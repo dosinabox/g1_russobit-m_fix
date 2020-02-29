@@ -17,7 +17,7 @@ func void b_buyattributepoints(var C_NPC typ,var int atr,var int atrplus)
 		typ_atr = typ.attribute[ATR_MANA_MAX];
 	};
 	atrplusstring = IntToString(atrplus);
-	if(!(typ.lp < atrplus))
+	if(typ.lp >= atrplus)
 	{
 		if((typ_atr + atrplus) <= 100)
 		{

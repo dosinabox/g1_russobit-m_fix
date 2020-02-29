@@ -2,13 +2,39 @@
 func void zs_smalltalk()
 {
 	printdebugnpc(PD_TA_FRAME,"ZS_Smalltalk");
-	b_setperception(self);
+	//b_setperception(self);
+	Npc_PercEnable(self,PERC_ASSESSENEMY,b_assessenemy);
+	Npc_PercEnable(self,PERC_ASSESSFIGHTER,b_assessfighter);
+	Npc_PercEnable(self,PERC_ASSESSPLAYER,b_assesssc);
+	Npc_PercEnable(self,PERC_ASSESSDAMAGE,zs_reacttodamage);
+	Npc_PercEnable(self,PERC_ASSESSMAGIC,b_assessmagic);
+	Npc_PercEnable(self,PERC_ASSESSCASTER,b_assesscaster);
+	Npc_PercEnable(self,PERC_ASSESSTHREAT,b_assessfighter);
+	Npc_PercEnable(self,PERC_ASSESSWARN,b_assesswarn);
+	Npc_PercEnable(self,PERC_ASSESSMURDER,zs_assessmurder);
+	Npc_PercEnable(self,PERC_ASSESSDEFEAT,zs_assessdefeat);
+	Npc_PercEnable(self,PERC_DRAWWEAPON,b_assessfighter);
+	Npc_PercEnable(self,PERC_ASSESSFIGHTSOUND,b_assessfightsound);
+	//Npc_PercEnable(self,PERC_ASSESSQUIETSOUND,b_assessquietsound);
+	Npc_PercEnable(self,PERC_CATCHTHIEF,zs_catchthief);
+	Npc_PercEnable(self,PERC_ASSESSTHEFT,b_assesstheft);
+	Npc_PercEnable(self,PERC_ASSESSSURPRISE,zs_assesssurprise);
+	Npc_PercEnable(self,PERC_OBSERVESUSPECT,b_observesuspect);
+	Npc_PercEnable(self,PERC_OBSERVEINTRUDER,b_observeintruder);
+	Npc_PercEnable(self,PERC_ASSESSTALK,b_assesstalk);
+	Npc_PercEnable(self,PERC_ASSESSCALL,zs_reacttocall);
+	Npc_PercEnable(self,PERC_ASSESSUSEMOB,b_assessusemob);
+	Npc_PercEnable(self,PERC_ASSESSENTERROOM,b_assessenterroom);
+	Npc_PercEnable(self,PERC_MOVEMOB,b_movemob);
+	Npc_PercEnable(self,PERC_MOVENPC,b_movenpc);
+	Npc_SetPercTime(self,1);
 	AI_SetWalkMode(self,NPC_WALK);
 	if(!Npc_IsOnFP(self,"SMALLTALK"))
 	{
 		printdebugnpc(PD_TA_CHECK,"...nicht auf FP!");
 		AI_GotoWP(self,self.wp);
 	};
+	AI_RemoveWeapon(self);
 	AI_GotoFP(self,"SMALLTALK");
 	AI_AlignToFP(self);
 };
@@ -20,7 +46,7 @@ func void zs_smalltalk_loop()
 	Npc_PerceiveAll(self);
 	Wld_DetectNpc(self,-1,zs_smalltalk,-1);
 	printglobals(PD_TA_CHECK);
-	if(Wld_DetectNpc(self,-1,zs_smalltalk,-1) && (Npc_GetDistToNpc(self,other) < HAI_DIST_SMALLTALK))
+	if(Wld_DetectNpc(self,-1,zs_smalltalk,-1) && (Npc_GetDistToNpc(self,other) < 250))
 	{
 		AI_TurnToNPC(self,other);
 		talktime = Hlp_Random(200);

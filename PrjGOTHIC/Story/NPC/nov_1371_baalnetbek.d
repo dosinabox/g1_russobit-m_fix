@@ -21,13 +21,15 @@ instance NOV_1371_BAALNETBEK(NPC_DEFAULT)
 	Mdl_SetModelFatness(self,3);
 	fight_tactic = FAI_HUMAN_STRONG;
 	CreateInvItem(self,itmw_1h_hatchet_01);
+	CreateInvItem(self,itwr_bloodfly_01);
 	daily_routine = rtn_start_1371;
+	aivar[AIV_ITEMSCHWEIN] = TRUE;
 };
 
 
 func void rtn_start_1371()
 {
-	ta_stay(24,0,6,0,"PATH_TAKE_HERB_08");
-	ta_stay(6,0,24,0,"PATH_TAKE_HERB_08");
+	ta_stay(7,0,23,3,"PATH_TAKE_HERB_08");
+	ta_meditate(23,3,7,0,"PATH_TAKE_HERB_08");
 };
 

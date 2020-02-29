@@ -34,13 +34,31 @@ func void rtn_start_524()
 
 func void rtn_follow_524()
 {
-	ta_followpc(23,0,16,0,"OCR_OUTSIDE_HUT_58");
-	ta_followpc(16,0,23,0,"OCR_OUTSIDE_HUT_58");
+	ta_followpc_silent(23,0,16,0,"OCR_OUTSIDE_HUT_58");
+	ta_followpc_silent(16,0,23,0,"OCR_OUTSIDE_HUT_58");
 };
 
 func void rtn_prepareritual_524()
 {
 	ta_sleep(23,0,7,45,"PSI_25_HUT_IN");
 	ta_listen(7,45,23,0,"PSI_PLATFORM_1");
+};
+
+func void rtn_remove_524()
+{
+	ta_stay(23,0,7,45,"WP_INTRO01");
+	ta_stay(7,45,23,0,"WP_INTRO01");
+};
+
+func void rtn_dead_524()
+{
+	ta_stay(22,0,7,0,"OCR_HUT_58");
+	ta_stay(7,0,22,0,"OCR_HUT_58");
+};
+
+func void rtn_prepareritual2_524()
+{
+	ta_sleep(0,0,8,0,"PSI_25_HUT_IN");
+	ta_listen(8,0,0,0,"PSI_12_HUT_EX_TEACH");
 };
 

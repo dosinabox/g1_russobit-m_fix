@@ -24,6 +24,11 @@ func void ta_sleep(var int start_h,var int start_m,var int stop_h,var int stop_m
 	TA_Min(self,start_h,start_m,stop_h,stop_m,zs_sleep,waypoint);
 };
 
+func void ta_sleep_yberion(var int start_h,var int start_m,var int stop_h,var int stop_m,var string waypoint)
+{
+	TA_Min(self,start_h,start_m,stop_h,stop_m,zs_sleep_yberion,waypoint);
+};
+
 func void ta_listen(var int start_h,var int start_m,var int stop_h,var int stop_m,var string waypoint)
 {
 	TA_Min(self,start_h,start_m,stop_h,stop_m,zs_listen,waypoint);
@@ -249,6 +254,11 @@ func void ta_meditate(var int start_h,var int start_m,var int stop_h,var int sto
 	TA_Min(self,start_h,start_m,stop_h,stop_m,zs_meditate,waypoint);
 };
 
+func void ta_meditate_corangar(var int start_h,var int start_m,var int stop_h,var int stop_m,var string waypoint)
+{
+	TA_Min(self,start_h,start_m,stop_h,stop_m,zs_meditate_corangar,waypoint);
+};
+
 func void ta_speech(var int start_h,var int start_m,var int stop_h,var int stop_m,var string waypoint)
 {
 	TA_Min(self,start_h,start_m,stop_h,stop_m,zs_speech,waypoint);
@@ -267,6 +277,11 @@ func void ta_guidepc(var int start_h,var int start_m,var int stop_h,var int stop
 func void ta_followpc(var int start_h,var int start_m,var int stop_h,var int stop_m,var string waypoint)
 {
 	TA_Min(self,start_h,start_m,stop_h,stop_m,zs_followpc,waypoint);
+};
+
+func void ta_followpc_silent(var int start_h,var int start_m,var int stop_h,var int stop_m,var string waypoint)
+{
+	TA_Min(self,start_h,start_m,stop_h,stop_m,zs_followpc_silent,waypoint);
 };
 
 func void ta_guardpalisade(var int start_h,var int start_m,var int stop_h,var int stop_m,var string waypoint)
@@ -369,6 +384,16 @@ func void ta_drained_yberion(var int start_h,var int start_m,var int stop_h,var 
 	TA_Min(self,start_h,start_m,stop_h,stop_m,zs_drained_yberion,waypoint);
 };
 
+func void ta_babe_cry(var int start_h,var int start_m,var int stop_h,var int stop_m,var string waypoint)
+{
+	TA_Min(self,start_h,start_m,stop_h,stop_m,zs_babe_cry,waypoint);
+};
+
+func void ta_drained_oreguard(var int start_h,var int start_m,var int stop_h,var int stop_m,var string waypoint)
+{
+	TA_Min(self,start_h,start_m,stop_h,stop_m,zs_drained_oreguard,waypoint);
+};
+
 func void ta_waitforrescue(var int start_h,var int start_m,var int stop_h,var int stop_m,var string waypoint)
 {
 	TA_Min(self,start_h,start_m,stop_h,stop_m,zs_waitforrescue,waypoint);
@@ -407,5 +432,10 @@ func void ta_sleeper(var int start_h,var int start_m,var int stop_h,var int stop
 func void ta_readbook_xardas(var int start_h,var int start_m,var int stop_h,var int stop_m,var string waypoint)
 {
 	TA_Min(self,start_h,start_m,stop_h,stop_m,zs_readbook_xardas,waypoint);
+};
+
+func void ta_arenafight(var int start_h,var int start_m,var int stop_h,var int stop_m,var string waypoint)
+{
+	TA_Min(self,start_h,start_m,stop_h,stop_m,zs_afight,waypoint);
 };
 

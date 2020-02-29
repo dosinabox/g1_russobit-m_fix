@@ -33,3 +33,9 @@ func void rtn_start_1413()
 	ta_guardpassage(21,0,8,0,"PSI_TEMPLE_GUARD_01");
 };
 
+func void rtn_remove_1413()
+{
+	ta_stay(23,0,7,45,"WP_INTRO01");
+	ta_stay(7,45,23,0,"WP_INTRO01");
+};
+

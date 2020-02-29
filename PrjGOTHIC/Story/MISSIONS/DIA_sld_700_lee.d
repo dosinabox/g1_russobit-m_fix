@@ -114,7 +114,7 @@ instance SLD_700_LEE_NOWREADY(C_INFO)
 
 func int sld_700_lee_nowready_condition()
 {
-	if((Npc_GetTrueGuild(hero) == GIL_ORG) && (Npc_KnowsInfo(hero,sld_700_lee_mitmachen) || (hero.level >= 10)))
+	if((Npc_GetTrueGuild(hero) == GIL_ORG) && (LEE_SLDPOSSIBLE == FALSE))
 	{
 		return 1;
 	};
@@ -123,31 +123,22 @@ func int sld_700_lee_nowready_condition()
 func void sld_700_lee_nowready_info()
 {
 	AI_Output(other,self,"DIA_Lee_NowReady_15_00");	//Я хочу стать наемником и защищать магов. Ты примешь меня?
-	if(CORKALOM_BRINGMCQBALLS == LOG_SUCCESS)
+	if(hero.level < 10)
+	{
+		AI_Output(self,other,"Sld_700_Lee_BECOMESLD_Info_08_03");	//Но ты еще не готов стать одним из нас. Наберись сначала опыта, а там посмотрим.
+		AI_StopProcessInfos(self);
+		b_printguildcondition(10);
+	}
+	else if(CORKALOM_BRINGMCQBALLS == LOG_SUCCESS)
 	{
 		AI_Output(self,other,"Sld_700_Lee_BECOMESLD_Info_08_01");	//Ты помог Братству, а твои дела в Старой шахте говорят сами за себя.
 		AI_Output(self,other,"Sld_700_Lee_BECOMESLD_Info_08_02");	//Я согласен принять тебя в наемники.
-		if(hero.level < 10)
-		{
-			AI_Output(self,other,"Sld_700_Lee_BECOMESLD_Info_08_03");	//Но ты еще не готов стать одним из нас. Наберись сначала опыта, а там посмотрим.
-			AI_StopProcessInfos(self);
-			b_printguildcondition(10);
-		}
-		else if(hero.level >= 10)
-		{
-			AI_Output(self,other,"Sld_700_Lee_BECOMESLD_Info_08_04");	//Я дам тебе возможность проявить себя.
-			LEE_SLDPOSSIBLE = TRUE;
-		};
+		LEE_SLDPOSSIBLE = TRUE;
 	}
-	else if(hero.level < 10)
-	{
-		AI_Output(self,other,"DIA_Lee_NowReady_08_01");	//Ты недостаточно опытен. Тебе нужно еще многому научиться.
-		b_printguildcondition(10);
-	}
-	else if(hero.level >= 10)
+	else
 	{
 		AI_Output(self,other,"Sld_700_Lee_BECOMESLD_Info_08_04");	//Я дам тебе возможность проявить себя.
-		LEE_SLDPOSSIBLE = TRUE;
+		AI_Output(self,other,"DIA_Lee_Mitmachen_08_02");	//Сначала познакомься с жизнью нашего лагеря, а я буду за тобой приглядывать!
 	};
 };
 
@@ -178,6 +169,8 @@ func void sld_700_lee_becomesldnow_info()
 	AI_Output(self,other,"Sld_700_Lee_BECOMESLDNOW_Info_08_03");	//Скажи мне только, почему? Почему ты решил присоединиться к нашему лагерю, а не к Гомезу или к Братству?
 	Log_CreateTopic(GE_BECOMEMERCENARY,LOG_NOTE);
 	b_logentry(GE_BECOMEMERCENARY,"Ли принял меня в ряды наемников.");
+	Log_CreateTopic(GE_TEACHERNC,LOG_NOTE);
+	b_logentry(GE_TEACHERNC,"Ли может научить меня вести бой двуручным мечом. Еще он может помочь мне увеличить силу и ловкость.");
 	Info_ClearChoices(sld_700_lee_becomesldnow);
 	Info_AddChoice(sld_700_lee_becomesldnow,"Другие лагеря того не стоят.",sld_700_lee_becomesldnow_noother);
 	Info_AddChoice(sld_700_lee_becomesldnow,"Я хотел свободы с тех пор как попал сюда.",sld_700_lee_becomesldnow_freedom);
@@ -190,7 +183,7 @@ func void sld_700_lee_becomesldnow_noother()
 	AI_Output(self,other,"Sld_700_Lee_BECOMESLDNOW_NOOTHER_08_02");	//Да, единственное, что хоть чего-то стоит в этой колонии - это надежда на освобождение. Добро пожаловать, наемник!
 	CreateInvItem(self,sld_armor_l);
 	b_giveinvitems(self,hero,sld_armor_l,1);
-	AI_EquipBestArmor(hero);
+	AI_EquipArmor(hero,sld_armor_l);
 	Npc_SetTrueGuild(hero,GIL_SLD);
 	hero.guild = GIL_SLD;
 	AI_StopProcessInfos(self);
@@ -202,7 +195,7 @@ func void sld_700_lee_becomesldnow_freedom()
 	AI_Output(self,other,"Sld_700_Lee_BECOMESLDNOW_FREEDOM_08_02");	//И мы вернем ее себе. Добро пожаловать, наемник!
 	CreateInvItem(self,sld_armor_l);
 	b_giveinvitems(self,hero,sld_armor_l,1);
-	AI_EquipBestArmor(hero);
+	AI_EquipArmor(hero,sld_armor_l);
 	Npc_SetTrueGuild(hero,GIL_SLD);
 	hero.guild = GIL_SLD;
 	AI_StopProcessInfos(self);
@@ -214,7 +207,7 @@ func void sld_700_lee_becomesldnow_justbecause()
 	AI_Output(self,other,"Sld_700_Lee_BECOMESLDNOW_JUSTBECAUSE_08_02");	//Главное, чтобы мы не остались в плену этого Барьера навечно. Добро пожаловать, наемник!
 	CreateInvItem(self,sld_armor_l);
 	b_giveinvitems(self,hero,sld_armor_l,1);
-	AI_EquipBestArmor(hero);
+	AI_EquipArmor(hero,sld_armor_l);
 	Npc_SetTrueGuild(hero,GIL_SLD);
 	hero.guild = GIL_SLD;
 	AI_StopProcessInfos(self);
@@ -302,6 +295,9 @@ func void sld_700_lee_fmtaken_info()
 };
 
 
+var int lee_armor_m_was_bought;
+var int lee_armor_h_was_bought;
+
 instance SLD_700_LEE_CHANGESIDE(C_INFO)
 {
 	npc = sld_700_lee;
@@ -323,16 +319,24 @@ func int sld_700_lee_changeside_condition()
 
 func void sld_700_lee_changeside_info()
 {
+	var C_ITEM eqarmor;
+	eqarmor = Npc_GetEquippedArmor(hero);
 	AI_Output(other,self,"Sld_700_Lee_CHANGESIDE_Info_15_01");	//Меня прогнали из Старого лагеря. Я могу присоединиться к вам?
 	AI_Output(self,other,"Sld_700_Lee_CHANGESIDE_Info_08_02");	//Ты много сделал для нас. Нам нужны такие люди, как ты.
 	AI_Output(self,other,"Sld_700_Lee_CHANGESIDE_Info_08_03");	//Что ж, добро пожаловать в Новый лагерь, наемник!
 	AI_Output(self,other,"Sld_700_Lee_CHANGESIDE_Info_08_04");	//Возьми эти доспехи. Я рад, что ты пришел к нам.
-	CreateInvItem(self,sld_armor_m);
-	b_giveinvitems(self,hero,sld_armor_m,1);
-	Npc_GetInvItemBySlot(hero,INV_ARMOR,2);
-	if(Hlp_GetInstanceID(item) == sld_armor_m)
+	if(Hlp_IsItem(eqarmor,grd_armor_h))
 	{
-		AI_EquipArmor(hero,item);
+		CreateInvItem(hero,sld_armor_h);
+		PrintScreen("Получен 1 предмет.",-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
+		AI_EquipArmor(hero,sld_armor_h);
+		LEE_ARMOR_H_WAS_BOUGHT = 1;
+	}
+	else
+	{
+		CreateInvItem(self,sld_armor_m);
+		b_giveinvitems(self,hero,sld_armor_m,1);
+		AI_EquipArmor(hero,sld_armor_m);
 	};
 	Npc_SetTrueGuild(hero,GIL_SLD);
 	hero.guild = GIL_SLD;
@@ -355,7 +359,7 @@ instance SLD_700_LEE_ARMOR(C_INFO)
 
 func int sld_700_lee_armor_condition()
 {
-	if(Npc_GetTrueGuild(hero) == GIL_SLD)
+	if(Npc_GetTrueGuild(hero) == GIL_SLD && LEE_ARMOR_H_WAS_BOUGHT != 1)
 	{
 		return TRUE;
 	};
@@ -367,8 +371,14 @@ func void sld_700_lee_armor_info()
 	AI_Output(self,other,"Sld_700_Lee_ARMOR_Info_08_02");	//Доспехи нужно заслужить. К тому же, хорошие доспехи ценятся очень высоко.
 	Info_ClearChoices(sld_700_lee_armor);
 	Info_AddChoice(sld_700_lee_armor,DIALOG_BACK,sld_700_lee_armor_back);
-	Info_AddChoice(sld_700_lee_armor,b_buildbuyarmorstring("Средний доспех: оружие 55, стрелы 10, огонь 25",VALUE_SLD_ARMOR_M),sld_700_lee_armor_m);
-	Info_AddChoice(sld_700_lee_armor,b_buildbuyarmorstring("Тяжелый доспех: оружие 70, стрелы 10, огонь 35",VALUE_SLD_ARMOR_H),sld_700_lee_armor_h);
+	if(LEE_ARMOR_H_WAS_BOUGHT != 1)
+	{
+		Info_AddChoice(sld_700_lee_armor,b_buildbuyarmorstring("Тяжелый доспех наемника: 70/10/35/0",VALUE_SLD_ARMOR_H),sld_700_lee_armor_h);
+	};
+	if(LEE_ARMOR_M_WAS_BOUGHT != 1)
+	{
+		Info_AddChoice(sld_700_lee_armor,b_buildbuyarmorstring("Средний доспех наемника: 55/10/25/0",VALUE_SLD_ARMOR_M),sld_700_lee_armor_m);
+	};
 };
 
 func void sld_700_lee_armor_back()
@@ -391,10 +401,10 @@ func void sld_700_lee_armor_m()
 	{
 		AI_Output(self,other,"Sld_700_Lee_ARMOR_M_Info_08_04");	//Это добротно сделанные доспехи. Они надежно защитят тебя.
 		b_giveinvitems(hero,self,itminugget,VALUE_SLD_ARMOR_M);
-		CreateInvItem(hero,sld_armor_m);
-		CreateInvItem(self,itamarrow);
-		b_giveinvitems(self,hero,itamarrow,1);
-		Npc_RemoveInvItem(hero,itamarrow);
+		CreateInvItem(self,sld_armor_m);
+		b_giveinvitems(self,hero,sld_armor_m,1);
+		AI_EquipArmor(hero,sld_armor_m);
+		LEE_ARMOR_M_WAS_BOUGHT = 1;
 	};
 };
 
@@ -414,9 +424,9 @@ func void sld_700_lee_armor_h()
 		AI_Output(self,other,"Sld_700_Lee_ARMOR_H_Info_08_04");	//Это лучшие доспехи, которые можно достать в колонии, поверь мне. Они стоят той руды, которую я за них беру.
 		b_giveinvitems(hero,self,itminugget,VALUE_SLD_ARMOR_H);
 		CreateInvItem(hero,sld_armor_h);
-		CreateInvItem(self,itamarrow);
-		b_giveinvitems(self,hero,itamarrow,1);
-		Npc_RemoveInvItem(hero,itamarrow);
+		PrintScreen("Получен 1 предмет.",-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
+		AI_EquipArmor(hero,sld_armor_h);
+		LEE_ARMOR_H_WAS_BOUGHT = 1;
 	};
 };
 
@@ -434,7 +444,7 @@ instance SLD_700_LEE_TEACH(C_INFO)
 
 func int sld_700_lee_teach_condition()
 {
-	if(Npc_GetTrueGuild(hero) == GIL_SLD)
+	if(Npc_GetTrueGuild(hero) == GIL_SLD || (Npc_GetTrueGuild(hero) == GIL_KDW))
 	{
 		return TRUE;
 	};

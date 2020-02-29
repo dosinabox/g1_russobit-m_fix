@@ -102,7 +102,7 @@ func int info_sld_723_lastwarn_condition()
 	};
 };
 
-func int info_sld_723_lastwarn_info()
+func void info_sld_723_lastwarn_info()
 {
 	AI_Output(self,hero,"Info_SLD_723_LastWarn_11_01");	//Стой! Я повторять не буду!
 	hero.aivar[AIV_LASTDISTTOWP] = Npc_GetDistToWP(hero,SLD_723_CHECKPOINT);
@@ -130,7 +130,7 @@ func int info_sld_723_attack_condition()
 	};
 };
 
-func int info_sld_723_attack_info()
+func void info_sld_723_attack_info()
 {
 	hero.aivar[AIV_LASTDISTTOWP] = 0;
 	hero.aivar[AIV_GUARDPASSAGE_STATUS] = AIV_GPS_PUNISH;
@@ -163,7 +163,7 @@ func int info_sld_723_parole_condition()
 	};
 };
 
-func int info_sld_723_parole_info()
+func void info_sld_723_parole_info()
 {
 	Info_ClearChoices(info_sld_723_parole);
 	Info_AddChoice(info_sld_723_parole,"Кронос разрешил мне пройти!",info_sld_723_parole_cronos);

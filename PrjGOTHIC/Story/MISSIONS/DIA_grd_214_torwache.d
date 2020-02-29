@@ -57,7 +57,7 @@ instance GRD_214_TORWACHE_SEETHORUS(C_INFO)
 
 func int grd_214_torwache_seethorus_condition()
 {
-	if(!Npc_KnowsInfo(hero,grd_216_torwache_seethorus) && ((CORKALOM_BRINGMCQBALLS == LOG_SUCCESS) || (Npc_HasItems(hero,itat_crawlerqueen) >= 3)) && !Npc_KnowsInfo(hero,grd_200_thorus_gardist) && (Npc_GetTrueGuild(hero) == GIL_STT))
+	if((KAPITEL < 4) && !Npc_KnowsInfo(hero,grd_216_torwache_seethorus) && ((CORKALOM_BRINGMCQBALLS == LOG_SUCCESS) || (Npc_HasItems(hero,itat_crawlerqueen) >= 3)) && !Npc_KnowsInfo(hero,grd_200_thorus_gardist) && (Npc_GetTrueGuild(hero) == GIL_STT))
 	{
 		return TRUE;
 	};
@@ -85,7 +85,7 @@ func int grd_214_torwache_nodusty_condition()
 {
 	var C_NPC dusty;
 	dusty = Hlp_GetNpc(vlk_524_dusty);
-	if((dusty.aivar[AIV_PARTYMEMBER] == TRUE) && (Npc_GetDistToNpc(hero,dusty) < 2000))
+	if(dusty.aivar[AIV_PARTYMEMBER] == TRUE && (Npc_GetDistToWP(dusty,"OCR_MAINGATE_OUTSIDE") < 2000))
 	{
 		return TRUE;
 	};
@@ -104,5 +104,7 @@ func void grd_214_torwache_nodusty_info()
 	dusty = Hlp_GetNpc(vlk_524_dusty);
 	dusty.aivar[AIV_PARTYMEMBER] = FALSE;
 	dusty.flags = 0;
+	GETNEWGUY_DUSTY_STOPPED = TRUE;
+	GETNEWGUY_DUSTY_MOVING = FALSE;
 };
 

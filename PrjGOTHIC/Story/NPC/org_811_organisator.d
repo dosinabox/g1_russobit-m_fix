@@ -14,7 +14,7 @@ instance ORG_811_ORGANISATOR(NPC_DEFAULT)
 	attribute[ATR_HITPOINTS_MAX] = 172;
 	attribute[ATR_HITPOINTS] = 172;
 	Mdl_SetVisual(self,"HUMANS.MDS");
-	Mdl_SetVisualBody(self,"hum_body_Naked0",0,2,"Hum_Head_Pony",8,1,org_armor_m);
+	Mdl_SetVisualBody(self,"hum_body_Naked0",0,1,"Hum_Head_Bald",101,1,org_armor_m);
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_STRONG;
@@ -23,9 +23,6 @@ instance ORG_811_ORGANISATOR(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	CreateInvItems(self,itkelockpick,2);
 	CreateInvItems(self,itminugget,14);
-	CreateInvItems(self,itforice,7);
-	CreateInvItems(self,itfobooze,4);
-	CreateInvItems(self,itlstorch,3);
 	CreateInvItems(self,itfo_potion_health_01,1);
 	CreateInvItem(self,itmi_stuff_barbknife_01);
 	CreateInvItem(self,itfomutton);

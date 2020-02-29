@@ -8,8 +8,8 @@ instance KDW_604_CRONOS(NPC_DEFAULT)
 	level = 28;
 	voice = 8;
 	id = 604;
-	attribute[ATR_STRENGTH] = 45;
-	attribute[ATR_DEXTERITY] = 35;
+	attribute[ATR_STRENGTH] = 1;
+	attribute[ATR_DEXTERITY] = 1;
 	attribute[ATR_MANA_MAX] = 100;
 	attribute[ATR_MANA] = 100;
 	attribute[ATR_HITPOINTS_MAX] = 376;
@@ -20,9 +20,10 @@ instance KDW_604_CRONOS(NPC_DEFAULT)
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_MAGE;
-	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,6);
-	CreateInvItem(self,itarruneicecube);
-	CreateInvItem(self,itarrunethunderbolt);
+	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,5);
+	EquipItem(self,itarruneicecube);
+	EquipItem(self,itarrunechainlightning);
+	CreateInvItem(self,alchemybook);
 	b_give_cronoschapter1runes();
 	daily_routine = rtn_start_604;
 };
@@ -30,7 +31,13 @@ instance KDW_604_CRONOS(NPC_DEFAULT)
 
 func void rtn_start_604()
 {
-	ta_sleep(23,0,8,0,"NC_PATH_TO_PIT_03");
-	ta_orepile(8,0,23,0,"NC_PATH_TO_PIT_03");
+	ta_sleep(2,0,5,0,"NC_KDW02_IN");
+	ta_orepile(5,0,2,0,"NC_PATH_TO_PIT_03");
+};
+
+func void rtn_orealert_604()
+{
+	ta_guard(1,0,4,0,"NC_KDW05+06_OUT");
+	ta_guard(4,0,1,0,"NC_KDW05+06_OUT");
 };
 

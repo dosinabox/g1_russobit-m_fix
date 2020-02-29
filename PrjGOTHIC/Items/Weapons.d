@@ -5,7 +5,7 @@ instance THORUS_SCHWERT(C_ITEM)
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_SWD;
 	material = MAT_METAL;
-	value = 500;
+	value = 200;
 	damagetotal = 90;
 	damagetype = DAM_EDGE;
 	range = 150;
@@ -29,7 +29,7 @@ instance INNOS_ZORN(C_ITEM)
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_SWD;
 	material = MAT_METAL;
-	value = 570;
+	value = 270;
 	damagetotal = 110;
 	damagetype = DAM_EDGE;
 	range = 160;
@@ -53,14 +53,14 @@ instance SCARS_SCHWERT(C_ITEM)
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_SWD;
 	material = MAT_METAL;
-	value = 460;
+	value = 260;
 	damagetotal = 85;
 	damagetype = DAM_EDGE;
 	range = 130;
 	cond_atr[2] = ATR_STRENGTH;
 	cond_value[2] = 70;
 	owner = ebr_101_scar;
-	visual = "ItMw_1H_Sword_Bastard_04.3DS";
+	visual = "ItMw_Beta_Sword_Big.3DS";
 	description = name;
 	text[2] = NAME_DAMAGE;
 	count[2] = damagetotal;
@@ -68,7 +68,6 @@ instance SCARS_SCHWERT(C_ITEM)
 	count[3] = cond_value[2];
 	text[4] = NAME_ONEHANDED;
 	text[5] = NAME_VALUE;
-	count[5] = value;
 	count[5] = value;
 };
 
@@ -78,7 +77,7 @@ instance ARTOS_SCHWERT(C_ITEM)
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_SWD;
 	material = MAT_METAL;
-	value = 360;
+	value = 260;
 	damagetotal = 65;
 	damagetype = DAM_EDGE;
 	range = 100;
@@ -98,11 +97,11 @@ instance ARTOS_SCHWERT(C_ITEM)
 
 instance RABENRECHT(C_ITEM)
 {
-	name = "Мудрость ворона";
+	name = "Суд Равена";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_SWD;
 	material = MAT_METAL;
-	value = 400;
+	value = 200;
 	damagetotal = 70;
 	damagetype = DAM_EDGE;
 	range = 130;
@@ -126,7 +125,7 @@ instance PRANKENHIEB(C_ITEM)
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_SWD;
 	material = MAT_METAL;
-	value = 300;
+	value = 200;
 	damagetotal = 55;
 	damagetype = DAM_EDGE;
 	range = 100;
@@ -150,7 +149,7 @@ instance DIEGOS_BOGEN(C_ITEM)
 	mainflag = ITEM_KAT_FF;
 	flags = ITEM_BOW;
 	material = MAT_WOOD;
-	value = 390;
+	value = 200;
 	damagetotal = 70;
 	damagetype = DAM_POINT;
 	munition = itamarrow;
@@ -179,7 +178,7 @@ instance WHISTLERS_SCHWERT(C_ITEM)
 	range = 100;
 	cond_atr[2] = ATR_STRENGTH;
 	cond_value[2] = 15;
-	visual = "ItMw_1H_Sword_02.3DS";
+	visual = "ItMw_Beta_Sword_Runes.3DS";
 	description = name;
 	text[2] = NAME_DAMAGE;
 	count[2] = damagetotal;
@@ -196,7 +195,7 @@ instance STAB_DES_LICHTS(C_ITEM)
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_AXE;
 	material = MAT_WOOD;
-	value = 350;
+	value = 200;
 	damagetotal = 65;
 	damagetype = DAM_BLUNT;
 	range = 160;
@@ -220,7 +219,7 @@ instance KALOMS_SCHWERT(C_ITEM)
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_SWD;
 	material = MAT_METAL;
-	value = 400;
+	value = 200;
 	damagetotal = 70;
 	damagetype = DAM_EDGE;
 	range = 100;
@@ -243,8 +242,8 @@ instance STREITSCHLICHTER(C_ITEM)
 	name = "Судья Лестера";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_AXE;
-	material = MAT_METAL;
-	value = 340;
+	material = MAT_WOOD;
+	value = 140;
 	damagetotal = 60;
 	damagetype = DAM_BLUNT;
 	range = 90;
@@ -268,7 +267,7 @@ instance ROTER_WIND(C_ITEM)
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_SWD;
 	material = MAT_METAL;
-	value = 570;
+	value = 200;
 	damagetotal = 105;
 	damagetype = DAM_EDGE;
 	range = 140;
@@ -291,8 +290,8 @@ instance NAMIBS_KEULE(C_ITEM)
 	name = "Дубина Намиба";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_AXE;
-	material = MAT_METAL;
-	value = 300;
+	material = MAT_WOOD;
+	value = 50;
 	damagetotal = 55;
 	damagetype = DAM_BLUNT;
 	range = 90;
@@ -315,8 +314,8 @@ instance ORUNS_KEULE(C_ITEM)
 	name = "Дубина Орана";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_AXE;
-	material = MAT_METAL;
-	value = 330;
+	material = MAT_WOOD;
+	value = 200;
 	damagetotal = 60;
 	damagetype = DAM_BLUNT;
 	range = 90;
@@ -336,18 +335,18 @@ instance ORUNS_KEULE(C_ITEM)
 
 instance FORTUNOS_KEULE(C_ITEM)
 {
-	name = "Дубина Фортун";
+	name = "Серп Фортуно";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_AXE;
 	material = MAT_METAL;
-	value = 110;
+	value = 20;
 	damagetotal = 20;
-	damagetype = DAM_BLUNT;
-	range = 90;
+	damagetype = DAM_EDGE;
+	range = 100;
 	cond_atr[2] = ATR_STRENGTH;
-	cond_value[2] = 15;
+	cond_value[2] = 10;
 	owner = nov_1357_fortuno;
-	visual = "ItMw_1H_Mace_03.3DS";
+	visual = "ItMw_1H_Sickle_01.3DS";
 	description = name;
 	text[2] = NAME_DAMAGE;
 	count[2] = damagetotal;
@@ -364,7 +363,7 @@ instance LEES_AXT(C_ITEM)
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_AXE;
 	material = MAT_METAL;
-	value = 560;
+	value = 200;
 	damagetotal = 105;
 	damagetype = DAM_EDGE;
 	range = 130;
@@ -384,11 +383,11 @@ instance LEES_AXT(C_ITEM)
 
 instance ORIKS_AXT(C_ITEM)
 {
-	name = "Топор Орикса";
+	name = "Топор Орика";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_AXE;
 	material = MAT_METAL;
-	value = 540;
+	value = 200;
 	damagetotal = 95;
 	damagetype = DAM_EDGE;
 	range = 130;
@@ -412,14 +411,14 @@ instance TORLOFS_AXT(C_ITEM)
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_AXE;
 	material = MAT_METAL;
-	value = 550;
+	value = 250;
 	damagetotal = 99;
 	damagetype = DAM_EDGE;
 	range = 130;
 	cond_atr[2] = ATR_STRENGTH;
 	cond_value[2] = 85;
 	owner = sld_737_torlof;
-	visual = "ItMw_2H_Axe_Heavy_03.3DS";
+	visual = "ItMw_Beta_Axe_New.3DS";
 	description = name;
 	text[2] = NAME_DAMAGE;
 	count[2] = damagetotal;
@@ -432,18 +431,18 @@ instance TORLOFS_AXT(C_ITEM)
 
 instance CORDS_SPALTER(C_ITEM)
 {
-	name = "Раскольник Корда";
+	name = "Раскалыватель Корда";
 	mainflag = ITEM_KAT_NF;
-	flags = ITEM_AXE;
+	flags = ITEM_SWD;
 	material = MAT_METAL;
-	value = 310;
+	value = 250;
 	damagetotal = 60;
 	damagetype = DAM_EDGE;
 	range = 100;
 	cond_atr[2] = ATR_STRENGTH;
 	cond_value[2] = 50;
 	owner = sld_709_cord;
-	visual = "ItMw_1H_Axe_02.3DS";
+	visual = "ItMw_Beta_Sword_Runes.3DS";
 	description = name;
 	text[2] = NAME_DAMAGE;
 	count[2] = damagetotal;
@@ -460,7 +459,7 @@ instance GORNS_RACHE(C_ITEM)
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_AXE;
 	material = MAT_METAL;
-	value = 560;
+	value = 200;
 	damagetotal = 100;
 	damagetype = DAM_EDGE;
 	range = 130;
@@ -484,7 +483,7 @@ instance LARES_AXT(C_ITEM)
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_AXE;
 	material = MAT_METAL;
-	value = 340;
+	value = 250;
 	damagetotal = 65;
 	damagetype = DAM_EDGE;
 	range = 100;
@@ -531,12 +530,12 @@ instance SILAS_AXT(C_ITEM)
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_AXE;
 	material = MAT_METAL;
-	value = 290;
-	damagetotal = 55;
+	value = 200;
+	damagetotal = 57;
 	damagetype = DAM_EDGE;
 	range = 100;
 	cond_atr[2] = ATR_STRENGTH;
-	cond_value[2] = 40;
+	cond_value[2] = 30;
 	owner = org_841_silas;
 	visual = "ItMw_1H_Axe_03.3DS";
 	description = name;
@@ -556,7 +555,7 @@ instance HEERSCHERSTAB(C_ITEM)
 	flags = ITEM_2HD_AXE;
 	material = MAT_WOOD;
 	value = 150;
-	damagetotal = 26;
+	damagetotal = 36;
 	damagetype = DAM_EDGE;
 	range = 150;
 	cond_atr[2] = ATR_STRENGTH;
@@ -569,6 +568,293 @@ instance HEERSCHERSTAB(C_ITEM)
 	text[3] = NAME_STR_NEEDED;
 	count[3] = cond_value[2];
 	text[4] = NAME_TWOHANDED;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+};
+
+instance ITRW_SCORPIO_CROSSBOW(C_ITEM)
+{
+	name = "Арбалет Скорпио";
+	mainflag = ITEM_KAT_FF;
+	flags = ITEM_CROSSBOW;
+	material = MAT_WOOD;
+	value = 100;
+	damagetotal = 110;
+	damagetype = DAM_POINT;
+	munition = itambolt;
+	cond_atr[2] = ATR_DEXTERITY;
+	cond_value[2] = 55;
+	owner = grd_205_scorpio;
+	visual = "ItRwCrossbow4.mms";
+	description = name;
+	text[2] = NAME_DAMAGE;
+	count[2] = damagetotal;
+	text[3] = NAME_DEX_NEEDED;
+	count[3] = cond_value[2];
+	text[5] = NAME_VALUE;
+	count[5] = value;
+};
+
+instance ITMW_GORHANIS(C_ITEM)
+{
+	name = "Посох Гор Ханиса";
+	mainflag = ITEM_KAT_NF;
+	flags = ITEM_2HD_AXE;
+	material = MAT_WOOD;
+	value = 50;
+	damagetotal = 65;
+	damagetype = DAM_BLUNT;
+	range = 150;
+	cond_atr[2] = ATR_STRENGTH;
+	cond_value[2] = 42;
+	owner = tpl_1422_gorhanis;
+	//visual = "ItMw_2H_Sword_Light_01.3DS";
+	visual = "ItMw_2H_Staff_01.3DS";
+	description = name;
+	text[2] = NAME_DAMAGE;
+	count[2] = damagetotal;
+	text[3] = NAME_STR_NEEDED;
+	count[3] = cond_value[2];
+	text[4] = NAME_TWOHANDED;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+};
+
+instance ITMW_KIRGO(C_ITEM)
+{
+	name = "Дубина Кирго";
+	mainflag = ITEM_KAT_NF;
+	flags = ITEM_AXE;
+	material = MAT_WOOD;
+	value = 30;
+	damagetotal = 30;
+	damagetype = DAM_BLUNT;
+	range = 100;
+	cond_atr[2] = ATR_STRENGTH;
+	cond_value[2] = 12;
+	owner = grd_251_kirgo;
+	//visual = "ItMw_1H_Sword_03.3DS";
+	visual = "ItMw_1H_Club_01.3DS";
+	description = name;
+	text[2] = NAME_DAMAGE;
+	count[2] = damagetotal;
+	text[3] = NAME_STR_NEEDED;
+	count[3] = cond_value[2];
+	text[4] = NAME_ONEHANDED;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+};
+
+instance ITMW_KHARIM(C_ITEM)
+{
+	name = "Булава Карима";
+	mainflag = ITEM_KAT_NF;
+	flags = ITEM_AXE;
+	material = MAT_WOOD;
+	value = 40;
+	damagetotal = 25;
+	damagetype = DAM_BLUNT;
+	range = 100;
+	cond_atr[2] = ATR_STRENGTH;
+	cond_value[2] = 11;
+	owner = sld_729_kharim;
+	visual = "ItMw_1H_Mace_02.3DS";
+	description = name;
+	text[2] = NAME_DAMAGE;
+	count[2] = damagetotal;
+	text[3] = NAME_STR_NEEDED;
+	count[3] = cond_value[2];
+	text[4] = NAME_ONEHANDED;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+};
+
+instance TR_M_CAVALORN(C_ITEM)
+{
+	name = "Меч Кавалорна";
+	mainflag = ITEM_KAT_NF;
+	flags = ITEM_SWD;
+	material = MAT_METAL;
+	value = 90;
+	damagetotal = 35;
+	damagetype = DAM_EDGE;
+	range = 100;
+	cond_atr[2] = ATR_STRENGTH;
+	cond_value[2] = 20;
+	owner = stt_336_cavalorn;
+	visual = "ItMw_1H_Sword_Short_02.3DS";
+	description = name;
+	text[2] = NAME_DAMAGE;
+	count[2] = damagetotal;
+	text[3] = NAME_STR_NEEDED;
+	count[3] = cond_value[2];
+	text[4] = NAME_ONEHANDED;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+};
+
+instance TR_R_CAVALORN(C_ITEM)
+{
+	name = "Лук Кавалорна";
+	mainflag = ITEM_KAT_FF;
+	flags = ITEM_BOW;
+	material = MAT_WOOD;
+	value = 100;
+	damagetotal = 45;
+	damagetype = DAM_POINT;
+	munition = itamarrow;
+	cond_atr[2] = ATR_DEXTERITY;
+	cond_value[2] = 15;
+	owner = stt_336_cavalorn;
+	visual = "ItRw_Bow_Small_02.mms";
+	description = name;
+	text[2] = NAME_DAMAGE;
+	count[2] = damagetotal;
+	text[3] = NAME_DEX_NEEDED;
+	count[3] = cond_value[2];
+	text[5] = NAME_VALUE;
+	count[5] = value;
+};
+
+instance TR_M_DARRION(C_ITEM)
+{
+	name = "Посох Дарриона";
+	mainflag = ITEM_KAT_NF;
+	flags = ITEM_2HD_AXE;
+	material = MAT_WOOD;
+	value = 85;
+	damagetotal = 40;
+	damagetype = DAM_BLUNT;
+	range = 160;
+	cond_atr[2] = ATR_STRENGTH;
+	cond_value[2] = 15;
+	owner = nov_1312_darrion;
+	visual = "ItMw_2H_Staff_01.3DS";
+	description = name;
+	text[2] = NAME_DAMAGE;
+	count[2] = damagetotal;
+	text[3] = NAME_STR_NEEDED;
+	count[3] = cond_value[2];
+	text[4] = NAME_TWOHANDED;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+};
+
+instance TR_M_FISK(C_ITEM)
+{
+	name = "Меч Фиска";
+	mainflag = ITEM_KAT_NF;
+	flags = ITEM_SWD;
+	material = MAT_METAL;
+	value = 200;
+	damagetotal = 57;
+	damagetype = DAM_EDGE;
+	range = 100;
+	cond_atr[2] = ATR_STRENGTH;
+	cond_value[2] = 30;
+	owner = stt_311_fisk;
+	visual = "ItMw_1H_Sword_Short_05.3DS";
+	description = name;
+	text[2] = NAME_DAMAGE;
+	count[2] = damagetotal;
+	text[3] = NAME_STR_NEEDED;
+	count[3] = cond_value[2];
+	text[4] = NAME_ONEHANDED;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+};
+
+instance TR_M_SCORPIO(C_ITEM)
+{
+	name = "Меч Скорпио";
+	mainflag = ITEM_KAT_NF;
+	flags = ITEM_SWD;
+	material = MAT_METAL;
+	value = 200;
+	damagetotal = 65;
+	damagetype = DAM_EDGE;
+	range = 100;
+	cond_atr[2] = ATR_STRENGTH;
+	cond_value[2] = 30;
+	owner = grd_205_scorpio;
+	visual = "ItMw_1H_Sword_03.3DS";
+	description = name;
+	text[2] = NAME_DAMAGE;
+	count[2] = damagetotal;
+	text[3] = NAME_STR_NEEDED;
+	count[3] = cond_value[2];
+	text[4] = NAME_ONEHANDED;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+};
+
+instance TR_M_SHARKY(C_ITEM)
+{
+	name = "Топор Шарки";
+	mainflag = ITEM_KAT_NF;
+	flags = ITEM_2HD_AXE;
+	material = MAT_WOOD;
+	value = 200;
+	damagetotal = 60;
+	damagetype = DAM_EDGE;
+	range = 150;
+	cond_atr[2] = ATR_STRENGTH;
+	cond_value[2] = 30;
+	owner = org_843_sharky;
+	visual = "ItMw_Beta_Axe_Old.3DS";
+	description = name;
+	text[2] = NAME_DAMAGE;
+	count[2] = damagetotal;
+	text[3] = NAME_STR_NEEDED;
+	count[3] = cond_value[2];
+	text[4] = NAME_TWOHANDED;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+};
+
+instance TR_M_SKIP(C_ITEM)
+{
+	name = "Меч Скипа";
+	mainflag = ITEM_KAT_NF;
+	flags = ITEM_SWD;
+	material = MAT_METAL;
+	value = 200;
+	damagetotal = 50;
+	damagetype = DAM_EDGE;
+	range = 120;
+	cond_atr[2] = ATR_STRENGTH;
+	cond_value[2] = 35;
+	owner = grd_211_skip;
+	visual = "ItMw_1H_Sword_Long_04.3DS";
+	description = name;
+	text[2] = NAME_DAMAGE;
+	count[2] = damagetotal;
+	text[3] = NAME_STR_NEEDED;
+	count[3] = cond_value[2];
+	text[4] = NAME_ONEHANDED;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+};
+
+instance TR_R_WOLF(C_ITEM)
+{
+	name = "Лук Волка";
+	mainflag = ITEM_KAT_FF;
+	flags = ITEM_BOW;
+	material = MAT_WOOD;
+	value = 200;
+	damagetotal = 101;
+	damagetype = DAM_POINT;
+	munition = itamarrow;
+	cond_atr[2] = ATR_DEXTERITY;
+	cond_value[2] = 60;
+	owner = org_855_wolf;
+	visual = "ItRw_Bow_War_05.mms";
+	description = name;
+	text[2] = NAME_DAMAGE;
+	count[2] = damagetotal;
+	text[3] = NAME_DEX_NEEDED;
+	count[3] = cond_value[2];
 	text[5] = NAME_VALUE;
 	count[5] = value;
 };

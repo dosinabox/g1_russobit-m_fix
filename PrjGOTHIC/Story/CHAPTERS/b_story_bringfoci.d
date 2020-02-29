@@ -18,6 +18,7 @@ func void b_story_bringfoci()
 	AI_ContinueRoutine(gorn);
 	lester = Hlp_GetNpc(pc_psionic);
 	Npc_ExchangeRoutine(lester,"FORTRESSWAIT");
+	b_exchangeroutine(tpl_1400_gornabar_psi,"Namib");
 	AI_ContinueRoutine(lester);
 	lestermonster = Hlp_GetNpc(bridgegolem);
 	if(Npc_IsDead(lestermonster))

@@ -6,7 +6,7 @@ instance DIA_BAALTONDRAL_MUTEEXIT(C_INFO)
 	condition = dia_baaltondral_muteexit_condition;
 	information = dia_baaltondral_muteexit_info;
 	permanent = 0;
-	description = "Ничего не говорить.";
+	description = "(ничего не говорить)";
 };
 
 
@@ -62,7 +62,10 @@ instance DIA_BAALTONDRAL_FANATICTEACHER(C_INFO)
 
 func int dia_baaltondral_fanaticteacher_condition()
 {
-	return 1;
+	if(KAPITEL < 4)
+	{
+		return 1;
+	};
 };
 
 func void dia_baaltondral_fanaticteacher_info()
@@ -72,7 +75,7 @@ func void dia_baaltondral_fanaticteacher_info()
 	AI_Output(self,other,"DIA_BaalTondral_FanaticTeacher_13_02");	//Я вижу в тебе сомнение, посеянное словами прислужников Баронов. Они выдают их за истинную монету, но ты-то чувствуешь, что все это ложь!
 	AI_Output(self,other,"DIA_BaalTondral_FanaticTeacher_13_03");	//Они лгут, чтобы получить власть над теми, кто слаб духом. Но они не смогут одолеть твой дух своей ложью.
 	AI_Output(self,other,"DIA_BaalTondral_FanaticTeacher_13_04");	//Ты же чувствуешь это стремление к свободе? Чувствуешь, как крепнет оно в тебе? Оно направляет твой дух. Не мешай ему.
-	AI_Output(self,other,"DIA_BaalTondral_FanaticTeacher_13_05");	//Ты знаешь, что произойдет, если ты попытаешься его подавить? Ты будешь лгать самому себе! Перестань жить в тени собственных страхов. 
+	AI_Output(self,other,"DIA_BaalTondral_FanaticTeacher_13_05");	//Ты знаешь, что произойдет, если ты попытаешься его подавить? Ты будешь лгать самому себе! Перестань жить в тени собственных страхов.
 	AI_Output(self,other,"DIA_BaalTondral_FanaticTeacher_13_06");	//Отбрось сомнения. Ты должен меня понять! Близится время пробуждения Спящего, и он освободит нас, а неверных жестоко покарает.
 	AI_Output(self,other,"DIA_BaalTondral_FanaticTeacher_13_07");	//Будут они смыты с лица земли гневом его, и души их будут истреблены. Не помогут им тогда ни раскаяние, ни горькие мольбы о прощении. Будет слишком поздно.
 	AI_Output(self,other,"DIA_BaalTondral_FanaticTeacher_13_08");	//За свои сомнения они заплатят ему жизнью.
@@ -97,14 +100,12 @@ func int dia_baaltondral_youtalked_condition()
 
 func void dia_baaltondral_youtalked_info()
 {
-	AI_Output(other,self,"DIA_BaalTondral_YouTalked_15_00");	//Эй! Ты заговорил со мной. Значит, теперь я смогу обращаться к тебе?
+	AI_Output(other,self,"DIA_BaalTondral_YouTalked_15_00");	//Ты заговорил со мной. Значит, теперь я смогу обращаться к тебе?
 	AI_Output(self,other,"DIA_BaalTondral_YouTalked_13_01");	//Я вижу, ты уже ознакомился с нашими правилами. Это похвально.
 	AI_Output(self,other,"DIA_BaalTondral_YouTalked_13_02");	//В тебе сокрыта великая духовная сила! Я чувствую это. Возможно, ты очень скоро будешь принят в наше Братство.
 	AI_Output(self,other,"DIA_BaalTondral_YouTalked_13_03");	//Я заговорил с тобой, дабы дать тебе шанс доказать нам свою преданность.
 };
 
-
-var int baaltondral_getnewguy;
 
 instance DIA_BAALTONDRAL_LOYALITY(C_INFO)
 {
@@ -119,7 +120,9 @@ instance DIA_BAALTONDRAL_LOYALITY(C_INFO)
 
 func int dia_baaltondral_loyality_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_baaltondral_youtalked))
+	var C_NPC dusty;
+	dusty = Hlp_GetNpc(vlk_524_dusty);
+	if(Npc_KnowsInfo(hero,dia_baaltondral_youtalked) && (GETNEWGUY_DUSTY_JOINED == FALSE) && (KAPITEL < 4) && (GETNEWGUY_DUSTY_MOVING == FALSE))
 	{
 		return 1;
 	};
@@ -133,7 +136,7 @@ func void dia_baaltondral_loyality_info()
 	Log_CreateTopic(CH1_RECRUITDUSTY,LOG_MISSION);
 	Log_SetTopicStatus(CH1_RECRUITDUSTY,LOG_RUNNING);
 	b_logentry(CH1_RECRUITDUSTY,"Идол Тондрал послал меня в Старый лагерь, чтобы найти человека, который согласится присоединиться к Братству. Это отличная возможность завоевать его расположение!");
-	BAALTONDRAL_GETNEWGUY = LOG_RUNNING;
+	GETNEWGUY_STARTED = TRUE;
 };
 
 
@@ -143,14 +146,16 @@ instance DIA_BAALTONDRAL_NEWMEMBER(C_INFO)
 	nr = 1;
 	condition = dia_baaltondral_newmember_condition;
 	information = dia_baaltondral_newmember_info;
-	permanent = 1;
+	permanent = 0;
 	description = "А где я смогу найти такого человека?";
 };
 
 
 func int dia_baaltondral_newmember_condition()
 {
-	if(BAALTONDRAL_GETNEWGUY == LOG_RUNNING)
+	var C_NPC dusty;
+	dusty = Hlp_GetNpc(vlk_524_dusty);
+	if(Npc_KnowsInfo(hero,dia_baaltondral_loyality) && (Npc_GetDistToWP(dusty,"PSI_PLATFORM_1") >= 1000) && (GETNEWGUY_DUSTY_JOINED == FALSE))
 	{
 		return 1;
 	};
@@ -177,7 +182,9 @@ instance DIA_BAALTONDRAL_NEWMEMBER2(C_INFO)
 
 func int dia_baaltondral_newmember2_condition()
 {
-	if(BAALTONDRAL_GETNEWGUY == LOG_RUNNING)
+	var C_NPC dusty;
+	dusty = Hlp_GetNpc(vlk_524_dusty);
+	if(Npc_KnowsInfo(hero,dia_baaltondral_loyality) && (Npc_GetDistToWP(dusty,"PSI_PLATFORM_1") >= 1000) && (GETNEWGUY_DUSTY_JOINED == FALSE))
 	{
 		return 1;
 	};
@@ -208,7 +215,7 @@ func int dia_baaltondral_dustysuccess_condition()
 {
 	var C_NPC dusty;
 	dusty = Hlp_GetNpc(vlk_524_dusty);
-	if((BAALTONDRAL_GETNEWGUY == LOG_RUNNING) && (Npc_GetDistToNpc(self,dusty) < 1000))
+	if(Npc_KnowsInfo(hero,dia_baaltondral_youtalked) && (Npc_GetDistToWP(dusty,"PSI_PLATFORM_1") < 1000) && (GETNEWGUY_DUSTY_JOINED == FALSE))
 	{
 		return 1;
 	};
@@ -218,24 +225,23 @@ func void dia_baaltondral_dustysuccess_info()
 {
 	var C_NPC dusty;
 	dusty = Hlp_GetNpc(vlk_524_dusty);
+	dusty.aivar[AIV_PARTYMEMBER] = FALSE;
+	dusty.flags = 0;
 	AI_Output(other,self,"DIA_BaalTondral_DustySuccess_15_00");	//Учитель, со мной пришел человек, который хочет познакомиться с тобой.
-	AI_Output(self,other,"DIA_BaalTondral_DustySuccess_13_01");	//Кто это с тобой? Он достоин? 
+	AI_Output(self,other,"DIA_BaalTondral_DustySuccess_13_01");	//Кто это с тобой? Он достоин?
 	AI_Output(other,self,"DIA_BaalTondral_DustySuccess_15_02");	//Ему нужно духовное наставление, Учитель.
 	AI_Output(self,other,"DIA_BaalTondral_DustySuccess_13_03");	//Хорошо. С этого дня он будет моим учеником.
 	AI_TurnToNPC(self,dusty);
-	AI_TurnToNPC(dusty,other);
 	AI_Output(self,NULL,"DIA_BaalTondral_DustySuccess_13_04");	//Ты должен будешь приходить ко мне каждый день и внимать моим словам. Я еще могу спасти твою душу.
-	dusty.aivar[AIV_PARTYMEMBER] = FALSE;
-	dusty.flags = 0;
-	dusty.guild = GIL_NOV;
-	Npc_SetTrueGuild(dusty,GIL_NOV);
-	b_exchangeroutine(vlk_524_dusty,"PREPARERITUAL");
-	BAALTONDRAL_GETNEWGUY = LOG_SUCCESS;
 	b_logentry(CH1_RECRUITDUSTY,"Дасти стал учеником Идола Тондрала. Я выполнил свое задание.");
 	Log_SetTopicStatus(CH1_RECRUITDUSTY,LOG_SUCCESS);
 	b_givexp(XP_DELIVEREDDUSTY);
+	GETNEWGUY_DUSTY_JOINED = TRUE;
+	GETNEWGUY_STARTED = LOG_SUCCESS;
+	dusty.guild = GIL_NOV;
+	Npc_SetTrueGuild(dusty,GIL_NOV);
+	AI_StopProcessInfos(self);
 };
-
 
 instance DIA_BAALTONDRAL_SENDTOKALOM(C_INFO)
 {
@@ -250,7 +256,7 @@ instance DIA_BAALTONDRAL_SENDTOKALOM(C_INFO)
 
 func int dia_baaltondral_sendtokalom_condition()
 {
-	if(BAALTONDRAL_GETNEWGUY == LOG_SUCCESS)
+	if((Npc_KnowsInfo(hero,dia_baaltondral_dustysuccess) || Npc_KnowsInfo(hero,dia_melvin_metdusty2)) && (Npc_GetTrueGuild(hero) == GIL_NONE) && (KAPITEL < 2) && Npc_KnowsInfo(hero,dia_baaltondral_youtalked))
 	{
 		return 1;
 	};
@@ -259,8 +265,9 @@ func int dia_baaltondral_sendtokalom_condition()
 func void dia_baaltondral_sendtokalom_info()
 {
 	AI_Output(other,self,"DIA_BaalTondral_SendToKalom_15_00");	//Учитель! Я хочу вступить в Братство. Помоги мне.
-	AI_TurnToNPC(self,other);
 	AI_Output(self,other,"DIA_BaalTondral_SendToKalom_13_01");	//Ты доказал нам свою преданность. Иди к Кор Галому. Он даст тебе одеяние послушника.
-	b_logentry(CH1_JOINPSI,"Идол Тондрал считает меня достойным носить одежду послушника!");
+	Log_CreateTopic(CH1_JOINPSI,LOG_MISSION);
+	Log_SetTopicStatus(CH1_JOINPSI,LOG_RUNNING);
+	b_logentry(CH1_JOINPSI,"Я привел нового человека в Лагерь сектантов. Теперь Идол Тондрал считает меня достойным носить одежду послушника!");
 };
 

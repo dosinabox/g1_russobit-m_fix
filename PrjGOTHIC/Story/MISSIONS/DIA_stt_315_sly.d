@@ -34,17 +34,14 @@ instance DIA_STT_315_SLY(C_INFO)
 
 func int dia_stt_315_sly_condition()
 {
-	if(Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST)
-	{
-		return 1;
-	};
+	return 1;
 };
 
 func void dia_stt_315_sly_info()
 {
 	AI_SetWalkMode(self,NPC_WALK);
 	AI_GotoNpc(self,other);
-	AI_Output(self,other,"DIA_STT_315_Sly_10_01");	//Я тебя раньше не видел. Ты ведь новенький, не так ли? 
+	AI_Output(self,other,"DIA_STT_315_Sly_10_01");	//Я тебя раньше не видел. Ты ведь новенький, не так ли?
 	AI_Output(self,other,"DIA_STT_315_Sly_10_02");	//Я Слай. Предлагаю новеньким работу.
 };
 

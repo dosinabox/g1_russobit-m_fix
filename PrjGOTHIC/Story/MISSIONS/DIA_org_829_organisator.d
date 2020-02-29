@@ -34,7 +34,10 @@ instance INFO_ORG_829_HELLO(C_INFO)
 
 func int info_org_829_hello_condition()
 {
-	return 1;
+	if(FMTAKEN == FALSE)
+	{
+		return 1;
+	};
 };
 
 func void info_org_829_hello_info()
@@ -84,6 +87,7 @@ func void info_org_829_offerjoint_info()
 		};
 		AI_Output(self,other,"Info_ORG_829_OfferJoint_06_01");	//Еще бы! Ты ведь из Лагеря сектантов, да?
 		NC_JOINTS_VERTEILT = NC_JOINTS_VERTEILT + 1;
+		ORG_829_GOTJOINT = TRUE;
 	}
 	else
 	{

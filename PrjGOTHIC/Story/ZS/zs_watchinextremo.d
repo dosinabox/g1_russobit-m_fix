@@ -9,7 +9,7 @@ func void zs_watchinextremo()
 	AI_PlayAni(self,"T_STAND_2_CLAPHANDS");
 };
 
-func int zs_watchinextremo_loop()
+func void zs_watchinextremo_loop()
 {
 	printdebugnpc(PD_ZS_LOOP,"zs_WatchInExtremo_Loop");
 };

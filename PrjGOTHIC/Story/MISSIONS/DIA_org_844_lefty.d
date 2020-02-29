@@ -63,7 +63,7 @@ instance DIA_LEFTY_FIRST(C_INFO)
 
 func int dia_lefty_first_condition()
 {
-	if(Wld_IsTime(8,0,19,0) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
+	if(Wld_IsTime(8,0,19,0) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE)) && (hero.level < 16)
 	{
 		return 1;
 	};
@@ -103,7 +103,16 @@ func void dia_lefty_first_never()
 	Info_ClearChoices(dia_lefty_first);
 	AI_StopProcessInfos(self);
 	Npc_SetTarget(self,other);
-	AI_StartState(self,zs_attack,1,"");
+	if(Npc_GetTrueGuild(hero) == GIL_ORG || Npc_GetTrueGuild(hero) == GIL_SLD || Npc_GetTrueGuild(hero) == GIL_KDW)
+	{
+		AI_StartState(self,zs_attack,0,"");
+	}
+	else
+	{
+		AI_StartState(self,zs_attack,1,"");
+		//npc_setpermattitude(self,ATT_HOSTILE);
+		//Npc_SetTempAttitude(self,ATT_HOSTILE);
+	};
 };
 
 func void dia_lefty_first_later()
@@ -128,7 +137,7 @@ instance DIA_LEFTY_WORKDAY(C_INFO)
 
 func int dia_lefty_workday_condition()
 {
-	if((Wld_IsTime(8,0,19,0) || (LEFTY_MISSION == LOG_SUCCESS)) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE) && ((LEFTY_WORKDAY <= (Wld_GetDay() - 1)) || (LEFTY_MISSION == LOG_SUCCESS)))
+	if((((LEFTY_MISSION == LOG_RUNNING)) && Wld_IsTime(8,0,19,0) || (LEFTY_MISSION == LOG_SUCCESS)) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE) &&  ((LEFTY_WORKDAY <= (Wld_GetDay() - 1)) || (LEFTY_MISSION == LOG_SUCCESS)))
 	{
 		return 1;
 	};
@@ -136,7 +145,6 @@ func int dia_lefty_workday_condition()
 
 func void dia_lefty_workday_info()
 {
-	AI_Output(self,other,"DIA_Lefty_WorkDay_07_00");	//Эй, ты!
 	if(LEFTY_MISSION == LOG_FAILED)
 	{
 		AI_Output(self,other,"DIA_Lefty_WorkDay_NextChance_07_00");	//Тебе повезло! Я дам тебе еще один шанс.
@@ -149,6 +157,7 @@ func void dia_lefty_workday_info()
 	}
 	else if(LEFTY_MISSION == LOG_RUNNING)
 	{
+		AI_Output(self,other,"DIA_Lefty_WorkDay_07_00");	//Эй, ты!
 		AI_Output(self,other,"DIA_Lefty_WorkDay_StillRunning_07_00");	//Я же сказал тебе, что ты должен разнести воду крестьянам!
 		AI_Output(self,other,"DIA_Lefty_WorkDay_StillRunning_07_01");	//Мне не нравится, когда кто-то не держит своего слова!
 		LEFTY_WORKDAY = b_setdaytolerance();
@@ -156,7 +165,16 @@ func void dia_lefty_workday_info()
 		b_logentry(CH1_CARRYWATER,"Лефти был в бешенстве, узнав, что я еще не разнес воду! Сложно иметь дело с этим неуравновешенным типом.");
 		AI_StopProcessInfos(self);
 		Npc_SetTarget(self,other);
-		AI_StartState(self,zs_attack,1,"");
+		if(Npc_GetTrueGuild(hero) == GIL_ORG || Npc_GetTrueGuild(hero) == GIL_SLD || Npc_GetTrueGuild(hero) == GIL_KDW)
+		{
+			AI_StartState(self,zs_attack,0,"");
+		}
+		else
+		{
+			AI_StartState(self,zs_attack,1,"");
+			//npc_setpermattitude(self,ATT_HOSTILE);
+			//Npc_SetTempAttitude(self,ATT_HOSTILE);
+		};
 	}
 	else if(LEFTY_MISSION == LOG_SUCCESS)
 	{
@@ -202,7 +220,16 @@ func void dia_lefty_neveragain_info()
 	AI_Output(self,other,"DIA_Lefty_NeverAgain_07_02");	//По-моему, тебе следует напомнить, кто здесь главный!
 	AI_StopProcessInfos(self);
 	Npc_SetTarget(self,other);
-	AI_StartState(self,zs_attack,1,"");
+	if(Npc_GetTrueGuild(hero) == GIL_ORG || Npc_GetTrueGuild(hero) == GIL_SLD || Npc_GetTrueGuild(hero) == GIL_KDW)
+	{
+		AI_StartState(self,zs_attack,0,"");
+	}
+	else
+	{
+		AI_StartState(self,zs_attack,1,"");
+		//npc_setpermattitude(self,ATT_HOSTILE);
+		//Npc_SetTempAttitude(self,ATT_HOSTILE);
+	};
 };
 
 
@@ -247,11 +274,13 @@ func void dia_lefty_perm_info()
 func void dia_lefty_perm_aufsmaul()
 {
 	AI_Output(other,self,"DIA_Lefty_PERM_AufsMaul_15_00");	//У меня был плохой день, и я просто хочу отдохнуть... постоять тут немного.
-	b_say(self,other,"$YOUWANNAFOOLME");
+	b_say(self,other,"$WATCHYOUAIMANGRY");
 	Info_ClearChoices(dia_lefty_perm);
 	AI_StopProcessInfos(self);
 	Npc_SetTarget(self,other);
 	AI_StartState(self,zs_attack,1,"");
+	//npc_setpermattitude(self,ATT_HOSTILE);
+	//Npc_SetTempAttitude(self,ATT_HOSTILE);
 };
 
 func void dia_lefty_perm_durstig()

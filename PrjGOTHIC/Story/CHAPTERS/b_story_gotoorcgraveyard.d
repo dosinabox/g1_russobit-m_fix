@@ -1,7 +1,6 @@
 
 func void b_story_gotoorcgraveyard()
 {
-	var C_NPC kalom;
 	var C_NPC novize;
 	var C_NPC novize_1;
 	var C_NPC novize_2;
@@ -14,9 +13,8 @@ func void b_story_gotoorcgraveyard()
 	var C_NPC novize_9;
 	var C_NPC novize_10;
 	var C_NPC novize_11;
-	Log_CreateTopic(CH3_ORCGRAVEYARD,LOG_MISSION);
-	Log_SetTopicStatus(CH3_ORCGRAVEYARD,LOG_RUNNING);
-	b_logentry(CH3_ORCGRAVEYARD,"Великая Церемония вызова Спящего прошла не так, как планировали Гуру. Мы увидели лишь нечеткое изображение орка и какой-то пещеры. Юберион, духовный Учитель Братства, не выдержал напряжения и потерял сознание!");
+	var C_NPC baaltyon;
+	var C_NPC talas;
 	b_logentry(CH3_ORCGRAVEYARD,"Кор Ангар, глава Стражей, попросил меня пойти на кладбище орков, систему пещер недалеко от Болотного лагеря. Туда уже направился Гуру Идол Люкор с несколькими Стражами, чтобы найти какие-нибудь указания, которые могли бы помочь расшифровать видение.");
 	Wld_InsertNpc(orcbiter,"OW_PATH_198_ORCGRAVEYARD4");
 	Wld_InsertNpc(orcbiter,"OW_PATH_198_ORCGRAVEYARD4");
@@ -27,8 +25,6 @@ func void b_story_gotoorcgraveyard()
 	Wld_InsertNpc(orcscout,"OW_PATH_198_ORCGRAVEYARD7");
 	Wld_InsertNpc(orcscout,"OW_PATH_198_ORCGRAVEYARD8");
 	Wld_InsertNpc(tpl_1463_templer,"OW_PATH_198_ORCGRAVEYARD8");
-	kalom = Hlp_GetNpc(gur_1201_corkalom);
-	Npc_ExchangeRoutine(kalom,"FLEE");
 	CORANGAR_GOTOOGY = TRUE;
 	novize = Hlp_GetNpc(nov_1319_novize);
 	Npc_ExchangeRoutine(novize,"START");
@@ -66,5 +62,20 @@ func void b_story_gotoorcgraveyard()
 	novize_11 = Hlp_GetNpc(nov_1337_novize);
 	Npc_ExchangeRoutine(novize_11,"START");
 	AI_ContinueRoutine(novize_11);
+	baaltyon = Hlp_GetNpc(gur_1210_baaltyon);
+	Npc_ExchangeRoutine(baaltyon,"START");
+	AI_ContinueRoutine(baaltyon);
+	talas = Hlp_GetNpc(nov_1300_talas);
+	Npc_ExchangeRoutine(talas,"START");
+	AI_ContinueRoutine(talas);
+	b_exchangeroutine(gur_1204_baalnamib,"startch2");
+	b_exchangeroutine(nov_1314_novize,"start");
+	b_exchangeroutine(nov_1354_novize,"start");
+	b_exchangeroutine(nov_1355_novize,"start");
+	b_exchangeroutine(nov_1323_novize,"start");
+	b_exchangeroutine(nov_1324_novize,"start");
+	b_exchangeroutine(tpl_1425_templer,"start");
+	b_exchangeroutine(tpl_1410_templer,"start");
+	b_exchangeroutine(tpl_1423_templer,"start");
 };
 

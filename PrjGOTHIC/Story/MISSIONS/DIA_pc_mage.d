@@ -25,6 +25,10 @@ func void dia_milten_exit_info()
 	{
 		AI_Output(self,hero,"DIA_Milten_EXIT_02_01");	//Увидимся.
 	};
+	if(Npc_HasItems(hero,demourizel))
+	{
+		Npc_RemoveInvItem(hero,demourizel);
+	};
 	AI_StopProcessInfos(self);
 };
 
@@ -101,27 +105,38 @@ func int dia_milten_gotocorristo_condition()
 
 func void dia_milten_gotocorristo_info()
 {
+	var C_NPC corristo;
+	AI_Output(self,other,"DIA_Milten_GotoCorristo_02_01");	//Мы слышали о твоих подвигах в Старой шахте. Без ползунов добыча руды идет гораздо спокойнее.
+	AI_Output(self,other,"DIA_Milten_GotoCorristo_02_02");	//Корристо тоже слышал о тебе. Он хочет поговорить с тобой. Иди к нему.
 	if((Npc_HasItems(other,itwr_fire_letter_01) >= 1) || (Npc_HasItems(other,itwr_fire_letter_02) >= 1))
 	{
-		AI_Output(other,self,"DIA_Milten_Hello_15_00");	//Я ищу Верховного Мага Круга Огня.
-		AI_Output(self,other,"DIA_Milten_Hello_02_01");	//Это Корристо. Зачем он тебе нужен?
 		AI_Output(other,self,"DIA_Milten_Letter_15_00");	//У меня есть письмо для Верховного Мага Круга Огня.
 		AI_Output(self,other,"DIA_Milten_Letter_02_03");	//Покажи мне это письмо.
 		AI_Output(other,self,"DIA_Milten_Letter_Give_15_00");	//Вот оно.
-		b_givexp(XP_XARDASLETTER);
+		b_usefakescroll();
 		if(Npc_HasItems(other,itwr_fire_letter_01))
 		{
+			b_givexp(XP_XARDASLETTER);
 			b_giveinvitems(other,self,itwr_fire_letter_01,1);
+			Npc_RemoveInvItem(self,itwr_fire_letter_01);
 		}
 		else if(Npc_HasItems(other,itwr_fire_letter_02))
 		{
+			b_givexp(XP_XARDASLETTEROPEN);
 			b_giveinvitems(other,self,itwr_fire_letter_02,1);
+			Npc_RemoveInvItem(self,itwr_fire_letter_02);
 		};
+		corristo = Hlp_GetNpc(kdf_402_corristo);
+		CreateInvItem(corristo,itwr_fire_letter_02);
 		AI_Output(other,self,"GUR_1200_Yberion_EARN_Info_15_01");	//А я не заслужил награды?
 		AI_Output(self,hero,"Info_Milten_SHSEAL_02_05");	//В этом больше нет необходимости.
+		if(PYROCAR_MESSENGER == LOG_RUNNING)
+		{
+			b_logentry(KDFLETTER,"Я доставил письмо магам. Принеси я его пораньше, то получил бы награду, жаль.");
+			Log_SetTopicStatus(KDFLETTER,LOG_SUCCESS);
+			PYROCAR_MESSENGER = LOG_SUCCESS;
+		};
 	};
-	AI_Output(self,other,"DIA_Milten_GotoCorristo_02_01");	//Мы слышали о твоих подвигах в Старой шахте. Без ползунов добыча руды идет гораздо спокойнее.
-	AI_Output(self,other,"DIA_Milten_GotoCorristo_02_02");	//Корристо тоже слышал о тебе. Он хочет поговорить с тобой. Иди к нему.
 };
 
 
@@ -159,9 +174,9 @@ func void dia_milten_letter_info()
 
 func void dia_milten_letter_give()
 {
+	var C_NPC corristo;
 	AI_Output(other,self,"DIA_Milten_Letter_Give_15_00");	//Вот оно.
 	b_usefakescroll();
-	b_givexp(XP_XARDASLETTER);
 	AI_Output(self,other,"DIA_Milten_Letter_Give_02_03");	//Это письмо адресовано Ксардасу!
 	AI_Output(other,self,"DIA_Milten_Letter_Give_15_04");	//И что в этом необычного?
 	AI_Output(self,other,"DIA_Milten_Letter_Give_02_05");	//Ксардас оставил служение Инносу много лет назад. Он ушел отсюда и посвятил свою жизнь черной магии.
@@ -173,12 +188,18 @@ func void dia_milten_letter_give()
 	AI_GotoWP(self,"OCC_CHAPEL_ENTRANCE");
 	if(Npc_HasItems(other,itwr_fire_letter_01))
 	{
+		b_givexp(XP_XARDASLETTER);
 		b_giveinvitems(other,self,itwr_fire_letter_01,1);
+		Npc_RemoveInvItem(self,itwr_fire_letter_01);
 	}
 	else if(Npc_HasItems(other,itwr_fire_letter_02))
 	{
+		b_givexp(XP_XARDASLETTEROPEN);
 		b_giveinvitems(other,self,itwr_fire_letter_02,1);
+		Npc_RemoveInvItem(self,itwr_fire_letter_02);
 	};
+	corristo = Hlp_GetNpc(kdf_402_corristo);
+	CreateInvItem(corristo,itwr_fire_letter_02);
 	MILTEN_HASLETTER = TRUE;
 	Npc_SetRefuseTalk(self,10);
 };
@@ -233,10 +254,18 @@ func void dia_milten_comesback_info()
 	{
 		AI_Output(self,other,"DIA_Milten_ComesBack_02_00");	//Корристо огорчило известие о том, что ты не доверяешь служителям Инноса.
 		AI_Output(self,other,"DIA_Milten_ComesBack_02_01");	//Но он позволил тебе встретиться с Торрезом и получить обычную награду.
+		if(PYROCAR_MESSENGER == LOG_RUNNING)
+		{
+			b_logentry(KDFLETTER,"Мильтен направил меня к Торрезу. Я не отдам такое ценное послание просто так, сначала мне нужна награда!");
+		};
 	}
 	else
 	{
 		AI_Output(self,other,"DIA_Milten_ComesBack_02_02");	//Корристо был в полном восторге. Он сказал, что ты можешь встретиться с Торрезом и выбрать себе награду.
+		if(PYROCAR_MESSENGER == LOG_RUNNING)
+		{
+			b_logentry(KDFLETTER,"Мильтен отнес письмо верховному магу, Корристо. Мне полагается награда за доставку, теперь нужно поговорить с Торрезом.");
+		};
 	};
 };
 
@@ -289,11 +318,15 @@ func int dia_milten_nocheinbrief_condition()
 
 func void dia_milten_nocheinbrief_info()
 {
+	var C_NPC corristo;
 	AI_Output(other,self,"DIA_Milten_NochEinBrief_15_00");	//У меня есть письмо от магов Воды.
 	AI_Output(self,other,"DIA_Milten_NochEinBrief_02_01");	//А! Очень хорошо! Я передам его Корристо.
 	AI_Output(self,other,"DIA_Milten_NochEinBrief_02_02");	//Когда вернешься в Новый лагерь, маги Воды вознаградят тебя за труды.
-	CRONOS_MESSENGER = LOG_SUCCESS;
+	b_logentry(KDWLETTER,"Мильтен получил письмо магов Воды, нужно сообщить об успехе Кроносу.");
 	b_giveinvitems(other,self,cronos_brief,1);
+	Npc_RemoveInvItem(self,cronos_brief);
+	corristo = Hlp_GetNpc(kdf_402_corristo);
+	CreateInvItem(corristo,cronos_brief);
 };
 
 
@@ -366,7 +399,7 @@ instance INFO_MILTEN_SHWAIT(C_INFO)
 
 func int info_milten_shwait_condition()
 {
-	if(Npc_GetDistToWP(hero,"OW_PATH_274") < 1000)
+	if(Npc_GetDistToWP(hero,"OW_PATH_274") < 1000 && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return 1;
 	};
@@ -377,7 +410,7 @@ func void info_milten_shwait_info()
 	AI_GotoNpc(self,hero);
 	AI_Output(self,hero,"Info_Milten_SHWAIT_02_01");	//Приветствую! Мой друг Лестер из Болотного лагеря рассказал мне о тебе.
 	AI_Output(self,hero,"Info_Milten_SHWAIT_02_02");	//Я поражен. Ты стал очень сильным.
-	AI_Output(hero,self,"Info_Milten_SHWAIT_15_03");	//Так, стараюсь.
+	AI_Output(hero,self,"Info_Milten_SHWAIT_15_03");	//Так, стараюсь...
 	AI_Output(self,hero,"Info_Milten_SHWAIT_02_04");	//Ах, да. Как всегда скромен, да?
 };
 
@@ -722,7 +755,7 @@ instance INFO_MILTEN_SHARRIVED(C_INFO)
 
 func int info_milten_sharrived_condition()
 {
-	if(Npc_KnowsInfo(hero,info_milten_shaccept) && (Npc_GetDistToWP(hero,"OW_PATH_3_STONES") < 500))
+	if(Npc_KnowsInfo(hero,info_milten_shaccept) && (Npc_GetDistToWP(hero,"OW_PATH_3_STONES") < 500) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -745,14 +778,14 @@ instance INFO_MILTEN_SHHEAL(C_INFO)
 	condition = info_milten_shheal_condition;
 	information = info_milten_shheal_info;
 	important = 0;
-	permanent = 0;
+	permanent = 1;
 	description = "Я ранен. Помоги мне!";
 };
 
 
 func int info_milten_shheal_condition()
 {
-	if(Npc_KnowsInfo(hero,info_milten_shaccept) && !Npc_KnowsInfo(hero,info_milten_shsuccess) && (hero.attribute[ATR_HITPOINTS] < ((hero.attribute[ATR_HITPOINTS_MAX] * 7) / 10)) && (Npc_HasItems(hero,itfo_potion_health_02) == 0))
+	if(Npc_KnowsInfo(hero,info_milten_shaccept) && !Npc_KnowsInfo(hero,info_milten_shsuccess) && (hero.attribute[ATR_HITPOINTS] < hero.attribute[ATR_HITPOINTS_MAX]))
 	{
 		return TRUE;
 	};
@@ -761,10 +794,23 @@ func int info_milten_shheal_condition()
 func void info_milten_shheal_info()
 {
 	AI_Output(hero,self,"Info_Milten_SHHEAL_15_01");	//Я ранен. Помоги мне!
-	if(Npc_HasItems(self,itfo_potion_health_02) > 0)
+	if(MILTEN_HEAL == 0)
 	{
 		AI_Output(self,hero,"Info_Milten_SHHEAL_02_02");	//Возьми целебный эликсир.
 		b_giveinvitems(self,hero,itfo_potion_health_02,1);
+		MILTEN_HEAL = 1;
+	}
+	else if(MILTEN_HEAL == 1)
+	{
+		AI_Output(self,hero,"Info_Milten_SHHEAL_02_02");	//Возьми целебный эликсир.
+		b_giveinvitems(self,hero,itfo_potion_health_02,1);
+		MILTEN_HEAL = 2;
+	}
+	else if(MILTEN_HEAL == 2)
+	{
+		AI_Output(self,hero,"Info_Milten_SHHEAL_02_02");	//Возьми целебный эликсир.
+		b_giveinvitems(self,hero,itfo_potion_health_02,1);
+		MILTEN_HEAL = 3;
 	}
 	else
 	{
@@ -827,6 +873,7 @@ func int info_milten_shscroll_condition()
 
 func void info_milten_shscroll_info()
 {
+	var C_NPC npc;
 	AI_Output(hero,self,"Info_Milten_SHSCROLL_15_01");	//Я использовал свиток... но я не убил стража!
 	AI_Output(self,hero,"Info_Milten_SHSCROLL_02_02");	//Только не это! Придумай, как еще можно победить его!
 	AI_Output(self,hero,"Info_Milten_SHSCROLL_02_03");	//Может быть, мы сможем купить еще один свиток или какую-нибудь руну в одном из лагерей?
@@ -834,6 +881,21 @@ func void info_milten_shscroll_info()
 	self.aivar[AIV_PARTYMEMBER] = FALSE;
 	AI_StopProcessInfos(self);
 	Npc_ExchangeRoutine(self,"SHWait");
+	if(c_npcbelongstooldcamp(hero))
+	{
+		npc = Hlp_GetNpc(kdf_405_torrez);
+		CreateInvItem(npc,itarscrolldestroyundead);
+	}
+	else if(c_npcbelongstonewcamp(hero))
+	{
+		npc = Hlp_GetNpc(kdw_604_cronos);
+		CreateInvItem(npc,itarscrolldestroyundead);
+	}
+	else
+	{
+		npc = Hlp_GetNpc(gur_1208_baalcadar);
+		CreateInvItem(npc,itarscrolldestroyundead);
+	};
 };
 
 
@@ -879,7 +941,7 @@ instance INFO_MILTEN_SHLEAVE(C_INFO)
 
 func int info_milten_shleave_condition()
 {
-	if(Npc_KnowsInfo(hero,info_milten_shaccept) && !Npc_KnowsInfo(hero,info_milten_shsuccess) && (Npc_GetDistToWP(hero,"OW_PATH_3_STONES") > 10000) && (self.aivar[AIV_PARTYMEMBER] == TRUE))
+	if(Npc_KnowsInfo(hero,info_milten_shaccept) && !Npc_KnowsInfo(hero,info_milten_shsuccess) && (Npc_GetDistToWP(hero,"OW_PATH_3_STONES") > 10000) && (self.aivar[AIV_PARTYMEMBER] == TRUE) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -909,7 +971,7 @@ instance INFO_MILTEN_SHCONTINUE(C_INFO)
 
 func int info_milten_shcontinue_condition()
 {
-	if((self.aivar[AIV_PARTYMEMBER] == FALSE) && Npc_KnowsInfo(hero,info_milten_shaccept) && !Npc_KnowsInfo(hero,info_milten_shsuccess) && (Npc_GetDistToWP(hero,"OW_PATH_3_STONES") < 9000))
+	if((self.aivar[AIV_PARTYMEMBER] == FALSE) && Npc_KnowsInfo(hero,info_milten_shaccept) && !Npc_KnowsInfo(hero,info_milten_shsuccess) && (Npc_GetDistToWP(hero,"OW_PATH_3_STONES") < 9000) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -926,6 +988,8 @@ func void info_milten_shcontinue_info()
 };
 
 
+var int orctalismanisfound;
+
 instance INFO_MILTEN_SHSUCCESS(C_INFO)
 {
 	npc = pc_mage;
@@ -938,14 +1002,17 @@ instance INFO_MILTEN_SHSUCCESS(C_INFO)
 
 func int info_milten_shsuccess_condition()
 {
-	if(Npc_KnowsInfo(hero,info_milten_shaccept) && Npc_HasItems(hero,itmi_orctalisman))
+	if(Npc_KnowsInfo(hero,info_milten_shaccept) && Npc_HasItems(hero,itmi_orctalisman) && (c_bodystatecontains(hero,BS_RUN) || c_bodystatecontains(hero,BS_WALK) || c_bodystatecontains(hero,BS_JUMP) || (ORCTALISMANISFOUND == 1) || Npc_HasReadiedWeapon(hero)) && (Npc_GetDistToPlayer(self) < 1000))
 	{
+		ORCTALISMANISFOUND = 1;
 		return TRUE;
 	};
 };
 
 func void info_milten_shsuccess_info()
 {
+	AI_UnreadySpell(hero);
+	AI_RemoveWeapon(hero);
 	AI_GotoNpc(self,hero);
 	AI_Output(self,hero,"Info_Milten_SHSUCCESS_02_01");	//Хорошо. Теперь у тебя есть талисман.
 	AI_Output(hero,self,"Info_Milten_SHSUCCESS_15_02");	//Вот, возьми его. Как ты и просил.
@@ -972,7 +1039,7 @@ instance INFO_MILTEN_OCWARN(C_INFO)
 
 func int info_milten_ocwarn_condition()
 {
-	if(KAPITEL == 4)
+	if(KAPITEL == 4 && Npc_CanSeeNpcFreeLOS(self,hero) && Npc_GetDistToNpc(self,hero) < 1400)
 	{
 		return TRUE;
 	};
@@ -1001,6 +1068,58 @@ func void info_milten_ocwarn_info()
 		AI_Output(hero,self,"Info_Milten_OCWARN_15_11");	//Старая шахта обрушилась?
 		AI_Output(self,hero,"Info_Milten_OCWARN_02_12");	//Да. Все произошло очень быстро. Никто не уцелел.
 		AI_Output(self,hero,"Info_Milten_OCWARN_02_13");	//Вход в шахту блокировали стражники.
+		if(GETNEWGUY_STARTED == TRUE)
+	    {
+	    	b_logentry(CH1_RECRUITDUSTY,"Теперь я не смогу вывести кого-либо из Старого лагеря.");
+	    	Log_SetTopicStatus(CH1_RECRUITDUSTY,LOG_FAILED);
+			GETNEWGUY_STARTED = LOG_FAILED;
+	    };
+		if(Npc_KnowsInfo(hero,grd_271_ulbert_trick) && !Npc_KnowsInfo(hero,grd_271_ulbert_angry))
+	    {
+	    	b_logentry(CH2_STORAGESHED,"В Старой шахте произошел обвал, теперь туда не попасть!");
+	    	Log_SetTopicStatus(CH2_STORAGESHED,LOG_FAILED);
+	    };
+		if(Npc_KnowsInfo(hero,vlk_584_snipes_deal) && !Npc_KnowsInfo(hero,grd_262_aaron_sellnow))
+	    {
+	    	b_logentry(CH2_SNIPESDEAL,"Старая шахта обрушилась! Я не смогу выполнить просьбу Снайпса...");
+	    	Log_SetTopicStatus(CH2_SNIPESDEAL,LOG_FAILED);
+	    };
+		if(Npc_KnowsInfo(hero,org_801_lares_newlist) && !Npc_KnowsInfo(hero,org_801_lares_bringlistback))
+	    {
+	    	b_logentry(THELISTFORNC,"Список припасов для Старой шахты и план Ларса больше не имеют никакого смысла.");
+	    	Log_SetTopicStatus(THELISTFORNC,LOG_FAILED);
+			LARES_BRINGLISTBACK = LOG_FAILED;
+			DIEGO_BRINGLIST = LOG_FAILED;
+	    };
+		if(Npc_KnowsInfo(hero,info_diego_bringlist_offer) && !Npc_KnowsInfo(hero,info_diego_bringlist_success))
+	    {
+	    	b_logentry(CH1_BRINGLIST,"Список припасов для Старой шахты больше не имеет никакого смысла.");
+	    	Log_SetTopicStatus(CH1_BRINGLIST,LOG_FAILED);
+			LARES_BRINGLISTBACK = LOG_FAILED;
+			DIEGO_BRINGLIST = LOG_FAILED;
+	    };
+		if(CRONOS_MESSENGER == LOG_RUNNING && !Npc_KnowsInfo(hero,dia_milten_nocheinbrief))
+	    {
+	    	b_logentry(KDWLETTER,"Все маги Огня мертвы, я не успел передать им письмо...");
+	    	Log_SetTopicStatus(KDWLETTER,LOG_FAILED);
+			CRONOS_MESSENGER = LOG_FAILED;
+	    };
+		if(PYROCAR_MESSENGER == LOG_RUNNING)
+	    {
+	    	b_logentry(KDFLETTER,"Все маги Огня мертвы, я не успел передать им письмо...");
+	    	Log_SetTopicStatus(KDFLETTER,LOG_FAILED);
+			PYROCAR_MESSENGER = LOG_FAILED;
+	    };
+		if(DEXTER_GETKALOMSRECIPE == LOG_RUNNING)
+		{
+			DEXTER_GETKALOMSRECIPE = LOG_FAILED;
+			Log_SetTopicStatus(CH1_KALOMSRECIPE,LOG_FAILED);
+		};
+		if(FISK_GETNEWHEHLER == LOG_RUNNING)
+		{
+			FISK_GETNEWHEHLER = LOG_FAILED;
+			Log_SetTopicStatus(CH1_FISKNEWDEALER,LOG_FAILED);
+		};
 	};
 };
 
@@ -1228,6 +1347,10 @@ func int info_milten_lsaway_condition()
 
 func void info_milten_lsaway_info()
 {
+	if((hero.attribute[ATR_STRENGTH] < 30) || (Npc_HasItems(hero,ITMW_2H_SWORD_HEAVY_03) || Npc_HasItems(hero,INNOS_ZORN) || Npc_HasItems(hero,GORNS_RACHE) || Npc_HasItems(hero,ROTER_WIND) || Npc_HasItems(hero,LEES_AXT) || Npc_HasItems(hero,THORUS_SCHWERT) || Npc_HasItems(hero,ITMW_2H_SWORD_HEAVY_04) || Npc_HasItems(hero,ITMW_2H_AXE_HEAVY_01) || Npc_HasItems(hero,ORIKS_AXT) || Npc_HasItems(hero,ITMW_2H_AXE_HEAVY_02) || Npc_HasItems(hero,ITMW_2H_AXE_HEAVY_04) || Npc_HasItems(hero,TORLOFS_AXT) || Npc_HasItems(hero,ITMW_2H_AXE_HEAVY_03)))
+	{
+		CreateInvItem(hero,demourizel);
+	};
 	AI_GotoNpc(self,hero);
 	AI_Output(self,hero,"Info_Milten_LSAWAY_02_01");	//Теперь рассказывай, что стряслось?
 	AI_Output(hero,self,"Info_Milten_LSAWAY_15_02");	//Мне нужна энергия рудной горы, и я думаю, что маги Воды не согласятся помочь мне получить ее.
@@ -1239,9 +1362,15 @@ func void info_milten_lsaway_info()
 	AI_Output(self,hero,"Info_Milten_LSAWAY_02_08");	//Никто не разговаривал с ним с тех самых пор, как он покинул Старый лагерь.
 	AI_Output(hero,self,"Info_Milten_LSAWAY_15_09");	//Я говорил с ним.
 	AI_Output(self,hero,"Info_Milten_LSAWAY_02_10");	//Зачем тебе понадобилась сила железной горы?
-	AI_Output(hero,self,"Info_Milten_LSAWAY_15_11");	//Я хочу передать ее этому мечу.
-	AI_Output(self,hero,"Info_Milten_LSAWAY_02_12");	//Ух, ты! Вот это клинок!
-	AI_Output(hero,self,"Info_Milten_LSAWAY_15_13");	//Его имя УРИЗЕЛЬ!
+	if(Npc_HasItems(hero,mythrilklinge01))
+	{
+		AI_Output(hero,self,"Info_Milten_LSAWAY_15_11");	//Я хочу передать ее этому мечу.
+		AI_EquipBestMeleeWeapon(hero);
+		AI_ReadyMeleeWeapon(hero);
+		AI_Output(self,hero,"Info_Milten_LSAWAY_02_12");	//Ух, ты! Вот это клинок!
+		AI_Output(hero,self,"Info_Milten_LSAWAY_15_13");	//Его имя УРИЗЕЛЬ!
+		AI_RemoveWeapon(hero);
+	};
 };
 
 
@@ -1266,6 +1395,11 @@ func int info_milten_loadsword4_condition()
 
 func void info_milten_loadsword4_info()
 {
+	if(Npc_HasItems(hero,demourizel))
+	{
+		Npc_RemoveInvItem(hero,demourizel);
+		AI_EquipBestMeleeWeapon(hero);
+	};
 	AI_Output(hero,self,"Info_Milten_LOADSWORD4_15_01");	//Ксардас дал мне заклинание, которое передаст мечу силу руды.
 	AI_Output(hero,self,"Info_Milten_LOADSWORD4_15_02");	//Тебе нужно будет прочитать его, когда я поднесу меч к горе.
 	b_usefakescroll();
@@ -1305,11 +1439,36 @@ func void info_milten_lsrisk_info()
 	AI_Output(self,hero,"Info_Milten_LSRISK_02_08");	//Встретимся возле железной горы, и... Никому не говори об этом!
 	AI_Output(hero,self,"Info_Milten_LSRISK_15_09");	//Хорошо. Встретимся у рудной горы.
 	b_logentry(CH5_URIZIEL,"Я смог убедить моего друга Мильтена помочь мне перенести энергию магической руды в меч. Мы договорились встретиться у подножия рудной горы.");
-	Npc_ExchangeRoutine(self,"LSOreHeap");
-	b_exchangeroutine(sld_726_soeldner,"loadsword");
 	AI_StopProcessInfos(self);
+	Npc_ExchangeRoutine(self,"LSOreHeap");
 };
 
+
+instance INFO_MILTEN_OREGUARD(C_INFO)
+{
+	npc = pc_mage;
+	condition = info_milten_oreguard_condition;
+	information = info_milten_oreguard_info;
+	important = 1;
+	permanent = 0;
+};
+
+
+func int info_milten_oreguard_condition()
+{
+	if(Npc_KnowsInfo(hero,info_oreguard))
+	{
+		return TRUE;
+	};
+};
+
+func void info_milten_oreguard_info()
+{
+	AI_Output(hero,self,"DIA_Huno_YouKnowYourJob_15_00");	//А у тебя неплохо получается, как я вижу.
+	AI_Output(self,hero,"Info_Milten_SHACCEPT_02_06");	//Иди за мной.
+	Npc_ExchangeRoutine(self,"LSOreHeap2");
+	AI_StopProcessInfos(self);
+};
 
 instance INFO_MILTEN_LSOREHEAP(C_INFO)
 {
@@ -1388,6 +1547,7 @@ func int info_milten_chaptersix_condition()
 func void info_milten_chaptersix_info()
 {
 	AI_StopProcessInfos(self);
+	AI_Teleport(hero,"NC_PIT_CENTER");
 	b_kapitelwechsel(6);
 };
 
@@ -1413,17 +1573,42 @@ func int info_milten_lsdone_condition()
 func void info_milten_lsdone_info()
 {
 	AI_Output(self,hero,"Info_Milten_LSDONE_02_01");	//Готово!
-	AI_Output(hero,self,"Info_Milten_LSDONE_15_02");	//Невероятно! Этот камень был серым, а теперь он излучает синий свет!
-	AI_EquipBestMeleeWeapon(hero);
-	AI_ReadyMeleeWeapon(hero);
-	AI_PlayAni(hero,"T_1HSINSPECT");
-	AI_RemoveWeapon(hero);
+	if(hero.attribute[ATR_STRENGTH] >= 30)
+	{
+		AI_EquipBestMeleeWeapon(hero);
+		AI_ReadyMeleeWeapon(hero);
+		AI_PlayAni(hero,"T_URISELINSPECT");
+		AI_RemoveWeapon(hero);
+		AI_Output(hero,self,"Info_Milten_LSDONE_15_02");	//Невероятно! Этот камень был серым, а теперь он излучает синий свет!
+	};
 	AI_Output(self,hero,"Info_Milten_LSDONE_02_03");	//Похоже, у нас получилось! Магическая сила всей этой руды теперь заключена в одном старом мече.
 	AI_Output(self,hero,"Info_Milten_LSDONE_02_04");	//Но, кажется, мы привлекли к себе слишком много внимания.
-	AI_Output(self,hero,"Info_Milten_LSDONE_02_05");	//Тебе придется воспользоваться Заклинанием Портал, для того чтобы выбраться отсюда!
+	AI_Output(self,hero,"Info_Milten_LSDONE_02_05");	//Тебе придется воспользоваться заклинанием Портал, для того чтобы выбраться отсюда!
 	AI_Output(hero,self,"Info_Milten_LSDONE_15_06");	//А что будет с тобой?
 	AI_Output(self,hero,"Info_Milten_LSDONE_02_07");	//Обо мне не волнуйся, я что-нибудь придумаю. Уходи!
+	if(!Npc_HasItems(hero,itarruneteleport3) && !Npc_HasItems(hero,itarruneteleport5))
+	{
+		CreateInvItem(self,itarscrollteleport5);
+		b_giveinvitems(self,hero,itarscrollteleport5,1);
+	};
+	if(hero.attribute[ATR_MANA] < 5 && !Npc_HasItems(hero,itfo_potion_mana_01) && !Npc_HasItems(hero,itfo_potion_mana_02) && !Npc_HasItems(hero,itfo_potion_mana_03))
+	{
+		CreateInvItem(self,itfo_potion_mana_01);
+		b_giveinvitems(self,hero,itfo_potion_mana_01,1);
+	};
+	Npc_RemoveInvItem(self,mythrilklinge01);
 	b_story_urizielloaded();
 	AI_StopProcessInfos(self);
+	b_exchangeroutine(pc_thief,"Reunion");
+	if(Npc_KnowsInfo(hero,info_gorn_diegomilten))
+	{
+		b_exchangeroutine(pc_fighter,"Reunion");
+	};
+	if(Npc_KnowsInfo(hero,info_lester_diegomilten))
+	{
+		b_exchangeroutine(pc_psionic,"Reunion");
+	};
+	AI_StartState(self,zs_miltensescape,1,"");
+	hero.aivar[AIV_INVINCIBLE] = FALSE;
 };
 

@@ -34,7 +34,7 @@ instance DIA_RODRIGUEZ_HELLO(C_INFO)
 
 func int dia_rodriguez_hello_condition()
 {
-	if(Npc_GetTrueGuild(hero) != GIL_KDF)
+	if(Npc_GetTrueGuild(hero) != GIL_KDF && !Npc_KnowsInfo(hero,dia_milten_letter))
 	{
 		return TRUE;
 	};

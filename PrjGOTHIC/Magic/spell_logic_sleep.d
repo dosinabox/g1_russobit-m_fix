@@ -10,10 +10,7 @@ func int spell_logic_sleep(var int manainvested)
 			return SPL_SENDCAST;
 		};
 		return SPL_RECEIVEINVEST;
-	}
-	else
-	{
-		return SPL_DONTINVEST;
 	};
+	return SPL_DONTINVEST;
 };
 

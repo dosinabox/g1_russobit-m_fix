@@ -34,3 +34,11 @@ func void rtn_start_1332()
 	ta_smalltalk(7,30,0,0,"NC_PLACE06");
 };
 
+func void rtn_ch5_1332()
+{
+	ta_standaround(0,0,7,30,"NC_PATH_PEASANT_OUTSIDE11");
+	ta_smalltalk(7,30,16,0,"NC_PLACE06");
+	ta_smalltalk(16,0,17,0,"NC_TAVERN_SIDE02");
+	ta_smalltalk(17,0,0,0,"NC_PLACE06");
+};
+

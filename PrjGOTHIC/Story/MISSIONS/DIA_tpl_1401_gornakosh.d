@@ -79,7 +79,7 @@ func void tpl_1401_gornakosh_info_info()
 	AI_Output(other,self,"Tpl_1401_GorNaKosh_INFO_Info_15_01");	//Что ты здесь делаешь?
 	AI_Output(self,other,"Tpl_1401_GorNaKosh_INFO_Info_13_02");	//Я охочусь на ползунов.
 	AI_Output(other,self,"Tpl_1401_GorNaKosh_INFO_Info_15_03");	//Ты можешь рассказать мне, как охотиться на ползунов?
-	AI_Output(self,other,"Tpl_1401_GorNaKosh_INFO_Info_13_04");	//Что ж, здесь есть только одно правило. Когда ты видишь перед собой ползуна, атакуй его первым так быстро, как только сможешь. 
+	AI_Output(self,other,"Tpl_1401_GorNaKosh_INFO_Info_13_04");	//Что ж, здесь есть только одно правило. Когда ты видишь перед собой ползуна, атакуй его первым так быстро, как только сможешь.
 	AI_Output(self,other,"Tpl_1401_GorNaKosh_INFO_Info_13_05");	//Твое бесстрашие и отвага сослужат тебе хорошую службу.
 	AI_StopProcessInfos(self);
 };

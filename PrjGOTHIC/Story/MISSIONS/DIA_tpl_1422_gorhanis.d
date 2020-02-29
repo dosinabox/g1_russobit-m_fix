@@ -50,7 +50,7 @@ instance INFO_GORHANIS_ARENA(C_INFO)
 	nr = 1;
 	condition = info_gorhanis_arena_condition;
 	information = info_gorhanis_arena_info;
-	permanent = 1;
+	permanent = 0;
 	description = "Ты сражаешься на арене?";
 };
 
@@ -133,7 +133,7 @@ instance INFO_GORHANIS_WAYTOST(C_INFO)
 	nr = 0;
 	condition = info_gorhanis_waytost_condition;
 	information = info_gorhanis_waytost_info;
-	permanent = 1;
+	permanent = 0;
 	description = "Как я найду дорогу к вашему лагерю?";
 };
 
@@ -175,9 +175,33 @@ func int info_gorhanis_charge_condition()
 func void info_gorhanis_charge_info()
 {
 	AI_Output(other,self,"Info_GorHanis_Charge_15_00");	//Я хочу сразиться с тобой на арене!
-	AI_Output(self,other,"Info_GorHanis_Charge_08_01");	//Убийство таких новичков перед толпой зрителей не прибавит славы Спящего.
-	AI_Output(self,other,"Info_GorHanis_Charge_08_02");	//Я смогу сразиться с тобой только тогда, когда ты будешь достойным противником.
-	AI_Output(self,other,"Info_GorHanis_Charge_08_03");	//Но я уверен, что бойцы из Старого или Нового лагерей не откажутся от твоего предложения. Они не отличаются высокими моральными принципами.
+	if(Npc_GetTrueGuild(hero) == GIL_NONE)
+	{
+		AI_Output(self,other,"Info_GorHanis_Charge_08_01");	//Убийство таких новичков перед толпой зрителей не прибавит славы Спящего.
+		AI_Output(self,other,"Info_GorHanis_Charge_08_02");	//Я смогу сразиться с тобой только тогда, когда ты будешь достойным противником.
+		AI_Output(self,other,"Info_GorHanis_Charge_08_03");	//Но я уверен, что бойцы из Старого или Нового лагерей не откажутся от твоего предложения. Они не отличаются высокими моральными принципами.
+	}
+	else
+	{
+		if(Wld_IsTime(18,30,23,10))
+		{
+			AI_Output(self,other,"SVM_8_NotNow");	//Сейчас не время.
+			AI_StopProcessInfos(self);
+		}
+		else
+		{
+			AI_Output(self,other,"SVM_8_NoLearnYoureBetter");	//Теперь ты готов!
+			AI_StopProcessInfos(self);
+			HANIS_CHARGED = TRUE;
+			self.attribute[ATR_HITPOINTS] = 280;
+			self.attribute[ATR_HITPOINTS_MAX] = 280;
+			Npc_ExchangeRoutine(self,"GUIDE");
+			b_fullstop(grd_251_kirgo);
+			b_fullstop(sld_729_kharim);
+			b_exchangeroutine(grd_251_kirgo,"nopractice");
+			b_exchangeroutine(sld_729_kharim,"nopractice");
+		};
+	};
 };
 
 
@@ -194,7 +218,7 @@ instance INFO_GORHANIS_CHARGEGOOD(C_INFO)
 
 func int info_gorhanis_chargegood_condition()
 {
-	if(Npc_KnowsInfo(hero,info_gorhanis_charge))
+	if(Npc_KnowsInfo(hero,info_gorhanis_charge) && (!Npc_IsDead(sld_729_kharim) && !Npc_IsDead(grd_251_kirgo)) && (HANIS_CHARGED != TRUE))
 	{
 		return 1;
 	};
@@ -203,6 +227,68 @@ func int info_gorhanis_chargegood_condition()
 func void info_gorhanis_chargegood_info()
 {
 	AI_Output(other,self,"Info_GorHanis_ChargeGood_15_00");	//А теперь моей силы достаточно, чтобы сразиться с тобой?
-	AI_Output(self,other,"Info_GorHanis_ChargeGood_08_01");	//Нет! Ты еще недостаточно силен. Ты не можешь быть моим противником!
+	if(Wld_IsTime(18,30,23,10))
+	{
+		AI_Output(self,other,"SVM_8_NotNow");	//Сейчас не время.
+		AI_StopProcessInfos(self);
+	}
+	else if(Npc_GetTrueGuild(hero) == GIL_NONE)
+	{
+		AI_Output(self,other,"Info_GorHanis_ChargeGood_08_01");	//Нет! Ты еще недостаточно силен. Ты не можешь быть моим противником!
+	}
+	else
+	{
+		AI_Output(self,other,"SVM_8_NoLearnYoureBetter");	//Теперь ты готов!
+		AI_StopProcessInfos(self);
+		HANIS_CHARGED = TRUE;
+		self.attribute[ATR_HITPOINTS] = 280;
+		self.attribute[ATR_HITPOINTS_MAX] = 280;
+		Npc_ExchangeRoutine(self,"GUIDE");
+		b_fullstop(grd_251_kirgo);
+		b_fullstop(sld_729_kharim);
+		b_exchangeroutine(grd_251_kirgo,"nopractice");
+		b_exchangeroutine(sld_729_kharim,"nopractice");
+	};
+};
+
+
+instance INFO_GORHANIS_INARENA(C_INFO)
+{
+	npc = tpl_1422_gorhanis;
+	nr = 1;
+	condition = info_gorhanis_inarena_condition;
+	information = info_gorhanis_inarena_info;
+	permanent = 0;
+	important = 1;
+};
+
+
+func int info_gorhanis_inarena_condition()
+{
+	if((HANIS_CHARGED == TRUE) && (Npc_GetDistToWP(hero,"OCR_ARENABATTLE_TRAIN") < 400))
+	{
+		return 1;
+	};
+};
+
+func void info_gorhanis_inarena_info()
+{
+	if(!Npc_HasItems(self,itmw_gorhanis) && !Npc_HasItems(self,itmw_1h_sword_01))
+	{
+		CreateInvItem(self,itmw_1h_sword_01);
+		AI_EquipBestMeleeWeapon(self);
+	};
+	AI_Output(self,other,"Info_TPL_1455_GorBoba1_08_05");	//Приготовься к встрече с Создателем!
+	b_clearimmortal(self);
+	Wld_SendUntrigger("OC_ARENA_GATE");
+	AI_StopProcessInfos(self);
+	Npc_ExchangeRoutine(self,"START");
+	b_exchangeroutine(grd_251_kirgo,"START");
+	b_exchangeroutine(sld_729_kharim,"START");
+	b_exchangeroutine(grd_998_gardist,"wait");
+	Npc_SetTarget(self,other);
+	AI_StartState(self,zs_attack,1,"");
+	HANIS_CHARGED_END = TRUE;
+	PLAYERINARENA = TRUE;
 };
 

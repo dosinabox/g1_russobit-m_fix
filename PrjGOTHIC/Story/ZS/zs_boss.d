@@ -6,7 +6,7 @@ func void zs_boss()
 	AI_Standup(self);
 	AI_SetWalkMode(self,NPC_WALK);
 	AI_GotoWP(self,self.wp);
-	if(Wld_IsFPAvailable(self,"FP_STAND"))
+	if(Wld_IsFPAvailable(self,"FP_STAND") && self.id != 328)
 	{
 		AI_GotoFP(self,"FP_STAND");
 		AI_AlignToFP(self);
@@ -15,6 +15,7 @@ func void zs_boss()
 	{
 		AI_AlignToWP(self);
 	};
+	AI_RemoveWeapon(self);
 	AI_PlayAni(self,"T_STAND_2_HGUARD");
 };
 

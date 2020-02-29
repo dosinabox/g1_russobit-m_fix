@@ -6,6 +6,7 @@ func void zs_guard()
 	Npc_PercEnable(self,PERC_ASSESSPLAYER,b_assesssc);
 	AI_Standup(self);
 	AI_SetWalkMode(self,NPC_WALK);
+	AI_RemoveWeapon(self);
 	AI_GotoWP(self,self.wp);
 	b_initarmor();
 };

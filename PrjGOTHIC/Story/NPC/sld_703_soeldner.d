@@ -15,7 +15,7 @@ instance SLD_703_SOELDNER(NPC_DEFAULT)
 	attribute[ATR_HITPOINTS] = 256;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Militia.mds");
-	Mdl_SetVisualBody(self,"hum_body_Naked0",0,1,"Hum_Head_Pony",53,1,sld_armor_h);
+	Mdl_SetVisualBody(self,"hum_body_Naked0",0,1,"Hum_Head_Bald",106,1,sld_armor_h);
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_STRONG;
@@ -29,11 +29,7 @@ instance SLD_703_SOELDNER(NPC_DEFAULT)
 	CreateInvItems(self,itfoloaf,5);
 	CreateInvItems(self,itfomutton,4);
 	CreateInvItems(self,itminugget,23);
-	CreateInvItems(self,itfobooze,5);
-	CreateInvItems(self,itlstorch,5);
 	CreateInvItems(self,itfo_potion_health_02,8);
-	CreateInvItem(self,itmi_stuff_barbknife_01);
-	CreateInvItem(self,itmi_stuff_amphore_01);
 	daily_routine = rtn_start_703;
 };
 
@@ -42,5 +38,11 @@ func void rtn_start_703()
 {
 	ta_sitaround(7,45,23,45,"NC_PLACE01");
 	ta_sleep(23,45,7,45,"NC_HUT02_IN");
+};
+
+func void rtn_fmtaken_703()
+{
+	ta_guardpassage(7,45,23,45,"NC_PATH55");
+	ta_guardpassage(23,45,7,45,"NC_PATH55");
 };
 

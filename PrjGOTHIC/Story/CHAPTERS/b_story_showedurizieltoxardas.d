@@ -1,7 +1,7 @@
 
 func void b_story_showedurizieltoxardas()
 {
-	b_logentry(CH4_ENTERTEMPLE," сардаса очень удивило то, что € смог попасть в подземный храм. “еперь он считает мен€ героем из какого-то древнего оркского пророчества.");
+	b_logentry(CH4_ENTERTEMPLE," сардаса очень удивило то, что € смог попасть в подземный храм. “еперь он считает мен€ героем из какого-то древнего пророчества орков.");
 	Log_SetTopicStatus(CH4_ENTERTEMPLE,LOG_SUCCESS);
 	Log_CreateTopic(CH5_URIZIEL,LOG_MISSION);
 	Log_SetTopicStatus(CH5_URIZIEL,LOG_RUNNING);

@@ -83,7 +83,7 @@ instance ITWRWORLDMAP_ORC(C_ITEM)
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
 	value = 250;
-	visual = "ItWr_Map_01.3DS";
+	visual = "ItWrWorldMap_Orc.3DS";
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	on_state[0] = useworldmap_orc;
@@ -111,12 +111,10 @@ instance ITKE_FREEMINE(C_ITEM)
 	name = "Ключ от Свободной шахты";
 	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MISSION;
-	value = 3;
+	value = 0;
 	visual = "ItKe_Key_01.3ds";
 	material = MAT_METAL;
 	description = "Ключ от Свободной шахты";
-	text[5] = NAME_VALUE;
-	count[5] = value;
 };
 
 instance ORCMEDICINE(C_ITEM)
@@ -130,7 +128,7 @@ instance ORCMEDICINE(C_ITEM)
 	on_state[0] = useorcmedicine;
 	scemename = "POTION";
 	description = name;
-	text[0] = "Действие: неизвестно";
+	text[1] = "Действие: неизвестно";
 };
 
 
@@ -160,7 +158,7 @@ instance ULUMULU(C_ITEM)
 	cond_value[2] = 30;
 	visual = "ItMi_Amulet_Ulumulu_02.3ds";
 	visual_skin = 0;
-	material = MAT_METAL;
+	material = MAT_WOOD;
 	description = name;
 	text[0] = "Улу-Мулу является великим знаком силы";
 	text[1] = "и достоинства. Его хозяин может";

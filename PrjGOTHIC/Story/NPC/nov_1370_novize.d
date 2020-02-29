@@ -14,6 +14,7 @@ instance NOV_1370_NOVIZE(NPC_DEFAULT)
 	attribute[ATR_MANA] = 0;
 	attribute[ATR_HITPOINTS_MAX] = 250;
 	attribute[ATR_HITPOINTS] = 250;
+	aivar[43] = TRUE;
 	protection[PROT_BLUNT] = 1000;
 	protection[PROT_EDGE] = 1000;
 	protection[PROT_POINT] = 1000;
@@ -38,7 +39,7 @@ func void rtn_start_1370()
 
 func void rtn_ot_1370()
 {
-	ta_meditate(24,0,6,0,"TPL_386");
-	ta_meditate(6,0,24,0,"TPL_386");
+	ta_otmeditate(24,0,6,0,"TPL_386");
+	ta_otmeditate(6,0,24,0,"TPL_386");
 };
 

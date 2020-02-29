@@ -280,16 +280,20 @@ func int info_freemineorc_givepotion_condition()
 func void info_freemineorc_givepotion_info()
 {
 	AI_Output(hero,self,"Info_FreemineOrc_GIVEPOTION_15_01");	//Вот, я нашел тебе зелье!
+	AI_Output(self,hero,"Info_FreemineOrc_GIVEPOTION_17_02");	//Чужак не плохой, как другой солдат! Чужак хороший!
 	b_giveinvitems(hero,self,orcmedicine,1);
 	EquipItem(self,orcmedicine);
 	if(c_bodystatecontains(self,BS_SIT))
 	{
-		AI_Standup(self);
-		AI_TurnToNPC(self,hero);
+		AI_PlayAniBS(self,"T_GUARDSIT_2_STAND",BS_STAND);
+		//AI_Standup(self);
+		//AI_TurnToNPC(self,hero);
 	};
-	AI_UseItemToState(self,orcmedicine,1);
-	AI_UseItemToState(self,orcmedicine,-1);
-	AI_Output(self,hero,"Info_FreemineOrc_GIVEPOTION_17_02");	//Чужак не плохой, как другой солдат! Чужак хороший!
+	//AI_UseItemToState(self,orcmedicine,1);
+	//AI_UseItemToState(self,orcmedicine,-1);
+	AI_PlayAniBS(self,"T_POTIONFAST_S0_2_STAND",BS_ITEMINTERACT);
+	AI_UseItem(self,orcmedicine);
+	self.attribute[ATR_HITPOINTS] = self.attribute[ATR_HITPOINTS_MAX];
 	AI_Output(self,hero,"Info_FreemineOrc_GIVEPOTION_17_03");	//Таррок сказать спасибо!
 	AI_Output(hero,self,"Info_FreemineOrc_GIVEPOTION_15_04");	//А ты можешь дать мне Улу-Мулу?
 	AI_Output(self,hero,"Info_FreemineOrc_GIVEPOTION_17_05");	//Чужак помогать Таррок, Таррок помогать чужак!
@@ -532,7 +536,7 @@ instance INFO_FREEMINEORC_LOOKINGULUMULU(C_INFO)
 
 func int info_freemineorc_lookingulumulu_condition()
 {
-	if(!Npc_HasItems(hero,itat_waran_01) && Npc_HasItems(hero,itat_shadow_02) && Npc_HasItems(hero,itat_swampshark_02) && Npc_HasItems(hero,itat_troll_02) && Npc_KnowsInfo(hero,info_freemineorc_firewaran2) && Npc_KnowsInfo(hero,info_freemineorc_shadowbeast2) && Npc_KnowsInfo(hero,info_freemineorc_swampshark2) && Npc_KnowsInfo(hero,info_freemineorc_troll2))
+	if((FREEMINEORC_LOOKINGULUMULU == LOG_RUNNING) && (!Npc_HasItems(hero,itat_waran_01) || !Npc_HasItems(hero,itat_shadow_02) || !Npc_HasItems(hero,itat_swampshark_02) || !Npc_HasItems(hero,itat_troll_02)) && Npc_KnowsInfo(hero,info_freemineorc_firewaran2) && Npc_KnowsInfo(hero,info_freemineorc_shadowbeast2) && Npc_KnowsInfo(hero,info_freemineorc_swampshark2) && Npc_KnowsInfo(hero,info_freemineorc_troll2))
 	{
 		return TRUE;
 	};

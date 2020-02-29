@@ -51,7 +51,7 @@ func void dia_grim_falle_info()
 	Info_ClearChoices(dia_grim_falle);
 	Info_AddChoice(dia_grim_falle,"Мне это не нужно. Пусть этим займется кто-нибудь еще.",dia_grim_falle_deny);
 	Info_AddChoice(dia_grim_falle,"А что будет, когда мы заберем у них амулет?",dia_grim_falle_howshare);
-	Info_AddChoice(dia_grim_falle,"Я готов.",dia_grim_falle_accepr);
+	Info_AddChoice(dia_grim_falle,"Что ж, пойдем вместе. Идем!",dia_grim_falle_accepr);
 };
 
 func void dia_grim_falle_deny()
@@ -68,7 +68,7 @@ func void dia_grim_falle_howshare()
 	Info_ClearChoices(dia_grim_falle);
 	Info_AddChoice(dia_grim_falle,"Мне это не нужно. Пусть этим займется кто-нибудь еще.",dia_grim_falle_deny);
 	Info_AddChoice(dia_grim_falle,"Я не согласен. Ты даешь мне половину награды...",dia_grim_falle_halfhalf);
-	Info_AddChoice(dia_grim_falle,"Да, можешь.",dia_grim_falle_accepr);
+	Info_AddChoice(dia_grim_falle,"Что ж, пойдем вместе. Идем!",dia_grim_falle_accepr);
 };
 
 func void dia_grim_falle_halfhalf()
@@ -79,8 +79,9 @@ func void dia_grim_falle_halfhalf()
 
 func void dia_grim_falle_accepr()
 {
-	AI_Output(other,self,"DIA_Grim_Falle_Accepr_15_00");	//Я готов.
-	AI_Output(self,other,"DIA_Grim_Falle_Accepr_06_01");	//Хорошо. 
+	//AI_Output(other,self,"DIA_Grim_Falle_Accepr_15_00");	//Я готов.
+	AI_Output(other,self,"DIA_Shrat_ComeWithMe_15_00");	//Что ж, пойдем вместе. Идем!
+	AI_Output(self,other,"DIA_Grim_Falle_Accepr_06_01");	//Хорошо.
 	Info_ClearChoices(dia_grim_falle);
 };
 
@@ -283,7 +284,10 @@ instance DIA_GRIM_AUFNAHME(C_INFO)
 
 func int dia_grim_aufnahme_condition()
 {
-	return 1;
+	if(KAPITEL < 2)
+	{
+		return 1;
+	};
 };
 
 func void dia_grim_aufnahme_info()
@@ -311,7 +315,7 @@ instance DIA_GRIM_HOWFARAREYOU(C_INFO)
 
 func int dia_grim_howfarareyou_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_grim_aufnahme) && Npc_KnowsInfo(hero,info_diego_rules))
+	if(Npc_KnowsInfo(hero,dia_grim_aufnahme) && Npc_KnowsInfo(hero,info_diego_rules) && KAPITEL < 2)
 	{
 		return 1;
 	};
@@ -320,7 +324,7 @@ func int dia_grim_howfarareyou_condition()
 func void dia_grim_howfarareyou_info()
 {
 	AI_Output(other,self,"DIA_Grim_HowFarAreYou_15_00");	//Как проходит твое испытание?
-	AI_Output(self,other,"DIA_Grim_HowFarAreYou_06_01");	//Я уже разговаривал с Декстером, Слаем и Фингерсом. 
+	AI_Output(self,other,"DIA_Grim_HowFarAreYou_06_01");	//Я уже разговаривал с Декстером, Слаем и Фингерсом.
 	if(!GRIM_TESTS)
 	{
 		b_logentry(CH1_JOINOC,"Декстер, Слай и Фингерс самые влиятельные из Призраков.");
@@ -342,7 +346,7 @@ instance DIA_GRIM_YOURPDV(C_INFO)
 
 func int dia_grim_yourpdv_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_grim_aufnahme))
+	if(Npc_KnowsInfo(hero,dia_grim_aufnahme) && KAPITEL < 2)
 	{
 		return 1;
 	};
@@ -380,34 +384,6 @@ func void dia_grim_inextremo_info()
 	AI_Output(self,other,"DIA_Grim_INEXTREMO_06_02");	//Здесь In Extremo! Они будут выступать на сцене.
 	AI_Output(self,other,"DIA_Grim_INEXTREMO_06_03");	//Торопись! Жаль будет пропустить их выступление.
 	Npc_ExchangeRoutine(self,"InExtremo");
-	AI_StopProcessInfos(self);
-};
-
-
-instance DIA_GRIM_INEXTREMOAWAY(C_INFO)
-{
-	npc = vlk_580_grim;
-	nr = 1;
-	condition = dia_grim_inextremoaway_condition;
-	information = dia_grim_inextremoaway_info;
-	permanent = 0;
-	important = 0;
-	description = "А где In Extremo?";
-};
-
-
-func int dia_grim_inextremoaway_condition()
-{
-	if(Npc_KnowsInfo(hero,dia_grim_inextremo) && (KAPITEL == 3))
-	{
-		return TRUE;
-	};
-};
-
-func void dia_grim_inextremoaway_info()
-{
-	AI_Output(hero,self,"DIA_Grim_INEXTREMOAWAY_15_01");	//А где In Extremo?
-	AI_Output(self,hero,"DIA_Grim_INEXTREMOAWAY_06_02");	//Они уже уехали. А я уже так привык сидеть по вечерам перед сценой.
 	AI_StopProcessInfos(self);
 };
 

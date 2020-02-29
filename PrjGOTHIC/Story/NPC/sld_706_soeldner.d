@@ -25,15 +25,10 @@ instance SLD_706_SOELDNER(NPC_DEFAULT)
 	EquipItem(self,itmw_1h_mace_war_03);
 	EquipItem(self,itrw_bow_long_01);
 	CreateInvItems(self,itamarrow,20);
-	CreateInvItems(self,itforice,7);
 	CreateInvItems(self,itfoloaf,6);
 	CreateInvItems(self,itfomutton,4);
 	CreateInvItems(self,itminugget,18);
-	CreateInvItems(self,itfobooze,4);
-	CreateInvItems(self,itlstorch,5);
 	CreateInvItems(self,itfo_potion_health_02,9);
-	CreateInvItem(self,itmi_stuff_barbknife_01);
-	CreateInvItem(self,itmi_stuff_amphore_01);
 	daily_routine = rtn_start_706;
 };
 
@@ -42,5 +37,11 @@ func void rtn_start_706()
 {
 	ta_standaround(7,30,0,0,"NC_HUT02_OUT");
 	ta_sleep(0,0,7,30,"NC_HUT02_IN");
+};
+
+func void rtn_fmtaken_706()
+{
+	ta_practicesword(7,30,0,0,"PATH_OC_NC_27");
+	ta_practicesword(0,0,7,30,"PATH_OC_NC_27");
 };
 

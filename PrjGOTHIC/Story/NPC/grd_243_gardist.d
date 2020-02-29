@@ -15,7 +15,7 @@ instance GRD_243_GARDIST(NPC_DEFAULT)
 	attribute[ATR_HITPOINTS] = 280;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Militia.mds");
-	Mdl_SetVisualBody(self,"hum_body_Naked0",0,2,"Hum_Head_Bald",4,1,grd_armor_h);
+	Mdl_SetVisualBody(self,"hum_body_Naked0",0,1,"Hum_Head_Bald",93,1,grd_armor_h);
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_RANGED;

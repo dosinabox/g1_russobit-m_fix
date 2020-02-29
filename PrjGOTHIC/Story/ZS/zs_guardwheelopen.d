@@ -6,12 +6,17 @@ func void zs_guardwheelopen()
 	AI_Standup(self);
 	AI_SetWalkMode(self,NPC_WALK);
 	AI_GotoWP(self,self.wp);
-	if(Wld_GetMobState(self,"VWHEEL") == 1)
+	if(guardcheckgatestate(self) == 1)
 	{
 		printdebugnpc(PD_TA_CHECK,"...Tor geschlossen!");
+		if(Wld_GetMobState(self,"VWHEEL") == 0)
+		{
+			AI_UseMob(self,"VWHEEL",1);
+		};
+		AI_Wait(self,0.5);
 		AI_UseMob(self,"VWHEEL",0);
 		AI_UseMob(self,"VWHEEL",-1);
-		AI_AlignToWP(self);
+		AI_GotoWP(self,self.wp);
 	};
 };
 
@@ -35,5 +40,6 @@ func int zs_guardwheelopen_loop()
 func void zs_guardwheelopen_end()
 {
 	printdebugnpc(PD_TA_FRAME,"ZS_GuardWheelOpen_End");
+	AI_StopLookAt(self);
 };
 

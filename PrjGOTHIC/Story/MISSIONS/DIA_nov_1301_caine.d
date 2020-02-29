@@ -103,7 +103,7 @@ instance DIA_CAINE_WOSEKRET(C_INFO)
 
 func int dia_caine_wosekret_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_caine_job))
+	if(Npc_KnowsInfo(hero,dia_caine_job) && (KNOWS_GETMCMANDIBLES != TRUE))
 	{
 		return 1;
 	};

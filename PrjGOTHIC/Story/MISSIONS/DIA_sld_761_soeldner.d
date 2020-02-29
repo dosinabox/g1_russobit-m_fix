@@ -56,7 +56,7 @@ instance DIA_SLD_761_SOELDNER_EXIT_2(C_INFO)
 	information = dia_sld_761_soeldner_exit_2_info;
 	important = 0;
 	permanent = 1;
-	description = "Лучше я пойду отсюда.";
+	description = "Лучше я пойду отсюда...";
 };
 
 
@@ -70,7 +70,7 @@ func int dia_sld_761_soeldner_exit_2_condition()
 
 func void dia_sld_761_soeldner_exit_2_info()
 {
-	AI_Output(other,self,"DIA_SLD_761_Soeldner_EXIT_2_INFO_15_01");	//Лучше я пойду отсюда.
+	AI_Output(other,self,"DIA_SLD_761_Soeldner_EXIT_2_INFO_15_01");	//Лучше я пойду отсюда...
 	AI_Output(self,other,"DIA_SLD_761_Soeldner_EXIT_2_INFO_03_02");	//Хорошо.
 	AI_StopProcessInfos(self);
 };

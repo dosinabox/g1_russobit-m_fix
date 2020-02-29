@@ -31,7 +31,7 @@ func void b_killinextremo()
 	b_exchangeroutine(iefan2,"off");
 	b_exchangeroutine(iefan3,"off");
 	b_exchangeroutine(iefan4,"off");
-	b_exchangeroutine(vlk_580_grim,"start");
+	//b_exchangeroutine(vlk_580_grim,"start");
 };
 
 func void b_inextremostartmusic()

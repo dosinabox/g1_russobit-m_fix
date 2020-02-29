@@ -32,7 +32,7 @@ func void rtn_start_220()
 {
 	ta_practicesword(7,35,20,5,"OCC_CENTER_4_TRAIN2");
 	ta_standaround(20,5,0,5,"OCC_SHADOWS_CORNER_MOVEMENT");
-	ta_sleep(0,5,7,35,"OCC_MERCS_UPPER_RIGHT_ROOM_BED2");
+	ta_sleep(0,5,7,35,"OCC_MERCS_UPPER_RIGHT_ROOM_BED1");
 };
 
 func void rtn_ot_220()

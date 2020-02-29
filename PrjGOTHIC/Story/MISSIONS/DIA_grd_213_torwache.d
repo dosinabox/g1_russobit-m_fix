@@ -51,7 +51,7 @@ func int info_grd_213_lastwarn_condition()
 	};
 };
 
-func int info_grd_213_lastwarn_info()
+func void info_grd_213_lastwarn_info()
 {
 	AI_Output(self,hero,"Info_Grd_213_LastWarn_07_01");	//Ты оглох? Еще шаг, и я превращу тебя в корм для червей!
 	hero.aivar[AIV_LASTDISTTOWP] = Npc_GetDistToWP(hero,GRD_213_CHECKPOINT);
@@ -79,7 +79,7 @@ func int info_grd_213_attack_condition()
 	};
 };
 
-func int info_grd_213_attack_info()
+func void info_grd_213_attack_info()
 {
 	hero.aivar[AIV_LASTDISTTOWP] = 0;
 	hero.aivar[AIV_GUARDPASSAGE_STATUS] = AIV_GPS_PUNISH;

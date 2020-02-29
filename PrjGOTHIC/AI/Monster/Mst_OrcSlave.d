@@ -30,6 +30,12 @@ func void set_orcslave_visuals()
 	Mdl_SetVisualBody(self,"Orc_BodySlave",DEFAULT,DEFAULT,"Orc_HeadSlave",DEFAULT,DEFAULT,-1);
 };
 
+func void set_orcpeasant_visuals()
+{
+	Mdl_SetVisual(self,"Orc.mds");
+	//Mdl_SetVisualBody(self,"Orc_BodySlave",1,DEFAULT,"Orc_HeadSlave",DEFAULT,DEFAULT,-1);
+	Mdl_SetVisualBody(self,"Orc_BodyPeasant",DEFAULT,DEFAULT,"Orc_HeadSlave",DEFAULT,DEFAULT,-1);
+};
 
 instance ORCSLAVE(MST_DEFAULT_ORCSLAVE)
 {
@@ -39,18 +45,18 @@ instance ORCSLAVE(MST_DEFAULT_ORCSLAVE)
 
 instance ORCPEASANTDANCE(MST_DEFAULT_ORCSLAVE)
 {
-	guild = GIL_ORCWARRIOR;
+	guild = GIL_ORCSCOUT;
 	name[0] = "Îðê";
-	set_orcslave_visuals();
+	set_orcpeasant_visuals();
 	CreateInvItem(self,itmw2horcsword01);
 	start_aistate = zs_orc_dance;
 };
 
 instance ORCPEASANTDRUM(MST_DEFAULT_ORCSLAVE)
 {
-	guild = GIL_ORCWARRIOR;
+	guild = GIL_ORCSCOUT;
 	name[0] = "Îðê";
-	set_orcslave_visuals();
+	set_orcpeasant_visuals();
 	CreateInvItem(self,itmw2horcsword01);
 	start_aistate = zs_orc_drum;
 };

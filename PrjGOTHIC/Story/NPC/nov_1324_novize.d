@@ -30,3 +30,9 @@ func void rtn_start_1324()
 	ta_sitcampfire(8,0,0,0,"PSI_PATH_4_CAMPFIRE_B");
 };
 
+func void rtn_ritual_1324()
+{
+	ta_stay(8,0,13,0,"PSI_CEREMONY_NEW5");
+	ta_stay(13,0,8,0,"PSI_CEREMONY_NEW5");
+};
+

@@ -19,10 +19,8 @@ instance TPL_1402_GORNATOTH(NPC_DEFAULT)
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_MASTER;
-	Npc_SetTalentSkill(self,NPC_TALENT_2H,2);
-	CreateInvItem(self,itmw_2h_sword_old_01);
-	CreateInvItem(self,itmw_2h_sword_light_01);
-	CreateInvItem(self,itmw_2h_sword_light_02);
+	Npc_SetTalentSkill(self,NPC_TALENT_1H,2);
+	EquipItem(self,itmw_1h_sword_long_01);
 	daily_routine = rtn_start_1402;
 };
 
@@ -31,5 +29,11 @@ func void rtn_start_1402()
 {
 	ta_sleep(1,0,5,0,"PSI_33_HUT_IN");
 	ta_boss(5,0,1,0,"PSI_MEETING_BRIDGE_MOVEMENT");
+};
+
+func void rtn_train_1402()
+{
+	ta_sleep(1,0,5,0,"PSI_33_HUT_IN");
+	ta_practicesword(5,0,1,0,"PSI_PATH_6_8");
 };
 

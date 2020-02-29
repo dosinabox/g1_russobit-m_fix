@@ -81,7 +81,7 @@ instance VLK_583_GLEN_BUY(C_INFO)
 	information = vlk_583_glen_buy_info;
 	important = 0;
 	permanent = 1;
-	description = "(Купить отмычки)";
+	description = "(купить отмычки)";
 	trade = 1;
 };
 

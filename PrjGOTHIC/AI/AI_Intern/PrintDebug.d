@@ -34,11 +34,11 @@ func void printdebugnpc(var int type,var string text)
 	var string inst_id;
 	instance_id = self.id;
 	inst_id = IntToString(instance_id);
-	pipe = ConcatStrings("###",self.name);
+	pipe = ConcatStrings("### ",self.name);
 	pipe = ConcatStrings(pipe,"(");
 	pipe = ConcatStrings(pipe,inst_id);
 	pipe = ConcatStrings(pipe,")");
-	pipe = ConcatStrings(pipe," ### ->");
+	pipe = ConcatStrings(pipe," ### -> ");
 	pipe = ConcatStrings(pipe,text);
 	PrintDebugInstCh(type,pipe);
 };
@@ -49,27 +49,27 @@ func void printglobals(var int channel)
 	printdebugnpc(channel,"PrintGlobals");
 	if(Hlp_IsValidNpc(self))
 	{
-		pipe = ConcatStrings("...self:  ",self.name);
+		pipe = ConcatStrings("...self:   ",self.name);
 		printdebugnpc(channel,pipe);
 	};
 	if(Hlp_IsValidNpc(other))
 	{
-		pipe = ConcatStrings("...other: ",other.name);
+		pipe = ConcatStrings("...other:  ",other.name);
 		printdebugnpc(channel,pipe);
 	};
 	if(Hlp_IsValidNpc(victim))
 	{
-		pipe = ConcatStrings("...victim:",victim.name);
+		pipe = ConcatStrings("...victim: ",victim.name);
 		printdebugnpc(channel,pipe);
 	};
 	if(Hlp_IsValidNpc(hero))
 	{
-		pipe = ConcatStrings("...hero:  ",hero.name);
+		pipe = ConcatStrings("...hero:   ",hero.name);
 		printdebugnpc(channel,pipe);
 	};
 	if(Hlp_IsValidItem(item))
 	{
-		pipe = ConcatStrings("...item:  ",item.name);
+		pipe = ConcatStrings("...item:   ",item.name);
 		printdebugnpc(channel,pipe);
 	};
 };

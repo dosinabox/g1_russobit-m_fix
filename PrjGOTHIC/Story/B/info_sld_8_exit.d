@@ -120,7 +120,10 @@ instance INFO_SLD_8_DIELAGE(C_INFO)
 
 func int info_sld_8_dielage_condition()
 {
-	return 1;
+	if(FMTAKEN == FALSE)
+	{
+		return 1;
+	};
 };
 
 func void info_sld_8_dielage_info()

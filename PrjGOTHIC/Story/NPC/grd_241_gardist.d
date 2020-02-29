@@ -56,3 +56,9 @@ func void rtn_orcassault_241()
 {
 };
 
+func void rtn_qc_241()
+{
+	ta_guardpassage(7,0,20,0,"LOCATION_11_14");
+	ta_standaround(20,0,7,0,"LOCATION_11_12_04");
+};
+

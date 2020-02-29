@@ -9,7 +9,7 @@ func void b_story_findorcshaman()
 	Wld_InsertNpc(orcwarrior4,"CASTLE_07");
 	Wld_InsertNpc(orcwarrior4,"CASTLE_07");
 	Wld_InsertNpc(orcwarrior4,"CASTLE_07");
-	Wld_InsertNpc(stonegolem,"CASTLE_04");
+	Wld_InsertNpc(stonegolem,"LOCATION_32_01");
 	FINDORCSHAMAN = LOG_RUNNING;
 };
 

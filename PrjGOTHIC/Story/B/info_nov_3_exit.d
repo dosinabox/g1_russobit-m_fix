@@ -58,7 +58,10 @@ instance INFO_NOV_3_WICHTIGEPERSONEN(C_INFO)
 
 func int info_nov_3_wichtigepersonen_condition()
 {
-	return 1;
+	if(KAPITEL < 3)
+	{
+		return 1;
+	};
 };
 
 func void info_nov_3_wichtigepersonen_info()

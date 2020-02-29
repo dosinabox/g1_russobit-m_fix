@@ -18,7 +18,7 @@ func int zs_mm_attackmage_loop()
 		if(Npc_IsNextTargetAvailable(self))
 		{
 			Npc_GetNextTarget(self);
-			printdebugstring(PD_ZS_CHECK,"...neues Ziel gefunden:",other.name);
+			printdebugstring(PD_ZS_CHECK,"...neues Ziel gefunden: ",other.name);
 		}
 		else
 		{

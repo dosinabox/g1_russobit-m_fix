@@ -236,7 +236,7 @@ func void kdw_605_riordian_healinfo_info()
 	AI_Output(other,self,"KDW_605_Riordian_HEALINFO_Info_15_01");	//Я ранен. Ты можешь вылечить меня?
 	AI_Output(self,other,"KDW_605_Riordian_HEALINFO_Info_14_02");	//Да подарят слова мои здоровье и силу тебе!
 	hero.attribute[ATR_HITPOINTS] = hero.attribute[ATR_HITPOINTS_MAX];
-	Snd_Play("MFX_Heal_Cast");
+	//Snd_Play("MFX_Heal_Cast");
 };
 
 
@@ -288,5 +288,9 @@ func int kdw_605_riordian_trade_condition()
 func void kdw_605_riordian_trade_info()
 {
 	AI_Output(other,self,"KDW_605_Riordian_TRADE_Info_15_01");	//Покажи мне свои товары.
+	if(Npc_HasItems(self,itarrunethunderball) >= 1)
+	{
+		Npc_RemoveInvItems(self,itarrunethunderball,Npc_HasItems(self,itarrunethunderball));
+	};
 };
 

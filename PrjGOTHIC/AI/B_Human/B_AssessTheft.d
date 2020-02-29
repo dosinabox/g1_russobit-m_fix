@@ -6,14 +6,34 @@ func void b_guarditemsassesstheft()
 	{
 		if(Hlp_IsValidItem(item) && !Hlp_IsValidNpc(victim))
 		{
+			if((item.flags & ITEM_DROPPED) == ITEM_DROPPED)
+			{
+				return;
+			};
+			if(C_NpcBelongsToOldCamp(self) && (Npc_GetTrueGuild(hero) == GIL_KDF))
+			{
+				return;
+			};
+			if(C_NpcBelongsToNewCamp(self) && (Npc_GetTrueGuild(hero) == GIL_KDW))
+			{
+				return;
+			};
 			if(Npc_CanSeeNpcFreeLOS(self,other))
 			{
-				b_sayoverlay(self,other,"$HANDSOFF");
-				Npc_SendPassivePerc(self,PERC_ASSESSWARN,self,other);
+				b_say(self,other,"$HANDSOFF");
+				if(self.id != 1371)
+				{
+					Npc_SendPassivePerc(self,PERC_ASSESSWARN,self,other);
+				};
 				if(c_amistronger(self,other))
 				{
 					AI_Standup(self);
 					AI_StartState(self,zs_catchthief,0,"");
+				}
+				else
+				{
+					AI_Wait(self,2);
+					b_say(self,other,"$YOUCANKEEPTHECRAP");
 				};
 			};
 		};
@@ -25,7 +45,7 @@ func void b_assesstheft()
 	var int other_guild;
 	var int self_guild;
 	var int item_ownerguild;
-	if(self.aivar[AIV_ITEMSCHWEIN] == TRUE)
+	if(self.aivar[AIV_ITEMSCHWEIN] == TRUE || Npc_IsInState(self,zs_clearroom) || Npc_IsInState(self,zs_clearroomwait) || Npc_IsInState(self,zs_observesuspect))
 	{
 		b_guarditemsassesstheft();
 	};
@@ -89,20 +109,7 @@ func void b_assesstheft()
 		}
 		else
 		{
-			printdebugnpc(PD_ZS_CHECK,"...Taschendiebstahl!");
-			if(c_npcishuman(victim) && !c_npcisdown(victim) && ((Wld_GetGuildAttitude(self.guild,victim.guild) == ATT_FRIENDLY) || (Wld_GetGuildAttitude(self.guild,victim.guild) == ATT_NEUTRAL) || (Npc_GetPermAttitude(self,other) == ATT_ANGRY)))
-			{
-				printdebugnpc(PD_ZS_CHECK,"...Opfer FRIENDLY/NEUTRAL oder Dieb ANGRY");
-				b_fullstop(self);
-				c_lookatnpc(self,other);
-				AI_PointAtNpc(self,other);
-				b_say(self,other,"$BEHINDYOU");
-				b_assessandmemorize(NEWS_THEFT,NEWS_SOURCE_WITNESS,self,other,victim);
-				AI_StopPointAt(self);
-				Npc_SendPassivePerc(self,PERC_ASSESSWARN,victim,other);
-				AI_StartState(self,zs_observeperson,0,"");
-				return;
-			};
+			return;
 		};
 	}
 	else

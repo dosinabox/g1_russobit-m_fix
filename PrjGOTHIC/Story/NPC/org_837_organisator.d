@@ -26,12 +26,7 @@ instance ORG_837_ORGANISATOR(NPC_DEFAULT)
 	CreateInvItems(self,itkelockpick,1);
 	CreateInvItems(self,itminugget,10);
 	CreateInvItems(self,itforice,9);
-	CreateInvItems(self,itfobooze,4);
-	CreateInvItems(self,itlstorch,2);
 	CreateInvItems(self,itfo_potion_health_01,2);
-	CreateInvItem(self,itmi_stuff_plate_01);
-	CreateInvItem(self,itmi_stuff_cup_01);
-	CreateInvItem(self,itat_teeth_01);
 	daily_routine = rtn_start_837;
 };
 
@@ -40,6 +35,6 @@ func void rtn_start_837()
 {
 	ta_sleep(2,30,8,0,"NC_HUT31_IN");
 	ta_smalltalk(8,0,18,0,"NC_HUT31_OUT");
-	ta_smalltalk(18,0,2,30,"NC_TAVERN_TOP02");
+	ta_smalltalk(18,0,2,30,"NC_TAVERN_TOP05");
 };
 

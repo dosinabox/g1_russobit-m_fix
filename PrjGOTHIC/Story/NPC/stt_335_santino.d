@@ -20,15 +20,7 @@ instance STT_335_SANTINO(NPC_DEFAULT)
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_STRONG;
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
-	CreateInvItems(self,itfo_potion_water_01,5);
-	CreateInvItems(self,itkelockpick,5);
-	CreateInvItems(self,itminugget,50);
-	CreateInvItems(self,itlstorch,10);
-	CreateInvItems(self,itfobeer,7);
-	CreateInvItems(self,itfo_potion_mana_01,5);
-	CreateInvItems(self,itfo_potion_health_01,5);
-	CreateInvItems(self,itamarrow,100);
-	CreateInvItems(self,itambolt,100);
+	b_give_santinochapter1crap();
 	daily_routine = rtn_start_335;
 };
 

@@ -21,7 +21,7 @@ instance NOV_1330_BAALPARVEZ(NPC_DEFAULT)
 	fight_tactic = FAI_HUMAN_STRONG;
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	EquipItem(self,itmw_1h_mace_04);
-	CreateInvItem(self,itmi_stuff_oldcoin_02);
+	CreateInvItem(self,itmi_stuff_oldcoin_01);
 	CreateInvItems(self,itminugget,50);
 	CreateInvItems(self,itfo_potion_health_03,1);
 	CreateInvItems(self,itforice,1);
@@ -40,5 +40,11 @@ func void rtn_guide_1330()
 {
 	ta_guidepc(8,0,20,0,"PATH_OC_PSI_18");
 	ta_guidepc(20,0,8,0,"PATH_OC_PSI_18");
+};
+
+func void rtn_dead_1330()
+{
+	ta_stay(8,0,20,0,"OCC_CELLAR_BAN_ROOM_1");
+	ta_stay(20,0,8,0,"OCC_CELLAR_BAN_ROOM_1");
 };
 

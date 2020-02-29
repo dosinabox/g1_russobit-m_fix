@@ -60,7 +60,7 @@ instance VLK_586_GRIMES_KNOW(C_INFO)
 	information = vlk_586_grimes_know_info;
 	important = 0;
 	permanent = 0;
-	description = "Должно быть, ты слышал немало о разных планах побега из колонии.";
+	description = "Должно быть, ты уже немало слышал о разных планах побега из колонии.";
 };
 
 
@@ -80,7 +80,7 @@ func void vlk_586_grimes_know_info()
 	AI_Output(self,other,"VLK_586_Grimes_KNOW_Info_04_04");	//Не повторяй их ошибок. Барьер никого не выпустит.
 	AI_Output(other,self,"VLK_586_Grimes_KNOW_Info_15_05");	//В мои планы не входит провести ближайшие десять лет в этой шахте!
 	AI_Output(self,other,"VLK_586_Grimes_KNOW_Info_04_06");	//Не хочешь - не надо. Возможно, когда-нибудь ты будешь большим человеком, кто знает.
-	AI_Output(self,other,"VLK_586_Grimes_KNOW_Info_04_07");	//Да, только Барьеру не важно кем ты будешь, он тебя все равно остановит.
+	AI_Output(self,other,"VLK_586_Grimes_KNOW_Info_04_07");	//Да только Барьеру не важно кем ты будешь, он тебя все равно остановит.
 };
 
 

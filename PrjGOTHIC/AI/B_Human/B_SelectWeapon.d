@@ -10,14 +10,14 @@ func void b_fillquiver(var C_NPC slf)
 		printdebugnpc(PD_ZS_DETAIL,"...aktive Waffe benutzt Pfeile!");
 		addedammo = 20 - c_npchasammo(slf,itamarrow);
 		CreateInvItems(slf,itamarrow,addedammo);
-		printdebugint(PD_ZS_DETAIL,"...hinzugefügte Pfeile:",addedammo);
+		printdebugint(PD_ZS_DETAIL,"...hinzugefügte Pfeile: ",addedammo);
 	}
 	else if(readiedweapon.munition == itambolt)
 	{
 		printdebugnpc(PD_ZS_DETAIL,"...aktive Waffe benutzt Bolzen!");
 		addedammo = 20 - c_npchasammo(slf,itambolt);
 		CreateInvItems(slf,itambolt,addedammo);
-		printdebugint(PD_ZS_DETAIL,"...hinzugefügte Bolzen:",addedammo);
+		printdebugint(PD_ZS_DETAIL,"...hinzugefügte Bolzen: ",addedammo);
 	}
 	else
 	{
@@ -118,10 +118,10 @@ func void b_drawspell(var C_NPC slf,var int spell,var int mana)
 		manamax = slf.attribute[ATR_MANA_MAX];
 		if(manaleft < (manamax / 2))
 		{
-			printdebugint(PD_ZS_CHECK,"...Mana übrig:",manaleft);
+			printdebugint(PD_ZS_CHECK,"...Mana übrig: ",manaleft);
 			manarefill = (manamax / 2) - manaleft;
 			Npc_ChangeAttribute(slf,ATR_MANA,manarefill);
-			printdebugint(PD_ZS_CHECK,"...Mana hinzugefügt:",manarefill);
+			printdebugint(PD_ZS_CHECK,"...Mana hinzugefügt: ",manarefill);
 		};
 	};
 };

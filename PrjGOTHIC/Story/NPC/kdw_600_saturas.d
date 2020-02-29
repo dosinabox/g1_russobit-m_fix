@@ -19,9 +19,9 @@ instance KDW_600_SATURAS(NPC_DEFAULT)
 	Mdl_SetVisualBody(self,"hum_body_Naked0",0,3,"Hum_Head_FatBald",7,0,kdw_armor_h);
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
-	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,6);
-	CreateInvItem(self,itarrunechainlightning);
-	CreateInvItem(self,itarruneicecube);
+	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,5);
+	EquipItem(self,itarrunechainlightning);
+	EquipItem(self,itarruneicecube);
 	CreateInvItem(self,itfo_potion_health_01);
 	CreateInvItem(self,itfo_potion_mana_01);
 	EquipItem(self,schutzamulett_feuer);

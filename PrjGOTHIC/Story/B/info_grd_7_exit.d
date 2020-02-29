@@ -26,7 +26,7 @@ instance INFO_GRD_7_EINERVONEUCHWERDEN(C_INFO)
 	condition = info_grd_7_einervoneuchwerden_condition;
 	information = info_grd_7_einervoneuchwerden_info;
 	permanent = 1;
-	description = "Я хочу быть одним из стражников Гомеза. Что сделать для этого?";
+	description = "Я хочу быть одним из стражников Гомеза. Что мне сделать для этого?";
 };
 
 
@@ -43,7 +43,10 @@ func void info_grd_7_einervoneuchwerden_info()
 	AI_Output(other,self,"Info_grd_7_EinerVonEuchWerden_15_00");	//Я хочу быть одним из стражников Гомеза. Что мне сделать для этого?
 	AI_Output(self,other,"Info_grd_7_EinerVonEuchWerden_07_01");	//Что ты можешь сделать? Ты шутишь? Думаешь, можно просто прийти сюда и сразу стать одним из нас?
 	AI_Output(self,other,"Info_grd_7_EinerVonEuchWerden_07_02");	//Гомез назначает своими стражниками только самых лучших.
-	AI_Output(self,other,"Info_grd_7_EinerVonEuchWerden_07_03");	//Тебе придется начинать так же, как и все остальные. Сначала нужно стать Призраком и доказать, что на тебя можно положиться.
+	if(Npc_GetTrueGuild(other) != GIL_STT)
+	{
+		AI_Output(self,other,"Info_grd_7_EinerVonEuchWerden_07_03");	//Тебе придется начинать так же, как и все остальные. Сначала нужно стать Призраком и доказать, что на тебя можно положиться.
+	};
 };
 
 

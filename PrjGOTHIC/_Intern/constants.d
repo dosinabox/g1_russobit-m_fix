@@ -65,6 +65,7 @@ const int ITEM_2HD_AXE = 1 << 17;
 const int ITEM_BOW = 1 << 19;
 const int ITEM_CROSSBOW = 1 << 20;
 const int ITEM_AMULET = 1 << 22;
+const int ITEM_DROPPED = 1 << 24;
 const int ITEM_RING = 1 << 11;
 const int DAM_INVALID = 0;
 const int DAM_BARRIER = 1;
@@ -85,7 +86,7 @@ const int DAM_INDEX_POINT = 6;
 const int DAM_INDEX_FALL = 7;
 const int DAM_INDEX_MAX = 8;
 const int NPC_ATTACK_FINISH_DISTANCE = 180;
-const int NPC_BURN_TICKS_PER_DAMAGE_POINT = 100;
+const int NPC_BURN_TICKS_PER_DAMAGE_POINT = 10;
 const int DAM_CRITICAL_MULTIPLIER = 2;
 const int BLOOD_SIZE_DIVISOR = 1000;
 const int BLOOD_DAMAGE_MAX = 200;
@@ -261,10 +262,5 @@ const int MAT_CLAY = 4;
 const int MAT_GLAS = 5;
 const int LOG_MISSION = 0;
 const int LOG_NOTE = 1;
-
-const string STR_INFO_TRADE_ACCEPT = "Êóïèòü";
-const string STR_INFO_TRADE_RESET = "Îòêàçàòüñÿ";
-const string STR_INFO_TRADE_EXIT = "ÍÀÇÀÄ";
-
 const int TIME_INFINITE = -1000;
 const int NPC_VOICE_VARIATION_MAX = 10;

@@ -43,7 +43,7 @@ instance SPECIALJOINT(C_ITEM)
 	text[1] = "гораздо сильнее, чем обычный 'Зов мечты'.";
 	text[3] = "Он приготовлен для Гуру Идола Тиона!";
 	text[5] = NAME_VALUE;
-	count[4] = VALUE_JOINT3 * 10;
+	count[5] = VALUE_JOINT3 * 10;
 };
 
 
@@ -55,15 +55,15 @@ func void usespecialjoint()
 
 instance ITAT_DAMLURKER_01(C_ITEM)
 {
-	name = "Когти шныга";
+	name = "Когти шныга с плотины";
 	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MISSION;
 	value = VALUE_LURKERKLAUE;
 	visual = "ItAt_Lurker_01.3DS";
 	material = MAT_LEATHER;
 	description = name;
-	text[4] = NAME_VALUE;
-	count[4] = VALUE_LURKERKLAUE * 2;
+	text[5] = NAME_VALUE;
+	count[5] = VALUE_LURKERKLAUE;
 };
 
 instance ITWROMMAP(C_ITEM)
@@ -72,7 +72,7 @@ instance ITWROMMAP(C_ITEM)
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
 	value = 30;
-	visual = "ItWr_Map_01.3DS";
+	visual = "ItWrOMMap.3DS";
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	on_state[0] = useommap;
@@ -165,13 +165,37 @@ instance KDW_AMULETT(C_ITEM)
 	mainflag = ITEM_KAT_MAGIC;
 	flags = ITEM_AMULET | ITEM_MISSION;
 	value = 100;
-	visual = "ItMi_Amulet_01.3ds";
+	visual = "ItMi_Amulet_Foki_02.3ds";
 	visual_skin = 0;
 	material = MAT_METAL;
+	on_equip = equip_kdw_amulett;
+	on_unequip = unequip_kdw_amulett;
 	description = "Амулет посланника магов Воды";
+	text[2] = NAME_BONUS_MANAMAX;
+	count[2] = 5;
 	text[5] = NAME_VALUE;
 	count[5] = value;
 };
+
+func void equip_kdw_amulett()
+{
+	self.attribute[ATR_MANA] = self.attribute[ATR_MANA] + 5;
+	self.attribute[ATR_MANA_MAX] = self.attribute[ATR_MANA_MAX] + 5;
+};
+
+func void unequip_kdw_amulett()
+{
+	if(self.attribute[ATR_MANA] >= 5)
+	{
+		self.attribute[ATR_MANA] = self.attribute[ATR_MANA] - 5;
+	}
+	else
+	{
+		self.attribute[ATR_MANA] = 0;
+	};
+	self.attribute[ATR_MANA_MAX] = self.attribute[ATR_MANA_MAX] - 5;
+};
+
 
 instance CRONOS_BRIEF(C_ITEM)
 {
@@ -179,7 +203,7 @@ instance CRONOS_BRIEF(C_ITEM)
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
 	value = 0;
-	visual = "ItWr_Scroll_01.3DS";
+	visual = "ItWr_Scroll_02.3DS";
 	material = MAT_LEATHER;
 	on_state[0] = usecronosbrief;
 	scemename = "MAP";
@@ -192,7 +216,7 @@ func void usecronosbrief()
 	var int ndocid;
 	ndocid = Doc_Create();
 	Doc_SetPages(ndocid,1);
-	Doc_SetPage(ndocid,0,"letters.TGA",0);
+	Doc_SetPage(ndocid,0,"letters2.TGA",0);
 	Doc_SetFont(ndocid,-1,"font_10_book.tga");
 	Doc_SetMargins(ndocid,-1,50,50,50,50,1);
 	Doc_PrintLine(ndocid,0," ");
@@ -223,7 +247,7 @@ instance NEKS_AMULETT(C_ITEM)
 	on_equip = equip_schutzamulett_nek;
 	on_unequip = unequip_schutzamulett_nek;
 	description = "Амулет убитого стражника";
-	text[1] = "На обратной стороне амулета выбито имя 'Нек'";
+	text[1] = "На обратной стороне выбито имя 'Нек'";
 	text[2] = NAME_PROT_EDGE;
 	count[2] = 5;
 	text[5] = NAME_VALUE;
@@ -263,15 +287,30 @@ instance RECRUITJOINT(C_ITEM)
 
 instance HEALTHWATER(C_ITEM)
 {
-	name = "Лечебное зелье для Юбериона";
-	mainflag = ITEM_KAT_NONE;
-	flags = ITEM_MISSION;
-	value = 10;
-	visual = "ItFo_Potion_Health_01.3ds";
+	name = NAME_TRANK;
+	mainflag = ITEM_KAT_POTIONS;
+	flags = ITEM_MISSION | ITEM_MULTI;
+	value = 1500;
+	visual = "ItFo_Potion_Yberion.3ds";
 	material = MAT_GLAS;
-	description = name;
+	on_state[0] = usehealthwater;
+	scemename = "POTIONFAST";
+	description = "Лечебное зелье Фортуно";
+	text[1] = NAME_BONUS_MANAMAX;
+	count[1] = 10;
+	text[2] = NAME_BONUS_HPMAX;
+	count[2] = 10;
 	text[5] = NAME_VALUE;
 	count[5] = value;
+};
+
+func void usehealthwater()
+{
+	Npc_ChangeAttribute(self,ATR_MANA_MAX,10);
+	Npc_ChangeAttribute(self,ATR_HITPOINTS_MAX,10);
+	Npc_ChangeAttribute(self,ATR_MANA,10);
+	Npc_ChangeAttribute(self,ATR_HITPOINTS,10);
+	PrintScreen("Макс. мана и жизненная сила +10",-1,-1,"FONT_OLD_20_WHITE.TGA",_TIME_MESSAGE_RAISEATTRIBUTE);
 };
 
 instance THELIST(C_ITEM)
@@ -282,7 +321,7 @@ instance THELIST(C_ITEM)
 	hp = 5;
 	hp_max = 5;
 	weight = 1;
-	visual = "ItWr_Scroll_01.3ds";
+	visual = "ITAR_SCROLL_01_EG.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	on_state[0] = usethelist;
@@ -327,7 +366,7 @@ instance THELISTNC(C_ITEM)
 	hp = 5;
 	hp_max = 5;
 	weight = 1;
-	visual = "ItWr_Scroll_01.3ds";
+	visual = "ITAR_SCROLL_01_EG.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	on_state[0] = usethelistnc;
@@ -375,7 +414,7 @@ instance LARES_RING(C_ITEM)
 {
 	name = NAME_RING;
 	mainflag = ITEM_KAT_MAGIC;
-	flags = ITEM_RING || ITEM_MISSION;
+	flags = ITEM_RING | ITEM_MISSION;
 	value = 50;
 	visual = "ItMi_Ring_01.3ds";
 	visual_skin = 0;
@@ -405,15 +444,15 @@ instance HEILTRANK(C_ITEM)
 {
 	name = NAME_TRANK;
 	mainflag = ITEM_KAT_POTIONS;
-	flags = ITEM_MULTI || ITEM_MISSION;
-	value = 100;
+	flags = ITEM_MULTI;
+	value = 15;
 	visual = "ItFo_Potion_Health_01.3ds";
 	material = MAT_GLAS;
 	on_state[0] = useheiltrank;
-	scemename = "POTION";
+	scemename = "POTIONFAST";
 	description = "Зелье быстрого лечения";
-	text[2] = NAME_BONUS_HP;
-	count[2] = 30;
+	text[1] = NAME_BONUS_HP;
+	count[1] = 30;
 	text[5] = NAME_VALUE;
 	count[5] = value;
 };
@@ -421,22 +460,19 @@ instance HEILTRANK(C_ITEM)
 
 func void useheiltrank()
 {
-	printdebugnpc(PD_ITEM_MOBSI,"UseHealthPotion");
 	Npc_ChangeAttribute(self,ATR_HITPOINTS,30);
-	printdebugnpc(PD_ITEM_MOBSI,"Я выпью целебное зелье.");
 };
 
 
 instance SPECIALWATER(C_ITEM)
 {
-	name = "Волшебная вода";
-	mainflag = ITEM_KAT_FOOD;
+	name = "Бутыль";
+	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MISSION;
 	value = 10;
-	visual = "ItFoFlaskHealth.3ds";
+	visual = "ItFo_Potion_Yberion.3ds";
 	material = MAT_GLAS;
-	scemename = "POTION";
-	description = name;
+	description = "Основа зелья Фортуно";
 	text[5] = NAME_VALUE;
 	count[5] = value;
 };
@@ -447,37 +483,65 @@ instance KALOMSRECIPE(C_ITEM)
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
 	value = 100;
-	visual = "ItWr_Scroll_01.3DS";
+	visual = "HP0RECIPE.3DS";
 	material = MAT_LEATHER;
 	scemename = "MAP";
-	description = name;
-	text[0] = "Рецепт целебного зелья";
+	description = "Рецепт Галома";
+	//text[0] = "Рецепт целебного зелья";
+	text[1] = NAME_BONUS_HP;
+	count[1] = 30;
 	text[5] = NAME_VALUE;
 	count[5] = value;
 	on_state[0] = use_kalomsrecipe;
 };
 
 
-func void use_kalomsrecipe()
+func void use_kalomsrecipe_old()
 {
 	var int ndocid;
 	ndocid = Doc_Create();
-	Doc_SetPages(ndocid,2);
-	Doc_SetPage(ndocid,0,"Book_Brown_L.tga",0);
-	Doc_SetPage(ndocid,1,"Book_Brown_R.tga",0);
-	Doc_SetMargins(ndocid,0,275,20,30,20,1);
-	Doc_SetFont(ndocid,-1,"font_10_book.tga");
-	Doc_PrintLine(ndocid,0,"");
+	Doc_SetPages(ndocid,1);
+	Doc_SetPage(ndocid,0,"letters2.TGA",0);
+	Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+	Doc_SetFont(ndocid,-1,"font_15_book.tga");
 	Doc_PrintLine(ndocid,0,"Лифрун ак Гарак");
 	Doc_PrintLine(ndocid,0,"");
 	Doc_PrintLines(ndocid,0,"Гарак ор Нах бин ту. Лифрун мар Ораг штах. Шрунк есп Хоринф.");
-	Doc_SetMargins(ndocid,-1,30,20,275,20,1);
-	Doc_PrintLine(ndocid,1,"");
-	Doc_PrintLine(ndocid,1,"");
-	Doc_PrintLines(ndocid,1,"Скорее всего, это лучше прочитать наоборот.");
-	Doc_PrintLine(ndocid,1,"");
-	Doc_PrintLine(ndocid,1,"- Галом");
+	Doc_PrintLine(ndocid,0,"");
+	Doc_PrintLine(ndocid,0,"");
+	Doc_PrintLine(ndocid,0,"");
+	Doc_SetFont(ndocid,-1,"font_10_book.tga");
+	Doc_PrintLines(ndocid,0,"Скорее всего, это лучше прочитать наоборот.");
+	Doc_PrintLine(ndocid,0,"- Галом");
 	Doc_Show(ndocid);
+};
+
+func void use_kalomsrecipe()
+{
+	if(ALCHEMYACTIVE == FALSE)
+	{
+		PrintScreen("Необходимо изучение навыка алхимии!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else
+	{
+		var int ndocid;
+		ndocid = Doc_Create();
+		Doc_SetPages(ndocid,1);
+		Doc_SetPage(ndocid,0,"letters2.TGA",0);
+		Doc_SetFont(ndocid,-1,"font_10_book.tga");
+		Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+		Doc_PrintLines(ndocid,0,"После изучения свойств ночной тьмы понял, как усилить целебный эффект. Листья нужно высушить на солнце, измельчить и высыпать в чистую воду. Кипятить не нужно. Это зелье не намного сильнее обычного целебного корня, но быстро в приготовлении и подойдет для употребления внутрь: поможет от внутреннего кровотечения или изжоги.");
+		Doc_PrintLine(ndocid,0,"");
+		Doc_PrintLines(ndocid,0,"- Галом");
+		Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+		Doc_Show(ndocid);
+		if(HP0RECIPE == FALSE)
+		{
+			PrintScreen("Изучен новый рецепт!",-1,12,"FONT_OLD_20_WHITE.TGA",4);
+			b_logentry("Алхимия","Изучен рецепт зелья быстрого лечения (жизненная сила +30). Требуется: ночная тьма (1).");
+			HP0RECIPE = TRUE;
+		};
+	};
 };
 
 
@@ -485,15 +549,15 @@ instance ITWRWORLDMAP(C_ITEM)
 {
 	name = "Карта колонии";
 	mainflag = ITEM_KAT_DOCS;
-	flags = ITEM_MISSION;
+	flags = ITEM_MISSION | ITEM_MULTI;
 	value = 50;
-	visual = "ItWr_Map_01.3DS";
+	visual = "ItWrWorldMap.3DS";
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	on_state[0] = useworldmap;
 	description = name;
-	text[0] = "К сожалению, здесь не хватает области";
-	text[1] = "на юго-западе.";
+	text[0] = "К сожалению, здесь не хватает";
+	text[1] = "области на юго-западе.";
 	text[5] = NAME_VALUE;
 	count[5] = value;
 };
@@ -516,7 +580,7 @@ instance ITWROCMAP(C_ITEM)
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
 	value = 40;
-	visual = "ItWr_Map_01.3DS";
+	visual = "ItWrOCMap.3DS";
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	on_state[0] = useocmap;
@@ -530,6 +594,8 @@ func void useocmap()
 {
 	var int ndocid;
 	ndocid = Doc_CreateMap();
+	//Doc_SetLevel(ndocid,"WORLD.ZEN");
+	//Doc_MapCoordinates("WORLD.ZEN", -11975, -9675, 0, 0, 11775, 7875, 687, 511);
 	Doc_SetPages(ndocid,1);
 	Doc_SetPage(ndocid,0,"Map_OldCamp.tga",1);
 	Doc_Show(ndocid);
@@ -542,7 +608,7 @@ instance ITWRNCMAP(C_ITEM)
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
 	value = 40;
-	visual = "ItWr_Map_01.3DS";
+	visual = "ItWrNCMap.3DS";
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	on_state[0] = usencmap;
@@ -556,6 +622,8 @@ func void usencmap()
 {
 	var int ndocid;
 	ndocid = Doc_CreateMap();
+	//Doc_SetLevel(ndocid,"WORLD.ZEN");
+	//Doc_MapCoordinates("WORLD.ZEN", -64875, -1775, 0, 0, -41125, 15775, 687, 511);
 	Doc_SetPages(ndocid,1);
 	Doc_SetPage(ndocid,0,"Map_NewCamp.tga",1);
 	Doc_Show(ndocid);
@@ -568,7 +636,7 @@ instance ITWRPSIMAP(C_ITEM)
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
 	value = 40;
-	visual = "ItWr_Map_01.3DS";
+	visual = "ItWrPsiMap.3DS";
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	on_state[0] = usepsimap;
@@ -582,6 +650,8 @@ func void usepsimap()
 {
 	var int ndocid;
 	ndocid = Doc_CreateMap();
+	//Doc_SetLevel(ndocid,"WORLD.ZEN");
+	//Doc_MapCoordinates("WORLD.ZEN", 33750, -21500, 0, 0, 67050, 2600, 687, 511);
 	Doc_SetPages(ndocid,1);
 	Doc_SetPage(ndocid,0,"Map_PSICamp.tga",1);
 	Doc_Show(ndocid);
@@ -594,7 +664,7 @@ instance ITWRPINUP(C_ITEM)
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
 	value = 60;
-	visual = "ItWr_Scroll_01.3DS";
+	visual = "ItWrPinup.3DS";
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	on_state[0] = usepinup;
@@ -638,10 +708,8 @@ instance ITWR_FIRE_LETTER_01(C_ITEM)
 	material = MAT_LEATHER;
 	on_state[0] = usefireletter;
 	scemename = "MAPSEALED";
-	description = "Письмо магам Огня";
+	description = "Запечатанное письмо магам Огня";
 	text[1] = "Не вскрывать!";
-	text[5] = NAME_VALUE;
-	count[5] = value;
 };
 
 
@@ -651,11 +719,11 @@ func void usefireletter()
 	CreateInvItem(hero,itwr_fire_letter_02);
 	ndocid = Doc_Create();
 	Doc_SetPages(ndocid,1);
-	Doc_SetPage(ndocid,0,"letters.TGA",0);
+	Doc_SetPage(ndocid,0,"letters_fire.TGA",0);
 	Doc_SetFont(ndocid,-1,"font_10_book.tga");
 	Doc_SetMargins(ndocid,-1,50,50,50,50,1);
 	Doc_PrintLine(ndocid,0," ");
-	Doc_PrintLine(ndocid,0,"Многоуважаемый Мастер");
+	Doc_PrintLine(ndocid,0,"Многоуважаемый Мастер Ксардас,");
 	Doc_PrintLine(ndocid,0,"");
 	Doc_SetFont(ndocid,-1,"font_10_book.TGA");
 	Doc_PrintLines(ndocid,0,"Ваше предыдущее письмо вызвало беспокойство среди магов. Мы посоветовались и в этом послании сообщаем Вам о нашем решении. Братство представляет собой большую опасность. Оно угрожает нашей торговле с королем, угрожает нашему королевству и Вашей жизни. Вам необходимо отправить к сектантам одного из своих людей, чтобы он разузнал, какой бог наделяет их силой и какими знаниями они обладают. Когда это станет известно, мы сообщим священнослужителям о том, что мы вместе отправим этого темного бога туда, откуда он явился. Наши ученые работают над древними манускриптами. Мы постараемся сообщить Вам все, что сможем узнать.");
@@ -676,13 +744,11 @@ instance ITWR_FIRE_LETTER_02(C_ITEM)
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
 	value = 0;
-	visual = "ItWr_Scroll_01.3DS";
+	visual = "ItWrScroll.3DS";
 	material = MAT_LEATHER;
 	on_state[0] = usefireletter2;
 	scemename = "MAP";
 	description = "Письмо магам Огня";
-	text[5] = NAME_VALUE;
-	count[5] = value;
 };
 
 
@@ -691,11 +757,11 @@ func void usefireletter2()
 	var int ndocid;
 	ndocid = Doc_Create();
 	Doc_SetPages(ndocid,1);
-	Doc_SetPage(ndocid,0,"letters.TGA",0);
+	Doc_SetPage(ndocid,0,"letters_fire.TGA",0);
 	Doc_SetFont(ndocid,-1,"font_10_book.tga");
 	Doc_SetMargins(ndocid,-1,50,50,50,50,1);
 	Doc_PrintLine(ndocid,0," ");
-	Doc_PrintLine(ndocid,0,"Многоуважаемый Мастер Ксардас");
+	Doc_PrintLine(ndocid,0,"Многоуважаемый Мастер Ксардас,");
 	Doc_PrintLine(ndocid,0,"");
 	Doc_SetFont(ndocid,-1,"font_10_book.TGA");
 	Doc_PrintLines(ndocid,0,"Ваше предыдущее письмо вызвало беспокойство среди магов. Мы посоветовались и в этом послании сообщаем Вам о нашем решении. Братство представляет собой большую опасность. Оно угрожает нашей торговле с королем, угрожает нашему королевству и Вашей жизни. Вам необходимо отправить к сектантам одного из своих людей, чтобы он разузнал, какой бог наделяет их силой и какими знаниями они обладают. Когда это станет известно, мы сообщим священнослужителям о том, что мы вместе отправим этого темного бога туда, откуда он явился. Наши ученые работают над древними манускриптами. Мы постараемся сообщить Вам все, что сможем узнать.");
@@ -718,10 +784,7 @@ instance ITKE_GOMEZ_01(C_ITEM)
 	visual = "ItKe_Key_04.3ds";
 	material = MAT_METAL;
 	description = name;
-	text[0] = "Это ключ от личного сундука Гомеза.";
-	text[1] = "Он открывает камеры подвалов в замке Баронов.";
-	text[5] = NAME_VALUE;
-	count[5] = value;
+	text[0] = "Открывает сундук Гомеза.";
 };
 
 instance ITKEY_RB_01(C_ITEM)
@@ -736,7 +799,7 @@ instance ITKEY_RB_01(C_ITEM)
 	text[0] = "Открывает сундук Лорда.";
 };
 
-instance ITKE_OB_SMITH_01(C_ITEM)
+instance ITKEY_OB_SMITH_01(C_ITEM)
 {
 	name = "Железный ключ";
 	mainflag = ITEM_KAT_NONE;
@@ -745,24 +808,20 @@ instance ITKE_OB_SMITH_01(C_ITEM)
 	visual = "ItKe_Key_02.3ds";
 	material = MAT_METAL;
 	description = name;
-	text[0] = "Он открывает дверь в кузницу.";
-	text[5] = NAME_VALUE;
-	count[5] = value;
+	text[0] = "Открывает дверь склада в кузнице.";
 };
 
 instance ITKE_STORAGE_01(C_ITEM)
 {
-	name = "Ключ";
+	name = "Ключ от склада";
 	mainflag = ITEM_KAT_NONE;
 	flags = 0;
 	value = 0;
-	visual = "ItKe_Key_03.3ds";
+	visual = "ItKe_Key_02.3ds";
 	material = MAT_METAL;
 	description = name;
-	text[0] = "Открывает главную дверь";
+	text[0] = "Открывает двери склада";
 	text[1] = "в подвалах замка Баронов.";
-	text[5] = NAME_VALUE;
-	count[5] = value;
 };
 
 instance ITKE_OM_01(C_ITEM)
@@ -824,15 +883,13 @@ instance ITFO_OM_BEER_01(C_ITEM)
 	mainflag = ITEM_KAT_FOOD;
 	flags = ITEM_MULTI;
 	value = 30;
-	visual = "ItFo_Beer_01.3ds";
+	visual = "ItFo_Beer_02.3ds";
 	material = MAT_GLAS;
 	on_state[0] = usestarkbeer;
 	scemename = "POTION";
 	description = name;
-	text[0] = NAME_BONUS_HP;
-	count[0] = 6;
-	text[3] = "";
-	text[4] = "";
+	text[1] = NAME_BONUS_HPMAX;
+	count[1] = 1;
 	text[5] = NAME_VALUE;
 	count[5] = value;
 };
@@ -840,7 +897,32 @@ instance ITFO_OM_BEER_01(C_ITEM)
 
 func void usestarkbeer()
 {
-	Npc_ChangeAttribute(self,ATR_HITPOINTS,6);
+	b_raiseattribute(ATR_HITPOINTS_MAX,1);
+	Npc_ChangeAttribute(self,ATR_HITPOINTS,1);
+	if(Npc_IsPlayer(self))
+	{
+		if(STARKBEER == 0)
+		{
+			STARKBEER = 1;
+		}
+		else if(STARKBEER == 1)
+		{
+			STARKBEER = 2;
+		}
+		else if(STARKBEER == 2)
+		{
+			STARKBEER = 3;
+		}
+		else if(STARKBEER == 3)
+		{
+			STARKBEER = 4;
+		}
+		else if(STARKBEER == 4)
+		{
+			STARKBEER = 5;
+			Mdl_ApplyOverlayMdsTimed(self,"HUMANS_DRUNKEN.MDS",60000);
+		};
+	};
 };
 
 
@@ -857,7 +939,7 @@ instance THERIDDLE1(C_ITEM)
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
 	value = 50;
-	visual = "ItWr_Book_02_03.3ds";
+	visual = "ITWR_BOOK_RIDDLE.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	description = "Хроманин";
@@ -872,8 +954,8 @@ func void usetheriddle1()
 	var int ndocid;
 	ndocid = Doc_Create();
 	Doc_SetPages(ndocid,2);
-	Doc_SetPage(ndocid,0,"Book_Mage_L.tga",0);
-	Doc_SetPage(ndocid,1,"Book_Mage_R.tga",0);
+	Doc_SetPage(ndocid,0,"Book_Riddle_L.tga",0);
+	Doc_SetPage(ndocid,1,"Book_Riddle_R.tga",0);
 	Doc_SetFont(ndocid,-1,"font_15_book.tga");
 	Doc_SetMargins(ndocid,0,275,20,30,20,1);
 	Doc_PrintLine(ndocid,0,"");
@@ -892,14 +974,15 @@ func void usetheriddle1()
 	Doc_PrintLine(ndocid,1,"");
 	Doc_PrintLine(ndocid,1,"");
 	Doc_PrintLine(ndocid,1,"");
-	Doc_PrintLines(ndocid,1,"Мудрый пересматривает свои прошлые дела, прежде чем начать что-то новое.");
+	Doc_PrintLines(ndocid,1,"Мудрый пересматривает свои прошлые дела свысока, прежде чем начать что-то новое.");
 	Doc_Show(ndocid);
 	if(RIDDLE1 == FALSE)
 	{
 		Log_CreateTopic(THERIDDLE_LOG,LOG_MISSION);
 		Log_SetTopicStatus(THERIDDLE_LOG,LOG_RUNNING);
-		b_logentry(THERIDDLE_LOG,"Я взял у скелета-мага в туманной башне одну очень странную книгу. 'Хроманин'! Она содержит непонятные вещи. В ней написано, что таинственный Некто создал этот мир: ...Мудрый пересматривает свои прошлые дела, прежде чем начать что-то новое... Да... Я еще ничего не понимаю, но, может быть, скоро что-нибудь прояснится.");
-		Wld_InsertItem(theriddle2,"CASTLE_TOWER_TOP");
+		b_logentry(THERIDDLE_LOG,"Я взял у скелета-мага в туманной башне одну очень странную книгу. 'Хроманин'! Она содержит непонятные вещи. В ней написано, что таинственный Некто создал этот мир: ...Мудрый пересматривает свои прошлые дела свысока, прежде чем начать что-то новое... Да... Я еще ничего не понимаю, но, может быть, скоро что-нибудь прояснится.");
+		Wld_InsertItem(theriddle2,"FP_RIDD_2");
+		Snd_Play("AMBIENTTONE_03_DARK");
 		RIDDLE1 = TRUE;
 	};
 };
@@ -911,7 +994,7 @@ instance THERIDDLE2(C_ITEM)
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
 	value = 50;
-	visual = "ItWr_Book_02_03.3ds";
+	visual = "ITWR_BOOK_RIDDLE.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	description = "Хроманин 2";
@@ -926,8 +1009,8 @@ func void usetheriddle2()
 	var int ndocid;
 	ndocid = Doc_Create();
 	Doc_SetPages(ndocid,2);
-	Doc_SetPage(ndocid,0,"Book_Mage_L.tga",0);
-	Doc_SetPage(ndocid,1,"Book_Mage_R.tga",0);
+	Doc_SetPage(ndocid,0,"Book_Riddle_L.tga",0);
+	Doc_SetPage(ndocid,1,"Book_Riddle_R.tga",0);
 	Doc_SetFont(ndocid,-1,"font_15_book.tga");
 	Doc_SetMargins(ndocid,0,275,20,30,20,1);
 	Doc_PrintLine(ndocid,0,"");
@@ -965,7 +1048,7 @@ instance THERIDDLE3(C_ITEM)
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
 	value = 50;
-	visual = "ItWr_Book_02_03.3ds";
+	visual = "ITWR_BOOK_RIDDLE.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	description = "Хроманин 3";
@@ -980,8 +1063,8 @@ func void usetheriddle3()
 	var int ndocid;
 	ndocid = Doc_Create();
 	Doc_SetPages(ndocid,2);
-	Doc_SetPage(ndocid,0,"Book_Mage_L.tga",0);
-	Doc_SetPage(ndocid,1,"Book_Mage_R.tga",0);
+	Doc_SetPage(ndocid,0,"Book_Riddle_L.tga",0);
+	Doc_SetPage(ndocid,1,"Book_Riddle_R.tga",0);
 	Doc_SetFont(ndocid,-1,"font_15_book.tga");
 	Doc_SetMargins(ndocid,0,275,20,30,20,1);
 	Doc_PrintLine(ndocid,0,"");
@@ -1019,7 +1102,7 @@ instance THERIDDLE4(C_ITEM)
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
 	value = 50;
-	visual = "ItWr_Book_02_03.3ds";
+	visual = "ITWR_BOOK_RIDDLE.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	description = "Хроманин 4";
@@ -1034,8 +1117,8 @@ func void usetheriddle4()
 	var int ndocid;
 	ndocid = Doc_Create();
 	Doc_SetPages(ndocid,2);
-	Doc_SetPage(ndocid,0,"Book_Mage_L.tga",0);
-	Doc_SetPage(ndocid,1,"Book_Mage_R.tga",0);
+	Doc_SetPage(ndocid,0,"Book_Riddle_L.tga",0);
+	Doc_SetPage(ndocid,1,"Book_Riddle_R.tga",0);
 	Doc_SetFont(ndocid,-1,"font_15_book.tga");
 	Doc_SetMargins(ndocid,0,275,20,30,20,1);
 	Doc_PrintLine(ndocid,0,"");
@@ -1061,7 +1144,7 @@ func void usetheriddle4()
 		b_givexp(700);
 		b_logentry(THERIDDLE_LOG,"Книга четвертая. И зачем только я позволяю этим книжкам морочить мне голову... Забыты дела тех, кто был когда-то на борту...");
 		Snd_Play("FoundRiddlersBook");
-		Wld_InsertItem(theriddle5,"LOCATION_25_01");
+		Wld_InsertItem(theriddle5,"FP_RIDD_4");
 		RIDDLE4 = TRUE;
 	};
 };
@@ -1073,7 +1156,7 @@ instance THERIDDLE5(C_ITEM)
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
 	value = 50;
-	visual = "ItWr_Book_02_03.3ds";
+	visual = "ITWR_BOOK_RIDDLE.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	description = "Хроманин 5";
@@ -1089,8 +1172,8 @@ func void usetheriddle5()
 	var C_NPC riddler;
 	ndocid = Doc_Create();
 	Doc_SetPages(ndocid,2);
-	Doc_SetPage(ndocid,0,"Book_Mage_L.tga",0);
-	Doc_SetPage(ndocid,1,"Book_Mage_R.tga",0);
+	Doc_SetPage(ndocid,0,"Book_Riddle_L.tga",0);
+	Doc_SetPage(ndocid,1,"Book_Riddle_R.tga",0);
 	Doc_SetFont(ndocid,-1,"font_15_book.tga");
 	Doc_SetMargins(ndocid,0,275,20,30,20,1);
 	Doc_PrintLine(ndocid,0,"");
@@ -1130,7 +1213,7 @@ instance THERIDDLE6(C_ITEM)
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
 	value = 50;
-	visual = "ItWr_Book_02_03.3ds";
+	visual = "ITWR_BOOK_RIDDLE.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	description = "Хроманин 6";
@@ -1145,13 +1228,13 @@ func void usetheriddle6()
 	var int ndocid;
 	ndocid = Doc_Create();
 	Doc_SetPages(ndocid,2);
-	Doc_SetPage(ndocid,0,"Book_Mage_L.tga",0);
-	Doc_SetPage(ndocid,1,"Book_Mage_R.tga",0);
+	Doc_SetPage(ndocid,0,"Book_Riddle_L.tga",0);
+	Doc_SetPage(ndocid,1,"Book_Riddle_R_Blood.tga",0);
 	Doc_SetFont(ndocid,-1,"font_15_book.tga");
 	Doc_SetMargins(ndocid,0,275,20,30,20,1);
 	Doc_PrintLine(ndocid,0,"");
-	Doc_PrintLine(ndocid,0,"Хроманин");
-	Doc_PrintLine(ndocid,0,"-----------");
+	Doc_PrintLine(ndocid,0,"");
+	Doc_PrintLine(ndocid,0,"");
 	Doc_SetFont(ndocid,-1,"font_10_book.TGA");
 	Doc_PrintLine(ndocid,0,"");
 	Doc_PrintLines(ndocid,0,"");
@@ -1171,16 +1254,18 @@ func void usetheriddle6()
 	if(RIDDLE6 == FALSE)
 	{
 		b_givexp(1000);
-		b_logentry(THERIDDLE_LOG,"Таинственный Некто мертв. Его убили какие-то демоны. Что связывало его с этими порождениями ада. Иначе он никогда не вернулся бы в это забытое богами место. Он не разделил со мной свою тайну, она умерла вместе с ним.");
+		b_logentry(THERIDDLE_LOG,"Таинственный Некто мертв. Его убили какие-то демоны. Что-то связывало его с этими порождениями ада. Иначе он никогда не вернулся бы в это забытое богами место. Он не разделил со мной свою тайну, она умерла вместе с ним.");
 		Log_SetTopicStatus(THERIDDLE_LOG,LOG_SUCCESS);
 		Snd_Play("FoundRiddler");
 		Wld_InsertNpc(skeletonmage,"OW_FOGDUNGEON_36_MOVEMENT");
+		Wld_InsertNpc(skeletonmage,"OW_FOGDUNGEON_37");
 		Wld_InsertNpc(skeleton,"OW_FOGDUNGEON_36_MOVEMENT");
-		Wld_InsertNpc(skeletonwarrior,"OW_FOGDUNGEON_36_MOVEMENT");
 		Wld_InsertNpc(skeleton,"OW_FOGDUNGEON_36_MOVEMENT2");
 		Wld_InsertNpc(skeletonscout,"OW_FOGDUNGEON_36_MOVEMENT2");
-		Wld_InsertNpc(skeletonwarrior,"OW_FOGDUNGEON_37");
-		Wld_InsertNpc(skeletonmage,"OW_FOGDUNGEON_37");
+		if(Npc_GetDistToWP(hero,"OW_FOGDUNGEON_36_MOVEMENT2") < 8000)
+	    {
+	    	Wld_SpawnNpcRange(hero,skeletonwarrior,2,30);
+	    };
 		RIDDLE6 = TRUE;
 	};
 };

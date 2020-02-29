@@ -26,7 +26,7 @@ func int zs_upset_loop()
 	{
 		printdebugnpc(PD_ZS_CHECK,"...other noch nah genug!");
 		AI_TurnToNPC(self,other);
-		b_sayoverlay(self,other,"$HeyHeyHey");
+		db_say(self,other,"HeyHeyHey");
 		AI_PlayAni(self,"T_ANGRY");
 		if(Npc_GetDistToNpc(self,other) < PERC_DIST_WATCHFIGHT)
 		{

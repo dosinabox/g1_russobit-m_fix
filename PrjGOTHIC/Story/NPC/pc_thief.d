@@ -43,9 +43,9 @@ func void rtn_prestart_1()
 
 func void rtn_start_1()
 {
-	ta_sleep(23,0,3,0,"OCR_HUT_1");
-	ta_sitaround(3,0,5,30,"OCR_HUT_Z5_SIT3");
-	ta_sleep(5,30,7,0,"OCR_CAULDRON_1");
+	ta_sleep(23,0,7,0,"OCR_HUT_1");
+	//ta_sitaround(3,0,5,30,"OCR_HUT_Z5_SIT3");
+	//ta_sleep(5,30,7,0,"OCR_HUT_1");
 	ta_sitaround(7,0,10,0,"OCR_CAULDRON_1");
 	ta_smalltalk(10,0,12,0,"OCR_CAMPFIRE_A_MOVEMENT1");
 	ta_sitaround(12,0,16,0,"OCR_CAULDRON_1");
@@ -93,5 +93,12 @@ func void rtn_fmtaken_1()
 
 func void rtn_orcassault_1()
 {
+};
+
+func void rtn_reunion_1()
+{
+	ta_guard(8,0,16,5,"LOCATION_02_03");
+	ta_sleep(16,5,0,5,"LOCATION_02_07");
+	ta_sitaround(0,5,8,0,"LOCATION_02_04");
 };
 

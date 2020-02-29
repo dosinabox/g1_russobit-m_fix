@@ -34,6 +34,8 @@ instance GIL_VALUES(C_GILVALUES)
 	falldown_damage[GIL_BLOODFLY] = 0;
 	fight_range_base[GIL_BLOODFLY] = 80;
 	fight_range_fist[GIL_BLOODFLY] = 80;
+	blood_emitter[GIL_BLOODFLY] = "BFX_Preset2";
+	blood_texture[GIL_BLOODFLY] = "BQM_Meatbug.tga";
 	swim_time[GIL_MINECRAWLER] = 0;
 	dive_time[GIL_MINECRAWLER] = 0;
 	water_depth_knee[GIL_MINECRAWLER] = 75;
@@ -46,6 +48,8 @@ instance GIL_VALUES(C_GILVALUES)
 	falldown_damage[GIL_MINECRAWLER] = 1;
 	fight_range_base[GIL_MINECRAWLER] = 100;
 	fight_range_fist[GIL_MINECRAWLER] = 170;
+	blood_emitter[GIL_MINECRAWLER] = "BFX_Preset2";
+	blood_texture[GIL_MINECRAWLER] = "BQM_Meatbug.tga";
 	swim_time[GIL_DEMON] = TIME_INFINITE;
 	dive_time[GIL_DEMON] = 0;
 	water_depth_knee[GIL_DEMON] = 999999;
@@ -61,7 +65,7 @@ instance GIL_VALUES(C_GILVALUES)
 	fight_range_base[GIL_DEMON] = 100;
 	fight_range_fist[GIL_DEMON] = 140;
 	blood_emitter[GIL_DEMON] = "BFX_Demon";
-	blood_texture[GIL_DEMON] = "BQM_Scavenger2.tga";
+	blood_texture[GIL_DEMON] = "BQM_Zombie.tga";
 	blood_amount[GIL_DEMON] = 10;
 	blood_max_distance[GIL_DEMON] = 200;
 	swim_time[GIL_GOBBO] = TIME_INFINITE;
@@ -307,6 +311,10 @@ instance GIL_VALUES(C_GILVALUES)
 	fight_range_base[GIL_SKELETON] = 60;
 	fight_range_fist[GIL_SKELETON] = 50;
 	blood_emitter[GIL_SKELETON] = "BFX_Skeleton";
+	blood_texture[GIL_SKELETON] = "MODIALPHA01.tga";
+	blood_flow[GIL_SKELETON] = 0;
+	blood_amount[GIL_SKELETON] = 0;
+	blood_max_distance[GIL_SKELETON] = 0;
 	swim_time[GIL_SNAPPER] = TIME_INFINITE;
 	dive_time[GIL_SNAPPER] = TIME_INFINITE;
 	water_depth_knee[GIL_SNAPPER] = 50;

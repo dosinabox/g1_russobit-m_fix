@@ -13,7 +13,7 @@ const int VALUE_MANAELIXIER = 65;
 const int MANA_ELIXIER = 70;
 const int VALUE_ELIXIER1 = 95;
 const int MANA_ELIXIER1 = 100;
-const int VALUE_ELIXIEREGG = 1;
+const int VALUE_ELIXIEREGG = 1000;
 const int MANAMAX_ELIXIEREGG = 10;
 const int VALUE_STRESSENZ = 300;
 const int STR_ESSENZ = 3;
@@ -45,9 +45,9 @@ const int VALUE_MANAMAXELIXIER = 1500;
 const int MANAMAX_ELIXIER = 15;
 const int VALUE_HASTE1 = 100;
 const int TIME_HASTE1 = 60000;
-const int VALUE_HASTE2 = 150;
+const int VALUE_HASTE2 = 200;
 const int TIME_HASTE2 = 120000;
-const int VALUE_HASTE3 = 200;
+const int VALUE_HASTE3 = 500;
 const int TIME_HASTE3 = 300000;
 
 instance ITFO_POTION_MANA_01(C_ITEM)
@@ -131,7 +131,7 @@ instance ITFO_POTION_ELIXIER(C_ITEM)
 	mainflag = ITEM_KAT_POTIONS;
 	flags = ITEM_MULTI;
 	value = VALUE_ELIXIER1;
-	visual = "ItFo_Potion_Elixier.3ds";
+	visual = "ItFo_Potion_Yberion.3ds";
 	material = MAT_GLAS;
 	on_state[0] = useelixier;
 	scemename = "POTIONFAST";
@@ -185,7 +185,7 @@ instance ITFO_POTION_HEALTH_02(C_ITEM)
 	material = MAT_GLAS;
 	on_state[0] = usehealth2potion;
 	scemename = "POTIONFAST";
-	description = "Экстракт исцеляющей силы";
+	description = "Экстракт исцеления";
 	text[1] = NAME_BONUS_HP;
 	count[1] = HP_EXTRAKT;
 	text[5] = NAME_VALUE;
@@ -206,11 +206,11 @@ instance ITFO_POTION_HEALTH_03(C_ITEM)
 	mainflag = ITEM_KAT_POTIONS;
 	flags = ITEM_MULTI;
 	value = VALUE_HPELIXIER;
-	visual = "ItFo_Potion_Health_01.3ds";
+	visual = "ItFo_Potion_Health_03.3ds";
 	material = MAT_GLAS;
 	on_state[0] = usehealth3potion;
 	scemename = "POTIONFAST";
-	description = "Зелье исцеляющей силы";
+	description = "Зелье исцеления";
 	text[1] = NAME_BONUS_HP;
 	count[1] = HP_ELIXIER;
 	text[5] = NAME_VALUE;
@@ -235,10 +235,10 @@ instance ITFO_POTION_ELIXIER_EGG(C_ITEM)
 	material = MAT_GLAS;
 	on_state[0] = useeggelixier;
 	scemename = "POTIONFAST";
-	description = "Зелье из слюны ползунов";
-	text[0] = "Настраивает на связь со Спящим.";
+	description = "Зелье из яиц Королевы ползунов";
 	text[1] = NAME_BONUS_MANAMAX;
 	count[1] = MANAMAX_ELIXIEREGG;
+	text[3] = "Настраивает на связь со Спящим.";
 	text[5] = NAME_VALUE;
 	count[5] = VALUE_ELIXIEREGG;
 };
@@ -247,6 +247,7 @@ instance ITFO_POTION_ELIXIER_EGG(C_ITEM)
 func void useeggelixier()
 {
 	b_raiseattribute(ATR_MANA_MAX,MANAMAX_ELIXIEREGG);
+	Npc_ChangeAttribute(self,ATR_MANA,MANAMAX_ELIXIEREGG);
 };
 
 
@@ -328,7 +329,7 @@ instance ITFO_POTION_DEX_01(C_ITEM)
 	mainflag = ITEM_KAT_POTIONS;
 	flags = ITEM_MULTI;
 	value = VALUE_DEXESSENZ;
-	visual = "ItFo_Potion_Dex_01.3ds";
+	visual = "ItFo_Potion_Dex_01_new.3ds";
 	material = MAT_GLAS;
 	on_state[0] = usedexpotion;
 	scemename = "POTIONFAST";
@@ -352,7 +353,7 @@ instance ITFO_POTION_DEX_02(C_ITEM)
 	mainflag = ITEM_KAT_POTIONS;
 	flags = ITEM_MULTI;
 	value = VALUE_DEXEXTRAKT;
-	visual = "ItFo_Potion_Dex_02.3ds";
+	visual = "ItFo_Potion_Dex_02_new.3ds";
 	material = MAT_GLAS;
 	on_state[0] = usedex2potion;
 	scemename = "POTIONFAST";
@@ -376,7 +377,7 @@ instance ITFO_POTION_DEX_03(C_ITEM)
 	mainflag = ITEM_KAT_POTIONS;
 	flags = ITEM_MULTI;
 	value = VALUE_DEXELIXIER;
-	visual = "ItFo_Potion_Dex_03.3ds";
+	visual = "ItFo_Potion_Dex_03_new.3ds";
 	material = MAT_GLAS;
 	on_state[0] = usedex3potion;
 	scemename = "POTIONFAST";
@@ -475,6 +476,7 @@ instance ITFO_POTION_HEALTH_PERMA_01(C_ITEM)
 func void uselifepotion()
 {
 	b_raiseattribute(ATR_HITPOINTS_MAX,HPMAX_ESSENZ);
+	Npc_ChangeAttribute(self,ATR_HITPOINTS,HPMAX_ESSENZ);
 };
 
 
@@ -499,6 +501,7 @@ instance ITFO_POTION_HEALTH_PERMA_02(C_ITEM)
 func void uselife2potion()
 {
 	b_raiseattribute(ATR_HITPOINTS_MAX,HPMAX_EXTRAKT);
+	Npc_ChangeAttribute(self,ATR_HITPOINTS,HPMAX_EXTRAKT);
 };
 
 
@@ -523,6 +526,7 @@ instance ITFO_POTION_HEALTH_PERMA_03(C_ITEM)
 func void uselife3potion()
 {
 	b_raiseattribute(ATR_HITPOINTS_MAX,HPMAX_ELIXIER);
+	Npc_ChangeAttribute(self,ATR_HITPOINTS,HPMAX_ELIXIER);
 };
 
 
@@ -547,6 +551,7 @@ instance ITFO_POTION_MANA_PERMA_01(C_ITEM)
 func void usenectarpotion()
 {
 	b_raiseattribute(ATR_MANA_MAX,MANAMAX_ESSENZ);
+	Npc_ChangeAttribute(self,ATR_MANA,MANAMAX_ESSENZ);
 	printdebugnpc(PD_ITEM_MOBSI,"Я пью магическое зелье.");
 };
 
@@ -572,6 +577,7 @@ instance ITFO_POTION_MANA_PERMA_02(C_ITEM)
 func void usenectar2potion()
 {
 	b_raiseattribute(ATR_MANA_MAX,MANAMAX_EXTRAKT);
+	Npc_ChangeAttribute(self,ATR_MANA,MANAMAX_EXTRAKT);
 	printdebugnpc(PD_ITEM_MOBSI,"Я пью магическое зелье.");
 };
 
@@ -597,6 +603,7 @@ instance ITFO_POTION_MANA_PERMA_03(C_ITEM)
 func void usenectar3potion()
 {
 	b_raiseattribute(ATR_MANA_MAX,MANAMAX_ELIXIER);
+	Npc_ChangeAttribute(self,ATR_MANA,MANAMAX_ELIXIER);
 	printdebugnpc(PD_ITEM_MOBSI,"Я пью магическое зелье.");
 };
 
@@ -607,7 +614,7 @@ instance ITFO_POTION_HASTE_01(C_ITEM)
 	mainflag = ITEM_KAT_POTIONS;
 	flags = ITEM_MULTI;
 	value = VALUE_HASTE1;
-	visual = "ItFo_Potion_Haste_01.3ds";
+	visual = "ItFo_Potion_Dex_01.3ds";
 	material = MAT_GLAS;
 	on_state[0] = usehastepotion;
 	scemename = "POTIONFAST";
@@ -632,8 +639,8 @@ instance ITFO_POTION_HASTE_02(C_ITEM)
 	name = NAME_TRANK;
 	mainflag = ITEM_KAT_POTIONS;
 	flags = ITEM_MULTI;
-	value = VALUE_HASTE1;
-	visual = "ItFo_Potion_Haste_01.3ds";
+	value = VALUE_HASTE2;
+	visual = "ItFo_Potion_Dex_02.3ds";
 	material = MAT_GLAS;
 	on_state[0] = usehastepotion2;
 	scemename = "POTIONFAST";
@@ -658,8 +665,8 @@ instance ITFO_POTION_HASTE_03(C_ITEM)
 	name = NAME_TRANK;
 	mainflag = ITEM_KAT_POTIONS;
 	flags = ITEM_MULTI;
-	value = VALUE_HASTE1;
-	visual = "ItFo_Potion_Haste_01.3ds";
+	value = VALUE_HASTE3;
+	visual = "ItFo_Potion_Dex_03.3ds";
 	material = MAT_GLAS;
 	on_state[0] = usehastepotion3;
 	scemename = "POTIONFAST";

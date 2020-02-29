@@ -14,6 +14,7 @@ func void zs_proclaimandpunish()
 		AI_StartState(self,zs_turnaway,0,"");
 		return;
 	};
+	b_drawweapon(self,other);
 	if((Npc_IsInFightMode(self,FMODE_FAR) || Npc_IsInFightMode(self,FMODE_MAGIC)) && (Npc_GetDistToNpc(self,hero) > PERC_DIST_DIALOG))
 	{
 		Npc_SetTarget(self,hero);
@@ -52,6 +53,7 @@ func void zs_proclaimandpunish_end()
 	if(c_npcisdown(hero))
 	{
 		printdebugnpc(PD_ZS_CHECK,"...SC mittlerweile am Boden!");
+		b_removeweapon(self);
 		return;
 	};
 	if(Npc_WasInState(self,zs_assessenemy))
@@ -64,39 +66,39 @@ func void zs_proclaimandpunish_end()
 			if(Npc_GetAttitude(self,murder_victim) == ATT_FRIENDLY)
 			{
 				printdebugnpc(PD_ZS_CHECK,"...und zwar einen Freund des NSCs!");
-				b_sayoverlay(self,hero,"$YouKilledOneOfUs");
+				db_say(self,hero,"YouKilledOneOfUs");
 			};
 		}
 		else if(Wld_GetGuildAttitude(self.guild,hero.guild) == ATT_HOSTILE)
 		{
 			printdebugnpc(PD_ZS_CHECK,"...SC ist Todfeind!");
-			b_sayoverlay(self,hero,"$DieMortalEnemy");
+			db_say(self,hero,"DieMortalEnemy");
 		}
 		else if(Npc_HasNews(self,NEWS_THEFT,hero,self))
 		{
 			printdebugnpc(PD_ZS_CHECK,"...SC hat vom NSC geklaut!");
-			b_sayoverlay(self,hero,"$DIRTYTHIEF");
+			db_say(self,hero,"DIRTYTHIEF");
 		}
 		else if(Npc_HasNews(self,NEWS_DEFEAT,self,hero))
 		{
 			printdebugnpc(PD_ZS_CHECK,"...Normaler Angriff (SC ist schon mal besiegt worden)!");
-			b_sayoverlay(self,hero,"$YOUSTILLNOTHAVEENOUGH");
+			db_say(self,hero,"YOUSTILLNOTHAVEENOUGH");
 		}
 		else
 		{
 			printdebugnpc(PD_ZS_CHECK,"...Normaler Angriff (SC wurde noch nicht besiegt)!");
-			b_sayoverlay(self,hero,"$NowWait");
+			db_say(self,hero,"NowWait");
 		};
 	}
 	else if(c_getattackreason(self) == AIV_AR_INTRUDER)
 	{
 		printdebugnpc(PD_ZS_CHECK,"...SC hat Durchgang durchbrochen!");
-		b_sayoverlay(self,hero,"$NowWaitIntruder");
+		db_say(self,hero,"NowWaitIntruder");
 	}
 	else
 	{
 		printdebugnpc(PD_ZS_CHECK,"...SC greift Schützling einer Wache an !");
-		b_sayoverlay(self,hero,"$YouAttackedMyCharge");
+		db_say(self,hero,"YouAttackedMyCharge");
 	};
 	Npc_SetTarget(self,hero);
 	AI_StartState(self,zs_attack,0,"");

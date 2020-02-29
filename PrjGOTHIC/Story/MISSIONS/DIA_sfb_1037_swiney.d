@@ -40,7 +40,7 @@ func int info_swiney_hello_condition()
 func void info_swiney_hello_info()
 {
 	AI_Output(other,self,"Info_Swiney_Hello_15_00");	//Кто ты?
-	AI_Output(self,other,"Info_Swiney_Hello_09_01");	//Я лучший проходчик в этой проклятой колонии. 
+	AI_Output(self,other,"Info_Swiney_Hello_09_01");	//Я лучший проходчик в этой проклятой колонии.
 	AI_Output(self,other,"Info_Swiney_Hello_09_02");	//Если бы не я, половина наших рудокопов давно бы валялась под завалами. Сами они не могут понять, где не стоит махать киркой.
 };
 
@@ -79,22 +79,27 @@ func void info_swiney_schuerfer_info()
 
 func void info_swiney_schuerfer_ja()
 {
+	AI_EquipArmor(self,sfb_armor_l);
 	AI_Output(other,self,"Info_Swiney_Schuerfer_Ja_15_00");	//Да.
 	AI_Output(self,other,"Info_Swiney_Schuerfer_Ja_09_01");	//Хорошо! Тогда ты сам знаешь, что нужно делать. Вот тебе рабочая одежда. Кирку тебе придется найти самому. Удачи!
 	CreateInvItem(self,sfb_armor_l);
 	b_giveinvitems(self,hero,sfb_armor_l,1);
+	AI_EquipArmor(hero,sfb_armor_l);
 	Info_ClearChoices(info_swiney_schuerfer);
 };
 
 func void info_swiney_schuerfer_nein()
 {
+	//AI_EquipArmor(self,sfb_armor_l);
 	AI_Output(other,self,"Info_Swiney_Schuerfer_Nein_15_00");	//Нет.
-	AI_Output(self,other,"Info_Swiney_Schuerfer_Nein_09_01");	//Конечно, нет! А почему я? Хорошо. Слушай. Возьми эту рабочую одежду и надень ее прямо сейчас.
+	AI_Output(self,other,"Info_Swiney_Schuerfer_Nein_09_01");	//Конечно, нет! Хорошо. Слушай. Возьми эту рабочую одежду и надень ее прямо сейчас.
 	AI_Output(self,other,"Info_Swiney_Schuerfer_Nein_09_02");	//Если ты этого не сделаешь, то любой камень сможет искалечить тебя. А это не понравится ни тебе, ни нам. Какая потом от тебя будет польза?
 	AI_Output(self,other,"Info_Swiney_Schuerfer_Nein_09_03");	//Где-то неподалеку я видел одну старую кирку.
 	AI_Output(self,other,"Info_Swiney_Schuerfer_Nein_09_04");	//Правда ты с ней много не наработаешь, ну, что ж...
-	CreateInvItem(self,sfb_armor_l);
-	b_giveinvitems(self,hero,sfb_armor_l,1);
+	CreateInvItem(hero,sfb_armor_l);
+	//b_giveinvitems(self,hero,sfb_armor_l,1);
+	PrintScreen("Получен 1 предмет.",-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
+	AI_EquipArmor(hero,sfb_armor_l);
 	Info_ClearChoices(info_swiney_schuerfer);
 };
 

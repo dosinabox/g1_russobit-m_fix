@@ -1,13 +1,14 @@
 
 instance GUR_1212_MADCORKALOM(NPC_DEFAULT)
 {
-	name[0] = "Сумасшедший Кор Галом";
+	name[0] = "Безумный Кор Галом";
 	npctype = NPCTYPE_MAIN;
 	guild = GIL_GUR;
 	level = 1000;
 	voice = 10;
 	id = 1212;
 	flags = 0;
+	aivar[43] = TRUE;
 	attribute[ATR_STRENGTH] = 70;
 	attribute[ATR_DEXTERITY] = 100;
 	attribute[ATR_MANA_MAX] = 500;

@@ -5,13 +5,13 @@ instance GUR_1203_BAALTONDRAL(NPC_DEFAULT)
 	npctype = NPCTYPE_MAIN;
 	guild = GIL_GUR;
 	level = 28;
-	flags = 0;
+	flags = NPC_FLAG_IMMORTAL;
 	voice = 13;
 	id = 1203;
 	attribute[ATR_STRENGTH] = 60;
 	attribute[ATR_DEXTERITY] = 40;
-	attribute[ATR_MANA_MAX] = 50;
-	attribute[ATR_MANA] = 50;
+	attribute[ATR_MANA_MAX] = 100;
+	attribute[ATR_MANA] = 100;
 	attribute[ATR_HITPOINTS_MAX] = 388;
 	attribute[ATR_HITPOINTS] = 388;
 	Mdl_SetVisual(self,"HUMANS.MDS");
@@ -19,7 +19,7 @@ instance GUR_1203_BAALTONDRAL(NPC_DEFAULT)
 	Mdl_SetVisualBody(self,"hum_body_Naked0",1,1,"Hum_Head_Psionic",24,2,gur_armor_m);
 	b_scale(self);
 	Mdl_SetModelFatness(self,-1);
-	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,6);
+	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,4);
 	CreateInvItem(self,itarrunewindfist);
 	fight_tactic = FAI_HUMAN_MAGE;
 	daily_routine = rtn_start_1203;

@@ -5,7 +5,7 @@ instance TPL_1458_TEMPLER(NPC_DEFAULT)
 	npctype = NPCTYPE_GUARD;
 	guild = GIL_GUR;
 	level = 50;
-	voice = 8;
+	voice = 11;
 	id = 1458;
 	attribute[ATR_STRENGTH] = 70;
 	attribute[ATR_DEXTERITY] = 65;

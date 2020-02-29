@@ -24,15 +24,9 @@ instance SLD_750_SOELDNER(NPC_DEFAULT)
 	EquipItem(self,itmw_1h_mace_war_03);
 	EquipItem(self,itrw_bow_long_01);
 	CreateInvItems(self,itamarrow,20);
-	CreateInvItems(self,itforice,6);
-	CreateInvItems(self,itfoloaf,5);
-	CreateInvItems(self,itfomutton,4);
-	CreateInvItems(self,itminugget,20);
 	CreateInvItems(self,itfobooze,5);
 	CreateInvItems(self,itlstorch,5);
-	CreateInvItems(self,itfo_potion_health_02,8);
-	CreateInvItem(self,itmi_stuff_barbknife_01);
-	CreateInvItem(self,itmi_stuff_amphore_01);
+	CreateInvItems(self,itfo_potion_health_02,2);
 	daily_routine = rtn_fmcstart_750;
 };
 
@@ -40,6 +34,6 @@ instance SLD_750_SOELDNER(NPC_DEFAULT)
 func void rtn_fmcstart_750()
 {
 	ta_guardpalisade(1,0,13,0,"FMC_PATH19");
-	ta_guardpalisade(13,0,1,0,"FMC_Path19");
+	ta_guardpalisade(13,0,1,0,"FMC_PATH19");
 };
 

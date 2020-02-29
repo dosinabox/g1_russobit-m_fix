@@ -34,7 +34,10 @@ instance DIA_VLK_534_LEAVEME(C_INFO)
 
 func int dia_vlk_534_leaveme_condition()
 {
-	return 1;
+	if(KAPITEL < 4)
+	{
+		return 1;
+	};
 };
 
 func void dia_vlk_534_leaveme_info()

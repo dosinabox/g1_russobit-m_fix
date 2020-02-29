@@ -159,9 +159,6 @@ func void stt_311_fisk_forgetsword_info()
 	AI_Output(self,other,"Stt_311_Fisk_ForgetSword_12_01");	//Передай ему, что этого меча ему в жизни не видать!
 };
 
-
-var int fisk_getnewhehler;
-
 instance STT_311_FISK_MORDRAGKO(C_INFO)
 {
 	npc = stt_311_fisk;
@@ -175,7 +172,7 @@ instance STT_311_FISK_MORDRAGKO(C_INFO)
 
 func int stt_311_fisk_mordragko_condition()
 {
-	if((MORDRAGKO_HAUAB == TRUE) && (Npc_GetTrueGuild(hero) == GIL_NONE))
+	if((Npc_IsDead(org_826_mordrag) || (MORDRAGKO_HAUAB == TRUE) || (MORDRAGKO_STAYATNC == TRUE)) && (Npc_GetTrueGuild(hero) == GIL_NONE))
 	{
 		return 1;
 	};
@@ -243,7 +240,7 @@ func void stt_311_fisk_hehlersuccess_info()
 	AI_Output(self,other,"Stt_311_Fisk_HehlerSuccess_12_01");	//Что, правда? Кто бы мог подумать. Кажется, ты твердо намерен всем здесь понравиться...
 	AI_Output(self,other,"Stt_311_Fisk_HehlerSuccess_12_02");	//Так тебе это удалось? И кто же он?
 	AI_Output(other,self,"Stt_311_Fisk_HehlerSuccess_15_03");	//Шарки, один из воров.
-	AI_Output(self,other,"Stt_311_Fisk_HehlerSuccess_12_04");	// Шарки? Да он же еще хуже, чем Мордраг.
+	AI_Output(self,other,"Stt_311_Fisk_HehlerSuccess_12_04");	//Шарки? Да он же еще хуже, чем Мордраг.
 	AI_Output(self,other,"Stt_311_Fisk_HehlerSuccess_12_05");	//Что касается Диего: можешь больше не волноваться.
 	FISK_GETNEWHEHLER = LOG_SUCCESS;
 	b_givexp(XP_FISKDEALER);
@@ -251,6 +248,9 @@ func void stt_311_fisk_hehlersuccess_info()
 	b_logentry(CH1_FISKNEWDEALER,"Фиск остался доволен тем, что Шарки согласился заменить Мордрага.");
 };
 
+
+var int fisk_armor_l_was_bought;
+var int fisk_armor_m_was_bought;
 
 instance STT_311_FISK_ARMOR(C_INFO)
 {
@@ -265,7 +265,7 @@ instance STT_311_FISK_ARMOR(C_INFO)
 
 func int stt_311_fisk_armor_condition()
 {
-	if((KAPITEL < 2) && Npc_KnowsInfo(hero,stt_311_fisk_first))
+	if((KAPITEL < 2) && Npc_KnowsInfo(hero,stt_311_fisk_first) && ((FISK_ARMOR_L_WAS_BOUGHT != 1) || (FISK_ARMOR_M_WAS_BOUGHT != 1)))
 	{
 		return TRUE;
 	};
@@ -277,8 +277,14 @@ func void stt_311_fisk_armor_info()
 	AI_Output(self,other,"Stt_311_Fisk_ARMOR_Info_12_02");	//Ну, думаю, я смогу подобрать что-нибудь для тебя.
 	Info_ClearChoices(stt_311_fisk_armor);
 	Info_AddChoice(stt_311_fisk_armor,DIALOG_BACK,stt_311_fisk_armor_back);
-	Info_AddChoice(stt_311_fisk_armor,b_buildbuyarmorstring("Простые штаны рудокопа, защита от оружия 10, от огня 5",VALUE_VLK_ARMOR_L),stt_311_fisk_armor_l);
-	Info_AddChoice(stt_311_fisk_armor,b_buildbuyarmorstring("Штаны рудокопа, защита от оружия 15, от огня 5",VALUE_VLK_ARMOR_M),stt_311_fisk_armor_m);
+	if(FISK_ARMOR_M_WAS_BOUGHT != 1)
+	{
+		Info_AddChoice(stt_311_fisk_armor,b_buildbuyarmorstring("Штаны рудокопа: 15/0/5/0",VALUE_VLK_ARMOR_M),stt_311_fisk_armor_m);
+	};
+	if(FISK_ARMOR_L_WAS_BOUGHT != 1)
+	{
+		Info_AddChoice(stt_311_fisk_armor,b_buildbuyarmorstring("Простые штаны рудокопа: 10/0/5/0",VALUE_VLK_ARMOR_L),stt_311_fisk_armor_l);
+	};
 };
 
 func void stt_311_fisk_armor_back()
@@ -295,10 +301,12 @@ func void stt_311_fisk_armor_l()
 	}
 	else
 	{
-		AI_Output(self,other,"Stt_311_Fisk_ARMOR_L_Info_12_03");	//Хороший выбор.  
+		AI_Output(self,other,"Stt_311_Fisk_ARMOR_L_Info_12_03");	//Хороший выбор.
 		b_giveinvitems(hero,self,itminugget,VALUE_VLK_ARMOR_L);
 		CreateInvItem(self,vlk_armor_l);
 		b_giveinvitems(self,hero,vlk_armor_l,1);
+		AI_EquipArmor(hero,vlk_armor_l);
+		FISK_ARMOR_L_WAS_BOUGHT = 1;
 	};
 };
 
@@ -311,10 +319,12 @@ func void stt_311_fisk_armor_m()
 	}
 	else
 	{
-		AI_Output(self,other,"Stt_311_Fisk_ARMOR_M_Info_12_03");	//Хороший выбор.  
+		AI_Output(self,other,"Stt_311_Fisk_ARMOR_M_Info_12_03");	//Хороший выбор.
 		b_giveinvitems(hero,self,itminugget,VALUE_VLK_ARMOR_M);
 		CreateInvItem(self,vlk_armor_m);
 		b_giveinvitems(self,hero,vlk_armor_m,1);
+		AI_EquipArmor(hero,vlk_armor_m);
+		FISK_ARMOR_M_WAS_BOUGHT = 1;
 	};
 };
 

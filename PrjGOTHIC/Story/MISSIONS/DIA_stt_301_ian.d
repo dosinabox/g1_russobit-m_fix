@@ -220,7 +220,7 @@ instance STT_301_IAN_GETLIST(C_INFO)
 
 func int stt_301_ian_getlist_condition()
 {
-	if((DIEGO_BRINGLIST == LOG_RUNNING) && Npc_KnowsInfo(hero,info_diego_ianpassword))
+	if((DIEGO_BRINGLIST == LOG_RUNNING) && Npc_KnowsInfo(hero,info_diego_ianpassword) && !Npc_KnowsInfo(hero,stt_301_ian_steallist))
 	{
 		return TRUE;
 	};
@@ -232,6 +232,7 @@ func void stt_301_ian_getlist_info()
 	AI_Output(self,other,"STT_301_IAN_GETLIST_Info_13_02");	//Понятно, вот тебе список. Они должны поторопиться с доставкой.
 	b_logentry(CH1_BRINGLIST,"Ян без проблем передал мне список для Диего.");
 	b_giveinvitems(self,hero,thelist,1);
+	Npc_RemoveInvItem(self,thelist);
 };
 
 
@@ -316,18 +317,15 @@ func int stt_301_ian_gear_suc_condition()
 
 func void stt_301_ian_gear_suc_info()
 {
-	var C_NPC sklave;
 	b_giveinvitems(hero,self,itmi_stuff_gearwheel_01,1);
 	Npc_RemoveInvItem(self,itmi_stuff_gearwheel_01);
 	IAN_GEARWHEEL = LOG_SUCCESS;
 	b_givexp(XP_BRINGGEARWHEEL);
-	sklave = Hlp_GetNpc(orc_2001_sklave);
-	Npc_ExchangeRoutine(sklave,"Пресс");
 	AI_Output(other,self,"STT_301_IAN_GEAR_SUC_Info_15_01");	//Я нашел шестеренку.
 	AI_Output(self,other,"STT_301_IAN_GEAR_SUC_Info_13_02");	//О! Отличная работа! Думаю, она как раз подойдет. Что ж, вернемся к твоей проблеме. Ты искал логово ползунов, да? Хм...
 	AI_Output(self,other,"STT_301_IAN_GEAR_SUC_Info_13_03");	//Сходи к Асгхану, он откроет тебе ворота. Возможно, то, что ты ищешь, находится именно там.
 	AI_Output(self,other,"STT_301_IAN_GEAR_SUC_Info_13_04");	//Скажи ему: 'Все будет в порядке'. Так он узнает, что я дал свое согласие.
-	b_logentry(CH2_MCEGGS,"Я принес Яну шестеренку, снятую со старого рудного пресса. Он сказал, что когда я буду говорить с Асгханом, я должен сообщить ему слова 'Все будет в порядке'. Тогда он откроет ворота в Заброшенную шахту.");
+	b_logentry(CH2_MCEGGS,"Я принес Яну шестеренку, снятую со старого рудного пресса. Он сказал, что когда я буду говорить с Асгханом, я должен сообщить ему слова 'Все будет в порядке'. Тогда он откроет ворота в заброшенную часть шахты.");
 };
 
 
@@ -354,7 +352,7 @@ func void stt_301_ian_gotoasghan_info()
 {
 	AI_Output(other,self,"STT_301_IAN_GOTOASGHAN_Info_15_01");	//Я все еще не нашел логово ползунов!
 	AI_Output(self,other,"STT_301_IAN_GOTOASGHAN_Info_13_02");	//Я же сказал, пойди к Асгхану. Он возглавляет стражников. Ты найдешь его на нижнем горизонте.
-	b_logentry(CH2_MCEGGS,"Если я хочу найти логово ползунов, я должен поговорить с Асгханом.");
+	b_logentry(CH2_MCEGGS,"Если я хочу найти логово ползунов, то должен поговорить с Асгханом.");
 };
 
 
@@ -383,8 +381,8 @@ func void stt_301_ian_afterall_info()
 	AI_Output(self,other,"STT_301_IAN_AFTERALL_Info_13_02");	//В шахте снова будет тихо и спокойно!
 	AI_Output(self,other,"STT_301_IAN_AFTERALL_Info_13_03");	//Ладно, не обижайся. Ты хорошо поработал!
 	AI_Output(self,other,"STT_301_IAN_AFTERALL_Info_13_04");	//Вот, возьми себе этот ящик пива. Это твоя награда.
-	CreateInvItems(self,itfo_om_beer_01,6);
-	b_giveinvitems(self,hero,itfo_om_beer_01,6);
+	CreateInvItems(self,itfo_om_beer_01,5);
+	b_giveinvitems(self,hero,itfo_om_beer_01,5);
 };
 
 
@@ -411,5 +409,42 @@ func void stt_301_ian_notenough_info()
 {
 	AI_Output(other,self,"STT_301_IAN_NOTENOUGH_Info_15_01");	//Я нашел логово ползунов. А еще в нем были вот эти яйца.
 	AI_Output(self,other,"STT_301_IAN_NOTENOUGH_Info_13_02");	//Что? Ты нашел так мало яиц? Ну, что ж, ты хотя бы доказал, что умеешь драться.
+};
+
+instance STT_301_IAN_STEALLIST(C_INFO)
+{
+	npc = stt_301_ian;
+	condition = stt_301_ian_steallist_condition;
+	information = stt_301_ian_steallist_info;
+	important = 0;
+	permanent = 0;
+	description = "(украсть список)";
+};
+
+
+func int stt_301_ian_steallist_condition()
+{
+	if(!Npc_KnowsInfo(hero,org_801_lares_bringlistback) && !Npc_KnowsInfo(hero,stt_301_ian_getlist) && !Npc_KnowsInfo(hero,info_diego_bringlist_success) && Npc_KnowsInfo(hero,org_801_lares_newlist) && Npc_HasItems(self,thelist) && Npc_GetTalentSkill(hero,NPC_TALENT_PICKPOCKET) >= 1 && Npc_GetTalentSkill(hero,NPC_TALENT_SNEAK) == 1)
+	{
+		return TRUE;
+	};
+};
+
+func void stt_301_ian_steallist_info()
+{
+	AI_GotoNpc(other,self);
+	AI_Output(other,self,"KDW_600_Saturas_TIMESUP_Info_15_11");	//Рудная гора... э... она уже очень высокая!
+	AI_Output(self,other,"DIA_ARTO_PERM_13_01");	//Точно.
+	AI_TurnAway(self,other);
+	AI_PlayAni(other,"T_STAND_2_IGET");
+	AI_PlayAni(other,"T_IGET_2_STAND");
+	AI_PlayAni(self,"T_SEARCH");
+	PrintScreen("Украден список.",-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
+	CreateInvItem(hero,thelist);
+	Npc_RemoveInvItem(self,thelist);
+	AI_WhirlAround(self,other);
+	AI_Output(self,other,"SVM_13_YouWannaFoolMe");	//Обмануть меня захотел? Только попробуй!
+	b_logentry(THELISTFORNC,"Ян развесил уши и профукал свой список. Теперь нужно отнести мой трофей в Новый лагерь.");
+	AI_StopProcessInfos(self);
 };
 

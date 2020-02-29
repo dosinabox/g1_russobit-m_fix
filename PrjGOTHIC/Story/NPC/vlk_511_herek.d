@@ -3,7 +3,7 @@ instance VLK_511_HEREK(NPC_DEFAULT)
 {
 	name[0] = "Херек";
 	npctype = NPCTYPE_MAIN;
-	guild = GIL_NONE;
+	guild = GIL_VLK;
 	level = 2;
 	voice = 1;
 	id = 511;

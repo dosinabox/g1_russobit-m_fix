@@ -1,7 +1,7 @@
 
 instance CS_ESKORTE1(NPC_DEFAULT)
 {
-	name[0] = "Ёскорт1";
+	name[0] = "√вардеец";
 	slot = "guard";
 	guild = GIL_GRD;
 	level = 5;
@@ -16,10 +16,13 @@ instance CS_ESKORTE1(NPC_DEFAULT)
 	attribute[ATR_HITPOINTS] = 100;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Militia.MDS");
-	Mdl_SetVisualBody(self,"hum_body_Naked0",0,1,"Hum_Head_Fighter",18,2,grd_armor_i);
+	Mdl_SetVisualBody(self,"hum_body_Naked0",0,1,"Hum_Head_Fighter",17,2,grd_armor_i);
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_STRONG;
+	EquipItem(self,itmw_1h_sword_02);
+	EquipItem(self,itrw_crossbow_01);
+	CreateInvItems(self,itambolt,30);
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,2);
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,2);
 	Npc_SetTalentSkill(self,NPC_TALENT_2H,1);
@@ -30,6 +33,13 @@ instance CS_ESKORTE1(NPC_DEFAULT)
 
 func void rtn_start_3024()
 {
-	ta_position(0,0,24,0,"WP_INTRO06");
+	ta_boss(0,0,12,0,"WP_INTRO05");
+	ta_boss(12,0,24,0,"WP_INTRO05");
+};
+
+func void rtn_flee_3024()
+{
+	ta_stay(0,0,12,0,"WP_INTRO01");
+	ta_stay(12,0,24,0,"WP_INTRO01");
 };
 

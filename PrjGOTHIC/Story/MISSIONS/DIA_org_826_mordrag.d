@@ -39,10 +39,7 @@ instance ORG_826_MORDRAG_GREET(C_INFO)
 
 func int org_826_mordrag_greet_condition()
 {
-	if(Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST)
-	{
-		return 1;
-	};
+	return 1;
 };
 
 func void org_826_mordrag_greet_info()
@@ -50,8 +47,6 @@ func void org_826_mordrag_greet_info()
 	AI_Output(self,other,"Org_826_Mordrag_Greet_11_00");	//Эй, новенький! Я Мордраг. Запомни меня. Я продаю всевозможные товары по низкой цене.
 };
 
-
-var int mordrag_traded;
 
 instance ORG_826_MORDRAG_TRADE(C_INFO)
 {
@@ -67,17 +62,28 @@ instance ORG_826_MORDRAG_TRADE(C_INFO)
 
 func int org_826_mordrag_trade_condition()
 {
-	return 1;
+	if(Npc_KnowsInfo(hero,org_826_mordrag_greet) && (MORDRAGKO_HAUAB != TRUE))
+	{
+		return 1;
+	};
 };
 
 func void org_826_mordrag_trade_info()
 {
-	AI_Output(other,self,"Org_826_Mordrag_Trade_15_00");	//Покажи мне твои товары.
+	AI_Output(other,self,"DIA_BaalKagan_TRADE_15_00");	//Покажи мне свои товары.
 	AI_Output(self,other,"Org_826_Mordrag_Trade_11_01");	//Смотри...
 	if(MORDRAG_TRADED == 0)
 	{
-		Log_CreateTopic(GE_TRADEROC,LOG_NOTE);
-		b_logentry(GE_TRADEROC,"Вор Мордраг продает на рыночной площади ворованный товар.");
+		if(KAPITEL > 3 || Npc_KnowsInfo(hero,org_801_lares_gotokalom))
+		{
+			Log_CreateTopic(GE_TRADERNC,LOG_NOTE);
+			b_logentry(GE_TRADERNC,"Вор Мордраг продает ворованный товар в баре на озере.");
+		}
+		else
+		{
+			Log_CreateTopic(GE_TRADEROC,LOG_NOTE);
+			b_logentry(GE_TRADEROC,"Вор Мордраг продает на рыночной площади ворованный товар.");
+		};
 		MORDRAG_TRADED = 1;
 	};
 };
@@ -89,7 +95,7 @@ instance ORG_826_MORDRAG_COURIER(C_INFO)
 	nr = 3;
 	condition = org_826_mordrag_courier_condition;
 	information = org_826_mordrag_courier_info;
-	permanent = 1;
+	permanent = 0;
 	description = "Ты действительно один из гонцов магов?";
 };
 
@@ -106,10 +112,47 @@ func void org_826_mordrag_courier_info()
 {
 	AI_Output(other,self,"Org_826_Mordrag_Courier_15_00");	//Ты действительно один из гонцов магов?
 	AI_Output(self,other,"Org_826_Mordrag_Courier_11_01");	//А что если так?
-	AI_Output(other,self,"Org_826_Mordrag_Courier_15_02");	//Я бы хотел поговорить с магами. Мне нужно попасть в замок.
-	AI_Output(self,other,"Org_826_Mordrag_Courier_11_03");	//Посланники магов носят печать, которая служит пропуском. Ты сможешь получить ее, если станешь одним из нас.
+	//AI_Output(other,self,"Org_826_Mordrag_Courier_15_02");	//Я бы хотел поговорить с магами. Мне нужно попасть в замок.
+	Info_ClearChoices(org_826_mordrag_courier);
+	if(Npc_HasItems(hero,itwr_fire_letter_01) || Npc_HasItems(hero,itwr_fire_letter_02))
+	{
+		Info_AddChoice(org_826_mordrag_courier,"Мне нужно попасть в замок. У меня есть письмо...",org_826_mordrag_courier_letter);
+	};
+	Info_AddChoice(org_826_mordrag_courier,"Да я просто так спросил.",org_826_mordrag_courier_notletter);
+	
 };
 
+func void org_826_mordrag_courier_letter()
+{
+	AI_Output(other,self,"Info_Thorus_LetterForMages_15_00");	//Мне нужно попасть в замок. У меня есть письмо для Верховного Мага Круга Огня.
+	AI_Output(self,hero,"Info_Diego_OCWARN_11_01");	//Эй... Тихо!
+	AI_PlayAni(self,"T_SEARCH");
+	AI_Output(self,other,"Org_826_Mordrag_Courier_11_03");	//Посланники магов носят печать, которая служит пропуском. Ты сможешь получить ее, если станешь одним из нас.
+	if(LETTER_TOLD == 0)
+	{
+		LETTER_TOLD = 1;
+	}
+	else if(LETTER_TOLD == 1)
+	{
+		LETTER_TOLD = 2;
+		if(!Npc_IsDead(vlk_505_buddler))
+		{
+			b_exchangeroutine(vlk_505_buddler,"letterwait");
+		};
+		if(!Npc_IsDead(vlk_506_buddler))
+		{
+			b_exchangeroutine(vlk_506_buddler,"letterwait");
+		};
+	};
+	Info_ClearChoices(org_826_mordrag_courier);
+};
+
+func void org_826_mordrag_courier_notletter()
+{
+	AI_Output(other,self,"DIA_Jarvis_WoHaufen_15_03");	//Да я просто так спросил.
+	AI_Output(self,other,"Org_826_Mordrag_Courier_11_03");	//Посланники магов носят печать, которая служит пропуском. Ты сможешь получить ее, если станешь одним из нас.
+	Info_ClearChoices(org_826_mordrag_courier);
+};
 
 instance ORG_826_MORDRAG_PROBLEM(C_INFO)
 {
@@ -138,7 +181,10 @@ func void org_826_mordrag_problem_info()
 	AI_Output(self,other,"Org_826_Mordrag_Problem_11_03");	//Да ты что? Тогда они должны будут подослать ко мне кого-нибудь, иначе ничего не выйдет!
 	AI_Output(other,self,"Org_826_Mordrag_Problem_15_04");	//А почему ты уверен, что они никого не присылали? Например, они могли послать меня...
 	AI_Output(self,other,"Org_826_Mordrag_Problem_11_05");	//Потому что мне кажется, что ты не похож на убийцу. Ты скоро узнаешь, что в колонии есть более интересные дела, чем работа на Гомеза.
-	AI_Output(self,other,"Org_826_Mordrag_Problem_11_06");	//У нас в Новом лагере тоже нужны способные люди. А еще там нет никого, кто будет указывать тебе, что можно, а что нельзя.
+	if((Npc_GetTrueGuild(hero) == GIL_NONE) && (KAPITEL < 2))
+	{
+		AI_Output(self,other,"Org_826_Mordrag_Problem_11_06");	//У нас в Новом лагере тоже нужны способные люди. А еще там нет никого, кто будет указывать тебе, что можно, а что нельзя.
+	};
 };
 
 
@@ -155,7 +201,7 @@ instance ORG_826_MORDRAG_NCINFO(C_INFO)
 
 func int org_826_mordrag_ncinfo_condition()
 {
-	if(Npc_KnowsInfo(hero,org_826_mordrag_problem) || Npc_KnowsInfo(hero,org_826_mordrag_courier))
+	if(Npc_KnowsInfo(hero,org_826_mordrag_problem) || (Npc_KnowsInfo(hero,org_826_mordrag_courier) && !c_npcbelongstonewcamp(hero) && (KAPITEL < 4) && (MORDRAGKO_HAUAB != TRUE)))
 	{
 		return 1;
 	};
@@ -185,7 +231,7 @@ instance ORG_826_MORDRAG_JOINNEWCAMP(C_INFO)
 
 func int org_826_mordrag_joinnewcamp_condition()
 {
-	if(Npc_KnowsInfo(hero,org_826_mordrag_problem) || Npc_KnowsInfo(hero,org_826_mordrag_courier))
+	if((Npc_KnowsInfo(hero,org_826_mordrag_problem) || Npc_KnowsInfo(hero,org_826_mordrag_courier)) && (Npc_GetTrueGuild(hero) == GIL_NONE) && (KAPITEL < 2) && (MORDRAGKO_HAUAB != TRUE))
 	{
 		return 1;
 	};
@@ -212,7 +258,7 @@ instance ORG_826_MORDRAG_GOTONEWCAMP(C_INFO)
 
 func int org_826_mordrag_gotonewcamp_condition()
 {
-	if(Npc_KnowsInfo(hero,org_826_mordrag_joinnewcamp))
+	if(Npc_KnowsInfo(hero,org_826_mordrag_joinnewcamp) && (Npc_GetTrueGuild(hero) == GIL_NONE) && (KAPITEL < 2) && (MORDRAGKO_HAUAB != TRUE))
 	{
 		return 1;
 	};
@@ -225,12 +271,13 @@ func void org_826_mordrag_gotonewcamp_info()
 	MORDRAG_GOTONC_DAY = Wld_GetDay();
 	AI_StopProcessInfos(self);
 	npc_setpermattitude(self,ATT_FRIENDLY);
-	if(Npc_GetTrueGuild(hero) == GIL_NONE)
+	self.flags = NPC_FLAG_IMMORTAL;
+	if((Npc_GetTrueGuild(hero) == GIL_NONE) && (KAPITEL < 2))
 	{
 		Log_CreateTopic(CH1_JOINNC,LOG_MISSION);
 		Log_SetTopicStatus(CH1_JOINNC,LOG_RUNNING);
+		b_logentry(CH1_JOINNC,"Мордраг согласился показать мне дорогу в Новый лагерь. Надеюсь, он не подстроит мне ловушку!");
 	};
-	b_logentry(CH1_JOINNC,"Мордраг согласился показать мне дорогу в Новый лагерь. Надеюсь, он не подстроит мне ловушку!");
 	self.aivar[AIV_PARTYMEMBER] = TRUE;
 	Npc_ExchangeRoutine(self,"GUIDE");
 };
@@ -359,7 +406,7 @@ func int org_826_mordrag_hauab_condition()
 {
 	var C_NPC mordrag;
 	mordrag = Hlp_GetNpc(org_826_mordrag);
-	if(mordrag.aivar[AIV_WASDEFEATEDBYSC] >= 1)
+	if((mordrag.aivar[AIV_WASDEFEATEDBYSC] >= 1) && (THORUS_MORDRAGKO == LOG_RUNNING))
 	{
 		return 1;
 	};
@@ -398,7 +445,7 @@ func void org_826_mordrag_gotokalom_info()
 {
 	AI_Output(other,self,"Org_826_Mordrag_GotoKalom_15_00");	//Ларс передал тебе послание.
 	AI_Output(self,other,"Org_826_Mordrag_GotoKalom_11_01");	//Ну-ка, послушаем.
-	AI_Output(other,self,"Org_826_Mordrag_GotoKalom_15_02");	//Он хочет знать, что делается в Лагере сектантов. 
+	AI_Output(other,self,"Org_826_Mordrag_GotoKalom_15_02");	//Он хочет знать, что делается в Лагере сектантов.
 	AI_Output(self,other,"Org_826_Mordrag_GotoKalom_11_03");	//У меня такое чувство, что все это решится само собой...
 	b_logentry(CH1_JOINNC,"Я передал Мордрагу то, что сказал мне Ларс. Он что-то говорил о том, что дело будет улажено само. Не знаю, что он имел в виду!");
 };

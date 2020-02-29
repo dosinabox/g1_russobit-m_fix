@@ -1,5 +1,7 @@
 
-const int ARMOR_VALUE_MULTIPLIER = 30;
+//const int ARMOR_VALUE_MULTIPLIER = 30;
+const int ARMOR_VALUE_MULTIPLIER = 6;
+const int ARMOR_VALUE_DECREASE = 5;
 const int VALUE_TPL_ARMOR_L = 1350;
 const int VALUE_TPL_ARMOR_M = 1650;
 const int VALUE_TPL_ARMOR_H = 2100;
@@ -7,23 +9,122 @@ const int VALUE_STT_ARMOR_M = 750;
 const int VALUE_STT_ARMOR_H = 1200;
 const int VALUE_GRD_ARMOR_L = 1350;
 const int VALUE_GRD_ARMOR_M = 1650;
-const int VALUE_GRD_ARMOR_H = 2100;
+const int VALUE_GRD_ARMOR_H = 3000;
 const int VALUE_KDF_ARMOR_L = 1200;
 const int VALUE_KDF_ARMOR_H = 1500;
 const int VALUE_KDW_ARMOR_L = 1950;
-const int VALUE_KDW_ARMOR_H = 2100;
+const int VALUE_KDW_ARMOR_H = 2600;
 const int VALUE_ORG_ARMOR_L = 750;
 const int VALUE_ORG_ARMOR_M = 1050;
 const int VALUE_ORG_ARMOR_H = 1200;
 const int VALUE_SLD_ARMOR_L = 1350;
 const int VALUE_SLD_ARMOR_M = 1650;
-const int VALUE_SLD_ARMOR_H = 2100;
+const int VALUE_SLD_ARMOR_H = 2600;
 const int VALUE_NOV_ARMOR_L = 500;
 const int VALUE_NOV_ARMOR_M = 750;
 const int VALUE_NOV_ARMOR_H = 1200;
 const int VALUE_VLK_ARMOR_L = 250;
 const int VALUE_VLK_ARMOR_M = 500;
 const int VALUE_SFB_ARMOR_L = 250;
+
+func void initplayerbody(var int equipment)
+{
+	var C_ITEM armor;
+	if(equipment == 0)
+	{
+		Mdl_SetVisualBody(self,"hum_body_Naked0",4,1,"Hum_Head_Pony",9,0,-1);
+	}
+	else if(equipment == 1)
+	{
+		Mdl_SetVisualBody(self,"hum_body_Naked0",0,1,"Hum_Head_Pony",9,0,-1);
+	}
+	else if(equipment == 3)
+	{
+		if(RUSSOBITMFIXV11 == FALSE && Npc_KnowsInfo(hero,info_diego_gamestart)) 
+		{
+			PrintScreen("Загруженное сохранение не поддерживается!",-1,43,"font_old_10_white.tga",5);
+			PrintScreen("Пожалуйста, начните новую игру.",-1,40,"font_old_10_white.tga",5);
+			//Mdl_SetVisualBody(hero,"hum_body_Naked0",0,0,"Hum_Head_FatBald",100,0,-1);
+			hero.attribute[ATR_HITPOINTS] = hero.attribute[ATR_HITPOINTS] - hero.attribute[ATR_HITPOINTS] + 10;
+		}
+		else if(Npc_HasEquippedArmor(hero))
+		{
+			armor = Npc_GetEquippedArmor(hero);
+			if((Hlp_GetInstanceID(armor) == Hlp_GetInstanceID(nov_armor_l)) || (Hlp_GetInstanceID(armor) == Hlp_GetInstanceID(nov_armor_m)) || (Hlp_GetInstanceID(armor) == Hlp_GetInstanceID(nov_armor_h)))
+			{
+				Mdl_SetVisualBody(hero,"hum_body_Naked0",0,1,"Hum_Head_Pony",9,0,-1);
+			}
+			else if((Hlp_GetInstanceID(armor) == Hlp_GetInstanceID(tpl_armor_l)) || (Hlp_GetInstanceID(armor) == Hlp_GetInstanceID(tpl_armor_m)) || (Hlp_GetInstanceID(armor) == Hlp_GetInstanceID(tpl_armor_h)))
+			{
+				Mdl_SetVisualBody(hero,"hum_body_Naked0",0,1,"Hum_Head_Pony",9,0,-1);
+			}
+			else if((Hlp_GetInstanceID(armor) == Hlp_GetInstanceID(stt_armor_m)) || (Hlp_GetInstanceID(armor) == Hlp_GetInstanceID(stt_armor_h)) || (Hlp_GetInstanceID(armor) == Hlp_GetInstanceID(grd_armor_l)))
+			{
+				Mdl_SetVisualBody(hero,"hum_body_Naked0",0,1,"Hum_Head_Pony",9,0,-1);
+			}
+			else if(Hlp_GetInstanceID(armor) == Hlp_GetInstanceID(sld_armor_l))
+			{
+				Mdl_SetVisualBody(hero,"hum_body_Naked0",0,5,"Hum_Head_Pony",11,0,-1);
+			};
+		};
+	};
+};
+
+func void equip_psi_armor()
+{
+	if(self.id == 0)
+	{
+		AI_PlayAni(self,"T_PLUNDER");
+		Snd_Play("BACKPACK_HANDLE");
+		initplayerbody(1);
+	};
+};
+
+func void equip_psi_armor2()
+{
+	if(self.id == 0)
+	{
+		AI_PlayAni(self,"T_PLUNDER");
+		Snd_Play("BACKPACK_APPLY");
+		initplayerbody(1);
+	};
+};
+
+func void equip_sld_armor()
+{
+	if(self.id == 0)
+	{
+		AI_PlayAni(self,"T_PLUNDER");
+		Snd_Play("BACKPACK_HANDLE");
+		Mdl_SetVisualBody(self,"hum_body_Naked0",0,5,"Hum_Head_Pony",11,0,-1);
+	};
+};
+
+func void unequip_psi_armor()
+{
+	if(self.id == 0)
+	{
+		initplayerbody(0);
+	};
+};
+
+func void equip_simple_armor()
+{
+	if(self.id == 0)
+	{
+		AI_PlayAni(self,"T_PLUNDER");
+		Snd_Play("BACKPACK_HANDLE");
+	};
+};
+
+func void equip_metal_armor()
+{
+	if(self.id == 0)
+	{
+		AI_PlayAni(self,"T_PLUNDER");
+		Snd_Play("BACKPACK_APPLY");
+	};
+};
 
 instance VLK_ARMOR_L(C_ITEM)
 {
@@ -35,11 +136,12 @@ instance VLK_ARMOR_L(C_ITEM)
 	protection[PROT_POINT] = 0;
 	protection[PROT_FIRE] = 5;
 	protection[PROT_MAGIC] = 0;
-	value = value_vlk_armor_l;
+	value = value_vlk_armor_l / armor_value_decrease;
 	wear = WEAR_TORSO;
 	visual = "vlkl.3ds";
 	visual_change = "Hum_VLKL_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_simple_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -64,11 +166,12 @@ instance VLK_ARMOR_M(C_ITEM)
 	protection[PROT_POINT] = 0;
 	protection[PROT_FIRE] = 5;
 	protection[PROT_MAGIC] = 0;
-	value = value_vlk_armor_m;
+	value = value_vlk_armor_m / armor_value_decrease;
 	wear = WEAR_TORSO;
 	visual = "vlkm.3ds";
 	visual_change = "Hum_VLKM_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_simple_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -93,11 +196,13 @@ instance STT_ARMOR_M(C_ITEM)
 	protection[PROT_POINT] = 5;
 	protection[PROT_FIRE] = 15;
 	protection[PROT_MAGIC] = 0;
-	value = value_stt_armor_m;
+	value = value_stt_armor_m / armor_value_decrease;
 	wear = WEAR_TORSO;
 	visual = "sttm.3ds";
 	visual_change = "Hum_STTM_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_psi_armor;
+	on_unequip = unequip_psi_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -122,11 +227,13 @@ instance STT_ARMOR_H(C_ITEM)
 	protection[PROT_POINT] = 5;
 	protection[PROT_FIRE] = 20;
 	protection[PROT_MAGIC] = 0;
-	value = value_stt_armor_h;
+	value = value_stt_armor_h / armor_value_decrease;
 	wear = WEAR_TORSO;
 	visual = "stth.3ds";
 	visual_change = "Hum_STTS_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_psi_armor;
+	on_unequip = unequip_psi_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -151,11 +258,13 @@ instance GRD_ARMOR_L(C_ITEM)
 	protection[PROT_POINT] = 5;
 	protection[PROT_FIRE] = 20;
 	protection[PROT_MAGIC] = 0;
-	value = value_grd_armor_l;
+	value = value_grd_armor_l / armor_value_decrease;
 	wear = WEAR_TORSO;
 	visual = "grdl.3ds";
 	visual_change = "Hum_GRDL_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_psi_armor;
+	on_unequip = unequip_psi_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -180,11 +289,12 @@ instance GRD_ARMOR_M(C_ITEM)
 	protection[PROT_POINT] = 10;
 	protection[PROT_FIRE] = 25;
 	protection[PROT_MAGIC] = 0;
-	value = value_grd_armor_m;
+	value = value_grd_armor_m / armor_value_decrease;
 	wear = WEAR_TORSO;
 	visual = "grdm.3ds";
 	visual_change = "Hum_GRDM_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_simple_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -209,11 +319,12 @@ instance GRD_ARMOR_H(C_ITEM)
 	protection[PROT_POINT] = 10;
 	protection[PROT_FIRE] = 35;
 	protection[PROT_MAGIC] = 0;
-	value = value_grd_armor_h;
+	value = value_grd_armor_h / armor_value_decrease;
 	wear = WEAR_TORSO;
 	visual = "grdh.3ds";
 	visual_change = "Hum_GRDS_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_metal_armor;
 	material = MAT_METAL;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -244,6 +355,7 @@ instance EBR_ARMOR_M(C_ITEM)
 	visual = "ebrm.3ds";
 	visual_change = "Hum_EBRM_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_simple_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -275,6 +387,7 @@ instance EBR_ARMOR_H(C_ITEM)
 	visual = "ebrh.3ds";
 	visual_change = "Hum_EBRS_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_metal_armor;
 	material = MAT_METAL;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -294,17 +407,17 @@ instance EBR_ARMOR_H2(C_ITEM)
 	name = "Тяжелый доспех Барона";
 	mainflag = ITEM_KAT_ARMOR;
 	flags = 0;
-	protection[PROT_EDGE] = 80;
-	protection[PROT_BLUNT] = 80;
-	protection[PROT_POINT] = 8;
-	protection[PROT_FIRE] = 40;
-	protection[PROT_MAGIC] = 3;
+	protection[PROT_EDGE] = 62;
+	protection[PROT_BLUNT] = 62;
+	protection[PROT_POINT] = 6;
+	protection[PROT_FIRE] = 15;
+	protection[PROT_MAGIC] = 0;
 	value = protection[PROT_EDGE] * ARMOR_VALUE_MULTIPLIER;
 	wear = WEAR_TORSO;
-	ownerguild = GIL_EBR;
 	visual = "ebrh2.3ds";
 	visual_change = "Hum_EBRS_ARMOR2.asc";
 	visual_skin = 0;
+	on_equip = equip_metal_armor;
 	material = MAT_METAL;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -329,11 +442,12 @@ instance SFB_ARMOR_L(C_ITEM)
 	protection[PROT_POINT] = 0;
 	protection[PROT_FIRE] = 5;
 	protection[PROT_MAGIC] = 0;
-	value = value_sfb_armor_l;
+	value = value_sfb_armor_l / armor_value_decrease;
 	wear = WEAR_TORSO;
 	visual = "sfbl.3ds";
 	visual_change = "Hum_SFBL_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_simple_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -358,11 +472,12 @@ instance ORG_ARMOR_L(C_ITEM)
 	protection[PROT_POINT] = 5;
 	protection[PROT_FIRE] = 15;
 	protection[PROT_MAGIC] = 0;
-	value = value_org_armor_l;
+	value = value_org_armor_l / armor_value_decrease;
 	wear = WEAR_TORSO;
-	visual = "orgl.3ds";
+	visual = "orgl2.3ds";
 	visual_change = "Hum_ORGL_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_simple_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -387,11 +502,12 @@ instance ORG_ARMOR_M(C_ITEM)
 	protection[PROT_POINT] = 5;
 	protection[PROT_FIRE] = 15;
 	protection[PROT_MAGIC] = 0;
-	value = value_org_armor_m;
+	value = value_org_armor_m / armor_value_decrease;
 	wear = WEAR_TORSO;
 	visual = "orgm.3ds";
 	visual_change = "Hum_ORGM_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_simple_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -416,11 +532,12 @@ instance ORG_ARMOR_H(C_ITEM)
 	protection[PROT_POINT] = 5;
 	protection[PROT_FIRE] = 20;
 	protection[PROT_MAGIC] = 0;
-	value = value_org_armor_h;
+	value = value_org_armor_h / armor_value_decrease;
 	wear = WEAR_TORSO;
 	visual = "orgh.3ds";
 	visual_change = "Hum_ORGS_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_metal_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -445,11 +562,13 @@ instance SLD_ARMOR_L(C_ITEM)
 	protection[PROT_POINT] = 5;
 	protection[PROT_FIRE] = 20;
 	protection[PROT_MAGIC] = 0;
-	value = value_sld_armor_l;
+	value = value_sld_armor_l / armor_value_decrease;
 	wear = WEAR_TORSO;
 	visual = "sldl.3ds";
 	visual_change = "Hum_SLDL_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_sld_armor;
+	on_unequip = unequip_psi_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -474,11 +593,12 @@ instance SLD_ARMOR_M(C_ITEM)
 	protection[PROT_POINT] = 10;
 	protection[PROT_FIRE] = 25;
 	protection[PROT_MAGIC] = 0;
-	value = value_sld_armor_m;
+	value = value_sld_armor_m / armor_value_decrease;
 	wear = WEAR_TORSO;
 	visual = "sldm.3ds";
 	visual_change = "Hum_SLDM_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_simple_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -503,11 +623,12 @@ instance SLD_ARMOR_H(C_ITEM)
 	protection[PROT_POINT] = 10;
 	protection[PROT_FIRE] = 35;
 	protection[PROT_MAGIC] = 0;
-	value = value_sld_armor_h;
+	value = value_sld_armor_h / armor_value_decrease;
 	wear = WEAR_TORSO;
 	visual = "sldh.3ds";
 	visual_change = "Hum_SLDS_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_metal_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -524,7 +645,7 @@ instance SLD_ARMOR_H(C_ITEM)
 
 instance NOV_ARMOR_L(C_ITEM)
 {
-	name = "Одежда Послушника";
+	name = "Одежда послушника";
 	mainflag = ITEM_KAT_ARMOR;
 	flags = 0;
 	protection[PROT_EDGE] = 15;
@@ -532,11 +653,13 @@ instance NOV_ARMOR_L(C_ITEM)
 	protection[PROT_POINT] = 0;
 	protection[PROT_FIRE] = 10;
 	protection[PROT_MAGIC] = 0;
-	value = value_nov_armor_l;
+	value = value_nov_armor_l / armor_value_decrease;
 	wear = WEAR_TORSO;
 	visual = "novl.3ds";
 	visual_change = "Hum_NOVL_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_psi_armor;
+	on_unequip = unequip_psi_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -553,7 +676,7 @@ instance NOV_ARMOR_L(C_ITEM)
 
 instance NOV_ARMOR_M(C_ITEM)
 {
-	name = "Легкий доспех Послушника";
+	name = "Легкий доспех послушника";
 	mainflag = ITEM_KAT_ARMOR;
 	flags = 0;
 	protection[PROT_EDGE] = 30;
@@ -562,10 +685,12 @@ instance NOV_ARMOR_M(C_ITEM)
 	protection[PROT_FIRE] = 15;
 	protection[PROT_MAGIC] = 0;
 	wear = WEAR_TORSO;
-	value = value_nov_armor_m;
-	visual = "novm.3ds";
+	value = value_nov_armor_m / armor_value_decrease;
+	visual = "novm2.3ds";
 	visual_change = "Hum_NOVM_ARMOR.asc";
-	visual_skin = 0;
+	visual_skin = 1;
+	on_equip = equip_psi_armor;
+	on_unequip = unequip_psi_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -590,11 +715,13 @@ instance NOV_ARMOR_H(C_ITEM)
 	protection[PROT_POINT] = 5;
 	protection[PROT_FIRE] = 20;
 	protection[PROT_MAGIC] = 0;
-	value = value_nov_armor_h;
+	value = value_nov_armor_h / armor_value_decrease;
 	wear = WEAR_TORSO;
-	visual = "novh.3ds";
+	visual = "novh2.3ds";
 	visual_change = "Hum_NOVS_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_psi_armor;
+	on_unequip = unequip_psi_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -619,11 +746,13 @@ instance TPL_ARMOR_L(C_ITEM)
 	protection[PROT_POINT] = 5;
 	protection[PROT_FIRE] = 20;
 	protection[PROT_MAGIC] = 0;
-	value = value_tpl_armor_l;
+	value = value_tpl_armor_l / armor_value_decrease;
 	wear = WEAR_TORSO;
 	visual = "tpll.3ds";
 	visual_change = "Hum_TPLL_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_psi_armor;
+	on_unequip = unequip_psi_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -648,11 +777,13 @@ instance TPL_ARMOR_M(C_ITEM)
 	protection[PROT_POINT] = 10;
 	protection[PROT_FIRE] = 25;
 	protection[PROT_MAGIC] = 0;
-	value = value_tpl_armor_m;
+	value = value_tpl_armor_m / armor_value_decrease;
 	wear = WEAR_TORSO;
 	visual = "tplm.3ds";
 	visual_change = "Hum_TPLM_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_psi_armor;
+	on_unequip = unequip_psi_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -677,11 +808,13 @@ instance TPL_ARMOR_H(C_ITEM)
 	protection[PROT_POINT] = 10;
 	protection[PROT_FIRE] = 35;
 	protection[PROT_MAGIC] = 0;
-	value = value_tpl_armor_h;
+	value = value_tpl_armor_h / armor_value_decrease;
 	wear = WEAR_TORSO;
 	visual = "tplh.3ds";
 	visual_change = "Hum_TPLS_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_psi_armor2;
+	on_unequip = unequip_psi_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -712,6 +845,7 @@ instance GUR_ARMOR_M(C_ITEM)
 	visual = "gurm.3ds";
 	visual_change = "Hum_GURM_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_simple_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -742,6 +876,7 @@ instance GUR_ARMOR_H(C_ITEM)
 	visual = "gurh.3ds";
 	visual_change = "Hum_GURS_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_simple_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -767,10 +902,11 @@ instance KDF_ARMOR_L(C_ITEM)
 	protection[PROT_FIRE] = 25;
 	protection[PROT_MAGIC] = 5;
 	wear = WEAR_TORSO;
-	value = value_kdf_armor_l;
+	value = value_kdf_armor_l / armor_value_decrease;
 	visual = "kdfl.3ds";
 	visual_change = "Hum_KDFL_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_simple_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -787,7 +923,7 @@ instance KDF_ARMOR_L(C_ITEM)
 
 instance KDF_ARMOR_H(C_ITEM)
 {
-	name = "Великая мантия Огня";
+	name = "Великая мантия мага Огня";
 	mainflag = ITEM_KAT_ARMOR;
 	flags = 0;
 	protection[PROT_EDGE] = 50;
@@ -796,10 +932,11 @@ instance KDF_ARMOR_H(C_ITEM)
 	protection[PROT_FIRE] = 30;
 	protection[PROT_MAGIC] = 10;
 	wear = WEAR_TORSO;
-	value = value_kdf_armor_h;
+	value = value_kdf_armor_h / armor_value_decrease;
 	visual = "kdfh.3ds";
 	visual_change = "Hum_KDFS_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_simple_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -824,11 +961,12 @@ instance KDW_ARMOR_L(C_ITEM)
 	protection[PROT_POINT] = 5;
 	protection[PROT_FIRE] = 40;
 	protection[PROT_MAGIC] = 15;
-	value = value_kdw_armor_l;
+	value = value_kdw_armor_l / armor_value_decrease;
 	wear = WEAR_TORSO;
 	visual = "kdwl.3ds";
 	visual_change = "Hum_KDWL_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_simple_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -854,10 +992,11 @@ instance KDW_ARMOR_H(C_ITEM)
 	protection[PROT_FIRE] = 45;
 	protection[PROT_MAGIC] = 20;
 	wear = WEAR_TORSO;
-	value = value_kdw_armor_h;
+	value = value_kdw_armor_h / armor_value_decrease;
 	visual = "kdwh.3ds";
 	visual_change = "Hum_KDWS_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_simple_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -888,6 +1027,7 @@ instance DMB_ARMOR_M(C_ITEM)
 	visual = "dmbm.3ds";
 	visual_change = "Hum_DMBM_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_simple_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -917,6 +1057,7 @@ instance CRW_ARMOR_H(C_ITEM)
 	visual = "crws.3ds";
 	visual_change = "Hum_CRAWLER_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_metal_armor;
 	material = MAT_WOOD;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -946,6 +1087,7 @@ instance ORE_ARMOR_M(C_ITEM)
 	visual = "magie.3ds";
 	visual_change = "Hum_MAGIE_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_metal_armor;
 	material = MAT_WOOD;
 	description = name;
 	text[0] = "Полностью выкован из магической руды.";
@@ -976,6 +1118,7 @@ instance ORE_ARMOR_H(C_ITEM)
 	visual = "magie.3ds";
 	visual_change = "Hum_MAGIE_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_metal_armor;
 	material = MAT_WOOD;
 	description = name;
 	text[0] = "Кузнец Стоун смог улучшить этот древний доспех!";
@@ -1004,9 +1147,10 @@ instance LAW_ARMOR(C_ITEM)
 	value = protection[PROT_EDGE] * ARMOR_VALUE_MULTIPLIER;
 	wear = WEAR_TORSO;
 	ownerguild = GIL_DMB;
-	visual = "dmbm.3ds";
+	visual = "lawm.3ds";
 	visual_change = "Hum_LAW_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_simple_armor;
 	material = MAT_LEATHER;
 	description = name;
 	text[1] = NAME_PROT_EDGE;
@@ -1023,22 +1167,23 @@ instance LAW_ARMOR(C_ITEM)
 
 instance GRD_ARMOR_I(C_ITEM)
 {
-	name = "Доспех королевского стражника";
+	name = "Доспех гвардейца";
 	mainflag = ITEM_KAT_ARMOR;
 	flags = 0;
-	protection[PROT_EDGE] = 50;
-	protection[PROT_BLUNT] = 50;
-	protection[PROT_POINT] = 5;
-	protection[PROT_FIRE] = 25;
-	protection[PROT_MAGIC] = 1;
-	value = protection[PROT_EDGE] * ARMOR_VALUE_MULTIPLIER;
+	protection[PROT_EDGE] = 15;
+	protection[PROT_BLUNT] = 15;
+	protection[PROT_POINT] = 1;
+	protection[PROT_FIRE] = 3;
+	protection[PROT_MAGIC] = 0;
+	value = 100;
 	wear = WEAR_TORSO;
-	ownerguild = GIL_GRD;
 	visual = "grdi.3ds";
 	visual_change = "Hum_GRDI_ARMOR.asc";
 	visual_skin = 0;
+	on_equip = equip_simple_armor;
 	material = MAT_LEATHER;
 	description = name;
+	text[0] = "Очень старый и изношенный.";
 	text[1] = NAME_PROT_EDGE;
 	count[1] = protection[PROT_EDGE];
 	text[2] = NAME_PROT_POINT;
@@ -1071,7 +1216,7 @@ instance BAB_ARMOR_NUDE(C_ITEM)
 
 instance BAB_ARMOR_BIKINI(C_ITEM)
 {
-	name = "Девица";
+	name = "Девица в бикини";
 	mainflag = ITEM_KAT_ARMOR;
 	flags = 0;
 	value = 1;
@@ -1085,5 +1230,118 @@ instance BAB_ARMOR_BIKINI(C_ITEM)
 	visual_change = "Bab_ARMOR.asc";
 	visual_skin = 1;
 	material = MAT_LEATHER;
+};
+
+instance ZOM_ARMOR(C_ITEM)
+{
+	name = "Доспех зомби";
+	mainflag = ITEM_KAT_ARMOR;
+	flags = 0;
+	protection[PROT_EDGE] = 0;
+	protection[PROT_BLUNT] = 0;
+	protection[PROT_POINT] = 0;
+	protection[PROT_FIRE] = 0;
+	protection[PROT_MAGIC] = 0;
+	value = 20;
+	wear = WEAR_TORSO;
+	visual = "ebrh.3ds";
+	visual_change = "Hum_EBRS_ARMOR.asc";
+	visual_skin = 2;
+	material = MAT_LEATHER;
+	description = name;
+	text[1] = "Очень старый и изношенный доспех.";
+	text[2] = "Когда-то его носил один из Баронов.";
+	text[5] = NAME_VALUE;
+	count[5] = value;
+};
+
+instance ORG2N(C_ITEM)
+{
+	name = "Легкий доспех грабителя";
+	mainflag = ITEM_KAT_ARMOR;
+	flags = 0;
+	protection[PROT_EDGE] = 18;
+	protection[PROT_BLUNT] = 18;
+	protection[PROT_POINT] = 3;
+	protection[PROT_FIRE] = 10;
+	protection[PROT_MAGIC] = 0;
+	value = 100;
+	wear = WEAR_TORSO;
+	visual = "org2l.3ds";
+	visual_change = "Hum_ORGL_ARMOR.asc";
+	visual_skin = 1;
+	on_equip = equip_simple_armor;
+	material = MAT_LEATHER;
+	description = name;
+	text[1] = NAME_PROT_EDGE;
+	count[1] = protection[PROT_EDGE];
+	text[2] = NAME_PROT_POINT;
+	count[2] = protection[PROT_POINT];
+	text[3] = NAME_PROT_FIRE;
+	count[3] = protection[PROT_FIRE];
+	text[4] = NAME_PROT_MAGIC;
+	count[4] = protection[PROT_MAGIC];
+	text[5] = NAME_VALUE;
+	count[5] = value;
+};
+
+instance ORG2L(C_ITEM)
+{
+	name = "Доспех грабителя";
+	mainflag = ITEM_KAT_ARMOR;
+	flags = 0;
+	protection[PROT_EDGE] = 32;
+	protection[PROT_BLUNT] = 32;
+	protection[PROT_POINT] = 5;
+	protection[PROT_FIRE] = 15;
+	protection[PROT_MAGIC] = 0;
+	value = 150;
+	wear = WEAR_TORSO;
+	visual = "org2l.3ds";
+	visual_change = "Hum_ORGL_ARMOR.asc";
+	visual_skin = 1;
+	on_equip = equip_simple_armor;
+	material = MAT_LEATHER;
+	description = name;
+	text[1] = NAME_PROT_EDGE;
+	count[1] = protection[PROT_EDGE];
+	text[2] = NAME_PROT_POINT;
+	count[2] = protection[PROT_POINT];
+	text[3] = NAME_PROT_FIRE;
+	count[3] = protection[PROT_FIRE];
+	text[4] = NAME_PROT_MAGIC;
+	count[4] = protection[PROT_MAGIC];
+	text[5] = NAME_VALUE;
+	count[5] = value;
+};
+
+instance ORG2M(C_ITEM)
+{
+	name = "Доспех Квентина";
+	mainflag = ITEM_KAT_ARMOR;
+	flags = 0;
+	protection[PROT_EDGE] = 40;
+	protection[PROT_BLUNT] = 40;
+	protection[PROT_POINT] = 5;
+	protection[PROT_FIRE] = 20;
+	protection[PROT_MAGIC] = 0;
+	value = value_org_armor_m;
+	wear = WEAR_TORSO;
+	visual = "orgm.3ds";
+	visual_change = "Hum_ORGM_ARMOR.asc";
+	visual_skin = 1;
+	on_equip = equip_simple_armor;
+	material = MAT_LEATHER;
+	description = name;
+	text[1] = NAME_PROT_EDGE;
+	count[1] = protection[PROT_EDGE];
+	text[2] = NAME_PROT_POINT;
+	count[2] = protection[PROT_POINT];
+	text[3] = NAME_PROT_FIRE;
+	count[3] = protection[PROT_FIRE];
+	text[4] = NAME_PROT_MAGIC;
+	count[4] = protection[PROT_MAGIC];
+	text[5] = NAME_VALUE;
+	count[5] = value;
 };
 

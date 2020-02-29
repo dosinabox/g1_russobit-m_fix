@@ -1,11 +1,11 @@
 
 instance TPL_1425_TEMPLER(NPC_DEFAULT)
 {
-	name[0] = NAME_TEMPLER;
+	name[0] = "Гор Боба";
 	npctype = NPCTYPE_GUARD;
 	guild = GIL_TPL;
 	level = 17;
-	voice = 13;
+	voice = 8;
 	id = 1425;
 	attribute[ATR_STRENGTH] = 85;
 	attribute[ATR_DEXTERITY] = 65;
@@ -53,5 +53,17 @@ func void rtn_start_1425()
 	ta_guard(3,0,4,0,"PSI_PATH_TEMPLE_8");
 	ta_smalltalk(4,0,5,0,"PSI_SWAMP_6");
 	ta_guard(5,0,6,0,"PSI_PATH_TEMPLE_8");
+};
+
+func void rtn_remove_1425()
+{
+	ta_stay(23,0,7,45,"WP_INTRO01");
+	ta_stay(7,45,23,0,"WP_INTRO01");
+};
+
+func void rtn_ritual_1425()
+{
+	ta_guard(8,0,13,0,"PSI_PATH_TEMPLE_5");
+	ta_guard(13,0,8,0,"PSI_PATH_TEMPLE_5");
 };
 

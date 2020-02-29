@@ -26,7 +26,7 @@ func void b_orc_itemeat()
 	};
 	if(Hlp_Random(10) < 5)
 	{
-		if(Npc_HasItems(self,itfocheese) == 0)
+		if(!Npc_HasItems(self,itfocheese))
 		{
 			CreateInvItem(self,itfocheese);
 		};
@@ -38,7 +38,7 @@ func void b_orc_itemeat()
 	}
 	else
 	{
-		if(Npc_HasItems(self,itfoloaf) == 0)
+		if(!Npc_HasItems(self,itfoloaf))
 		{
 			CreateInvItem(self,itfoloaf);
 		};
@@ -63,7 +63,7 @@ func void b_orc_itempotion()
 	};
 	if(Npc_GetBodyState(self) != BS_ITEMINTERACT)
 	{
-		EquipItem(self,itfobeer);
+		//EquipItem(self,itfobeer);
 		AI_UseItemToState(self,itfowine,1);
 	};
 	AI_UseItemToState(self,itfowine,-1);

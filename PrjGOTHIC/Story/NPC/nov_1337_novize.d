@@ -26,8 +26,8 @@ instance NOV_1337_NOVIZE(NPC_DEFAULT)
 
 func void rtn_start_1337()
 {
-	ta_meditate(8,0,10,0,"PSI_TEMPLE_COURT_2_MOVEMENT");
-	ta_meditate(10,0,8,0,"PSI_TEMPLE_COURT_2_MOVEMENT");
+	ta_meditate(6,27,23,52,"PSI_TEMPLE_COURT_2_MOVEMENT");
+	ta_sleep(23,52,6,27,"PSI_5_HUT_IN");
 };
 
 func void rtn_ritual_1337()

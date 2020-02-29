@@ -17,7 +17,7 @@ func void zs_assessfighter()
 	c_zsinit();
 	b_fullstop(self);
 	b_whirlaround(self,other);
-	if(self.aivar[AIV_WASDEFEATEDBYSC] || (c_npcisworker(self) && c_amiweaker(self,other)))
+	if((self.aivar[AIV_WASDEFEATEDBYSC] || (c_npcisworker(self) && c_amiweaker(self,other))) && Npc_CanSeeNpcFreeLOS(self,other))
 	{
 		printdebugnpc(PD_ZS_CHECK,"...NSC wird zurückweichen!");
 		if(Npc_GetPermAttitude(self,other) != ATT_HOSTILE)

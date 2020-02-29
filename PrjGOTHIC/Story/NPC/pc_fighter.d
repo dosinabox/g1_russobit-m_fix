@@ -28,9 +28,7 @@ instance PC_FIGHTER(NPC_DEFAULT)
 	fight_tactic = FAI_HUMAN_STRONG;
 	aivar[AIV_IMPORTANT] = TRUE;
 	EquipItem(self,gorns_rache);
-	CreateInvItems(self,itfowine,5);
-	CreateInvItems(self,itfo_potion_health_03,10);
-	CreateInvItems(self,itfo_potion_mana_01,5);
+	b_give_gornchapter1crap();
 	daily_routine = rtn_start_3;
 };
 
@@ -120,6 +118,15 @@ func void rtn_waitfm_3()
 };
 
 
+func void rtn_reunion_3()
+{
+	ta_guard(0,0,8,5,"LOCATION_02_03");
+	ta_sleep(8,5,16,5,"LOCATION_02_07");
+	ta_practicesword(16,5,20,5,"LOCATION_02_04");
+	ta_sitaround(20,5,0,0,"LOCATION_02_04");
+};
+
+
 instance PC_FIGHTERFM(NPC_DEFAULT)
 {
 	name[0] = "Горн";
@@ -161,5 +168,11 @@ func void rtn_wait_5()
 {
 	ta_stay(0,0,23,0,"FM_02");
 	ta_stay(23,0,24,0,"FM_02");
+};
+
+func void rtn_remove_5()
+{
+	ta_stay(0,0,23,0,"NOWHERE");
+	ta_stay(23,0,24,0,"NOWHERE");
 };
 

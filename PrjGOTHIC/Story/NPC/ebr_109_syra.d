@@ -5,7 +5,7 @@ instance EBR_109_SYRA(NPC_DEFAULT)
 	npctype = NPCTYPE_MAIN;
 	guild = GIL_BAB;
 	level = 1;
-	voice = 16;
+	voice = 18;
 	id = 109;
 	flags = NPC_FLAG_IMMORTAL;
 	attribute[ATR_STRENGTH] = 20;
@@ -29,5 +29,11 @@ func void rtn_start_109()
 	ta_babe_sweep(22,0,6,0,"OCC_BARONS_LEFT_ROOM_FRONT");
 	ta_babe_sweep(6,0,16,0,"OCC_BARONS_RIGHT_ROOM_TABLE");
 	ta_babe_dance(16,0,22,0,"OCC_BARONS_DANCE");
+};
+
+func void rtn_flee_109()
+{
+	ta_stay(0,0,12,0,"WP_INTRO01");
+	ta_stay(12,0,24,0,"WP_INTRO01");
 };
 

@@ -18,10 +18,10 @@ instance PC_MAGE(NPC_DEFAULT)
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_SetVisualBody(self,"hum_body_Naked0",0,1,"Hum_Head_Bald",76,1,kdf_armor_l);
 	Mdl_ApplyOverlayMds(self,"Humans_Mage.mds");
-	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,6);
+	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,3);
 	CreateInvItem(self,itarrunefireball);
 	CreateInvItems(self,itfowine,3);
-	CreateInvItems(self,itfo_potion_health_02,10);
+	CreateInvItems(self,itfo_potion_health_02,3);
 	CreateInvItems(self,itfo_potion_mana_02,10);
 	aivar[AIV_IMPORTANT] = TRUE;
 	fight_tactic = FAI_HUMAN_MAGE;
@@ -80,7 +80,26 @@ func void rtn_lsaway_2()
 
 func void rtn_lsoreheap_2()
 {
-	ta_stay(0,0,12,0,"NC_PATH41");
-	ta_stay(12,0,24,0,"NC_PATH41");
+	ta_guidepc(0,0,12,0,"NC_PATH34");
+	ta_guidepc(12,0,24,0,"NC_PATH34");
 };
 
+func void rtn_lsoreheap_justincase_2()
+{
+	ta_stay(0,0,12,0,"NC_PATH35");
+	ta_stay(12,0,24,0,"NC_PATH35");
+};
+
+func void rtn_lsoreheap2_2()
+{
+	ta_guidepc(0,0,12,0,"NC_PATH41");
+	ta_guidepc(12,0,24,0,"NC_PATH41");
+};
+
+func void rtn_reunion_2()
+{
+	ta_sleep(0,5,8,5,"LOCATION_02_07");
+	ta_smalltalk(8,5,16,5,"LOCATION_02_04");
+	ta_sitaround(16,5,20,5,"LOCATION_02_05");
+	ta_practicemagic(20,5,0,5,"LOCATION_02_08");
+};

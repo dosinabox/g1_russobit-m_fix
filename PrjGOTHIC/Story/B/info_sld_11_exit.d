@@ -93,7 +93,10 @@ instance INFO_SLD_11_DASLAGER(C_INFO)
 
 func int info_sld_11_daslager_condition()
 {
-	return 1;
+	if(FMTAKEN == FALSE)
+	{
+		return 1;
+	};
 };
 
 func void info_sld_11_daslager_info()
@@ -115,12 +118,15 @@ instance INFO_SLD_11_DIELAGE(C_INFO)
 
 func int info_sld_11_dielage_condition()
 {
-	return 1;
+	if(FMTAKEN == FALSE)
+	{
+		return 1;
+	};
 };
 
 func void info_sld_11_dielage_info()
 {
-	AI_Output(other,self,"Info_Sld_11_DieLage_15_00");	//Ну а у тебя как жизнь?
+	AI_Output(other,self,"Info_Sld_11_DieLage_15_00");	//Ну, а у тебя как жизнь?
 	AI_Output(self,other,"Info_Sld_11_DieLage_11_01");	//Пока все спокойно...
 	AI_Output(other,self,"Info_Sld_11_DieLage_15_02");	//Пока?
 	AI_Output(self,other,"Info_Sld_11_DieLage_11_03");	//Если воры и дальше будут грабить караваны Гомеза, он соберет армию и нападет на наш лагерь.

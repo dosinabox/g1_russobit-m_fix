@@ -68,3 +68,9 @@ func void rtn_fmtaken2_233()
 	ta_stay(20,0,7,0,"OCR_NORTHGATE_LEFT_GUARD_CHANGE");
 };
 
+func void rtn_flee_233()
+{
+	ta_stay(0,0,12,0,"WP_INTRO01");
+	ta_stay(12,0,24,0,"WP_INTRO01");	
+};
+

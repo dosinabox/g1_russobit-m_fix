@@ -7,7 +7,8 @@ instance GRD_211_SKIP(NPC_DEFAULT)
 	level = 15;
 	voice = 12;
 	id = 211;
-	attribute[ATR_STRENGTH] = 70;
+	flags = NPC_FLAG_IMMORTAL;
+	attribute[ATR_STRENGTH] = 35;
 	attribute[ATR_DEXTERITY] = 50;
 	attribute[ATR_MANA_MAX] = 0;
 	attribute[ATR_MANA] = 0;
@@ -23,7 +24,8 @@ instance GRD_211_SKIP(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,2);
 	Npc_SetTalentSkill(self,NPC_TALENT_2H,1);
 	Npc_SetTalentSkill(self,NPC_TALENT_CROSSBOW,1);
-	EquipItem(self,itmw_1h_sword_02);
+	//EquipItem(self,itmw_1h_sword_02);
+	EquipItem(self,tr_m_skip);
 	CreateInvItems(self,itminugget,400);
 	daily_routine = rtn_start_211;
 };
@@ -38,7 +40,7 @@ func void rtn_start_211()
 
 func void rtn_ot_211()
 {
-	ta_position(7,0,20,0,"OCC_STABLE_BACK");
-	ta_position(20,0,7,0,"OCC_STABLE_BACK");
+	ta_standaround(7,0,20,0,"OCC_STABLE_BACK");
+	ta_standaround(20,0,7,0,"OCC_STABLE_BACK");
 };
 

@@ -37,3 +37,9 @@ func void rtn_start_281()
 	ta_guardwheelopen(19,55,7,55,"OW_PATH_1_16_C");
 };
 
+func void rtn_fmtaken_281()
+{
+	ta_guardwheelclosed(7,55,19,55,"OW_PATH_1_16_C");
+	ta_guardwheelclosed(19,55,7,55,"OW_PATH_1_16_C");
+};
+

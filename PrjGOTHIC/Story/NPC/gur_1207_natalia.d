@@ -17,36 +17,48 @@ instance GUR_1207_NATALIA(NPC_DEFAULT)
 	Mdl_SetVisual(self,"Babe.MDS");
 	Mdl_SetVisualBody(self,"Bab_body_Naked0",0,0,"Bab_Head_Hair1",0,DEFAULT,-1);
 	fight_tactic = FAI_HUMAN_COWARD;
-	daily_routine = rtn_start_1421;
+	daily_routine = rtn_start_1207;
 };
 
 
-func void rtn_start_1421()
+func void rtn_start_1207()
 {
-	ta_babe_sitaround(0,0,6,0,"PSI_TEMPLE_ROOMS_IN_03");
+	ta_babe_sleep(23,0,6,0,"PSI_TEMPLE_ROOMS_IN_03");
 	ta_babe_fan(6,0,7,0,"PSI_TEMPLE_ROOMS_03");
-	ta_babe_sitaround(7,0,8,0,"PSI_TEMPLE_ROOMS_IN");
+	ta_babe_sitaround(7,0,8,0,"PSI_TEMPLE_ROOMS_IN_03");
 	ta_babe_fan(8,0,9,0,"PSI_TEMPLE_ROOMS_03");
-	ta_babe_sitaround(9,0,10,0,"PSI_TEMPLE_ROOMS_IN");
+	ta_babe_sitaround(9,0,10,0,"PSI_TEMPLE_ROOMS_IN_03");
 	ta_babe_fan(10,0,11,0,"PSI_TEMPLE_ROOMS_03");
-	ta_babe_sitaround(11,0,12,0,"PSI_TEMPLE_ROOMS_IN");
+	ta_babe_sitaround(11,0,12,0,"PSI_TEMPLE_ROOMS_IN_03");
 	ta_babe_fan(12,0,13,0,"PSI_TEMPLE_ROOMS_03");
-	ta_babe_sitaround(13,0,14,0,"PSI_TEMPLE_ROOMS_IN");
+	ta_babe_sitaround(13,0,14,0,"PSI_TEMPLE_ROOMS_IN_03");
 	ta_babe_fan(14,0,15,0,"PSI_TEMPLE_ROOMS_03");
-	ta_babe_sitaround(15,0,16,0,"PSI_TEMPLE_ROOMS_IN");
+	ta_babe_sitaround(15,0,16,0,"PSI_TEMPLE_ROOMS_IN_03");
 	ta_babe_fan(16,0,17,0,"PSI_TEMPLE_ROOMS_03");
-	ta_babe_sitaround(17,0,18,0,"PSI_TEMPLE_ROOMS_IN");
+	ta_babe_sitaround(17,0,18,0,"PSI_TEMPLE_ROOMS_IN_03");
 	ta_babe_fan(18,0,19,0,"PSI_TEMPLE_ROOMS_03");
-	ta_babe_sitaround(19,0,20,0,"PSI_TEMPLE_ROOMS_IN");
+	ta_babe_sitaround(19,0,20,0,"PSI_TEMPLE_ROOMS_IN_03");
 	ta_babe_fan(20,0,21,0,"PSI_TEMPLE_ROOMS_03");
-	ta_babe_sitaround(21,0,22,0,"PSI_TEMPLE_ROOMS_IN");
+	ta_babe_sitaround(21,0,22,0,"PSI_TEMPLE_ROOMS_IN_03");
 	ta_babe_fan(22,0,23,0,"PSI_TEMPLE_ROOMS_03");
-	ta_babe_sitaround(23,0,0,0,"PSI_TEMPLE_ROOMS_IN");
 };
 
-func void rtn_dead_1421()
+func void rtn_dead_1207()
 {
-	ta_babe_sitaround(0,0,6,0,"PSI_TEMPLE_ROOMS_IN_03");
-	ta_babe_sitaround(6,0,0,0,"PSI_TEMPLE_ROOMS_IN_03");
+	ta_babe_sitaround(0,0,6,0,"PSI_TEMPLE_ROOMS_IN_02");
+	ta_babe_sitaround(6,0,0,0,"PSI_TEMPLE_ROOMS_IN_02");
+};
+
+func void rtn_after_1207()
+{
+	ta_babe_cry(0,0,6,0,"PSI_TEMPLE_ROOMS_IN_03");
+	ta_babe_cry(6,0,0,0,"PSI_TEMPLE_ROOMS_IN_03");
+};
+
+func void rtn_wash_1207()
+{
+	ta_babe_sleep(0,0,6,0,"PSI_TEMPLE_ROOMS_IN_03");
+	ta_babe_sweep(6,0,12,0,"PSI_TEMPLE_ROOMS_03");
+	ta_babe_sweep(12,0,0,0,"PSI_TEMPLE_IN_06");
 };
 

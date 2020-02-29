@@ -40,10 +40,10 @@ func int dia_graham_hello_condition()
 func void dia_graham_hello_info()
 {
 	AI_Output(other,self,"DIA_Graham_Hello_15_00");	//Привет! Я здесь недавно.
-	AI_Output(self,other,"DIA_Graham_Hello_02_01");	//Меня зовут Грехэм. Я рисую карты. Я тебя раньше не видел... Что тебе нужно?
+	AI_Output(self,other,"DIA_Graham_Hello_02_01");	//Меня зовут Грехем. Я рисую карты. Я тебя раньше не видел... Что тебе нужно?
+	Log_CreateTopic(GE_TRADEROC,LOG_NOTE);
 	b_logentry(GE_TRADEROC,"Рудокоп Грехем продает карты. Его можно найти слева от главных ворот.");
 };
-
 
 var int graham_omkarteverkauft;
 var int graham_omkarteerpresst;

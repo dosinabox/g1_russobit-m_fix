@@ -51,7 +51,7 @@ instance DIA_SILAS_TRADE(C_INFO)
 	nr = 1;
 	condition = dia_silas_trade_condition;
 	information = dia_silas_trade_info;
-	permanent = 0;
+	permanent = 1;
 	description = "Я хочу выпить.";
 	trade = 1;
 };

@@ -13,7 +13,7 @@ func void zs_playtune()
 func void zs_playtune_loop()
 {
 	printdebugnpc(PD_TA_LOOP,"ZS_PlayTune_Loop");
-	if(Npc_HasItems(self,itmilute) <= 1)
+	if(!Npc_HasItems(self,itmilute))
 	{
 		CreateInvItem(self,itmilute);
 	};

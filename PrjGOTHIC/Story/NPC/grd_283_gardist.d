@@ -13,6 +13,7 @@ instance GRD_283_GARDIST(NPC_DEFAULT)
 	attribute[ATR_MANA] = 0;
 	attribute[ATR_HITPOINTS_MAX] = 200;
 	attribute[ATR_HITPOINTS] = 200;
+	aivar[43] = TRUE;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Militia.mds");
 	Mdl_SetVisualBody(self,"hum_body_Naked0",0,1,"Hum_Head_FatBald",13,1,grd_armor_m);

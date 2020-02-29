@@ -7,8 +7,9 @@ instance GRD_205_SCORPIO(NPC_DEFAULT)
 	level = 15;
 	voice = 13;
 	id = 205;
-	attribute[ATR_STRENGTH] = 70;
-	attribute[ATR_DEXTERITY] = 50;
+	flags = NPC_FLAG_IMMORTAL;
+	attribute[ATR_STRENGTH] = 30;
+	attribute[ATR_DEXTERITY] = 55;
 	attribute[ATR_MANA_MAX] = 0;
 	attribute[ATR_MANA] = 0;
 	attribute[ATR_HITPOINTS_MAX] = 220;
@@ -22,8 +23,11 @@ instance GRD_205_SCORPIO(NPC_DEFAULT)
 	fight_tactic = FAI_HUMAN_STRONG;
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,2);
 	Npc_SetTalentSkill(self,NPC_TALENT_2H,1);
-	Npc_SetTalentSkill(self,NPC_TALENT_CROSSBOW,1);
-	EquipItem(self,itmw_1h_sword_03);
+	Npc_SetTalentSkill(self,NPC_TALENT_CROSSBOW,2);
+	//EquipItem(self,itmw_1h_sword_03);
+	EquipItem(self,tr_m_scorpio);
+	EquipItem(self,itrw_scorpio_crossbow);
+	CreateInvItems(self,itambolt,45);
 	CreateInvItems(self,itminugget,200);
 	CreateInvItems(self,itfo_potion_health_02,5);
 	daily_routine = rtn_start_205;
@@ -32,9 +36,10 @@ instance GRD_205_SCORPIO(NPC_DEFAULT)
 
 func void rtn_start_205()
 {
-	ta_boss(7,25,20,0,"OCC_CENTER_4");
+	ta_boss(7,25,15,0,"OCC_CENTER_4");
+	ta_practicebow(15,0,20,0,"OCC_RUIN_PRACTICE_LEADER");
 	ta_smalltalk(20,0,1,0,"OCC_STABLE_ENTRANCE_INSERT");
-	ta_sleep(20,0,7,25,"OCC_MERCS_UPPER_RIGHT_ROOM_BED4");
+	ta_sleep(1,0,7,25,"OCC_MERCS_UPPER_RIGHT_ROOM_BED3");
 };
 
 func void rtn_bannished_205()

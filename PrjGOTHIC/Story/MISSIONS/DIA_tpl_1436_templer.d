@@ -41,7 +41,7 @@ func int tpl_1436_templer_crawler_condition()
 func void tpl_1436_templer_crawler_info()
 {
 	AI_Output(other,self,"Tpl_1436_Templer_CRAWLER_Info_15_01");	//Как дела?
-	AI_Output(self,other,"Tpl_1436_Templer_CRAWLER_Info_13_02");	//Не плохо. Охотимся на ползунов, а заодно и рудокопов защищаем, - недовольных нет.
+	AI_Output(self,other,"Tpl_1436_Templer_CRAWLER_Info_13_02");	//Неплохо. Охотимся на ползунов, а заодно и рудокопов защищаем, - недовольных нет.
 	AI_Output(self,other,"Tpl_1436_Templer_CRAWLER_Info_13_03");	//Основная наша задача - это добывать слюну из челюстей этих ползучих тварей. Из нее Гуру Кор Галом готовит магические эликсиры.
 };
 

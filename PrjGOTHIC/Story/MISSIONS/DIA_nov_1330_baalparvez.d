@@ -34,10 +34,7 @@ instance DIA_BAALPARVEZ_GREET(C_INFO)
 
 func int dia_baalparvez_greet_condition()
 {
-	if(Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST)
-	{
-		return 1;
-	};
+	return 1;
 };
 
 func void dia_baalparvez_greet_info()
@@ -219,12 +216,12 @@ func void dia_baalparvez_gotopsi_info()
 	AI_Output(other,self,"DIA_BaalParvez_GotoPSI_15_00");	//Проводи меня в свой лагерь. Я хочу посмотреть на него!
 	if(PSI_WALK == 0)
 	{
-		if(Npc_GetTrueGuild(hero) == GIL_NONE)
+		if((Npc_GetTrueGuild(hero) == GIL_NONE) && (KAPITEL < 2))
 		{
 			Log_CreateTopic(CH1_JOINPSI,LOG_MISSION);
 			Log_SetTopicStatus(CH1_JOINPSI,LOG_RUNNING);
+			b_logentry(CH1_JOINPSI,"Идол Парвез, миссионер из Братства, ищет последователей веры в Спящего в Старом лагере. Он предложил проводить меня в Болотный лагерь.");
 		};
-		b_logentry(CH1_JOINPSI,"Идол Парвез, миссионер из Братства, ищет последователей веры в Спящего в Старом лагере. Он предложил проводить меня в Болотный лагерь.");
 		PSI_WALK = 1;
 	};
 	AI_Output(self,other,"DIA_BaalParvez_GotoPSI_10_01");	//Очень хорошо! Я пойду впереди. Иди за мной!

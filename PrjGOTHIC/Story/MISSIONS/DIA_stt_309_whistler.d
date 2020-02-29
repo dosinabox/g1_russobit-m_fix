@@ -66,7 +66,7 @@ instance DIA_WHISTLER_FAVOUR(C_INFO)
 
 func int dia_whistler_favour_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_whistler_iamnew))
+	if(Npc_KnowsInfo(hero,dia_whistler_iamnew) && (Npc_GetTrueGuild(hero) == GIL_NONE))
 	{
 		return 1;
 	};
@@ -94,8 +94,8 @@ func void dia_whistler_favour_ok()
 	{
 		Log_CreateTopic(CH1_JOINOC,LOG_MISSION);
 		Log_SetTopicStatus(CH1_JOINOC,LOG_RUNNING);
+		b_logentry(CH1_JOINOC,"Уистлер поддержит меня, если я куплю для него меч у Фиска. Для этого он дал мне 100 кусков руды.");
 	};
-	b_logentry(CH1_JOINOC,"Уистлер поддержит меня, если я куплю для него меч у Фиска. Для этого он дал мне 100 кусков руды.");
 	fisk = Hlp_GetNpc(stt_311_fisk);
 	CreateInvItems(self,itminugget,100);
 	b_giveinvitems(self,hero,itminugget,100);
@@ -161,7 +161,7 @@ instance DIA_WHISTLER_RUNNINGPAYBACK(C_INFO)
 
 func int dia_whistler_runningpayback_condition()
 {
-	if(WHISTLER_BUYMYSWORD == LOG_RUNNING)
+	if((WHISTLER_BUYMYSWORD == LOG_RUNNING) && !Npc_KnowsInfo(hero,dia_whistler_running110))
 	{
 		return 1;
 	};
@@ -174,6 +174,44 @@ func void dia_whistler_runningpayback_info()
 	{
 		AI_Output(self,other,"DIA_Whistler_RunningPayBack_11_01");	//Идиот! Таких у нас и без тебя хватает! Убирайся!
 		b_giveinvitems(hero,self,itminugget,100);
+		WHISTLER_BUYMYSWORD = LOG_OBSOLETE;
+		b_logentry(CH1_JOINOC,"Я все испортил. Теперь Уистлеру никогда не видать своего меча.");
+		AI_StopProcessInfos(self);
+	}
+	else
+	{
+		AI_Output(self,other,"DIA_Whistler_RunningPayBack_11_02");	//Где ты здесь видишь сто кусков? Отдавай мою руду, иначе у тебя будут неприятности!
+		AI_StopProcessInfos(self);
+	};
+};
+
+
+instance DIA_WHISTLER_RUNNINGPAYBACK_110(C_INFO)
+{
+	npc = stt_309_whistler;
+	nr = 5;
+	condition = dia_whistler_runningpayback_110_condition;
+	information = dia_whistler_runningpayback_110_info;
+	permanent = 1;
+	description = "Я не смог купить меч. Вот тебе твоя сотня кусков.";
+};
+
+
+func int dia_whistler_runningpayback_110_condition()
+{
+	if((WHISTLER_BUYMYSWORD == LOG_RUNNING) && Npc_KnowsInfo(hero,dia_whistler_running110))
+	{
+		return 1;
+	};
+};
+
+func void dia_whistler_runningpayback_110_info()
+{
+	AI_Output(other,self,"DIA_Whistler_RunningPayBack_15_00");	//Я не смог купить меч. Вот тебе твоя сотня кусков.
+	if(Npc_HasItems(other,itminugget) >= 110)
+	{
+		AI_Output(self,other,"DIA_Whistler_RunningPayBack_11_01");	//Идиот! Таких у нас и без тебя хватает! Убирайся!
+		b_giveinvitems(hero,self,itminugget,110);
 		WHISTLER_BUYMYSWORD = LOG_OBSOLETE;
 		b_logentry(CH1_JOINOC,"Я все испортил. Теперь Уистлеру никогда не видать своего меча.");
 		AI_StopProcessInfos(self);
@@ -252,6 +290,7 @@ func void dia_whistler_mysword_success_info()
 	};
 	WHISTLER_BUYMYSWORD = LOG_SUCCESS;
 	b_givexp(XP_WHISTLERSSWORD);
+	AI_EquipBestMeleeWeapon(self);
 	AI_StopProcessInfos(self);
 };
 
@@ -269,7 +308,7 @@ instance DIA_WHISTLER_STANDARDKAP1(C_INFO)
 
 func int dia_whistler_standardkap1_condition()
 {
-	if(WHISTLER_BUYMYSWORD == LOG_SUCCESS)
+	if(WHISTLER_BUYMYSWORD == LOG_SUCCESS && KAPITEL < 2)
 	{
 		return 1;
 	};

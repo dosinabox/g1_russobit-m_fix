@@ -28,7 +28,7 @@ instance NOV_1340_NOVIZE(NPC_DEFAULT)
 
 func void rtn_start_1340()
 {
-	ta_sleep(2,0,8,5,"PSI_24_HUT_IN");
-	ta_listen(8,5,2,0,"PSI_TEACH_CADAR");
+	ta_sleep(2,0,7,5,"PSI_24_HUT_IN");
+	ta_listen(7,5,2,0,"PSI_TEACH_CADAR");
 };
 

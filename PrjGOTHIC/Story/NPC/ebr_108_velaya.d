@@ -34,3 +34,9 @@ func void rtn_start_108()
 	ta_babe_sitaround(19,0,1,0,"OCC_BARONS_UPSTAIRS_LEFT_BACK_ROOM_FRONT");
 };
 
+func void rtn_flee_108()
+{
+	ta_stay(0,0,12,0,"WP_INTRO01");
+	ta_stay(12,0,24,0,"WP_INTRO01");
+};
+

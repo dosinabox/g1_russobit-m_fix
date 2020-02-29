@@ -34,7 +34,7 @@ func void rtn_start_1440()
 	ta_smalltalk(14,0,6,0,"OW_OM_ENTRANCE02");
 };
 
-func void rtn_fmtaken_1440()
+func void rtn_gc_1440()
 {
 	ta_smalltalk(6,0,14,0,"PSI_SWAMP_MOVEMENT");
 	ta_smalltalk(14,0,6,0,"PSI_SWAMP_MOVEMENT");

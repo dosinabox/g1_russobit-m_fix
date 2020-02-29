@@ -68,14 +68,17 @@ func void info_tpl_8_wichtigepersonen_info()
 	var C_NPC corangar;
 	AI_Output(other,self,"Info_Tpl_8_WichtigePersonen_15_00");	//Кто здесь всем управляет?
 	AI_Output(self,other,"Info_Tpl_8_WichtigePersonen_08_01");	//Гуру - главные среди нас. Мы делаем то, что они нам говорят. В этом состоит наше послушание.
-	AI_Output(self,other,"Info_Tpl_8_WichtigePersonen_15_02");	//А кто здесь Гуру?
-	AI_Output(self,other,"Info_Tpl_8_WichtigePersonen_08_03");	//Верховный Гуру лагеря, Юберион, просвещенный. Ему помогают Кор Галом, Кор Ангари и некоторые другие.
-	yberion = Hlp_GetNpc(gur_1200_yberion);
-	corkalom = Hlp_GetNpc(gur_1201_corkalom);
-	corangar = Hlp_GetNpc(gur_1202_corangar);
-	yberion.aivar[AIV_FINDABLE] = TRUE;
-	corkalom.aivar[AIV_FINDABLE] = TRUE;
-	corangar.aivar[AIV_FINDABLE] = TRUE;
+	if(KAPITEL < 3)
+	{
+		AI_Output(other,self,"Info_Tpl_8_WichtigePersonen_15_02");	//А кто здесь Гуру?
+		AI_Output(self,other,"Info_Tpl_8_WichtigePersonen_08_03");	//Верховный Гуру лагеря, Юберион, просвещенный. Ему помогают Кор Галом, Кор Ангари и некоторые другие.
+		yberion = Hlp_GetNpc(gur_1200_yberion);
+		corkalom = Hlp_GetNpc(gur_1201_corkalom);
+		corangar = Hlp_GetNpc(gur_1202_corangar);
+		yberion.aivar[AIV_FINDABLE] = TRUE;
+		corkalom.aivar[AIV_FINDABLE] = TRUE;
+		corangar.aivar[AIV_FINDABLE] = TRUE;
+	};
 };
 
 
@@ -101,7 +104,7 @@ func void info_tpl_8_daslager_info()
 {
 	AI_Output(other,self,"Info_Tpl_8_DasLager_15_00");	//Расскажи мне об этом лагере.
 	AI_Output(self,other,"Info_Tpl_8_DasLager_08_01");	//Ты здесь новичок. Тебе можно ходить везде. Для неверных закрыт лишь храм Спящего.
-	AI_Output(other,self,"Info_Tpl_8_DasLager_08_02");	//Поэтому лучше тебе не заходить на запретную территорию и не беспокоить наших учителей во время медитации.
+	AI_Output(self,other,"Info_Tpl_8_DasLager_08_02");	//Поэтому лучше тебе не заходить на запретную территорию и не беспокоить наших учителей во время медитации.
 };
 
 

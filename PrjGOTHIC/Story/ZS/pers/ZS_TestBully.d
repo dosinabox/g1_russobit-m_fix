@@ -27,7 +27,7 @@ func void zs_testbully()
 	};
 };
 
-func int zs_testbully_loop()
+func void zs_testbully_loop()
 {
 	var int multireaktion;
 	printdebugnpc(PD_TA_LOOP,"ZS_TestBully_Loop");

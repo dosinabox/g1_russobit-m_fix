@@ -1,0 +1,81 @@
+
+func void b_clearquentincamp()
+{
+	if(!Npc_IsDead(org_858_quentin))
+	{
+		b_killnpc(org_858_quentin);
+	};
+	if(!Npc_IsDead(org_863_raeuber))
+	{
+		b_killnpc(org_863_raeuber);
+	};
+	if(!Npc_IsDead(org_864_raeuber))
+	{
+		b_killnpc(org_864_raeuber);
+	};
+	if(!Npc_IsDead(org_865_raeuber))
+	{
+		b_killnpc(org_865_raeuber);
+	};
+	if(!Npc_IsDead(org_866_raeuber))
+	{
+		b_killnpc(org_866_raeuber);
+	};
+	if(!Npc_IsDead(org_867_raeuber))
+	{
+		b_killnpc(org_867_raeuber);
+	};
+	if(!Npc_IsDead(org_868_raeuber))
+	{
+		b_killnpc(org_868_raeuber);
+	};
+	if(!Npc_IsDead(org_869_raeuber))
+	{
+		b_killnpc(org_869_raeuber);
+	};
+	if(!Npc_IsDead(org_870_raeuber))
+	{
+		b_killnpc(org_870_raeuber);
+	};
+	if(!Npc_IsDead(org_871_raeuber))
+	{
+		b_killnpc(org_871_raeuber);
+	};
+	if(!Npc_IsDead(org_874_raeuber))
+	{
+		b_killnpc(org_874_raeuber);
+	};
+	if(!Npc_IsDead(org_861_killian) && STOOGES_FLED == TRUE)
+	{
+		b_killnpc(org_861_killian);
+	};
+	if(!Npc_IsDead(org_860_renyu) && STOOGES_FLED == TRUE)
+	{
+		b_killnpc(org_860_renyu);
+	};
+	if(!Npc_IsDead(org_862_jacko) && STOOGES_FLED == TRUE)
+	{
+		b_killnpc(org_862_jacko);
+	};
+	if(!Npc_IsDead(org_899_alex))
+	{
+		b_killnpc(org_899_alex);
+	};
+	if(!Npc_IsDead(org_898_alex))
+	{
+		b_killnpc(org_898_alex);
+	};
+	if(!Npc_IsDead(org_857_calash) && Npc_KnowsInfo(hero,info_calash_dia3))
+	{
+		b_killnpc(org_857_calash);
+	};
+	b_exchangeroutine(ebr_101_scar,"qc");
+	b_exchangeroutine(grd_240_gardist,"qc");
+	b_exchangeroutine(grd_241_gardist,"qc");
+	b_exchangeroutine(grd_242_gardist,"qc");
+	b_exchangeroutine(grd_245_gardist,"qc");
+	b_exchangeroutine(vlk_595_buddler,"start");
+	b_exchangeroutine(vlk_596_buddler,"start");
+	b_exchangeroutine(vlk_597_buddler,"start");
+};
+

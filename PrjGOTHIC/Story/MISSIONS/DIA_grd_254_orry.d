@@ -17,7 +17,10 @@ func int dia_orry_preexit_condition()
 
 func void dia_orry_preexit_info()
 {
-	AI_Output(self,other,"DIA_Orry_PreExit_06_00");	//Постарайся добраться до Старого лагеря живым!
+	if(KAPITEL <= 1)
+	{
+		AI_Output(self,other,"DIA_Orry_PreExit_06_00");	//Постарайся добраться до Старого лагеря живым!
+	};
 	AI_StopProcessInfos(self);
 };
 
@@ -35,7 +38,7 @@ instance DIA_ORRY_EXIT(C_INFO)
 
 func int dia_orry_exit_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_orry_preexit))
+	if(Npc_KnowsInfo(hero,dia_orry_preexit) && KAPITEL <= 1)
 	{
 		return 1;
 	};
@@ -60,24 +63,24 @@ instance DIA_ORRY_GUARDGATE(C_INFO)
 
 func int dia_orry_guardgate_condition()
 {
-	if(KAPITEL <= 1)
-	{
-		return 1;
-	};
+	return 1;
 };
 
 func void dia_orry_guardgate_info()
 {
 	AI_Output(other,self,"DIA_Orry_GuardGate_15_00");	//Что ты здесь делаешь?
 	AI_Output(self,other,"DIA_Orry_GuardGate_06_01");	//Контролирую, чтобы никто не подошел к месту обмена. В особенности эти головорезы из Нового лагеря.
-	AI_Output(self,other,"DIA_Orry_GuardGate_06_02");	//Ты новенький, не так ли? Тебя ведь только сегодня забросили к нам?
-	AI_Output(other,self,"DIA_Orry_GuardGate_15_03");	//Да, все так и есть.
-	AI_Output(self,other,"DIA_Orry_GuardGate_06_04");	//Держись подальше от парней из Нового лагеря!
-	AI_Output(self,other,"DIA_Orry_GuardGate_06_05");	//Я, да и все остальные, кого ты видел в месте обмена, работаем на Старый лагерь.
-	AI_Output(self,other,"DIA_Orry_GuardGate_06_06");	//С Диего... ты уже говорил с ним?
-	Info_ClearChoices(dia_orry_guardgate);
-	Info_AddChoice(dia_orry_guardgate,"Еще нет.",dia_orry_guardgate_no);
-	Info_AddChoice(dia_orry_guardgate,"Да, поговорил.",dia_orry_guardgate_yes);
+	if(KAPITEL <= 1)
+	{
+		AI_Output(self,other,"DIA_Orry_GuardGate_06_02");	//Ты новенький, не так ли? Тебя ведь только сегодня забросили к нам?
+		AI_Output(other,self,"DIA_Orry_GuardGate_15_03");	//Да, все так и есть.
+		AI_Output(self,other,"DIA_Orry_GuardGate_06_04");	//Держись подальше от парней из Нового лагеря!
+		AI_Output(self,other,"DIA_Orry_GuardGate_06_05");	//Я, да и все остальные, кого ты видел в месте обмена, работаем на Старый лагерь.
+		AI_Output(self,other,"DIA_Orry_GuardGate_06_06");	//С Диего... ты уже говорил с ним?
+		Info_ClearChoices(dia_orry_guardgate);
+		Info_AddChoice(dia_orry_guardgate,"Еще нет.",dia_orry_guardgate_no);
+		Info_AddChoice(dia_orry_guardgate,"Да, поговорил.",dia_orry_guardgate_yes);
+	};
 };
 
 func void dia_orry_guardgate_no()
@@ -109,7 +112,7 @@ instance DIA_ORRY_NEWCAMP(C_INFO)
 
 func int dia_orry_newcamp_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_orry_guardgate))
+	if(Npc_KnowsInfo(hero,dia_orry_guardgate) && KAPITEL <= 1)
 	{
 		return 1;
 	};
@@ -136,7 +139,7 @@ instance DIA_ORRY_OLDCAMP(C_INFO)
 
 func int dia_orry_oldcamp_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_orry_guardgate))
+	if(Npc_KnowsInfo(hero,dia_orry_guardgate) && KAPITEL <= 1)
 	{
 		return 1;
 	};
@@ -163,7 +166,7 @@ instance DIA_ORRY_SHORE(C_INFO)
 
 func int dia_orry_shore_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_orry_guardgate))
+	if(Npc_KnowsInfo(hero,dia_orry_guardgate) && KAPITEL <= 1)
 	{
 		return 1;
 	};
@@ -220,7 +223,7 @@ instance DIA_ORRY_WAFFE(C_INFO)
 
 func int dia_orry_waffe_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_orry_guardgate))
+	if(Npc_KnowsInfo(hero,dia_orry_guardgate) && KAPITEL <= 2)
 	{
 		return 1;
 	};

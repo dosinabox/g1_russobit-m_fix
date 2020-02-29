@@ -24,7 +24,7 @@ instance ITARSCROLLLIGHT(C_ITEM)
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
 	value = 5;
-	visual = "ItAr_Scroll_32.3DS";
+	visual = "ItAr_Scroll_32_EG.3DS";
 	material = MAT_STONE;
 	spell = SPL_LIGHT;
 	cond_atr[2] = ATR_MANA_MAX;
@@ -92,7 +92,7 @@ instance ITARRUNEFIREBALL(C_ITEM)
 	count[0] = mag_circle;
 	text[1] = NAME_MANAKOSTENMAX;
 	count[1] = SPL_SENDCAST_FIREBALL;
-	text[2] = ConcatStrings(NAME_DAM_FIRE,NAME_PERMANA);
+	text[2] = "Огненный урон (за ед. маг. силы):";
 	count[2] = SPL_DAMAGE_FIREBALL;
 	text[4] = NAME_SPELL_LOAD;
 	text[5] = NAME_VALUE;
@@ -113,7 +113,7 @@ instance ITARSCROLLFIREBALL(C_ITEM)
 	description = "Огненный шар";
 	text[1] = NAME_MANAKOSTENMAX;
 	count[1] = SPL_SENDCAST_FIREBALL;
-	text[2] = ConcatStrings(NAME_DAM_FIRE,NAME_PERMANA);
+	text[2] = "Огненный урон (за ед. маг. силы):";
 	count[2] = SPL_DAMAGE_FIREBALL;
 	text[4] = NAME_SPELL_LOAD;
 	text[5] = NAME_VALUE;
@@ -135,7 +135,7 @@ instance ITARRUNEFIRESTORM(C_ITEM)
 	count[0] = mag_circle;
 	text[1] = NAME_MANAKOSTENMAX;
 	count[1] = SPL_SENDCAST_FIRESTORM;
-	text[2] = ConcatStrings(NAME_DAM_FIRE,NAME_PERMANA);
+	text[2] = "Огненный урон (за ед. маг. силы):";
 	count[2] = SPL_DAMAGE_FIRESTORM;
 	text[4] = NAME_SPELL_LOAD;
 	text[5] = NAME_VALUE;
@@ -148,7 +148,7 @@ instance ITARSCROLLFIRESTORM(C_ITEM)
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
 	value = 110;
-	visual = "ItAr_Scroll_28.3DS";
+	visual = "ItAr_Scroll_36.3DS";
 	material = MAT_STONE;
 	spell = SPL_FIRESTORM;
 	cond_atr[2] = ATR_MANA_MAX;
@@ -156,7 +156,7 @@ instance ITARSCROLLFIRESTORM(C_ITEM)
 	description = "Огненный шторм";
 	text[1] = NAME_MANAKOSTENMAX;
 	count[1] = SPL_SENDCAST_FIRESTORM;
-	text[2] = ConcatStrings(NAME_DAM_FIRE,NAME_PERMANA);
+	text[2] = "Огненный урон (за ед. маг. силы):";
 	count[2] = SPL_DAMAGE_FIRESTORM;
 	text[4] = NAME_SPELL_LOAD;
 	text[5] = NAME_VALUE;
@@ -190,7 +190,7 @@ instance ITARSCROLLFIRERAIN(C_ITEM)
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
 	value = 130;
-	visual = "ItAr_Scroll_36.3DS";
+	visual = "ItAr_Scroll_28.3DS";
 	material = MAT_STONE;
 	spell = SPL_FIRERAIN;
 	cond_atr[2] = ATR_MANA_MAX;
@@ -213,8 +213,6 @@ instance ITARRUNETELEPORT1(C_ITEM)
 	material = MAT_STONE;
 	spell = SPL_TELEPORT1;
 	description = "Телепортация к магам Огня";
-	text[0] = NAME_MAG_CIRCLE;
-	count[0] = mag_circle;
 	text[1] = NAME_MANAKOSTEN;
 	count[1] = SPL_SENDCAST_TELEPORT;
 };
@@ -243,8 +241,6 @@ instance ITARRUNETELEPORT2(C_ITEM)
 	material = MAT_STONE;
 	spell = SPL_TELEPORT2;
 	description = "Телепортация к магам Воды";
-	text[0] = NAME_MAG_CIRCLE;
-	count[0] = mag_circle;
 	text[1] = NAME_MANAKOSTEN;
 	count[1] = SPL_SENDCAST_TELEPORT;
 };
@@ -254,7 +250,7 @@ instance ITARSCROLLTELEPORT2(C_ITEM)
 	name = NAME_SPRUCHROLLE;
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
-	visual = "ItAr_Scroll_37.3DS";
+	visual = "ItAr_Scroll_40.3DS";
 	material = MAT_STONE;
 	spell = SPL_TELEPORT2;
 	cond_atr[2] = ATR_MANA_MAX;
@@ -273,8 +269,6 @@ instance ITARRUNETELEPORT3(C_ITEM)
 	material = MAT_STONE;
 	spell = SPL_TELEPORT3;
 	description = "Телепортация к некроманту";
-	text[0] = NAME_MAG_CIRCLE;
-	count[0] = mag_circle;
 	text[1] = NAME_MANAKOSTEN;
 	count[1] = SPL_SENDCAST_TELEPORT;
 };
@@ -284,7 +278,7 @@ instance ITARSCROLLTELEPORT3(C_ITEM)
 	name = NAME_SPRUCHROLLE;
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
-	visual = "ItAr_Scroll_40.3DS";
+	visual = "ItAr_Scroll_39.3DS";
 	material = MAT_STONE;
 	spell = SPL_TELEPORT3;
 	cond_atr[2] = ATR_MANA_MAX;
@@ -299,7 +293,7 @@ instance ITARSCROLLTELEPORT4(C_ITEM)
 	name = NAME_SPRUCHROLLE;
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
-	visual = "ItAr_Scroll_39.3DS";
+	visual = "ItAr_Scroll_43_EG.3DS";
 	material = MAT_STONE;
 	spell = SPL_TELEPORT4;
 	cond_atr[2] = ATR_MANA_MAX;
@@ -318,8 +312,6 @@ instance ITARRUNETELEPORT5(C_ITEM)
 	material = MAT_STONE;
 	spell = SPL_TELEPORT5;
 	description = "Телепортация в Болотный лагерь";
-	text[0] = NAME_MAG_CIRCLE;
-	count[0] = mag_circle;
 	text[1] = NAME_MANAKOSTEN;
 	count[1] = SPL_SENDCAST_TELEPORT;
 };
@@ -329,7 +321,7 @@ instance ITARSCROLLTELEPORT5(C_ITEM)
 	name = NAME_SPRUCHROLLE;
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
-	visual = "ItAr_Scroll_39.3DS";
+	visual = "ItAr_Scroll_37.3DS";
 	material = MAT_STONE;
 	spell = SPL_TELEPORT5;
 	cond_atr[2] = ATR_MANA_MAX;
@@ -352,7 +344,7 @@ instance ITARRUNEHEAL(C_ITEM)
 	description = "Лечение";
 	text[0] = NAME_MAG_CIRCLE;
 	count[0] = mag_circle;
-	text[1] = "Лечение за маг. силу";
+	text[1] = "Лечение за ману:";
 	count[1] = SPL_HEALING_HP_PER_MP;
 	text[4] = NAME_SPELL_INVEST;
 	text[5] = NAME_VALUE;
@@ -365,13 +357,13 @@ instance ITARSCROLLHEAL(C_ITEM)
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
 	value = 50;
-	visual = "ItAr_Scroll_01.3DS";
+	visual = "ItAr_Scroll_33_EG.3DS";
 	material = MAT_STONE;
 	spell = SPL_HEAL;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_HEALING_HP_PER_MP;
 	description = "Лечение";
-	text[1] = "Лечение за маг. силу";
+	text[1] = "Лечение за ману:";
 	count[1] = SPL_HEALING_HP_PER_MP;
 	text[2] = NAME_MANA_NEEDED;
 	count[2] = SPL_HEALING_HP_PER_MP;
@@ -385,8 +377,8 @@ instance ITARSCROLLTRFBLOODFLY(C_ITEM)
 	name = NAME_SPRUCHROLLE;
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
-	value = 100;
-	visual = "ItAr_Scroll_01.3DS";
+	value = 300;
+	visual = "ITAR_SCROLL_02_EG.3DS";
 	material = MAT_STONE;
 	spell = SPL_TRF_BLOODFLY;
 	cond_atr[2] = ATR_MANA_MAX;
@@ -403,7 +395,7 @@ instance ITARSCROLLTRFCRAWLER(C_ITEM)
 	name = NAME_SPRUCHROLLE;
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
-	value = 100;
+	value = 300;
 	visual = "ItAr_Scroll_04.3DS";
 	material = MAT_STONE;
 	spell = SPL_TRF_CRAWLER;
@@ -421,7 +413,7 @@ instance ITARSCROLLTRFLURKER(C_ITEM)
 	name = NAME_SPRUCHROLLE;
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
-	value = 100;
+	value = 300;
 	visual = "ItAr_Scroll_02.3DS";
 	material = MAT_STONE;
 	spell = SPL_TRF_LURKER;
@@ -439,7 +431,7 @@ instance ITARSCROLLTRFMEATBUG(C_ITEM)
 	name = NAME_SPRUCHROLLE;
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
-	value = 100;
+	value = 300;
 	visual = "ItAr_Scroll_03.3DS";
 	material = MAT_STONE;
 	spell = SPL_TRF_MEATBUG;
@@ -457,7 +449,7 @@ instance ITARSCROLLTRFMOLERAT(C_ITEM)
 	name = NAME_SPRUCHROLLE;
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
-	value = 100;
+	value = 300;
 	visual = "ItAr_Scroll_05.3DS";
 	material = MAT_STONE;
 	spell = SPL_TRF_MOLERAT;
@@ -475,7 +467,7 @@ instance ITARSCROLLTRFORCDOG(C_ITEM)
 	name = NAME_SPRUCHROLLE;
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
-	value = 200;
+	value = 300;
 	visual = "ItAr_Scroll_11.3DS";
 	material = MAT_STONE;
 	spell = SPL_TRF_ORCDOG;
@@ -493,7 +485,7 @@ instance ITARSCROLLTRFSCAVENGER(C_ITEM)
 	name = NAME_SPRUCHROLLE;
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
-	value = 100;
+	value = 300;
 	visual = "ItAr_Scroll_07.3DS";
 	material = MAT_STONE;
 	spell = SPL_TRF_SCAVENGER;
@@ -511,7 +503,7 @@ instance ITARSCROLLTRFSHADOWBEAST(C_ITEM)
 	name = NAME_SPRUCHROLLE;
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
-	value = 200;
+	value = 300;
 	visual = "ItAr_Scroll_06.3DS";
 	material = MAT_STONE;
 	spell = SPL_TRF_SHADOWBEAST;
@@ -529,8 +521,8 @@ instance ITARSCROLLTRFSNAPPER(C_ITEM)
 	name = NAME_SPRUCHROLLE;
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
-	value = 150;
-	visual = "ItAr_Scroll_01.3DS";
+	value = 300;
+	visual = "ItAr_Scroll_30_EG.3DS";
 	material = MAT_STONE;
 	spell = SPL_TRF_SNAPPER;
 	cond_atr[2] = ATR_MANA_MAX;
@@ -547,7 +539,7 @@ instance ITARSCROLLTRFWARAN(C_ITEM)
 	name = NAME_SPRUCHROLLE;
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
-	value = 100;
+	value = 300;
 	visual = "ItAr_Scroll_10.3DS";
 	material = MAT_STONE;
 	spell = SPL_TRF_WARAN;
@@ -565,7 +557,7 @@ instance ITARSCROLLTRFWOLF(C_ITEM)
 	name = NAME_SPRUCHROLLE;
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
-	value = 100;
+	value = 300;
 	visual = "ItAr_Scroll_09.3DS";
 	material = MAT_STONE;
 	spell = SPL_TRF_WOLF;
@@ -584,7 +576,7 @@ instance ITARRUNECHAINLIGHTNING(C_ITEM)
 	mainflag = ITEM_KAT_RUNE;
 	flags = 0;
 	value = 700;
-	visual = "ItAr_Rune_18.3ds";
+	visual = "ItAr_Rune_19.3ds";
 	material = MAT_STONE;
 	spell = SPL_CHAINLIGHTNING;
 	mag_circle = 4;
@@ -604,7 +596,7 @@ instance ITARSCROLLCHAINLIGHTNING(C_ITEM)
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
 	value = 70;
-	visual = "ItAr_Scroll_20.3DS";
+	visual = "ItAr_Scroll_31.3DS";
 	material = MAT_STONE;
 	spell = SPL_CHAINLIGHTNING;
 	description = "Молния";
@@ -621,7 +613,7 @@ instance ITARRUNETHUNDERBOLT(C_ITEM)
 	mainflag = ITEM_KAT_RUNE;
 	flags = 0;
 	value = 500;
-	visual = "ItAr_Rune_19.3ds";
+	visual = "ItAr_Rune_18.3ds";
 	material = MAT_STONE;
 	spell = SPL_THUNDERBOLT;
 	mag_circle = 1;
@@ -642,7 +634,7 @@ instance ITARSCROLLTHUNDERBOLT(C_ITEM)
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
 	value = 50;
-	visual = "ItAr_Scroll_41.3DS";
+	visual = "ItAr_Scroll_20.3DS";
 	material = MAT_STONE;
 	spell = SPL_THUNDERBOLT;
 	cond_atr[2] = ATR_MANA_MAX;
@@ -671,7 +663,7 @@ instance ITARRUNETHUNDERBALL(C_ITEM)
 	count[0] = mag_circle;
 	text[1] = NAME_MANAKOSTENMAX;
 	count[1] = SPL_SENDCAST_THUNDERBALL;
-	text[2] = ConcatStrings(NAME_DAM_MAGIC,NAME_PERMANA);
+	text[2] = "Магический урон (за ед. маг. силы):";
 	count[2] = SPL_DAMAGE_THUNDERBALL;
 	text[4] = NAME_SPELL_LOAD;
 	text[5] = NAME_VALUE;
@@ -692,7 +684,7 @@ instance ITARSCROLLTHUNDERBALL(C_ITEM)
 	description = "Шаровая молния";
 	text[1] = NAME_MANAKOSTENMAX;
 	count[1] = SPL_SENDCAST_THUNDERBALL;
-	text[2] = ConcatStrings(NAME_DAM_MAGIC,NAME_PERMANA);
+	text[2] = "Магический урон (за ед. маг. силы):";
 	count[2] = SPL_DAMAGE_THUNDERBALL;
 	text[4] = NAME_SPELL_LOAD;
 	text[5] = NAME_VALUE;
@@ -714,7 +706,7 @@ instance ITARRUNEICECUBE(C_ITEM)
 	count[0] = mag_circle;
 	text[1] = NAME_MANAKOSTEN;
 	count[1] = SPL_SENDCAST_ICECUBE;
-	text[2] = "Урон";
+	text[2] = "Урон:";
 	count[2] = SPL_FREEZE_DAMAGE;
 	text[5] = NAME_VALUE;
 	count[5] = value;
@@ -734,7 +726,7 @@ instance ITARSCROLLICECUBE(C_ITEM)
 	description = "Ледяная глыба";
 	text[1] = NAME_MANAKOSTEN;
 	count[1] = SPL_SENDCAST_ICECUBE;
-	text[2] = "Урон";
+	text[2] = "Урон:";
 	count[2] = SPL_FREEZE_DAMAGE;
 	text[5] = NAME_VALUE;
 	count[5] = value;
@@ -755,7 +747,7 @@ instance ITARRUNEICEWAVE(C_ITEM)
 	count[0] = mag_circle;
 	text[1] = NAME_MANAKOSTEN;
 	count[1] = SPL_SENDCAST_ICEWAVE;
-	text[2] = "Урон";
+	text[2] = "Урон:";
 	count[2] = SPL_FREEZE_DAMAGE;
 	text[5] = NAME_VALUE;
 	count[5] = value;
@@ -775,7 +767,7 @@ instance ITARSCROLLICEWAVE(C_ITEM)
 	description = "Ледяная волна";
 	text[1] = NAME_MANAKOSTEN;
 	count[1] = SPL_SENDCAST_ICEWAVE;
-	text[2] = "Урон";
+	text[2] = "Урон:";
 	count[2] = SPL_FREEZE_DAMAGE;
 	text[5] = NAME_VALUE;
 	count[5] = value;
@@ -810,7 +802,7 @@ instance ITARSCROLLSUMMONSKELETONS(C_ITEM)
 	spell = SPL_SUMMONSKELETON;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_SUMMONSKELETON;
-	description = "Призыв скелета";
+	description = "Призыв скелетов";
 	text[1] = NAME_MANAKOSTEN;
 	count[1] = SPL_SENDCAST_SUMMONSKELETON;
 	text[5] = NAME_VALUE;
@@ -823,7 +815,7 @@ instance ITARSCROLLSUMMONGOLEM(C_ITEM)
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
 	value = 450;
-	visual = "ItAr_Scroll_23.3DS";
+	visual = "ITAR_SCROLL_23_EG.3DS";
 	material = MAT_STONE;
 	spell = SPL_SUMMONGOLEM;
 	cond_atr[2] = ATR_MANA_MAX;
@@ -886,8 +878,6 @@ instance ITARSCROLLDESTROYUNDEAD(C_ITEM)
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_DESTROYUNDEAD;
 	description = "Уничтожение нежити";
-	text[0] = NAME_MAG_CIRCLE;
-	count[0] = mag_circle;
 	text[1] = NAME_MANAKOSTEN;
 	count[1] = SPL_SENDCAST_DESTROYUNDEAD;
 	text[2] = NAME_DAM_MAGIC;
@@ -911,7 +901,7 @@ instance ITARRUNEWINDFIST(C_ITEM)
 	count[0] = mag_circle;
 	text[1] = NAME_MANAKOSTENMAX;
 	count[1] = SPL_SENDCAST_WINDFIST;
-	text[2] = ConcatStrings(NAME_DAM_FLY,NAME_PERMANA);
+	text[2] = "Урон от падения (за ед. маг. силы):";
 	count[2] = SPL_DAMAGE_WINDFIST;
 	text[4] = NAME_SPELL_LOAD;
 	text[5] = NAME_VALUE;
@@ -932,7 +922,7 @@ instance ITARSCROLLWINDFIST(C_ITEM)
 	description = "Кулак ветра";
 	text[1] = NAME_MANAKOSTENMAX;
 	count[1] = SPL_SENDCAST_WINDFIST;
-	text[2] = ConcatStrings(NAME_DAM_FLY,NAME_PERMANA);
+	text[2] = "Урон от падения (за ед. маг. силы):";
 	count[2] = SPL_DAMAGE_WINDFIST;
 	text[4] = NAME_SPELL_LOAD;
 	text[5] = NAME_VALUE;
@@ -954,7 +944,7 @@ instance ITARRUNESTORMFIST(C_ITEM)
 	count[0] = mag_circle;
 	text[1] = NAME_MANAKOSTENMAX;
 	count[1] = SPL_SENDCAST_STORMFIST;
-	text[2] = ConcatStrings(NAME_DAM_FLY,NAME_PERMANA);
+	text[2] = "Урон от падения (за ед. маг. силы):";
 	count[2] = SPL_DAMAGE_STORMFIST;
 	text[4] = NAME_SPELL_LOAD;
 	text[5] = NAME_VALUE;
@@ -975,7 +965,7 @@ instance ITARSCROLLSTORMFIST(C_ITEM)
 	description = "Шторм";
 	text[1] = NAME_MANAKOSTENMAX;
 	count[1] = SPL_SENDCAST_STORMFIST;
-	text[2] = ConcatStrings(NAME_DAM_FLY,NAME_PERMANA);
+	text[2] = "Урон от падения (за ед. маг. силы):";
 	count[2] = SPL_DAMAGE_STORMFIST;
 	text[4] = NAME_SPELL_LOAD;
 	text[5] = NAME_VALUE;
@@ -1033,7 +1023,7 @@ instance ITARRUNECHARM(C_ITEM)
 	material = MAT_STONE;
 	spell = SPL_CHARM;
 	mag_circle = 3;
-	description = "Дружба";
+	description = "Чары";
 	text[0] = NAME_MAG_CIRCLE;
 	count[0] = mag_circle;
 	text[1] = NAME_MANAKOSTEN;
@@ -1048,12 +1038,12 @@ instance ITARSCROLLCHARM(C_ITEM)
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
 	value = 70;
-	visual = "ItAr_Scroll_19.3DS";
+	visual = "ItAr_Scroll_10_EG.3DS";
 	material = MAT_STONE;
 	spell = SPL_CHARM;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_CHARM;
-	description = "Дружба";
+	description = "Чары";
 	text[1] = NAME_MANAKOSTEN;
 	count[1] = SPL_SENDCAST_CHARM;
 	text[5] = NAME_VALUE;
@@ -1085,7 +1075,7 @@ instance ITARSCROLLSLEEP(C_ITEM)
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
 	value = 50;
-	visual = "ItAr_Scroll_16.3DS";
+	visual = "ItAr_Scroll_09_EG.3DS";
 	material = MAT_STONE;
 	spell = SPL_SLEEP;
 	cond_atr[2] = ATR_MANA_MAX;
@@ -1123,7 +1113,7 @@ instance ITARSCROLLPYROKINESIS(C_ITEM)
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
 	value = 70;
-	visual = "ItAr_Scroll_33.3DS";
+	visual = "ItAr_Scroll_29_EG.3DS";
 	material = MAT_STONE;
 	spell = SPL_PYROKINESIS;
 	cond_atr[2] = ATR_MANA_MAX;
@@ -1175,7 +1165,7 @@ instance ITARSCROLLFEAR(C_ITEM)
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
 	value = 250;
-	visual = "ItAr_Scroll_34.3DS";
+	visual = "ItAr_Scroll_11_EG.3DS";
 	material = MAT_STONE;
 	spell = SPL_FEAR;
 	cond_atr[2] = ATR_MANA_MAX;
@@ -1211,7 +1201,7 @@ instance ITARRUNEBREATHOFDEATH(C_ITEM)
 	mainflag = ITEM_KAT_RUNE;
 	flags = 0;
 	value = 1500;
-	visual = "ItAr_Rune_21.3ds";
+	visual = "ItAr_Rune_12.3ds";
 	material = MAT_STONE;
 	spell = SPL_BREATHOFDEATH;
 	mag_circle = 6;
@@ -1237,7 +1227,7 @@ instance ITARSCROLLSHRINK(C_ITEM)
 	spell = SPL_SHRINK;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_SHRINK;
-	description = "Ужас врагов";
+	description = "Уменьшение монстра";
 	text[1] = NAME_MANAKOSTEN;
 	count[1] = SPL_SENDCAST_SHRINK;
 	text[5] = NAME_VALUE;

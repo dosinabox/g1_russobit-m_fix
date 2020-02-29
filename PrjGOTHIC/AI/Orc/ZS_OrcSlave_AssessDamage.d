@@ -1,7 +1,7 @@
 
 func void zs_orcslave_assessdamage()
 {
-	printdebugnpc(PD_ORC_FRAME,"ZS_OrcSlave_AssessDamage: Weglaufen");
+	printdebugnpc(PD_ORC_FRAME,"ZS_OrcSlave_AssessDamage: Weglaufen ");
 	AI_TurnToNPC(self,other);
 	AI_Dodge(self);
 	AI_PlayAni(self,"T_FRIGHTENED");
@@ -10,7 +10,7 @@ func void zs_orcslave_assessdamage()
 
 func int zs_orcslave_assessdamage_loop()
 {
-	printdebugnpc(PD_ORC_FRAME,"ZS_OrcSlave_AssessDamage_Loop: Weglaufen");
+	printdebugnpc(PD_ORC_FRAME,"ZS_OrcSlave_AssessDamage_Loop: Weglaufen ");
 	if(Npc_GetDistToNpc(self,other) > 1200)
 	{
 		return 1;

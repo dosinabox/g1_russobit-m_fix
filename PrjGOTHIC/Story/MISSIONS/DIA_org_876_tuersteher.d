@@ -51,9 +51,16 @@ func void dia_org_876_amsfb_info()
 		self.aivar[AIV_PASSGATE] = TRUE;
 		AI_StopProcessInfos(self);
 	}
+	else if(Hlp_IsItem(myarmor,vlk_armor_l) || Hlp_IsItem(myarmor,vlk_armor_m))
+	{
+		AI_Output(self,other,"SVM_6_WhatsThisSupposedToBe");	//Что тебе здесь нужно? Что ты замышляешь?
+		AI_Output(self,other,"Info_Org_804_FirstWarn_Info_06_00");	//Прислужникам Гомеза вход воспрещен! Уходи!
+		AI_StopProcessInfos(self);
+	}
 	else
 	{
 		AI_Output(self,other,"DIA_Org_876_AmSfb_NOSFB_06_00");	//Что-то ты не похож на рудокопа. Тебе сюда нельзя!
+		AI_StopProcessInfos(self);
 	};
 };
 
@@ -171,7 +178,7 @@ instance DIA_ORG_876_SCSLD(C_INFO)
 
 func int dia_org_876_scsld_condition()
 {
-	if((other.guild == GIL_SLD) || (other.guild == GIL_KDW) || (other.guild == GIL_KDF))
+	if((other.guild == GIL_SLD) || (other.guild == GIL_KDW) || (other.guild == GIL_KDF) || (other.guild == GIL_DMB) || (other.guild == GIL_GUR))
 	{
 		return 1;
 	};
@@ -182,6 +189,7 @@ func void dia_org_876_scsld_info()
 	AI_Output(self,other,"DIA_Org_876_ScSld_06_00");	//Стой! Ты же знаешь правила. Сюда могут пройти только воры или рудокопы.
 	AI_Output(other,self,"DIA_Org_876_ScSld_15_01");	//А ты хочешь меня остановить?
 	AI_Output(self,other,"DIA_Org_876_ScSld_06_02");	//Нет... ладно, проходи...
+	AI_StopProcessInfos(self);
 	self.aivar[AIV_PASSGATE] = TRUE;
 };
 
@@ -199,7 +207,7 @@ instance DIA_ORG_876_SCSEKTE(C_INFO)
 
 func int dia_org_876_scsekte_condition()
 {
-	if((other.guild == GIL_NOV) || (other.guild == GIL_TPL))
+	if((other.guild == GIL_NOV) || (other.guild == GIL_TPL) || (other.guild == GIL_GUR))
 	{
 		return 1;
 	};
@@ -209,8 +217,8 @@ func void dia_org_876_scsekte_info()
 {
 	AI_Output(self,other,"DIA_Org_876_ScSekte_06_00");	//Обычно сюда могут пройти только свои, ну, сектантов мы тоже пускаем.
 	AI_Output(self,other,"DIA_Org_876_ScSekte_06_01");	//Особенно если у них есть с собой болотник.
+	self.aivar[AIV_PASSGATE] = TRUE;
 };
-
 
 var int org_876_gotjoint;
 
@@ -251,6 +259,7 @@ func void dia_org_876_gibkraut_info()
 			b_giveinvitems(other,self,itmijoint_3,1);
 		};
 		AI_Output(self,other,"DIA_Org_876_GibKraut_06_01");	//Всегда рады видеть тебя здесь.
+		AI_StopProcessInfos(self);
 		self.aivar[AIV_PASSGATE] = TRUE;
 		ORG_876_GOTJOINT = TRUE;
 	}
@@ -278,7 +287,7 @@ instance INFO_ORG_876_FIRSTWARN(C_INFO)
 
 func int info_org_876_firstwarn_condition()
 {
-	if((hero.aivar[AIV_GUARDPASSAGE_STATUS] == AIV_GPS_BEGIN) && (self.aivar[AIV_PASSGATE] == FALSE) && (Npc_GetAttitude(self,hero) != ATT_FRIENDLY) && Hlp_StrCmp(Npc_GetNearestWP(self),self.wp))
+	if((hero.aivar[AIV_GUARDPASSAGE_STATUS] == AIV_GPS_BEGIN) && (self.aivar[AIV_PASSGATE] == FALSE) && Hlp_StrCmp(Npc_GetNearestWP(self),self.wp))
 	{
 		return TRUE;
 	};
@@ -287,11 +296,20 @@ func int info_org_876_firstwarn_condition()
 func void info_org_876_firstwarn_info()
 {
 	printglobals(PD_MISSION);
-	AI_Output(self,hero,"Info_Org_876_FirstWarn_Info_06_00");	//Куда это ты собрался?
-	AI_Output(hero,self,"Info_Org_876_FirstWarn_Info_15_01");	//Туда.
-	AI_Output(self,hero,"Info_Org_876_FirstWarn_Info_06_02");	//А для тебя вход закрыт. Сюда могут приходить только воры или рудокопы.
-	hero.aivar[AIV_LASTDISTTOWP] = Npc_GetDistToWP(hero,ORG_876_CHECKPOINT);
-	hero.aivar[AIV_GUARDPASSAGE_STATUS] = AIV_GPS_FIRSTWARN;
+	if(Npc_GetAttitude(self,hero) != ATT_FRIENDLY)
+	{
+		AI_Output(self,hero,"Info_Org_876_FirstWarn_Info_06_00");	//Куда это ты собрался?
+		AI_Output(hero,self,"Info_Org_876_FirstWarn_Info_15_01");	//Туда.
+		AI_Output(self,hero,"Info_Org_876_FirstWarn_Info_06_02");	//А для тебя вход закрыт. Сюда могут приходить только воры или рудокопы.
+		hero.aivar[AIV_LASTDISTTOWP] = Npc_GetDistToWP(hero,ORG_876_CHECKPOINT);
+		hero.aivar[AIV_GUARDPASSAGE_STATUS] = AIV_GPS_FIRSTWARN;
+	}
+	else
+	{
+		AI_Output(self,other,"SVM_6_FriendlyGreetings");	//Привет, дружище!
+		self.aivar[AIV_PASSGATE] = TRUE;
+		AI_StopProcessInfos(self);
+	};
 };
 
 
@@ -314,7 +332,7 @@ func int info_org_876_lastwarn_condition()
 	};
 };
 
-func int info_org_876_lastwarn_info()
+func void info_org_876_lastwarn_info()
 {
 	AI_Output(self,hero,"Info_Org_876_LastWarn_06_00");	//У тебя проблемы со слухом?
 	hero.aivar[AIV_LASTDISTTOWP] = Npc_GetDistToWP(hero,ORG_876_CHECKPOINT);
@@ -342,7 +360,7 @@ func int info_org_876_attack_condition()
 	};
 };
 
-func int info_org_876_attack_info()
+func void info_org_876_attack_info()
 {
 	hero.aivar[AIV_LASTDISTTOWP] = 0;
 	hero.aivar[AIV_GUARDPASSAGE_STATUS] = AIV_GPS_PUNISH;

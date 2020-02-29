@@ -51,30 +51,35 @@ func void evt_tpl_16_func_01()
 func void evt_tpl_sleeperdemon_01()
 {
 	AI_PlayAni(sleeper,"T_HURT");
+	Snd_Play("SLE_HURT");
 	Wld_InsertNpc(demonlord,"TPL_410");
 };
 
 func void evt_tpl_sleeperdemon_02()
 {
 	AI_PlayAni(sleeper,"T_HURT");
+	Snd_Play("SLE_HURT");
 	Wld_InsertNpc(demonlord,"TPL_389");
 };
 
 func void evt_tpl_sleeperdemon_03()
 {
 	AI_PlayAni(sleeper,"T_HURT");
+	Snd_Play("SLE_HURT");
 	Wld_InsertNpc(demonlord,"TPL_391");
 };
 
 func void evt_tpl_sleeperdemon_04()
 {
 	AI_PlayAni(sleeper,"T_HURT");
+	Snd_Play("SLE_HURT");
 	Wld_InsertNpc(demonlord,"TPL_409");
 };
 
 func void evt_tpl_sleeperdemon_05()
 {
 	AI_PlayAni(sleeper,"T_HURT");
+	Snd_Play("SLE_HURT");
 	Wld_InsertNpc(demonlord,"TPL_390");
 };
 

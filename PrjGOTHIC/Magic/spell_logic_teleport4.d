@@ -16,15 +16,12 @@ func int spell_logic_teleport4(var int manainvested)
 		};
 		return SPL_NEXTLEVEL;
 	}
-	else
+	else if(manainvested >= SPL_SENDCAST_TELEPORT)
 	{
-		if(manainvested >= SPL_SENDCAST_TELEPORT)
-		{
-			AI_Teleport(self,"OW_SLEEPERENTRANCE");
-			AI_PlayAni(self,"T_HEASHOOT_2_STAND");
-			return SPL_SENDCAST;
-		};
-		return SPL_NEXTLEVEL;
+		AI_Teleport(self,"OW_SLEEPERENTRANCE");
+		AI_PlayAni(self,"T_HEASHOOT_2_STAND");
+		return SPL_SENDCAST;
 	};
+	return SPL_NEXTLEVEL;
 };
 

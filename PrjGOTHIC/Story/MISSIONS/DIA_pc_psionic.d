@@ -215,7 +215,7 @@ instance DIA_LESTER_HOWPROOFWORTHY(C_INFO)
 
 func int dia_lester_howproofworthy_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_lester_wannajoin) && (Npc_GetTrueGuild(hero) == GIL_NONE))
+	if(Npc_KnowsInfo(hero,dia_lester_wannajoin) && (Npc_GetTrueGuild(hero) == GIL_NONE) && (KAPITEL < 2))
 	{
 		return 1;
 	};
@@ -250,7 +250,7 @@ func int dia_lester_weitweg_condition()
 {
 	var C_NPC namib;
 	namib = Hlp_GetNpc(gur_1204_baalnamib);
-	if((Npc_GetDistToNpc(other,namib) > 1000) && (BAALNAMIB_ANSPRECHBAR == FALSE) && (Npc_GetTrueGuild(hero) == GIL_NONE))
+	if((Npc_GetDistToNpc(other,namib) > 1000) && (BAALNAMIB_ANSPRECHBAR == FALSE) && (Npc_GetTrueGuild(hero) == GIL_NONE) && (KAPITEL < 2))
 	{
 		return 1;
 	};
@@ -267,6 +267,8 @@ func void dia_lester_weitweg_info()
 	AI_Output(self,other,"DIA_Lester_WeitWeg_05_06");	//Я спрошу тебя, что заставило тебя прийти к такому решению, а ты ответишь, что тебе было видение, в котором Спящий призвал тебя к себе.
 	AI_Output(self,other,"DIA_Lester_WeitWeg_05_07");	//Он не останется равнодушным. Ты сможешь с этим справиться?
 	AI_Output(other,self,"DIA_Lester_WeitWeg_15_08");	//Смогу.
+	Log_CreateTopic(CH1_JOINPSI,LOG_MISSION);
+	Log_SetTopicStatus(CH1_JOINPSI,LOG_RUNNING);
 	b_logentry(CH1_JOINPSI,"Чтобы удивить Идола Намиба, я должен сказать Лестеру, что принимаю веру в Спящего и отказываюсь от старых богов, так чтобы он это слышал.");
 	LESTER_SHOW = TRUE;
 };
@@ -323,7 +325,7 @@ func int dia_lester_show_condition()
 func void dia_lester_show_info()
 {
 	AI_Output(other,self,"DIA_Lester_Show_15_00");	//Я отрекся от старых богов.
-	AI_Output(self,other,"DIA_Lester_Show_05_01");	// Правда? А почему ты так решил?
+	AI_Output(self,other,"DIA_Lester_Show_05_01");	//Правда? А почему ты так решил?
 	AI_Output(other,self,"DIA_Lester_Show_15_02");	//Мне было видение. Спящий говорил со мной.
 	AI_Output(self,other,"DIA_Lester_Show_05_03");	//И что он сказал?
 	AI_Output(other,self,"DIA_Lester_Show_15_04");	//Он сказал: иди в лагерь на болотах и стань одним из братьев.
@@ -458,7 +460,7 @@ func void pc_psionic_guidefirst_maingate()
 
 func void pc_psionic_guidefirst_smith()
 {
-	AI_Output(other,self,"PC_Psionic_GUIDEFIRST_SMITH_Info_15_01");	//...к кузнице.
+	AI_Output(other,self,"PC_Psionic_GUIDEFIRST_SMITH_Info_15_01");	//...к кузнице?
 	AI_Output(self,other,"PC_Psionic_GUIDEFIRST_SMITH_Info_05_02");	//Следуй за мной!
 	LESTERGUIDE = 1;
 	AI_StopProcessInfos(self);
@@ -467,7 +469,7 @@ func void pc_psionic_guidefirst_smith()
 
 func void pc_psionic_guidefirst_tempel()
 {
-	AI_Output(other,self,"PC_Psionic_GUIDEFIRST_TEMPEL_Info_15_01");	//...к Храму.
+	AI_Output(other,self,"PC_Psionic_GUIDEFIRST_TEMPEL_Info_15_01");	//...к Храму?
 	AI_Output(self,other,"PC_Psionic_GUIDEFIRST_TEMPEL_Info_05_02");	//Следуй за мной!
 	LESTERGUIDE = 2;
 	AI_StopProcessInfos(self);
@@ -476,7 +478,7 @@ func void pc_psionic_guidefirst_tempel()
 
 func void pc_psionic_guidefirst_train()
 {
-	AI_Output(other,self,"PC_Psionic_GUIDEFIRST_TRAIN_Info_15_01");	//...к наставникам.
+	AI_Output(other,self,"PC_Psionic_GUIDEFIRST_TRAIN_Info_15_01");	//...к наставникам?
 	AI_Output(self,other,"PC_Psionic_GUIDEFIRST_TARIN_Info_05_02");	//Следуй за мной!
 	LESTERGUIDE = 3;
 	AI_StopProcessInfos(self);
@@ -485,7 +487,7 @@ func void pc_psionic_guidefirst_train()
 
 func void pc_psionic_guidefirst_herb()
 {
-	AI_Output(other,self,"PC_Psionic_GUIDEFIRST_HERB_Info_15_01");	//...в лабораторию.
+	AI_Output(other,self,"PC_Psionic_GUIDEFIRST_HERB_Info_15_01");	//...в лабораторию?
 	AI_Output(self,other,"PC_Psionic_GUIDEFIRST_HERB_Info_05_02");	//Следуй за мной!
 	LESTERGUIDE = 4;
 	AI_StopProcessInfos(self);
@@ -651,8 +653,10 @@ func void pc_psionic_send_info()
 	AI_Output(self,other,"PC_Psionic_SEND_Info_05_02");	//Гуру нашего Братства ожидают великого события.
 	AI_Output(other,self,"PC_Psionic_SEND_Info_15_03");	//Да? Они хотят выйти отсюда?
 	AI_Output(self,other,"PC_Psionic_SEND_Info_05_04");	//Они хотят призвать Спящего. Но им нужно что-то, что поможет объединить их духовные силы.
-	AI_Output(other,self,"PC_Psionic_SEND_Info_15_05");	//Да? 
+	//AI_Output(other,self,"PC_Psionic_SEND_Info_15_05");	//Да?
 	AI_Output(self,other,"PC_Psionic_SEND_Info_05_06");	//Для этого нужен магический артефакт, который они называют юнитором.
+	Npc_ExchangeRoutine(pc_psionic,"StartCH2");
+	Npc_ExchangeRoutine(gur_1204_baalnamib,"StartCH2");
 	b_kapitelwechsel(2);
 };
 
@@ -822,7 +826,7 @@ instance PC_PSIONIC_FOKUSPLACE(C_INFO)
 
 func int pc_psionic_fokusplace_condition()
 {
-	if(Npc_GetDistToWP(hero,"LOCATION_19_03_PATH_RUIN7") < 400)
+	if(Npc_GetDistToWP(hero,"LOCATION_19_03_PATH_RUIN7") < 400 && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -853,7 +857,7 @@ instance PC_PSIONIC_COMEBACK(C_INFO)
 
 func int pc_psionic_comeback_condition()
 {
-	if((Npc_GetDistToWP(hero,"PATH_TO_PLATEAU04_BRIDGE2") < 600) && Npc_KnowsInfo(hero,pc_psionic_followme) && !Npc_HasItems(hero,focus_3))
+	if((Npc_GetDistToWP(hero,"PATH_TO_PLATEAU04_BRIDGE2") < 600) && Npc_KnowsInfo(hero,pc_psionic_followme) && !Npc_HasItems(hero,focus_3) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -875,14 +879,14 @@ instance PC_PSIONIC_IAMHURT(C_INFO)
 	condition = pc_psionic_iamhurt_condition;
 	information = pc_psionic_iamhurt_info;
 	important = 0;
-	permanent = 0;
+	permanent = 1;
 	description = "Я ранен. Ты можешь помочь мне?";
 };
 
 
 func int pc_psionic_iamhurt_condition()
 {
-	if((hero.attribute[ATR_HITPOINTS] < (hero.attribute[ATR_HITPOINTS_MAX] / 2)) && Npc_KnowsInfo(hero,pc_psionic_followme))
+	if((hero.attribute[ATR_HITPOINTS] < hero.attribute[ATR_HITPOINTS_MAX]) && Npc_KnowsInfo(hero,pc_psionic_followme) && !Npc_KnowsInfo(hero,pc_psionic_finish))
 	{
 		return TRUE;
 	};
@@ -891,9 +895,29 @@ func int pc_psionic_iamhurt_condition()
 func void pc_psionic_iamhurt_info()
 {
 	AI_Output(other,self,"PC_Psionic_IAMHURT_Info_15_01");	//Я ранен. Ты можешь помочь мне?
-	AI_Output(self,other,"PC_Psionic_IAMHURT_Info_05_02");	//Вот, возьми это зелье лечения.
-	CreateInvItem(self,itfo_potion_health_02);
-	b_giveinvitems(self,hero,itfo_potion_health_02,1);
+	if(LESTER_HEAL == 0)
+	{
+		AI_Output(self,other,"PC_Psionic_IAMHURT_Info_05_02");	//Вот, возьми это зелье лечения.
+		b_giveinvitems(self,hero,itfo_potion_health_02,1);
+		LESTER_HEAL = 1;
+	}
+	else if(LESTER_HEAL == 1)
+	{
+		AI_Output(self,other,"PC_Psionic_IAMHURT_Info_05_02");	//Вот, возьми это зелье лечения.
+		b_giveinvitems(self,hero,itfo_potion_health_02,1);
+		LESTER_HEAL = 2;
+	}
+	else if(LESTER_HEAL == 2)
+	{
+		AI_Output(self,other,"PC_Psionic_IAMHURT_Info_05_02");	//Вот, возьми это зелье лечения.
+		b_giveinvitems(self,hero,itfo_potion_health_02,1);
+		LESTER_HEAL = 3;
+	}
+	else
+	{
+		AI_Output(self,other,"SVM_5_Help");	//Черт!
+	};
+	AI_StopProcessInfos(self);
 };
 
 
@@ -943,7 +967,7 @@ instance PC_PSIONIC_TIP(C_INFO)
 
 func int pc_psionic_tip_condition()
 {
-	if(Npc_KnowsInfo(hero,pc_psionic_urkunde) && !Npc_HasItems(hero,focus_3))
+	if(Npc_KnowsInfo(hero,pc_psionic_urkunde) && !Npc_HasItems(hero,focus_3) && !Npc_KnowsInfo(hero,pc_psionic_finish))
 	{
 		return TRUE;
 	};
@@ -968,7 +992,7 @@ instance PC_PSIONIC_LEAVE(C_INFO)
 
 func int pc_psionic_leave_condition()
 {
-	if(!Npc_HasItems(hero,focus_3) && !Npc_HasItems(self,itwr_urkunde_01) && (Npc_GetDistToWP(hero,"PATH_TO_PLATEAU04_BRIDGE2") < 900))
+	if(!Npc_HasItems(hero,focus_3) && !Npc_HasItems(self,itwr_urkunde_01) && (Npc_GetDistToWP(hero,"PATH_TO_PLATEAU04_BRIDGE2") < 900) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -996,7 +1020,7 @@ instance PC_PSIONIC_BALKON(C_INFO)
 
 func int pc_psionic_balkon_condition()
 {
-	if(!Npc_HasItems(self,itwr_urkunde_01) && (Npc_GetDistToWP(hero,"LOCATION_19_03_PEMTAGRAM2") < 1000))
+	if(!Npc_HasItems(self,itwr_urkunde_01) && (Npc_GetDistToWP(hero,"LOCATION_19_03_PEMTAGRAM2") < 1000) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -1139,9 +1163,14 @@ func void info_lester_diegomilten_info()
 	AI_Output(hero,self,"Info_FreemineOrc_EXIT_15_03");	//Спасибо. А теперь мне нужно уходить.
 	AI_Output(self,hero,"Info_Lester_EXIT_05_02");	//Да хранит тебя Спящий!
 	b_givexp(XP_MESSAGEFORGORN);
+	if(KAPITEL == 6)
+	{
+		Npc_ExchangeRoutine(self,"Reunion");
+	};
 	if(WARNED_GORN_OR_LESTER == FALSE)
 	{
 		WARNED_GORN_OR_LESTER = TRUE;
+		b_logentry(CH4_4FRIENDS,"Лестер скоро направится на встречу с друзьями. Надеюсь, с ними все будет в порядке.");
 	}
 	else
 	{

@@ -27,14 +27,17 @@ instance DIA_GORNARAN_WACHE(C_INFO)
 	nr = 1;
 	condition = dia_gornaran_wache_condition;
 	information = dia_gornaran_wache_info;
-	permanent = 1;
+	permanent = 0;
 	description = "Что ты здесь делаешь?";
 };
 
 
 func int dia_gornaran_wache_condition()
 {
-	return TRUE;
+	if(KAPITEL < 6)
+	{
+		return TRUE;
+	};
 };
 
 func void dia_gornaran_wache_info()
@@ -49,7 +52,7 @@ func void dia_gornaran_wache_info()
 
 instance INFO_TPL_1405_GORNARAN(C_INFO)
 {
-	npc = tpl_1405_gornaran;
+	npc = tpl_1490_gornaran;
 	condition = info_tpl_1405_gornaran_condition;
 	information = info_tpl_1405_gornaran_info;
 	permanent = 0;
@@ -59,98 +62,24 @@ instance INFO_TPL_1405_GORNARAN(C_INFO)
 
 func int info_tpl_1405_gornaran_condition()
 {
-	if(KAPITEL == 6)
-	{
-		return TRUE;
-	};
+	return TRUE;
 };
 
 func void info_tpl_1405_gornaran_info()
 {
 	AI_Output(self,other,"Info_TPL_1405_GorNaRan_Info_13_01");	//Куда ты собрался? Здесь проход запрещен.
-};
-
-
-instance INFO_TPL_1405_GORNARAN2(C_INFO)
-{
-	npc = tpl_1405_gornaran;
-	nr = 1;
-	condition = info_tpl_1405_gornaran2_condition;
-	information = info_tpl_1405_gornaran2_info;
-	permanent = 1;
-	description = "Что здесь происходит?";
-};
-
-
-func int info_tpl_1405_gornaran2_condition()
-{
-	if(Npc_KnowsInfo(hero,info_tpl_1405_gornaran))
-	{
-		return 1;
-	};
-};
-
-func void info_tpl_1405_gornaran2_info()
-{
 	AI_Output(other,self,"Info_TPL_1405_GorNaRan_Info_15_02");	//Что здесь происходит?
 	AI_Output(self,other,"Info_TPL_1405_GorNaRan_Info_13_03");	//И ты еще спрашиваешь? Встань на колени и моли Спящего о прощении, настал миг его пробуждения и час расплаты для всех неверных. Будут они стерты с лица земли.
-};
-
-
-instance INFO_TPL_1405_GORNARAN3(C_INFO)
-{
-	npc = tpl_1405_gornaran;
-	nr = 1;
-	condition = info_tpl_1405_gornaran3_condition;
-	information = info_tpl_1405_gornaran3_info;
-	permanent = 1;
-	description = "Я же просто хотел посмотреть.";
-};
-
-
-func int info_tpl_1405_gornaran3_condition()
-{
-	if(Npc_KnowsInfo(hero,info_tpl_1405_gornaran))
-	{
-		return 1;
-	};
-};
-
-func void info_tpl_1405_gornaran3_info()
-{
 	AI_Output(other,self,"Info_TPL_1405_GorNaRan_Info_15_04");	//Я же просто хотел посмотреть.
+	AI_DrawWeapon(self);
 	AI_Output(self,other,"Info_TPL_1405_GorNaRan_Info_13_05");	//Ты, жалкий червь! Ты не можешь осквернять это место, ибо момент пробуждения Спящего близок! Я должен буду избавить его от твоего присутствия.
-	AI_StopProcessInfos(self);
-	Npc_SetTarget(self,hero);
-	AI_StartState(self,zs_attack,1,"");
-};
-
-
-instance INFO_TPL_1405_GORNARAN4(C_INFO)
-{
-	npc = tpl_1405_gornaran;
-	nr = 1;
-	condition = info_tpl_1405_gornaran4_condition;
-	information = info_tpl_1405_gornaran4_info;
-	permanent = 0;
-	description = "Ты не сможешь остановить меня!";
-};
-
-
-func int info_tpl_1405_gornaran4_condition()
-{
-	if(Npc_KnowsInfo(hero,info_tpl_1405_gornaran))
-	{
-		return 1;
-	};
-};
-
-func void info_tpl_1405_gornaran4_info()
-{
 	AI_Output(other,self,"Info_TPL_1405_GorNaRan_Info_15_06");	//Ты не сможешь остановить меня!
 	AI_Output(self,other,"Info_TPL_1405_GorNaRan_Info_13_07");	//И это все, парень! За Спящего!
 	AI_StopProcessInfos(self);
 	Npc_SetTarget(self,hero);
 	AI_StartState(self,zs_attack,1,"");
+	npc_setpermattitude(self,ATT_HOSTILE);
+	Npc_SetTempAttitude(self,ATT_HOSTILE);
+	Npc_ExchangeRoutine(self,"HOSTILE");
 };
 

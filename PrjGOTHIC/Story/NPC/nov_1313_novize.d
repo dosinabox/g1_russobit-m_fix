@@ -6,7 +6,7 @@ instance NOV_1313_NOVIZE(NPC_DEFAULT)
 	guild = GIL_NOV;
 	level = 3;
 	voice = 2;
-	id = 1310;
+	id = 1313;
 	attribute[ATR_STRENGTH] = 10;
 	attribute[ATR_DEXTERITY] = 10;
 	attribute[ATR_MANA_MAX] = 0;
@@ -28,5 +28,11 @@ func void rtn_start_1313()
 {
 	ta_sleep(23,55,8,5,"PSI_12_HUT_IN_BED2");
 	ta_listen(8,5,23,55,"PSI_12_HUT_EX_TEACH2");
+};
+
+func void rtn_remove_1313()
+{
+	ta_stay(23,0,7,45,"WP_INTRO01");
+	ta_stay(7,45,23,0,"WP_INTRO01");
 };
 

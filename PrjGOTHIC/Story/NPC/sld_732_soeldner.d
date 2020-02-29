@@ -44,3 +44,9 @@ func void rtn_start_732()
 	ta_guardpassage(22,0,8,0,"NC_GUARD_MAGES_RIGHT");
 };
 
+func void rtn_orealert_732()
+{
+	ta_guard(8,0,22,0,"NC_OREALERT_1");
+	ta_guard(22,0,8,0,"NC_OREALERT_1");
+};
+

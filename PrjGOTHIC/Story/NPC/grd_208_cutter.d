@@ -36,7 +36,7 @@ instance GRD_208_CUTTER(NPC_DEFAULT)
 
 func void rtn_start_208()
 {
-	ta_sleep(23,35,8,35,"OCC_MERCS_UPPER_RIGHT_ROOM_BED6");
+	ta_sleep(23,35,8,35,"OCC_MERCS_UPPER_RIGHT_ROOM_BED2");
 	ta_smalltalk(8,35,23,35,"OCC_MERCS_ENTRANCE");
 };
 
@@ -44,5 +44,17 @@ func void rtn_ot_208()
 {
 	ta_guard(7,0,20,0,"OCC_MERCS_ENTRANCE");
 	ta_guard(20,0,7,0,"OCC_MERCS_ENTRANCE");
+};
+
+func void rtn_fmtaken_208()
+{
+	ta_stayneutral(7,0,20,0,"OCR_NORTHGATE_LEFT_GUARD_CHANGE");
+	ta_stayneutral(20,0,7,0,"OCR_NORTHGATE_LEFT_GUARD_CHANGE");
+};
+
+func void rtn_fmtaken2_208()
+{
+	ta_stay(7,0,20,0,"OCR_NORTHGATE_LEFT_GUARD_CHANGE");
+	ta_stay(20,0,7,0,"OCR_NORTHGATE_LEFT_GUARD_CHANGE");
 };
 

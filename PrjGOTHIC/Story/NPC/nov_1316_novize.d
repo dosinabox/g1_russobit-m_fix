@@ -20,180 +20,105 @@ instance NOV_1316_NOVIZE(NPC_DEFAULT)
 	Mdl_SetModelFatness(self,-1);
 	fight_tactic = FAI_HUMAN_COWARD;
 	EquipItem(self,itmw_1h_hatchet_01);
+	CreateInvItem(self,itmw_1h_sledgehammer_01);
 	daily_routine = rtn_start_1316;
 };
 
 
 func void rtn_start_1316()
 {
-	ta_smith_fire(8,0,8,10,"PSI_SMITH_01");
-	ta_smith_anvil(8,10,8,20,"PSI_SMITH_01");
+	ta_standaround(7,50,8,20,"PSI_SMITH_1_2");
 	ta_smith_fire(8,20,8,30,"PSI_SMITH_01");
 	ta_smith_anvil(8,30,8,40,"PSI_SMITH_01");
 	ta_smith_cool(8,40,8,50,"PSI_SMITH_01");
 	ta_smith_sharp(8,50,8,55,"PSI_SMITH_01");
-	ta_sitaround(8,55,9,0,"PSI_SMITH_01");
-	ta_smith_fire(9,0,9,10,"PSI_SMITH_01");
-	ta_smith_anvil(9,10,9,20,"PSI_SMITH_01");
+	
+	ta_standaround(8,55,9,20,"PSI_SMITH_1_2");
 	ta_smith_fire(9,20,9,30,"PSI_SMITH_01");
 	ta_smith_anvil(9,30,9,40,"PSI_SMITH_01");
 	ta_smith_cool(9,40,9,50,"PSI_SMITH_01");
 	ta_smith_sharp(9,50,9,55,"PSI_SMITH_01");
-	ta_sitaround(9,55,10,0,"PSI_SMITH_01");
-	ta_smith_fire(10,0,10,10,"PSI_SMITH_01");
-	ta_smith_anvil(10,10,10,20,"PSI_SMITH_01");
+	
+	ta_standaround(9,55,10,20,"PSI_SMITH_1_2");
 	ta_smith_fire(10,20,10,30,"PSI_SMITH_01");
 	ta_smith_anvil(10,30,10,40,"PSI_SMITH_01");
 	ta_smith_cool(10,40,10,50,"PSI_SMITH_01");
 	ta_smith_sharp(10,50,10,55,"PSI_SMITH_01");
-	ta_sitaround(10,55,11,0,"PSI_SMITH_01");
-	ta_smith_fire(11,0,11,10,"PSI_SMITH_01");
-	ta_smith_anvil(11,10,11,20,"PSI_SMITH_01");
+	
+	ta_standaround(10,55,11,20,"PSI_SMITH_1_2");
 	ta_smith_fire(11,20,11,30,"PSI_SMITH_01");
 	ta_smith_anvil(11,30,11,40,"PSI_SMITH_01");
 	ta_smith_cool(11,40,11,50,"PSI_SMITH_01");
 	ta_smith_sharp(11,50,11,55,"PSI_SMITH_01");
-	ta_sitaround(11,55,12,0,"PSI_SMITH_01");
-	ta_smith_fire(12,0,12,10,"PSI_SMITH_01");
-	ta_smith_anvil(12,10,12,20,"PSI_SMITH_01");
+	
+	ta_standaround(11,55,12,20,"PSI_SMITH_1_2");
 	ta_smith_fire(12,20,12,30,"PSI_SMITH_01");
 	ta_smith_anvil(12,30,12,40,"PSI_SMITH_01");
 	ta_smith_cool(12,40,12,50,"PSI_SMITH_01");
 	ta_smith_sharp(12,50,12,55,"PSI_SMITH_01");
-	ta_sitaround(12,55,13,0,"PSI_SMITH_01");
-	ta_smith_fire(13,0,13,10,"PSI_SMITH_01");
-	ta_smith_anvil(13,10,13,20,"PSI_SMITH_01");
+	
+	ta_standaround(12,55,13,20,"PSI_SMITH_1_2");
 	ta_smith_fire(13,20,13,30,"PSI_SMITH_01");
 	ta_smith_anvil(13,30,13,40,"PSI_SMITH_01");
 	ta_smith_cool(13,40,13,50,"PSI_SMITH_01");
 	ta_smith_sharp(13,50,13,55,"PSI_SMITH_01");
-	ta_sitaround(13,55,14,0,"PSI_SMITH_01");
-	ta_smith_fire(14,0,14,10,"PSI_SMITH_01");
-	ta_smith_anvil(14,10,14,20,"PSI_SMITH_01");
+	
+	ta_standaround(13,55,14,20,"PSI_SMITH_1_2");
 	ta_smith_fire(14,20,14,30,"PSI_SMITH_01");
 	ta_smith_anvil(14,30,14,40,"PSI_SMITH_01");
 	ta_smith_cool(14,40,14,50,"PSI_SMITH_01");
 	ta_smith_sharp(14,50,14,55,"PSI_SMITH_01");
-	ta_sitaround(14,55,15,0,"PSI_SMITH_01");
-	ta_smith_fire(15,0,15,10,"PSI_SMITH_01");
-	ta_smith_anvil(15,10,15,20,"PSI_SMITH_01");
+	
+	ta_standaround(14,55,15,20,"PSI_SMITH_1_2");
 	ta_smith_fire(15,20,15,30,"PSI_SMITH_01");
 	ta_smith_anvil(15,30,15,40,"PSI_SMITH_01");
 	ta_smith_cool(15,40,15,50,"PSI_SMITH_01");
 	ta_smith_sharp(15,50,15,55,"PSI_SMITH_01");
-	ta_sitaround(15,55,16,0,"PSI_SMITH_01");
-	ta_smith_fire(16,0,16,10,"PSI_SMITH_01");
-	ta_smith_anvil(16,10,16,20,"PSI_SMITH_01");
+	
+	ta_standaround(15,55,16,20,"PSI_SMITH_1_2");
 	ta_smith_fire(16,20,16,30,"PSI_SMITH_01");
 	ta_smith_anvil(16,30,16,40,"PSI_SMITH_01");
 	ta_smith_cool(16,40,16,50,"PSI_SMITH_01");
 	ta_smith_sharp(16,50,16,55,"PSI_SMITH_01");
-	ta_sitaround(16,55,17,0,"PSI_SMITH_01");
-	ta_smith_fire(17,0,17,10,"PSI_SMITH_01");
-	ta_smith_anvil(17,10,17,20,"PSI_SMITH_01");
+	
+	ta_standaround(16,55,17,20,"PSI_SMITH_1_2");
 	ta_smith_fire(17,20,17,30,"PSI_SMITH_01");
 	ta_smith_anvil(17,30,17,40,"PSI_SMITH_01");
 	ta_smith_cool(17,40,17,50,"PSI_SMITH_01");
 	ta_smith_sharp(17,50,17,55,"PSI_SMITH_01");
-	ta_sitaround(17,55,18,0,"PSI_SMITH_01");
-	ta_smith_fire(18,0,18,10,"PSI_SMITH_01");
-	ta_smith_anvil(18,10,18,20,"PSI_SMITH_01");
+	
+	ta_standaround(17,55,18,20,"PSI_SMITH_1_2");
 	ta_smith_fire(18,20,18,30,"PSI_SMITH_01");
 	ta_smith_anvil(18,30,18,40,"PSI_SMITH_01");
 	ta_smith_cool(18,40,18,50,"PSI_SMITH_01");
 	ta_smith_sharp(18,50,18,55,"PSI_SMITH_01");
-	ta_sitaround(18,55,19,0,"PSI_SMITH_01");
-	ta_smith_fire(19,0,19,10,"PSI_SMITH_01");
-	ta_smith_anvil(19,10,19,20,"PSI_SMITH_01");
+	
+	ta_standaround(18,55,19,20,"PSI_SMITH_1_2");
 	ta_smith_fire(19,20,19,30,"PSI_SMITH_01");
 	ta_smith_anvil(19,30,19,40,"PSI_SMITH_01");
 	ta_smith_cool(19,40,19,50,"PSI_SMITH_01");
 	ta_smith_sharp(19,50,19,55,"PSI_SMITH_01");
-	ta_sitaround(19,55,20,0,"PSI_SMITH_01");
-	ta_smith_fire(20,0,20,10,"PSI_SMITH_01");
-	ta_smith_anvil(20,10,20,20,"PSI_SMITH_01");
+	
+	ta_standaround(19,55,20,20,"PSI_SMITH_1_2");
 	ta_smith_fire(20,20,20,30,"PSI_SMITH_01");
 	ta_smith_anvil(20,30,20,40,"PSI_SMITH_01");
 	ta_smith_cool(20,40,20,50,"PSI_SMITH_01");
 	ta_smith_sharp(20,50,20,55,"PSI_SMITH_01");
-	ta_sitaround(20,55,21,0,"PSI_SMITH_01");
-	ta_smith_fire(21,0,21,10,"PSI_SMITH_01");
-	ta_smith_anvil(21,10,21,20,"PSI_SMITH_01");
+	
+	ta_standaround(20,55,21,20,"PSI_SMITH_1_2");
 	ta_smith_fire(21,20,21,30,"PSI_SMITH_01");
 	ta_smith_anvil(21,30,21,40,"PSI_SMITH_01");
 	ta_smith_cool(21,40,21,50,"PSI_SMITH_01");
 	ta_smith_sharp(21,50,21,55,"PSI_SMITH_01");
-	ta_sitaround(21,55,22,0,"PSI_SMITH_01");
-	ta_smith_fire(22,0,22,10,"PSI_SMITH_01");
-	ta_smith_anvil(22,10,22,20,"PSI_SMITH_01");
+	
+	ta_standaround(21,55,22,20,"PSI_SMITH_1_2");
 	ta_smith_fire(22,20,22,30,"PSI_SMITH_01");
-	ta_smith_anvil(22,30,22,40,"PSI_SMITH_01");
-	ta_smith_cool(22,40,22,50,"PSI_SMITH_01");
-	ta_smith_sharp(22,50,22,55,"PSI_SMITH_01");
-	ta_sitaround(22,55,23,0,"PSI_SMITH_01");
-	ta_smith_fire(23,0,23,10,"PSI_SMITH_01");
-	ta_smith_anvil(23,10,23,20,"PSI_SMITH_01");
-	ta_smith_fire(23,20,23,30,"PSI_SMITH_01");
-	ta_smith_anvil(23,30,23,40,"PSI_SMITH_01");
-	ta_smith_cool(23,40,23,50,"PSI_SMITH_01");
-	ta_smith_sharp(23,50,23,55,"PSI_SMITH_01");
-	ta_sitaround(23,55,24,0,"PSI_SMITH_01");
-	ta_smith_fire(0,0,0,10,"PSI_SMITH_01");
-	ta_smith_anvil(0,10,0,20,"PSI_SMITH_01");
-	ta_smith_fire(0,20,0,30,"PSI_SMITH_01");
-	ta_smith_anvil(0,30,0,40,"PSI_SMITH_01");
-	ta_smith_cool(0,40,0,50,"PSI_SMITH_01");
-	ta_smith_sharp(0,50,0,55,"PSI_SMITH_01");
-	ta_sitaround(0,55,1,0,"PSI_SMITH_01");
-	ta_smith_fire(1,0,1,10,"PSI_SMITH_01");
-	ta_smith_anvil(1,10,1,20,"PSI_SMITH_01");
-	ta_smith_fire(1,20,1,30,"PSI_SMITH_01");
-	ta_smith_anvil(1,30,1,40,"PSI_SMITH_01");
-	ta_smith_cool(1,40,1,50,"PSI_SMITH_01");
-	ta_smith_sharp(1,50,1,55,"PSI_SMITH_01");
-	ta_sitaround(1,55,2,0,"PSI_SMITH_01");
-	ta_smith_fire(2,0,2,10,"PSI_SMITH_01");
-	ta_smith_anvil(2,10,2,20,"PSI_SMITH_01");
-	ta_smith_fire(2,20,2,30,"PSI_SMITH_01");
-	ta_smith_anvil(2,30,2,40,"PSI_SMITH_01");
-	ta_smith_cool(2,40,2,50,"PSI_SMITH_01");
-	ta_smith_sharp(2,50,2,55,"PSI_SMITH_01");
-	ta_sitaround(2,55,3,0,"PSI_SMITH_01");
-	ta_smith_fire(3,0,3,10,"PSI_SMITH_01");
-	ta_smith_anvil(3,10,3,20,"PSI_SMITH_01");
-	ta_smith_fire(3,20,3,30,"PSI_SMITH_01");
-	ta_smith_anvil(3,30,3,40,"PSI_SMITH_01");
-	ta_smith_cool(3,40,3,50,"PSI_SMITH_01");
-	ta_smith_sharp(3,50,3,55,"PSI_SMITH_01");
-	ta_sitaround(3,55,4,0,"PSI_SMITH_01");
-	ta_smith_fire(4,0,4,10,"PSI_SMITH_01");
-	ta_smith_anvil(4,10,4,20,"PSI_SMITH_01");
-	ta_smith_fire(4,20,4,30,"PSI_SMITH_01");
-	ta_smith_anvil(4,30,4,40,"PSI_SMITH_01");
-	ta_smith_cool(4,40,4,50,"PSI_SMITH_01");
-	ta_smith_sharp(4,50,4,55,"PSI_SMITH_01");
-	ta_sitaround(4,55,5,0,"PSI_SMITH_01");
-	ta_smith_fire(5,0,5,10,"PSI_SMITH_01");
-	ta_smith_anvil(5,10,5,20,"PSI_SMITH_01");
-	ta_smith_fire(5,20,5,30,"PSI_SMITH_01");
-	ta_smith_anvil(5,30,5,40,"PSI_SMITH_01");
-	ta_smith_cool(5,40,5,50,"PSI_SMITH_01");
-	ta_smith_sharp(5,50,5,55,"PSI_SMITH_01");
-	ta_sitaround(5,55,6,0,"PSI_SMITH_01");
-	ta_smith_fire(6,0,6,10,"PSI_SMITH_01");
-	ta_smith_anvil(6,10,6,20,"PSI_SMITH_01");
-	ta_smith_fire(6,20,6,30,"PSI_SMITH_01");
-	ta_smith_anvil(6,30,6,40,"PSI_SMITH_01");
-	ta_smith_cool(6,40,6,50,"PSI_SMITH_01");
-	ta_smith_sharp(6,50,6,55,"PSI_SMITH_01");
-	ta_sitaround(6,55,7,0,"PSI_SMITH_01");
-	ta_smith_fire(7,0,7,10,"PSI_SMITH_01");
-	ta_smith_anvil(7,10,7,20,"PSI_SMITH_01");
-	ta_smith_fire(7,20,7,30,"PSI_SMITH_01");
-	ta_smith_anvil(7,30,7,40,"PSI_SMITH_01");
-	ta_smith_cool(7,40,7,50,"PSI_SMITH_01");
-	ta_smith_sharp(7,50,7,55,"PSI_SMITH_01");
-	ta_sitaround(7,55,8,0,"PSI_SMITH_01");
+	ta_smith_anvil(21,30,21,40,"PSI_SMITH_01");
+	ta_smith_cool(21,40,21,50,"PSI_SMITH_01");
+	ta_smith_sharp(21,50,21,55,"PSI_SMITH_01");
+	
+	ta_standaround(21,55,22,40,"PSI_SMITH_1_2");
+	ta_sleep(22,40,7,50,"PSI_22_HUT_IN");
 };
 
 func void rtn_prepareritual_1316()

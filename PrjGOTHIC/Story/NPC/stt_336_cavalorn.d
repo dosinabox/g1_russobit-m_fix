@@ -7,6 +7,7 @@ instance STT_336_CAVALORN(NPC_DEFAULT)
 	level = 5;
 	voice = 12;
 	id = 336;
+	flags = NPC_FLAG_IMMORTAL;
 	attribute[ATR_STRENGTH] = 20;
 	attribute[ATR_DEXTERITY] = 15;
 	attribute[ATR_MANA_MAX] = 0;
@@ -19,16 +20,18 @@ instance STT_336_CAVALORN(NPC_DEFAULT)
 	b_scale(self);
 	Mdl_SetModelFatness(self,-1);
 	fight_tactic = FAI_HUMAN_STRONG;
-	Npc_SetTalentSkill(self,NPC_TALENT_BOW,1);
+	Npc_SetTalentSkill(self,NPC_TALENT_BOW,2);
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	Npc_SetTalentSkill(self,NPC_TALENT_SNEAK,1);
 	b_give_cavalornchapter1weapons();
-	EquipItem(self,itmw_1h_sword_short_02);
-	EquipItem(self,itrw_bow_small_02);
+	//EquipItem(self,itmw_1h_sword_short_02);
+	//EquipItem(self,itrw_bow_small_02);
+	EquipItem(self,tr_m_cavalorn);
+	EquipItem(self,tr_r_cavalorn);
 	CreateInvItems(self,itamarrow,16);
 	CreateInvItem(self,itfo_potion_water_01);
 	CreateInvItem(self,itfoapple);
-	CreateInvItem(self,itkelockpick);
+	CreateInvItems(self,itkelockpick,5);
 	daily_routine = rtn_start_336;
 };
 

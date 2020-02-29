@@ -1,7 +1,7 @@
 
 instance ORG_859_AIDAN(NPC_DEFAULT)
 {
-	name[0] = "јйдан";
+	name[0] = "Ёйдан";
 	npctype = NPCTYPE_MAIN;
 	guild = GIL_ORG;
 	level = 15;
@@ -41,7 +41,8 @@ instance ORG_859_AIDAN(NPC_DEFAULT)
 
 func void rtn_start_859()
 {
-	ta_standaround(7,0,22,0,"OW_WOODRUIN_WOLF_SPAWN");
+	ta_standaround(7,0,18,0,"OW_WOODRUIN_WOLF_SPAWN");
+	ta_practicebow(18,0,22,0,"OW_WOODRUIN_WOLF_SPAWN");
 	ta_sitcampfire(22,0,7,0,"OW_WOODRUIN_WOLF_SPAWN");
 };
 

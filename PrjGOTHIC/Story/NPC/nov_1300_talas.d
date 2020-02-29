@@ -32,37 +32,43 @@ instance NOV_1300_TALAS(NPC_DEFAULT)
 
 func void rtn_start_1300()
 {
-	ta_smoke(24,0,6,0,"PSI_PATH_TEMPLE_4_MOVEMENT");
-	ta_smoke(6,0,24,0,"PSI_PATH_TEMPLE_4_MOVEMENT");
+	ta_smoke(5,0,23,55,"PSI_PATH_TEMPLE_4_MOVEMENT");
+	ta_sleep(23,55,5,0,"PSI_29_HUT_IN");
+};
+
+func void rtn_ritual_1300()
+{
+	ta_stay(6,0,23,0,"PSI_TEMPLE_NOVIZE_PR3");
+	ta_stay(23,0,6,0,"PSI_TEMPLE_NOVIZE_PR3");
 };
 
 func void rtn_gobbocave_1300()
 {
-	ta_guidepc(24,0,6,0,"LOCATION_29_02");
-	ta_guidepc(6,0,24,0,"LOCATION_29_02");
+	ta_guidepc(6,0,23,0,"LOCATION_29_02");
+	ta_guidepc(23,0,6,0,"LOCATION_29_02");
 };
 
 func void rtn_returntocamp_1300()
 {
-	ta_guidepc(24,0,6,0,"PSI_START");
-	ta_guidepc(6,0,24,0,"PSI_START");
+	ta_guidepc(6,0,23,0,"PSI_START");
+	ta_guidepc(23,0,6,0,"PSI_START");
 };
 
 func void rtn_backincamp_1300()
 {
-	ta_smoke(24,0,6,0,"PSI_PATH_TEMPLE_4_MOVEMENT");
-	ta_smoke(6,0,24,0,"PSI_PATH_TEMPLE_4_MOVEMENT");
+	ta_smoke(6,0,23,0,"PSI_PATH_TEMPLE_4_MOVEMENT");
+	ta_smoke(23,0,6,0,"PSI_PATH_TEMPLE_4_MOVEMENT");
 };
 
 func void rtn_ogy_1300()
 {
-	ta_guidepc(24,0,6,0,"OW_PATH_011");
-	ta_guidepc(6,0,24,0,"OW_PATH_011");
+	ta_guidepc(6,0,23,0,"OW_PATH_011");
+	ta_guidepc(23,0,6,0,"OW_PATH_011");
 };
 
 func void rtn_returntocampagain_1300()
 {
-	ta_smoke(24,0,6,0,"PSI_PATH_TEMPLE_4_MOVEMENT");
-	ta_smoke(6,0,24,0,"PSI_PATH_TEMPLE_4_MOVEMENT");
+	ta_smoke(10,0,22,0,"PSI_PATH_TEMPLE_4_MOVEMENT");
+	ta_sleep(22,0,10,0,"PSI_29_HUT_IN");
 };
 

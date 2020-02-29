@@ -20,11 +20,11 @@ func void b_initarmor()
 	var C_ITEM myarmor;
 	printdebugnpc(PD_TA_DETAIL,"B_InitArmor");
 	myarmor = Npc_GetEquippedArmor(self);
-	if(Hlp_IsItem(myarmor,grd_armor_l))
+	if(Hlp_IsItem(myarmor,grd_armor_l) || Hlp_IsItem(myarmor,org_armor_l) || Hlp_IsItem(myarmor,org_armor_m) || Hlp_IsItem(myarmor,sld_armor_m))
 	{
 		AI_PlayAni(self,"T_STAND_2_LGUARD");
 	}
-	else if(Hlp_IsItem(myarmor,grd_armor_h) || Hlp_IsItem(myarmor,grd_armor_m))
+	else if(Hlp_IsItem(myarmor,grd_armor_h) || Hlp_IsItem(myarmor,grd_armor_m) || Hlp_IsItem(myarmor,org_armor_h) || Hlp_IsItem(myarmor,sld_armor_h))
 	{
 		AI_PlayAni(self,"T_STAND_2_HGUARD");
 	};
@@ -37,7 +37,7 @@ func void b_playarmor()
 	printdebugnpc(PD_TA_DETAIL,"B_PlayArmor");
 	guardreaktion = Hlp_Random(100);
 	myarmor = Npc_GetEquippedArmor(self);
-	if(Hlp_IsItem(myarmor,grd_armor_l))
+	if(Hlp_IsItem(myarmor,grd_armor_l) || Hlp_IsItem(myarmor,org_armor_l) || Hlp_IsItem(myarmor,org_armor_m) || Hlp_IsItem(myarmor,sld_armor_m))
 	{
 		if(guardreaktion >= 90)
 		{
@@ -57,7 +57,7 @@ func void b_playarmor()
 			AI_PlayAni(self,"T_LGUARD_CHANGELEG");
 		};
 	}
-	else if(Hlp_IsItem(myarmor,grd_armor_h) || Hlp_IsItem(myarmor,grd_armor_m))
+	else if(Hlp_IsItem(myarmor,grd_armor_h) || Hlp_IsItem(myarmor,grd_armor_m) || Hlp_IsItem(myarmor,org_armor_h) || Hlp_IsItem(myarmor,sld_armor_h))
 	{
 		guardreaktion = Hlp_Random(100);
 		if(guardreaktion >= 95)
@@ -77,11 +77,11 @@ func void b_exitarmor()
 	var C_ITEM myarmor;
 	printdebugnpc(PD_TA_DETAIL,"B_ExitArmor");
 	myarmor = Npc_GetEquippedArmor(self);
-	if(Hlp_IsItem(myarmor,grd_armor_l))
+	if(Hlp_IsItem(myarmor,grd_armor_l) || Hlp_IsItem(myarmor,org_armor_l) || Hlp_IsItem(myarmor,org_armor_m) || Hlp_IsItem(myarmor,sld_armor_m))
 	{
 		AI_PlayAni(self,"T_LGUARD_2_STAND");
 	}
-	else if(Hlp_IsItem(myarmor,grd_armor_h) || Hlp_IsItem(myarmor,grd_armor_m))
+	else if(Hlp_IsItem(myarmor,grd_armor_h) || Hlp_IsItem(myarmor,grd_armor_m) || Hlp_IsItem(myarmor,org_armor_h) || Hlp_IsItem(myarmor,sld_armor_h))
 	{
 		AI_PlayAni(self,"T_HGUARD_2_STAND");
 	};
@@ -92,7 +92,11 @@ func void b_eatsmall(var C_NPC self)
 	printdebugnpc(PD_TA_DETAIL,"B_EatSmall");
 	if((Npc_GetStateTime(self) >= self.aivar[AIV_ITEMFREQ]) && (Hlp_Random(100) > 20))
 	{
-		AI_PlayAni(self,"T_FOOD_RANDOM_1");
+		AI_PlayAniBS(self,"T_FOOD_RANDOM_1",BS_ITEMINTERACT);
+		if(self.attribute[ATR_HITPOINTS] < self.attribute[ATR_HITPOINTS_MAX])
+		{
+			Npc_ChangeAttribute(self,ATR_HITPOINTS,5);
+		};
 		Npc_SetStateTime(self,0);
 		self.aivar[AIV_ITEMFREQ] = Hlp_Random(5) + 5;
 	};
@@ -103,7 +107,11 @@ func void b_eathuge(var C_NPC self)
 	printdebugnpc(PD_TA_DETAIL,"B_EatHuge");
 	if(Npc_GetStateTime(self) >= self.aivar[AIV_ITEMFREQ])
 	{
-		AI_PlayAni(self,"T_FOODHUGE_RANDOM_1");
+		AI_PlayAniBS(self,"T_FOODHUGE_RANDOM_1",BS_ITEMINTERACT);
+		if(self.attribute[ATR_HITPOINTS] < self.attribute[ATR_HITPOINTS_MAX])
+		{
+			Npc_ChangeAttribute(self,ATR_HITPOINTS,10);
+		};
 		Npc_SetStateTime(self,0);
 		self.aivar[AIV_ITEMFREQ] = Hlp_Random(5) + 5;
 	};
@@ -114,7 +122,7 @@ func void b_throwapple(var C_NPC self)
 	printdebugnpc(PD_TA_DETAIL,"B_ThrowApple");
 	if(Npc_GetStateTime(self) >= self.aivar[AIV_ITEMFREQ])
 	{
-		AI_PlayAni(self,"T_FOOD_RANDOM_2");
+		AI_PlayAniBS(self,"T_FOOD_RANDOM_2",BS_ITEMINTERACT);
 		Npc_SetStateTime(self,0);
 		self.aivar[AIV_ITEMFREQ] = Hlp_Random(5) + 5;
 	};
@@ -125,7 +133,11 @@ func void b_drinkbottle(var C_NPC self)
 	printdebugnpc(PD_TA_DETAIL,"B_DrinkBottle");
 	if((Npc_GetStateTime(self) >= self.aivar[AIV_ITEMFREQ]) && (Hlp_Random(100) > 30))
 	{
-		AI_PlayAni(self,"T_POTION_RANDOM_1");
+		AI_PlayAniBS(self,"T_POTION_RANDOM_1",BS_ITEMINTERACT);
+		if(self.attribute[ATR_HITPOINTS] < self.attribute[ATR_HITPOINTS_MAX])
+		{
+			Npc_ChangeAttribute(self,ATR_HITPOINTS,5);
+		};
 		Npc_SetStateTime(self,0);
 		self.aivar[AIV_ITEMFREQ] = Hlp_Random(5) + 5;
 	};
@@ -136,7 +148,7 @@ func void b_wipemouth(var C_NPC self)
 	printdebugnpc(PD_TA_DETAIL,"B_WipeMouth");
 	if((Npc_GetStateTime(self) >= self.aivar[AIV_ITEMFREQ]) && (Hlp_Random(100) > 50))
 	{
-		AI_PlayAni(self,"T_POTION_RANDOM_2");
+		AI_PlayAniBS(self,"T_POTION_RANDOM_2",BS_ITEMINTERACT);
 		Npc_SetStateTime(self,0);
 		self.aivar[AIV_ITEMFREQ] = Hlp_Random(5) + 5;
 	};
@@ -147,7 +159,7 @@ func void b_lookbottle(var C_NPC self)
 	printdebugnpc(PD_TA_DETAIL,"B_LookBottle");
 	if(Npc_GetStateTime(self) >= self.aivar[AIV_ITEMFREQ])
 	{
-		AI_PlayAni(self,"T_POTION_RANDOM_3");
+		AI_PlayAniBS(self,"T_POTION_RANDOM_3",BS_ITEMINTERACT);
 		Npc_SetStateTime(self,0);
 		self.aivar[AIV_ITEMFREQ] = Hlp_Random(5) + 5;
 	};
@@ -158,7 +170,7 @@ func void b_drawjoint(var C_NPC self)
 	printdebugnpc(PD_TA_DETAIL,"B_DrawJoint");
 	if(Npc_GetStateTime(self) >= self.aivar[AIV_ITEMFREQ])
 	{
-		AI_PlayAni(self,"T_JOINT_RANDOM_1");
+		AI_PlayAniBS(self,"T_JOINT_RANDOM_1",BS_ITEMINTERACT);
 		Npc_SetStateTime(self,0);
 		self.aivar[AIV_ITEMFREQ] = Hlp_Random(5) + 5;
 	};
@@ -169,7 +181,11 @@ func void b_eatmeat(var C_NPC self)
 	printdebugnpc(PD_TA_DETAIL,"B_EatMeat");
 	if(Npc_GetStateTime(self) >= self.aivar[AIV_ITEMFREQ])
 	{
-		AI_PlayAni(self,"T_MEAT_RANDOM_1");
+		AI_PlayAniBS(self,"T_MEAT_RANDOM_1",BS_ITEMINTERACT);
+		if(self.attribute[ATR_HITPOINTS] < self.attribute[ATR_HITPOINTS_MAX])
+		{
+			Npc_ChangeAttribute(self,ATR_HITPOINTS,10);
+		};
 		Npc_SetStateTime(self,0);
 		self.aivar[AIV_ITEMFREQ] = Hlp_Random(5) + 5;
 	};
@@ -180,13 +196,21 @@ func void b_eatrice(var C_NPC self)
 	printdebugnpc(PD_TA_DETAIL,"B_EatRice");
 	if((Npc_GetStateTime(self) >= self.aivar[AIV_ITEMFREQ]) && (Hlp_Random(1) == 1))
 	{
-		AI_PlayAni(self,"T_RICE_RANDOM_1");
+		AI_PlayAniBS(self,"T_RICE_RANDOM_1",BS_ITEMINTERACT);
+		if(self.attribute[ATR_HITPOINTS] < self.attribute[ATR_HITPOINTS_MAX])
+		{
+			Npc_ChangeAttribute(self,ATR_HITPOINTS,5);
+		};
 		Npc_SetStateTime(self,0);
 		self.aivar[AIV_ITEMFREQ] = Hlp_Random(5) + 5;
 	}
 	else
 	{
-		AI_PlayAni(self,"T_RICE_RANDOM_2");
+		AI_PlayAniBS(self,"T_RICE_RANDOM_2",BS_ITEMINTERACT);
+		if(self.attribute[ATR_HITPOINTS] < self.attribute[ATR_HITPOINTS_MAX])
+		{
+			Npc_ChangeAttribute(self,ATR_HITPOINTS,5);
+		};
 		Npc_SetStateTime(self,0);
 		self.aivar[AIV_ITEMFREQ] = Hlp_Random(5) + 5;
 	};

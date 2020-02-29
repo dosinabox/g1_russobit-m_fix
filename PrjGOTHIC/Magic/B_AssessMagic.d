@@ -57,7 +57,7 @@ func void b_assessmagic_icecube()
 {
 	printdebugnpc(PD_MAGIC,"B_AssessMagic ...IceCube oder IceWave");
 	Npc_SendPassivePerc(self,PERC_ASSESSFIGHTSOUND,self,other);
-	if(!((self.guild == GIL_SLF) || (self.guild == GIL_DEMON) || (self.guild == GIL_GOLEM) || (self.guild == GIL_SWAMPSHARK) || (self.guild == GIL_TROLL)) && (!c_bodystatecontains(self,BS_SWIM) || c_bodystatecontains(self,BS_DIVE)))
+	if(!((self.guild == GIL_SLF) || (self.guild == GIL_DEMON) || (self.guild == GIL_GOLEM) || (self.guild == GIL_SWAMPSHARK) || (self.guild == GIL_TROLL)) && !(c_bodystatecontains(self,BS_SWIM) || c_bodystatecontains(self,BS_DIVE)))
 	{
 		Npc_ClearAIQueue(self);
 		AI_StartState(self,zs_magicfreeze,0,"");

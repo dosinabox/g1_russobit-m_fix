@@ -36,7 +36,7 @@ instance DIA_SKIP_FIRST(C_INFO)
 
 func int dia_skip_first_condition()
 {
-	if(!((Npc_GetTrueGuild(other) == GIL_STT) || (Npc_GetTrueGuild(other) == GIL_GRD) || (Npc_GetTrueGuild(other) == GIL_KDF)))
+	if(!(Npc_GetTrueGuild(other) == GIL_STT) || (Npc_GetTrueGuild(other) == GIL_GRD) || (Npc_GetTrueGuild(other) == GIL_KDF))
 	{
 		return 1;
 	};
@@ -168,7 +168,7 @@ func int grd_211_skip_trade_condition()
 func void grd_211_skip_trade_info()
 {
 	AI_Output(other,self,"GRD_211_Skip_TRADE_Info_15_01");	//Я просто подумал, что неплохо было бы поговорить с тобой о снаряжении.
-	AI_Output(self,other,"GRD_211_Skip_TRADE_Info_12_02");	//Если надо могу кое-что продать.
+	AI_Output(self,other,"GRD_211_Skip_TRADE_Info_12_02");	//Если надо, могу кое-что продать.
 };
 
 

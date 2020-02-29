@@ -5,7 +5,7 @@ instance GRD_223_GARDIST(NPC_DEFAULT)
 	npctype = NPCTYPE_GUARD;
 	guild = GIL_GRD;
 	level = 15;
-	voice = 13;
+	voice = 6;
 	id = 223;
 	attribute[ATR_STRENGTH] = 70;
 	attribute[ATR_DEXTERITY] = 50;

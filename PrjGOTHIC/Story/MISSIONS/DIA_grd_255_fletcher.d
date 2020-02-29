@@ -35,7 +35,7 @@ instance DIA_FLETCHER_FIRST(C_INFO)
 
 func int dia_fletcher_first_condition()
 {
-	if(Wld_IsTime(0,0,6,0))
+	if(Wld_IsTime(0,0,6,0) && KAPITEL < 4)
 	{
 		return 1;
 	};
@@ -69,7 +69,7 @@ instance DIA_FLETCHER_HELLO(C_INFO)
 
 func int dia_fletcher_hello_condition()
 {
-	if(Npc_IsInState(self,zs_talk))
+	if(Npc_IsInState(self,zs_talk) && KAPITEL < 4)
 	{
 		return 1;
 	};
@@ -90,7 +90,7 @@ func void dia_fletcher_hello_info()
 func void dia_fletcher_hello_whereelse()
 {
 	AI_Output(other,self,"DIA_Fletcher_Hello_WhereElse_15_00");	//А где ты есть?
-	AI_Output(self,other,"DIA_Fletcher_Hello_WhereElse_06_01");	//На самом деле я в замке у большого костра, и в руке у меня кубок с пивом.   
+	AI_Output(self,other,"DIA_Fletcher_Hello_WhereElse_06_01");	//На самом деле я в замке у большого костра, и в руке у меня кубок с пивом.
 };
 
 func void dia_fletcher_hello_whytalk()
@@ -134,9 +134,12 @@ func void dia_fletcher_wonek_info()
 	AI_Output(self,other,"DIA_Fletcher_WoNek_06_01");	//Нет, да и где узнать можно не знаю.
 	AI_Output(self,other,"DIA_Fletcher_WoNek_06_02");	//Так или иначе, местные рудокопы должны что-нибудь знать, да только со стражником они говорить не будут.
 	AI_Output(self,other,"DIA_Fletcher_WoNek_06_03");	//Тем более, сейчас. Они знают, как я ненавижу свою работу и уверен, они смеются у меня за спиной!
-	Log_CreateTopic(CH1_LOSTNEK,LOG_MISSION);
-	Log_SetTopicStatus(CH1_LOSTNEK,LOG_RUNNING);
-	b_logentry(CH1_LOSTNEK,"Говорят, что рудокопы возле арены могут знать, куда делся Нек.");
+	if((SLY_LOSTNEK != LOG_SUCCESS) && (Npc_GetTrueGuild(hero) == GIL_NONE))
+	{
+		Log_CreateTopic(CH1_LOSTNEK,LOG_MISSION);
+		Log_SetTopicStatus(CH1_LOSTNEK,LOG_RUNNING);
+		b_logentry(CH1_LOSTNEK,"Говорят, что рудокопы возле арены могут знать, куда делся Нек.");
+	};
 };
 
 
@@ -248,7 +251,7 @@ instance GRD_255_FLETCHER_WELCOME(C_INFO)
 
 func int grd_255_fletcher_welcome_condition()
 {
-	if(Npc_GetTrueGuild(hero) == GIL_GRD)
+	if(Npc_GetTrueGuild(hero) == GIL_GRD && KAPITEL < 4)
 	{
 		return TRUE;
 	};
@@ -272,7 +275,7 @@ instance INFO_FLETCHER_DIE(C_INFO)
 
 func int info_fletcher_die_condition()
 {
-	if(KAPITEL == 4)
+	if(KAPITEL >= 4)
 	{
 		return TRUE;
 	};
@@ -300,13 +303,13 @@ func void info_fletcher_die_info()
 		AI_Output(hero,self,"Info_Fletcher_DIE_15_06");	//Постой...
 		AI_Output(self,hero,"Info_Fletcher_DIE_06_07");	//Что? Думал, никто и не догадается, а?
 		AI_Output(hero,self,"Info_Fletcher_DIE_15_08");	//Тебе следовало бы попридержать свой язык!
-		AI_Output(self,hero,"Info_Fletcher_DIE_06_09");	//Нет. Это тебе попридержать...попридержать свою голову, потому что скоро ее у тебя не будет.
+		AI_Output(self,hero,"Info_Fletcher_DIE_06_09");	//Нет. Это тебе попридержать... попридержать свою голову, потому что скоро ее у тебя не будет.
 		AI_Output(self,hero,"Info_Fletcher_DIE_06_10");	//Умри, предатель!
-		if(Npc_KnowsInfo(hero,info_bloodwyn_die))
+		if(Npc_KnowsInfo(hero,info_cutter_die))
 		{
-			b_logentry(CH4_BANNEDFROMOC,"Бладвин, который сейчас охраняет ворота, повел себя точно так же, как и Флетчер. Он что-то знает о том, что я ищу юниторы для Нового лагеря.");
+			b_logentry(CH4_BANNEDFROMOC,"Флетчер, который сейчас охраняет ворота, повел себя точно так же, как и Палач. Он что-то знает о том, что я ищу юниторы для Нового лагеря.");
 		}
-		else if(Npc_GetTrueGuild(hero) == GIL_NONE)
+		else if(!Npc_KnowsInfo(hero,info_jackal_payday) && !Npc_KnowsInfo(hero,info_cutter_die) && !Npc_KnowsInfo(hero,info_grd238_die))
 		{
 			Log_CreateTopic(CH4_BANNEDFROMOC,LOG_MISSION);
 			Log_SetTopicStatus(CH4_BANNEDFROMOC,LOG_RUNNING);
@@ -339,16 +342,29 @@ func void info_fletcher_die_info()
 	b_exchangeroutine(grd_244_gardist,"FMTaken2");
 	b_exchangeroutine(grd_214_torwache,"FMTaken2");
 	b_exchangeroutine(grd_215_torwache,"FMTaken2");
+	if(c_npcbelongstooldcamp(hero))
+	{
+		Npc_SetTrueGuild(hero,GIL_NONE);
+		hero.guild = GIL_NONE;
+	};
+	if(GETNEWGUY_STARTED == TRUE && OC_BANNED == FALSE)
+	{
+	    b_logentry(CH1_RECRUITDUSTY,"Теперь я не смогу вывести кого-либо из Старого лагеря.");
+	    Log_SetTopicStatus(CH1_RECRUITDUSTY,LOG_FAILED);
+		GETNEWGUY_STARTED = LOG_FAILED;
+	};
 	b_setpermattitude(grd_255_fletcher,ATT_HOSTILE);
 	b_setpermattitude(grd_252_gardist,ATT_HOSTILE);
 	b_setpermattitude(grd_253_gardist,ATT_HOSTILE);
 	b_setpermattitude(grd_244_gardist,ATT_HOSTILE);
 	b_setpermattitude(grd_214_torwache,ATT_HOSTILE);
 	b_setpermattitude(grd_215_torwache,ATT_HOSTILE);
-	if(!Npc_KnowsInfo(hero,info_bloodwyn_die))
+	Wld_ExchangeGuildAttitudes("GIL_ATTITUDES_FMTAKEN");
+	if(!Npc_KnowsInfo(hero,info_cutter_die) && !Npc_KnowsInfo(hero,info_grd238_die))
 	{
 		b_logentry(CH4_FIREMAGES,"Ворота в Старый лагерь закрыты и охраняются стражниками. Они нападают на любого, кто окажется слишком неосторожен, чтобы подойти к ним.");
 	};
 	AI_StopProcessInfos(self);
+	OC_BANNED = TRUE;
 };
 

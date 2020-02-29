@@ -58,7 +58,10 @@ instance INFO_MINE_SLD_8_WICHTIGEPERSONEN(C_INFO)
 
 func int info_mine_sld_8_wichtigepersonen_condition()
 {
-	return 1;
+	if(FMTAKEN == FALSE)
+	{
+		return TRUE;
+	};
 };
 
 func void info_mine_sld_8_wichtigepersonen_info()
@@ -81,7 +84,10 @@ instance INFO_MINE_SLD_8_DASLAGER(C_INFO)
 
 func int info_mine_sld_8_daslager_condition()
 {
-	return 1;
+	if(FMTAKEN == FALSE)
+	{
+		return TRUE;
+	};
 };
 
 func void info_mine_sld_8_daslager_info()
@@ -104,7 +110,10 @@ instance INFO_MINE_SLD_8_DIELAGE(C_INFO)
 
 func int info_mine_sld_8_dielage_condition()
 {
-	return 1;
+	if(FMTAKEN == FALSE)
+	{
+		return TRUE;
+	};
 };
 
 func void info_mine_sld_8_dielage_info()

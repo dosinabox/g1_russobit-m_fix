@@ -1,4 +1,20 @@
 
+func void b_torrezlearn()
+{
+	Info_ClearChoices(kdf_405_torrez_mana);
+	Info_AddChoice(kdf_405_torrez_mana,DIALOG_BACK,kdf_405_torrez_mana_back);
+	if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF)
+	{
+		Info_AddChoice(kdf_405_torrez_mana,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),kdf_405_torrez_mana_man_5);
+		Info_AddChoice(kdf_405_torrez_mana,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),kdf_405_torrez_mana_man_1);
+	}
+	else
+	{
+		Info_AddChoice(kdf_405_torrez_mana,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,OTHERCAMPLEARNPAY * 5),kdf_405_torrez_mana_man_5);
+		Info_AddChoice(kdf_405_torrez_mana,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,OTHERCAMPLEARNPAY),kdf_405_torrez_mana_man_1);
+	};
+};
+
 instance DIA_TORREZ_EXIT(C_INFO)
 {
 	npc = kdf_405_torrez;
@@ -18,10 +34,6 @@ func int dia_torrez_exit_condition()
 func void dia_torrez_exit_info()
 {
 	AI_StopProcessInfos(self);
-	if(!Npc_HasItems(self,itarrunefirebolt))
-	{
-		CreateInvItem(self,itarrunefirebolt);
-	};
 };
 
 
@@ -38,7 +50,10 @@ instance DIA_TORREZ_HELLO(C_INFO)
 
 func int dia_torrez_hello_condition()
 {
-	return 1;
+	if(Npc_GetTrueGuild(hero) != GIL_KDF && !Npc_KnowsInfo(hero,dia_milten_letter))
+	{
+		return 1;
+	};
 };
 
 func void dia_torrez_hello_info()
@@ -72,6 +87,12 @@ func void dia_torrez_belohnung_info()
 {
 	AI_Output(other,self,"DIA_Torrez_Belohnung_15_00");	//Меня прислал Корристо. Я передал ему письмо и теперь могу выбрать себе награду.
 	AI_Output(self,other,"DIA_Torrez_Belohnung_04_01");	//Ты оказал нам неоценимую услугу, и, конечно, можешь получить за нее награду. Выбирай.
+	if(PYROCAR_MESSENGER == LOG_RUNNING)
+	{
+	    b_logentry(KDFLETTER,"Я получил награду у Торреза. Мое задание выполнено.");
+	    Log_SetTopicStatus(KDFLETTER,LOG_SUCCESS);
+		PYROCAR_MESSENGER = LOG_SUCCESS;
+	};
 	Info_ClearChoices(dia_torrez_belohnung);
 	Info_AddChoice(dia_torrez_belohnung,"Эссенция силы духа (Макс. маг. сила +5)",dia_torrez_belohnung_manamax);
 	Info_AddChoice(dia_torrez_belohnung,"3 свитка (Огненный шар, Молния и Превращение в падальщика)",dia_torrez_belohnung_scrolls);
@@ -169,6 +190,12 @@ func void dia_torrez_brieftausch_info()
 	};
 	corristo = Hlp_GetNpc(kdf_402_corristo);
 	CreateInvItems(corristo,itwr_fire_letter_02,1);
+	if(PYROCAR_MESSENGER == LOG_RUNNING)
+	{
+	    b_logentry(KDFLETTER,"Я доставил письмо магам и получил награду у Торреза.");
+	    Log_SetTopicStatus(KDFLETTER,LOG_SUCCESS);
+		PYROCAR_MESSENGER = LOG_SUCCESS;
+	};
 	AI_StopProcessInfos(self);
 };
 
@@ -186,7 +213,10 @@ instance DIA_TORREZ_PERM(C_INFO)
 
 func int dia_torrez_perm_condition()
 {
-	return 1;
+    if(Npc_GetTrueGuild(hero) != GIL_KDF)
+	{
+		return TRUE;
+	};
 };
 
 func void dia_torrez_perm_info()
@@ -301,10 +331,7 @@ func void kdf_405_torrez_mana_info()
 {
 	AI_Output(other,self,"KDF_405_Torrez_MANA_Info_15_01");	//Мне нужно увеличить магическую силу.
 	AI_Output(self,other,"KDF_405_Torrez_MANA_Info_04_02");	//Я могу помочь тебе. Как ты будешь ее использовать, зависит только от тебя.
-	Info_ClearChoices(kdf_405_torrez_mana);
-	Info_AddChoice(kdf_405_torrez_mana,DIALOG_BACK,kdf_405_torrez_mana_back);
-	Info_AddChoice(kdf_405_torrez_mana,"Маг. сила + 5 (5 очков обучения)",kdf_405_torrez_mana_man_5);
-	Info_AddChoice(kdf_405_torrez_mana,"Маг. сила + 1 (1 очко обучения)",kdf_405_torrez_mana_man_1);
+	b_torrezlearn();
 };
 
 func void kdf_405_torrez_mana_back()
@@ -314,20 +341,46 @@ func void kdf_405_torrez_mana_back()
 
 func void kdf_405_torrez_mana_man_1()
 {
-	b_buyattributepoints(other,ATR_MANA_MAX,1);
-	Info_ClearChoices(kdf_405_torrez_mana);
-	Info_AddChoice(kdf_405_torrez_mana,DIALOG_BACK,kdf_405_torrez_mana_back);
-	Info_AddChoice(kdf_405_torrez_mana,"Маг. сила + 5 (5 очков обучения)",kdf_405_torrez_mana_man_5);
-	Info_AddChoice(kdf_405_torrez_mana,"Маг. сила + 1 (1 очко обучения)",kdf_405_torrez_mana_man_1);
+	if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF)
+	{
+		b_buyattributepoints(other,ATR_MANA_MAX,1);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY)
+	{
+		if(hero.lp >= 1 && hero.attribute[ATR_MANA_MAX] < 100)
+		{
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
+		};
+		b_buyattributepoints(other,ATR_MANA_MAX,1);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"B_Gravo_HelpAttitude_NoOre_04_02");	//Что ж, тогда ничего не получится. Очень жаль, но я ничего не могу сделать.
+	};
+	b_torrezlearn();
 };
 
 func void kdf_405_torrez_mana_man_5()
 {
-	b_buyattributepoints(other,ATR_MANA_MAX,5);
-	Info_ClearChoices(kdf_405_torrez_mana);
-	Info_AddChoice(kdf_405_torrez_mana,DIALOG_BACK,kdf_405_torrez_mana_back);
-	Info_AddChoice(kdf_405_torrez_mana,"Маг. сила + 5 (5 очков обучения)",kdf_405_torrez_mana_man_5);
-	Info_AddChoice(kdf_405_torrez_mana,"Маг. сила + 1 (1 очко обучения)",kdf_405_torrez_mana_man_1);
+	if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF)
+	{
+		b_buyattributepoints(other,ATR_MANA_MAX,5);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY * 5)
+	{
+		if(hero.lp >= 5 && hero.attribute[ATR_MANA_MAX] < 96)
+		{
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
+		};
+		b_buyattributepoints(other,ATR_MANA_MAX,5);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"B_Gravo_HelpAttitude_NoOre_04_02");	//Что ж, тогда ничего не получится. Очень жаль, но я ничего не могу сделать.
+	};
+	b_torrezlearn();
 };
 
 
@@ -344,7 +397,7 @@ instance KDF_405_TORREZ_WANNABEMAGE(C_INFO)
 
 func int kdf_405_torrez_wannabemage_condition()
 {
-	if(Npc_KnowsInfo(hero,kdf_405_torrez_greet) && (Npc_GetTrueGuild(hero) != GIL_KDF) && !Npc_KnowsInfo(hero,kdf_402_corristo_wannbekdf))
+	if(Npc_KnowsInfo(hero,kdf_405_torrez_greet) && (Npc_GetTrueGuild(hero) != GIL_KDF))
 	{
 		return TRUE;
 	};

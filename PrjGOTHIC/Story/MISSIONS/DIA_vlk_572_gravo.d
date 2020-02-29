@@ -74,6 +74,7 @@ func void dia_gravo_helphow_info()
 	AI_Output(self,other,"DIA_Gravo_HelpHow_04_03");	//Он решает, что делать с новичками. Так вот, приходишь ко мне, а я говорю с теми людьми, к мнению которых Торус прислушивается.
 	AI_Output(self,other,"DIA_Gravo_HelpHow_04_04");	//Они замолвят ему за тебя словечко, и он больше на тебя не в обиде. Конечно, бесплатно никто из них ничего не сделает. Все это будешь оплачивать ты.
 	AI_Output(self,other,"DIA_Gravo_HelpHow_04_05");	//А я позабочусь о том, чтобы твоя руда попала в нужные руки...
+	Log_CreateTopic(GE_TRADEROC,LOG_NOTE);
 	b_logentry(GE_TRADEROC,"Рудокоп Граво предлагает особую услугу. Если у меня случится ссора с кем-то из важных людей из Старого лагеря, я смогу заплатить ему, и он уладит проблему.");
 };
 
@@ -204,12 +205,17 @@ func int dia_gravo_influence_condition()
 
 func void dia_gravo_influence_info()
 {
+	var int log;
 	AI_Output(other,self,"DIA_Gravo_Influence_15_00");	//Ты можешь назвать мне самых влиятельных из Призраков.
 	AI_Output(self,other,"DIA_Gravo_Influence_04_01");	//Хочешь подружиться с нужными людьми, да?
 	AI_Output(self,other,"DIA_Gravo_Influence_04_02");	//Самый влиятельный из Призраков - Диего. Он доверяет Фингерсу, Уистлеру и Слаю.
 	AI_Output(self,other,"DIA_Gravo_Influence_04_03");	//Декстер и Фиск продают товары на рыночной площади. У них много покупателей среди стражников, поэтому они тоже могут повлиять на некоторых людей.
 	AI_Output(self,other,"DIA_Gravo_Influence_04_04");	//Еще здесь есть Скатти. Он организует сражения на арене. В лагере многие должны ему руду, так что я и его причисляю к влиятельным людям.
-	Log_CreateTopic(GE_TRADEROC,LOG_NOTE);
-	b_logentry(GE_TRADEROC,"Декстер и Фиск торгуют различными товарами на рыночной площади.");
+	if(log == FALSE)
+	{
+		Log_CreateTopic(GE_TRADEROC,LOG_NOTE);
+		b_logentry(GE_TRADEROC,"Декстер и Фиск торгуют различными товарами на рыночной площади.");
+		log = TRUE;
+	};
 };
 

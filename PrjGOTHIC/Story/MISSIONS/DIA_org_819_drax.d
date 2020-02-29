@@ -45,10 +45,14 @@ func void org_819_drax_hunthere_info()
 	AI_Output(self,other,"Org_819_Drax_HuntHere_06_03");	//Я могу обучить тебя, но все имеет свою цену.
 	AI_Output(other,self,"Org_819_Drax_HuntHere_15_04");	//И какова эта цена?
 	AI_Output(self,other,"Org_819_Drax_HuntHere_06_05");	//Для начала бутылка пива, а там посмотрим.
+	if(!Npc_HasItems(other,itfobeer))
+	{
+		AI_Output(other,self,"Org_819_Drax_Scavenger_KEIN_BIER_15_00");	//У меня нет пива.
+		AI_Output(self,other,"Org_819_Drax_Scavenger_KEIN_BIER_06_01");	//Так купи его. Это мой последний бесплатный совет на сегодня. А когда вернешься с пивом, прихвати немного руды.
+		AI_Output(self,other,"Org_819_Drax_Scavenger_KEIN_BIER_06_02");	//Я могу многому тебя научить, но не задаром же!
+	};
 };
 
-
-var int drax_bierbekommen;
 var int drax_lehrer_frei;
 
 instance ORG_819_DRAX_SCAVENGER(C_INFO)
@@ -57,14 +61,14 @@ instance ORG_819_DRAX_SCAVENGER(C_INFO)
 	nr = 1;
 	condition = org_819_drax_scavenger_condition;
 	information = org_819_drax_scavenger_info;
-	permanent = 1;
+	permanent = 0;
 	description = "Вот твое пиво. Так ты расскажешь мне об охоте?";
 };
 
 
 func int org_819_drax_scavenger_condition()
 {
-	if(Npc_KnowsInfo(hero,org_819_drax_hunthere) && (DRAX_BIERBEKOMMEN == FALSE))
+	if(Npc_KnowsInfo(hero,org_819_drax_hunthere) && Npc_HasItems(other,itfobeer) > 0)
 	{
 		return 1;
 	};
@@ -72,28 +76,18 @@ func int org_819_drax_scavenger_condition()
 
 func void org_819_drax_scavenger_info()
 {
-	if(Npc_HasItems(other,itfobeer) > 0)
+	b_giveinvitems(other,self,itfobeer,1);
+	AI_Output(other,self,"Org_819_Drax_Scavenger_15_00");	//Вот твое пиво. Так ты расскажешь мне об охоте?
+	if(c_bodystatecontains(self,BS_SIT))
 	{
-		b_giveinvitems(other,self,itfobeer,1);
-		AI_Output(other,self,"Org_819_Drax_Scavenger_15_00");	//Вот твое пиво. Так ты расскажешь мне об охоте?
-		if(c_bodystatecontains(self,BS_SIT))
-		{
-			AI_Standup(self);
-			AI_TurnToNPC(self,hero);
-		};
-		AI_UseItem(self,itfobeer);
-		AI_Output(self,other,"Org_819_Drax_Scavenger_06_01");	// Эти места населены крупными птицами. Мы называем их падальщиками. Атаковать их нужно поодиночке. Выманить падальщика из стаи проще простого.
-		AI_Output(self,other,"Org_819_Drax_Scavenger_06_02");	//Когда ты подойдешь ближе, птица забеспокоится, а потом стремительно бросится на тебя. Держи оружие наготове.
-		AI_Output(self,other,"Org_819_Drax_Scavenger_06_03");	//Нанеси удар первым. Падальщик остановится, и у тебя будет тактическое преимущество. Тогда ты с легкостью его одолеешь.
-		AI_Output(self,other,"Org_819_Drax_Scavenger_06_04");	//Ну, а если он ударит тебя первым, тогда... но этого лучше не допускать.
-		DRAX_BIERBEKOMMEN = TRUE;
-	}
-	else
-	{
-		AI_Output(other,self,"Org_819_Drax_Scavenger_KEIN_BIER_15_00");	//У меня нет пива.
-		AI_Output(self,other,"Org_819_Drax_Scavenger_KEIN_BIER_06_01");	//Так купи его. Это мой последний бесплатный совет на сегодня. А когда вернешься с пивом, прихвати немного руды.
-		AI_Output(self,other,"Org_819_Drax_Scavenger_KEIN_BIER_06_02");	//Я могу многому тебя научить, но не задаром же!
+		AI_Standup(self);
+		AI_TurnToNPC(self,hero);
 	};
+	AI_UseItem(self,itfobeer);
+	AI_Output(self,other,"Org_819_Drax_Scavenger_06_01");	//Эти места населены крупными птицами. Мы называем их падальщиками. Атаковать их нужно поодиночке. Выманить падальщика из стаи проще простого.
+	AI_Output(self,other,"Org_819_Drax_Scavenger_06_02");	//Когда ты подойдешь ближе, птица забеспокоится, а потом стремительно бросится на тебя. Держи оружие наготове.
+	AI_Output(self,other,"Org_819_Drax_Scavenger_06_03");	//Нанеси удар первым. Падальщик остановится, и у тебя будет тактическое преимущество. Тогда ты с легкостью его одолеешь.
+	AI_Output(self,other,"Org_819_Drax_Scavenger_06_04");	//Ну, а если он ударит тебя первым, тогда... но этого лучше не допускать.
 	DRAX_LEHRER_FREI = TRUE;
 	Log_CreateTopic(GE_TEACHEROW,LOG_NOTE);
 	b_logentry(GE_TEACHEROW,"Вор Дракс предложил мне научиться разделывать добычу, если мне это будет по карману. Обычно он охотится между Старым лагерем и местом обмена.");
@@ -181,7 +175,7 @@ func void org_819_drax_creatures_zahn()
 			AI_Output(self,other,"Org_819_Drax_Creatures_Zahn_06_02");	//Клыки волков, глорхов и мракорисов ценятся выше всего.
 			KNOWS_GETTEETH = TRUE;
 			Log_CreateTopic(GE_ANIMALTROPHIES,LOG_NOTE);
-			b_logentry(GE_ANIMALTROPHIES,"Навык добычи клыков: волк, орочья собака, глорх, жерх, пес-кровосос, мракорис.");
+			b_logentry(GE_ANIMALTROPHIES,"Навык добычи клыков: волк, орочья собака, глорх, жерх, ищейка, мракорис.");
 		}
 		else
 		{
@@ -209,7 +203,7 @@ func void org_819_drax_creatures_fell()
 			AI_Output(self,other,"Org_819_Drax_Creatures_Fell_06_02");	//Из шкур волков и мракорисов шьют хорошую одежду. С практикой к тебе придет умение распознавать, годится та или иная шкура на одежду или нет.
 			KNOWS_GETFUR = TRUE;
 			Log_CreateTopic(GE_ANIMALTROPHIES,LOG_NOTE);
-			b_logentry(GE_ANIMALTROPHIES,"Навык добычи шкур: волк, орочья собака, маркорис, тролль.");
+			b_logentry(GE_ANIMALTROPHIES,"Навык добычи шкур: волк, орочья собака, мракорис, тролль.");
 		}
 		else
 		{

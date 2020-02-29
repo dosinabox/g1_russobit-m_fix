@@ -20,15 +20,17 @@ instance EBR_106_BARTHOLO(NPC_DEFAULT)
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	aivar[AIV_IMPORTANT] = TRUE;
+	aivar[43] = TRUE;
 	Npc_SetTalentSkill(self,NPC_TALENT_2H,2);
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,2);
 	Npc_SetTalentSkill(self,NPC_TALENT_BOW,2);
 	EquipItem(self,prankenhieb);
-	CreateInvItem(self,itfo_potion_health_03);
 	CreateInvItem(self,itke_storage_01);
+	b_give_bartholochapter1food();
 	daily_routine = rtn_start_106;
 	fight_tactic = FAI_HUMAN_MASTER;
 	senses = SENSE_SEE | SENSE_HEAR | SENSE_SMELL;
+	aivar[AIV_ITEMSCHWEIN] = TRUE;
 };
 
 

@@ -37,7 +37,7 @@ instance INFO_JACKAL_HELLO(C_INFO)
 
 func int info_jackal_hello_condition()
 {
-	if(KAPITEL <= 2)
+	if(Npc_GetTrueGuild(hero) == GIL_NONE && KAPITEL < 4)
 	{
 		return 1;
 	};
@@ -52,25 +52,33 @@ func void info_jackal_hello_info()
 	Info_ClearChoices(info_jackal_hello);
 	Info_AddChoice(info_jackal_hello,"А если я откажусь платить тебе?",info_jackal_hello_whatif);
 	Info_AddChoice(info_jackal_hello,"И что будет, после того как я отдам ее тебе?",info_jackal_hello_whatdoiget);
-	Info_AddChoice(info_jackal_hello,"Вот возьми, десять кусков. Твоя помощь может мне пригодиться.",info_jackal_hello_pay);
+	if(Npc_HasItems(other,itminugget) >= 10)
+	{
+		Info_AddChoice(info_jackal_hello,"Вот, возьми свои десять кусков. Твоя помощь может мне пригодиться.",info_jackal_hello_pay);
+	}
+	else
+	{
+		Info_AddChoice(info_jackal_hello,"Сейчас у меня нет десяти кусков.",info_jackal_hello_noore);
+	};
 };
 
 func void info_jackal_hello_pay()
 {
-	AI_Output(other,self,"Info_Jackal_Hello_Pay_15_00");	//Вот возьми, свои десять кусков. Твоя помощь может мне пригодиться.
-	if(Npc_HasItems(other,itminugget) >= 10)
-	{
-		AI_Output(self,other,"Info_Jackal_Hello_Pay_07_01");	//Если я буду неподалеку, ты можешь на меня рассчитывать. Ты всегда сможешь найти меня между рынком и южными воротами.
-		AI_Output(self,other,"Info_Jackal_Hello_Pay_07_02");	//За порядком в других районах следят Флетчер и Бладвин.
-		JACKAL_PROTECTIONPAID = TRUE;
-		npc_setpermattitude(self,ATT_FRIENDLY);
-		JACKAL_PAYDAY = b_setdaytolerance();
-	}
-	else
-	{
-		AI_Output(self,other,"Info_Jackal_Schutz_NoOre_07_00");	//Эй, только попробуй меня обмануть! Приходи, когда у тебя будет руда!
-	};
+	AI_Output(other,self,"Info_Jackal_Hello_Pay_15_00");	//Вот, возьми свои десять кусков. Твоя помощь может мне пригодиться.
+	AI_Output(self,other,"Info_Jackal_Hello_Pay_07_01");	//Если я буду неподалеку, ты можешь на меня рассчитывать. Ты всегда сможешь найти меня между рынком и южными воротами.
+	AI_Output(self,other,"Info_Jackal_Hello_Pay_07_02");	//За порядком в других районах следят Флетчер и Бладвин.
+	b_giveinvitems(other,self,itminugget,10);
+	JACKAL_PROTECTIONPAID = TRUE;
+	npc_setpermattitude(self,ATT_FRIENDLY);
+	JACKAL_PAYDAY = b_setdaytolerance();
 	Info_ClearChoices(info_jackal_hello);
+};
+
+func void info_jackal_hello_noore()
+{
+	AI_Output(other,self,"Info_Bloodwyn_Hello_NotNow_15_00");	//Сейчас у меня нет десяти кусков.
+	AI_Output(self,other,"SVM_7_YouWannaFoolMe");	//Ты пытаешься меня обдурить, да?
+	//AI_Output(self,other,"Info_Jackal_Schutz_07_02");	//Ты еще не заплатил десять кусков. Приходи, когда у тебя будет руда.
 };
 
 func void info_jackal_hello_whatdoiget()
@@ -108,14 +116,14 @@ instance INFO_JACKAL_SCHUTZ(C_INFO)
 	nr = 3;
 	condition = info_jackal_schutz_condition;
 	information = info_jackal_schutz_info;
-	permanent = 0;
+	permanent = 1;
 	description = "Я обдумал твое предложение. Вот тебе десять кусков.";
 };
 
 
 func int info_jackal_schutz_condition()
 {
-	if(Npc_KnowsInfo(hero,info_jackal_hello) && (JACKAL_PROTECTIONPAID == FALSE))
+	if(Npc_KnowsInfo(hero,info_jackal_hello) && (JACKAL_PROTECTIONPAID == FALSE) && Npc_GetTrueGuild(hero) != GIL_GRD && Npc_GetTrueGuild(hero) != GIL_STT && Npc_GetTrueGuild(hero) != GIL_KDF && KAPITEL < 4)
 	{
 		return 1;
 	};
@@ -123,17 +131,18 @@ func int info_jackal_schutz_condition()
 
 func void info_jackal_schutz_info()
 {
+	AI_Output(other,self,"Info_Jackal_Schutz_15_00");	//Я обдумал твое предложение. Вот тебе десять кусков.
 	if(Npc_HasItems(other,itminugget) >= 10)
 	{
-		AI_Output(other,self,"Info_Jackal_Schutz_15_00");	//Я обдумал твое предложение. Вот тебе десять кусков.
 		AI_Output(self,other,"Info_Jackal_Schutz_07_01");	//Хорошее решение! Теперь я буду тебя защищать!
+		b_giveinvitems(other,self,itminugget,10);
 		JACKAL_PROTECTIONPAID = TRUE;
 		npc_setpermattitude(self,ATT_FRIENDLY);
 		JACKAL_PAYDAY = b_setdaytolerance();
 	}
 	else
 	{
-		AI_Output(self,other,"Info_Jackal_Schutz_07_02");	//Ты еще не заплатил десять кусков. Приходи, когда у тебя будет руда.
+		AI_Output(self,other,"Info_Jackal_Schutz_NoOre_07_00");	//Эй, только попробуй меня обмануть! Приходи, когда у тебя будет руда!
 	};
 };
 
@@ -151,7 +160,7 @@ instance INFO_JACKAL_PERMPAID(C_INFO)
 
 func int info_jackal_permpaid_condition()
 {
-	if(JACKAL_PROTECTIONPAID == TRUE)
+	if(JACKAL_PROTECTIONPAID == TRUE && KAPITEL < 4)
 	{
 		return 1;
 	};
@@ -176,7 +185,7 @@ instance GRD_201_JACKAL_WELCOME(C_INFO)
 
 func int grd_201_jackal_welcome_condition()
 {
-	if(Npc_GetTrueGuild(hero) == GIL_GRD)
+	if(Npc_GetTrueGuild(hero) == GIL_GRD && KAPITEL < 4)
 	{
 		return TRUE;
 	};
@@ -208,6 +217,7 @@ func int info_jackal_payday_condition()
 
 func void info_jackal_payday_info()
 {
+	self.flags = 0;
 	if(c_npcbelongstonewcamp(hero))
 	{
 		if((OLDHEROGUILD == GIL_GRD) || (OLDHEROGUILD == GIL_KDF) || (OLDHEROGUILD == GIL_STT))
@@ -237,7 +247,36 @@ func void info_jackal_payday_info()
 	AI_Output(other,self,"Info_Jackal_PAYDAY_15_09");	//Ты слишком далеко зашел! Зря ты напал на шахту!
 	AI_Output(self,other,"Info_Jackal_PAYDAY_07_10");	//Но все получилось как нельзя лучше. И тебе уже ничего не удастся изменить. За это я ручаюсь!
 	AI_Output(self,other,"Info_Jackal_PAYDAY_07_11");	//Эй, он не должен уйти от нас живым!
-	AI_StopProcessInfos(self);
 	b_story_jackalfight();
+	AI_StopProcessInfos(self);
+	OC_BANNED = TRUE;
+	Wld_ExchangeGuildAttitudes("GIL_ATTITUDES_FMTAKEN");
+	if(GETNEWGUY_STARTED == TRUE && OC_BANNED == FALSE)
+	{
+	    b_logentry(CH1_RECRUITDUSTY,"Теперь я не смогу вывести кого-либо из Старого лагеря.");
+	    Log_SetTopicStatus(CH1_RECRUITDUSTY,LOG_FAILED);
+		GETNEWGUY_STARTED = LOG_FAILED;
+	};
+	if(c_npcbelongstooldcamp(hero))
+	{
+		Npc_SetTrueGuild(hero,GIL_NONE);
+		hero.guild = GIL_NONE;
+		if(!Npc_KnowsInfo(hero,info_cutter_die) && !Npc_KnowsInfo(hero,info_grd238_die) && !Npc_KnowsInfo(hero,info_fletcher_die))
+		{
+			Log_CreateTopic(CH4_BANNEDFROMOC,LOG_MISSION);
+			Log_SetTopicStatus(CH4_BANNEDFROMOC,LOG_RUNNING);
+			b_logentry(CH4_BANNEDFROMOC,"Шакал, который охраняет захваченную Свободную шахту с группой стражников, назвал меня предателем и перебежчиком. Без дальнейших разговоров он напал на меня!");
+			b_logentry(CH4_BANNEDFROMOC,"Кажется, это значит, что меня прогнали из Старого лагеря!");
+		};
+	};
+	if(GORN_JOINEDFORFM)
+	{
+		var C_NPC gorn;
+		gorn = Hlp_GetNpc(pc_fighter);
+		AI_SetWalkMode(gorn,NPC_RUN);
+		AI_Wait(gorn,3);
+		AI_GotoWP(gorn,"FMC_PATH15");
+		b_exchangeroutine(gorn,"WaitFM");
+	};
 };
 

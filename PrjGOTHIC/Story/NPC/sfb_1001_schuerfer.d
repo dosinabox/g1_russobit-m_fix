@@ -15,7 +15,7 @@ instance SFB_1001_SCHUERFER(NPC_DEFAULT)
 	attribute[ATR_HITPOINTS] = 76;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Tired.mds");
-	Mdl_SetVisualBody(self,"hum_body_Naked0",3,1,"Hum_Head_Fighter",95,3,-1);
+	Mdl_SetVisualBody(self,"hum_body_Naked0",3,1,"Hum_Head_Fighter",95,3,sfb_armor_l);
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_COWARD;

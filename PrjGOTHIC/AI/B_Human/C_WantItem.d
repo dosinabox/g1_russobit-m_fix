@@ -14,7 +14,7 @@ func int c_wantitem()
 	itemguild = item.ownerguild;
 	if(Hlp_IsValidItem(item))
 	{
-		printdebugstring(PD_ZS_DETAIL,"...'item':",item.name);
+		printdebugstring(PD_ZS_DETAIL,"...'item': ",item.name);
 		if(Npc_OwnedByNpc(item,self) || Npc_OwnedByGuild(item,selfguild))
 		{
 			printdebugnpc(PD_ZS_DETAIL,"...'item' gehört NSC oder seiner Gilde -> JA!");
@@ -42,8 +42,8 @@ func int c_wantitem()
 		}
 		else
 		{
-			printdebugint(PD_ZS_DETAIL,"...itemvalue:",itemvalue);
-			printdebugint(PD_ZS_DETAIL,"...levelbewertung:",levelbewertung);
+			printdebugint(PD_ZS_DETAIL,"...itemvalue: ",itemvalue);
+			printdebugint(PD_ZS_DETAIL,"...levelbewertung: ",levelbewertung);
 			if(itemvalue > levelbewertung)
 			{
 				printdebugnpc(PD_ZS_DETAIL,"...'item' ist wertvoll genug um interessant zu sein -> JA!");
@@ -59,7 +59,7 @@ func int c_wantitem()
 	else
 	{
 		printdebugnpc(PD_ZS_DETAIL,"...'item' ist ungültig -> NEIN!");
-		return FALSE;
 	};
+	return FALSE;
 };
 

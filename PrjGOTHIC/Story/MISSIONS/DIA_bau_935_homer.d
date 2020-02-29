@@ -97,7 +97,8 @@ func int dia_homer_wannahelp_condition()
 func void dia_homer_wannahelp_info()
 {
 	AI_Output(other,self,"DIA_Homer_WannaHelp_15_00");	//Может, я могу тебе чем-нибудь помочь?
-	AI_Output(self,other,"DIA_Homer_WannaHelp_02_01");	//Конечно. Просто избавься от этой твари, пока она не разрушила плотину. 
+	AI_Output(self,other,"DIA_Homer_WannaHelp_02_01");	//Конечно. Просто избавься от этой твари, пока она не разрушила плотину.
+	Wld_InsertNpc(damlurker,"NC_SPAWN_DAM_LURKER2");
 	HOMER_DAMLURKER = LOG_RUNNING;
 	Log_CreateTopic(CH1_DAMLURKER,LOG_MISSION);
 	Log_SetTopicStatus(CH1_DAMLURKER,LOG_RUNNING);

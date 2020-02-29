@@ -2,12 +2,12 @@
 instance BAU_900_RICELORD(NPC_DEFAULT)
 {
 	name[0] = "Лорд";
-	npctype = NPCTYPE_GUARD;
+	npctype = NPCTYPE_MAIN;
 	guild = GIL_BAU;
 	level = 10;
 	voice = 12;
 	id = 900;
-	attribute[ATR_STRENGTH] = 50;
+	attribute[ATR_STRENGTH] = 20;
 	attribute[ATR_DEXTERITY] = 10;
 	attribute[ATR_MANA_MAX] = 0;
 	attribute[ATR_MANA] = 0;
@@ -19,7 +19,7 @@ instance BAU_900_RICELORD(NPC_DEFAULT)
 	b_scale(self);
 	Mdl_SetModelFatness(self,2);
 	fight_tactic = FAI_HUMAN_STRONG;
-	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
+	Npc_SetTalentSkill(self,NPC_TALENT_2H,1);
 	CreateInvItems(self,itforice,10);
 	CreateInvItem(self,itfowine);
 	CreateInvItems(self,itminugget,40);

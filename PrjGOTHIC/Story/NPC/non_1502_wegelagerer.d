@@ -2,10 +2,10 @@
 instance NON_1502_WEGELAGERER(NPC_DEFAULT)
 {
 	name[0] = "Бандит";
-	npctype = NPCTYPE_AMBIENT;
+	npctype = NPCTYPE_ROGUE;
 	guild = GIL_NONE;
 	level = 9;
-	voice = 6;
+	voice = 8;
 	id = 1502;
 	attribute[ATR_STRENGTH] = 35;
 	attribute[ATR_DEXTERITY] = 15;
@@ -13,6 +13,7 @@ instance NON_1502_WEGELAGERER(NPC_DEFAULT)
 	attribute[ATR_MANA] = 0;
 	attribute[ATR_HITPOINTS_MAX] = 195;
 	attribute[ATR_HITPOINTS] = 195;
+	aivar[43] = TRUE;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_SetVisualBody(self,"hum_body_Naked0",2,3,"Hum_Head_Thief",5,2,-1);
 	b_scale(self);
@@ -29,7 +30,6 @@ instance NON_1502_WEGELAGERER(NPC_DEFAULT)
 
 func void rtn_start_1502()
 {
-	npc_setpermattitude(self,ATT_HOSTILE);
 	ta_sitcampfire(22,0,6,0,"SPAWN_TALL_PATH_BANDITOS2_03");
 	ta_smalltalk(6,0,22,0,"SPAWN_TALL_PATH_BANDITOS2_02_04");
 };

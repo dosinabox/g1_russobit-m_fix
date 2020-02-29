@@ -119,7 +119,7 @@ func void dia_viran_bloodflies_info()
 	AI_Output(self,other,"DIA_Viran_Bloodflies_07_01");	//Все очень просто. Как я уже говорил, здесь опасно работать. Но вот чертовы шершни нас совсем извели.
 	AI_Output(self,other,"DIA_Viran_Bloodflies_07_02");	//Без них нам было бы гораздо лучше! Теперь тебе все понятно?
 	VIRAN_BLOODFLIES = LOG_RUNNING;
-	b_logentry(CH1_DELIVERWEED,"Виран отдаст мне урожай болотника после того, как я убью всех шершней в округе.");
+	b_logentry(CH1_DELIVERWEED,"Вайран отдаст мне урожай болотника после того, как я убью всех шершней в округе.");
 };
 
 
@@ -163,11 +163,11 @@ func void dia_viran_running_info()
 		b_giveinvitems(self,hero,itmi_plants_swampherb_01,50);
 		if(Npc_KnowsInfo(hero,dia_balor_fetchweed))
 		{
-			b_logentry(CH1_DELIVERWEED,"Виран отдал мне вторую половину урожая болотника. Посмотрим, что скажет на это Кор Галом.");
+			b_logentry(CH1_DELIVERWEED,"Вайран отдал мне вторую половину урожая болотника. Посмотрим, что скажет на это Кор Галом.");
 		}
 		else
 		{
-			b_logentry(CH1_DELIVERWEED,"Виран дал мне урожай болотника. Его оказалось слишком мало. Мне кажется, он дал мне только половину.");
+			b_logentry(CH1_DELIVERWEED,"Вайран дал мне урожай болотника. Его оказалось слишком мало. Мне кажется, он дал мне только половину.");
 		};
 		b_givexp(XP_WEEDFROMVIRAN);
 		VIRAN_BLOODFLIES = LOG_SUCCESS;
@@ -217,7 +217,7 @@ instance DIA_VIRAN_RIPOFF(C_INFO)
 
 func int dia_viran_ripoff_condition()
 {
-	if((VIRAN_BOTENDAY <= (Wld_GetDay() - 2)) && (VIRAN_BLOODFLIES == LOG_SUCCESS))
+	if((VIRAN_BOTENDAY <= (Wld_GetDay() - 2)) && (VIRAN_BLOODFLIES == LOG_SUCCESS) && (KAPITEL < 3))
 	{
 		return 1;
 	};

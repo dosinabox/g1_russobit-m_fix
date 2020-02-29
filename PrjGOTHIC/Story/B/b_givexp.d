@@ -20,8 +20,11 @@ func void b_givexp(var int add_xp)
 	{
 		hero.level = hero.level + 1;
 		hero.exp_next = hero.exp_next + ((hero.level + 1) * 500);
-		hero.attribute[ATR_HITPOINTS_MAX] = hero.attribute[ATR_HITPOINTS_MAX] + HP_PER_LEVEL;
-		hero.attribute[ATR_HITPOINTS] = hero.attribute[ATR_HITPOINTS] + HP_PER_LEVEL;
+		if(!Npc_IsDead(hero))
+		{
+			hero.attribute[ATR_HITPOINTS_MAX] = hero.attribute[ATR_HITPOINTS_MAX] + HP_PER_LEVEL;
+			hero.attribute[ATR_HITPOINTS] = hero.attribute[ATR_HITPOINTS] + HP_PER_LEVEL;
+		};
 		hero.lp = hero.lp + LP_PER_LEVEL;
 		PrintScreen(NAME_LEVELUP,-1,_YPOS_MESSAGE_LEVELUP,"font_old_20_white.tga",_TIME_MESSAGE_LEVELUP);
 		Snd_Play("LevelUp");
@@ -32,14 +35,17 @@ func void b_deathxp()
 {
 	printdebugnpc(PD_ZS_FRAME,"B_DeathXP");
 	printglobals(PD_ZS_CHECK);
-	if(c_npcishuman(self) && Npc_WasInState(self,zs_unconscious))
+	if((c_npcishuman(self) && (Npc_WasInState(self,zs_unconscious) || self.aivar[AIV_WASDEFEATEDBYSC])) || (self.level == 0) || (self.npctype == NPCTYPE_FRIEND))
 	{
 		printdebugnpc(PD_ZS_CHECK,"...Opfer ist bewußtloser Mensch!");
 	}
 	else
 	{
 		printdebugnpc(PD_ZS_CHECK,"...Opfer ist entweder nicht bewußtlos oder kein Mensch!");
-		b_givexp(self.level * XP_PER_LEVEL_DEAD);
+		if(self.level > 0)
+		{
+			b_givexp(self.level * XP_PER_LEVEL_DEAD);
+		};
 	};
 };
 
@@ -50,7 +56,10 @@ func void b_unconciousxp()
 	if(!c_npcishuman(self) || !self.aivar[AIV_WASDEFEATEDBYSC])
 	{
 		printdebugnpc(PD_ZS_CHECK,"...erster Sieg!");
-		b_givexp(self.level * XP_PER_LEVEL_DEAD);
+		if(self.level > 0)
+		{
+			b_givexp(self.level * XP_PER_LEVEL_DEAD);
+		};
 	};
 };
 

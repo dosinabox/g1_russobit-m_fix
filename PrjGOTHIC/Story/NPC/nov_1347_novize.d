@@ -28,7 +28,7 @@ instance NOV_1347_NOVIZE(NPC_DEFAULT)
 func void rtn_start_1347()
 {
 	ta_smalltalk(8,0,23,0,"PSI_PATH_TEMPLE_9_MOVEMENT");
-	ta_smalltalk(23,0,8,0,"PSI_PATH_TEMPLE_9_MOVEMENT");
+	ta_sleep(23,0,8,0,"PSI_16_HUT_IN");
 };
 
 func void rtn_ritual_1347()

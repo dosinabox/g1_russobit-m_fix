@@ -137,6 +137,18 @@ class C_SVM
 	var string needkey;
 	var string nomorepicks;
 	var string invfull;
+	var string cry;
+	var string teach01;
+	var string teach02;
+	var string teach03;
+	var string teach04;
+	var string teach05;
+	var string teach06;
+	var string teach07;
+	var string gotlettergotore;
+	var string gotletternoore;
+	var string nolettergotore;
+	var string noletternoore;
 };
 
 instance SVM_0(C_SVM)
@@ -163,7 +175,7 @@ instance SVM_1(C_SVM)
 	iwillteachyourespectforforeignproperty = "SVM_1_IWillTeachYouRespectForForeignProperty";	//Я же предупреждал тебя не трогать мои вещи!
 	dirtythief = "SVM_1_DirtyThief";	//Я прикончу тебя, вор!
 	youattackedmycharge = "SVM_1_YouAttackedMyCharge";	//Никто не смеет лезть к моим друзьям!
-	youkilledoneofus = "SVM_1_YouKilledOneOfUs";	//Ты ударил нашего человека! Сейчас я ударю тебя! 
+	youkilledoneofus = "SVM_1_YouKilledOneOfUs";	//Ты ударил нашего человека! Сейчас я ударю тебя!
 	dead = "SVM_1_Dead";	//
 	aargh_1 = "SVM_1_Aargh_1";	//
 	aargh_2 = "SVM_1_Aargh_2";	//
@@ -210,7 +222,7 @@ instance SVM_1(C_SVM)
 	nolearnovermax = "SVM_1_NoLearnOverMax";	//Ты больше не можешь этому научиться. Тебе стоит попробовать что-то другое.
 	nolearnyoualreadyknow = "SVM_1_NoLearnYouAlreadyKnow";	//Тебе нужно изучить основы, прежде чем стать настоящим мастером.
 	nolearnyourebetter = "SVM_1_NoLearnYoureBetter";	//Ты уже стал умнее.
-	heyyou = "SVM_1_HeyYou";	//Эй, ты!  
+	heyyou = "SVM_1_HeyYou";	//Эй, ты!
 	notnow = "SVM_1_NotNow";	//Я занят!
 	whatdoyouwant = "SVM_1_WhatDoYouWant";	//Что тебе нужно!
 	isaidwhatdoyouwant = "SVM_1_ISaidWhatDoYouWant";	//Так тебе что-то нужно?
@@ -237,7 +249,7 @@ instance SVM_1(C_SVM)
 	youdefeatedvlk_guard = "SVM_1_YouDefeatedVLK_Guard";	//Если ты тронешь кого-нибудь из моих подопечных, будешь иметь дело со мной!
 	youstolefromme = "SVM_1_YouStoleFromMe";	//Ты обокрал меня! Только попробуй подойти ко мне еще раз!
 	youstolefromus = "SVM_1_YouStoleFromUs";	//Я хочу получить свои вещи! А ну верни!
-	youstolefromebr = "SVM_1_YouStoleFromEBr";	//Ты обокрал Баронов! Зачем ты это сделал?  
+	youstolefromebr = "SVM_1_YouStoleFromEBr";	//Ты обокрал Баронов! Зачем ты это сделал?
 	youstolefromgur = "SVM_1_YouStoleFromGur";	//Ты обокрал Гуру! А они уже знают об этом!
 	stolefrommage = "SVM_1_StoleFromMage";	//Ты обокрал магов! Какая странная идея!
 	youkilledmyfriend = "SVM_1_YouKilledMyFriend";	//Один из наших людей убит. Допустишь такую ошибку еще раз, и тебе конец!
@@ -304,18 +316,18 @@ instance SVM_2(C_SVM)
 	berzerk = "SVM_2_Berzerk";	//
 	youllbesorryforthis = "SVM_2_YoullBeSorryForThis";	//Ты об этом пожалеешь!
 	yesyes = "SVM_2_YesYes";	//Спокойно. Спокойно. Ты победил.
-	shitwhatamonster = "SVM_2_ShitWhatAMonster";	//Я, гм... мне просто нужна была помощь!
-	help = "SVM_2_Help";	//Нет времени - спешное дело!
+	shitwhatamonster = "SVM_2_ShitWhatAMonster";	//Нет времени - спешное дело!
+	help = "SVM_2_Help";	//Я, гм... мне просто нужна была помощь!
 	wewillmeetagain = "SVM_2_WeWillMeetAgain";	//Уверен, мы еще встретимся!
 	nevertrythatagain = "SVM_2_NeverTryThatAgain";	//Больше не делай этого!
 	itakeyourweapon = "SVM_2_ITakeYourWeapon";	//Я возьму это!
 	itookyourore = "SVM_2_ITookYourOre";	//В любом случае, эта руда тебе уже не пригодится!
-	shitnoore = "SVM_2_ShitNoOre";	//Что, преследуют неудачи, приятель. Совсем нет руды?
+	shitnoore = "SVM_2_ShitNoOre";	//Что, преследуют неудачи, приятель? Совсем нет руды?
 	handsoff = "SVM_2_HandsOff";	//Убери руки!
 	getoutofhere = "SVM_2_GetOutOfHere";	//Пошел прочь!
 	youviolatedforbiddenterritory = "SVM_2_YouViolatedForbiddenTerritory";	//Эй! Как ты здесь оказался?
 	youwannafoolme = "SVM_2_YouWannaFoolMe";	//По-твоему, я идиот?
-	whatsthissupposedtobe = "SVM_2_WhatsThisSupposedToBe";	//Что ты здесь шатаешься? 
+	whatsthissupposedtobe = "SVM_2_WhatsThisSupposedToBe";	//Что ты здесь шатаешься?
 	whyareyouinhere = "SVM_2_WhyYouAreInHere";	//Убирайся из моего дома, или я позову стражу!
 	whatdidyouinthere = "SVM_2_WhatDidYouInThere";	//Держись подальше от домов!
 	wisemove = "SVM_2_WiseMove";	//Правильное решение!
@@ -383,7 +395,7 @@ instance SVM_2(C_SVM)
 	getthingsright = "SVM_2_GetThingsRight";	//Тебе будет нелегко оправдаться!
 	youdefeatedmewell = "SVM_2_YouDefeatedMeWell";	//Да, ты победил. Это был жестокий бой, но сейчас все позади!
 	smalltalk01 = "SVM_2_Smalltalk01";	//...если ты думаешь...
-	smalltalk02 = "SVM_2_Smalltalk02";	//..ну, может быть...
+	smalltalk02 = "SVM_2_Smalltalk02";	//...ну, может быть...
 	smalltalk03 = "SVM_2_Smalltalk03";	//...ну, это было не слишком умно...
 	smalltalk04 = "SVM_2_Smalltalk04";	//...я не хочу в это ввязываться...
 	smalltalk05 = "SVM_2_Smalltalk05";	//...это точно не моя проблема...
@@ -406,13 +418,20 @@ instance SVM_2(C_SVM)
 	smalltalk22 = "SVM_2_Smalltalk22";	//...постой. Лучше ни во что не ввязываться сгоряча...
 	smalltalk23 = "SVM_2_Smalltalk23";	//...я думал, это выяснили еще очень давно...
 	smalltalk24 = "SVM_2_Smalltalk24";	//...давай поговорим о чем-нибудь еще...
+	teach01 = "SVM_2_Teach01";	//...они пытались говорить со Спящим...
+	teach02 = "SVM_2_Teach02";	//...на духовном уровне...
+	teach03 = "SVM_2_Teach03";	//...лишь Юберион...
+	teach04 = "SVM_2_Teach04";	//...отделились от слепой толпы...
+	teach05 = "SVM_2_Teach05";	//...видения прояснялись...
+	teach06 = "SVM_2_Teach06";	//...мы не забыли нашу цель...
+	teach07 = "SVM_2_Teach07";	//...призвать Спящего...
 	om = "SVM_2_Om";	//
 };
 
 instance SVM_3(C_SVM)
 {
 	stopmagic = "SVM_3_StopMagic";	//Перестань колдовать!
-	isaidstopmagic = "SVM_3_ISaidStopMagic";	//Я же сказал здесь нельзя колдовать.
+	isaidstopmagic = "SVM_3_ISaidStopMagic";	//Я же сказал, здесь нельзя колдовать.
 	weapondown = "SVM_3_WeaponDown";	//Убери свое оружие!
 	isaidweapondown = "SVM_3_ISaidWeaponDown";	//Если ты не уберешь оружие, я за себя не ручаюсь!
 	watchyouraim = "SVM_3_WatchYourAim";	//Ты хочешь меня убить?
@@ -440,7 +459,8 @@ instance SVM_3(C_SVM)
 	shitwhatamonster = "SVM_3_ShitWhatAMonster";	//Черт! Пора бежать отсюда!
 	help = "SVM_3_Help";	//Мне пора уходить!
 	wewillmeetagain = "SVM_3_WeWillMeetAgain";	//Тебе не избежать моей мести!
-	nevertrythatagain = "SVM_3_NeverTryThatAgain";	//Только попробуй сделать это еще раз!
+	//nevertrythatagain = "SVM_3_NeverTryThatAgain";	//Только попробуй сделать это еще раз!
+	nevertrythatagain = "SVM_3_WiseMove";	//Ты сам виноват. Теперь ты будешь наказан!
 	itakeyourweapon = "SVM_3_ITakeYourWeapon";	//Это оружие мне еще пригодится!
 	itookyourore = "SVM_3_ITookYourOre";	//Я возьму у тебя эту руду, ладно...
 	shitnoore = "SVM_3_ShitNoOre";	//У тебя нет руды? Ты огорчил меня. Как ты мог?
@@ -451,7 +471,8 @@ instance SVM_3(C_SVM)
 	whatsthissupposedtobe = "SVM_3_WhatsThisSupposedToBe";	//Убирайся отсюда!
 	whyareyouinhere = "SVM_3_WhyYouAreInHere";	//Это мой дом. Уходи, или я позову стражу!
 	whatdidyouinthere = "SVM_3_WhatDidYouInThere";	//Что тебе нужно? Одно неверное движение, и ты труп!
-	wisemove = "SVM_3_WiseMove";	//Ты сам виноват. Теперь ты будешь наказан!
+	//wisemove = "SVM_3_WiseMove";	//Ты сам виноват. Теперь ты будешь наказан!
+	wisemove = "SVM_3_NeverTryThatAgain";	//Только попробуй сделать это еще раз!
 	alarm = "SVM_3_Alarm";	//Стража, ко мне!
 	intruderalert = "SVM_3_IntruderAlert";	//Тревога!
 	behindyou = "SVM_3_BehindYou";	//Осторожно!
@@ -462,17 +483,18 @@ instance SVM_3(C_SVM)
 	ooh = "SVM_3_Ooh";	//Ох!
 	yeahwelldone = "SVM_3_YeahWellDone";	//Да! Отлично!
 	runcoward = "SVM_3_RunCoward";	//Он уходит от нас!
-	hedefeatedhim = "SVM_3_HeDefeatedHim";	//Он же убил его!
+	//hedefeatedhim = "SVM_3_HeDefeatedHim";	//Он же убил его!
+	hedefeatedhim = "SVM_3_LookAway";	//Я ничего не видел! Меня здесь не было!
 	hedeservedit = "SVM_3_HeDeservedIt";	//Давно надо было это сделать!
 	hekilledhim = "SVM_3_HeKilledHim";	//Он же мертв. Ты убил его!
 	itwasagoodfight = "SVM_3_ItWasAGoodFight";	//Здесь только драться и умеют...
-	awake = "SVM_3_Awake";	//Новый день, а кругом все по-старому...
+	awake = "SVM_3_Awake";	//
 	friendlygreetings = "SVM_3_FriendlyGreetings";	//Эй, ты.
 	algreetings = "SVM_3_ALGreetings";	//За Гомеза.
 	magegreetings = "SVM_3_MageGreetings";	//Во имя магии!
 	sectgreetings = "SVM_3_SectGreetings";	//Пробудись!
-	thereheis = "SVM_3_ThereHeIs";	//Смотрите, вон он.
-	nolearnnopoints = "SVM_3_NoLearnNoPoints";	// Ты недостаточно опытен. Я не смогу научить тебя.
+	thereheis = "SVM_4_ThereHeIs";	//Ты найдешь его вон там!
+	nolearnnopoints = "SVM_3_NoLearnNoPoints";	//Ты недостаточно опытен. Я не смогу научить тебя.
 	nolearnovermax = "SVM_3_NoLearnOverMax";	//Ты полностью освоил эту науку. Тебе стоит научиться чему-нибудь еще.
 	nolearnyoualreadyknow = "SVM_3_NoLearnYouAlreadyKnow";	//Ты должен проходить обучение шаг за шагом, только после этого ты станешь мастером!
 	nolearnyourebetter = "SVM_3_NoLearnYoureBetter";	//Теперь ты поумнее.
@@ -603,7 +625,7 @@ instance SVM_4(C_SVM)
 	friendlygreetings = "SVM_4_FriendlyGreetings";	//Приветствую тебя!
 	algreetings = "SVM_4_ALGreetings";	//За Гомеза!
 	magegreetings = "SVM_4_MageGreetings";	//Во имя магии!
-	sectgreetings = "SVM_4_SectGreetings";	//Пробудись! 
+	sectgreetings = "SVM_4_SectGreetings";	//Пробудись!
 	thereheis = "SVM_4_ThereHeIs";	//Ты найдешь его вон там!
 	nolearnnopoints = "SVM_4_NoLearnNoPoints";	//Я не смогу ничему научить тебя. Тебе не хватает опыта.
 	nolearnovermax = "SVM_4_NoLearnOverMax";	//Ты не сможешь это выучить. Лучше поучи что-нибудь другое.
@@ -626,7 +648,7 @@ instance SVM_4(C_SVM)
 	theykilledmyfriend = "SVM_4_TheyKilledMyFriend";	//Как только я найду того, кто убил нашего человека, я ему...
 	youdisturbedmyslumber = "SVM_4_YouDisturbedMySlumber";	//Ну, зачем ты разбудил меня?
 	suckergotsome = "SVM_4_SuckerGotSome";	//Что, проиграл, да! Это пойдет тебе на пользу!
-	suckerdefeatedebr = "SVM_4_SuckerDefeatedEBr";	//Ты победил Барона.  
+	suckerdefeatedebr = "SVM_4_SuckerDefeatedEBr";	//Ты победил Барона.
 	suckerdefeatedgur = "SVM_4_SuckerDefeatedGur";	//Ты избил одного из Гуру. Только не думай, что тебе позволят повторить такой 'подвиг'.
 	suckerdefeatedmage = "SVM_4_SuckerDefeatedMage";	//Так ты победил мага? Наглости тебе не занимать!
 	suckerdefeatednov_guard = "SVM_4_SuckerDefeatedNov_Guard";	//Да ты совсем из ума выжил! Нельзя бить наших послушников!
@@ -692,7 +714,8 @@ instance SVM_5(C_SVM)
 	youstillnothaveenough = "SVM_5_YouStillNotHaveEnough";	//А, тебе все еще мало!
 	youaskedforit = "SVM_5_YouAskedForIt";	//Ну, сам виноват!
 	nowwaitintruder = "SVM_5_NowWaitIntruder";	//Тебя придется уносить отсюда!
-	iwillteachyourespectforforeignproperty = "SVM_5_IWillTeachYouRespectForForeignProperty";	//Я тебя предупредил. Только попробуй что-нибудь украсть!
+	//iwillteachyourespectforforeignproperty = "SVM_5_IWillTeachYouRespectForForeignProperty";	//Я тебя предупредил. Только попробуй что-нибудь украсть!
+	iwillteachyourespectforforeignproperty = "SVM_5_HandsOff";	//Руки прочь!
 	dirtythief = "SVM_5_DirtyThief";	//Вор! Ну, сейчас ты получишь!
 	youattackedmycharge = "SVM_5_YouAttackedMyCharge";	//Если будешь лезть ко мне, ты сильно пожалеешь!
 	youkilledoneofus = "SVM_5_YouKilledOneOfUs";	//Ты убил одного из моих людей. Теперь твоя очередь!
@@ -710,7 +733,8 @@ instance SVM_5(C_SVM)
 	itakeyourweapon = "SVM_5_ITakeYourWeapon";	//Какое хорошее оружие!
 	itookyourore = "SVM_5_ITookYourOre";	//Да, твоя руда очень кстати! Я потрачу ее с пользой!
 	shitnoore = "SVM_5_ShitNoOre";	//Не повезло! Руды нет!
-	handsoff = "SVM_5_HandsOff";	//Руки прочь!
+	//handsoff = "SVM_5_HandsOff";	//Руки прочь!
+	handsoff = "SVM_5_IWillTeachYouRespectForForeignProperty";	//Я тебя предупредил. Только попробуй что-нибудь украсть!
 	getoutofhere = "SVM_5_GetOutOfHere";	//Пошел вон!
 	youviolatedforbiddenterritory = "SVM_5_YouViolatedForbiddenTerritory";	//Эй! Откуда ты пришел?
 	youwannafoolme = "SVM_5_YouWannaFoolMe";	//Удачная шутка!
@@ -736,8 +760,8 @@ instance SVM_5(C_SVM)
 	friendlygreetings = "SVM_5_FriendlyGreetings";	//Привет, дружище!
 	algreetings = "SVM_5_ALGreetings";	//За Гомеза!
 	magegreetings = "SVM_5_MageGreetings";	//Во имя магии!
-	sectgreetings = "SVM_5_SectGreetings";	//Пробудись! 
-	thereheis = "SVM_5_ThereHeIs";	//Все сюда.
+	sectgreetings = "SVM_5_SectGreetings";	//Пробудись!
+	thereheis = "SVM_4_ThereHeIs";	//Ты найдешь его вон там!
 	nolearnnopoints = "SVM_5_NoLearnNoPoints";	//Я ничему не смогу научить тебя, тебе не хватает опыта.
 	nolearnovermax = "SVM_5_NoLearnOverMax";	//Ты выучил все, что нужно. Тебе стоит поучиться чему-нибудь еще.
 	nolearnyoualreadyknow = "SVM_5_NoLearnYouAlreadyKnow";	//Мастерство приходит со временем. Тебе нужно больше опыта!
@@ -766,7 +790,7 @@ instance SVM_5(C_SVM)
 	suckerdefeatedvlk_guard = "SVM_5_SuckerDefeatedVlk_Guard";	//Ты зачем бьешь рудокопов? Тебе это зачтется!
 	youdefeatedmycomrade = "SVM_5_YouDefeatedMyComrade";	//Зачем ты ударил моего напарника?
 	youdefeatednov_guard = "SVM_5_YouDefeatedNOV_Guard";	//Только тронь послушника, и мы с тебя шкуру спустим!
-	youdefeatedvlk_guard = "SVM_5_YouDefeatedVLK_Guard";	//Не распускай руки! Я защищаю этих людей. Тронешь их хоть пальцем, пеняй на себя! 
+	youdefeatedvlk_guard = "SVM_5_YouDefeatedVLK_Guard";	//Не распускай руки! Я защищаю этих людей. Тронешь их хоть пальцем, пеняй на себя!
 	youstolefromme = "SVM_5_YouStoleFromMe";	//Как ты смеешь являться сюда, грязный вор!
 	youstolefromus = "SVM_5_YouStoleFromUs";	//У тебя есть то, что принадлежит нам. Лучше бы ты отдал это нам добровольно!
 	youstolefromebr = "SVM_5_YouStoleFromEBr";	//Ну, ты даешь! Ты же обокрал рудных Баронов! Они не оставят тебя в покое!
@@ -825,7 +849,8 @@ instance SVM_6(C_SVM)
 	youstillnothaveenough = "SVM_6_YouStillNotHaveEnough";	//А, тебе все еще мало!
 	youaskedforit = "SVM_6_YouAskedForIt";	//Ну, сам виноват!
 	nowwaitintruder = "SVM_6_NowWaitIntruder";	//Тебя придется уносить отсюда!
-	iwillteachyourespectforforeignproperty = "SVM_6_IWillTeachYouRespectForForeignProperty";	//Я тебя предупредил. Только попробуй что-нибудь украсть!
+	//iwillteachyourespectforforeignproperty = "SVM_6_IWillTeachYouRespectForForeignProperty";	//Я тебя предупредил. Только попробуй что-нибудь украсть!
+	iwillteachyourespectforforeignproperty = "SVM_6_HandsOff";	//Руки прочь!
 	dirtythief = "SVM_6_DirtyThief";	//Вор! Ну, сейчас ты получишь!
 	youattackedmycharge = "SVM_6_YouAttackedMyCharge";	//Если будешь лезть ко мне, ты сильно пожалеешь!
 	youkilledoneofus = "SVM_6_YouKilledOneOfUs";	//Ты убил одного из моих людей. Теперь твоя очередь!
@@ -843,7 +868,8 @@ instance SVM_6(C_SVM)
 	itakeyourweapon = "SVM_6_ITakeYourWeapon";	//Какое хорошее оружие!
 	itookyourore = "SVM_6_ITookYourOre";	//Да, твоя руда очень кстати! Я потрачу ее с пользой!
 	shitnoore = "SVM_6_ShitNoOre";	//Не повезло! Руды нет!
-	handsoff = "SVM_6_HandsOff";	//Руки прочь!
+	//handsoff = "SVM_6_HandsOff";	//Руки прочь!
+	handsoff = "SVM_6_IWillTeachYouRespectForForeignProperty";	//Я тебя предупредил. Только попробуй что-нибудь украсть!
 	getoutofhere = "SVM_6_GetOutOfHere";	//Пошел вон!
 	youviolatedforbiddenterritory = "SVM_6_YouViolatedForbiddenTerritory";	//Эй! Откуда ты пришел?
 	youwannafoolme = "SVM_6_YouWannaFoolMe";	//Удачная шутка!
@@ -870,7 +896,7 @@ instance SVM_6(C_SVM)
 	algreetings = "SVM_6_ALGreetings";	//За Гомеза!
 	magegreetings = "SVM_6_MageGreetings";	//Во имя магии!
 	sectgreetings = "SVM_6_SectGreetings";	//Пробудись!
-	thereheis = "SVM_6_ThereHeIs";	//Все сюда.
+	thereheis = "SVM_4_ThereHeIs";	//Ты найдешь его вон там!
 	nolearnnopoints = "SVM_6_NoLearnNoPoints";	//Я ничему не смогу научить тебя, тебе не хватает опыта.
 	nolearnovermax = "SVM_6_NoLearnOverMax";	//Ты выучил все, что нужно. Тебе стоит поучиться чему-нибудь еще.
 	nolearnyoualreadyknow = "SVM_6_NoLearnYouAlreadyKnow";	//Мастерство приходит со временем. Тебе нужно больше опыта!
@@ -951,7 +977,7 @@ instance SVM_7(C_SVM)
 	watchyouraimangry = "SVM_7_WatchYourAimAngry";	//Напугать меня захотел? Я тебя не боюсь!
 	whatareyoudoing = "SVM_7_WhatAreYouDoing";	//Я это тебе припомню! Смотри, что делаешь!
 	letsforgetourlittlefight = "SVM_7_LetsForgetOurLittleFight";	//Забудем об этом, хорошо?
-	strange = "SVM_7_Strange";	//Куда... он ушел? Невозможно! Как такое может быть?!
+	strange = "SVM_7_Strange";	//Куда же он ушел? Невозможно! Как такое может быть?!
 	diemonster = "SVM_7_DieMonster";	//Сейчас я тебя уничтожу!
 	diemortalenemy = "SVM_7_DieMortalEnemy";	//Настал твой час! Пощады не жди!
 	nowwait = "SVM_7_NowWait";	//Теперь у меня есть повод убить тебя!
@@ -975,7 +1001,7 @@ instance SVM_7(C_SVM)
 	nevertrythatagain = "SVM_7_NeverTryThatAgain";	//Только попробуй сделать это еще раз!
 	itakeyourweapon = "SVM_7_ITakeYourWeapon";	//А оружие я, пожалуй, заберу!
 	itookyourore = "SVM_7_ITookYourOre";	//Я бы мог тебя убить. Но руда - это тоже не так уж плохо!
-	shitnoore = "SVM_7_ShitNoOre";	//Что, нет руды? Да от тебя нет никакого толка!
+	shitnoore = "SVM_7_ShitNoOre";	//Что, нет руды? Да от тебя никакого толка!
 	handsoff = "SVM_7_HandsOff";	//Держи свои руки при себе!
 	getoutofhere = "SVM_7_GetOutOfHere";	//Убирайся! Пошел отсюда!
 	youviolatedforbiddenterritory = "SVM_7_YouViolatedForbiddenTerritory";	//Как ты попал сюда?
@@ -1071,6 +1097,13 @@ instance SVM_7(C_SVM)
 	smalltalk22 = "SVM_7_Smalltalk22";	//...надо выждать время. Спешка не доведет до добра...
 	smalltalk23 = "SVM_7_Smalltalk23";	//...я думал, это уже давно решенный вопрос...
 	smalltalk24 = "SVM_7_Smalltalk24";	//...это не слишком интересно, поговорим о чем-нибудь другом...
+	teach01 = "SVM_7_Teach01";	//...магию Спящего...
+	teach02 = "SVM_7_Teach02";	//...подобное заклинание...
+	teach03 = "SVM_7_Teach03";	//...другие братья...
+	teach04 = "SVM_7_Teach04";	//...болота очень опасны...
+	teach05 = "SVM_7_Teach05";	//...это можно сделать в любое время...
+	teach06 = "SVM_7_Teach06";	//...пробудись...
+	teach07 = "SVM_7_Teach07";	//...одного из своих последователей...
 	om = "SVM_7_Om";	//
 };
 
@@ -1127,7 +1160,7 @@ instance SVM_8(C_SVM)
 	ooh = "SVM_8_Ooh";	//Да не стой как столб! Бей его!
 	yeahwelldone = "SVM_8_YeahWellDone";	//Да, врежь ему! Он еще жив!
 	runcoward = "SVM_8_RunCoward";	//Только попробуй появиться здесь еще раз!
-	hedefeatedhim = "SVM_8_HeDefeatedHim";	//Это не так интересно! 
+	hedefeatedhim = "SVM_8_HeDefeatedHim";	//Это не так интересно!
 	hedeservedit = "SVM_8_HeDeservedIt";	//Это будет ему уроком!
 	hekilledhim = "SVM_8_HeKilledHim";	//Зачем ты это сделал? Ты должен будешь ответить за свой поступок!
 	itwasagoodfight = "SVM_8_ItWasAGoodFight";	//Это был отличный бой!
@@ -1149,7 +1182,7 @@ instance SVM_8(C_SVM)
 	outofmyway = "SVM_8_OutOfMyWay";	//Уйди в сторону!
 	youdeaforwhat = "SVM_8_YouDeafOrWhat";	//Ты не слышал меня? Дай пройти!
 	lookingfortroubleagain = "SVM_8_LookingForTroubleAgain";	//Ты хочешь со мной поссориться?
-	lookaway = "SVM_8_LookAway";	//Хм... Как хорошо вокруг! 
+	lookaway = "SVM_8_LookAway";	//Хм... Как хорошо вокруг!
 	okaykeepit = "SVM_8_OkayKeepIt";	//Хорошо! Возьми себе!
 	whatsthat = "SVM_8_WhatsThat";	//Эй! Что это было?
 	thatsmyweapon = "SVM_8_ThatsMyWeapon";	//Ты забрал мое оружие...
@@ -1215,7 +1248,7 @@ instance SVM_9(C_SVM)
 	isaidweapondown = "SVM_9_ISaidWeaponDown";	//Спрячь это, иначе пожалеешь!
 	watchyouraim = "SVM_9_WatchYourAim";	//Смотри, куда целишься!
 	watchyouraimangry = "SVM_9_WatchYourAimAngry";	//Убери свое оружие!
-	whatareyoudoing = "SVM_9_WhatAreYouDoing";	//Эй! Осторожнее! 
+	whatareyoudoing = "SVM_9_WhatAreYouDoing";	//Эй! Осторожнее!
 	letsforgetourlittlefight = "SVM_9_LetsForgetOurLittleFight";	//Может, стоит забыть об этом...
 	strange = "SVM_9_Strange";	//Давай, покажись. Я знаю, ты меня слышишь!
 	diemonster = "SVM_9_DieMonster";	//Эти твари действительно здоровые!
@@ -1253,7 +1286,7 @@ instance SVM_9(C_SVM)
 	alarm = "SVM_9_Alarm";	//Стража! Сюда!
 	intruderalert = "SVM_9_IntruderAlert";	//Тревога! Чужой!
 	behindyou = "SVM_9_BehindYou";	//За тобой!
-	theresafight = "SVM_9_TheresAFight";	//А, ну...посмотрим, насколько они хороши...
+	theresafight = "SVM_9_TheresAFight";	//А, ну... посмотрим, насколько они хороши...
 	heyheyhey = "SVM_9_HeyHeyHey";	//Получай!
 	cheerfight = "SVM_9_CheerFight";	//Давай, давай!
 	cheerfriend = "SVM_9_CheerFriend";	//Хорошо!
@@ -1274,7 +1307,7 @@ instance SVM_9(C_SVM)
 	nolearnovermax = "SVM_9_NoLearnOverMax";	//Ты уже выучил все возможное. Лучше поучись чему-нибудь другому.
 	nolearnyoualreadyknow = "SVM_9_NoLearnYouAlreadyKnow";	//Чтобы стать мастером, тебе нужно больше опыта.
 	nolearnyourebetter = "SVM_9_NoLearnYoureBetter";	//Теперь ты поумнее!
-	heyyou = "SVM_9_HeyYou";	//Эй, ты! 
+	heyyou = "SVM_9_HeyYou";	//Эй, ты!
 	notnow = "SVM_9_NotNow";	//Нет, не сейчас.
 	whatdoyouwant = "SVM_9_WhatDoYouWant";	//Что тебе надо?
 	isaidwhatdoyouwant = "SVM_9_ISaidWhatDoYouWant";	//Я могу помочь?
@@ -1311,12 +1344,12 @@ instance SVM_9(C_SVM)
 	youkilledocfolk = "SVM_9_YouKilledOCfolk";	//Один парень из Старого лагеря мертв, и, кажется, ты в этом замешан...
 	youkilledncfolk = "SVM_9_YouKilledNCfolk";	//В Новом лагере одного постигла смерть, и, похоже, от твоей руки!
 	youkilledpsifolk = "SVM_9_YouKilledPSIfolk";	//В Братстве стало на одного верующего меньше, и эта жизнь на твоей совести!
-	getthingsright = "SVM_9_GetThingsRight";	//Не легко тебе будет оправдаться!
+	getthingsright = "SVM_9_GetThingsRight";	//Нелегко тебе будет оправдаться!
 	youdefeatedmewell = "SVM_9_YouDefeatedMeWell";	//Хороший бой! Учеба пошла тебе на пользу.
 	smalltalk01 = "SVM_9_Smalltalk01";	//...да, если ты так думаешь...
 	smalltalk02 = "SVM_9_Smalltalk02";	//...может...
 	smalltalk03 = "SVM_9_Smalltalk03";	//...это было не слишком разумно...
-	smalltalk04 = "SVM_9_Smalltalk04";	//лучше я не буду в это вмешиваться...
+	smalltalk04 = "SVM_9_Smalltalk04";	//...лучше я не буду в это вмешиваться...
 	smalltalk05 = "SVM_9_Smalltalk05";	//...это не моя проблема...
 	smalltalk06 = "SVM_9_Smalltalk06";	//...кажется, скоро появится проблема...
 	smalltalk07 = "SVM_9_Smalltalk07";	//...держи язык за зубами, остальным незачем знать об этом.
@@ -1333,9 +1366,9 @@ instance SVM_9(C_SVM)
 	smalltalk18 = "SVM_9_Smalltalk18";	//...больше я не слушаю эту болтовню...
 	smalltalk19 = "SVM_9_Smalltalk19";	//...вечно так, поверишь кому-нибудь, а он тебя в неприятности втянет...
 	smalltalk20 = "SVM_9_Smalltalk20";	//...не думаю, что это изменится когда-нибудь...
-	smalltalk21 = "SVM_9_Smalltalk21";	//..да, похоже, ты прав....
+	smalltalk21 = "SVM_9_Smalltalk21";	//...да, похоже, ты прав...
 	smalltalk22 = "SVM_9_Smalltalk22";	//...держись. Лучше ни на что не натыкаться...
-	smalltalk23 = "SVM_9_Smalltalk23";	//..я полагал, это выяснили еще сто лет назад...
+	smalltalk23 = "SVM_9_Smalltalk23";	//...я полагал, это выяснили еще сто лет назад...
 	smalltalk24 = "SVM_9_Smalltalk24";	//...давай лучше о другом поговорим...
 	om = "SVM_9_Om";	//
 };
@@ -1429,7 +1462,7 @@ instance SVM_10(C_SVM)
 	suckerdefeatedmage = "SVM_10_SuckerDefeatedMage";	//Да, победить мага...
 	suckerdefeatednov_guard = "SVM_10_SuckerDefeatedNov_Guard";	//Если тронешь послушника хоть пальцем, будешь иметь дело со мной!
 	suckerdefeatedvlk_guard = "SVM_10_SuckerDefeatedVlk_Guard";	//Я здесь слежу за порядком. Оставь моих людей в покое!
-	youdefeatedmycomrade = "SVM_10_YouDefeatedMyComrade";	//Ты ударил одного из моих друзей!  
+	youdefeatedmycomrade = "SVM_10_YouDefeatedMyComrade";	//Ты ударил одного из моих друзей!
 	youdefeatednov_guard = "SVM_10_YouDefeatedNOV_Guard";	//Только попробуй ударить кого-нибудь. Тебе это даром не пройдет!
 	youdefeatedvlk_guard = "SVM_10_YouDefeatedVLK_Guard";	//Не трогай моих подопечных. Это может тебе дорого стоить!
 	youstolefromme = "SVM_10_YouStoleFromMe";	//Не вздумай появиться здесь еще раз, вор!
@@ -1490,7 +1523,7 @@ instance SVM_11(C_SVM)
 	youstillnothaveenough = "SVM_11_YouStillNotHaveEnough";	//Тебе мало прошлого раза? Что, хочешь повторить?
 	youaskedforit = "SVM_11_YouAskedForIt";	//Не хочешь слушать, так я скажу это тебе по-другому!
 	nowwaitintruder = "SVM_11_NowWaitIntruder";	//Эй, чужак! Сейчас мы тебя научим, как себя вести!
-	iwillteachyourespectforforeignproperty = "SVM_11_IWillTeachYouRespectForForeignProperty";	//Ты заплатишь за это. 
+	iwillteachyourespectforforeignproperty = "SVM_11_IWillTeachYouRespectForForeignProperty";	//Ты заплатишь за это.
 	dirtythief = "SVM_11_DirtyThief";	//Не стоило у меня воровать!
 	youattackedmycharge = "SVM_11_YouAttackedMyCharge";	//Ты хочешь мне все испортить? За это я должен тебя проучить!
 	youkilledoneofus = "SVM_11_YouKilledOneOfUs";	//Ты убил нашего человека, это твоя последняя ошибка!
@@ -1523,7 +1556,7 @@ instance SVM_11(C_SVM)
 	heyheyhey = "SVM_11_HeyHeyHey";	//Давай, бей!
 	cheerfight = "SVM_11_CheerFight";	//Перестань с ним играть!
 	cheerfriend = "SVM_11_CheerFriend";	//Давай же, ты сможешь его победить!
-	ooh = "SVM_11_Ooh";	//О! Не хорошо!
+	ooh = "SVM_11_Ooh";	//Ох! Нехорошо!
 	yeahwelldone = "SVM_11_YeahWellDone";	//Неплохой удар!
 	runcoward = "SVM_11_RunCoward";	//Больше здесь не появляйся!
 	hedefeatedhim = "SVM_11_HeDefeatedHim";	//Ух, какой удар!
@@ -1640,7 +1673,7 @@ instance SVM_12(C_SVM)
 	nevertrythatagain = "SVM_12_NeverTryThatAgain";	//В следующий раз тебе не выжить!
 	itakeyourweapon = "SVM_12_ITakeYourWeapon";	//Отличное оружие! Не стоит оставлять его здесь.
 	itookyourore = "SVM_12_ITookYourOre";	//Ты, конечно, не будешь против, если я позаимствую немного руды?
-	shitnoore = "SVM_12_ShitNoOre";	//Да у тебя же совсем нет руды?!
+	shitnoore = "SVM_12_ShitNoOre";	//Да у тебя же совсем нет руды!
 	handsoff = "SVM_12_HandsOff";	//Ты, негодяй! Убери руки! Я тебе покажу!
 	getoutofhere = "SVM_12_GetOutOfHere";	//Сгинь! Здесь тебе не место!
 	youviolatedforbiddenterritory = "SVM_12_YouViolatedForbiddenTerritory";	//Что это ты здесь делаешь?
@@ -1673,7 +1706,7 @@ instance SVM_12(C_SVM)
 	nolearnovermax = "SVM_12_NoLearnOverMax";	//Ты уже освоил эту науку. Тебе стоит научиться чему-нибудь еще.
 	nolearnyoualreadyknow = "SVM_12_NoLearnYouAlreadyKnow";	//Тебе нужно набраться опыта, только так ты станешь настоящим мастером.
 	nolearnyourebetter = "SVM_12_NoLearnYoureBetter";	//Теперь ты намного лучше!
-	heyyou = "SVM_12_HeyYou";	//Эй, ты!  
+	heyyou = "SVM_12_HeyYou";	//Эй, ты!
 	notnow = "SVM_12_NotNow";	//Не сейчас.
 	whatdoyouwant = "SVM_12_WhatDoYouWant";	//Чем могу помочь?
 	isaidwhatdoyouwant = "SVM_12_ISaidWhatDoYouWant";	//Что ты хочешь?
@@ -1773,7 +1806,7 @@ instance SVM_13(C_SVM)
 	nevertrythatagain = "SVM_13_NeverTryThatAgain";	//В следующий раз тебе не выжить!
 	itakeyourweapon = "SVM_13_ITakeYourWeapon";	//Отличное оружие! Не стоит оставлять его здесь.
 	itookyourore = "SVM_13_ITookYourOre";	//Ты, конечно, не будешь против, если я позаимствую немного руды?
-	shitnoore = "SVM_13_ShitNoOre";	//Да у тебя же совсем нет руды?!
+	shitnoore = "SVM_13_ShitNoOre";	//Да у тебя же совсем нет руды!
 	handsoff = "SVM_13_HandsOff";	//Ты, негодяй! Убери руки! Я тебе покажу!
 	getoutofhere = "SVM_13_GetOutOfHere";	//Сгинь! Здесь тебе не место!
 	youviolatedforbiddenterritory = "SVM_13_YouViolatedForbiddenTerritory";	//Что это ты здесь делаешь?
@@ -1869,6 +1902,13 @@ instance SVM_13(C_SVM)
 	smalltalk22 = "SVM_13_Smalltalk22";	//...надо выждать время. Спешка не доведет до добра...
 	smalltalk23 = "SVM_13_Smalltalk23";	//...я думал, это уже давно решенный вопрос...
 	smalltalk24 = "SVM_13_Smalltalk24";	//...это не слишком интересно, поговорим о чем-нибудь другом...
+	teach01 = "SVM_13_Teach01";	//...наше Братство...
+	teach02 = "SVM_13_Teach02";	//...учение Спящего...
+	teach03 = "SVM_13_Teach03";	//...я чувствую это...
+	teach04 = "SVM_13_Teach04";	//...чтобы он пробудился...
+	teach05 = "SVM_13_Teach05";	//...наша духовная сила...
+	teach06 = "SVM_13_Teach06";	//...в одном из видений...
+	teach07 = "SVM_13_Teach07";	//...люди не смогут...
 	om = "SVM_13_Om";	//
 };
 
@@ -1939,7 +1979,7 @@ instance SVM_14(C_SVM)
 	nolearnovermax = "SVM_14_NoLearnOverMax";	//Ты уже освоил эту науку. Тебе стоит научиться чему-нибудь еще.
 	nolearnyoualreadyknow = "SVM_14_NoLearnYouAlreadyKnow";	//Обучение должно происходить постепенно, только так ты станешь настоящим мастером.
 	nolearnyourebetter = "SVM_14_NoLearnYoureBetter";	//Ты уже знаешь больше.
-	heyyou = "SVM_14_HeyYou";	//Эй, ты! 
+	heyyou = "SVM_14_HeyYou";	//Эй, ты!
 	notnow = "SVM_14_NotNow";	//Не сейчас.
 	whatdoyouwant = "SVM_14_WhatDoYouWant";	//Что тебе от меня нужно?
 	isaidwhatdoyouwant = "SVM_14_ISaidWhatDoYouWant";	//Я могу что-нибудь для тебя сделать?
@@ -2033,6 +2073,7 @@ instance SVM_16(C_SVM)
 	aargh_2 = "SVM_16_Aargh_2";	//
 	aargh_3 = "SVM_16_Aargh_3";	//
 	dead = "SVM_16_Dead";	//
+	cry = "SVM_16_Cry";	//
 };
 
 instance SVM_17(C_SVM)
@@ -2042,5 +2083,69 @@ instance SVM_17(C_SVM)
 	weapondown = "SVM_17_OrcSound03";	//НЕМРОК КА ВАРРОК
 };
 
+instance SVM_18(C_SVM)
+{
+	notnow = "SVM_18_NotNow";	//Ты не должен разговаривать со мной!
+	help = "SVM_18_Help";	//
+	aargh_1 = "SVM_18_Aargh_1";	//
+	aargh_2 = "SVM_18_Aargh_2";	//
+	aargh_3 = "SVM_18_Aargh_3";	//
+	dead = "SVM_18_Dead";	//
+	cry = "SVM_18_Cry";	//
+};
 
-const int SVM_MODULES = 18;
+instance SVM_19(C_SVM)
+{
+	itookyourore = "SVM_19_ITookYourOre";	//Руда, отлично!
+	diemonster = "SVM_19_DieMonster";	//А ну-ка, иди сюда!
+	diemortalenemy = "SVM_19_DieMortalEnemy";	//А ну-ка, иди сюда!
+	shitwhatamonster = "SVM_19_ShitWhatAMonster";	//Бежим!
+	help = "SVM_19_Help";	//Бежим!
+	getoutofhere = "SVM_19_GetOutOfHere";	//Проваливай!
+	youviolatedforbiddenterritory = "SVM_19_YouViolatedForbiddenTerritory";	//Проваливай!
+	heyyou = "SVM_19_HeyYou";	//Эй, сосунок!
+	whatsthissupposedtobe = "SVM_19_WhatsThisSupposedToBe";	//Что ты там делаешь?
+	whyareyouinhere = "SVM_19_WhyYouAreInHere";	//Что ты там делаешь?
+	whatdidyouinthere = "SVM_19_WhatDidYouInThere";	//Что ты там делаешь?
+	handsoff = "SVM_19_HandsOff";	//Эй, сосунок!
+	wewillmeetagain = "SVM_19_WeWillMeetAgain";	//Я тебя запомнил...
+	nevertrythatagain = "SVM_19_NeverTryThatAgain";	//Я тебя запомнил...
+	youllbesorryforthis = "SVM_19_YoullBeSorryForThis";	//Я тебя запомнил...
+	weapondown = "SVM_19_WeaponDown";	//Убери оружие!
+	isaidweapondown = "SVM_19_ISaidWeaponDown";	//Спрячь ножичек, а то порежешься еще...
+	shitnoore = "SVM_19_ShitNoOre";	//Тьфу! У него даже руды нет!
+	dead = "SVM_19_Dead";	//
+	aargh_1 = "SVM_19_Aargh_1";	//
+	aargh_2 = "SVM_19_Aargh_2";	//
+	aargh_3 = "SVM_19_Aargh_3";	//
+	gotlettergotore = "SVM_19_GotLetterGotOre";	//И письмо, и руда! Вот так повезло!
+	gotletternoore = "SVM_19_GotLetterNoOre";	//А вот и письмо!
+	nolettergotore = "SVM_19_NoLetterGotOre";	//Что, потерял письмо? Ну хоть руда есть!
+	noletternoore = "SVM_19_NoLetterNoOre";	//Ну ты и болван! У тебя же вообще ничего нет!
+	smalltalk01 = "SVM_2_Smalltalk01";	//...если ты думаешь...
+	smalltalk02 = "SVM_2_Smalltalk02";	//...ну, может быть...
+	smalltalk03 = "SVM_2_Smalltalk03";	//...ну, это было не слишком умно...
+	smalltalk04 = "SVM_2_Smalltalk04";	//...я не хочу в это ввязываться...
+	smalltalk05 = "SVM_2_Smalltalk05";	//...это точно не моя проблема...
+	smalltalk06 = "SVM_2_Smalltalk06";	//...да, назревает проблема...
+	smalltalk07 = "SVM_2_Smalltalk07";	//...ну знаешь, держи это при себе, людям необязательно знать об этом.
+	smalltalk08 = "SVM_2_Smalltalk08";	//...больше этого не случится...
+	smalltalk09 = "SVM_2_Smalltalk09";	//...что-то не так в этой истории...
+	smalltalk10 = "SVM_2_Smalltalk10";	//...ты должен следить за тем, что говоришь людям...
+	smalltalk11 = "SVM_2_Smalltalk11";	//...пока меня не впутали...
+	smalltalk12 = "SVM_2_Smalltalk12";	//...ты не должен верить всему...
+	smalltalk13 = "SVM_2_Smalltalk13";	//...не хотел бы я оказаться на его месте...
+	smalltalk14 = "SVM_2_Smalltalk14";	//...каждый раз одна и та же история...
+	smalltalk15 = "SVM_2_Smalltalk15";	//...некоторых людей ничего не учит...
+	smalltalk16 = "SVM_2_Smalltalk16";	//...эх, были времена, когда все было совсем по-другому...
+	smalltalk17 = "SVM_2_Smalltalk17";	//...да, люди всегда болтают...
+	smalltalk18 = "SVM_2_Smalltalk18";	//...я больше не слушаю пустую болтовню...
+	smalltalk19 = "SVM_2_Smalltalk19";	//...вот веришь кому-то - и в результате попадаешь в неприятности, так всегда и бывает...
+	smalltalk20 = "SVM_2_Smalltalk20";	//...а я сомневаюсь, что это когда-нибудь изменится...
+	smalltalk21 = "SVM_2_Smalltalk21";	//...скорее всего, ты прав...
+	smalltalk22 = "SVM_2_Smalltalk22";	//...постой. Лучше ни во что не ввязываться сгоряча...
+	smalltalk23 = "SVM_2_Smalltalk23";	//...я думал, это выяснили еще очень давно...
+	smalltalk24 = "SVM_2_Smalltalk24";	//...давай поговорим о чем-нибудь еще...
+};
+
+const int SVM_MODULES = 20;

@@ -69,16 +69,11 @@ func int vlk_585_aleph_guards_condition()
 
 func void vlk_585_aleph_guards_info()
 {
-	var C_NPC brandick;
 	AI_Output(other,self,"VLK_585_Aleph_GUARDS_Info_15_01");	//О чем ты говоришь?
 	AI_Output(self,other,"VLK_585_Aleph_GUARDS_Info_05_02");	//Я работаю только тогда, когда они подходят слишком близко. Все остальное время я занимаюсь своими делами.
 	AI_Output(other,self,"VLK_585_Aleph_GUARDS_Info_15_03");	//Думаю, они все равно тебя подозревают. Зачем это тебе?
 	AI_Output(self,other,"VLK_585_Aleph_GUARDS_Info_05_04");	//Конечно, ты прав, я получаю так же мало руды, как все здесь. Ее всегда не хватает, так что приходится меняться.
 	AI_Output(self,other,"VLK_585_Aleph_GUARDS_Info_05_05");	//Я всегда в курсе последних событий. Могу рассказать много интересного. У тебя с собой, случайно, есть руда? Ну, скажем, 10 кусков.
-	Npc_ExchangeRoutine(self,"BUSY");
-	brandick = Hlp_GetNpc(grd_261_brandick);
-	Npc_ExchangeRoutine(brandick,"WATCH");
-	AI_ContinueRoutine(brandick);
 };
 
 
@@ -108,7 +103,7 @@ func void vlk_585_aleph_info_info()
 	AI_Output(self,other,"VLK_585_Aleph_INFO_Info_05_03");	//В одной из них будет стоять стражник. Там же стоит старый пресс.
 	AI_Output(self,other,"VLK_585_Aleph_INFO_Info_05_04");	//Если тебе повезет, ты найдешь зелье лечения, но будь осторожен, там повсюду ползуны.
 	AI_Output(self,other,"VLK_585_Aleph_INFO_Info_05_05");	//Если захочешь узнать что-нибудь еще, приходи ко мне, уж я смогу тебе помочь...
-	b_giveinvitems(hero,other,itminugget,10);
+	b_giveinvitems(other,self,itminugget,10);
 };
 
 
@@ -187,7 +182,7 @@ func void vlk_585_aleph_glen_info()
 {
 	AI_Output(other,self,"VLK_585_Aleph_GLEN_Info_15_01");	//Надеюсь, за эти десять кусков ты расскажешь мне что-нибудь стоящее.
 	AI_Output(self,other,"VLK_585_Aleph_GLEN_Info_05_02");	//Здесь очень много запертых сундуков. Отмычки можно купить у рудокопа по имени Глен. Ты найдешь его наверху.
-	b_giveinvitems(hero,self,itminugget,10);
+	b_giveinvitems(other,self,itminugget,10);
 };
 
 func void b_aleph_storageshedkey()
@@ -202,14 +197,14 @@ instance VLK_585_ALEPH_SCHUPPEN(C_INFO)
 	condition = vlk_585_aleph_schuppen_condition;
 	information = vlk_585_aleph_schuppen_info;
 	important = 0;
-	permanent = 0;
+	permanent = 1;
 	description = "Ты знаешь что-нибудь о ключе к ящикам на складе?";
 };
 
 
 func int vlk_585_aleph_schuppen_condition()
 {
-	if(Npc_KnowsInfo(hero,grd_271_ulbert_drunk) && !Npc_KnowsInfo(hero,grd_261_brandick_aleph))
+	if(Npc_KnowsInfo(hero,grd_271_ulbert_drunk) && !Npc_KnowsInfo(hero,grd_261_brandick_aleph) && ALEPH_KEY == FALSE && Npc_KnowsInfo(hero,vlk_585_aleph_guards))
 	{
 		return 1;
 	};
@@ -235,20 +230,18 @@ func void vlk_585_aleph_schuppen_50()
 		AI_Output(other,self,"VLK_585_Aleph_SCHUPPEN_50_15_01");	//50 кусков тебе хватит?
 		AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_50_05_02");	//Твоя щедрость безгранична! Возьми ключ. А еще возьми это кольцо. Оно было моим талисманом на счастье.
 		CreateInvItems(self,itke_om_03,1);
-		b_giveinvitems(self,hero,itke_om_03,2);
-		Npc_RemoveInvItem(hero,itke_om_03);
+		b_giveinvitems(self,other,itke_om_03,2);
+		Npc_RemoveInvItem(other,itke_om_03);
 		Npc_RemoveInvItem(self,staerkering);
-		CreateInvItem(hero,staerkering);
-		b_giveinvitems(hero,self,itminugget,50);
-		npc_setpermattitude(self,ATT_FRIENDLY);
+		CreateInvItem(other,staerkering);
+		b_giveinvitems(other,self,itminugget,50);
 		Info_ClearChoices(vlk_585_aleph_schuppen);
-		vlk_585_aleph_schuppen.permanent = 0;
+		ALEPH_KEY = TRUE;
 		b_aleph_storageshedkey();
 	}
 	else
 	{
 		AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_50_05_03");	//У тебя же нет руды!
-		vlk_585_aleph_schuppen.permanent = 1;
 	};
 };
 
@@ -258,17 +251,16 @@ func void vlk_585_aleph_schuppen_30()
 	{
 		CreateInvItem(self,itke_om_03);
 		b_giveinvitems(self,other,itke_om_03,1);
-		b_giveinvitems(hero,self,itminugget,30);
+		b_giveinvitems(other,self,itminugget,30);
 		Info_ClearChoices(vlk_585_aleph_schuppen);
 		AI_Output(other,self,"VLK_585_Aleph_SCHUPPEN_30_15_01");	//Предлагаю 30 кусков.
 		AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_30_05_02");	//Хорошо. У меня как раз есть ключ. Совершенно случайно, кстати.
-		vlk_585_aleph_schuppen.permanent = 0;
+		ALEPH_KEY = TRUE;
 		b_aleph_storageshedkey();
 	}
 	else
 	{
 		AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_30_05_03");	//Ты обещаешь то, чего нет!
-		vlk_585_aleph_schuppen.permanent = 1;
 	};
 };
 
@@ -276,13 +268,11 @@ func void vlk_585_aleph_schuppen_15()
 {
 	AI_Output(other,self,"VLK_585_Aleph_SCHUPPEN_15_15_01");	//Тебя устроит 15 кусков?
 	AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_15_05_02");	//15 кусков? Никогда не видел никакого ключа!
-	vlk_585_aleph_schuppen.permanent = 0;
 };
 
 func void vlk_585_aleph_schuppen_back()
 {
 	Info_ClearChoices(vlk_585_aleph_schuppen);
-	vlk_585_aleph_schuppen.permanent = 1;
 };
 
 
@@ -292,14 +282,14 @@ instance VLK_585_ALEPH_DIRTY(C_INFO)
 	condition = vlk_585_aleph_dirty_condition;
 	information = vlk_585_aleph_dirty_info;
 	important = 0;
-	permanent = 0;
+	permanent = 1;
 	description = "Ты знаешь что-нибудь о ключе к ящикам на складе?";
 };
 
 
 func int vlk_585_aleph_dirty_condition()
 {
-	if(Npc_KnowsInfo(hero,grd_271_ulbert_drunk) && Npc_KnowsInfo(hero,grd_261_brandick_aleph))
+	if(Npc_KnowsInfo(hero,grd_271_ulbert_drunk) && Npc_KnowsInfo(hero,grd_261_brandick_aleph) && ALEPH_KEY == FALSE && Npc_KnowsInfo(hero,vlk_585_aleph_guards))
 	{
 		return 1;
 	};
@@ -326,20 +316,19 @@ func void vlk_585_aleph_dirty_100()
 		CreateInvItem(self,itke_om_03);
 		b_giveinvitems(self,other,itke_om_03,1);
 		Info_ClearChoices(vlk_585_aleph_dirty);
-		vlk_585_aleph_dirty.permanent = 0;
+		ALEPH_KEY = TRUE;
 		b_aleph_storageshedkey();
 	}
 	else
 	{
 		AI_Output(self,other,"VLK_585_Aleph_DIRTY_100_Info_05_03");	//Ты за кого меня принимаешь? 100 кусков и ни одним меньше!
-		vlk_585_aleph_dirty.permanent = 1;
 	};
 };
 
 func void vlk_585_aleph_dirty_no()
 {
 	AI_Output(other,self,"VLK_585_Aleph_DIRTY_NO_Info_15_01");	//Сто кусков - да это же целое состояние. И не мечтай!
-	AI_Output(self,other,"VLK_585_Aleph_DIRTY_NO_Info_05_02");	//Ну, я никогда не начинал первым. Это ты ко мне все время обращался!.. 
-	vlk_585_aleph_dirty.permanent = 0;
+	AI_Output(self,other,"VLK_585_Aleph_DIRTY_NO_Info_05_02");	//Ну, я никогда не начинал первым. Это ты ко мне все время обращался!..
+	Info_ClearChoices(vlk_585_aleph_dirty);
 };
 

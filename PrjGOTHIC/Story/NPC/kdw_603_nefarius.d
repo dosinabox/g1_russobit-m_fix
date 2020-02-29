@@ -7,10 +7,11 @@ instance KDW_603_NEFARIUS(NPC_DEFAULT)
 	level = 25;
 	voice = 4;
 	id = 603;
+	flags = NPC_FLAG_IMMORTAL;
 	attribute[ATR_STRENGTH] = 35;
 	attribute[ATR_DEXTERITY] = 35;
-	attribute[ATR_MANA_MAX] = 85;
-	attribute[ATR_MANA] = 85;
+	attribute[ATR_MANA_MAX] = 100;
+	attribute[ATR_MANA] = 100;
 	attribute[ATR_HITPOINTS_MAX] = 340;
 	attribute[ATR_HITPOINTS] = 340;
 	Mdl_SetVisual(self,"HUMANS.MDS");
@@ -19,8 +20,8 @@ instance KDW_603_NEFARIUS(NPC_DEFAULT)
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_MAGE;
-	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,6);
-	CreateInvItem(self,itarrunethunderball);
+	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,5);
+	EquipItem(self,itarrunethunderball);
 	CreateInvItem(self,itfo_potion_health_02);
 	CreateInvItem(self,itfo_potion_mana_02);
 	EquipItem(self,schutzring_total1);
@@ -33,6 +34,12 @@ instance KDW_603_NEFARIUS(NPC_DEFAULT)
 func void rtn_start_603()
 {
 	ta_practicemagic(4,0,23,0,"NC_PLACE02");
-	ta_practicemagic(23,0,4,0,"NC_PLACE02");
+	ta_sleep(23,0,4,0,"NC_KDW05_IN");
+};
+
+func void rtn_orealert_603()
+{
+	ta_guard(4,0,23,0,"NC_LOWER_CAVE_01");
+	ta_guard(23,0,4,0,"NC_LOWER_CAVE_01");
 };
 

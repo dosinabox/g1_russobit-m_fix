@@ -7,6 +7,7 @@ instance VLK_538_HUNO(NPC_DEFAULT)
 	level = 12;
 	voice = 9;
 	id = 538;
+	flags = NPC_FLAG_IMMORTAL;
 	attribute[ATR_STRENGTH] = 55;
 	attribute[ATR_DEXTERITY] = 15;
 	attribute[ATR_MANA_MAX] = 0;
@@ -21,11 +22,10 @@ instance VLK_538_HUNO(NPC_DEFAULT)
 	aivar[AIV_IMPORTANT] = TRUE;
 	fight_tactic = FAI_HUMAN_COWARD;
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
-	EquipItem(self,itmw_1h_sledgehammer_01);
+	EquipItem(self,itmw_1h_sword_short_05);
 	CreateInvItems(self,itmiswordraw,10);
-	CreateInvItems(self,itmiswordrawhot,10);
-	CreateInvItems(self,itmiswordbladehot,10);
-	CreateInvItems(self,itmiswordblade,10);
+	CreateInvItem(self,itmihammer);
+	CreateInvItem(self,itmw_1h_sledgehammer_01);
 	daily_routine = rtn_start_538;
 };
 
@@ -117,5 +117,11 @@ func void rtn_start_538()
 	ta_smith_anvil(21,30,21,40,"OCR_HUT_34");
 	ta_smith_cool(21,40,21,50,"OCR_HUT_34");
 	ta_smith_anvil(21,50,22,0,"OCR_HUT_34");
+};
+
+func void rtn_flee_538()
+{
+	ta_stay(23,0,7,45,"WP_INTRO01");
+	ta_stay(7,45,23,0,"WP_INTRO01");
 };
 

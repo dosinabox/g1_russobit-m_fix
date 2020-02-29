@@ -30,6 +30,12 @@ func int zs_watchfight_loop()
 {
 	var int jubel;
 	var int anim;
+	var C_NPC kirgo;
+	var C_NPC kharim;
+	var C_NPC gorhanis;
+	kirgo = Hlp_GetNpc(grd_251_kirgo);
+	kharim = Hlp_GetNpc(sld_729_kharim);
+	gorhanis = Hlp_GetNpc(tpl_1422_gorhanis);
 	printdebugnpc(PD_ZS_LOOP,"ZS_WatchFight_Loop");
 	if(Npc_IsDead(other) || Npc_IsDead(victim))
 	{
@@ -41,7 +47,7 @@ func int zs_watchfight_loop()
 		printdebugnpc(PD_ZS_LOOP,"...Workaround für nicht ankommende PERC_ASSESSDEFEAT!");
 		return LOOP_END;
 	};
-	if(Npc_IsInState(other,zs_attack) || Npc_IsInState(victim,zs_attack))
+	if((Npc_IsInState(other,zs_attack) || Npc_IsInState(victim,zs_attack)) && (other != kirgo) && (other != kharim) && (other != gorhanis))
 	{
 		printdebugnpc(PD_ZS_CHECK,"...es wird noch gekämpft!");
 		if((Npc_GetDistToNpc(self,other) < PERC_DIST_INTERMEDIAT) || (Npc_GetDistToNpc(self,victim) < PERC_DIST_INTERMEDIAT))

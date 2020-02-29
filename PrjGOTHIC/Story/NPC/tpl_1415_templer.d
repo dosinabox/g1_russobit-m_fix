@@ -15,7 +15,7 @@ instance TPL_1415_TEMPLER(NPC_DEFAULT)
 	attribute[ATR_HITPOINTS] = 244;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Militia.mds");
-	Mdl_SetVisualBody(self,"hum_body_Naked0",0,1,"Hum_Head_Bald",59,1,tpl_armor_m);
+	Mdl_SetVisualBody(self,"hum_body_Naked0",0,2,"Hum_Head_Bald",7,1,tpl_armor_m);
 	b_scale(self);
 	Mdl_SetModelFatness(self,-1);
 	fight_tactic = FAI_HUMAN_STRONG;

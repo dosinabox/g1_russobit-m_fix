@@ -27,8 +27,8 @@ instance STT_302_VIPER(NPC_DEFAULT)
 	Npc_SetTalentValue(self,NPC_TALENT_PICKPOCKET,60);
 	Npc_SetTalentSkill(self,NPC_TALENT_PICKLOCK,1);
 	Npc_SetTalentValue(self,NPC_TALENT_PICKLOCK,60);
-	CreateInvItems(self,itminugget,750);
-	CreateInvItem(self,itmw_1h_sword_short_04);
+	b_give_viperchapter1nugget();
+	EquipItem(self,itmw_1h_sword_short_04);
 	daily_routine = rtn_start_302;
 };
 

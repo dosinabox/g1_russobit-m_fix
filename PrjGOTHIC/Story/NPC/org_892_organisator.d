@@ -22,25 +22,23 @@ instance ORG_892_ORGANISATOR(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_2H,1);
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	CreateInvItems(self,itkelockpick,3);
-	CreateInvItems(self,itminugget,9);
-	CreateInvItems(self,itforice,8);
-	CreateInvItems(self,itfobooze,7);
-	CreateInvItems(self,itlstorch,2);
 	CreateInvItems(self,itfo_potion_health_01,1);
-	CreateInvItem(self,itmi_stuff_plate_01);
-	CreateInvItem(self,itmi_stuff_cup_01);
-	CreateInvItem(self,itfomutton);
-	CreateInvItem(self,itat_teeth_01);
 	EquipItem(self,itmw_1h_mace_war_01);
 	EquipItem(self,itrw_bow_long_01);
-	CreateInvItems(self,itamarrow,20);
+	CreateInvItems(self,itamarrow,10);
 	daily_routine = rtn_fmcstart_892;
 };
 
 
 func void rtn_fmcstart_892()
 {
-	ta_smoke(1,0,13,0,"FMC_HUT11_OUT");
-	ta_smoke(13,0,1,0,"FMC_HUT11_OUT");
+	ta_smoke(6,0,23,0,"FMC_HUT11_OUT");
+	ta_sleep(23,0,6,0,"FMC_HUT11_IN");
+};
+
+func void rtn_dead_892()
+{
+	ta_stay(6,0,23,0,"FMC_HUT11_OUT");
+	ta_stay(23,0,6,0,"FMC_HUT11_OUT");
 };
 

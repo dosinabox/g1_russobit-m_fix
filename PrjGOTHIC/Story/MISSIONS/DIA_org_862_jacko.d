@@ -42,10 +42,24 @@ func int org_862_jacko_goaway_condition()
 
 func void org_862_jacko_goaway_info()
 {
+	var C_NPC killian;
+	var C_NPC renyu;
 	AI_Output(self,other,"ORG_862_Jacko_GoAway_Info_06_00");	//Что тебе здесь нужно?
 	AI_StopProcessInfos(self);
 	Npc_SetTarget(self,other);
 	AI_StartState(self,zs_attack,1,"");
+	npc_setpermattitude(self,ATT_HOSTILE);
+	Npc_SetTempAttitude(self,ATT_HOSTILE);
+	killian = Hlp_GetNpc(org_861_killian);
+	Npc_SetTarget(killian,hero);
+	AI_StartState(killian,zs_attack,0,"");
+	npc_setpermattitude(killian,ATT_HOSTILE);
+	Npc_SetTempAttitude(killian,ATT_HOSTILE);
+	renyu = Hlp_GetNpc(org_860_renyu);
+	Npc_SetTarget(renyu,hero);
+	AI_StartState(renyu,zs_attack,0,"");
+	npc_setpermattitude(renyu,ATT_HOSTILE);
+	Npc_SetTempAttitude(renyu,ATT_HOSTILE);
 };
 
 
@@ -116,7 +130,7 @@ func void org_862_jacko_guard_angriff()
 {
 	var C_NPC killian;
 	var C_NPC renyu;
-	AI_Output(other,self,"ORG_862_Jacko_GUARD_Angriff_Info_15_00");	//Я хочу прикрыть это дело. 
+	AI_Output(other,self,"ORG_862_Jacko_GUARD_Angriff_Info_15_00");	//Я хочу прикрыть это дело.
 	AI_Output(self,other,"ORG_862_Jacko_GUARD_Angriff_Info_06_01");	//Эй, парни! Идите-ка сюда на минутку!
 	Info_ClearChoices(org_862_jacko_guard);
 	AI_StopProcessInfos(self);

@@ -53,21 +53,21 @@ func void b_reacttomemory()
 					Npc_DeleteNews(self,murdernews);
 					return;
 				};
-				if(murdernews_victim.guild == GIL_GRD)
+				if(murdernews_victim.guild == GIL_GRD && KAPITEL < 4)
 				{
 					printdebugnpc(PD_ZS_FRAME,"B_ReactToMemory // Murder_News // Friendly/Neutral offender SC victim  NOT hostile // GRD");
 					b_say(self,other,"$YOUKILLEDOCFOLK");
 					Npc_DeleteNews(self,murdernews);
 					return;
 				};
-				if(murdernews_victim.guild == GIL_STT)
+				if(murdernews_victim.guild == GIL_STT && KAPITEL < 4)
 				{
 					printdebugnpc(PD_ZS_FRAME,"B_ReactToMemory // Murder_News // Friendly/Neutral offender SC victim  NOT hostile // STT");
 					b_say(self,other,"$YOUKILLEDOCFOLK");
 					Npc_DeleteNews(self,murdernews);
 					return;
 				};
-				if(murdernews_victim.guild == GIL_VLK)
+				if(murdernews_victim.guild == GIL_VLK && KAPITEL < 4)
 				{
 					printdebugnpc(PD_ZS_FRAME,"B_ReactToMemory // Murder_News // Friendly/Neutral offender SC victim  NOT hostile // VLK");
 					b_say(self,other,"$YOUKILLEDOCFOLK");

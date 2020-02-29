@@ -34,7 +34,10 @@ instance DIA_BULLIT_FIRST(C_INFO)
 
 func int dia_bullit_first_condition()
 {
-	return 1;
+	if((Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1000) && (!Npc_KnowsInfo(hero,info_xardas_loadsword02)))
+	{
+		return 1;
+	};
 };
 
 func void dia_bullit_first_info()
@@ -62,7 +65,7 @@ func int dia_bullit_aufsmaul_condition()
 func void dia_bullit_aufsmaul_info()
 {
 	AI_Output(other,self,"DIA_Bullit_AufsMAul_15_00");	//Я пришел, чтобы заставить тебя замолчать!
-	AI_Output(self,other,"DIA_Bullit_AufsMAul_06_01");	//Напугал! Ну, давай, сынок, подходи!
+	AI_Output(self,other,"DIA_Bullit_AufsMAul_06_01");	//Напугал! Ну давай, сынок, подходи!
 	Npc_SetAttitude(self,ATT_HOSTILE);
 	Npc_SetTempAttitude(self,ATT_HOSTILE);
 	AI_StopProcessInfos(self);

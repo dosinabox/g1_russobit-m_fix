@@ -182,5 +182,6 @@ func int spell_processmana_release(var int manainvested)
 	{
 		return SPL_SENDSTOP;
 	};
+	return SPL_SENDSTOP;
 };
 

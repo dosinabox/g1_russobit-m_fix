@@ -72,7 +72,7 @@ func int dia_grd_216_dustyzoll_condition()
 {
 	var C_NPC dusty;
 	dusty = Hlp_GetNpc(vlk_524_dusty);
-	if((dusty.aivar[AIV_PARTYMEMBER] == TRUE) && (Npc_GetDistToNpc(hero,dusty) < 2000))
+	if((dusty.aivar[AIV_PARTYMEMBER] == TRUE) && (Npc_GetDistToWP(dusty,"OCR_NORTHGATE") < 2000) && GRD216PASSED == FALSE)
 	{
 		return 1;
 	};
@@ -84,10 +84,7 @@ func void dia_grd_216_dustyzoll_info()
 	Info_ClearChoices(dia_grd_216_dustyzoll);
 	Info_AddChoice(dia_grd_216_dustyzoll,"Это тебе знать не положено!",dia_grd_216_dustyzoll_pissoff);
 	Info_AddChoice(dia_grd_216_dustyzoll,"Мы хотим пойти в лагерь Братства.",dia_grd_216_dustyzoll_topsi);
-	if(Npc_HasItems(other,itminugget) >= 100)
-	{
-		Info_AddChoice(dia_grd_216_dustyzoll,"Мы просто хотим прогуляться. А вот тебе от нас небольшой подарок.",dia_grd_216_dustyzoll_littlewalk);
-	};
+	Info_AddChoice(dia_grd_216_dustyzoll,"Мы просто хотим прогуляться. А вот тебе от нас небольшой подарок.",dia_grd_216_dustyzoll_littlewalk);
 };
 
 func void dia_grd_216_dustyzoll_pissoff()
@@ -102,6 +99,8 @@ func void dia_grd_216_dustyzoll_pissoff()
 	dusty = Hlp_GetNpc(vlk_524_dusty);
 	dusty.aivar[AIV_PARTYMEMBER] = FALSE;
 	dusty.flags = 0;
+	GETNEWGUY_DUSTY_STOPPED = TRUE;
+	GETNEWGUY_DUSTY_MOVING = FALSE;
 };
 
 func void dia_grd_216_dustyzoll_topsi()
@@ -116,6 +115,8 @@ func void dia_grd_216_dustyzoll_topsi()
 	dusty = Hlp_GetNpc(vlk_524_dusty);
 	dusty.aivar[AIV_PARTYMEMBER] = FALSE;
 	dusty.flags = 0;
+	GETNEWGUY_DUSTY_STOPPED = TRUE;
+	GETNEWGUY_DUSTY_MOVING = FALSE;
 };
 
 func void dia_grd_216_dustyzoll_littlewalk()
@@ -126,7 +127,7 @@ func void dia_grd_216_dustyzoll_littlewalk()
 	{
 		AI_Output(self,other,"DIA_Grd_216_Dusty_Zoll_LittleWalk_13_00");	//Я ничего не видел.
 		b_giveinvitems(hero,self,itminugget,100);
-		dia_grd_216_dustyzoll.permanent = 0;
+		GRD216PASSED = TRUE;
 		b_logentry(CH1_RECRUITDUSTY,"Охранник у южных ворот сделал вид, что он нас не видел. За небольшую плату, конечно. Все имеет свою цену!");
 		b_givexp(XP_BRIBEDDUSTYGUARD);
 		AI_StopProcessInfos(self);
@@ -141,6 +142,8 @@ func void dia_grd_216_dustyzoll_littlewalk()
 		dusty = Hlp_GetNpc(vlk_524_dusty);
 		dusty.aivar[AIV_PARTYMEMBER] = FALSE;
 		dusty.flags = 0;
+		GETNEWGUY_DUSTY_STOPPED = TRUE;
+		GETNEWGUY_DUSTY_MOVING = FALSE;
 	};
 };
 
@@ -157,7 +160,7 @@ instance GRD_216_TORWACHE_SEETHORUS(C_INFO)
 
 func int grd_216_torwache_seethorus_condition()
 {
-	if(!Npc_KnowsInfo(hero,grd_214_torwache_seethorus) && ((CORKALOM_BRINGMCQBALLS == LOG_SUCCESS) || (Npc_HasItems(hero,itat_crawlerqueen) >= 3)) && !Npc_KnowsInfo(hero,grd_200_thorus_gardist) && (Npc_GetTrueGuild(hero) == GIL_STT))
+	if((KAPITEL < 4) && !Npc_KnowsInfo(hero,grd_214_torwache_seethorus) && ((CORKALOM_BRINGMCQBALLS == LOG_SUCCESS) || (Npc_HasItems(hero,itat_crawlerqueen) >= 3)) && !Npc_KnowsInfo(hero,grd_200_thorus_gardist) && (Npc_GetTrueGuild(hero) == GIL_STT))
 	{
 		return TRUE;
 	};

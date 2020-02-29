@@ -31,3 +31,9 @@ func void rtn_start_1355()
 	ta_smalltalk(7,30,2,5,"PSI_TEACH_1");
 };
 
+func void rtn_ritual_1355()
+{
+	ta_stay(8,0,13,0,"PSI_CEREMONY_NEW3");
+	ta_stay(13,0,8,0,"PSI_CEREMONY_NEW3");
+};
+

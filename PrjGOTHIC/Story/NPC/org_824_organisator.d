@@ -39,6 +39,6 @@ instance ORG_824_ORGANISATOR(NPC_DEFAULT)
 func void rtn_start_824()
 {
 	ta_sleep(2,5,9,5,"NC_HUT24_IN");
-	ta_smalltalk(9,5,2,5,"NC_TAVERN_TOP05");
+	ta_smalltalk(9,5,2,5,"NC_TAVERN_TOP04");
 };
 

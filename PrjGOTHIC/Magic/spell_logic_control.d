@@ -14,7 +14,7 @@ func int spell_logic_control(var int manainvested)
 		if(other.flags != NPC_FLAG_IMMORTAL)
 		{
 			printdebugnpc(PD_MAGIC,"npc is not immortal, sub mana");
-			if(manainvested >= (other.level * 4))
+			if(manainvested >= (other.level * 2))
 			{
 				printdebugnpc(PD_MAGIC,"controlled success, starting states");
 				AI_StartState(self,zs_pc_controlling,0,"");

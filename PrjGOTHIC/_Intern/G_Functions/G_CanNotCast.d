@@ -4,23 +4,26 @@ func void g_cannotcast(var int bisplayer,var int ncircleneeded,var int ncirclepo
 	var int ndifference;
 	var string strdifference;
 	var string strmessage;
-	ndifference = ncircleneeded - ncirclepossessed;
-	strdifference = IntToString(ndifference);
-	if(bisplayer)
+	if((ncircleneeded == 7) && bisplayer)
 	{
-		strmessage = _STR_CANNOTUSE_PRE_PLAYER;
-	}
-	else
-	{
-		strmessage = ConcatStrings(self.name,_STR_CANNOTUSE_PRE_NPC);
-		strmessage = ConcatStrings(strmessage,IntToString(self.id));
-		strmessage = ConcatStrings(strmessage,_STR_CANNOTUSE_POST_NPC);
+		strmessage = " линок сломан, € не могу использовать его в бою.";
+		g_printscreen(strmessage);
+		return;
 	};
-	strmessage = ConcatStrings(strmessage,strdifference);
+	if((ncircleneeded == 8) && bisplayer)
+	{
+		strmessage = "“олько шаманы орков знают, как пользоватьс€ этим посохом.";
+		g_printscreen(strmessage);
+		return;
+	};
+	strmessage = _STR_ATTRIBUTE_MAGIC_CIRCLE;
+	strmessage = ConcatStrings(strmessage,IntToString(ncircleneeded));
 	strmessage = ConcatStrings(strmessage," ");
-	strmessage = ConcatStrings(strmessage,_STR_ATTRIBUTE_MAGIC_CIRCLE);
 	strmessage = ConcatStrings(strmessage,_STR_CANNOTUSE_LEVELS);
 	strmessage = ConcatStrings(strmessage,_STR_CANNOTUSE_POST);
-	g_printscreen(strmessage);
+	if(bisplayer)
+	{
+		g_printscreen(strmessage);
+	};
 };
 

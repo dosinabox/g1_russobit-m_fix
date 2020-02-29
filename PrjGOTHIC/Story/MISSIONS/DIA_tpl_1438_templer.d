@@ -113,7 +113,7 @@ instance TPL_1438_TEMPLER_EGGSEARCH(C_INFO)
 	information = tpl_1438_templer_eggsearch_info;
 	important = 0;
 	permanent = 0;
-	description = "Я ищу логово ползунов.  ";
+	description = "Я ищу логово ползунов.";
 };
 
 
@@ -127,7 +127,7 @@ func int tpl_1438_templer_eggsearch_condition()
 
 func void tpl_1438_templer_eggsearch_info()
 {
-	AI_Output(other,self,"Tpl_1438_Templer_EGGSEARCH_Info_15_01");	//Я ищу логово ползунов.  
+	AI_Output(other,self,"Tpl_1438_Templer_EGGSEARCH_Info_15_01");	//Я ищу логово ползунов.
 	AI_Output(self,other,"Tpl_1438_Templer_EGGSEARCH_Info_13_02");	//Думаю, Гор На Вид, Гор На Кош и Гор На Бар знают о ползунах куда больше, чем я. Поговори с ними.
 	b_logentry(CH2_MCEGGS,"Я спросил Стража на входе в Старую шахту о логове ползунов. Он посоветовал мне обратиться к Гор На Виду, Гор На Кошу и Гор На Бару. Эти имена, которые они дают своим Стражам, скоро сведут меня с ума!");
 };
@@ -166,7 +166,7 @@ instance TPL_1438_TEMPLER_TEACHZANGEN(C_INFO)
 	information = tpl_1438_templer_teachzangen_info;
 	important = 0;
 	permanent = 1;
-	description = "Добыча челюстей (1 пункт обучения)";
+	description = "Добыча челюстей (1 очко обучения)";
 };
 
 
@@ -190,8 +190,7 @@ func void tpl_1438_templer_teachzangen_info()
 		AI_Output(self,other,"Tpl_1438_Templer_TEACHZANGEN_Info_13_04");	//Нужно сделать надрез вокруг слюнных желез, оставляя довольно большой промежуток. Теперь ты можешь вынимать их вместе с челюстями. Если будешь делать, как я сказал, проблем не будет.
 		KNOWS_GETMCMANDIBLES = TRUE;
 		Log_CreateTopic(GE_ANIMALTROPHIES,LOG_NOTE);
-		b_logentry(GE_ANIMALTROPHIES,"Навык добычи челюстей: ползуны.");
-		tpl_1438_templer_teachzangen.permanent = 0;
+		b_logentry(GE_ANIMALTROPHIES,"Навык добычи челюстей ползунов.");
 		PrintScreen("Навык: добыча челюстей ползунов",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
 	}
 	else

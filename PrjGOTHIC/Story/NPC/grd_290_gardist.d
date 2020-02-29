@@ -7,6 +7,7 @@ instance GRD_290_GARDIST(NPC_DEFAULT)
 	level = 20;
 	voice = 7;
 	id = 290;
+	aivar[43] = TRUE;
 	attribute[ATR_STRENGTH] = 35;
 	attribute[ATR_DEXTERITY] = 35;
 	attribute[ATR_MANA_MAX] = 0;

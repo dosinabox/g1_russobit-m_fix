@@ -49,6 +49,7 @@ func void info_pacho_stop_info()
 	AI_Output(self,hero,"Info_Pacho_STOP_13_08");	//Они с радостью сделают из тебя котлету!
 	AI_Output(hero,self,"Info_Pacho_STOP_15_09");	//Ох...
 	AI_Output(self,hero,"Info_Pacho_STOP_13_10");	//Не за что!
+	Npc_ExchangeRoutine(self,"start2");
 	AI_StopProcessInfos(self);
 };
 

@@ -31,7 +31,6 @@ instance ORG_836_ORGANISATOR(NPC_DEFAULT)
 	CreateInvItem(self,itmi_stuff_barbknife_01);
 	CreateInvItem(self,itfomutton);
 	CreateInvItem(self,itfoloaf);
-	CreateInvItem(self,itat_teeth_01);
 	daily_routine = rtn_start_836;
 };
 

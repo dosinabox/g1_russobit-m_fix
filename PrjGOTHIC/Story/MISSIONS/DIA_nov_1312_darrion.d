@@ -70,23 +70,23 @@ func int dia_darrion_trade_condition()
 
 func void dia_darrion_trade_info()
 {
-	AI_Output(other,self,"DIA_Darrion_Trade_15_00");	//Покажи мне свои товары.
-	AI_Output(self,other,"DIA_Darrion_Trade_11_01");	//С этого надо было начинать. Вот все, что я продаю.
 	if(Npc_HasItems(self,itmiswordraw) < 5)
 	{
 		CreateInvItems(self,itmiswordraw,5);
 	};
-	if(Npc_HasItems(self,itmiswordrawhot) < 5)
+	if(Npc_HasItems(self,itmiswordbladehot) >= 1)
 	{
-		CreateInvItems(self,itmiswordrawhot,5);
+		Npc_RemoveInvItems(self,itmiswordbladehot,Npc_HasItems(self,itmiswordbladehot));
 	};
-	if(Npc_HasItems(self,itmiswordbladehot) < 5)
+	if(Npc_HasItems(self,itmiswordrawhot) >= 1)
 	{
-		CreateInvItems(self,itmiswordbladehot,5);
+		Npc_RemoveInvItems(self,itmiswordrawhot,Npc_HasItems(self,itmiswordrawhot));
 	};
-	if(Npc_HasItems(self,itmiswordblade) < 5)
+	if(Npc_HasItems(self,itmiswordblade) >= 1)
 	{
-		CreateInvItems(self,itmiswordblade,5);
+		Npc_RemoveInvItems(self,itmiswordblade,Npc_HasItems(self,itmiswordblade));
 	};
+	AI_Output(other,self,"DIA_Darrion_Trade_15_00");	//Покажи мне свои товары.
+	AI_Output(self,other,"DIA_Darrion_Trade_11_01");	//С этого надо было начинать. Вот все, что я продаю.
 };
 

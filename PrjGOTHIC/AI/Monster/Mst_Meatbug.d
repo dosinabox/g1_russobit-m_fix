@@ -5,6 +5,7 @@ prototype MST_DEFAULT_MEATBUG(C_NPC)
 	guild = GIL_MEATBUG;
 	aivar[AIV_IMPORTANT] = ID_MEATBUG;
 	level = 1;
+	Npc_SetToFistMode(self);
 	attribute[ATR_STRENGTH] = 1;
 	attribute[ATR_DEXTERITY] = 1;
 	attribute[ATR_HITPOINTS_MAX] = 10;
@@ -14,7 +15,7 @@ prototype MST_DEFAULT_MEATBUG(C_NPC)
 	protection[PROT_BLUNT] = 0;
 	protection[PROT_EDGE] = 0;
 	protection[PROT_POINT] = 0;
-	protection[PROT_FIRE] = 100;
+	protection[PROT_FIRE] = 0;
 	protection[PROT_FLY] = 0;
 	protection[PROT_MAGIC] = 0;
 	damagetype = DAM_EDGE;

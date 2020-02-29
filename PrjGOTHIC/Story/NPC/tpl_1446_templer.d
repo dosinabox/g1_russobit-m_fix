@@ -24,7 +24,7 @@ instance TPL_1446_TEMPLER(NPC_DEFAULT)
 	EquipItem(self,itmw_1h_sword_05);
 	CreateInvItem(self,itfosoup);
 	CreateInvItem(self,itmijoint_1);
-	CreateInvItem(self,itmi_stuff_oldcoin_02);
+	CreateInvItem(self,itmi_stuff_oldcoin_01);
 	daily_routine = rtn_start_1446;
 };
 

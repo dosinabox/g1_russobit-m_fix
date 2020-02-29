@@ -24,7 +24,7 @@ func void dia_gur_1202_corangar_exit_info()
 instance DIA_CORANGAR_LATERTRAINER(C_INFO)
 {
 	npc = gur_1202_corangar;
-	nr = 1;
+	nr = 6;
 	condition = dia_corangar_latertrainer_condition;
 	information = dia_corangar_latertrainer_info;
 	permanent = 0;
@@ -49,7 +49,7 @@ func void dia_corangar_latertrainer_info()
 instance DIA_CORANGAR_WIETEMPLER(C_INFO)
 {
 	npc = gur_1202_corangar;
-	nr = 1;
+	nr = 7;
 	condition = dia_corangar_wietempler_condition;
 	information = dia_corangar_wietempler_info;
 	permanent = 1;
@@ -59,7 +59,7 @@ instance DIA_CORANGAR_WIETEMPLER(C_INFO)
 
 func int dia_corangar_wietempler_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_corangar_latertrainer) && (Npc_GetTrueGuild(other) != GIL_TPL))
+	if(Npc_KnowsInfo(hero,dia_corangar_latertrainer) && (Npc_GetTrueGuild(hero) == GIL_NONE) && (KAPITEL < 2))
 	{
 		return 1;
 	};
@@ -96,7 +96,7 @@ func int gur_1202_corangar_teach_condition()
 func void gur_1202_corangar_teach_info()
 {
 	AI_Output(other,self,"GUR_1202_CorAngar_Teach_15_00");	//Как я могу увеличить силу и ловкость?
-	AI_Output(self,other,"GUR_1202_CorAngar_Teach_08_01");	//Ловкость и сила очень важные характеристики воина.
+	AI_Output(self,other,"GUR_1202_CorAngar_Teach_08_01");	//Ловкость и сила - очень важные характеристики воина.
 	Info_ClearChoices(gur_1202_corangar_teach);
 	Info_AddChoice(gur_1202_corangar_teach,DIALOG_BACK,gur_1202_corangar_teach_back);
 	Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),gur_1202_corangar_teach_str_5);
@@ -158,6 +158,7 @@ func void gur_1202_corangar_teach_dex_5()
 instance GUR_1202_CORANGAR_WANNABETPL(C_INFO)
 {
 	npc = gur_1202_corangar;
+	nr = 5;
 	condition = gur_1202_corangar_wannabetpl_condition;
 	information = gur_1202_corangar_wannabetpl_info;
 	important = 0;
@@ -180,7 +181,7 @@ func void gur_1202_corangar_wannabetpl_info()
 	if(hero.level < 10)
 	{
 		AI_Output(self,other,"GUR_1202_CorAngar_WANNABETPL_Info_08_02");	//Ты еще к этому не готов. Я смогу принять только тогда, когда у тебя будет больше опыта.
-		gur_1202_corangar_wannabetpl.permanent = 1;
+		b_printguildcondition(10);
 	}
 	else if(hero.level >= 10)
 	{
@@ -190,7 +191,6 @@ func void gur_1202_corangar_wannabetpl_info()
 		AI_Output(self,other,"GUR_1202_CorAngar_WANNABETPL_Info_08_06");	//Я рад, что ты добился таких хороших результатов, затратив на это так мало времени. Ты готов быть принятым в круг Стражей.
 		AI_Output(self,other,"GUR_1202_CorAngar_WANNABETPL_Info_08_07");	//Запомни, когда твой дух силен и тело закалено, ты можешь отразить любую угрозу.
 		AI_Output(self,other,"GUR_1202_CorAngar_WANNABETPL_Info_08_08");	//Сходи к Гор На Тофу на тренировочную площадку. Он даст тебе твои новые доспехи.
-		gur_1202_corangar_wannabetpl.permanent = 0;
 		Npc_SetTrueGuild(hero,GIL_TPL);
 		hero.guild = GIL_TPL;
 		Log_CreateTopic(GE_BECOMETEMPLAR,LOG_NOTE);
@@ -204,6 +204,7 @@ func void gur_1202_corangar_wannabetpl_info()
 instance GUR_1202_CORANGAR_ZWEIHAND1(C_INFO)
 {
 	npc = gur_1202_corangar;
+	nr = 800;
 	condition = gur_1202_corangar_zweihand1_condition;
 	information = gur_1202_corangar_zweihand1_info;
 	important = 0;
@@ -239,6 +240,7 @@ func void gur_1202_corangar_zweihand1_info()
 instance GUR_1202_CORANGAR_ZWEIHAND2(C_INFO)
 {
 	npc = gur_1202_corangar;
+	nr = 801;
 	condition = gur_1202_corangar_zweihand2_condition;
 	information = gur_1202_corangar_zweihand2_info;
 	important = 0;
@@ -342,7 +344,7 @@ instance GUR_1202_CORANGAR_WHERE(C_INFO)
 
 func int gur_1202_corangar_where_condition()
 {
-	if(Npc_KnowsInfo(hero,gur_1202_corangar_sends))
+	if(Npc_KnowsInfo(hero,gur_1202_corangar_sends) && (BAALLUKOR_BRINGPARCHMENT == 0))
 	{
 		return 1;
 	};
@@ -393,6 +395,7 @@ func void gur_1202_corangar_after_info()
 	b_story_backfromorcgraveyard();
 };
 
+var int yberion_day;
 
 instance INFO_CORANGAR_FINDHERB(C_INFO)
 {
@@ -419,12 +422,14 @@ func void info_corangar_findherb_info()
 	AI_Output(self,other,"Mis_3_NC_CorAngar_FindHerb_08_02");	//Сам он не сможет проснуться. Он быстро слабеет. Я знаю, что может его разбудить, но для этого мне нужна твоя помощь.
 	AI_Output(other,self,"Mis_3_NC_CorAngar_FindHerb_15_03");	//Как я могу ему помочь?
 	AI_Output(self,other,"Mis_3_NC_CorAngar_FindHerb_08_04");	//Найди мне болотные целебные травы. Принеси мне пять самых действенных из них.
+	AI_Output(self,other,"Info_CorAngar_FindHerb_Running_08_02");	//Может быть, Фортуно сможет тебе помочь? Он же травник.
 	AI_Output(self,other,"Mis_3_NC_CorAngar_FindHerb_08_05");	//И, пожалуйста, поторопись!
 	AI_StopProcessInfos(self);
 	CORANGAR_FINDHERB = LOG_RUNNING;
 	Log_CreateTopic(CH3_FINDHERBS,LOG_MISSION);
 	Log_SetTopicStatus(CH3_FINDHERBS,LOG_RUNNING);
-	b_logentry(CH3_FINDHERBS,"Юберион все еще без сознания. Кор Ангар попросил меня найти для него пять кустов самых сильных лечебных трав.");
+	b_logentry(CH3_FINDHERBS,"Юберион все еще без сознания. Кор Ангар попросил меня найти для него пять кустов самых сильных лечебных трав. Но поможет ли это..?");
+	YBERION_DAY = Wld_GetDay();
 };
 
 
@@ -502,7 +507,7 @@ instance INFO_CORANGAR_FINDHERB_RUNNING(C_INFO)
 
 func int info_corangar_findherb_running_condition()
 {
-	if((CORANGAR_FINDHERB == LOG_RUNNING) && (Npc_HasItems(other,itfo_plants_herb_03) < 5) && Npc_KnowsInfo(hero,info_corangar_findherb_where) && Npc_KnowsInfo(hero,info_corangar_findherb_look))
+	if((CORANGAR_FINDHERB == LOG_RUNNING) && (Npc_HasItems(other,itfo_plants_herb_03) < 5) && (Npc_HasItems(other,itfo_plants_herb_03) > 0) && Npc_KnowsInfo(hero,info_corangar_findherb_where) && Npc_KnowsInfo(hero,info_corangar_findherb_look))
 	{
 		return 1;
 	};
@@ -528,16 +533,18 @@ func void info_corangar_findherb_running_info()
 instance INFO_CORANGAR_FINDHERB_SUCCESS(C_INFO)
 {
 	npc = gur_1202_corangar;
+	nr = 1;
 	condition = info_corangar_findherb_success_condition;
 	information = info_corangar_findherb_success_info;
 	permanent = 0;
-	description = "Я добыл целебные травы для Юбериона.";
+	important = 0;
+	description = "(отдать целебные травы)";
 };
 
 
 func int info_corangar_findherb_success_condition()
 {
-	if((Npc_HasItems(other,itfo_plants_herb_03) >= 5) && (CORANGAR_FINDHERB == LOG_RUNNING))
+	if(Npc_HasItems(other,itfo_plants_herb_03) >= 5 && (CORANGAR_FINDHERB == LOG_RUNNING))
 	{
 		return TRUE;
 	};
@@ -546,26 +553,37 @@ func int info_corangar_findherb_success_condition()
 func void info_corangar_findherb_success_info()
 {
 	var C_NPC yberion;
+	var C_NPC angar;
+	yberion = Hlp_GetNpc(gur_1200_yberion);
+	angar = Hlp_GetNpc(gur_1202_corangar);
+	b_giveinvitems(other,self,itfo_plants_herb_03,5);
 	AI_Output(other,self,"Info_CorAngar_FindHerb_Success_15_01");	//Я добыл целебные травы для Юбериона.
 	AI_Output(self,other,"Info_CorAngar_FindHerb_Success_08_02");	//Отлично. Когда ты уходил, Юберион очнулся ненадолго.
 	AI_Output(other,self,"Info_CorAngar_FindHerb_Success_15_03");	//Он что-нибудь сказал?
 	AI_Output(self,other,"Info_CorAngar_FindHerb_Success_08_04");	//Да, он сказал, что Спящий на самом деле не является тем, что мы о нем думаем. Мы не должны пытаться разбудить его.
 	AI_Output(self,other,"Info_CorAngar_FindHerb_Success_08_05");	//Теперь нам остается надеяться на то, что Юбериона можно вылечить.
 	YBERION_DEAD = LOG_RUNNING;
-	b_giveinvitems(other,self,itfo_plants_herb_03,5);
-	Npc_RemoveInvItems(self,itfo_plants_herb_03,5);
 	b_givexp(XP_FINDHERBS);
-	CORANGAR_FINDHERB = LOG_SUCCESS;
-	b_logentry(CH3_FINDHERBS,"Я передал Кор Ангару лечебные травы. Теперь можно только надеяться на то, что еще не слишком поздно.");
-	Log_SetTopicStatus(CH3_FINDHERBS,LOG_SUCCESS);
-	yberion = Hlp_GetNpc(gur_1200_yberion);
-	AI_Wait(self,1);
-	AI_GotoNpc(self,yberion);
+	//CORANGAR_FINDHERB = LOG_SUCCESS;
+	//b_logentry(CH3_FINDHERBS,"Я передал Кор Ангару лечебные травы. Теперь можно только надеяться на то, что еще не слишком поздно.");
+	//Log_SetTopicStatus(CH3_FINDHERBS,LOG_SUCCESS);
+	b_logentry(CH3_FINDHERBS,"Я передал Кор Ангару лечебные травы, но они не помогли Юбериону... Глава Братства умер...");
+	CORANGAR_FINDHERB = LOG_FAILED;
+	Log_SetTopicStatus(CH3_FINDHERBS,LOG_FAILED);
+	YBERION_DIED = TRUE;
+	AI_Wait(self,0.5);
+	AI_GotoWP(self,"PSI_TEMPLE_ROOMS_IN_02");
+	AI_SetWalkMode(self,NPC_RUN);
+	AI_UseMob(self,"BOOK",-1);
 	AI_TurnToNPC(self,yberion);
+	yberion.flags = 0;
+	Npc_ChangeAttribute(yberion,ATR_HITPOINTS,-yberion.attribute[ATR_HITPOINTS_MAX]);
+	AI_UseItemToState(self,itfo_plants_herb_03,0);
 	AI_PlayAni(self,"T_PLUNDER");
-	AI_WaitTillEnd(self,yberion);
 	AI_Output(self,other,"GUR_1202_CorAngar_DEATH_Info_08_00");	//Юберион умер. Наш духовный учитель оставил нас!
+	AI_UseItemToState(self,itfo_plants_herb_03,-1);
 	AI_TurnToNPC(self,other);
+	AI_TurnToNPC(other,self);
 	AI_Output(self,other,"GUR_1202_CorAngar_DEATH_Info_08_01");	//Даже твоя помощь не смогла отвратить от него смерть!
 	AI_Output(other,self,"GUR_1202_CorAngar_DEATH_Info_15_02");	//Что же теперь будет, Кор Ангар?
 	AI_Output(self,other,"GUR_1202_CorAngar_DEATH_Info_08_03");	//Я всегда доверял Юбериону. Перед смертью он сказал мне, что теперь нам остается надеяться только на магов Воды.
@@ -575,10 +593,44 @@ func void info_corangar_findherb_success_info()
 	AI_Output(self,other,"GUR_1202_CorAngar_DEATH_Info_08_07");	//После слов Юбериона он ужасно рассердился и отправился сам искать путь к Спящему, взяв с собой нескольких Стражей.
 	AI_Output(other,self,"GUR_1202_CorAngar_DEATH_Info_15_08");	//Как же мы теперь сможем забрать юнитор?
 	AI_Output(self,other,"GUR_1202_CorAngar_DEATH_Info_08_09");	//Я думаю, он оставил юнитор и книгу в своей лаборатории. Вот тебе ключ от его сундука.
+	CreateInvItem(self,itarrunepyrokinesis);
+	CreateInvItem(self,stab_des_lichts);
+	if(YBERION_KEY_STOLEN == FALSE)
+	{
+		CreateInvItem(self,itke_yberion);
+	};
 	CreateInvItem(self,itke_psi_kalom_01);
 	b_giveinvitems(self,other,itke_psi_kalom_01,1);
+	Log_CreateTopic(CH3_ESCAPEPLANNC,LOG_MISSION);
+	Log_SetTopicStatus(CH3_ESCAPEPLANNC,LOG_RUNNING);
+	if(c_npcbelongstopsicamp(hero))
+	{
+		b_logentry(CH3_ESCAPEPLANNC,"Умер Юберион, духовный отец Братства! Да упокоится он с миром! Перед смертью он выразил свою волю: братья должны помочь магам Воды осуществить их план. Кор Ангар передал мне ключ от сундука из лаборатории Кор Галома. В нем находятся альманах и юнитор, которые я раздобыл для Братства. По мнению Кор Ангара, эти предметы могут пригодиться магам Воды.");
+	}
+	else
+	{
+		b_logentry(CH3_ESCAPEPLANNC,"Я окончательно решил пойти в Новый лагерь, чтобы помочь магам Воды разрушить Барьер. Кор Ангар передал мне ключ от сундука из лаборатории Кор Галома. В нем находятся альманах и юнитор, которые я раздобыл для Братства. По мнению Кор Ангара эти предметы могут пригодиться магам Воды. ");
+	};
+	if(BAALORUN_FETCHWEED == LOG_RUNNING)
+	{
+		BAALORUN_FETCHWEED = LOG_FAILED;
+		b_logentry(CH1_DELIVERWEED,"Кор Галом покинул лагерь, я не успел отдать ему урожай болотника.");
+		Log_SetTopicStatus(CH1_DELIVERWEED,LOG_FAILED);
+	};
+	if(KALOM_KRAUTBOTE == LOG_RUNNING)
+	{
+		KALOM_KRAUTBOTE = LOG_FAILED;
+		b_logentry(CH1_KRAUTBOTE,"Кор Галом пропал, теперь я не смогу отдать ему руду за болотник.");
+		Log_SetTopicStatus(CH1_KRAUTBOTE,LOG_FAILED);
+	};
+	if(KALOM_DRUGMONOPOL == LOG_RUNNING)
+	{
+		KALOM_DRUGMONOPOL = LOG_FAILED;
+		b_logentry(CH1_DRUGMONOPOL,"Я не смогу получить награду за устранение конкурентов, Кор Галом ушел из лагеря.");
+		Log_SetTopicStatus(CH1_DRUGMONOPOL,LOG_FAILED);
+	};
+	CORANGAR_SENDTONC = TRUE;
 };
-
 
 instance INFO_CORANGAR_TELEPORT(C_INFO)
 {
@@ -592,7 +644,7 @@ instance INFO_CORANGAR_TELEPORT(C_INFO)
 
 func int info_corangar_teleport_condition()
 {
-	if(Npc_KnowsInfo(hero,info_corangar_findherb_success))
+	if(Npc_KnowsInfo(hero,info_corangar_findherb_success) || Npc_KnowsInfo(hero,info_corangar_yberion_died) || Npc_KnowsInfo(hero,info_corangar_healthwater))
 	{
 		return TRUE;
 	};
@@ -606,6 +658,216 @@ func void info_corangar_teleport_info()
 	AI_Output(self,hero,"Info_CorAngar_TELEPORT_08_03");	//Возьми эту руну в знак нашей благодарности за твою помощь.
 	AI_Output(self,hero,"Info_CorAngar_TELEPORT_08_04");	//Она даст тебе возможность быстро перенестись на площадь перед нашим Храмом.
 	AI_Output(hero,self,"Info_CorAngar_TELEPORT_15_05");	//Спасибо тебе!
+	if(YBERION_DIED == TRUE)
+	{
+		Npc_ExchangeRoutine(self,"AFTER");
+		b_exchangeroutine(gur_1207_natalia,"AFTER");
+		b_exchangeroutine(gur_1205_chani,"AFTER");
+	}
+	else if(YBERION_HEALED == TRUE)
+	{
+		Npc_ExchangeRoutine(self,"guru");
+	};
 	b_story_senttonc();
+};
+
+instance CORANGAR_STEALKEY(C_INFO)
+{
+	npc = gur_1202_corangar;
+	condition = corangar_stealkey_condition;
+	information = corangar_stealkey_info;
+	important = 0;
+	permanent = 0;
+	description = "(украсть ключ)";
+};
+
+
+func int corangar_stealkey_condition()
+{
+	if(Npc_HasItems(self,itke_yberion) && Npc_GetTalentSkill(hero,NPC_TALENT_PICKPOCKET) == 2 && Npc_GetTalentSkill(hero,NPC_TALENT_SNEAK) == 1)
+	{
+		return TRUE;
+	};
+};
+
+func void corangar_stealkey_info()
+{
+	AI_GotoNpc(other,self);
+	AI_Output(other,self,"GUR_1201_CorKalom_CRAWLER_Info_15_01");	//Есть какие-нибудь верные приемы охоты на ползунов?
+	AI_Output(self,other,"GUR_1202_CorAngar_WANNABETPL_Info_08_07");	//Запомни, когда твой дух силен и тело закалено, ты можешь отразить любую угрозу.
+	AI_DrawWeapon(self);
+	AI_PlayAni(other,"T_STAND_2_IGET");
+	AI_PlayAni(other,"T_IGET_2_STAND");
+	AI_PlayAni(self,"T_1HSFREE");
+	AI_RemoveWeapon(self);
+	PrintScreen("Украден ключ.",-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
+	CreateInvItem(hero,itke_yberion);
+	Npc_RemoveInvItem(self,itke_yberion);
+	AI_StopProcessInfos(self);
+};
+
+instance INFO_CORANGAR_YBERION_DIED(C_INFO)
+{
+	npc = gur_1202_corangar;
+	condition = info_corangar_yberion_died_condition;
+	information = info_corangar_yberion_died_info;
+	permanent = 0;
+	important = 1;
+};
+
+
+func int info_corangar_yberion_died_condition()
+{
+	if((YBERION_DAY <= (Wld_GetDay() - 2)) && CORANGAR_FINDHERB == LOG_RUNNING)
+	{
+		return TRUE;
+	};
+};
+
+func void info_corangar_yberion_died_info()
+{
+	var C_NPC yberion;
+	yberion = Hlp_GetNpc(gur_1200_yberion);
+	yberion.flags = 0;
+	Npc_ChangeAttribute(yberion,ATR_HITPOINTS,-yberion.attribute[ATR_HITPOINTS_MAX]);
+	CreateInvItem(self,itarrunepyrokinesis);
+	CreateInvItem(self,stab_des_lichts);
+	CreateInvItem(self,itke_yberion);
+	CreateInvItem(self,itke_psi_kalom_01);
+	b_giveinvitems(self,other,itke_psi_kalom_01,1);
+	Log_CreateTopic(CH3_ESCAPEPLANNC,LOG_MISSION);
+	Log_SetTopicStatus(CH3_ESCAPEPLANNC,LOG_RUNNING);
+	if(c_npcbelongstopsicamp(hero))
+	{
+		b_logentry(CH3_ESCAPEPLANNC,"Умер Юберион, духовный отец Братства! Да упокоится он с миром! Перед смертью он выразил свою волю: братья должны помочь магам Воды осуществить их план. Кор Ангар передал мне ключ от сундука из лаборатории Кор Галома. В нем находятся альманах и юнитор, которые я раздобыл для Братства. По мнению Кор Ангара, эти предметы могут пригодиться магам Воды.");
+	}
+	else
+	{
+		b_logentry(CH3_ESCAPEPLANNC,"Я окончательно решил пойти в Новый лагерь, чтобы помочь магам Воды разрушить Барьер. Кор Ангар передал мне ключ от сундука из лаборатории Кор Галома. В нем находятся альманах и юнитор, которые я раздобыл для Братства. По мнению Кор Ангара эти предметы могут пригодиться магам Воды. ");
+	};
+	if(BAALORUN_FETCHWEED == LOG_RUNNING)
+	{
+		BAALORUN_FETCHWEED = LOG_FAILED;
+		b_logentry(CH1_DELIVERWEED,"Кор Галом покинул лагерь, я не успел отдать ему урожай болотника.");
+		Log_SetTopicStatus(CH1_DELIVERWEED,LOG_FAILED);
+	};
+	if(KALOM_KRAUTBOTE == LOG_RUNNING)
+	{
+		KALOM_KRAUTBOTE = LOG_FAILED;
+		b_logentry(CH1_KRAUTBOTE,"Кор Галом пропал, теперь я не смогу отдать ему руду за болотник.");
+		Log_SetTopicStatus(CH1_KRAUTBOTE,LOG_FAILED);
+	};
+	if(KALOM_DRUGMONOPOL == LOG_RUNNING)
+	{
+		KALOM_DRUGMONOPOL = LOG_FAILED;
+		b_logentry(CH1_DRUGMONOPOL,"Я не смогу получить награду за устранение конкурентов, Кор Галом ушел из лагеря.");
+		Log_SetTopicStatus(CH1_DRUGMONOPOL,LOG_FAILED);
+	};
+	CORANGAR_SENDTONC = TRUE;
+	AI_Output(self,other,"GUR_1202_CorAngar_DEATH_Info_08_00");	//Юберион умер. Наш духовный учитель оставил нас!
+	AI_Output(other,self,"GUR_1202_CorAngar_DEATH_Info_15_02");	//Что же теперь будет, Кор Ангар?
+	AI_Output(self,other,"GUR_1202_CorAngar_DEATH_Info_08_03");	//Я всегда доверял Юбериону. Перед смертью он сказал мне, что теперь нам остается надеяться только на магов Воды.
+	AI_Output(other,self,"GUR_1202_CorAngar_DEATH_Info_15_04");	//Значит, нам нужно помочь магам Воды.
+	AI_Output(self,other,"GUR_1202_CorAngar_DEATH_Info_08_05");	//Да, им нужен будет юнитор и альманах. И то, и другое находится у Кор Галома.
+	AI_Output(other,self,"GUR_1202_CorAngar_DEATH_Info_15_06");	//А где сейчас Кор Галом?
+	AI_Output(self,other,"GUR_1202_CorAngar_DEATH_Info_08_07_New");	//Отправился сам искать путь к Спящему, взяв с собой нескольких Стражей.
+	AI_Output(other,self,"GUR_1202_CorAngar_DEATH_Info_15_08");	//Как же мы теперь сможем забрать юнитор?
+	AI_Output(self,other,"GUR_1202_CorAngar_DEATH_Info_08_09");	//Я думаю, он оставил юнитор и книгу в своей лаборатории. Вот тебе ключ от его сундука.
+	b_logentry(CH3_FINDHERBS,"Я не успел принести Юбериону лечебные травы... Глава Братства умер...");
+	CORANGAR_FINDHERB = LOG_FAILED;
+	Log_SetTopicStatus(CH3_FINDHERBS,LOG_FAILED);
+	YBERION_DIED = TRUE;
+	AI_StopProcessInfos(self);
+};
+
+instance INFO_CORANGAR_HEALTHWATER(C_INFO)
+{
+	npc = gur_1202_corangar;
+	nr = 2;
+	condition = info_corangar_healthwater_condition;
+	information = info_corangar_healthwater_info;
+	permanent = 0;
+	important = 0;
+	description = "(отдать зелье Фортуно)";
+};
+
+
+func int info_corangar_healthwater_condition()
+{
+	if((CORANGAR_FINDHERB == LOG_RUNNING) && Npc_HasItems(other,healthwater))
+	{
+		return 1;
+	};
+};
+
+func void info_corangar_healthwater_info()
+{
+	var C_NPC yberion;
+	yberion = Hlp_GetNpc(gur_1200_yberion);
+	CreateInvItem(self,itarrunepyrokinesis);
+	CreateInvItem(self,stab_des_lichts);
+	CreateInvItem(self,itke_yberion);
+	CreateInvItem(self,itke_psi_kalom_01);
+	b_giveinvitems(self,other,itke_psi_kalom_01,1);
+	b_giveinvitems(other,self,healthwater,1);
+	Log_CreateTopic(CH3_ESCAPEPLANNC,LOG_MISSION);
+	Log_SetTopicStatus(CH3_ESCAPEPLANNC,LOG_RUNNING);
+	b_givexp(2000);
+	if(c_npcbelongstopsicamp(hero))
+	{
+		b_logentry(CH3_ESCAPEPLANNC,"Юберион ненадолго очнулся и выразил свою волю: братья должны помочь магам Воды осуществить их план. Кор Ангар передал мне ключ от сундука из лаборатории Кор Галома. В нем находятся альманах и юнитор, которые я раздобыл для Братства. По мнению Кор Ангара, эти предметы могут пригодиться магам Воды.");
+	}
+	else
+	{
+		b_logentry(CH3_ESCAPEPLANNC,"Я окончательно решил пойти в Новый лагерь, чтобы помочь магам Воды разрушить Барьер. Кор Ангар передал мне ключ от сундука из лаборатории Кор Галома. В нем находятся альманах и юнитор, которые я раздобыл для Братства. По мнению Кор Ангара, эти предметы могут пригодиться магам Воды.");
+	};
+	if(BAALORUN_FETCHWEED == LOG_RUNNING)
+	{
+		BAALORUN_FETCHWEED = LOG_FAILED;
+		b_logentry(CH1_DELIVERWEED,"Кор Галом покинул лагерь, я не успел отдать ему урожай болотника.");
+		Log_SetTopicStatus(CH1_DELIVERWEED,LOG_FAILED);
+	};
+	if(KALOM_KRAUTBOTE == LOG_RUNNING)
+	{
+		KALOM_KRAUTBOTE = LOG_FAILED;
+		b_logentry(CH1_KRAUTBOTE,"Кор Галом пропал, теперь я не смогу отдать ему руду за болотник.");
+		Log_SetTopicStatus(CH1_KRAUTBOTE,LOG_FAILED);
+	};
+	if(KALOM_DRUGMONOPOL == LOG_RUNNING)
+	{
+		KALOM_DRUGMONOPOL = LOG_FAILED;
+		b_logentry(CH1_DRUGMONOPOL,"Я не смогу получить награду за устранение конкурентов, Кор Галом ушел из лагеря.");
+		Log_SetTopicStatus(CH1_DRUGMONOPOL,LOG_FAILED);
+	};
+	CORANGAR_SENDTONC = TRUE;
+	AI_Output(other,self,"Tpl_1433_GorNaVid_HEALTH_SUC_Info_15_01_New");	//Вот, может быть, это поможет.
+	AI_Output(self,other,"Info_CorAngar_FindHerb_Success_08_05");	//Теперь нам остается надеяться на то, что Юбериона можно вылечить.
+	AI_Wait(self,0.5);
+	AI_GotoWP(self,"PSI_TEMPLE_ROOMS_IN_02");
+	AI_SetWalkMode(self,NPC_RUN);
+	AI_UseMob(self,"BOOK",-1);
+	AI_TurnToNPC(self,yberion);
+	AI_UseItemToState(self,healthwater,0);
+	AI_PlayAni(self,"T_PLUNDER");
+	AI_Wait(self,3);
+	AI_UseItemToState(self,healthwater,-1);
+	AI_GotoNpc(self,hero);
+	AI_Output(self,other,"Info_CorAngar_FindHerb_Success_08_02_New");	//Отлично. Юберион очнулся ненадолго.
+	AI_TurnToNPC(other,self);
+	AI_Output(other,self,"Info_CorAngar_FindHerb_Success_15_03");	//Он что-нибудь сказал?
+	AI_Output(self,other,"Info_CorAngar_FindHerb_Success_08_04");	//Да, он сказал, что Спящий на самом деле не является тем, что мы о нем думаем. Мы не должны пытаться разбудить его.
+	AI_Output(other,self,"GUR_1202_CorAngar_DEATH_Info_15_02");	//Что же теперь будет, Кор Ангар?
+	AI_Output(self,other,"GUR_1202_CorAngar_DEATH_Info_08_03_New");	//Я всегда доверял Юбериону. Он сказал мне, что теперь нам остается надеяться только на магов Воды.
+	AI_Output(other,self,"GUR_1202_CorAngar_DEATH_Info_15_04");	//Значит, нам нужно помочь магам Воды.
+	AI_Output(self,other,"GUR_1202_CorAngar_DEATH_Info_08_05");	//Да, им нужен будет юнитор и альманах. И то, и другое находится у Кор Галома.
+	AI_Output(other,self,"GUR_1202_CorAngar_DEATH_Info_15_06");	//А где сейчас Кор Галом?
+	AI_Output(self,other,"GUR_1202_CorAngar_DEATH_Info_08_07_New");	//Отправился сам искать путь к Спящему, взяв с собой нескольких Стражей.
+	AI_Output(other,self,"GUR_1202_CorAngar_DEATH_Info_15_08");	//Как же мы теперь сможем забрать юнитор?
+	AI_Output(self,other,"GUR_1202_CorAngar_DEATH_Info_08_09");	//Я думаю, он оставил юнитор и книгу в своей лаборатории. Вот тебе ключ от его сундука.
+	b_logentry(CH3_FINDHERBS,"Зелье Фортуно сработало! Юберион пришел в себя и успел немного поговорить с Кор Ангаром, прежде чем потерял сознание. Он все еще слаб, но уже не при смерти. Надеюсь, он поправится.");
+	CORANGAR_FINDHERB = LOG_SUCCESS;
+	Log_SetTopicStatus(CH3_FINDHERBS,LOG_SUCCESS);
+	YBERION_HEALED = TRUE;
+	AI_StopProcessInfos(self);
 };
 

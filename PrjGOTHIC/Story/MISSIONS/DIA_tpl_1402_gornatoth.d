@@ -116,7 +116,7 @@ instance TPL_1402_GORNATOTH_GETSTUFF(C_INFO)
 
 func int tpl_1402_gornatoth_getstuff_condition()
 {
-	if(Npc_KnowsInfo(hero,gur_1202_corangar_wannabetpl) && (Npc_GetTrueGuild(hero) == GIL_TPL))
+	if(Npc_GetTrueGuild(hero) == GIL_TPL)
 	{
 		return TRUE;
 	};
@@ -130,13 +130,14 @@ func void tpl_1402_gornatoth_getstuff_info()
 	b_logentry(GE_BECOMETEMPLAR,"Гор На Тоф вручил мне мой первый доспех Стража. Теперь я стал частью этого общества воинов!");
 	Log_CreateTopic(GE_TRADERPSI,LOG_NOTE);
 	b_logentry(GE_TRADERPSI,"У Гор На Тофа есть хорошие доспехи Стражей, но получить их может только тот, кто внес значительное пожертвование на нужды Братства. Я могу найти его на тренировочной площадке лагеря Братства.");
-	CreateInvItem(hero,tpl_armor_l);
-	CreateInvItem(self,itamarrow);
-	b_giveinvitems(self,hero,itamarrow,1);
-	Npc_RemoveInvItem(hero,itamarrow);
-	AI_EquipBestArmor(hero);
+	CreateInvItem(self,tpl_armor_l);
+	b_giveinvitems(self,hero,tpl_armor_l,1);
+	AI_EquipArmor(hero,tpl_armor_l);
 };
 
+
+var int gornatoth_armor_m_was_bought;
+var int gornatoth_armor_h_was_bought;
 
 instance TPL_1402_GORNATOTH_ARMOR(C_INFO)
 {
@@ -151,7 +152,7 @@ instance TPL_1402_GORNATOTH_ARMOR(C_INFO)
 
 func int tpl_1402_gornatoth_armor_condition()
 {
-	if(Npc_KnowsInfo(hero,tpl_1402_gornatoth_getstuff))
+	if(Npc_KnowsInfo(hero,tpl_1402_gornatoth_getstuff) && ((GORNATOTH_ARMOR_M_WAS_BOUGHT != 1) || (GORNATOTH_ARMOR_H_WAS_BOUGHT != 1)))
 	{
 		return TRUE;
 	};
@@ -163,8 +164,14 @@ func void tpl_1402_gornatoth_armor_info()
 	AI_Output(self,other,"Info_GorNaToth_ARMOR_11_02");	//Я могу дать тебе доспех получше, но за это ты внесешь пожертвование на нужды нашего Братства.
 	Info_ClearChoices(tpl_1402_gornatoth_armor);
 	Info_AddChoice(tpl_1402_gornatoth_armor,DIALOG_BACK,tpl_1402_gornatoth_armor_back);
-	Info_AddChoice(tpl_1402_gornatoth_armor,b_buildbuyarmorstring("Тяжелый доспех: оружие 70, стрелы 10, огонь 35",VALUE_TPL_ARMOR_H),tpl_1402_gornatoth_armor_h);
-	Info_AddChoice(tpl_1402_gornatoth_armor,b_buildbuyarmorstring("Средний доспех: оружие 55, стрелы 10, огонь 25",VALUE_TPL_ARMOR_M),tpl_1402_gornatoth_armor_m);
+	if(GORNATOTH_ARMOR_H_WAS_BOUGHT != 1)
+	{
+		Info_AddChoice(tpl_1402_gornatoth_armor,b_buildbuyarmorstring("Тяжелый доспех стража: 70/10/35/0",VALUE_TPL_ARMOR_H),tpl_1402_gornatoth_armor_h);
+	};
+	if(GORNATOTH_ARMOR_M_WAS_BOUGHT != 1)
+	{
+		Info_AddChoice(tpl_1402_gornatoth_armor,b_buildbuyarmorstring("Средний доспех стража: 55/10/25/0",VALUE_TPL_ARMOR_M),tpl_1402_gornatoth_armor_m);
+	};
 };
 
 func void tpl_1402_gornatoth_armor_m()
@@ -182,11 +189,10 @@ func void tpl_1402_gornatoth_armor_m()
 	{
 		AI_Output(self,hero,"Info_GorNaToth_ARMOR_M_11_04");	//Ты можешь внести пожертвование, поэтому я дам тебе такой доспех. Он станет твоей надежной защитой.
 		b_giveinvitems(hero,self,itminugget,VALUE_TPL_ARMOR_M);
-		CreateInvItem(hero,tpl_armor_m);
-		CreateInvItem(self,itamarrow);
-		b_giveinvitems(self,hero,itamarrow,1);
-		Npc_RemoveInvItem(hero,itamarrow);
-		AI_EquipBestArmor(hero);
+		CreateInvItem(self,tpl_armor_m);
+		b_giveinvitems(self,hero,tpl_armor_m,1);
+		AI_EquipArmor(hero,tpl_armor_m);
+		GORNATOTH_ARMOR_M_WAS_BOUGHT = 1;
 	};
 	Info_ClearChoices(tpl_1402_gornatoth_armor);
 };
@@ -204,13 +210,14 @@ func void tpl_1402_gornatoth_armor_h()
 	}
 	else
 	{
+		//AI_EquipArmor(self,tpl_armor_h);
 		AI_Output(self,hero,"Info_GorNaToth_ARMOR_H_11_04");	//Носи этот доспех в знак высочайшей чести, оказанной тебе Братством.
 		b_giveinvitems(hero,self,itminugget,VALUE_TPL_ARMOR_H);
-		CreateInvItem(self,itamarrow);
-		b_giveinvitems(self,hero,itamarrow,1);
-		Npc_RemoveInvItem(hero,itamarrow);
 		CreateInvItem(hero,tpl_armor_h);
-		AI_EquipBestArmor(hero);
+		//b_giveinvitems(self,hero,tpl_armor_h,1);
+		PrintScreen("Получен 1 предмет.",-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
+		AI_EquipArmor(hero,tpl_armor_h);
+		GORNATOTH_ARMOR_H_WAS_BOUGHT = 1;
 	};
 	Info_ClearChoices(tpl_1402_gornatoth_armor);
 };

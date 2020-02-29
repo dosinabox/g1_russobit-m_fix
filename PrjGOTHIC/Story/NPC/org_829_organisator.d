@@ -24,12 +24,8 @@ instance ORG_829_ORGANISATOR(NPC_DEFAULT)
 	EquipItem(self,itmw_1h_mace_01);
 	CreateInvItems(self,itkelockpick,1);
 	CreateInvItems(self,itminugget,9);
-	CreateInvItems(self,itforice,8);
 	CreateInvItems(self,itfobooze,2);
-	CreateInvItems(self,itlstorch,2);
 	CreateInvItems(self,itfo_potion_health_01,1);
-	CreateInvItem(self,itmi_stuff_cup_01);
-	CreateInvItem(self,itat_teeth_01);
 	daily_routine = rtn_start_829;
 };
 
@@ -38,5 +34,11 @@ func void rtn_start_829()
 {
 	ta_guardpassage(8,0,20,0,"OW_PATH_07_21_GUARD_RIGHT");
 	ta_guardpassage(20,0,8,0,"OW_PATH_07_21_GUARD_RIGHT");
+};
+
+func void rtn_fmtaken_829()
+{
+	ta_guardpassage(8,0,20,0,"OW_PATH_067_LADDER2_MOVEMENT");
+	ta_guardpassage(20,0,8,0,"OW_PATH_067_LADDER2_MOVEMENT");
 };
 

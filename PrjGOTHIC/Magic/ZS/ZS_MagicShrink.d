@@ -1,5 +1,5 @@
 
-func int zs_magicshrink()
+func void zs_magicshrink()
 {
 	printdebugnpc(PD_ZS_FRAME,"ZS_MagicShrink");
 	if(!Npc_HasBodyFlag(self,BS_FLAG_INTERRUPTABLE))
@@ -82,9 +82,9 @@ func int zs_magicshrink_loop()
 	else if(self.aivar[AIV_WASDEFEATEDBYSC] == 13)
 	{
 		printdebugnpc(PD_ZS_CHECK,"...klein geschrumpft!");
-		Npc_ChangeAttribute(self,ATR_HITPOINTS,-((self.attribute * 9) / 10));
-		Npc_ChangeAttribute(self,ATR_HITPOINTS_MAX,-((self.attribute[ATR_HITPOINTS_MAX] * 9) / 10));
-		Npc_ChangeAttribute(self,ATR_STRENGTH,-((self.attribute[ATR_STRENGTH] * 9) / 10));
+		Npc_ChangeAttribute(self,ATR_HITPOINTS,-(self.attribute * 9) / 10);
+		Npc_ChangeAttribute(self,ATR_HITPOINTS_MAX,-(self.attribute[ATR_HITPOINTS_MAX] * 9) / 10);
+		Npc_ChangeAttribute(self,ATR_STRENGTH,-(self.attribute[ATR_STRENGTH] * 9) / 10);
 		self.protection[PROT_BLUNT] = self.protection[PROT_BLUNT] / 10;
 		self.protection[PROT_EDGE] = self.protection[PROT_EDGE] / 10;
 		self.protection[PROT_FIRE] = self.protection[PROT_FIRE] / 10;

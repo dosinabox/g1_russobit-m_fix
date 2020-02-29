@@ -43,7 +43,7 @@ instance INFO_BLOODWYN_HELLO(C_INFO)
 
 func int info_bloodwyn_hello_condition()
 {
-	if(KAPITEL <= 2)
+	if(Npc_GetTrueGuild(hero) == GIL_NONE)
 	{
 		return 1;
 	};
@@ -57,7 +57,7 @@ func void info_bloodwyn_hello_info()
 	AI_Output(self,other,"Info_Bloodwyn_Hello_08_03");	//Большинство тех, кто сюда попадает, бандиты и убийцы.
 	AI_Output(self,other,"Info_Bloodwyn_Hello_08_04");	//Они думают, что им все позволено. Но мы стараемся пресечь своеволие.
 	AI_Output(self,other,"Info_Bloodwyn_Hello_08_05");	//Гомeз хочет, чтобы в лагере было спокойно, и мы следим за этим. Но эта работа не из легких.
-	AI_Output(self,other,"Info_Bloodwyn_Hello_08_06");	//Вот поэтому я предлагаю тебе поделиться по- дружески рудой в награду за наши труды. Ты поможешь нам - мы поможем тебе, если у тебя возникнут проблемы.
+	AI_Output(self,other,"Info_Bloodwyn_Hello_08_06");	//Вот поэтому я предлагаю тебе поделиться по-дружески рудой в награду за наши труды. Ты поможешь нам - мы поможем тебе, если у тебя возникнут проблемы.
 	Info_ClearChoices(info_bloodwyn_hello);
 	Info_AddChoice(info_bloodwyn_hello,"Почему бы и нет? Сколько руды тебе нужно?",info_bloodwyn_hello_howmuch);
 	Info_AddChoice(info_bloodwyn_hello,"Я должен платить деньги за защиту? Нет уж...",info_bloodwyn_hello_forgetit);
@@ -97,7 +97,7 @@ func void info_bloodwyn_hello_oktakeit()
 {
 	AI_Output(other,self,"Info_Bloodwyn_Hello_OkTakeIt_15_00");	//Вот тебе руда. Друг всегда может пригодиться.
 	AI_Output(self,other,"Info_Bloodwyn_Hello_OkTakeIt_08_01");	//А ты умный парень. Теперь ты можешь на меня положиться. Я буду защищать тебя.
-	AI_Output(self,other,"Info_Bloodwyn_Hello_OkTakeIt_08_02");	//Но это еще не значит, что тебе здесь будет все позволено, это понятно? 
+	AI_Output(self,other,"Info_Bloodwyn_Hello_OkTakeIt_08_02");	//Но это еще не значит, что тебе здесь будет все позволено, это понятно?
 	b_giveinvitems(other,self,itminugget,10);
 	BLOODWYN_PROTECTIONPAID = TRUE;
 	HEREK_PROTECTIONBULLY = FALSE;
@@ -119,18 +119,19 @@ func void info_bloodwyn_hello_notnow()
 		{
 			AI_Output(self,other,"Info_Bloodwyn_Hello_NotNow_TenOreMore_08_00");	//Что у нас тут есть? Здесь кто-то не умеет считать до десяти, да?
 			AI_Output(self,other,"Info_Bloodwyn_Hello_NotNow_TenOreMore_08_01");	//Я просто возьму все, что у тебя есть. Тогда я забуду, что ты пытался меня обмануть.
+			b_giveinvitems(other,self,itminugget,Npc_HasItems(other,itminugget));
 		}
 		else
 		{
 			AI_Output(self,other,"Info_Bloodwyn_Hello_NotNow_LessThanTen_08_00");	//Ну, у тебя мало руды, но мне хватит и этого. Главное, ты согласился платить. Спасибо.
 			AI_Output(self,other,"Info_Bloodwyn_Hello_NotNow_LessThanTen_08_01");	//Теперь я буду приглядывать за тобой, пока ты будешь в лагере.
+			b_giveinvitems(other,self,itminugget,Npc_HasItems(other,itminugget));
 		};
 	}
 	else
 	{
 		AI_Output(self,other,"Info_Bloodwyn_Hello_NotNow_NoOre_08_00");	//У тебя совсем ничего нет... Ну, как я сказал, заплатишь в следующий раз...
 	};
-	b_giveinvitems(other,self,itminugget,Npc_HasItems(other,itminugget));
 	BLOODWYN_PROTECTIONPAID = TRUE;
 	HEREK_PROTECTIONBULLY = FALSE;
 	GRIM_PROTECTIONBULLY = FALSE;
@@ -153,7 +154,7 @@ instance INFO_BLOODWYN_PAYDAY(C_INFO)
 
 func int info_bloodwyn_payday_condition()
 {
-	if((KAPITEL <= 2) && (BLOODWYN_PAYDAY <= (Wld_GetDay() - 1)) && (Npc_HasItems(other,itminugget) >= 10))
+	if((KAPITEL <= 2) && (BLOODWYN_PAYDAY <= (Wld_GetDay() - 1)) && (Npc_HasItems(other,itminugget) >= 10) && Npc_GetTrueGuild(hero) != GIL_GRD && Npc_GetTrueGuild(hero) != GIL_STT && Npc_GetTrueGuild(hero) != GIL_KDF)
 	{
 		return 1;
 	};
@@ -183,6 +184,7 @@ func void info_bloodwyn_payday_payagain()
 {
 	AI_Output(other,self,"Info_Bloodwyn_PayDay_PayAgain_15_00");	//Вот, возьми десять кусков. Для друга не жалко.
 	AI_Output(self,other,"Info_Bloodwyn_PayDay_PayAgain_08_01");	//Я тоже так думаю.
+	b_giveinvitems(other,self,itminugget,10);
 	BLOODWYN_PROTECTIONPAID = TRUE;
 	HEREK_PROTECTIONBULLY = FALSE;
 	GRIM_PROTECTIONBULLY = FALSE;
@@ -217,7 +219,7 @@ instance INFO_BLOODWYN_DOCH(C_INFO)
 
 func int info_bloodwyn_doch_condition()
 {
-	if(BLOODWYN_PROTECTIONPAID == FALSE)
+	if(BLOODWYN_PROTECTIONPAID == FALSE && Npc_GetTrueGuild(hero) != GIL_GRD && Npc_GetTrueGuild(hero) != GIL_STT && Npc_GetTrueGuild(hero) != GIL_KDF)
 	{
 		return 1;
 	};
@@ -230,6 +232,7 @@ func void info_bloodwyn_doch_info()
 	{
 		AI_Output(self,other,"Info_Bloodwyn_Doch_08_01");	//Вот видишь! Ты все-таки можешь принимать правильные решения.
 		AI_Output(self,other,"Info_Bloodwyn_Doch_08_02");	//И теперь ты будешь платить мне за защиту каждый день, да?
+		b_giveinvitems(other,self,itminugget,10);
 		BLOODWYN_PROTECTIONPAID = TRUE;
 		HEREK_PROTECTIONBULLY = FALSE;
 		GRIM_PROTECTIONBULLY = FALSE;
@@ -275,6 +278,7 @@ func void info_bloodwyn_payforjesse_info()
 	{
 		AI_Output(other,self,"Info_Bloodwyn_PayForJesse_15_03");	//Нет, я все же заплачу за него. Вот тебе десять кусков и оставь его в покое.
 		AI_Output(self,other,"Info_Bloodwyn_PayForJesse_08_04");	//Как хочешь, дело твое.
+		b_giveinvitems(other,self,itminugget,10);
 		JESSE_PAYFORME = LOG_SUCCESS;
 	}
 	else
@@ -311,7 +315,7 @@ func void grd_233_bloodwyn_welcome_info()
 
 instance INFO_BLOODWYN_DIE(C_INFO)
 {
-	npc = grd_233_bloodwyn;
+	//npc = grd_233_bloodwyn;
 	condition = info_bloodwyn_die_condition;
 	information = info_bloodwyn_die_info;
 	permanent = 0;
@@ -392,6 +396,7 @@ func void info_bloodwyn_die_info()
 	b_setpermattitude(grd_229_gardist,ATT_HOSTILE);
 	b_setpermattitude(grd_216_torwache,ATT_HOSTILE);
 	b_setpermattitude(grd_217_torwache,ATT_HOSTILE);
+	Wld_ExchangeGuildAttitudes("GIL_ATTITUDES_FMTAKEN");
 	if(!Npc_KnowsInfo(hero,info_fletcher_die))
 	{
 		b_logentry(CH4_FIREMAGES,"Ворота в Старый лагерь закрыты и охраняются стражниками. Они нападают на любого, кто окажется слишком неосторожен, чтобы подойти к ним.");

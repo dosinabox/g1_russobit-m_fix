@@ -7,10 +7,11 @@ instance KDW_605_RIORDIAN(NPC_DEFAULT)
 	level = 25;
 	voice = 14;
 	id = 605;
-	attribute[ATR_STRENGTH] = 35;
-	attribute[ATR_DEXTERITY] = 35;
-	attribute[ATR_MANA_MAX] = 90;
-	attribute[ATR_MANA] = 90;
+	flags = NPC_FLAG_IMMORTAL;
+	attribute[ATR_STRENGTH] = 1;
+	attribute[ATR_DEXTERITY] = 1;
+	attribute[ATR_MANA_MAX] = 100;
+	attribute[ATR_MANA] = 100;
 	attribute[ATR_HITPOINTS_MAX] = 340;
 	attribute[ATR_HITPOINTS] = 340;
 	Mdl_SetVisual(self,"HUMANS.MDS");
@@ -19,8 +20,9 @@ instance KDW_605_RIORDIAN(NPC_DEFAULT)
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_MAGE;
-	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,6);
-	CreateInvItem(self,itarrunethunderball);
+	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,5);
+	EquipItem(self,itarrunethunderball);
+	CreateInvItem(self,alchemybook);
 	b_giveriordianchapter1potions();
 	daily_routine = rtn_start_605;
 	senses = SENSE_SEE | SENSE_HEAR | SENSE_SMELL;
@@ -29,8 +31,9 @@ instance KDW_605_RIORDIAN(NPC_DEFAULT)
 
 func void rtn_start_605()
 {
-	ta_sleep(23,0,4,0,"NC_KDW06_IN");
-	ta_potionalchemy(4,0,23,0,"NC_KDW06_IN");
+	ta_sleep(1,0,5,0,"NC_KDW06_IN_BED");
+	ta_potionalchemy(5,0,22,0,"NC_KDW06_IN");
+	ta_readbook(22,0,1,0,"NC_KDW06_IN");
 };
 
 func void rtn_foundurshak_605()

@@ -65,7 +65,7 @@ func int zs_guidepc_loop()
 	return LOOP_CONTINUE;
 };
 
-func int zs_guidepc_end()
+func void zs_guidepc_end()
 {
 	printdebugnpc(PD_TA_FRAME,"ZS_GuidePC_End");
 	self.senses_range = hero.senses_range;

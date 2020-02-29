@@ -30,7 +30,7 @@ instance TPL_1409_TEMPLER(NPC_DEFAULT)
 
 func void rtn_start_1409()
 {
-	ta_smalltalk(0,0,8,0,"PSI_SMITH_TALK");
-	ta_smalltalk(8,0,24,0,"PSI_SMITH_TALK");
+	ta_smalltalk(5,0,22,0,"PSI_SMITH_TALK");
+	ta_guard(22,0,5,0,"PSI_PATH_9_9");
 };
 

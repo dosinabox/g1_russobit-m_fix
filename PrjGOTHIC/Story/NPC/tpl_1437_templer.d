@@ -30,7 +30,13 @@ instance TPL_1437_TEMPLER(NPC_DEFAULT)
 
 func void rtn_start_1437()
 {
-	ta_sitaround(0,0,12,0,"OM_207");
-	ta_sitaround(12,0,24,0,"OM_207");
+	ta_sitaround(0,0,12,0,"OM_CAVE1_81");
+	ta_sitaround(12,0,24,0,"OM_CAVE1_81");
+};
+
+func void rtn_flee_1437()
+{
+	ta_stay(0,0,12,0,"WP_INTRO01");
+	ta_stay(12,0,24,0,"WP_INTRO01");
 };
 

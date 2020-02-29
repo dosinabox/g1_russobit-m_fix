@@ -328,7 +328,9 @@ func void info_orcshaman_map_info()
 	AI_Output(hero,self,"Info_OrcShaman_MAP_15_01");	//А ты можешь показать мне на карте, где этот город находится?
 	AI_Output(self,hero,"Info_OrcShaman_MAP_17_02");	//Дом Ур-Шак там, на пустой белый карта.
 	AI_Output(self,hero,"Info_OrcShaman_MAP_17_03");	//Чужать давать карта, Ур-Шак рисовать дом.
-	AI_Output(self,hero,"Info_OrcShaman_MAP_17_04");	//
+	AI_TurnAway(self,hero);
+	AI_Output(self,hero,"Info_OrcShaman_MAP_17_04");	//(рисует на карте)
+	AI_WhirlAround(self,hero);
 	AI_Output(hero,self,"Info_OrcShaman_MAP_15_05");	//О! А ты неплохо рисуешь! Спасибо!
 	b_giveinvitems(hero,self,itwrworldmap,1);
 	Npc_RemoveInvItem(self,itwrworldmap);
@@ -654,11 +656,12 @@ func int info_orcshaman_idol_condition()
 
 func void info_orcshaman_idol_info()
 {
+	AI_Output(hero,self,"Info_OrcShaman_IDOL_15_01");	//Есть ли другой путь в храм Спящего?
 	if(Npc_HasItems(hero,itmi_stuff_idol_sleeper_01))
 	{
 		AI_Output(self,hero,"Info_OrcShaman_IDOL_17_03");	//Друг найти знак, что лежать на колонне!
 		AI_Output(self,hero,"Info_OrcShaman_IDOL_17_04");	//Друг теперь открыть ворота в храм!
-		b_logentry(CH4_ENTERTEMPLE,"Есть и другой вход в храм Спящего. Нужно повернуть статую Спящего на священной колонне орков-шаманов. Она откроет путь в храм.");
+		b_logentry(CH4_ENTERTEMPLE,"Есть и другой путь в храм Спящего. Нужно поставить статую Спящего на пъедистал перед большими воротами у входа.");
 	}
 	else
 	{

@@ -5,8 +5,9 @@ instance KDF_401_DAMAROK(NPC_DEFAULT)
 	npctype = NPCTYPE_MAIN;
 	guild = GIL_KDF;
 	level = 27;
-	voice = 14;
+	voice = 5;
 	id = 401;
+	flags = NPC_FLAG_IMMORTAL;
 	attribute[ATR_STRENGTH] = 35;
 	attribute[ATR_DEXTERITY] = 35;
 	attribute[ATR_MANA_MAX] = 100;
@@ -20,19 +21,24 @@ instance KDF_401_DAMAROK(NPC_DEFAULT)
 	Mdl_SetModelFatness(self,0);
 	aivar[AIV_IMPORTANT] = TRUE;
 	fight_tactic = FAI_HUMAN_MAGE;
-	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,6);
-	CreateInvItem(self,itarrunefireball);
-	CreateInvItems(self,itfo_potion_health_02,3);
-	CreateInvItems(self,itfo_potion_health_01,4);
-	EquipItem(self,schutzamulett_geschosse);
-	CreateInvItem(self,itmi_stuff_oldcoin_02);
+	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,4);
+	EquipItem(self,itarrunefireball);
+	CreateInvItems(self,itfo_potion_health_02,2);
+	CreateInvItems(self,itfo_potion_health_01,2);
+	CreateInvItems(self,itfo_potion_mana_01,3);
+	CreateInvItems(self,itfo_plants_herb_01,2);
+	CreateInvItems(self,itfo_plants_herb_02,5);
+	CreateInvItems(self,itfo_plants_herb_03,3);
+	CreateInvItems(self,itfo_plants_nightshadow_02,2);
+	CreateInvItems(self,itmiflask,5);
+	//EquipItem(self,schutzamulett_geschosse);
 	daily_routine = rtn_start_401;
 };
 
 
 func void rtn_start_401()
 {
-	ta_sitcampfire(19,1,7,1,"OCC_CHAPEL_MAGE_01");
+	ta_sitaround(19,1,7,1,"OCC_CHAPEL_UPSTAIRS_RIGHT");
 	ta_potionalchemy(7,1,19,1,"OCC_CHAPEL_RIGHT_ROOM");
 };
 
@@ -40,5 +46,11 @@ func void rtn_kdfritual_401()
 {
 	ta_position(8,0,20,0,"OCC_CHAPEL_MAGE_04");
 	ta_position(20,0,8,0,"OCC_CHAPEL_MAGE_04");
+};
+
+func void rtn_dead_401()
+{
+	ta_stay(8,0,20,0,"OCC_CELLAR_BAN_ROOM_MAG2");
+	ta_stay(20,0,8,0,"OCC_CELLAR_BAN_ROOM_MAG2");
 };
 

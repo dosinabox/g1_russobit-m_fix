@@ -17,6 +17,8 @@ func void pc_sleep(var int t)
 	hero.attribute[ATR_MANA] = hero.attribute[ATR_MANA_MAX];
 	printglobals(PD_ITEM_MOBSI);
 	Npc_SendPassivePerc(hero,PERC_ASSESSENTERROOM,NULL,hero);
+	b_sayoverlay(hero,NULL,"SVM_15_Awake");
+	PLAYER_MOBSI_PRODUCTION = MOBSI_SLEEPABITEND;
 };
 
 func void sleepabit_s1()
@@ -28,7 +30,13 @@ func void sleepabit_s1()
 	if((Hlp_GetInstanceID(self) == Hlp_GetInstanceID(her)) || (Hlp_GetInstanceID(self) == Hlp_GetInstanceID(rock)))
 	{
 		self.aivar[AIV_INVINCIBLE] = TRUE;
+		if(Npc_RefuseTalk(self) == TRUE)
+	    {
+	    	PrintScreen("Сейчас здесь нельзя спать...",-1,-1,"font_old_20_white.tga",3);
+			self.aivar[AIV_INVINCIBLE] = FALSE;
+	    };
 		AI_ProcessInfos(her);
+		PLAYER_MOBSI_PRODUCTION = MOBSI_SLEEPABIT;
 	};
 };
 
@@ -41,13 +49,16 @@ instance PC_NOSLEEP(C_INFO)
 	information = pc_nosleep_info;
 	important = 0;
 	permanent = 1;
-	description = DIALOG_ENDE;
+	description = "ОТМЕНА";
 };
 
 
 func int pc_nosleep_condition()
 {
-	return 1;
+	if(PLAYER_MOBSI_PRODUCTION == MOBSI_SLEEPABIT)
+	{
+		return TRUE;
+	};
 };
 
 func void pc_nosleep_info()
@@ -70,7 +81,10 @@ instance PC_SLEEPTIME_MORNING(C_INFO)
 
 func int pc_sleeptime_morning_condition()
 {
-	return 1;
+	if(Npc_RefuseTalk(self) == FALSE && PLAYER_MOBSI_PRODUCTION == MOBSI_SLEEPABIT)
+	{
+		return 1;
+	};
 };
 
 func void pc_sleeptime_morning_info()
@@ -92,7 +106,10 @@ instance PC_SLEEPTIME_NOON(C_INFO)
 
 func int pc_sleeptime_noon_condition()
 {
-	return 1;
+	if(Npc_RefuseTalk(self) == FALSE && PLAYER_MOBSI_PRODUCTION == MOBSI_SLEEPABIT)
+	{
+		return 1;
+	};
 };
 
 func void pc_sleeptime_noon_info()
@@ -114,7 +131,10 @@ instance PC_SLEEPTIME_EVENING(C_INFO)
 
 func int pc_sleeptime_evening_condition()
 {
-	return 1;
+	if(Npc_RefuseTalk(self) == FALSE && PLAYER_MOBSI_PRODUCTION == MOBSI_SLEEPABIT)
+	{
+		return 1;
+	};
 };
 
 func void pc_sleeptime_evening_info()
@@ -136,7 +156,10 @@ instance PC_SLEEPTIME_MIDNIGHT(C_INFO)
 
 func int pc_sleeptime_midnight_condition()
 {
-	return 1;
+	if(Npc_RefuseTalk(self) == FALSE && PLAYER_MOBSI_PRODUCTION == MOBSI_SLEEPABIT)
+	{
+		return 1;
+	};
 };
 
 func void pc_sleeptime_midnight_info()

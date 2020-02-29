@@ -15,7 +15,7 @@ instance NOV_1334_NOVIZE(NPC_DEFAULT)
 	attribute[ATR_HITPOINTS] = 148;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Mage.mds");
-	Mdl_SetVisualBody(self,"hum_body_Naked0",1,1,"Hum_Head_FatBald",29,2,nov_armor_m);
+	Mdl_SetVisualBody(self,"hum_body_Naked0",1,1,"Hum_Head_FatBald",29,2,nov_armor_l);
 	b_scale(self);
 	Mdl_SetModelFatness(self,-1);
 	fight_tactic = FAI_HUMAN_COWARD;
@@ -26,7 +26,7 @@ instance NOV_1334_NOVIZE(NPC_DEFAULT)
 
 func void rtn_start_1334()
 {
-	ta_pickrice(7,0,19,0,"PATH_TAKE_HERB_06");
-	ta_pickrice(19,0,7,0,"PATH_TAKE_HERB_06");
+	ta_pickrice(6,0,21,0,"PATH_TAKE_HERB_06");
+	ta_sitcampfire(21,0,6,0,"PATH_TAKE_HERB_07");
 };
 

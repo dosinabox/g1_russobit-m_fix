@@ -51,14 +51,10 @@ func void g_cannotuse(var int bisplayer,var int nattribute,var int nvalue)
 	{
 		return;
 	};
-	strmessage = ConcatStrings(self.name,_STR_CANNOTUSE_PRE_NPC);
-	strmessage = ConcatStrings(strmessage,IntToString(self.id));
-	strmessage = ConcatStrings(strmessage,_STR_CANNOTUSE_POST_NPC);
 	strmessage = ConcatStrings(strmessage,strdifference);
 	strmessage = ConcatStrings(strmessage," ");
 	strmessage = ConcatStrings(strmessage,strattribute);
-	strmessage = ConcatStrings(strmessage,_STR_CANNOTUSE_POINTS);
-	strmessage = ConcatStrings(strmessage,_STR_CANNOTUSE_POST);
+	strmessage = ConcatStrings(strmessage,"для использования.");
 	if(bisplayer)
 	{
 		g_printscreen(strmessage);

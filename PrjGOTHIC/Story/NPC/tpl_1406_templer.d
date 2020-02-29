@@ -33,3 +33,15 @@ func void rtn_start_1406()
 	ta_guardpassage(21,0,9,0,"PSI_LABOR_GUARD_1");
 };
 
+func void rtn_flee_1406()
+{
+	ta_stay(0,0,12,0,"WP_INTRO01");
+	ta_stay(12,0,24,0,"WP_INTRO01");
+};
+
+func void rtn_care_1406()
+{
+	ta_guard(9,0,21,0,"PSI_TEMPLE_ROOMS_03");
+	ta_guard(21,0,9,0,"PSI_TEMPLE_ROOMS_03");
+};
+

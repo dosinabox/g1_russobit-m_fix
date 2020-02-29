@@ -19,7 +19,15 @@ func void zs_smoke()
 func int zs_smoke_loop()
 {
 	printdebugnpc(PD_TA_LOOP,"ZS_Smoke_Loop");
-	return 0;
+	//return 0;
+	var int smoketime;
+	smoketime = Hlp_Random(100);
+	if(smoketime >= 80)
+	{
+		b_playitemrandoms(self);
+	};
+	AI_Wait(self,1);
+	return LOOP_CONTINUE;
 };
 
 func void zs_smoke_end()

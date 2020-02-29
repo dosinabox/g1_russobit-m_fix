@@ -13,10 +13,7 @@ func int spell_logic_summongolem(var int manainvested)
 			Wld_SpawnNpcRange(self,summonedbynpc_stonegolem,1,500);
 		};
 		return SPL_SENDCAST;
-	}
-	else
-	{
-		return SPL_NEXTLEVEL;
 	};
+	return SPL_NEXTLEVEL;
 };
 

@@ -272,7 +272,7 @@ instance IE_397_ANNOUNCER(NPC_DEFAULT)
 	attribute[ATR_HITPOINTS_MAX] = 88;
 	attribute[ATR_HITPOINTS] = 88;
 	Mdl_SetVisual(self,"HUMANS.MDS");
-	Mdl_SetVisualBody(self,"Hum_Body_Naked0",4,1,"Hum_Head_Fatbald",113,DEFAULT,-1);
+	Mdl_SetVisualBody(self,"Hum_Body_Naked0",4,3,"Hum_Head_Fatbald",113,DEFAULT,-1);
 	fight_tactic = FAI_HUMAN_STRONG;
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	daily_routine = rtn_announce_397;
@@ -471,7 +471,7 @@ instance IEFAN4(NPC_DEFAULT)
 	attribute[ATR_HITPOINTS_MAX] = 100;
 	attribute[ATR_HITPOINTS] = 100;
 	Mdl_SetVisual(self,"HUMANS.MDS");
-	Mdl_SetVisualBody(self,"hum_body_Naked0",4,2,"Hum_Head_FatBald",4,DEFAULT,-1);
+	Mdl_SetVisualBody(self,"hum_body_Naked0",3,1,"Hum_Head_FatBald",4,DEFAULT,-1);
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_COWARD;

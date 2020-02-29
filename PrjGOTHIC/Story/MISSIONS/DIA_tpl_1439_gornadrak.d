@@ -34,7 +34,10 @@ instance DIA_GORNADRAK_GREET(C_INFO)
 
 func int dia_gornadrak_greet_condition()
 {
-	return 1;
+	if(!Npc_KnowsInfo(hero,info_corkalom_bringmcqballs_success))
+	{
+		return 1;
+	};
 };
 
 func void dia_gornadrak_greet_info()
@@ -58,7 +61,7 @@ instance DIA_GORNADRAK_WASSEKRET(C_INFO)
 
 func int dia_gornadrak_wassekret_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_gornadrak_greet))
+	if(Npc_KnowsInfo(hero,dia_gornadrak_greet) && !Npc_KnowsInfo(hero,info_corkalom_bringmcqballs_success))
 	{
 		return 1;
 	};
@@ -97,7 +100,7 @@ func void dia_gornadrak_teachmandibles_info()
 	PrintScreen("Навык: добыча челюстей ползунов",-1,-1,"FONT_OLD_20_WHITE.TGA",3);
 	KNOWS_GETMCMANDIBLES = TRUE;
 	Log_CreateTopic(GE_ANIMALTROPHIES,LOG_NOTE);
-	b_logentry(GE_ANIMALTROPHIES,"Навык добычи челюстей: ползуны.");
+	b_logentry(GE_ANIMALTROPHIES,"Навык добычи челюстей ползунов.");
 };
 
 
@@ -151,6 +154,13 @@ func int dia_gornadrak_permanent_condition()
 func void dia_gornadrak_permanent_info()
 {
 	AI_Output(other,self,"DIA_GorNaDrak_Permanent_15_00");	//У вас уже достаточно зелья для великой Церемонии?
-	AI_Output(self,other,"DIA_GorNaDrak_Permanent_09_01");	//Нет. Нам нужно еще очень много слюны. Нашим Стражам приходится охотиться на ползунов в Старой шахте и днем, и ночью.
+	if(CORKALOM_BRINGMCQBALLS == LOG_SUCCESS)
+	{
+		AI_Output(self,other,"SVM_9_LookAway");	//Да! Погода сегодня отличная!
+	}
+	else
+	{
+		AI_Output(self,other,"DIA_GorNaDrak_Permanent_09_01");	//Нет. Нам нужно еще очень много слюны. Нашим Стражам приходится охотиться на ползунов в Старой шахте и днем, и ночью.
+	};
 };
 

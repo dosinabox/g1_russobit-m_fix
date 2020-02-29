@@ -14,7 +14,7 @@ func int b_comparenpcinstance(var C_NPC first,var C_NPC second)
 	else
 	{
 		printdebugnpc(PD_ZS_CHECK,"B_CompareNpcInstance False");
-		return 0;
 	};
+	return 0;
 };
 

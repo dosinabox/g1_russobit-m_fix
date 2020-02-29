@@ -15,6 +15,7 @@ func void zs_stand()
 	{
 		AI_AlignToWP(self);
 	};
+	AI_RemoveWeapon(self);
 	AI_PlayAni(self,"T_STAND_2_LGUARD");
 };
 

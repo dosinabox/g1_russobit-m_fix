@@ -1,11 +1,11 @@
 
 instance TPL_1452_TEMPLER(NPC_DEFAULT)
 {
-	name[0] = NAME_MADTEMPLAR2;
+	name[0] = "Телохранитель Галома";
 	npctype = NPCTYPE_GUARD;
 	guild = GIL_GUR;
 	level = 100;
-	voice = 8;
+	voice = 13;
 	id = 1452;
 	attribute[ATR_STRENGTH] = 70;
 	attribute[ATR_DEXTERITY] = 65;
@@ -19,11 +19,12 @@ instance TPL_1452_TEMPLER(NPC_DEFAULT)
 	protection[PROT_FIRE] = 80;
 	protection[PROT_FLY] = 80;
 	protection[PROT_MAGIC] = 70;
+	aivar[43] = TRUE;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Mage.mds");
-	Mdl_SetVisualBody(self,"hum_body_Naked0",1,1,"Hum_Head_Bald",117,2,tpl_armor_m);
+	Mdl_SetVisualBody(self,"hum_body_Naked0",1,1,"Hum_Head_Bald",63,2,tpl_armor_h);
 	b_scale(self);
-	Mdl_SetModelFatness(self,-1);
+	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_STRONG;
 	Npc_SetTalentSkill(self,NPC_TALENT_2H,1);
 	CreateInvItem(self,itmw_2h_sword_light_02);

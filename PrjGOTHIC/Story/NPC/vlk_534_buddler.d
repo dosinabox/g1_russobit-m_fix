@@ -34,3 +34,9 @@ func void rtn_start_534()
 	ta_sitcampfire(10,0,22,0,"OC_ROUND_22_CF_2");
 };
 
+func void rtn_fmtaken_534()
+{
+	ta_sitcampfire(10,0,22,0,"OW_PATH_AM_NEW1");
+	ta_sitcampfire(10,0,22,0,"OW_PATH_AM_NEW1");
+};
+

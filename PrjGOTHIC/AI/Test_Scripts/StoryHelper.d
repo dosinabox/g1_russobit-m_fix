@@ -1,14 +1,14 @@
 
 instance SH(NPC_DEFAULT)
 {
-	name[0] = "StoryHelper";
+	name[0] = "Помощник по сюжету";
 	npctype = NPCTYPE_MAIN;
 	guild = GIL_NONE;
 	level = 10;
 	voice = 15;
 	id = 0;
 	Mdl_SetVisual(self,"HUMANS.MDS");
-	Mdl_SetVisualBody(self,"hum_body_Naked0",4,1,"Hum_Head_Pony",9,0,-1);
+	Mdl_SetVisualBody(self,"hum_body_Naked0",4,1,"Hum_Head_Bald",9,0,law_armor);
 	start_aistate = zs_sh_hangaround;
 };
 
@@ -409,7 +409,7 @@ func void storyhelper_info5_info()
 {
 	Info_ClearChoices(storyhelper_info5);
 	Info_AddChoice(storyhelper_info5,"НАЗАД",storyhelper_back5);
-	Info_AddChoice(storyhelper_info5,"V: УРИЗЕЛЬ заряжен",storyhelper_urizielloaded);
+	//Info_AddChoice(storyhelper_info5,"V: УРИЗЕЛЬ заряжен",storyhelper_urizielloaded);
 	Info_AddChoice(storyhelper_info5,"V: Подготовка к зарядке УРИЗЕЛЯ",storyhelper_loaduriziel);
 	Info_AddChoice(storyhelper_info5,"V: Исследование затонувшей башни",storyhelper_exploresunkentower);
 	Info_AddChoice(storyhelper_info5,"V: Нахождение УРИЗЕЛЯ",storyhelper_founduriziel);
@@ -603,12 +603,41 @@ func void storyhelper_urizielloaded()
 	b_story_loadsword();
 	b_kapitelwechsel(6);
 	b_story_urizielloaded();
-	Info_ClearChoices(storyhelper_info5);
+	//Info_ClearChoices(storyhelper_info5);
+	Info_ClearChoices(storyhelper_info6);
 	AI_StopProcessInfos(self);
 };
 
 func void storyhelper_back5()
 {
 	Info_ClearChoices(storyhelper_info5);
+};
+
+instance STORYHELPER_INFO6(C_INFO)
+{
+	npc = sh;
+	condition = storyhelper_info6_condition;
+	information = storyhelper_info6_info;
+	important = 0;
+	permanent = 1;
+	description = "Глава 6";
+};
+
+
+func int storyhelper_info6_condition()
+{
+	return TRUE;
+};
+
+func void storyhelper_info6_info()
+{
+	Info_ClearChoices(storyhelper_info6);
+	Info_AddChoice(storyhelper_info6,"НАЗАД",storyhelper_back6);
+	Info_AddChoice(storyhelper_info6,"VI: УРИЗЕЛЬ заряжен",storyhelper_urizielloaded);
+};
+
+func void storyhelper_back6()
+{
+	Info_ClearChoices(storyhelper_info6);
 };
 

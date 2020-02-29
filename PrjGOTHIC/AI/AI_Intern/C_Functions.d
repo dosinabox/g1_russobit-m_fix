@@ -10,8 +10,8 @@ func int c_amistronger(var C_NPC slf,var C_NPC oth)
 	else
 	{
 		printdebugnpc(PD_ZS_DETAIL,"...no");
-		return FALSE;
 	};
+	return FALSE;
 };
 
 func int c_amiweaker(var C_NPC slf,var C_NPC oth)
@@ -19,14 +19,125 @@ func int c_amiweaker(var C_NPC slf,var C_NPC oth)
 	printdebugnpc(PD_ZS_DETAIL,"C_AmIWeaker");
 	if((2 * slf.level) <= oth.level)
 	{
-		printdebugnpc(PD_ZS_DETAIL,"...yes");
-		return TRUE;
+		if(self.guild == GIL_ORCSCOUT || self.guild == GIL_ORCWARRIOR)
+		{
+			return FALSE;
+		}
+		if(self.id == 1303)
+		{
+			return FALSE;
+		}
+		else if(self.id == 844)
+		{
+			return FALSE;
+		}
+		else if(self.id == 336)
+		{
+			return FALSE;
+		}
+		else if(self.id == 337)
+		{
+			return FALSE;
+		}
+		else if(self.id == 338)
+		{
+			return FALSE;
+		}
+		else if(self.id == 246)
+		{
+			return FALSE;
+		}
+		else if(self.id == 284)
+		{
+			return FALSE;
+		}
+		else if(self.id == 286)
+		{
+			return FALSE;
+		}
+		else if(self.id == 287)
+		{
+			return FALSE;
+		}
+		else if(self.id == 288)
+		{
+			return FALSE;
+		}
+		else if(self.id == 289)
+		{
+			return FALSE;
+		}
+		else if(self.id == 290)
+		{
+			return FALSE;
+		}
+		else if(self.id == 291)
+		{
+			return FALSE;
+		}
+		else if(self.id == 292)
+		{
+			return FALSE;
+		}
+		else if(self.id == 293)
+		{
+			return FALSE;
+		}
+		else if(self.id == 294)
+		{
+			return FALSE;
+		}
+		else if(self.id == 295)
+		{
+			return FALSE;
+		}
+		else if(self.id == 296)
+		{
+			return FALSE;
+		}
+		else if(self.id == 297)
+		{
+			return FALSE;
+		}
+		else if(self.id == 298)
+		{
+			return FALSE;
+		}
+		else if(self.id == 299)
+		{
+			return FALSE;
+		}
+		else if(self.id == 1490)
+		{
+			return FALSE;
+		}
+		else if(self.id == 1333)
+		{
+			return FALSE;
+		}
+		else if(self.id == 251)
+		{
+			return FALSE;
+		}
+		else if(self.id == 729)
+		{
+			return FALSE;
+		}
+		else if(self.id == 1422)
+		{
+			return FALSE;
+		}
+		else
+		{
+			printdebugnpc(PD_ZS_DETAIL,"...yes");
+			return TRUE;
+		};
 	}
 	else
 	{
 		printdebugnpc(PD_ZS_DETAIL,"...no");
-		return FALSE;
 	};
+	return FALSE;
 };
 
 func int c_npcisinfightmode(var C_NPC oth)
@@ -53,8 +164,8 @@ func int c_npcisinfightmode(var C_NPC oth)
 	else
 	{
 		printdebugnpc(PD_ZS_CHECK,"...false");
-		return FALSE;
 	};
+	return FALSE;
 };
 
 func int c_npcisinneutralspellmode(var C_NPC oth)
@@ -68,8 +179,8 @@ func int c_npcisinneutralspellmode(var C_NPC oth)
 	else
 	{
 		printdebugnpc(PD_ZS_CHECK,"...false");
-		return FALSE;
 	};
+	return FALSE;
 };
 
 func int c_npcisdown(var C_NPC slf)
@@ -83,14 +194,14 @@ func int c_npcisdown(var C_NPC slf)
 	else
 	{
 		printdebugnpc(PD_ZS_DETAIL,"...false");
-		return FALSE;
 	};
+	return FALSE;
 };
 
 func int c_npcishuman(var C_NPC slf)
 {
 	printdebugnpc(PD_ZS_DETAIL,"C_NpcIsHuman");
-	printdebugstring(PD_ZS_DETAIL,"...name:",slf.name);
+	printdebugstring(PD_ZS_DETAIL,"...name: ",slf.name);
 	if(slf.guild < GIL_SEPERATOR_HUM)
 	{
 		printdebugnpc(PD_ZS_DETAIL,"...true");
@@ -99,14 +210,14 @@ func int c_npcishuman(var C_NPC slf)
 	else
 	{
 		printdebugnpc(PD_ZS_DETAIL,"...false");
-		return FALSE;
 	};
+	return FALSE;
 };
 
 func int c_npcismonster(var C_NPC slf)
 {
 	printdebugnpc(PD_ZS_DETAIL,"C_NpcIsMonster");
-	printdebugstring(PD_ZS_DETAIL,"...name:",slf.name);
+	printdebugstring(PD_ZS_DETAIL,"...name: ",slf.name);
 	if((slf.guild > GIL_SEPERATOR_HUM) && (slf.guild < GIL_SEPERATOR_ORC))
 	{
 		printdebugnpc(PD_ZS_DETAIL,"...true");
@@ -115,8 +226,8 @@ func int c_npcismonster(var C_NPC slf)
 	else
 	{
 		printdebugnpc(PD_ZS_DETAIL,"...false");
-		return FALSE;
 	};
+	return FALSE;
 };
 
 func int c_npcisdangerousmonster(var C_NPC slf,var C_NPC oth)
@@ -142,8 +253,8 @@ func int c_npcisorc(var C_NPC slf)
 	else
 	{
 		printdebugnpc(PD_ZS_DETAIL,"...false");
-		return FALSE;
 	};
+	return FALSE;
 };
 
 func int c_npcismonstermage(var C_NPC slf)
@@ -157,8 +268,8 @@ func int c_npcismonstermage(var C_NPC slf)
 	else
 	{
 		printdebugnpc(PD_ZS_DETAIL,"...false");
-		return FALSE;
 	};
+	return FALSE;
 };
 
 func void npc_setpermattitude(var C_NPC slf,var int att)
@@ -177,10 +288,10 @@ func int npc_gettempattitude(var C_NPC slf,var C_NPC oth)
 func int c_bodystatecontains(var C_NPC slf,var int bodystate)
 {
 	printdebugnpc(PD_ZS_DETAIL,"C_BodyStateContains()");
-	printdebugint(PD_ZS_DETAIL,"bodystate:",bodystate);
-	printdebugint(PD_ZS_DETAIL,"bodystate&(BS_MAX|BS_FLAG_INTERRUPTABLE|BS_FLAG_FREEHANDS):",bodystate & (BS_MAX | BS_FLAG_INTERRUPTABLE | BS_FLAG_FREEHANDS));
-	printdebugint(PD_ZS_DETAIL,"Npc_GetBodyState(slf):",Npc_GetBodyState(slf));
-	printdebugint(PD_ZS_DETAIL,"Npc_GetBodyState(slf)&(BS_MAX|BS_FLAG_INTERRUPTABLE|BS_FLAG_FREEHANDS):",Npc_GetBodyState(slf) & (BS_MAX | BS_FLAG_INTERRUPTABLE | BS_FLAG_FREEHANDS));
+	printdebugint(PD_ZS_DETAIL,"bodystate: ",bodystate);
+	printdebugint(PD_ZS_DETAIL,"bodystate&(BS_MAX|BS_FLAG_INTERRUPTABLE|BS_FLAG_FREEHANDS): ",bodystate & (BS_MAX | BS_FLAG_INTERRUPTABLE | BS_FLAG_FREEHANDS));
+	printdebugint(PD_ZS_DETAIL,"Npc_GetBodyState(slf): ",Npc_GetBodyState(slf));
+	printdebugint(PD_ZS_DETAIL,"Npc_GetBodyState(slf)&(BS_MAX|BS_FLAG_INTERRUPTABLE|BS_FLAG_FREEHANDS): ",Npc_GetBodyState(slf) & (BS_MAX | BS_FLAG_INTERRUPTABLE | BS_FLAG_FREEHANDS));
 	if((Npc_GetBodyState(slf) & (BS_MAX | BS_FLAG_INTERRUPTABLE | BS_FLAG_FREEHANDS)) == (bodystate & (BS_MAX | BS_FLAG_INTERRUPTABLE | BS_FLAG_FREEHANDS)))
 	{
 		printdebugnpc(PD_ZS_DETAIL,"...true");
@@ -189,8 +300,8 @@ func int c_bodystatecontains(var C_NPC slf,var int bodystate)
 	else
 	{
 		printdebugnpc(PD_ZS_DETAIL,"...false");
-		return FALSE;
 	};
+	return FALSE;
 };
 
 func int c_npctypeisfriend(var C_NPC slf,var C_NPC oth)
@@ -204,8 +315,8 @@ func int c_npctypeisfriend(var C_NPC slf,var C_NPC oth)
 	else
 	{
 		printdebugnpc(PD_ZS_DETAIL,"...false");
-		return FALSE;
 	};
+	return FALSE;
 };
 
 func int c_npcisguard(var C_NPC slf)
@@ -249,8 +360,8 @@ func int c_npcisboss(var C_NPC slf)
 	else
 	{
 		printdebugnpc(PD_ZS_DETAIL,"...false");
-		return FALSE;
 	};
+	return FALSE;
 };
 
 func int c_npcisworker(var C_NPC slf)
@@ -264,8 +375,8 @@ func int c_npcisworker(var C_NPC slf)
 	else
 	{
 		printdebugnpc(PD_ZS_DETAIL,"...false");
-		return FALSE;
 	};
+	return FALSE;
 };
 
 func int c_npcismage(var C_NPC slf)
@@ -279,8 +390,8 @@ func int c_npcismage(var C_NPC slf)
 	else
 	{
 		printdebugnpc(PD_ZS_DETAIL,"...false");
-		return FALSE;
 	};
+	return FALSE;
 };
 
 func int c_npcbelongstooldcamp(var C_NPC slf)
@@ -294,8 +405,8 @@ func int c_npcbelongstooldcamp(var C_NPC slf)
 	else
 	{
 		printdebugnpc(PD_ZS_DETAIL,"...FALSE");
-		return FALSE;
 	};
+	return FALSE;
 };
 
 func int c_npcbelongstonewcamp(var C_NPC slf)
@@ -309,8 +420,8 @@ func int c_npcbelongstonewcamp(var C_NPC slf)
 	else
 	{
 		printdebugnpc(PD_ZS_DETAIL,"...FALSE");
-		return FALSE;
 	};
+	return FALSE;
 };
 
 func int c_npcbelongstopsicamp(var C_NPC slf)
@@ -324,8 +435,8 @@ func int c_npcbelongstopsicamp(var C_NPC slf)
 	else
 	{
 		printdebugnpc(PD_ZS_DETAIL,"...FALSE");
-		return FALSE;
 	};
+	return FALSE;
 };
 
 func int c_chargewasattacked(var C_NPC guard,var C_NPC charge,var C_NPC attacker)
@@ -361,60 +472,60 @@ func int c_npchasammo(var C_NPC slf,var int category)
 	count = Npc_GetInvItemBySlot(slf,INV_WEAPON,1);
 	if(Hlp_IsValidItem(item) && (item.mainflag == ITEM_KAT_MUN))
 	{
-		printdebugint(PD_ZS_DETAIL,"...gefundene Anzahl:",count);
+		printdebugint(PD_ZS_DETAIL,"...gefundene Anzahl: ",count);
 		if(Hlp_GetInstanceID(item) == category)
 		{
-			printdebugstring(PD_ZS_DETAIL,"...Munitionstyp:",item.name);
+			printdebugstring(PD_ZS_DETAIL,"...Munitionstyp: ",item.name);
 			return count;
 		};
 	};
 	count = Npc_GetInvItemBySlot(slf,INV_WEAPON,2);
 	if(Hlp_IsValidItem(item) && (item.mainflag == ITEM_KAT_MUN))
 	{
-		printdebugint(PD_ZS_DETAIL,"...gefundene Anzahl:",count);
+		printdebugint(PD_ZS_DETAIL,"...gefundene Anzahl: ",count);
 		if(Hlp_GetInstanceID(item) == category)
 		{
-			printdebugstring(PD_ZS_DETAIL,"...Munitionstyp:",item.name);
+			printdebugstring(PD_ZS_DETAIL,"...Munitionstyp: ",item.name);
 			return count;
 		};
 	};
 	count = Npc_GetInvItemBySlot(slf,INV_WEAPON,3);
 	if(Hlp_IsValidItem(item) && (item.mainflag == ITEM_KAT_MUN))
 	{
-		printdebugint(PD_ZS_DETAIL,"...gefundene Anzahl:",count);
+		printdebugint(PD_ZS_DETAIL,"...gefundene Anzahl: ",count);
 		if(Hlp_GetInstanceID(item) == category)
 		{
-			printdebugstring(PD_ZS_DETAIL,"...Munitionstyp:",item.name);
+			printdebugstring(PD_ZS_DETAIL,"...Munitionstyp: ",item.name);
 			return count;
 		};
 	};
 	count = Npc_GetInvItemBySlot(slf,INV_WEAPON,4);
 	if(Hlp_IsValidItem(item) && (item.mainflag == ITEM_KAT_MUN))
 	{
-		printdebugint(PD_ZS_DETAIL,"...gefundene Anzahl:",count);
+		printdebugint(PD_ZS_DETAIL,"...gefundene Anzahl: ",count);
 		if(Hlp_GetInstanceID(item) == category)
 		{
-			printdebugstring(PD_ZS_DETAIL,"...Munitionstyp:",item.name);
+			printdebugstring(PD_ZS_DETAIL,"...Munitionstyp: ",item.name);
 			return count;
 		};
 	};
 	count = Npc_GetInvItemBySlot(slf,INV_WEAPON,5);
 	if(Hlp_IsValidItem(item) && (item.mainflag == ITEM_KAT_MUN))
 	{
-		printdebugint(PD_ZS_DETAIL,"...gefundene Anzahl:",count);
+		printdebugint(PD_ZS_DETAIL,"...gefundene Anzahl: ",count);
 		if(Hlp_GetInstanceID(item) == category)
 		{
-			printdebugstring(PD_ZS_DETAIL,"...Munitionstyp:",item.name);
+			printdebugstring(PD_ZS_DETAIL,"...Munitionstyp: ",item.name);
 			return count;
 		};
 	};
 	count = Npc_GetInvItemBySlot(slf,INV_WEAPON,6);
 	if(Hlp_IsValidItem(item) && (item.mainflag == ITEM_KAT_MUN))
 	{
-		printdebugint(PD_ZS_DETAIL,"...gefundene Anzahl:",count);
+		printdebugint(PD_ZS_DETAIL,"...gefundene Anzahl: ",count);
 		if(Hlp_GetInstanceID(item) == category)
 		{
-			printdebugstring(PD_ZS_DETAIL,"...Munitionstyp:",item.name);
+			printdebugstring(PD_ZS_DETAIL,"...Munitionstyp: ",item.name);
 			return count;
 		};
 	};
@@ -540,7 +651,7 @@ func int c_otheristoleratedenemy(var C_NPC slf,var C_NPC oth)
 		if(Hlp_IsValidItem(weapon))
 		{
 			weaponinstance = Hlp_GetInstanceID(weapon);
-			printdebugstring(PD_ZS_DETAIL,"...gezogene Waffe von 'other':",weapon.name);
+			printdebugstring(PD_ZS_DETAIL,"...gezogene Waffe von 'other': ",weapon.name);
 			if(weaponinstance == ulumulu)
 			{
 				printdebugnpc(PD_ZS_DETAIL,"...true!");
@@ -551,7 +662,7 @@ func int c_otheristoleratedenemy(var C_NPC slf,var C_NPC oth)
 		if(Hlp_IsValidItem(weapon))
 		{
 			weaponinstance = Hlp_GetInstanceID(weapon);
-			printdebugstring(PD_ZS_DETAIL,"...equippte Waffe von 'other':",weapon.name);
+			printdebugstring(PD_ZS_DETAIL,"...equippte Waffe von 'other': ",weapon.name);
 			if(weaponinstance == ulumulu)
 			{
 				printdebugnpc(PD_ZS_DETAIL,"...true!");
@@ -594,5 +705,75 @@ func void b_tolerateenemy(var C_NPC slf,var C_NPC oth)
 			};
 		};
 	};
+};
+
+func int c_npcisguarding(var C_NPC slf)
+{
+	if(slf.id == 872)
+	{
+		//стражник у старой шахты
+		return TRUE;
+	};
+	if(slf.id == 840 || slf.id == 804)
+	{
+		//роско и охранник ларса
+		return TRUE;
+	};
+	if(slf.id == 818 || slf.id == 819 || slf.id == 859)
+	{
+		//ретфорд, дракс и эйдан
+		return TRUE;
+	};
+	if(slf.id == 1442 || slf.id == 1441)
+	{
+		//стражи юбериона
+		return TRUE;
+	};
+	if(slf.id == 336)
+	{
+		//кавалорн
+		return TRUE;
+	};
+	if(slf.id == 732 || slf.id == 723)
+	{
+		//наемники магов воды
+		return TRUE;
+	};
+	if(slf.id == 212 || slf.id == 213)
+	{
+		//стражники замка
+		return TRUE;
+	};
+	if(slf.id == 218)
+	{
+		//стражник баронов
+		return TRUE;
+	};
+	if(slf.id == 224)
+	{
+		//пако
+		return TRUE;
+	};
+	if(slf.id == 998)
+	{
+		//стражник арены
+		return TRUE;
+	};
+	if(slf.id == 251 || slf.id == 729 || slf.id == 1422)
+	{
+		//бойцы арены
+		return TRUE;
+	};
+	if(slf.id == 328)
+	{
+		//сэм
+		return TRUE;
+	};
+	if(slf.id == 726)
+	{
+		//наемник у руды
+		return TRUE;
+	};
+	return FALSE;
 };
 

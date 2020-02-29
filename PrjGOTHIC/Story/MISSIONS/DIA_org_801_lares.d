@@ -38,7 +38,7 @@ func int org_801_lares_youhere_condition()
 {
 	var C_NPC roscoe;
 	roscoe = Hlp_GetNpc(org_840_roscoe);
-	if(roscoe.aivar[AIV_PASSGATE] == FALSE)
+	if(roscoe.aivar[AIV_PASSGATE] == FALSE && LARES_VORBEIGEMOGELT == FALSE)
 	{
 		return 1;
 	};
@@ -48,7 +48,7 @@ func void org_801_lares_youhere_info()
 {
 	var C_NPC roscoe;
 	roscoe = Hlp_GetNpc(org_840_roscoe);
-	if(Npc_IsInState(roscoe,zs_magicsleep) || (npc_gettempattitude(roscoe,other) == ATT_FRIENDLY))
+	if((Npc_IsInState(roscoe,zs_magicsleep) || (npc_gettempattitude(roscoe,other) == ATT_FRIENDLY) || Npc_IsInState(roscoe,zs_unconscious) || Npc_IsDead(roscoe)) && (hero.guild != GIL_GRD) && (hero.guild != GIL_STT))
 	{
 		AI_Output(self,other,"ORG_801_Lares_YouHere_11_00");	//Как ты попал сюда, и что случилось с Роско?
 		AI_Output(other,self,"ORG_801_Lares_YouHere_15_01");	//Он не захотел меня останавливать.
@@ -59,8 +59,10 @@ func void org_801_lares_youhere_info()
 	}
 	else
 	{
-		Npc_SetTempAttitude(self,ATT_HOSTILE);
 		AI_StopProcessInfos(self);
+		Npc_SetTempAttitude(self,ATT_HOSTILE);
+		b_intruderalert(self,other);
+		b_setattackreason(self,AIV_AR_INTRUDER);
 		Npc_SetTarget(self,other);
 		AI_StartState(self,zs_attack,1,"");
 	};
@@ -92,9 +94,6 @@ func void org_801_lares_wannajoin_info()
 	AI_Output(self,other,"ORG_801_Lares_WannaJoin_11_01");	//Да? А кто ты вообще такой?
 };
 
-
-var int lares_bringlistback;
-
 instance ORG_801_LARES_BRINGLIST(C_INFO)
 {
 	npc = org_801_lares;
@@ -108,7 +107,7 @@ instance ORG_801_LARES_BRINGLIST(C_INFO)
 
 func int org_801_lares_bringlist_condition()
 {
-	if(Npc_KnowsInfo(hero,org_801_lares_wannajoin) && Npc_HasItems(hero,thelist))
+	if(Npc_HasItems(hero,thelist) && (Npc_KnowsInfo(hero,org_801_lares_newlist) || Npc_KnowsInfo(hero,info_diego_bringlist_offer)) && !Npc_KnowsInfo(hero,info_diego_ocwarn) && !Npc_KnowsInfo(hero,info_milten_ocwarn))
 	{
 		return 1;
 	};
@@ -123,16 +122,25 @@ func void org_801_lares_bringlist_info()
 	b_usefakescroll();
 	AI_Output(self,other,"ORG_801_Lares_BringList_11_04");	//Так, так. Знаешь, что мы сейчас сделаем? Мы его немного подправим, а потом ты отнесешь его в Старый лагерь.
 	AI_Output(self,other,"ORG_801_Lares_BringList_11_05");	//А потом, когда они доставят товар в шахту, мы просто заберем его себе! Ну, вот, сейчас мы все сделаем... Есть! Вот и списочек. Ты знаешь, что делать.
+	//b_logentry(CH1_BRINGLIST,"Ларс, главарь воров, дополнил список и велел отнести его Диего.");
 	POINTS_NC = POINTS_NC + 10;
 	LARES_BRINGLISTBACK = LOG_RUNNING;
 	Npc_RemoveInvItem(hero,thelist);
 	CreateInvItem(hero,thelistnc);
-	if(Npc_GetTrueGuild(hero) == GIL_NONE)
+	if((Npc_GetTrueGuild(hero) == GIL_NONE) && (KAPITEL < 2))
 	{
 		Log_CreateTopic(CH1_JOINNC,LOG_MISSION);
 		Log_SetTopicStatus(CH1_JOINNC,LOG_RUNNING);
+		b_logentry(CH1_JOINNC,"Ларс, главарь шайки воров, был сильно удивлен, когда я принес ему список. Он дополнил его и велел отнести Диего.");
 	};
-	b_logentry(CH1_JOINNC,"Ларс, главарь шайки воров, был сильно удивлен, когда я принес ему список. Он дополнил его и велел отнести Диего.");
+	if(Npc_KnowsInfo(hero,info_diego_bringlist_offer))
+	{
+		b_logentry(CH1_BRINGLIST,"Я решил отдать список Ларсу, главарю воров. Он дополнил его и велел отнести Диего.");
+	}
+	else if(Npc_KnowsInfo(hero,org_801_lares_newlist) && !Npc_KnowsInfo(hero,info_diego_bringlist_offer))
+	{
+		b_logentry(THELISTFORNC,"Ларс дополнил украденный мной список и велел отнести его Диего.");
+	};
 	b_givexp(XP_GIVELISTTOLARES);
 };
 
@@ -162,8 +170,56 @@ func void org_801_lares_bringlistback_info()
 	AI_Output(self,other,"ORG_801_Lares_BringListBack_11_01");	//Хорошо! Я как раз направил своих людей к Старой шахте. Стражники Торуса должны сейчас лежать себе спокойно в лесу.
 	POINTS_NC = POINTS_NC + 10;
 	LARES_BRINGLISTBACK = LOG_SUCCESS;
-	b_logentry(CH1_JOINNC,"Ларс со своей шайкой напал на конвой с грузом для Старой шахты. Конечно, он не захотел ждать моего возвращения.");
+	if(Npc_KnowsInfo(hero,info_diego_bringlist_offer))
+	{
+		b_logentry(CH1_BRINGLIST,"Ларс со своей шайкой напал на конвой с грузом для Старой шахты. Конечно, он не захотел ждать моего возвращения.");
+		Log_SetTopicStatus(CH1_BRINGLIST,LOG_SUCCESS);
+	}
+	else if(Npc_KnowsInfo(hero,org_801_lares_newlist) && !Npc_KnowsInfo(hero,info_diego_bringlist_offer))
+	{
+		b_logentry(THELISTFORNC,"Ларс со своей шайкой напал на конвой с грузом для Старой шахты. Конечно, он не захотел ждать моего возвращения.");
+		Log_SetTopicStatus(THELISTFORNC,LOG_SUCCESS);
+	};
+	Log_SetTopicStatus(THELISTFORNC,LOG_SUCCESS);
 	b_givexp(XP_REPORTLISTDELIVERYTOLARES);
+	if(KAPITEL < 4)
+	{
+		b_exchangeroutine(grd_896_gardist,"dead2");
+		b_exchangeroutine(grd_895_gardist,"dead2");
+		b_exchangeroutine(grd_894_gardist,"dead2");
+		b_exchangeroutine(grd_893_gardist,"dead2");
+		b_exchangeroutine(grd_872_gardist,"dead2");
+		b_killnpc(grd_896_gardist);
+		b_killnpc(grd_895_gardist);
+		b_killnpc(grd_894_gardist);
+		b_killnpc(grd_893_gardist);
+		b_killnpc(grd_872_gardist);
+		Npc_RemoveInvItems(grd_896_gardist,itambolt,Npc_HasItems(grd_896_gardist,itambolt));
+		Npc_RemoveInvItems(grd_895_gardist,itambolt,Npc_HasItems(grd_895_gardist,itambolt));
+		Npc_RemoveInvItems(grd_894_gardist,itambolt,Npc_HasItems(grd_894_gardist,itambolt));
+		Npc_RemoveInvItems(grd_893_gardist,itambolt,Npc_HasItems(grd_893_gardist,itambolt));
+		Npc_RemoveInvItems(grd_872_gardist,itambolt,Npc_HasItems(grd_872_gardist,itambolt));
+		Npc_RemoveInvItem(grd_896_gardist,itfomutton);
+		Npc_RemoveInvItem(grd_895_gardist,itfomutton);
+		Npc_RemoveInvItem(grd_894_gardist,itfomutton);
+		Npc_RemoveInvItem(grd_893_gardist,itfomutton);
+		Npc_RemoveInvItem(grd_872_gardist,itfomutton);
+		Npc_RemoveInvItem(grd_896_gardist,itmw_1h_sword_03);
+		Npc_RemoveInvItem(grd_895_gardist,itmw_1h_sword_03);
+		Npc_RemoveInvItem(grd_894_gardist,itmw_1h_sword_03);
+		Npc_RemoveInvItem(grd_893_gardist,itmw_1h_sword_03);
+		Npc_RemoveInvItem(grd_872_gardist,itmw_1h_sword_03);
+		Npc_RemoveInvItem(grd_896_gardist,itrw_crossbow_03);
+		Npc_RemoveInvItem(grd_895_gardist,itrw_crossbow_03);
+		Npc_RemoveInvItem(grd_894_gardist,itrw_crossbow_03);
+		Npc_RemoveInvItem(grd_893_gardist,itrw_crossbow_03);
+		Npc_RemoveInvItem(grd_872_gardist,itrw_crossbow_03);
+		Npc_RemoveInvItem(grd_896_gardist,itfo_potion_health_01);
+		Npc_RemoveInvItem(grd_895_gardist,itfo_potion_health_01);
+		Npc_RemoveInvItem(grd_894_gardist,itfo_potion_health_01);
+		Npc_RemoveInvItem(grd_893_gardist,itfo_potion_health_01);
+		Npc_RemoveInvItem(grd_872_gardist,itfo_potion_health_01);
+	};
 };
 
 
@@ -200,7 +256,7 @@ func void org_801_lares_bringlistanteil_info()
 		AI_Output(self,other,"ORG_801_Lares_BringListAnteil_11_05");	//Ты слишком любопытен. Тебе это знать не положено. Просто иди к нему и возьми свою долю.
 	};
 	b_logentry(CH1_JOINNC,"Наемник Горн каким-то образом участвовал в нападении на груз из Старого лагеря. Я могу взять свою долю у него.");
-	gorn.aivar[AIV_FINDABLE] == TRUE;
+	gorn.aivar[AIV_FINDABLE] = TRUE;
 };
 
 
@@ -232,12 +288,12 @@ func void org_801_lares_mordragsentme_info()
 	AI_Output(self,other,"ORG_801_Lares_MordragSentMe_11_03");	//Я хочу, чтобы ты сходил к нему и передал ему кое-что от меня.
 	AI_Output(self,other,"ORG_801_Lares_MordragSentMe_11_04");	//Скажи ему, что нам нужно заслать в Лагерь сектантов своего человека. Я хочу знать, что они там затевают.
 	LARES_INFORMMORDRAG = LOG_RUNNING;
-	if(Npc_GetTrueGuild(hero) == GIL_NONE)
+	if((Npc_GetTrueGuild(hero) == GIL_NONE) && (KAPITEL < 2))
 	{
 		Log_CreateTopic(CH1_JOINNC,LOG_MISSION);
 		Log_SetTopicStatus(CH1_JOINNC,LOG_RUNNING);
+		b_logentry(CH1_JOINNC,"Ларс послал меня к Мордрагу. Я должен сказать ему, что в Лагерь сектантов нужно послать шпиона. Необходимо разузнать, что готовят братья.");
 	};
-	b_logentry(CH1_JOINNC,"Ларс послал меня к Мордрагу. Я должен сказать ему, что в Лагерь сектантов нужно послать шпиона. Необходимо разузнать, что готовят братья.");
 	b_givexp(XP_GIVERINGTOLARES);
 	POINTS_NC = POINTS_NC + 10;
 };
@@ -301,14 +357,14 @@ func void org_801_lares_getkraut_info()
 		AI_Output(self,other,"ORG_801_Lares_GetKraut_11_03");	//Да, умный ты парень!
 	};
 	AI_Output(self,other,"ORG_801_Lares_GetKraut_11_04");	//Если так, то продай и принеси мне четыреста кусков руды.
-	AI_Output(self,other,"ORG_801_Lares_GetKraut_11_05");	//Тогда можно будет поговорить о твоем приеме в нашу шайку.
 	LARES_GET400ORE = LOG_RUNNING;
-	if(Npc_GetTrueGuild(hero) == GIL_NONE)
+	if((Npc_GetTrueGuild(hero) == GIL_NONE) && (KAPITEL < 2))
 	{
+		AI_Output(self,other,"ORG_801_Lares_GetKraut_11_05");	//Тогда можно будет поговорить о твоем приеме в нашу шайку.
 		Log_CreateTopic(CH1_JOINNC,LOG_MISSION);
 		Log_SetTopicStatus(CH1_JOINNC,LOG_RUNNING);
+		b_logentry(CH1_JOINNC,"Я должен взять болотник у Идола Исидро и продать его за 400 кусков руды, которые нужно принести Ларсу.");
 	};
-	b_logentry(CH1_JOINNC,"Я должен взять болотник у Идола Исидро и продать его за 400 кусков руды, которые нужно принести Ларсу.");
 };
 
 
@@ -345,7 +401,7 @@ func void org_801_lares_400ore_info()
 	}
 	else
 	{
-		AI_Output(self,other,"ORG_801_Lares_400Ore_NOORE_11_00");	//Пересчитай-ка еще раз, вся ли руда не месте. 
+		AI_Output(self,other,"ORG_801_Lares_400Ore_NOORE_11_00");	//Пересчитай-ка еще раз, вся ли руда не месте.
 	};
 };
 
@@ -363,7 +419,7 @@ instance ORG_801_LARES_REICHT(C_INFO)
 
 func int org_801_lares_reicht_condition()
 {
-	if(Npc_KnowsInfo(hero,org_801_lares_wannajoin) && (Npc_KnowsInfo(hero,org_801_lares_mordragsentme) || Npc_KnowsInfo(hero,org_801_lares_bringlist)) && (Npc_GetTrueGuild(other) == GIL_NONE) && (KAPITEL < 2))
+	if(Npc_KnowsInfo(hero,org_801_lares_wannajoin) && (Npc_KnowsInfo(hero,org_801_lares_mordragsentme) || Npc_KnowsInfo(hero,org_801_lares_bringlist) || LARES_GET400ORE == LOG_SUCCESS) && (Npc_GetTrueGuild(other) == GIL_NONE) && (KAPITEL < 2))
 	{
 		return 1;
 	};
@@ -378,11 +434,9 @@ func void org_801_lares_reicht_info()
 		AI_Output(self,other,"ORG_801_Lares_Reicht_AUFNAHME_11_01");	//Я даже приготовил тебе подарок - доспех, если быть точным. Подарок, конечно, небольшой, но заслуженный.
 		hero.guild = GIL_ORG;
 		Npc_SetTrueGuild(hero,GIL_ORG);
-		CreateInvItem(hero,org_armor_l);
-		CreateInvItem(self,itamarrow);
-		b_giveinvitems(self,hero,itamarrow,1);
-		Npc_RemoveInvItem(hero,itamarrow);
-		AI_EquipBestArmor(hero);
+		CreateInvItem(self,org_armor_l);
+		b_giveinvitems(self,hero,org_armor_l,1);
+		AI_EquipArmor(hero,org_armor_l);
 		b_givexp(XP_BECOMEBANDIT);
 		b_logentry(CH1_JOINNC,"Ларс принял меня в свою шайку. Отныне Новый лагерь будет моим домом!");
 		Log_SetTopicStatus(CH1_JOINNC,LOG_SUCCESS);
@@ -392,11 +446,31 @@ func void org_801_lares_reicht_info()
 		Log_CreateTopic(CH1_JOINPSI,LOG_MISSION);
 		Log_SetTopicStatus(CH1_JOINPSI,LOG_FAILED);
 		b_logentry(CH1_JOINPSI,"Братство не примет меня, так как я уже стал членом Нового лагеря.");
-		Log_SetTopicStatus(CH1_LOSTNEK,LOG_FAILED);
-		Log_SetTopicStatus(CH1_FISKNEWDEALER,LOG_FAILED);
-		Log_SetTopicStatus(CH1_KALOMSRECIPE,LOG_FAILED);
-		Log_SetTopicStatus(CH1_BRINGLIST,LOG_FAILED);
-		Log_SetTopicStatus(CH1_MORDRAGKO,LOG_FAILED);
+		Log_CreateTopic(GE_TEACHERNC,LOG_NOTE);
+		b_logentry(GE_TEACHERNC,"Я вступил в Новый лагерь и теперь некоторые учителя будут согласны учить меня бесплатно.");
+		if(BAALORUN_FETCHWEED == LOG_RUNNING)
+		{
+			b_logentry(CH1_DELIVERWEED,"Члену шайки Ларса не пристало быть на побегушках у сектантов. Думаю, у них и без меня найдется, кому таскать тюки с травой.");
+			Log_SetTopicStatus(CH1_DELIVERWEED,LOG_FAILED);
+			BAALORUN_FETCHWEED = LOG_FAILED;
+		};
+		if(THORUS_MORDRAGKO == LOG_RUNNING)
+		{
+			THORUS_MORDRAGKO = LOG_FAILED;
+			Log_SetTopicStatus(CH1_MORDRAGKO,LOG_FAILED);
+			b_logentry(CH1_MORDRAGKO,"Теперь я с ворами, а наш Мордраг может делать в Старом лагере все, что захочет!");
+		};
+		if(KIRGO_CHARGED == TRUE && KIRGO_CHARGED_END == FALSE)
+		{
+			KIRGO_CHARGED = FALSE;
+			b_exchangeroutine(grd_251_kirgo,"START");
+		};
+		if(KHARIM_CHARGED == TRUE && KHARIM_CHARGED_END == FALSE)
+		{
+			KHARIM_CHARGED = FALSE;
+			b_exchangeroutine(sld_729_kharim,"START");
+		};
+		b_exchangeroutine(tpl_1422_gorhanis,"START");
 	}
 	else
 	{
@@ -408,8 +482,15 @@ func void org_801_lares_reicht_info()
 		{
 			AI_Output(self,other,"ORG_801_Lares_Reicht_11_03");	//Ты доказал свою преданность нам, когда принес список.
 		};
+		if(LARES_GET400ORE == LOG_SUCCESS)
+		{
+			AI_Output(self,other,"SVM_11_ITookYourOre");	//Как хорошо, что ты поделился со мной этой рудой!
+		};
 		AI_Output(self,other,"ORG_801_Lares_Reicht_11_04");	//Но ты еще не готов. Иди, выполняй другие поручения.
-		b_printguildcondition(5);
+		if(hero.level < 5)
+		{
+			b_printguildcondition(5);
+		};	
 	};
 };
 
@@ -481,7 +562,10 @@ instance ORG_801_LARES_WHERELEARN(C_INFO)
 
 func int org_801_lares_wherelearn_condition()
 {
-	return TRUE;
+	if(Npc_GetTrueGuild(other) == GIL_ORG)
+	{
+		return 1;
+	};
 };
 
 func void org_801_lares_wherelearn_info()
@@ -570,5 +654,41 @@ func void org_801_lares_teach_dex_5()
 	Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),org_801_lares_teach_str_1);
 	Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),org_801_lares_teach_dex_5);
 	Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),org_801_lares_teach_dex_1);
+};
+
+instance ORG_801_LARES_NEWLIST(C_INFO)
+{
+	npc = org_801_lares;
+	nr = 1;
+	condition = org_801_lares_newlist_condition;
+	information = org_801_lares_newlist_info;
+	permanent = 0;
+	description = "У тебя есть для меня еще какое-нибудь задание?";
+};
+
+
+func int org_801_lares_newlist_condition()
+{
+	if(Npc_GetTrueGuild(other) == GIL_ORG && Npc_KnowsInfo(hero,org_801_lares_gotokalom) && !Npc_KnowsInfo(hero,info_diego_bringlist_success) && !Npc_KnowsInfo(hero,org_801_lares_bringlist) && KAPITEL < 4)
+	{
+		return 1;
+	};
+};
+
+func void org_801_lares_newlist_info()
+{
+	AI_Output(other,self,"Mis_1_Psi_Kalom_DrugMonopol_15_00");	//У тебя есть для меня еще какое-нибудь задание?
+	AI_Output(self,other,"ORG_801_Lares_NewList_01");	//В Старой шахте всем заправляет Призрак по имени Ян. Он отвечает за поставки и каждые несколько недель пишет список нужных припасов.
+	AI_Output(self,other,"ORG_801_Lares_NewList_02");	//Я хочу, чтобы ты отправился туда, выкрал у Яна этот список и принес его мне. Обратись к Веджу в нашем лагере, он бесплатно обучит тебя всему необходимому. 
+	if(!Npc_KnowsInfo(hero,info_diego_bringlist_offer))
+	{
+		Log_CreateTopic(THELISTFORNC,LOG_MISSION);
+		Log_SetTopicStatus(THELISTFORNC,LOG_RUNNING);
+		b_logentry(THELISTFORNC,"Ларсу нужен список припасов, который я выкраду у Яна в Старой шахте.");
+	}
+	else
+	{
+		b_logentry(CH1_BRINGLIST,"Ларс предложил перехитрить людей Гомеза и принести список из шахты не Диего, а ему.");
+	};
 };
 

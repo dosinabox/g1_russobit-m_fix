@@ -1,7 +1,7 @@
 
 prototype MST_DEFAULT_MINECRAWLERWARRIOR(C_NPC)
 {
-	name[0] = "Ползун-боец";
+	name[0] = "Ползун-воин";
 	guild = GIL_MINECRAWLER;
 	aivar[AIV_IMPORTANT] = ID_MINECRAWLERWARRIOR;
 	level = 22;
@@ -38,6 +38,12 @@ func void set_minecrawlerwarrior_visuals()
 	Mdl_SetVisualBody(self,"Cr2_Body",DEFAULT,DEFAULT,"",DEFAULT,DEFAULT,-1);
 };
 
+func void set_otminecrawlerwarrior_visuals()
+{
+	Mdl_SetVisual(self,"Crawler.mds");
+	Mdl_SetVisualBody(self,"Cr2_Body",1,DEFAULT,"",DEFAULT,DEFAULT,-1);
+};
+
 
 instance MINECRAWLERWARRIOR(MST_DEFAULT_MINECRAWLERWARRIOR)
 {
@@ -48,9 +54,11 @@ instance MINECRAWLERWARRIOR(MST_DEFAULT_MINECRAWLERWARRIOR)
 instance OTMINECRAWLER(MST_DEFAULT_MINECRAWLERWARRIOR)
 {
 	name[0] = "Храмовый ползун";
+	guild = GIL_MINECRAWLER;
 	level = 25;
-	set_minecrawlerwarrior_visuals();
+	set_otminecrawlerwarrior_visuals();
 	Npc_SetToFistMode(self);
+	Mdl_SetModelScale(self,1.2,1.2,1.2);
 	attribute[ATR_STRENGTH] = 120;
 	attribute[ATR_DEXTERITY] = 120;
 	attribute[ATR_HITPOINTS_MAX] = 300;

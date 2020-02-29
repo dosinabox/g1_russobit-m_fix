@@ -83,7 +83,10 @@ instance ORG_818_RATFORD_WHYDANGEROUS(C_INFO)
 
 func int org_818_ratford_whydangerous_condition()
 {
-	return 1;
+	if(Npc_KnowsInfo(hero,org_818_ratford_whatgame))
+	{
+		return 1;
+	};
 };
 
 func void org_818_ratford_whydangerous_info()
@@ -120,8 +123,12 @@ func void org_818_ratford_woequipment_info()
 	AI_Output(self,other,"Org_818_Ratford_WoEquipment_07_01");	//У торговцев в лагерях. Отсюда недалеко до Старого лагеря. Иди по дороге и без труда его найдешь.
 	AI_Output(self,other,"Org_818_Ratford_WoEquipment_07_02");	//Но в Новом лагере, из которого мы пришли, вещи стоят не так дорого, если, конечно, найти нужных людей.
 	AI_Output(self,other,"Org_818_Ratford_WoEquipment_07_03");	//Если зайдешь в Старый лагерь, найди Мордрага. Он один из нас. У него ты сможешь купить хороший товар по низкой цене.
-	Log_CreateTopic(GE_TRADEROC,LOG_NOTE);
-	b_logentry(GE_TRADEROC,"Вор Мордраг продает в Старом лагере свои товары по выгодным ценам.");
+	if(MORDRAG_TRADED == 0)
+	{
+		Log_CreateTopic(GE_TRADEROC,LOG_NOTE);
+		b_logentry(GE_TRADEROC,"Вор Мордраг продает в Старом лагере свои товары по выгодным ценам.");
+		MORDRAG_TRADED = 1;
+	};
 };
 
 
@@ -138,7 +145,7 @@ instance ORG_818_RATFORD_MORELOCATIONS(C_INFO)
 
 func int org_818_ratford_morelocations_condition()
 {
-	if(Npc_KnowsInfo(hero,org_818_ratford_whydangerous))
+	if(Npc_KnowsInfo(hero,org_818_ratford_woequipment))
 	{
 		return 1;
 	};
@@ -168,7 +175,7 @@ instance ORG_818_RATFORD_WOKARTE(C_INFO)
 
 func int org_818_ratford_wokarte_condition()
 {
-	if(Npc_KnowsInfo(hero,org_818_ratford_whydangerous))
+	if(Npc_KnowsInfo(hero,org_818_ratford_morelocations))
 	{
 		return 1;
 	};
@@ -178,7 +185,7 @@ func void org_818_ratford_wokarte_info()
 {
 	AI_Output(other,self,"Org_818_Ratford_WoKarte_15_00");	//Где мне достать карту?
 	AI_Output(self,other,"Org_818_Ratford_WoKarte_07_01");	//Спроси об этом людей из Старого лагеря. По-моему, там жил один картограф.
-	AI_Output(self,other,"Org_818_Ratford_WoKarte_07_02");	//Может, у тебя получиться выудить у него какую-нибудь карту. А, может, у него будет карта и для меня?
+	AI_Output(self,other,"Org_818_Ratford_WoKarte_07_02");	//Может, у тебя получиться выудить у него какую-нибудь карту. А может, у него будет карта и для меня?
 	Info_ClearChoices(org_818_ratford_wokarte);
 	Info_AddChoice(org_818_ratford_wokarte,"Если я достану карту бесплатно, я возьму все, что смогу унести.",org_818_ratford_wokarte_stehlen);
 	Info_AddChoice(org_818_ratford_wokarte,"А зачем это тебе? Разве он не продает их?",org_818_ratford_wokarte_kaufen);
@@ -215,7 +222,10 @@ instance ORG_818_RATFORD_THANKS(C_INFO)
 
 func int org_818_ratford_thanks_condition()
 {
-	return 1;
+	if(Npc_KnowsInfo(hero,org_818_ratford_morelocations))
+	{
+		return 1;
+	};
 };
 
 func void org_818_ratford_thanks_info()
@@ -224,5 +234,140 @@ func void org_818_ratford_thanks_info()
 	AI_Output(self,other,"Org_818_Ratford_Thanks_07_01");	//Только не думай, что здесь все будут рады помочь тебе!
 	AI_Output(self,other,"Org_818_Ratford_Thanks_07_02");	//Конечно, у новичка отбирать нечего, но некоторые могут убить тебя просто потому, что им приглянулась твоя кирка.
 	AI_Output(other,self,"Org_818_Ratford_Thanks_15_04");	//Я это запомню.
+};
+
+instance ORG_818_RATFORD_QUEST1(C_INFO)
+{
+	npc = org_818_ratford;
+	nr = 1;
+	condition = org_818_ratford_quest1_condition;
+	information = org_818_ratford_quest1_info;
+	permanent = 0;
+	description = "И что будет, после того как я отдам ее тебе?";
+};
+
+
+func int org_818_ratford_quest1_condition()
+{
+	if(Npc_KnowsInfo(hero,org_818_ratford_wokarte))
+	{
+		return 1;
+	};
+};
+
+func void org_818_ratford_quest1_info()
+{
+	AI_Output(other,self,"Info_Jackal_Hello_WhatDoIGet_15_00");	//И что будет, после того как я отдам ее тебе?
+	AI_Output(self,other,"Info_Jackal_PermPaid_07_01");	//Ты можешь рассчитывать на мою помощь!
+	Log_CreateTopic("Карта для охотника",LOG_MISSION);
+	Log_SetTopicStatus("Карта для охотника",LOG_RUNNING);
+	b_logentry("Карта для охотника","Ретфорду нужна карта колонии. Если у меня будет достаточно руды, то я смогу купить ее в Старом лагере. А если не будет, то я что-нибудь придумаю...");
+};
+
+instance ORG_818_RATFORD_QUEST2(C_INFO)
+{
+	npc = org_818_ratford;
+	nr = 1;
+	condition = org_818_ratford_quest2_condition;
+	information = org_818_ratford_quest2_info;
+	permanent = 1;
+	description = "(отдать карту)";
+};
+
+
+func int org_818_ratford_quest2_condition()
+{
+	if(Npc_KnowsInfo(hero,org_818_ratford_quest1) && ((Npc_HasItems(hero,itwrworldmap) && RATFORD_ITWRWORLDMAP == FALSE) || (Npc_HasItems(hero,itwrommap) && RATFORD_ITWROMMAP == FALSE) || (Npc_HasItems(hero,itwrfocusmappsi) && (RATFORD_ITWRFOCUSMAPPSI == FALSE)) || Npc_HasItems(hero,itwrfocimap)))
+	{
+		return 1;
+	};
+};
+
+func void org_818_ratford_quest2_info()
+{
+	Info_ClearChoices(org_818_ratford_quest2);
+	Info_AddChoice(org_818_ratford_quest2,DIALOG_BACK,org_818_ratford_back);
+	if(Npc_HasItems(hero,itwrworldmap) && (RATFORD_ITWRWORLDMAP == FALSE))
+	{
+		Info_AddChoice(org_818_ratford_quest2,"...колонии.",org_818_ratford_itwrworldmap);
+	};
+	if(Npc_HasItems(hero,itwrommap) && (RATFORD_ITWROMMAP == FALSE))
+	{
+		Info_AddChoice(org_818_ratford_quest2,"...дороги к Старой шахте.",org_818_ratford_itwrommap);
+	};
+	if(Npc_HasItems(hero,itwrfocusmappsi) && (RATFORD_ITWRFOCUSMAPPSI == FALSE))
+	{
+		Info_AddChoice(org_818_ratford_quest2,"...Юбериона.",org_818_ratford_itwrfocusmappsi);
+	};
+	if(Npc_HasItems(hero,itwrfocimap))
+	{
+		Info_AddChoice(org_818_ratford_quest2,"...Сатураса.",org_818_ratford_itwrfocimap);
+	};
+};
+
+func void org_818_ratford_back()
+{
+	Info_ClearChoices(org_818_ratford_quest2);
+	Npc_RemoveInvItem(self,itwrommap);
+	Npc_RemoveInvItem(self,itwrfocusmappsi);
+};
+
+func void org_818_ratford_itwrworldmap()
+{
+	AI_Output(other,self,"Mis_1_Psi_Kalom_Success_15_04");	//Я справился с твоим заданием.
+	CreateInvItem(self,itwrworldmap);
+	AI_UseItemToState(self,itwrworldmap,1);
+	AI_Wait(self,2);
+	AI_UseItemToState(self,itwrworldmap,-1);
+	AI_Output(self,other,"VLK_584_Snipes_DEAL_RUN_Info_07_02");	//Возьми, ты заслужил их.
+	b_giveinvitems(other,self,itwrworldmap,1);
+	CreateInvItems(self,itat_wolf_01,3);
+	b_giveinvitems(self,other,itat_wolf_01,4);
+	b_logentry("Карта для охотника","Я отдал Ретфорду карту колонии, а взамен получил несколько волчьих шкур.");
+	Log_SetTopicStatus("Карта для охотника",LOG_SUCCESS);
+	RATFORD_ITWRWORLDMAP = TRUE;
+	b_givexp(200);
+};
+
+func void org_818_ratford_itwrommap()
+{
+	AI_Output(other,self,"Mis_1_Psi_Kalom_Success_15_04");	//Я справился с твоим заданием.
+	CreateInvItem(self,itwrommap);
+	AI_UseItemToState(self,itwrommap,1);
+	AI_Wait(self,1);
+	AI_UseItemToState(self,itwrommap,-1);
+	AI_Output(self,other,"SVM_7_OkayKeepIt");	//Хорошо, хорошо! Оставь себе!
+	b_logentry("Карта для охотника","Карта дороги к Старой шахте слишком мала.");
+	RATFORD_ITWROMMAP = TRUE;
+	b_givexp(40);
+};
+
+func void org_818_ratford_itwrfocusmappsi()
+{
+	AI_Output(other,self,"Mis_1_Psi_Kalom_Success_15_04");	//Я справился с твоим заданием.
+	CreateInvItem(self,itwrfocusmappsi);
+	AI_UseItemToState(self,itwrfocusmappsi,1);
+	AI_Wait(self,1);
+	AI_UseItemToState(self,itwrfocusmappsi,-1);
+	AI_Output(self,other,"SVM_7_YouCanKeeptheCrap");	//Ну, ладно, оставь себе! А я найду себе что-то другое.
+	b_logentry("Карта для охотника","Карта Юбериона не подходит для охоты.");
+	RATFORD_ITWRFOCUSMAPPSI = TRUE;
+	b_givexp(40);
+};
+
+func void org_818_ratford_itwrfocimap()
+{
+	AI_Output(other,self,"Mis_1_Psi_Kalom_Success_15_04");	//Я справился с твоим заданием.
+	CreateInvItem(self,itwrfocimap);
+	AI_UseItemToState(self,itwrfocimap,1);
+	AI_Wait(self,2);
+	AI_UseItemToState(self,itwrfocimap,-1);
+	AI_Output(self,other,"VLK_584_Snipes_DEAL_RUN_Info_07_02");	//Возьми, ты заслужил их.
+	b_giveinvitems(other,self,itwrfocimap,1);
+	CreateInvItems(self,itat_wolf_01,3);
+	b_giveinvitems(self,other,itat_wolf_01,4);
+	b_logentry("Карта для охотника","Хоть карта Сатураса и довольно старая, но Ретфорду она будет очень полезна.");
+	Log_SetTopicStatus("Карта для охотника",LOG_SUCCESS);
+	b_givexp(200);
 };
 

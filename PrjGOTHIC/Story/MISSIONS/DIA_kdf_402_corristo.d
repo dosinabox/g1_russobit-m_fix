@@ -35,7 +35,7 @@ instance INFO_CORRISTO_INTRUDER(C_INFO)
 
 func int info_corristo_intruder_condition()
 {
-	if(Npc_IsInState(self,zs_talk) && (!Npc_KnowsInfo(hero,grd_200_thorus_wannabemage) && (CORKALOM_BRINGMCQBALLS != LOG_SUCCESS)))
+	if(Npc_IsInState(self,zs_talk) && !(Npc_KnowsInfo(hero,grd_200_thorus_wannabemage) || Npc_KnowsInfo(hero,dia_milten_gotocorristo) || (CORKALOM_BRINGMCQBALLS == LOG_SUCCESS)))
 	{
 		return 1;
 	};
@@ -61,7 +61,7 @@ instance KDF_402_CORRISTO_EXPLAINMAGE(C_INFO)
 
 func int kdf_402_corristo_explainmage_condition()
 {
-	if(!Npc_KnowsInfo(hero,kdf_402_corristo_wannbekdf) && (Npc_GetTrueGuild(hero) == GIL_STT))
+	if(Npc_GetTrueGuild(hero) == GIL_STT)
 	{
 		return TRUE;
 	};
@@ -89,7 +89,7 @@ instance KDF_402_CORRISTO_WANNBEKDF(C_INFO)
 
 func int kdf_402_corristo_wannbekdf_condition()
 {
-	if(((CORKALOM_BRINGMCQBALLS == LOG_SUCCESS) || Npc_KnowsInfo(hero,grd_200_thorus_wannabemage)) && (Npc_GetTrueGuild(hero) == GIL_STT))
+	if(((CORKALOM_BRINGMCQBALLS == LOG_SUCCESS) || Npc_KnowsInfo(hero,dia_milten_gotocorristo) || Npc_KnowsInfo(hero,grd_200_thorus_wannabemage)) && !Npc_KnowsInfo(hero,kdf_402_corristo_kdftest) && (Npc_GetTrueGuild(hero) == GIL_STT))
 	{
 		return TRUE;
 	};
@@ -131,7 +131,7 @@ instance KDF_402_CORRISTO_KDFTEST(C_INFO)
 
 func int kdf_402_corristo_kdftest_condition()
 {
-	if(CORRISTO_KDFAUFNAHME == 1)
+	if((CORRISTO_KDFAUFNAHME == 1) && (Npc_GetTrueGuild(hero) == GIL_STT))
 	{
 		return TRUE;
 	};
@@ -263,7 +263,7 @@ instance KDF_402_CORRISTO_AUFNAHME(C_INFO)
 
 func int kdf_402_corristo_aufnahme_condition()
 {
-	if((Npc_GetDistToWP(hero,"OCC_CHAPEL_UPSTAIRS") < 500) && (CORRISTO_KDFAUFNAHME == 4))
+	if((Npc_GetDistToWP(hero,"OCC_CHAPEL_UPSTAIRS") < 400) && (CORRISTO_KDFAUFNAHME == 4))
 	{
 		return TRUE;
 	};
@@ -312,23 +312,48 @@ func int kdf_402_corristo_robe_condition()
 func void kdf_402_corristo_robe_info()
 {
 	Snd_Play("MFX_Heal_Cast");
-	CreateInvItem(hero,kdf_armor_l);
-	CreateInvItem(self,itamarrow);
-	b_giveinvitems(self,hero,itamarrow,1);
-	Npc_RemoveInvItem(hero,itamarrow);
 	AI_Output(self,other,"KDF_402_Corristo_ROBE_Info_14_01");	//Этой клятвой ты связал свою жизнь с неугасимым Огнем.
 	AI_Output(self,other,"KDF_402_Corristo_ROBE_Info_14_02");	//Возьми это одеяние и носи его в знак вечного союза.
 	AI_StopProcessInfos(self);
-	AI_EquipBestArmor(hero);
-	AI_UnequipWeapons(hero);
+	CreateInvItem(self,kdf_armor_l);
+	b_giveinvitems(self,hero,kdf_armor_l,1);
+	AI_EquipArmor(hero,kdf_armor_l);
 	Npc_SetTrueGuild(hero,GIL_KDF);
 	hero.guild = GIL_KDF;
 	hero.attribute[ATR_HITPOINTS] = hero.attribute[ATR_HITPOINTS_MAX];
 	b_logentry(GE_BECOMEFIREMAGE,"Я прошел испытание и принес клятву Огня. Теперь я могу носить одеяние магов Огня!");
 	Log_CreateTopic(GE_TEACHEROC,LOG_NOTE);
 	b_logentry(GE_TEACHEROC,"Корристо может посвятить меня в тайны Кругов магии и помочь мне повысить мою магическую силу. Я смогу найти его в доме магов Огня.");
+	AI_Output(self,other,"KDF_401_Damarok_WELCOME_Info_14_01");	//Да хранит тебя неугасимый Огонь!
+	AI_Output(self,other,"KDF_401_Damarok_HEAL_Info_14_01");	//Если ты будешь ранен, я помогу тебе вылечить раны.
 };
 
+
+instance KDF_401_DAMAROK_HEALINFO(C_INFO)
+{
+	npc = kdf_402_corristo;
+	nr = 100;
+	condition = kdf_401_damarok_healinfo_condition;
+	information = kdf_401_damarok_healinfo_info;
+	important = 0;
+	permanent = 1;
+	description = "Я ранен. Ты можешь помочь мне?";
+};
+
+func int kdf_401_damarok_healinfo_condition()
+{
+	if((hero.attribute[ATR_HITPOINTS] < hero.attribute[ATR_HITPOINTS_MAX]) && (Npc_GetTrueGuild(hero) == GIL_KDF))
+	{
+		return TRUE;
+	};
+};
+
+func void kdf_401_damarok_healinfo_info()
+{
+	AI_Output(other,self,"KDF_401_Damarok_HEALINFO_Info_15_01");	//Я ранен. Ты можешь помочь мне?
+	AI_Output(self,other,"KDF_401_Damarok_HEALINFO_Info_14_02");	//Излечивая тело, я очищаю дух.
+	hero.attribute[ATR_HITPOINTS] = hero.attribute[ATR_HITPOINTS_MAX];
+};
 
 instance KDF_402_CORRISTO_MANA(C_INFO)
 {
@@ -442,7 +467,7 @@ func void kdf_402_corristo_kreis1_info()
 		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_02");	//Вступление в Первый Круг магии даст тебе умение использовать магические руны.
 		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_03");	//Каждая руна содержит в себе одно магическое заклинание.
 		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_04");	//Используя свою магическую силу, ты сможешь прочитать это заклинание.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_05");	//Но в отличие от магических свитков, которые теряют свою силу после первого прочтения, заклинание руны можно читать снова и снова, и оно не иссякнет. 
+		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_05");	//Но в отличие от магических свитков, которые теряют свою силу после первого прочтения, заклинание руны можно читать снова и снова, и оно не иссякнет.
 		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_06");	//Каждая руна является источником магической силы, которая может быть задействована в любое время.
 		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_07");	//Как я уже сказал, при прочтении заклинания руны или свитка будет расходоваться твоя магическая сила.
 		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_08");	//Каждый новый Круг, который ты изучишь, будет давать тебе возможность читать заклинания более сложных рун.
@@ -557,6 +582,7 @@ func void kdf_402_corristo_kreis4_info()
 	};
 };
 
+var int kdf_armor_h_was_bought;
 
 instance KDF_402_CORRISTO_HEAVYARMOR(C_INFO)
 {
@@ -565,13 +591,13 @@ instance KDF_402_CORRISTO_HEAVYARMOR(C_INFO)
 	information = kdf_402_corristo_heavyarmor_info;
 	important = 0;
 	permanent = 1;
-	description = b_buildbuyarmorstring("Учитель, я хочу носить одеяние верховных магов Круга Огня.",VALUE_KDF_ARMOR_H);
+	description = b_buildbuyarmorstring("Одеяние верховного мага: 50/5/0/10",VALUE_KDF_ARMOR_H);
 };
 
 
 func int kdf_402_corristo_heavyarmor_condition()
 {
-	if(Npc_GetTrueGuild(hero) == GIL_KDF)
+	if((Npc_GetTrueGuild(hero) == GIL_KDF) && (KDF_ARMOR_H_WAS_BOUGHT != 1))
 	{
 		return TRUE;
 	};
@@ -584,20 +610,24 @@ func void kdf_402_corristo_heavyarmor_info()
 	{
 		AI_Output(self,other,"KDF_402_Corristo_WANNBEKDF_Info_14_04");	//Ты знаешь еще слишком мало. Приходи ко мне, когда будешь знать больше.
 	}
+	else if(Npc_GetTalentSkill(hero,NPC_TALENT_MAGE) < 3)
+	{
+		AI_Output(self,other,"KDF_402_Corristo_WANNBEKDF_Info_14_04");	//Ты знаешь еще слишком мало. Приходи ко мне, когда будешь знать больше.
+	}
 	else if(Npc_HasItems(hero,itminugget) < VALUE_KDF_ARMOR_H)
 	{
 		AI_Output(self,other,"KDF_402_Corristo_HEAVYARMOR_Info_14_03");	//Тебе не хватает руды.
 	}
 	else
 	{
+		//AI_EquipArmor(self,kdf_armor_h);
 		AI_Output(self,other,"KDF_402_Corristo_HEAVYARMOR_Info_14_04");	//Я вижу, что ты уже достоин носить облачение верховного мага Круга Огня.
-		CreateInvItem(hero,kdf_armor_h);
-		CreateInvItem(self,itamarrow);
-		b_giveinvitems(self,hero,itamarrow,1);
-		Npc_RemoveInvItem(hero,itamarrow);
 		b_giveinvitems(hero,self,itminugget,VALUE_KDF_ARMOR_H);
-		AI_EquipBestArmor(hero);
-		kdf_402_corristo_heavyarmor.permanent = 0;
+		CreateInvItem(hero,kdf_armor_h);
+		//b_giveinvitems(self,hero,kdf_armor_h,1);
+		PrintScreen("Получен 1 предмет.",-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
+		AI_EquipArmor(hero,kdf_armor_h);
+		KDF_ARMOR_H_WAS_BOUGHT = 1;
 	};
 };
 

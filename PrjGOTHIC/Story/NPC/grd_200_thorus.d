@@ -40,3 +40,9 @@ func void rtn_start_200()
 	ta_sleep(23,0,8,0,"OCC_BARONS_UPPER_RIGHT_ROOM_BED1");
 };
 
+func void rtn_flee_200()
+{
+	ta_stay(0,0,12,0,"WP_INTRO01");
+	ta_stay(12,0,24,0,"WP_INTRO01");	
+};
+

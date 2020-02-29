@@ -84,6 +84,7 @@ instance DIA_RICELORD_TRADE(C_INFO)
 
 func int dia_ricelord_trade_condition()
 {
+	return TRUE;
 };
 
 func void dia_ricelord_trade_info()
@@ -92,6 +93,8 @@ func void dia_ricelord_trade_info()
 	AI_Output(self,other,"DIA_Ricelord_TRADE_12_01");	//Ты можешь что-то предложить?
 };
 
+
+var int ricelord_askedforwater_day;
 
 instance DIA_RICELORD_LEFTYSENTME(C_INFO)
 {
@@ -106,7 +109,7 @@ instance DIA_RICELORD_LEFTYSENTME(C_INFO)
 
 func int dia_ricelord_leftysentme_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_ricelord_hello) && (LEFTY_MISSION == LOG_RUNNING) && (RICELORD_ASKEDFORWATER == FALSE) && (LEFTYDEAD == FALSE))
+	if(Npc_KnowsInfo(hero,dia_ricelord_hello) && (LEFTY_MISSION == LOG_RUNNING) && (RICELORD_ASKEDFORWATER == FALSE) && (LEFTYDEAD == FALSE) && (RICELORD_ASKEDFORWATER_DAY != (Wld_GetDay() + 1)))
 	{
 		return 1;
 	};
@@ -142,12 +145,19 @@ func int dia_ricelord_getwater_condition()
 func void dia_ricelord_getwater_info()
 {
 	AI_Output(other,self,"DIA_Ricelord_GetWater_15_00");	//Я должен отнести крестьянам воды.
-	if(LEFTY_WORKDAY == Wld_GetDay())
+	if(Npc_IsDead(org_844_lefty))
+	{
+		AI_Output(self,other,"SVM_12_HeKilledHim");	//Ты убиваешь людей. Теперь у тебя большие неприятности!
+		RICELORD_ASKEDFORWATER = FALSE;
+		AI_StopProcessInfos(self);
+	}
+	else if(LEFTY_WORKDAY == Wld_GetDay())
 	{
 		AI_Output(self,other,"DIA_Ricelord_GetWater_12_01");	//Отлично. Держи. Дюжина бутылок с водой.
 		AI_Output(self,other,"DIA_Ricelord_GetWater_12_02");	//Крестьян там намного больше, так что следи, чтобы всем досталось поровну.
 		CreateInvItems(self,itfo_potion_water_01,12);
 		b_giveinvitems(self,other,itfo_potion_water_01,12);
+		RICELORD_ASKEDFORWATER_DAY = Wld_GetDay() + 1;
 		RICELORD_ASKEDFORWATER = FALSE;
 		b_logentry(CH1_CARRYWATER,"Лорд дал мне дюжину бутылок с водой.");
 		AI_StopProcessInfos(self);

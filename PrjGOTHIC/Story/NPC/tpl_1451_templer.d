@@ -5,7 +5,7 @@ instance TPL_1451_TEMPLER(NPC_DEFAULT)
 	npctype = NPCTYPE_GUARD;
 	guild = GIL_GUR;
 	level = 100;
-	voice = 8;
+	voice = 4;
 	id = 1451;
 	attribute[ATR_STRENGTH] = 70;
 	attribute[ATR_DEXTERITY] = 65;
@@ -19,9 +19,10 @@ instance TPL_1451_TEMPLER(NPC_DEFAULT)
 	protection[PROT_FIRE] = 80;
 	protection[PROT_FLY] = 80;
 	protection[PROT_MAGIC] = 70;
+	aivar[43] = TRUE;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Mage.mds");
-	Mdl_SetVisualBody(self,"hum_body_Naked0",1,1,"Hum_Head_Bald",117,2,tpl_armor_m);
+	Mdl_SetVisualBody(self,"hum_body_Naked0",1,1,"Hum_Head_Bald",117,2,tpl_armor_h);
 	b_scale(self);
 	Mdl_SetModelFatness(self,-1);
 	fight_tactic = FAI_HUMAN_STRONG;

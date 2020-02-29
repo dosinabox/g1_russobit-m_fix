@@ -55,3 +55,9 @@ func void rtn_start_1423()
 	ta_smalltalk(5,0,6,0,"PSI_SWAMP_1");
 };
 
+func void rtn_ritual_1423()
+{
+	ta_guard(8,0,13,0,"PSI_PATH_TEMPLE_8");
+	ta_guard(13,0,8,0,"PSI_PATH_TEMPLE_8");
+};
+

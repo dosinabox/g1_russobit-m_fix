@@ -16,7 +16,7 @@ func void b_stoppyro()
 	};
 };
 
-func int zs_pyro()
+func void zs_pyro()
 {
 	printdebugnpc(PD_ZS_FRAME,"ZS_Pyro");
 	Npc_PercEnable(self,PERC_ASSESSSTOPMAGIC,b_stoppyro);

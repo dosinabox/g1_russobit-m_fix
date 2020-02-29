@@ -25,7 +25,10 @@ func void zs_listen_loop()
 			{
 				printdebugnpc(PD_TA_CHECK,"...der nah genug ist!");
 				AI_TurnToNPC(self,other);
-				AI_PlayAniBS(self,"T_STAND_2_SIT",BS_SIT);
+				if(!c_bodystatecontains(self,BS_SIT))
+				{
+					AI_PlayAniBS(self,"T_STAND_2_SIT",BS_SIT);
+				};
 				c_lookatnpc(self,other);
 				self.aivar[AIV_FOUNDPERSON] = TRUE;
 			};

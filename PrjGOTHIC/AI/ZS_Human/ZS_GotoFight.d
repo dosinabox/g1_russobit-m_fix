@@ -3,7 +3,7 @@ func void b_stop()
 {
 	printdebugnpc(PD_ZS_FRAME,"B_Stop");
 	printglobals(PD_ZS_CHECK);
-	if(Npc_GetDistToNpc(self,other) < PERC_DIST_WATCHFIGHT)
+	if(Npc_GetDistToNpc(self,other) < PERC_DIST_WATCHFIGHT && self.id != 328)
 	{
 		printdebugnpc(PD_ZS_FRAME,"B_Stop To close");
 		Npc_ClearAIQueue(self);

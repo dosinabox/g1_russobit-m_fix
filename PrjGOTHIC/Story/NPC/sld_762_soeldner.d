@@ -15,7 +15,7 @@ instance SLD_762_SOELDNER(NPC_DEFAULT)
 	attribute[ATR_HITPOINTS] = 256;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Militia.mds");
-	Mdl_SetVisualBody(self,"hum_body_Naked0",0,1,"Hum_Head_Pony",53,1,sld_armor_m);
+	Mdl_SetVisualBody(self,"hum_body_Naked0",0,1,"Hum_Head_Bald",53,1,sld_armor_m);
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_STRONG;
@@ -25,15 +25,9 @@ instance SLD_762_SOELDNER(NPC_DEFAULT)
 	EquipItem(self,itmw_1h_mace_war_03);
 	EquipItem(self,itrw_bow_long_01);
 	CreateInvItems(self,itamarrow,20);
-	CreateInvItems(self,itforice,7);
 	CreateInvItems(self,itfoloaf,5);
 	CreateInvItems(self,itfomutton,4);
-	CreateInvItems(self,itminugget,18);
-	CreateInvItems(self,itfobooze,5);
-	CreateInvItems(self,itlstorch,5);
-	CreateInvItems(self,itfo_potion_health_02,7);
-	CreateInvItem(self,itmi_stuff_barbknife_01);
-	CreateInvItem(self,itmi_stuff_amphore_01);
+	CreateInvItems(self,itfo_potion_health_02,3);
 	daily_routine = rtn_fmcstart_762;
 };
 

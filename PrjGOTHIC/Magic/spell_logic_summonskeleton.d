@@ -15,10 +15,7 @@ func int spell_logic_summonskeleton(var int manainvested)
 			Wld_SpawnNpcRange(self,summonedbynpc_skeletonwarrior,1,500);
 		};
 		return SPL_SENDCAST;
-	}
-	else
-	{
-		return SPL_NEXTLEVEL;
 	};
+	return SPL_NEXTLEVEL;
 };
 

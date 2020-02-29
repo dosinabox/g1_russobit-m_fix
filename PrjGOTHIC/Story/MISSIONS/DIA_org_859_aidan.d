@@ -44,7 +44,7 @@ func void dia_aidan_hello_info()
 	AI_Output(other,self,"DIA_Aidan_Hello_15_02");	//За них хорошо платят?
 	AI_Output(self,other,"DIA_Aidan_Hello_13_03");	//Да, можно неплохо зарабатывать, если знать, как разделывать добычу.
 	Log_CreateTopic(GE_TEACHEROW,LOG_NOTE);
-	b_logentry(GE_TEACHEROW,"Айдан, охотник, живущий между Старым и Новым лагерями, может научить меня разделывать добычу.");
+	b_logentry(GE_TEACHEROW,"Эйдан, охотник, живущий между Старым и Новым лагерями, может научить меня разделывать добычу.");
 };
 
 
@@ -117,7 +117,7 @@ func void org_859_aidan_creatures_zahn()
 			AI_Output(self,other,"Org_859_Aidan_Creatures_Zahn_13_02");	//Лучше всего продаются клыки волков, глорхов и мракорисов.
 			KNOWS_GETTEETH = TRUE;
 			Log_CreateTopic(GE_ANIMALTROPHIES,LOG_NOTE);
-			b_logentry(GE_ANIMALTROPHIES,"Навык добычи клыков: волк, орочья собака, глорх, жерх, пес-кровосос, мракорис.");
+			b_logentry(GE_ANIMALTROPHIES,"Навык добычи клыков: волк, орочья собака, глорх, жерх, ищейка, мракорис.");
 		}
 		else
 		{

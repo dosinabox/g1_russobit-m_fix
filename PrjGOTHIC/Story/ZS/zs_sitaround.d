@@ -3,10 +3,11 @@ func void zs_sitaround()
 {
 	printdebugnpc(PD_TA_FRAME,"ZS_SitAround");
 	b_setperception(self);
-	if(Npc_GetDistToWP(self,self.wp) > PERC_DIST_FLEE)
+	if((Npc_GetDistToWP(self,self.wp) > PERC_DIST_FLEE) && (!c_bodystatecontains(self,BS_SIT)))
 	{
 		printdebugnpc(PD_TA_CHECK,"...zu weit weg vom TA-Startpunkt!");
 		AI_Standup(self);
+		AI_RemoveWeapon(self);
 		AI_SetWalkMode(self,NPC_WALK);
 		AI_GotoWP(self,self.wp);
 	};
@@ -19,6 +20,7 @@ func int zs_sitaround_loop()
 	if(!c_bodystatecontains(self,BS_SIT))
 	{
 		printdebugnpc(PD_TA_CHECK,"...NSC sitzt noch nicht!");
+		AI_RemoveWeapon(self);
 		if(Wld_IsMobAvailable(self,"BENCH"))
 		{
 			printdebugnpc(PD_TA_CHECK,"...Bank gefunden!");
@@ -37,20 +39,20 @@ func int zs_sitaround_loop()
 			AI_UseMob(self,"SMALL THRONE",1);
 			self.aivar[AIV_HANGAROUNDSTATUS] = 4;
 		}
-		else if(Wld_IsFPAvailable(self,"SIT"))
+		else
 		{
 			printdebugnpc(PD_TA_CHECK,"...FP 'SIT' gefunden!");
-			AI_GotoFP(self,"SIT");
+			//AI_GotoFP(self,"SIT");
 			AI_AlignToFP(self);
 			AI_PlayAniBS(self,"T_STAND_2_SIT",BS_SIT);
 			self.aivar[AIV_HANGAROUNDSTATUS] = 1;
-		}
-		else
-		{
-			printdebugnpc(PD_TA_CHECK,"...keine Sitzgelegenheit gefunden!");
-			AI_StartState(self,zs_standaround,1,"");
-			return LOOP_CONTINUE;
 		};
+		//else
+		//{
+			//printdebugnpc(PD_TA_CHECK,"...keine Sitzgelegenheit gefunden!");
+			//AI_StartState(self,zs_standaround,1,"");
+			//return LOOP_CONTINUE;
+		//};
 	}
 	else
 	{
@@ -114,7 +116,10 @@ func void zs_sitaround_end()
 	printdebugnpc(PD_TA_FRAME,"ZS_SitAround_End");
 	if(self.aivar[AIV_HANGAROUNDSTATUS] == 1)
 	{
-		AI_PlayAni(self,"T_SIT_2_STAND");
+		if(c_bodystatecontains(self,BS_SIT))
+		{
+			AI_PlayAni(self,"T_SIT_2_STAND");
+		};
 		self.aivar[AIV_HANGAROUNDSTATUS] = 0;
 	}
 	else if(self.aivar[AIV_HANGAROUNDSTATUS] == 4)

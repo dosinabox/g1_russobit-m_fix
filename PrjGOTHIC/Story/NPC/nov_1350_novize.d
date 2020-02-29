@@ -27,7 +27,7 @@ instance NOV_1350_NOVIZE(NPC_DEFAULT)
 
 func void rtn_start_1350()
 {
-	ta_guardpassage(8,0,20,0,"PSI_22_HUT_EX_GUARD");
-	ta_guardpassage(20,0,8,0,"PSI_22_HUT_EX_GUARD");
+	ta_guardpassage(8,0,23,0,"PSI_22_HUT_EX_GUARD");
+	ta_sleep(23,0,8,0,"PSI_22_HUT_IN");
 };
 

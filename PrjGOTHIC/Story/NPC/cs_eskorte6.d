@@ -7,7 +7,7 @@ instance CS_ESKORTE6(NPC_DEFAULT)
 	level = 5;
 	flags = 0;
 	voice = 11;
-	id = 3028;
+	id = 3030;
 	attribute[ATR_STRENGTH] = 13;
 	attribute[ATR_DEXTERITY] = 9;
 	attribute[ATR_MANA_MAX] = 0;

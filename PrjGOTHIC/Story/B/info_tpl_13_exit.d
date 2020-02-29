@@ -42,7 +42,7 @@ func void info_tpl_13_einervoneuchwerden_info()
 {
 	AI_Output(other,self,"Info_Tpl_13_EinerVonEuchWerden_15_00");	//я хочу быть —тражем, как ты.
 	AI_Output(self,other,"Info_Tpl_13_EinerVonEuchWerden_13_01");	//«наешь ли ты, что мне пришлось пережить, чтобы —п€щий избрал мен€ одним из своих стражей? “ебе этого пока не пон€ть.
-	AI_Output(self,other,"Info_Tpl_13_EinerVonEuchWerden_13_02");	//Ќе думай, что теб€ просто так, без доказательства твоей преданности, могут назначить на это почетное место. 
+	AI_Output(self,other,"Info_Tpl_13_EinerVonEuchWerden_13_02");	//Ќе думай, что теб€ просто так, без доказательства твоей преданности, могут назначить на это почетное место.
 	AI_Output(self,other,"Info_Tpl_13_EinerVonEuchWerden_13_03");	//—начала ты должен будешь познакомитьс€ с учением —п€щего.
 	AI_Output(self,other,"Info_Tpl_13_EinerVonEuchWerden_13_04");	//Ќа это уйдет некоторое врем€. Ёто избавит теб€ от глупостей, которые верт€тс€ в твоей голове.
 };

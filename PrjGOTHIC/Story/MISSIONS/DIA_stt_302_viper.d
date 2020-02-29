@@ -67,7 +67,7 @@ func int stt_302_viper_melt_condition()
 func void stt_302_viper_melt_info()
 {
 	AI_Output(other,self,"Stt_302_Viper_MELT_Info_15_01");	//я слышал, что в шахте переплавл€етс€ только часть руды.
-	AI_Output(self,other,"Stt_302_Viper_MELT_Info_11_02");	// огда-то мы переплавл€ли всю руду. Ќо √омез и маги решили, что так не пойдет. 
+	AI_Output(self,other,"Stt_302_Viper_MELT_Info_11_02");	// огда-то мы переплавл€ли всю руду. Ќо √омез и маги решили, что так не пойдет.
 	AI_Output(self,other,"Stt_302_Viper_MELT_Info_11_03");	//Ќесколько недель они что-то здесь изучали, рассматривали руду и все остальное.
 	AI_Output(self,other,"Stt_302_Viper_MELT_Info_11_04");	//ќни несли вс€кую чушь и совали свои благородные носы в те вещи, о которых не имели ни малейшего представлени€.
 	AI_Output(self,other,"Stt_302_Viper_MELT_Info_11_05");	//¬ итоге мы стали переплавл€ть только часть руды, а маги сюда больше не показывались.

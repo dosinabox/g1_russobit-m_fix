@@ -66,8 +66,7 @@ func int info_org_830_what_condition()
 func void info_org_830_what_info()
 {
 	AI_Output(other,self,"Info_ORG_830_What_15_00");	//Что ты здесь делаешь?
-	AI_Output(self,other,"Info_ORG_830_What_13_01");	//Только не думай, что я дам тебе затянуться... ничего не выйдет!
-	AI_Output(self,other,"Info_ORG_830_What_13_02");	//Нет. Делать мне больше нечего. И потом, такие как ты обычно не доставляют нам неприятностей.
+	AI_Output(self,other,"Info_ORG_830_What_13_01");	//Только не думай, что я дам тебе затянуться... ничего не выйдет!	
 };
 
 

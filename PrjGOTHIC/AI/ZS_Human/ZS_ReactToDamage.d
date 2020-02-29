@@ -8,6 +8,16 @@ func void zs_reacttodamage()
 	Npc_PercEnable(self,PERC_ASSESSMURDER,b_combatassessmurder);
 	Npc_PercEnable(self,PERC_ASSESSDEFEAT,b_combatassessdefeat);
 	b_whirlaround(self,other);
+	if(Hlp_GetInstanceID(org_858_quentin) == Hlp_GetInstanceID(self) || Hlp_GetInstanceID(org_869_raeuber) == Hlp_GetInstanceID(self) || Hlp_GetInstanceID(org_870_raeuber) == Hlp_GetInstanceID(self) || Hlp_GetInstanceID(org_865_raeuber) == Hlp_GetInstanceID(self) || Hlp_GetInstanceID(org_866_raeuber) == Hlp_GetInstanceID(self) || Hlp_GetInstanceID(org_864_raeuber) == Hlp_GetInstanceID(self))
+	{
+		b_setorg2hostile();
+		if(QUENTIN_GANG_QUEST_STARTED == LOG_RUNNING && !Npc_KnowsInfo(hero,dia_raven_quentin))
+		{
+			QUENTIN_GANG_QUEST_STARTED = LOG_FAILED;
+			Log_SetTopicStatus(QUENTIN_GANG,LOG_FAILED);
+			b_logentry(QUENTIN_GANG,"“еперь можно забыть о св€з€х с преступным миром!");
+		};
+	};
 	if(self.aivar[AIV_SPECIALCOMBATDAMAGEREACTION])
 	{
 		b_specialcombatdamagereaction();

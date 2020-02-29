@@ -56,3 +56,9 @@ func void rtn_start_1407()
 	ta_guard(5,0,6,0,"PSI_PATH_9_12");
 };
 
+func void rtn_remove_1407()
+{
+	ta_stay(23,0,7,45,"WP_INTRO01");
+	ta_stay(7,45,23,0,"WP_INTRO01");
+};
+

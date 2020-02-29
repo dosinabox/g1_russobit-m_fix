@@ -34,3 +34,9 @@ func void rtn_start_1436()
 	ta_smalltalk(12,0,24,0,"OM_CAVE1_56");
 };
 
+func void rtn_flee_1436()
+{
+	ta_stay(0,0,12,0,"WP_INTRO01");
+	ta_stay(12,0,24,0,"WP_INTRO01");
+};
+

@@ -7,7 +7,8 @@ instance ORG_843_SHARKY(NPC_DEFAULT)
 	level = 8;
 	voice = 10;
 	id = 843;
-	attribute[ATR_STRENGTH] = 40;
+	flags = NPC_FLAG_IMMORTAL;
+	attribute[ATR_STRENGTH] = 30;
 	attribute[ATR_DEXTERITY] = 30;
 	attribute[ATR_MANA_MAX] = 0;
 	attribute[ATR_MANA] = 0;
@@ -22,6 +23,7 @@ instance ORG_843_SHARKY(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_BOW,1);
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	b_give_sharkychapter1weapons();
+	EquipItem(self,tr_m_sharky);
 	CreateInvItems(self,itkelockpick,15);
 	CreateInvItems(self,itminugget,50);
 	CreateInvItems(self,itforice,10);

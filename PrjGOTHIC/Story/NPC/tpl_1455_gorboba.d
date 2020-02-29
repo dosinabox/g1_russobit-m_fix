@@ -19,6 +19,7 @@ instance TPL_1455_GORBOBA(NPC_DEFAULT)
 	protection[PROT_FIRE] = 50;
 	protection[PROT_FLY] = 80;
 	protection[PROT_MAGIC] = 75;
+	aivar[43] = TRUE;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Mage.mds");
 	Mdl_SetVisualBody(self,"hum_body_Naked0",1,1,"Hum_Head_Bald",117,2,tpl_armor_m);
@@ -30,6 +31,7 @@ instance TPL_1455_GORBOBA(NPC_DEFAULT)
 	CreateInvItem(self,itfosoup);
 	CreateInvItem(self,itmijoint_1);
 	CreateInvItem(self,itfo_potion_health_02);
+	CreateInvItem(self,itwrtemplemap);
 	daily_routine = rtn_ot_1455;
 };
 

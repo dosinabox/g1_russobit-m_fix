@@ -25,15 +25,9 @@ instance SLD_723_SOELDNER(NPC_DEFAULT)
 	EquipItem(self,itmw_1h_mace_war_03);
 	EquipItem(self,itrw_bow_long_01);
 	CreateInvItems(self,itamarrow,20);
-	CreateInvItems(self,itforice,7);
-	CreateInvItems(self,itfoloaf,6);
 	CreateInvItems(self,itfomutton,4);
 	CreateInvItems(self,itminugget,22);
-	CreateInvItems(self,itfobooze,5);
-	CreateInvItems(self,itlstorch,5);
 	CreateInvItems(self,itfo_potion_health_02,7);
-	CreateInvItem(self,itmi_stuff_barbknife_01);
-	CreateInvItem(self,itmi_stuff_amphore_01);
 	daily_routine = rtn_start_723;
 };
 
@@ -42,5 +36,11 @@ func void rtn_start_723()
 {
 	ta_guardpassage(8,0,22,0,"NC_GUARD_MAGES_LEFT");
 	ta_guardpassage(22,0,8,0,"NC_GUARD_MAGES_LEFT");
+};
+
+func void rtn_orealert_723()
+{
+	ta_guard(8,0,22,0,"NC_OREALERT_2");
+	ta_guard(22,0,8,0,"NC_OREALERT_2");
 };
 

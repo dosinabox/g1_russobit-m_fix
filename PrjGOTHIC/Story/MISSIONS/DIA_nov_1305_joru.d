@@ -120,7 +120,7 @@ instance DIA_JORU_JOINPSI(C_INFO)
 
 func int dia_joru_joinpsi_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_joru_greet) && (Npc_GetTrueGuild(hero) == GIL_NONE))
+	if(Npc_KnowsInfo(hero,dia_joru_greet) && (Npc_GetTrueGuild(hero) == GIL_NONE) && (KAPITEL < 2))
 	{
 		return 1;
 	};
@@ -139,16 +139,23 @@ func void dia_joru_joinpsi_info()
 
 func void dia_joru_joinpsi_ja()
 {
+	AI_Output(other,self,"Info_Swiney_Schuerfer_Ja_15_00");	//Да.
 	AI_Output(self,other,"DIA_Joru_JoinPsi_Ja_07_00");	//Если так, то он уже дал тебе дневную дозу болотника. Дай ее мне, я смогу помочь тебе.
 	AI_Output(other,self,"DIA_Joru_JoinPsi_Ja_15_01");	//Я подумаю.
+	AI_Output(self,other,"DIA_Joru_JointsRunning_NO_JOINTS_07_00");	//Три 'Северных темных', и я расскажу тебе все, что знаю.
 	JORU_BRINGJOINTS = LOG_RUNNING;
+	Log_CreateTopic(CH1_JOINPSI,LOG_MISSION);
+	Log_SetTopicStatus(CH1_JOINPSI,LOG_RUNNING);
+	b_logentry(CH1_JOINPSI,"Йору попросил меня отдать ему мою дневную порцию болотника, которую я могу получить у Фортуно.");
 	Info_ClearChoices(dia_joru_joinpsi);
 };
 
 func void dia_joru_joinpsi_nein()
 {
+	AI_Output(other,self,"Info_Swiney_Schuerfer_Nein_15_00");	//Нет.
 	AI_Output(self,other,"DIA_Joru_JoinPsi_Nein_07_00");	//Тогда пойди к нему и возьми свою дневную дозу. Если отдашь ее мне, я посмотрю, чем тебе можно помочь.
 	AI_Output(other,self,"DIA_Joru_JoinPsi_Nein_15_01");	//Я подумаю.
+	AI_Output(self,other,"DIA_Joru_JointsRunning_NO_JOINTS_07_00");	//Три 'Северных темных', и я расскажу тебе все, что знаю.
 	JORU_BRINGJOINTS = LOG_RUNNING;
 	Log_CreateTopic(CH1_JOINPSI,LOG_MISSION);
 	Log_SetTopicStatus(CH1_JOINPSI,LOG_RUNNING);
@@ -163,14 +170,14 @@ instance DIA_JORU_JOINTSRUNNING(C_INFO)
 	nr = 5;
 	condition = dia_joru_jointsrunning_condition;
 	information = dia_joru_jointsrunning_info;
-	permanent = 1;
+	permanent = 0;
 	description = "У меня есть болотник. Возьми его.";
 };
 
 
 func int dia_joru_jointsrunning_condition()
 {
-	if(JORU_BRINGJOINTS == LOG_RUNNING)
+	if(JORU_BRINGJOINTS == LOG_RUNNING && (Npc_HasItems(other,itmijoint_2) >= 3))
 	{
 		return 1;
 	};
@@ -179,18 +186,12 @@ func int dia_joru_jointsrunning_condition()
 func void dia_joru_jointsrunning_info()
 {
 	AI_Output(other,self,"DIA_Joru_JointsRunning_15_00");	//У меня есть болотник. Возьми его.
-	if(Npc_HasItems(other,itmijoint_2) >= 3)
-	{
-		AI_Output(self,other,"DIA_Joru_JointsRunning_07_01");	//Хорошо! Наверное, ты уже заметил, что ни один из Гуру не хочет с тобой разговаривать.
-		AI_Output(self,other,"DIA_Joru_JointsRunning_07_02");	//Они заговорят с тобой только тогда, когда ты сможешь произвести на них впечатление. Я могу рассказать тебе, как это сделать.
-		b_giveinvitems(other,self,itmijoint_2,3);
-		JORU_BRINGJOINTS = LOG_SUCCESS;
-		b_givexp(XP_WEEDFORJORU);
-	}
-	else
-	{
-		AI_Output(self,other,"DIA_Joru_JointsRunning_NO_JOINTS_07_00");	//Но только после того, как ты отдашь мне свою дневную дозу. Три 'Северных темных', и я расскажу тебе все, что знаю.
-	};
+	AI_Output(self,other,"DIA_Joru_JointsRunning_07_01");	//Хорошо! Наверное, ты уже заметил, что ни один из Гуру не хочет с тобой разговаривать.
+	AI_Output(self,other,"DIA_Joru_JointsRunning_07_02");	//Они заговорят с тобой только тогда, когда ты сможешь произвести на них впечатление. Я могу рассказать тебе, как это сделать.
+	b_giveinvitems(other,self,itmijoint_2,3);
+	b_logentry(CH1_JOINPSI,"Я отдал болотник Йору. Теперь посмотрим, чем он сможет мне помочь.");
+	JORU_BRINGJOINTS = LOG_SUCCESS;
+	b_givexp(XP_WEEDFORJORU);
 };
 
 
@@ -209,7 +210,7 @@ instance DIA_JORU_IMPRESSGURUS(C_INFO)
 
 func int dia_joru_impressgurus_condition()
 {
-	if(JORU_BRINGJOINTS == LOG_SUCCESS)
+	if(JORU_BRINGJOINTS == LOG_SUCCESS && KAPITEL < 2)
 	{
 		return 1;
 	};
@@ -248,7 +249,7 @@ instance DIA_JORU_GETMAGIC(C_INFO)
 
 func int dia_joru_getmagic_condition()
 {
-	if(JORU_TIPS == TRUE)
+	if(JORU_TIPS == TRUE && KAPITEL < 2)
 	{
 		return 1;
 	};
@@ -256,14 +257,14 @@ func int dia_joru_getmagic_condition()
 
 func void dia_joru_getmagic_info()
 {
+	AI_Output(other,self,"DIA_Joru_GetMagic_15_00");	//Где я могу найти магию Спящего?
+	AI_Output(self,other,"DIA_Joru_GetMagic_07_01");	//Идол Кадар продает руны и свитки. Но у тебя все равно не получиться их купить, если он не захочет с тобой разговаривать, верно?
+	AI_Output(self,other,"DIA_Joru_GetMagic_07_02");	//Может быть, тебе с этим поможет какой-нибудь другой Гуру.
 	if(JORU_TIPS_MAGE == FALSE)
 	{
 		Log_CreateTopic(GE_TRADERPSI,LOG_NOTE);
 		b_logentry(GE_TRADERPSI,"Идол Кадар продает руны и магические свитки.");
 		JORU_TIPS_MAGE = TRUE;
 	};
-	AI_Output(other,self,"DIA_Joru_GetMagic_15_00");	//Где я могу найти магию Спящего?
-	AI_Output(self,other,"DIA_Joru_GetMagic_07_01");	//Идол Кадар продает руны и свитки. Но у тебя все равно не получиться их купить, если он не захочет с тобой разговаривать, верно?
-	AI_Output(self,other,"DIA_Joru_GetMagic_07_02");	//Может быть, тебе с этим поможет какой-нибудь другой Гуру.
 };
 

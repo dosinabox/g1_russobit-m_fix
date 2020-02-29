@@ -34,6 +34,7 @@ func int zs_getbackitem_loop()
 	{
 		return 1;
 	};
+	return 0;
 };
 
 func void zs_getbackitem_end()
@@ -60,7 +61,7 @@ func void b_getbackitem_given()
 	printdebugnpc(PD_ZS_FRAME,"ZS_GetBackItem_Given");
 	if(self.aivar[AIV_WANTEDITEM] == Hlp_GetInstanceID(item))
 	{
-		printdebugnpc(PD_ZS_FRAME,"ZS_GetBackItem_Given // want this item cause it_s mine");
+		printdebugnpc(PD_ZS_FRAME,"ZS_GetBackItem_Given // want this item cause it´s mine");
 		Npc_ClearAIQueue(self);
 		Npc_GiveItem(other,item,self);
 		b_say(self,other,"$WISEMOVE");
@@ -70,18 +71,18 @@ func void b_getbackitem_given()
 	{
 		if(c_wantitem())
 		{
-			printdebugnpc(PD_ZS_FRAME,"ZS_GetBackItem_Given // want this cause it_s worthy");
+			printdebugnpc(PD_ZS_FRAME,"ZS_GetBackItem_Given // want this cause it´s worthy");
 			Npc_ClearAIQueue(self);
 			Npc_GiveItem(other,item,self);
 			b_say(self,other,"$OKAYTOO");
 		}
 		else
 		{
-			printdebugnpc(PD_ZS_FRAME,"ZS_GetBackItem_Given don_t want this crap");
+			printdebugnpc(PD_ZS_FRAME,"ZS_GetBackItem_Given don´t want this crap");
 			b_say(self,other,"$YOUWANNAFOOLME");
 			if(c_amistronger(self,other))
 			{
-				printdebugnpc(PD_ZS_FRAME,"ZS_GetBackItem_Given don_t want this crap // stronger");
+				printdebugnpc(PD_ZS_FRAME,"ZS_GetBackItem_Given don´t want this crap // stronger");
 				Npc_ClearAIQueue(self);
 				Npc_SetTarget(self,other);
 				AI_StartState(self,zs_attack,0,"");

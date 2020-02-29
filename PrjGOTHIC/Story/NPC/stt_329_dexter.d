@@ -7,6 +7,7 @@ instance STT_329_DEXTER(NPC_DEFAULT)
 	level = 7;
 	voice = 10;
 	id = 329;
+	flags = NPC_FLAG_IMMORTAL;
 	attribute[ATR_STRENGTH] = 30;
 	attribute[ATR_DEXTERITY] = 18;
 	attribute[ATR_MANA_MAX] = 0;
@@ -25,6 +26,8 @@ instance STT_329_DEXTER(NPC_DEFAULT)
 	EquipItem(self,itrw_bow_small_03);
 	CreateInvItems(self,itamarrow,15);
 	CreateInvItem(self,itwrworldmap);
+	CreateInvItem(self,alchemybook);
+	CreateInvItems(self,itmiflask,11);
 	CreateInvItems(self,itkelockpick,20);
 	CreateInvItems(self,itminugget,200);
 	CreateInvItems(self,itmijoint_1,23);
@@ -45,5 +48,11 @@ func void rtn_start_329()
 	ta_sitaround(8,15,11,0,"OCR_OUTSIDE_HUT_55");
 	ta_smalltalk(11,0,17,0,"OCR_OUTSIDE_HUT_47_SMALT1");
 	ta_standaround(17,0,23,30,"OCR_MARKETPLACE_SCAVENGER");
+};
+
+func void rtn_flee_329()
+{
+	ta_stay(23,0,7,45,"WP_INTRO01");
+	ta_stay(7,45,23,0,"WP_INTRO01");
 };
 

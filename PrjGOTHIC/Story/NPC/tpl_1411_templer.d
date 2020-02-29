@@ -33,3 +33,9 @@ func void rtn_start_1411()
 	ta_practicesword(6,0,0,0,"PSI_PATH_6_8");
 };
 
+func void rtn_remove_1411()
+{
+	ta_stay(23,0,16,0,"WP_INTRO01");
+	ta_stay(16,0,23,0,"WP_INTRO01");
+};
+

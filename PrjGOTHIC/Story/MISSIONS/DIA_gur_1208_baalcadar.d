@@ -1,4 +1,20 @@
 
+func void b_baalcadarlearn()
+{
+	Info_ClearChoices(gur_1208_baalcadar_teach);
+	Info_AddChoice(gur_1208_baalcadar_teach,DIALOG_BACK,gur_1208_baalcadar_teach_back);
+	if(hero.guild == GIL_NOV || hero.guild == GIL_TPL || hero.guild == GIL_GUR)
+	{
+		Info_AddChoice(gur_1208_baalcadar_teach,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),gur_1208_baalcadar_teach_man_5);
+		Info_AddChoice(gur_1208_baalcadar_teach,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),gur_1208_baalcadar_teach_man_1);
+	}
+	else
+	{
+		Info_AddChoice(gur_1208_baalcadar_teach,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,OTHERCAMPLEARNPAY * 5),gur_1208_baalcadar_teach_man_5);
+		Info_AddChoice(gur_1208_baalcadar_teach,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,OTHERCAMPLEARNPAY),gur_1208_baalcadar_teach_man_1);
+	};
+};
+
 instance DIA_BAALCADAR_EXIT(C_INFO)
 {
 	npc = gur_1208_baalcadar;
@@ -111,12 +127,12 @@ func void dia_baalcadar_sleepspell_info()
 	AI_Output(other,self,"DIA_BaalCadar_SleepSpell_15_02");	//Никто. Это было не слишком сложно.
 	AI_Output(self,other,"DIA_BaalCadar_SleepSpell_02_03");	//Думаю, ты обладаешь способностями к обучению. Я буду учить тебя.
 	BAALCADAR_ANSPRECHBAR = TRUE;
-	if(Npc_GetTrueGuild(hero) == GIL_NONE)
+	if((Npc_GetTrueGuild(hero) == GIL_NONE) && (KAPITEL < 2))
 	{
 		Log_CreateTopic(CH1_JOINPSI,LOG_MISSION);
 		Log_SetTopicStatus(CH1_JOINPSI,LOG_RUNNING);
+		b_logentry(CH1_JOINPSI,"Идол Кадар считает меня способным учеником!");
 	};
-	b_logentry(CH1_JOINPSI,"Идол Кадар считает меня способным учеником!");
 	b_givexp(XP_IMPRESSBAALCADAR);
 };
 
@@ -149,10 +165,7 @@ func void gur_1208_baalcadar_teach_info()
 		b_logentry(GE_TEACHERPSI,"Идол Кадар может помочь мне увеличить мою магическую силу.");
 		LOG_BAALCADARTRAIN = TRUE;
 	};
-	Info_ClearChoices(gur_1208_baalcadar_teach);
-	Info_AddChoice(gur_1208_baalcadar_teach,DIALOG_BACK,gur_1208_baalcadar_teach_back);
-	Info_AddChoice(gur_1208_baalcadar_teach,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),gur_1208_baalcadar_teach_man_5);
-	Info_AddChoice(gur_1208_baalcadar_teach,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),gur_1208_baalcadar_teach_man_1);
+	b_baalcadarlearn();
 };
 
 func void gur_1208_baalcadar_teach_back()
@@ -162,22 +175,45 @@ func void gur_1208_baalcadar_teach_back()
 
 func void gur_1208_baalcadar_teach_man_1()
 {
-	b_buyattributepoints(other,ATR_MANA_MAX,LPCOST_ATTRIBUTE_MANA);
-	Info_ClearChoices(gur_1208_baalcadar_teach);
-	Info_AddChoice(gur_1208_baalcadar_teach,DIALOG_BACK,gur_1208_baalcadar_teach_back);
-	Info_AddChoice(gur_1208_baalcadar_teach,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),gur_1208_baalcadar_teach_man_5);
-	Info_AddChoice(gur_1208_baalcadar_teach,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),gur_1208_baalcadar_teach_man_1);
+	if(hero.guild == GIL_NOV || hero.guild == GIL_TPL || hero.guild == GIL_GUR)
+	{
+		b_buyattributepoints(other,ATR_MANA_MAX,LPCOST_ATTRIBUTE_MANA);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY)
+	{
+		if(hero.lp >= 1 && hero.attribute[ATR_MANA_MAX] < 100)
+		{
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
+		};
+		b_buyattributepoints(other,ATR_MANA_MAX,LPCOST_ATTRIBUTE_MANA);
+	}
+	else
+	{
+		AI_Output(self,other,"SVM_2_ShitNoOre");	//Что, преследуют неудачи, приятель? Совсем нет руды?
+	};
+	b_baalcadarlearn();
 };
 
 func void gur_1208_baalcadar_teach_man_5()
 {
-	b_buyattributepoints(other,ATR_MANA_MAX,5 * LPCOST_ATTRIBUTE_MANA);
-	Info_ClearChoices(gur_1208_baalcadar_teach);
-	Info_AddChoice(gur_1208_baalcadar_teach,DIALOG_BACK,gur_1208_baalcadar_teach_back);
-	Info_AddChoice(gur_1208_baalcadar_teach,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),gur_1208_baalcadar_teach_man_5);
-	Info_AddChoice(gur_1208_baalcadar_teach,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),gur_1208_baalcadar_teach_man_1);
+	if(hero.guild == GIL_NOV || hero.guild == GIL_TPL || hero.guild == GIL_GUR)
+	{
+		b_buyattributepoints(other,ATR_MANA_MAX,5 * LPCOST_ATTRIBUTE_MANA);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY * 5)
+	{
+		if(hero.lp >= 5 && hero.attribute[ATR_MANA_MAX] < 96)
+		{
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
+		};
+		b_buyattributepoints(other,ATR_MANA_MAX,5 * LPCOST_ATTRIBUTE_MANA);
+	}
+	else
+	{
+		AI_Output(self,other,"SVM_2_ShitNoOre");	//Что, преследуют неудачи, приятель? Совсем нет руды?
+	};
+	b_baalcadarlearn();
 };
-
 
 instance GUR_1208_BAALCADAR_FIRSTTEST(C_INFO)
 {
@@ -234,7 +270,7 @@ func void gur_1208_baalcadar_kreis1_info()
 	{
 		AI_Output(self,other,"Gur_1208_BaalCadar_KREIS1_Info_02_02");	//Так слушай же меня.
 		AI_Output(self,other,"Gur_1208_BaalCadar_KREIS1_Info_02_03");	//В далекие времена появился Спящий, и послал он роду человеческому видение.
-		AI_Output(self,other,"Gur_1208_BaalCadar_KREIS1_Info_02_04");	//Людей ослепляло корыстолюбие, и своими алчными взорами не увидели они его. 
+		AI_Output(self,other,"Gur_1208_BaalCadar_KREIS1_Info_02_04");	//Людей ослепляло корыстолюбие, и своими алчными взорами не увидели они его.
 		AI_Output(self,other,"Gur_1208_BaalCadar_KREIS1_Info_02_05");	//Лишь Юберион и с ним несколько избранных отделились от слепой толпы и основали Братство.
 		AI_Output(self,other,"Gur_1208_BaalCadar_KREIS1_Info_02_06");	//В тот момент, когда они последовали зову Спящего, был рожден Первый Круг. Магия рун покорится тому, кто идет за Спящим.
 		gur_1208_baalcadar_kreis1.permanent = 0;

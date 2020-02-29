@@ -273,7 +273,7 @@ instance SPELL_HEAL(C_SPELL_PROTO)
 instance SPELL_TRANSFORM(C_SPELL_PROTO)
 {
 	time_per_mana = 250;
-	spelltype = SPELL_BAD;
+	spelltype = SPELL_NEUTRAL;
 	targetcollectalgo = TARGET_COLLECT_NONE;
 	canturnduringinvest = 0;
 	targetcollectrange = 0;
@@ -435,7 +435,7 @@ instance SPELL_TELEKINESIS(C_SPELL_PROTO)
 instance SPELL_CHARM(C_SPELL_PROTO)
 {
 	time_per_mana = 250;
-	spelltype = SPELL_BAD;
+	spelltype = SPELL_NEUTRAL;
 	targetcollectalgo = TARGET_COLLECT_FOCUS;
 	targetcollectrange = 1000;
 	targetcollecttype = TARGET_TYPE_HUMANS;

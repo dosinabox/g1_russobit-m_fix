@@ -33,3 +33,9 @@ func void rtn_start_1419()
 	ta_practicesword(6,10,23,0,"PSI_TRAINING_8");
 };
 
+func void rtn_remove_1419()
+{
+	ta_stay(23,0,16,0,"WP_INTRO01");
+	ta_stay(16,0,23,0,"WP_INTRO01");
+};
+

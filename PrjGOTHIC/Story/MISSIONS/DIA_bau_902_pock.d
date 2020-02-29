@@ -37,7 +37,9 @@ instance INFO_POCK_WASSER(C_INFO)
 
 func int info_pock_wasser_condition()
 {
-	if(((LEFTY_MISSION == LOG_RUNNING) || ((LEFTY_MISSION == LOG_SUCCESS) && Npc_HasItems(other,itfo_potion_water_01))) && (self.aivar[AIV_DEALDAY] <= Wld_GetDay()))
+	var C_NPC lefty;
+	lefty = Hlp_GetNpc(org_844_lefty);
+	if(((LEFTY_MISSION == LOG_RUNNING) || ((LEFTY_MISSION == LOG_SUCCESS) && Npc_HasItems(other,itfo_potion_water_01))) && (self.aivar[AIV_DEALDAY] <= Wld_GetDay()) && (lefty.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -179,5 +181,66 @@ func void dia_pock_forgotall_info()
 	AI_Output(other,self,"DIA_Pock_ForgotAll_15_02");	//Эй, мы, кажется, уже разговаривали с тобой!
 	AI_Output(self,other,"DIA_Pock_ForgotAll_04_03");	//Нет! Неправда, быть того не может! Я тебя раньше здесь не видел.
 	AI_Output(other,self,"DIA_Pock_ForgotAll_15_04");	//Да, конечно...
+};
+
+instance INFO_POCK_WASSER_NOLEFTY(C_INFO)
+{
+	npc = bau_902_pock;
+	nr = 800;
+	condition = info_pock_wasser_nolefty_condition;
+	information = info_pock_wasser_nolefty_info;
+	permanent = 1;
+	description = "Я принес тебе воды.";
+};
+
+func int info_pock_wasser_nolefty_condition()
+{
+	var C_NPC lefty;
+	lefty = Hlp_GetNpc(org_844_lefty);
+	if(Npc_HasItems(other,itfo_potion_water_01) && (lefty.aivar[AIV_WASDEFEATEDBYSC] == TRUE) && (self.aivar[AIV_DEALDAY] <= Wld_GetDay()))
+	{
+		return 1;
+	};
+};
+
+func void info_pock_wasser_nolefty_info()
+{
+	AI_Output(other,self,"Info_Wasser_NoLefty");	//Я принес тебе воды.
+	AI_Output(self,other,"SVM_4_YeahWellDone");	//Отлично!
+	self.aivar[AIV_DEALDAY] = Wld_GetDay() + 1;
+	b_giveinvitems(other,self,itfo_potion_water_01,1);
+	if(c_bodystatecontains(self,BS_SIT))
+	{
+		AI_Standup(self);
+		AI_TurnToNPC(self,hero);
+	};
+	AI_UseItem(self,itfo_potion_water_01);
+};
+
+instance DIA_POCK_HELLO2(C_INFO)
+{
+	npc = bau_902_pock;
+	nr = 1;
+	condition = dia_pock_hello2_condition;
+	information = dia_pock_hello2_info;
+	permanent = 0;
+	important = 1;
+};
+
+
+func int dia_pock_hello2_condition()
+{
+	var C_NPC lefty;
+	lefty = Hlp_GetNpc(org_844_lefty);
+	if(lefty.aivar[AIV_WASDEFEATEDBYSC] == TRUE)
+	{
+		return 1;
+	};
+};
+
+func void dia_pock_hello2_info()
+{
+	AI_Output(self,other,"SVM_4_ItWasAGoodFight");	//Раньше даже сражались лучше, чем сейчас.
+	AI_StopProcessInfos(self);
 };
 

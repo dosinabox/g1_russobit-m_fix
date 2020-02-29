@@ -54,7 +54,7 @@ func void b_givedeathinv()
 		{
 			CreateInvItems(self,itat_claws_01,2);
 		};
-		if(self.aivar[AIV_IMPORTANT] == ID_LURKER)
+		if(self.aivar[AIV_IMPORTANT] == ID_LURKER && self.level == 17)
 		{
 			CreateInvItems(self,itat_lurker_01,2);
 		};

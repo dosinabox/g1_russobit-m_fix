@@ -36,3 +36,9 @@ func void rtn_start_572()
 	ta_sitaround(17,0,22,30,"OCR_AUDIENCE_01");
 };
 
+func void rtn_watch_572()
+{
+	ta_boss(22,30,6,0,"OCR_AUDIENCE_01");
+	ta_boss(6,0,22,30,"OCR_AUDIENCE_01");
+};
+

@@ -133,7 +133,7 @@ instance ITRW_BOW_LONG_01(C_ITEM)
 
 instance ITRW_BOW_LONG_02(C_ITEM)
 {
-	name = "Стремительный лук";
+	name = "Осиновый лук";
 	mainflag = ITEM_KAT_FF;
 	flags = ITEM_BOW;
 	material = MAT_WOOD;
@@ -155,7 +155,7 @@ instance ITRW_BOW_LONG_02(C_ITEM)
 
 instance ITRW_BOW_LONG_03(C_ITEM)
 {
-	name = "Пастуший лук";
+	name = "Ивовый лук";
 	mainflag = ITEM_KAT_FF;
 	flags = ITEM_BOW;
 	material = MAT_WOOD;
@@ -287,7 +287,7 @@ instance ITRW_BOW_LONG_08(C_ITEM)
 
 instance ITRW_BOW_LONG_09(C_ITEM)
 {
-	name = "Нимродер";
+	name = "Нимрод";
 	mainflag = ITEM_KAT_FF;
 	flags = ITEM_BOW;
 	material = MAT_WOOD;
@@ -297,7 +297,7 @@ instance ITRW_BOW_LONG_09(C_ITEM)
 	munition = itamarrow;
 	cond_atr[2] = ATR_DEXTERITY;
 	cond_value[2] = 36;
-	visual = "ItRw_Bow_Long_08.mms";
+	visual = "ItRw_Bow_Long_09.mms";
 	description = name;
 	text[2] = NAME_DAMAGE;
 	count[2] = damagetotal;
@@ -375,7 +375,7 @@ instance ITRW_BOW_WAR_03(C_ITEM)
 
 instance ITRW_BOW_WAR_04(C_ITEM)
 {
-	name = "Лук демонов";
+	name = "Лук демона";
 	mainflag = ITEM_KAT_FF;
 	flags = ITEM_BOW;
 	material = MAT_WOOD;
@@ -407,7 +407,7 @@ instance ITRW_BOW_WAR_05(C_ITEM)
 	munition = itamarrow;
 	cond_atr[2] = ATR_DEXTERITY;
 	cond_value[2] = 50;
-	visual = "ItRw_Bow_War_04.mms";
+	visual = "ItRw_Bow_War_05.mms";
 	description = name;
 	text[2] = NAME_DAMAGE;
 	count[2] = damagetotal;

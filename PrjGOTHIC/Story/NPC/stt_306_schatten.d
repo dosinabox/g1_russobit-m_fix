@@ -34,7 +34,14 @@ func void rtn_start_306()
 {
 	ta_sleep(23,0,8,5,"OCR_HUT_27");
 	ta_smalltalk(8,5,17,0,"OCR_OUTSIDE_HUT_27_MOVEMENT");
-	ta_sitaround(17,0,19,5,"OCR_OUTSIDE_ARENA_HANGAROUND");
-	ta_arenaspectator(19,5,23,0,"OCR_ARENA_07");
+	ta_sitaround(17,0,19,0,"OCR_OUTSIDE_ARENA_HANGAROUND");
+	ta_arenaspectator(19,0,23,0,"OCR_ARENA_07");
+};
+
+func void rtn_noarena_306()
+{
+	ta_sleep(23,0,8,5,"OCR_HUT_27");
+	ta_smalltalk(8,5,17,0,"OCR_OUTSIDE_HUT_27_MOVEMENT");
+	ta_sitaround(17,0,23,0,"OCR_OUTSIDE_ARENA_HANGAROUND");
 };
 

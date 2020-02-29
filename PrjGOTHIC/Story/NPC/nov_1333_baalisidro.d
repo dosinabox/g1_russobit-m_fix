@@ -22,8 +22,6 @@ instance NOV_1333_BAALISIDRO(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	EquipItem(self,itmw_1h_axe_old_01);
 	CreateInvItems(self,itmijoint_1,10);
-	CreateInvItems(self,itmijoint_2,20);
-	CreateInvItems(self,itmijoint_3,20);
 	daily_routine = rtn_start_1333;
 };
 
@@ -32,5 +30,11 @@ func void rtn_start_1333()
 {
 	ta_sitaround(8,0,20,0,"NC_TAVERN_SIT2");
 	ta_sitaround(20,0,8,0,"NC_TAVERN_SIT2");
+};
+
+func void rtn_ch5_1333()
+{
+	ta_herbalchemy(7,5,0,5,"PSI_HERB_PLACE_3");
+	ta_sleep(0,5,7,5,"PSI_6_HUT_IN_BED1");
 };
 

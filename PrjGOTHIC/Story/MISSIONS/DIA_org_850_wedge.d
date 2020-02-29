@@ -1,4 +1,65 @@
 
+func void b_wedgelearn()
+{
+	Info_ClearChoices(dia_wedge_lehrer);
+	Info_AddChoice(dia_wedge_lehrer,DIALOG_BACK,dia_wedge_lehrer_back);
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKPOCKET) == 1)
+	{
+		if(hero.guild == GIL_ORG)
+		{
+			Info_AddChoice(dia_wedge_lehrer,b_buildlearnstring(NAME_LEARNPICKPOCKET_2,10,0),dia_wedge_lehrer_pickpocket2);
+		}
+		else
+		{
+			Info_AddChoice(dia_wedge_lehrer,b_buildlearnstring(NAME_LEARNPICKPOCKET_2,LPCOST_TALENT_PICKPOCKET_2,200),dia_wedge_lehrer_pickpocket2);
+		};
+	};
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKPOCKET) == 0)
+	{
+		if(hero.guild == GIL_ORG)
+		{
+			Info_AddChoice(dia_wedge_lehrer,b_buildlearnstring(NAME_LEARNPICKPOCKET_1,5,0),dia_wedge_lehrer_pickpocket);
+		}
+		else
+		{
+			Info_AddChoice(dia_wedge_lehrer,b_buildlearnstring(NAME_LEARNPICKPOCKET_1,LPCOST_TALENT_PICKPOCKET_1,100),dia_wedge_lehrer_pickpocket);
+		};
+	};
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) == 1)
+	{
+		if(hero.guild == GIL_ORG)
+		{
+			Info_AddChoice(dia_wedge_lehrer,b_buildlearnstring(NAME_LEARNPICKLOCK_2,10,0),dia_wedge_lehrer_lockpick2);
+		}
+		else
+		{
+			Info_AddChoice(dia_wedge_lehrer,b_buildlearnstring(NAME_LEARNPICKLOCK_2,LPCOST_TALENT_PICKLOCK_2,200),dia_wedge_lehrer_lockpick2);
+		};
+	};
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) == 0)
+	{
+		if(hero.guild == GIL_ORG)
+		{
+			Info_AddChoice(dia_wedge_lehrer,b_buildlearnstring(NAME_LEARNPICKLOCK_1,5,0),dia_wedge_lehrer_lockpick);
+		}
+		else
+		{
+			Info_AddChoice(dia_wedge_lehrer,b_buildlearnstring(NAME_LEARNPICKLOCK_1,LPCOST_TALENT_PICKLOCK_1,100),dia_wedge_lehrer_lockpick);
+		};
+	};
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_SNEAK) == 0)
+	{
+		if(hero.guild == GIL_ORG)
+		{
+			Info_AddChoice(dia_wedge_lehrer,b_buildlearnstring(NAME_LEARNSNEAK,5,0),dia_wedge_lehrer_schleichen);
+		}
+		else
+		{
+			Info_AddChoice(dia_wedge_lehrer,b_buildlearnstring(NAME_LEARNSNEAK,LPCOST_TALENT_SNEAK,100),dia_wedge_lehrer_schleichen);
+		};
+	};
+};
+
 instance DIA_WEDGE_EXIT(C_INFO)
 {
 	npc = org_850_wedge;
@@ -132,61 +193,121 @@ func void dia_wedge_lehrer_info()
 		LOG_WEDGELEARN = TRUE;
 	};
 	AI_Output(other,self,"DIA_Wedge_Lehrer_15_00");	//Ты можешь научить меня чему-нибудь?
-	AI_Output(self,other,"DIA_Wedge_Lehrer_05_01");	//Зависит от того, что ты хочешь узнать!
-	Info_ClearChoices(dia_wedge_lehrer);
-	Info_AddChoice(dia_wedge_lehrer,DIALOG_BACK,dia_wedge_lehrer_back);
-	if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKPOCKET) == 1)
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKPOCKET) < 2 || Npc_GetTalentSkill(hero,NPC_TALENT_SNEAK) == 0 || Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) < 2)
 	{
-		Info_AddChoice(dia_wedge_lehrer,b_buildlearnstring(NAME_LEARNPICKPOCKET_2,LPCOST_TALENT_PICKPOCKET_2,0),dia_wedge_lehrer_pickpocket2);
-	};
-	if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKPOCKET) == 0)
+		AI_Output(self,other,"DIA_Wedge_Lehrer_05_01");	//Зависит от того, что ты хочешь узнать!
+		b_wedgelearn();
+	}
+	else
 	{
-		Info_AddChoice(dia_wedge_lehrer,b_buildlearnstring(NAME_LEARNPICKPOCKET_1,LPCOST_TALENT_PICKPOCKET_1,0),dia_wedge_lehrer_pickpocket);
-	};
-	if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) == 1)
-	{
-		Info_AddChoice(dia_wedge_lehrer,b_buildlearnstring(NAME_LEARNPICKLOCK_2,LPCOST_TALENT_PICKLOCK_2,0),dia_wedge_lehrer_lockpick2);
-	};
-	if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) == 0)
-	{
-		Info_AddChoice(dia_wedge_lehrer,b_buildlearnstring(NAME_LEARNPICKLOCK_1,LPCOST_TALENT_PICKLOCK_1,0),dia_wedge_lehrer_lockpick);
-	};
-	if(Npc_GetTalentSkill(hero,NPC_TALENT_SNEAK) == 0)
-	{
-		Info_AddChoice(dia_wedge_lehrer,b_buildlearnstring(NAME_LEARNSNEAK,LPCOST_TALENT_SNEAK,0),dia_wedge_lehrer_schleichen);
+		AI_Output(self,other,"SVM_5_NoLearnOverMax");	//Ты выучил все, что нужно. Тебе стоит поучиться чему-нибудь еще.
 	};
 };
 
 func void dia_wedge_lehrer_schleichen()
 {
 	AI_Output(other,self,"DIA_Wedge_Lehrer_Schleichen_15_00");	//Я хочу научиться подкрадываться.
-	if(b_giveskill(other,NPC_TALENT_SNEAK,1,LPCOST_TALENT_SNEAK))
+	if(hero.guild == GIL_ORG)
 	{
-		AI_Output(self,other,"DIA_Wedge_Lehrer_Schleichen_05_01");	//Все решает твое умение сохранять равновесие. Так же немаловажно контролировать свое дыхание.
-		AI_Output(self,other,"DIA_Wedge_Lehrer_Schleichen_05_02");	//Существует особый способ движения, при котором никто не сможет услышать твоих шагов.
+		if(b_giveskill(other,NPC_TALENT_SNEAK,1,5))
+		{
+			AI_Output(self,other,"DIA_Wedge_Lehrer_Schleichen_05_01");	//Все решает твое умение сохранять равновесие. Так же немаловажно контролировать свое дыхание.
+			AI_Output(self,other,"DIA_Wedge_Lehrer_Schleichen_05_02");	//Существует особый способ движения, при котором никто не сможет услышать твоих шагов.
+		};
+	}
+	else
+	{
+		if(Npc_HasItems(hero,itminugget) >= 100)
+		{
+			if(hero.lp >= LPCOST_TALENT_SNEAK)
+			{
+				b_giveinvitems(other,self,itminugget,100);
+			};
+			if(b_giveskill(other,NPC_TALENT_SNEAK,1,LPCOST_TALENT_SNEAK))
+			{
+				AI_Output(self,other,"DIA_Wedge_Lehrer_Schleichen_05_01");	//Все решает твое умение сохранять равновесие. Так же немаловажно контролировать свое дыхание.
+				AI_Output(self,other,"DIA_Wedge_Lehrer_Schleichen_05_02");	//Существует особый способ движения, при котором никто не сможет услышать твоих шагов.
+			};
+		}
+		else
+		{
+			AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+			AI_Output(self,other,"SVM_5_NotNow");	//У меня нет времени.
+		};
 	};
+	b_wedgelearn();
 };
 
 func void dia_wedge_lehrer_lockpick()
 {
 	AI_Output(other,self,"DIA_Wedge_Lehrer_Lockpick_15_00");	//Я хочу научиться виртуозно вскрывать замки.
-	if(b_giveskill(other,NPC_TALENT_PICKLOCK,1,LPCOST_TALENT_PICKLOCK_1))
+	if(hero.guild == GIL_ORG)
 	{
-		AI_Output(self,other,"DIA_Wedge_Lehrer_Lockpick_05_01");	//Ты ведь хотел бы это узнать, да? Научиться этому не очень сложно.
-		AI_Output(self,other,"DIA_Wedge_Lehrer_Lockpick_05_02");	//Очень важно следить за тем, чтобы у тебя не сломалась отмычка.
-		AI_Output(self,other,"DIA_Wedge_Lehrer_Lockpick_05_03");	//Если ты будешь действовать очень осторожно, ты заметишь, что во многих случаях тебе не понадобится больше одной отмычки.
+		if(b_giveskill(other,NPC_TALENT_PICKLOCK,1,5))
+		{
+			AI_Output(self,other,"DIA_Wedge_Lehrer_Lockpick_05_01");	//Ты ведь хотел бы это узнать, да? Научиться этому не очень сложно.
+			AI_Output(self,other,"DIA_Wedge_Lehrer_Lockpick_05_02");	//Очень важно следить за тем, чтобы у тебя не сломалась отмычка.
+			AI_Output(self,other,"DIA_Wedge_Lehrer_Lockpick_05_03");	//Если ты будешь действовать очень осторожно, ты заметишь, что во многих случаях тебе не понадобится больше одной отмычки.
+		};
+	}
+	else
+	{
+		if(Npc_HasItems(hero,itminugget) >= 100)
+		{
+			if(hero.lp >= LPCOST_TALENT_PICKLOCK_1)
+			{
+				b_giveinvitems(other,self,itminugget,100);
+			};
+			if(b_giveskill(other,NPC_TALENT_PICKLOCK,1,LPCOST_TALENT_PICKLOCK_1))
+			{
+				AI_Output(self,other,"DIA_Wedge_Lehrer_Lockpick_05_01");	//Ты ведь хотел бы это узнать, да? Научиться этому не очень сложно.
+				AI_Output(self,other,"DIA_Wedge_Lehrer_Lockpick_05_02");	//Очень важно следить за тем, чтобы у тебя не сломалась отмычка.
+				AI_Output(self,other,"DIA_Wedge_Lehrer_Lockpick_05_03");	//Если ты будешь действовать очень осторожно, ты заметишь, что во многих случаях тебе не понадобится больше одной отмычки.
+			};
+		}
+		else
+		{
+			AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+			AI_Output(self,other,"SVM_5_NotNow");	//У меня нет времени.
+		};
 	};
+	b_wedgelearn();
 };
 
 func void dia_wedge_lehrer_lockpick2()
 {
 	AI_Output(other,self,"DIA_Wedge_Lehrer_Lockpick2_15_00");	//Я хочу стать мастером взлома замков.
-	if(b_giveskill(other,NPC_TALENT_PICKLOCK,2,LPCOST_TALENT_PICKLOCK_2))
+	if(hero.guild == GIL_ORG)
 	{
-		AI_Output(self,other,"DIA_Wedge_Lehrer_Lockpick2_05_01");	//Стоит немного потренироваться, и ты уже с легкостью будешь распознавать момент, когда отмычка готова вот-вот сломаться. При этом ты услышишь особый звук.
-		AI_Output(self,other,"DIA_Wedge_Lehrer_Lockpick2_05_02");	//С опытом к тебе придет умение различать щелчки в замке при повороте отмычки. При этом ты будешь ломать их гораздо реже.
-		AI_Output(self,other,"DIA_Wedge_Lehrer_Lockpick2_05_03");	//Настоящему профессионалу часто удается открыть замок, не сломав ни одной отмычки.
+		if(b_giveskill(other,NPC_TALENT_PICKLOCK,2,10))
+		{
+			AI_Output(self,other,"DIA_Wedge_Lehrer_Lockpick2_05_01");	//Стоит немного потренироваться, и ты уже с легкостью будешь распознавать момент, когда отмычка готова вот-вот сломаться. При этом ты услышишь особый звук.
+			AI_Output(self,other,"DIA_Wedge_Lehrer_Lockpick2_05_02");	//С опытом к тебе придет умение различать щелчки в замке при повороте отмычки. При этом ты будешь ломать их гораздо реже.
+			AI_Output(self,other,"DIA_Wedge_Lehrer_Lockpick2_05_03");	//Настоящему профессионалу часто удается открыть замок, не сломав ни одной отмычки.
+		};
+	}
+	else
+	{
+		if(Npc_HasItems(hero,itminugget) >= 200)
+		{
+			if(b_giveskill(other,NPC_TALENT_PICKLOCK,2,LPCOST_TALENT_PICKLOCK_2))
+			{
+				if(hero.lp >= LPCOST_TALENT_PICKLOCK_2)
+				{
+					b_giveinvitems(other,self,itminugget,200);
+				};
+				AI_Output(self,other,"DIA_Wedge_Lehrer_Lockpick2_05_01");	//Стоит немного потренироваться, и ты уже с легкостью будешь распознавать момент, когда отмычка готова вот-вот сломаться. При этом ты услышишь особый звук.
+				AI_Output(self,other,"DIA_Wedge_Lehrer_Lockpick2_05_02");	//С опытом к тебе придет умение различать щелчки в замке при повороте отмычки. При этом ты будешь ломать их гораздо реже.
+				AI_Output(self,other,"DIA_Wedge_Lehrer_Lockpick2_05_03");	//Настоящему профессионалу часто удается открыть замок, не сломав ни одной отмычки.
+			};
+		}
+		else
+		{
+			AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+			AI_Output(self,other,"SVM_5_NotNow");	//У меня нет времени.
+		};
 	};
+	b_wedgelearn();
 };
 
 func void dia_wedge_lehrer_pickpocket()
@@ -194,29 +315,80 @@ func void dia_wedge_lehrer_pickpocket()
 	AI_Output(other,self,"DIA_Wedge_Lehrer_PICKPOCKET_15_00");	//Я хочу стать опытным карманником.
 	if(Npc_GetTalentSkill(other,NPC_TALENT_SNEAK) == 1)
 	{
-		if(b_giveskill(other,NPC_TALENT_PICKPOCKET,1,LPCOST_TALENT_PICKPOCKET_1))
+		if(hero.guild == GIL_ORG)
 		{
-			AI_Output(self,other,"DIA_Wedge_Lehrer_PICKPOCKET_05_01");	//Так ты хочешь облегчать кошельки местных богачей, да? Что ж.
-			AI_Output(self,other,"DIA_Wedge_Lehrer_PICKPOCKET_05_02");	//Я научу тебя этому, но у вора всегда есть небольшой шанс быть застигнутым на месте преступления.
-			AI_Output(self,other,"DIA_Wedge_Lehrer_PICKPOCKET_05_03");	//Риск будет оправдан только в том случае, если ты остаешься один на один со своей жертвой.
-			AI_Output(self,other,"DIA_Wedge_Lehrer_PICKPOCKET_05_04");	//Но только профессиональный вор может совершенно незаметно вытащить что-нибудь ценное из кармана зазевавшегося прохожего!
+			if(b_giveskill(other,NPC_TALENT_PICKPOCKET,1,5))
+			{
+				AI_Output(self,other,"DIA_Wedge_Lehrer_PICKPOCKET_05_01");	//Так ты хочешь облегчать кошельки местных богачей, да? Что ж.
+				AI_Output(self,other,"DIA_Wedge_Lehrer_PICKPOCKET_05_02");	//Я научу тебя этому, но у вора всегда есть небольшой шанс быть застигнутым на месте преступления.
+				AI_Output(self,other,"DIA_Wedge_Lehrer_PICKPOCKET_05_03");	//Риск будет оправдан только в том случае, если ты остаешься один на один со своей жертвой.
+				AI_Output(self,other,"DIA_Wedge_Lehrer_PICKPOCKET_05_04");	//Но только профессиональный вор может совершенно незаметно вытащить что-нибудь ценное из кармана зазевавшегося прохожего!
+			};
+		}
+		else
+		{
+			if(Npc_HasItems(hero,itminugget) >= 100)
+			{
+				if(hero.lp >= LPCOST_TALENT_PICKPOCKET_1)
+				{
+					b_giveinvitems(other,self,itminugget,100);
+				};
+				if(b_giveskill(other,NPC_TALENT_PICKPOCKET,1,LPCOST_TALENT_PICKPOCKET_1))
+				{
+					AI_Output(self,other,"DIA_Wedge_Lehrer_PICKPOCKET_05_01");	//Так ты хочешь облегчать кошельки местных богачей, да? Что ж.
+					AI_Output(self,other,"DIA_Wedge_Lehrer_PICKPOCKET_05_02");	//Я научу тебя этому, но у вора всегда есть небольшой шанс быть застигнутым на месте преступления.
+					AI_Output(self,other,"DIA_Wedge_Lehrer_PICKPOCKET_05_03");	//Риск будет оправдан только в том случае, если ты остаешься один на один со своей жертвой.
+					AI_Output(self,other,"DIA_Wedge_Lehrer_PICKPOCKET_05_04");	//Но только профессиональный вор может совершенно незаметно вытащить что-нибудь ценное из кармана зазевавшегося прохожего!
+				};
+			}
+			else
+			{
+				AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+				AI_Output(self,other,"SVM_5_NotNow");	//У меня нет времени.
+			};
 		};
 	}
 	else
 	{
 		AI_Output(self,other,"DIA_Wedge_lehrer_Pickpocket_05_05");	//Даже не думай об этом! Тот, кто не умеет подкрадываться, никогда не станет вором.
 	};
+	b_wedgelearn();
 };
 
 func void dia_wedge_lehrer_pickpocket2()
 {
 	AI_Output(other,self,"DIA_Wedge_Lehrer_Pickpocket2_15_00");	//Я хочу стать мастером-карманником.
-	if(b_giveskill(other,NPC_TALENT_PICKPOCKET,2,LPCOST_TALENT_PICKPOCKET_2))
+	if(hero.guild == GIL_ORG)
 	{
-		AI_Output(self,other,"DIA_Wedge_Lehrer_Pickpocket2_05_01");	//Думаю, ты уже готов к тому, чтобы я посвятил тебя в секреты настоящего мастерства.
-		AI_Output(self,other,"DIA_Wedge_Lehrer_Pickpocket2_05_02");	//Но знай, что даже самого лучше вора могут застать на месте преступления.
-		AI_Output(self,other,"DIA_Wedge_Lehrer_Pickpocket2_05_03");	//Будь осторожен.
+		if(b_giveskill(other,NPC_TALENT_PICKPOCKET,2,10))
+		{
+			AI_Output(self,other,"DIA_Wedge_Lehrer_Pickpocket2_05_01");	//Думаю, ты уже готов к тому, чтобы я посвятил тебя в секреты настоящего мастерства.
+			AI_Output(self,other,"DIA_Wedge_Lehrer_Pickpocket2_05_02");	//Но знай, что даже самого лучше вора могут застать на месте преступления.
+			AI_Output(self,other,"DIA_Wedge_Lehrer_Pickpocket2_05_03");	//Будь осторожен.
+		};
+	}
+	else
+	{
+		if(Npc_HasItems(hero,itminugget) >= 200)
+		{
+			if(hero.lp >= LPCOST_TALENT_PICKPOCKET_2)
+			{
+				b_giveinvitems(other,self,itminugget,200);
+			};
+			if(b_giveskill(other,NPC_TALENT_PICKPOCKET,2,LPCOST_TALENT_PICKPOCKET_2))
+			{
+				AI_Output(self,other,"DIA_Wedge_Lehrer_Pickpocket2_05_01");	//Думаю, ты уже готов к тому, чтобы я посвятил тебя в секреты настоящего мастерства.
+				AI_Output(self,other,"DIA_Wedge_Lehrer_Pickpocket2_05_02");	//Но знай, что даже самого лучше вора могут застать на месте преступления.
+				AI_Output(self,other,"DIA_Wedge_Lehrer_Pickpocket2_05_03");	//Будь осторожен.
+			};
+		}
+		else
+		{
+			AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+			AI_Output(self,other,"SVM_5_NotNow");	//У меня нет времени.
+		};
 	};
+	b_wedgelearn();
 };
 
 func void dia_wedge_lehrer_back()

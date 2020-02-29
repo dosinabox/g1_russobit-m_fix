@@ -20,18 +20,22 @@ instance SFB_1030_SCHUERFER(NPC_DEFAULT)
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_COWARD;
 	CreateInvItems(self,itforice,4);
-	CreateInvItems(self,itminugget,7);
 	CreateInvItem(self,itmi_stuff_plate_01);
 	EquipItem(self,itmwpickaxe);
 	CreateInvItem(self,itmw_1h_nailmace_01);
-	CreateInvItem(self,itmi_stuff_oldcoin_02);
 	daily_routine = rtn_fmcstart_1030;
 };
 
 
 func void rtn_fmcstart_1030()
 {
-	ta_pickore(1,0,13,0,"FMC_ORE_02");
-	ta_pickore(13,0,1,0,"FMC_ORE_02");
+	ta_pickore(6,0,23,0,"FMC_ORE_02");
+	ta_sleep(23,0,6,0,"FMC_HUT14_IN");
+};
+
+func void rtn_dead_1030()
+{
+	ta_stay(6,0,23,0,"FMC_HUT14_IN");
+	ta_stay(23,0,6,0,"FMC_HUT14_IN");
 };
 

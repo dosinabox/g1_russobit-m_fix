@@ -30,6 +30,12 @@ instance TPL_1412_TEMPLER(NPC_DEFAULT)
 func void rtn_start_1412()
 {
 	ta_sleep(0,5,6,5,"PSI_15_HUT_IN");
-	ta_practicesword(16,5,0,5,"PSI_TRAINING_1");
+	ta_practicesword(6,5,0,5,"PSI_TRAINING_1");
+};
+
+func void rtn_remove_1412()
+{
+	ta_stay(23,0,16,0,"WP_INTRO01");
+	ta_stay(16,0,23,0,"WP_INTRO01");
 };
 

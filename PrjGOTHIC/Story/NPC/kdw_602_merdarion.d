@@ -5,12 +5,13 @@ instance KDW_602_MERDARION(NPC_DEFAULT)
 	npctype = NPCTYPE_MAIN;
 	guild = GIL_KDW;
 	level = 26;
-	voice = 14;
+	voice = 5;
 	id = 602;
+	flags = NPC_FLAG_IMMORTAL;
 	attribute[ATR_STRENGTH] = 45;
 	attribute[ATR_DEXTERITY] = 35;
-	attribute[ATR_MANA_MAX] = 90;
-	attribute[ATR_MANA] = 90;
+	attribute[ATR_MANA_MAX] = 100;
+	attribute[ATR_MANA] = 100;
 	attribute[ATR_HITPOINTS_MAX] = 352;
 	attribute[ATR_HITPOINTS] = 352;
 	Mdl_SetVisual(self,"HUMANS.MDS");
@@ -19,8 +20,8 @@ instance KDW_602_MERDARION(NPC_DEFAULT)
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_MAGE;
-	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,6);
-	CreateInvItem(self,itarrunechainlightning);
+	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,5);
+	EquipItem(self,itarrunechainlightning);
 	CreateInvItem(self,itfo_potion_health_03);
 	CreateInvItems(self,itfo_potion_mana_02,2);
 	EquipItem(self,lebensamulett);
@@ -38,5 +39,11 @@ func void rtn_kdwaufnahme_602()
 {
 	ta_position(1,0,5,0,"NC_KDW_CAVE_STAIRS_MOVEMENT2");
 	ta_position(5,0,1,0,"NC_KDW_CAVE_STAIRS_MOVEMENT2");
+};
+
+func void rtn_orealert_602()
+{
+	ta_guard(1,0,4,0,"NC_PLACE02");
+	ta_guard(4,0,1,0,"NC_PLACE02");
 };
 

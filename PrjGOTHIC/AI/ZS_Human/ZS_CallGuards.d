@@ -8,7 +8,8 @@ func void zs_callguards()
 	Npc_PercEnable(self,PERC_ASSESSMAGIC,b_assessmagic);
 	Npc_PercEnable(self,PERC_ASSESSSURPRISE,zs_assesssurprise);
 	b_smartturntonpc(self,hero);
-	b_sayoverlay(self,hero,"$ALARM");
+	db_say(self,hero,"ALARM");
+	Npc_SetRefuseTalk(hero,60);
 	Npc_SendPassivePerc(self,PERC_ASSESSWARN,self,hero);
 	AI_StartState(self,zs_flee,0,"");
 };
@@ -22,7 +23,8 @@ func void zs_callguardsonenterroom()
 	Npc_PercEnable(self,PERC_ASSESSMAGIC,b_assessmagic);
 	Npc_PercEnable(self,PERC_ASSESSSURPRISE,zs_assesssurprise);
 	b_smartturntonpc(self,hero);
-	b_sayoverlay(self,hero,"$ALARM");
+	db_say(self,hero,"ALARM");
+	Npc_SetRefuseTalk(hero,60);
 	Npc_SendPassivePerc(self,PERC_ASSESSWARN,self,hero);
 };
 

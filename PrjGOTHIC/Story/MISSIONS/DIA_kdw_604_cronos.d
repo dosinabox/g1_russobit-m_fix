@@ -1,4 +1,20 @@
 
+func void b_cronoslearn()
+{
+	Info_ClearChoices(kdw_604_cronos_mana);
+	Info_AddChoice(kdw_604_cronos_mana,DIALOG_BACK,kdw_604_cronos_mana_back);
+	if(hero.guild == GIL_ORG || hero.guild == GIL_SLD || hero.guild == GIL_KDW)
+	{
+		Info_AddChoice(kdw_604_cronos_mana,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),kdw_604_cronos_mana_man_5);
+		Info_AddChoice(kdw_604_cronos_mana,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),kdw_604_cronos_mana_man_1);
+	}
+	else
+	{
+		Info_AddChoice(kdw_604_cronos_mana,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,OTHERCAMPLEARNPAY * 5),kdw_604_cronos_mana_man_5);
+		Info_AddChoice(kdw_604_cronos_mana,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,OTHERCAMPLEARNPAY),kdw_604_cronos_mana_man_1);
+	};
+};
+
 instance KDW_604_CRONOS_EXIT(C_INFO)
 {
 	npc = kdw_604_cronos;
@@ -19,14 +35,6 @@ func int kdw_604_cronos_exit_condition()
 func void kdw_604_cronos_exit_info()
 {
 	AI_StopProcessInfos(self);
-	if(!Npc_HasItems(self,itarruneicecube))
-	{
-		CreateInvItem(self,itarruneicecube);
-	};
-	if(!Npc_HasItems(self,itarrunethunderbolt))
-	{
-		CreateInvItem(self,itarrunethunderbolt);
-	};
 };
 
 
@@ -43,7 +51,7 @@ instance KDW_604_CRONOS_BRIEF(C_INFO)
 
 func int kdw_604_cronos_brief_condition()
 {
-	if(Npc_KnowsInfo(hero,kdw_604_cronos_greet) && (Npc_GetTrueGuild(hero) != GIL_STT) && (Npc_GetTrueGuild(hero) != GIL_KDF) && (hero.level < 10))
+	if(Npc_KnowsInfo(hero,kdw_604_cronos_greet) && (Npc_GetTrueGuild(hero) != GIL_STT) && (Npc_GetTrueGuild(hero) != GIL_KDF) && (Npc_GetTrueGuild(hero) != GIL_ORG) && (Npc_HasItems(hero,itwr_fire_letter_01) || Npc_HasItems(hero,itwr_fire_letter_02)))
 	{
 		return 1;
 	};
@@ -95,7 +103,7 @@ instance KDW_604_CRONOS_WANNAJOIN(C_INFO)
 	condition = kdw_604_cronos_wannajoin_condition;
 	information = kdw_604_cronos_wannajoin_info;
 	permanent = 0;
-	description = "Я хочу присоединиться к этому лагерю.  ";
+	description = "Я хочу присоединиться к этому лагерю.";
 };
 
 
@@ -109,7 +117,7 @@ func int kdw_604_cronos_wannajoin_condition()
 
 func void kdw_604_cronos_wannajoin_info()
 {
-	AI_Output(other,self,"DIA_Cronos_WannaJoin_15_00");	//Я хочу присоединиться к этому лагерю.  
+	AI_Output(other,self,"DIA_Cronos_WannaJoin_15_00");	//Я хочу присоединиться к этому лагерю.
 	AI_Output(self,other,"DIA_Cronos_WannaJoin_08_01");	//Если ты хочешь присоединиться к этому лагерю, поговори с Ли или с Ларсом.
 };
 
@@ -136,7 +144,7 @@ func int kdw_604_cronos_wannamage_condition()
 func void kdw_604_cronos_wannamage_info()
 {
 	AI_Output(other,self,"DIA_Cronos_WannaMage_15_00");	//Я хочу стать магом!
-	AI_Output(self,other,"DIA_Cronos_WannaMage_08_01");	//Мы не можем раскрывать наше тайное знание своим врагам. 
+	AI_Output(self,other,"DIA_Cronos_WannaMage_08_01");	//Мы не можем раскрывать наше тайное знание своим врагам.
 	AI_Output(self,other,"DIA_Cronos_WannaMage_08_02");	//Только когда ты докажешь нам, что ты верен нашему делу, мы сможем приступить к твоему обучению.
 };
 
@@ -154,7 +162,7 @@ instance KDW_604_CRONOS_BANDIT(C_INFO)
 
 func int kdw_604_cronos_bandit_condition()
 {
-	if((Npc_GetTrueGuild(hero) == GIL_ORG) || (Npc_GetTrueGuild(hero) == GIL_SLD))
+	if((Npc_GetTrueGuild(hero) == GIL_ORG) || (Npc_GetTrueGuild(hero) == GIL_SLD) && KAPITEL < 4)
 	{
 		return 1;
 	};
@@ -168,6 +176,9 @@ func void kdw_604_cronos_bandit_info()
 	CreateInvItem(other,kdw_amulett);
 	CreateInvItem(other,cronos_brief);
 	CRONOS_MESSENGER = LOG_RUNNING;
+	Log_CreateTopic(KDWLETTER,LOG_MISSION);
+	Log_SetTopicStatus(KDWLETTER,LOG_RUNNING);
+	b_logentry(KDWLETTER,"Кронос доверил мне важное послание, которое я должен отнести магам Огня в Старый лагерь.");
 };
 
 
@@ -184,7 +195,7 @@ instance KDW_604_CRONOS_BRIEFBACK(C_INFO)
 
 func int kdw_604_cronos_briefback_condition()
 {
-	if(CRONOS_MESSENGER == LOG_SUCCESS)
+	if(CRONOS_MESSENGER == LOG_RUNNING && Npc_KnowsInfo(hero,dia_milten_nocheinbrief))
 	{
 		return 1;
 	};
@@ -194,9 +205,12 @@ func void kdw_604_cronos_briefback_info()
 {
 	AI_Output(other,self,"DIA_Cronos_BriefBack_15_00");	//Я передал послание!
 	AI_Output(self,other,"DIA_Cronos_BriefBack_08_01");	//А, хорошо! Возьми это в награду за твои труды...
+	CRONOS_MESSENGER = LOG_SUCCESS;
 	CreateInvItems(self,itminugget,200);
 	b_giveinvitems(self,other,itminugget,200);
 	b_givexp(XP_CRONOSLETTER);
+	Log_SetTopicStatus(KDWLETTER,LOG_SUCCESS);
+	b_logentry(KDWLETTER,"Маги Воды довольны моей услугой.");
 };
 
 
@@ -250,7 +264,7 @@ func void info_cronos_kalom_info()
 {
 	AI_Output(other,self,"Info_Cronos_KALOM_15_01");	//Кор Галом с несколькими фанатиками Стражами ушли из Братства!
 	AI_Output(other,self,"Info_Cronos_KALOM_15_02");	//Они сами хотят найти Спящего и прервать его тысячелетний сон.
-	AI_Output(self,other,"Info_Cronos_KALOM_08_03");	//Я никогда ему не доверял. Не важно, какое место он занимает, важно то, что его ослепила жажда власти. Он способен на все. 
+	AI_Output(self,other,"Info_Cronos_KALOM_08_03");	//Я никогда ему не доверял. Не важно, какое место он занимает, важно то, что его ослепила жажда власти. Он способен на все.
 	AI_Output(self,other,"Info_Cronos_KALOM_08_04");	//Думаю, без него в Братстве будет гораздо лучше!
 	AI_Output(self,other,"Info_Cronos_KALOM_08_05");	//Я сообщу об этом Сатурасу, как только у меня будет возможность. А теперь иди!
 	AI_StopProcessInfos(self);
@@ -265,7 +279,7 @@ instance INFO_CRONOS_YBERION(C_INFO)
 	information = info_cronos_yberion_info;
 	permanent = 0;
 	important = 0;
-	description = "Юберион, лидер сектантов болотного лагеря, умер!";
+	description = "Гуру Братства провели одну церемонию. Они вызывали Спящего.";
 };
 
 
@@ -279,10 +293,13 @@ func int info_cronos_yberion_condition()
 
 func void info_cronos_yberion_info()
 {
-	AI_Output(other,self,"Info_Cronos_YBERION_15_01");	//Юберион, лидер сектантов Болотного лагеря, умер!
-	AI_Output(self,other,"Info_Cronos_YBERION_08_02");	//Что? Как это могло произойти?
 	AI_Output(other,self,"Info_Cronos_YBERION_15_03");	//Гуру Братства провели одну церемонию. Они вызывали Спящего.
 	AI_Output(other,self,"Info_Cronos_YBERION_15_04");	//Но умственное напряжение плохо сказалось на Юберионе. Он этого не выдержал.
+	if(YBERION_DIED == TRUE)
+	{
+		AI_Output(other,self,"Info_Cronos_YBERION_15_01");	//Юберион, лидер сектантов Болотного лагеря, умер!
+	};
+	AI_Output(self,other,"Info_Cronos_YBERION_08_02");	//Что? Как это могло произойти?
 	AI_Output(self,other,"Info_Cronos_YBERION_08_05");	//Это очень печальная новость. Юберион был одним из наших союзников.
 	AI_Output(self,other,"Info_Cronos_YBERION_08_06");	//Но не стоит из-за этого отвлекать Сатураса от исследований.
 	AI_StopProcessInfos(self);
@@ -438,10 +455,7 @@ func void kdw_604_cronos_mana_info()
 {
 	AI_Output(other,self,"KDW_604_Cronos_MANA_Info_15_01");	//Я хочу увеличить свою магическую силу.
 	AI_Output(self,other,"KDW_604_Cronos_MANA_Info_08_02");	//Я могу помочь тебе в этом. Используй свою силу с умом.
-	Info_ClearChoices(kdw_604_cronos_mana);
-	Info_AddChoice(kdw_604_cronos_mana,DIALOG_BACK,kdw_604_cronos_mana_back);
-	Info_AddChoice(kdw_604_cronos_mana,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),kdw_604_cronos_mana_man_5);
-	Info_AddChoice(kdw_604_cronos_mana,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),kdw_604_cronos_mana_man_1);
+	b_cronoslearn();
 };
 
 func void kdw_604_cronos_mana_back()
@@ -451,20 +465,46 @@ func void kdw_604_cronos_mana_back()
 
 func void kdw_604_cronos_mana_man_1()
 {
-	b_buyattributepoints(other,ATR_MANA_MAX,LPCOST_ATTRIBUTE_MANA);
-	Info_ClearChoices(kdw_604_cronos_mana);
-	Info_AddChoice(kdw_604_cronos_mana,DIALOG_BACK,kdw_604_cronos_mana_back);
-	Info_AddChoice(kdw_604_cronos_mana,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),kdw_604_cronos_mana_man_5);
-	Info_AddChoice(kdw_604_cronos_mana,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),kdw_604_cronos_mana_man_1);
+	if(hero.guild == GIL_ORG || hero.guild == GIL_SLD || hero.guild == GIL_KDW)
+	{
+		b_buyattributepoints(other,ATR_MANA_MAX,LPCOST_ATTRIBUTE_MANA);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY)
+	{
+		if(hero.lp >= 1 && hero.attribute[ATR_MANA_MAX] < 100)
+		{
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
+		};
+		b_buyattributepoints(other,ATR_MANA_MAX,LPCOST_ATTRIBUTE_MANA);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"SVM_8_NotNow");	//Сейчас не время.
+	};
+	b_cronoslearn();
 };
 
 func void kdw_604_cronos_mana_man_5()
 {
-	b_buyattributepoints(other,ATR_MANA_MAX,5 * LPCOST_ATTRIBUTE_MANA);
-	Info_ClearChoices(kdw_604_cronos_mana);
-	Info_AddChoice(kdw_604_cronos_mana,DIALOG_BACK,kdw_604_cronos_mana_back);
-	Info_AddChoice(kdw_604_cronos_mana,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),kdw_604_cronos_mana_man_5);
-	Info_AddChoice(kdw_604_cronos_mana,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),kdw_604_cronos_mana_man_1);
+	if(hero.guild == GIL_ORG || hero.guild == GIL_SLD || hero.guild == GIL_KDW)
+	{
+		b_buyattributepoints(other,ATR_MANA_MAX,5 * LPCOST_ATTRIBUTE_MANA);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY * 5)
+	{
+		if(hero.lp >= 5 && hero.attribute[ATR_MANA_MAX] < 96)
+		{
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
+		};
+		b_buyattributepoints(other,ATR_MANA_MAX,5 * LPCOST_ATTRIBUTE_MANA);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"SVM_8_NotNow");	//Сейчас не время.
+	};
+	b_cronoslearn();
 };
 
 
@@ -514,7 +554,7 @@ func int kdw_604_cronos_greet_condition()
 func void kdw_604_cronos_greet_info()
 {
 	AI_Output(other,self,"KDW_604_Cronos_GREET_Info_15_01");	//Приветствую тебя, маг!
-	AI_Output(self,other,"KDW_604_Cronos_GREET_Info_08_02");	//Да прибудет с тобой благословение Аданоса! Я могу помочь твоему духу стать сильнее или дать тебе что-то полезное.
+	AI_Output(self,other,"KDW_604_Cronos_GREET_Info_08_02");	//Да пребудет с тобой благословение Аданоса! Я могу помочь твоему духу стать сильнее или дать тебе что-то полезное.
 	AI_Output(self,other,"KDW_604_Cronos_GREET_Info_08_03");	//Что я могу сделать для тебя?
 	Log_CreateTopic(GE_TRADERNC,LOG_NOTE);
 	b_logentry(GE_TRADERNC,"Кронос продает руны, свитки и кольца. Целыми днями он стоит у решетки, закрывающей рудную гору.");

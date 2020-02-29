@@ -24,6 +24,25 @@ func int zs_attack_loop()
 	printdebugnpc(PD_ZS_LOOP,"ZS_Attack_Loop");
 	Npc_GetTarget(self);
 	printglobals(PD_ZS_DETAIL);
+	if(self.id == 251 && (Wld_IsTime(20,18,20,20) || Wld_IsTime(21,40,19,10)) && PLAYERINARENA == FALSE)
+	{
+		AI_Dodge(self);
+		return LOOP_END;
+	};
+	if(self.id == 729 && (Wld_IsTime(20,18,21,40) || Wld_IsTime(22,58,19,10)) && PLAYERINARENA == FALSE)
+	{
+		AI_Dodge(self);
+		return LOOP_END;
+	};
+	if(self.id == 1422 && (Wld_IsTime(21,38,21,40) || Wld_IsTime(22,58,20,18)) && PLAYERINARENA == FALSE)
+	{
+		AI_Dodge(self);
+		return LOOP_END;
+	};
+	if(((self.id == 3) || (self.id == 5)) && Npc_IsPlayer(other) && (KAPITEL >= 4))
+	{
+		return LOOP_END;
+	};
 	if(c_npcisdown(other) || !Hlp_IsValidNpc(other))
 	{
 		printdebugnpc(PD_ZS_CHECK,"...Ziel ist kampf-unfähig oder ungültig!");
@@ -33,7 +52,7 @@ func int zs_attack_loop()
 		{
 			if(Hlp_IsValidNpc(other) && !c_npcisdown(other) && Npc_CanSeeNpcFreeLOS(self,other) && !c_otheristoleratedenemy(self,other))
 			{
-				printdebugstring(PD_ZS_CHECK,"...neues Ziel gefunden:",other.name);
+				printdebugstring(PD_ZS_CHECK,"...neues Ziel gefunden: ",other.name);
 			}
 			else
 			{
@@ -49,7 +68,7 @@ func int zs_attack_loop()
 	};
 	if(Npc_GetStateTime(self) > 2)
 	{
-		if(!Npc_IsInFightMode(self,FMODE_FAR) && !Npc_IsInFightMode(self,FMODE_MAGIC) && (!Npc_IsInFightMode(other,FMODE_FAR) && !Npc_IsInFightMode(other,FMODE_MAGIC)))
+		if(!Npc_IsInFightMode(self,FMODE_FAR) && !Npc_IsInFightMode(self,FMODE_MAGIC) && !(Npc_IsInFightMode(other,FMODE_FAR) && !Npc_IsInFightMode(other,FMODE_MAGIC)))
 		{
 			printdebugnpc(PD_ZS_CHECK,"...WEDER NSC noch Gegner führen Fernkampfwaffen!");
 			if((Npc_GetDistToNpc(self,other) > HAI_DIST_ABORT_MELEE) && (self.aivar[AIV_LASTHITBYRANGEDWEAPON] == FALSE))
@@ -213,13 +232,14 @@ func void b_combatremoveweapon()
 func void b_combatassessenterroom()
 {
 	printdebugnpc(PD_ZS_FRAME,"B_CombatAssessEnterRoom");
-	if((Wld_GetPlayerPortalGuild() == GIL_NONE) && !Npc_HasNews(self,NEWS_THEFT,other,self))
+	if((Wld_GetPlayerPortalGuild() == GIL_NONE) && !Npc_HasNews(self,NEWS_THEFT,other,self) && (self.aivar[AIV_ATTACKREASON] == AIV_AR_INTRUDER))
 	{
 		printdebugnpc(PD_ZS_CHECK,"...SC hat Raum des NSCs verlassen und noch nichts geklaut!");
 		if(self.attribute[ATR_HITPOINTS] == self.attribute[ATR_HITPOINTS_MAX])
 		{
 			printdebugnpc(PD_ZS_CHECK,"...NSC unverletzt!");
 			b_fullstop(self);
+			b_setattackreason(self,AIV_AR_NONE);
 			b_resettempattitude(self);
 			b_assessremoveweapon();
 		};
@@ -232,7 +252,7 @@ func void b_combatcatchthief()
 	b_assessandmemorize(NEWS_THEFT,NEWS_SOURCE_WITNESS,self,other,self);
 	b_fullstop(self);
 	b_whirlaround(self,other);
-	b_sayoverlay(self,other,"$DIRTYTHIEF");
+	db_say(self,other,"DIRTYTHIEF");
 	Npc_SetTarget(self,other);
 	AI_StartState(self,zs_attack,0,"");
 };

@@ -19,7 +19,7 @@ func int c_preytopredator(var C_NPC prey,var C_NPC predator)
 	return 0;
 };
 
-func int b_mm_desynchronize()
+func void b_mm_desynchronize()
 {
 	var int msec;
 	printdebugnpc(PD_MST_FRAME,"B_MM_DeSynchronize");
@@ -338,7 +338,7 @@ func int zs_mm_attack_loop()
 			printglobals(PD_ZS_DETAIL);
 			if(Hlp_IsValidNpc(other) && !c_npcisdown(other))
 			{
-				printdebugstring(PD_MST_CHECK,"...neues Ziel gefunden:",other.name);
+				printdebugstring(PD_MST_CHECK,"...neues Ziel gefunden: ",other.name);
 			}
 			else
 			{
@@ -379,8 +379,8 @@ func int zs_mm_flee_loop()
 	else
 	{
 		self.wp = Npc_GetNearestWP(self);
-		return 1;
 	};
+	return 1;
 };
 
 func void zs_mm_flee_end()
@@ -783,8 +783,8 @@ func int zs_mm_summoned_loop()
 	else
 	{
 		AI_TurnToNPC(self,other);
-		return LOOP_CONTINUE;
 	};
+	return LOOP_CONTINUE;
 };
 
 func void zs_mm_summoned_end()

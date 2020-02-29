@@ -56,7 +56,7 @@ func void b_assesssc()
 		rock = Hlp_GetNpc(pc_rockefeller);
 		if((Hlp_GetInstanceID(her) != Hlp_GetInstanceID(hero)) && (Hlp_GetInstanceID(rock) != Hlp_GetInstanceID(hero)) && Npc_IsInState(self,zs_guardpassage))
 		{
-			if(Wld_GetGuildAttitude(self.guild,other.guild) != ATT_FRIENDLY)
+			if(Wld_GetGuildAttitude(self.guild,other.guild) != ATT_FRIENDLY && hero.guild != GIL_MEATBUG)
 			{
 				b_fullstop(self);
 				b_say(self,other,"$NOWWAIT");
@@ -92,7 +92,7 @@ func void b_assesssc()
 	if((hero.aivar[AIV_GUARDPASSAGE_STATUS] == AIV_GPS_FIRSTWARN) || (hero.aivar[AIV_GUARDPASSAGE_STATUS] == AIV_GPS_LASTWARN))
 	{
 		printdebugnpc(PD_ZS_CHECK,"...SC wurde von Durchgangswachen verwarnt!");
-		printdebugint(PD_ZS_CHECK,"hero.aivar[AIV_GUARDPASSAGE_STATUS] =",hero.aivar[AIV_GUARDPASSAGE_STATUS]);
+		printdebugint(PD_ZS_CHECK,"hero.aivar[AIV_GUARDPASSAGE_STATUS] = ",hero.aivar[AIV_GUARDPASSAGE_STATUS]);
 		if(Npc_IsInState(self,zs_guardpassage) && (Npc_GetDistToNpc(self,hero) > HAI_DIST_GUARDPASSAGE_RESET))
 		{
 			printdebugnpc(PD_ZS_CHECK,"...Status für Durchgangswachen zurücksetzen!");

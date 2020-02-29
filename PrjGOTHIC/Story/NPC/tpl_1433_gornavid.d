@@ -40,3 +40,9 @@ func void rtn_gate_1433()
 	ta_guard(12,0,24,0,"OM_CAVE3_21");
 };
 
+func void rtn_flee_1433()
+{
+	ta_stay(0,0,12,0,"WP_INTRO01");
+	ta_stay(12,0,24,0,"WP_INTRO01");
+};
+

@@ -61,6 +61,14 @@ func void b_assignambientinfos(var C_NPC amb_self)
 			else if(amb_self.voice == 5)
 			{
 				b_assignambientinfos_sfb_5(amb_self);
+			}
+			else if(amb_self.voice == 13)
+			{
+				b_assignambientinfos_sfb_13(amb_self);
+			}
+			else if(amb_self.voice == 14)
+			{
+				b_assignambientinfos_sfb_14(amb_self);
 			};
 		}
 		else if(amb_self.guild == GIL_NOV)

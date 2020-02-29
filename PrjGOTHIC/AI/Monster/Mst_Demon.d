@@ -37,7 +37,6 @@ func void set_demon_visuals()
 	Mdl_SetVisualBody(self,"Dem_Body",DEFAULT,DEFAULT,"",DEFAULT,DEFAULT,-1);
 };
 
-
 instance DEMON(MST_DEFAULT_DEMON)
 {
 	set_demon_visuals();
@@ -46,7 +45,9 @@ instance DEMON(MST_DEFAULT_DEMON)
 
 instance SUMMONEDBYPC_DEMON(MST_DEFAULT_DEMON)
 {
+	name[0] = "Призванный демон";
 	set_demon_visuals();
+	level = 0;
 	Npc_SetToFistMode(self);
 	senses = SENSE_HEAR | SENSE_SEE;
 	start_aistate = zs_mm_summonedbypc;
@@ -64,11 +65,13 @@ instance SUMMONEDBYNPC_DEMON(MST_DEFAULT_DEMON)
 
 instance XARDASDEMON(MST_DEFAULT_DEMON)
 {
+	name[0] = " ";
 	flags = NPC_FLAG_IMMORTAL;
 	npctype = NPCTYPE_FRIEND;
 	guild = GIL_DEMON;
 	aivar[AIV_IMPORTANT] = ID_DEMON;
-	set_demon_visuals();
+	Mdl_SetVisual(self,"Demon.mds");
+	//set_demon_visuals();
 	Npc_SetToFistMode(self);
 	start_aistate = zs_xardasdemon;
 };

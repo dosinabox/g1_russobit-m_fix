@@ -41,6 +41,12 @@ func void b_assessenemy()
 			b_fullstop(self);
 			AI_StartState(self,zs_assessenemy,0,"");
 		}
+		else if(c_npcisorc(other) && (other.guild != gil_orcslave) && (other.npctype != NPCTYPE_MAIN) && (other.npctype != NPCTYPE_FRIEND))
+		{
+			b_fullstop(self);
+			AI_StartState(self,zs_assessmonster,0,"");
+			return;
+		}
 		else
 		{
 			printdebugnpc(PD_ZS_CHECK,"... 'enemy' ist Monster/Orc!");

@@ -26,12 +26,9 @@ instance ORG_830_ORGANISATOR(NPC_DEFAULT)
 	CreateInvItems(self,itkelockpick,1);
 	CreateInvItems(self,itminugget,10);
 	CreateInvItems(self,itforice,7);
-	CreateInvItems(self,itfobooze,1);
-	CreateInvItems(self,itlstorch,1);
+	CreateInvItems(self,itmijoint_1,3);
 	CreateInvItems(self,itfo_potion_health_01,1);
 	CreateInvItem(self,itmi_stuff_plate_01);
-	CreateInvItem(self,itfomutton);
-	CreateInvItem(self,itat_teeth_01);
 	daily_routine = rtn_start_830;
 };
 
@@ -40,5 +37,11 @@ func void rtn_start_830()
 {
 	ta_smoke(8,0,20,0,"OW_PATH_07_21_GUARD_LEFT");
 	ta_smoke(20,0,8,0,"OW_PATH_07_21_GUARD_LEFT");
+};
+
+func void rtn_fmtaken_830()
+{
+	ta_practicesword(8,0,20,0,"OW_PATH_068");
+	ta_practicesword(20,0,8,0,"OW_PATH_068");
 };
 

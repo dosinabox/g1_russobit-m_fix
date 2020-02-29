@@ -19,27 +19,19 @@ instance ORG_826_MORDRAG(NPC_DEFAULT)
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_COWARD;
-	CreateInvItems(self,itkelockpick,2);
-	CreateInvItems(self,itminugget,11);
-	CreateInvItems(self,itforice,8);
-	CreateInvItems(self,itfobooze,3);
-	CreateInvItems(self,itlstorch,2);
-	CreateInvItems(self,itfo_potion_health_01,3);
-	CreateInvItem(self,itmi_stuff_plate_01);
-	CreateInvItem(self,itmi_stuff_cup_01);
-	CreateInvItem(self,itfoloaf);
-	CreateInvItem(self,itat_teeth_01);
+	b_give_mordragchapter1crap();
 	EquipItem(self,itmw_1h_mace_02);
 	EquipItem(self,itrw_bow_long_01);
-	CreateInvItems(self,itamarrow,10);
+	CreateInvItems(self,itamarrow,30);
 	daily_routine = rtn_prestart_826;
 };
 
 
 func void rtn_prestart_826()
 {
-	ta_smalltalk(10,0,22,0,"OCR_OUTSIDE_HUT_44");
-	ta_stand(22,0,10,0,"OCR_OUTSIDE_HUT_44");
+	ta_smalltalk(10,0,23,0,"OCR_OUTSIDE_HUT_44");
+	ta_sitaround(23,0,5,30,"OCR_OUTSIDE_MCAMP_01");
+	ta_standaround(5,30,10,0,"OCR_OUTSIDE_HUT_44");
 };
 
 func void rtn_guide_826()
@@ -50,7 +42,7 @@ func void rtn_guide_826()
 
 func void rtn_start_826()
 {
-	ta_stand(8,0,23,0,"NC_TAVERN_BAR");
-	ta_stand(23,0,8,0,"NC_TAVERN_BAR");
+	ta_standaround(8,0,23,0,"NC_TAVERN_MORDRAG_SHRIKE");
+	ta_standaround(23,0,8,0,"NC_TAVERN_MORDRAG_SHRIKE");
 };
 

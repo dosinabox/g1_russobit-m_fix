@@ -134,7 +134,7 @@ instance DIA_GORN_HUTFREE(C_INFO)
 
 func int dia_gorn_hutfree_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_shrike_getlost))
+	if((Npc_KnowsInfo(hero,dia_shrike_getlost) || Npc_IsDead(org_842_shrike)) && GORN_SHRIKESHUT == LOG_RUNNING)
 	{
 		return 1;
 	};
@@ -143,10 +143,18 @@ func int dia_gorn_hutfree_condition()
 func void dia_gorn_hutfree_info()
 {
 	AI_Output(other,self,"DIA_Gorn_HutFree_15_00");	//Шрайк нашел себе другой дом.
-	AI_Output(self,other,"DIA_Gorn_HutFree_09_01");	//Хорошо. Только что со мной говорил Тарлоф. Он хочет сам переговорить с этим парнем.
 	GORN_SHRIKESHUT = LOG_SUCCESS;
 	Log_SetTopicStatus(CH1_SHRIKESHUT,LOG_SUCCESS);
-	b_logentry(CH1_SHRIKESHUT,"Горну понравилось, как я выкинул Шрайка из пустого дома. Думаю, ему можно доверять. Постараюсь в будущем держаться к нему поближе.");
+	if(Npc_IsDead(org_842_shrike))
+	{
+		AI_Output(self,other,"SVM_9_GetThingsRight");	//Нелегко тебе будет оправдаться!
+		b_logentry(CH1_SHRIKESHUT,"Горну не понравилось, что я убил Шрайка. Но думаю, ему можно доверять. Постараюсь в будущем держаться к нему поближе.");
+	}
+	else
+	{
+		AI_Output(self,other,"DIA_Gorn_HutFree_09_01");	//Хорошо. Только что со мной говорил Тарлоф. Он хочет сам переговорить с этим парнем.
+		b_logentry(CH1_SHRIKESHUT,"Горну понравилось, как я выкинул Шрайка из пустого дома. Думаю, ему можно доверять. Постараюсь в будущем держаться к нему поближе.");
+	};
 	b_givexp(XP_REPORTEDKICKEDSHRIKE);
 };
 
@@ -195,6 +203,10 @@ instance DIA_GORN_TRADE(C_INFO)
 
 func int dia_gorn_trade_condition()
 {
+	if(Npc_KnowsInfo(hero,org_801_lares_bringlistanteil))
+	{
+		return 1;
+	};
 };
 
 func void dia_gorn_trade_info()
@@ -256,7 +268,7 @@ instance INFO_GORN_NCWAIT(C_INFO)
 
 func int info_gorn_ncwait_condition()
 {
-	if(Npc_GetDistToWP(self,"NC_PATH52") < 1000)
+	if(Npc_GetDistToWP(self,"NC_PATH52") < 1000 && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -313,7 +325,7 @@ instance INFO_GORN_CRONOS(C_INFO)
 
 func int info_gorn_cronos_condition()
 {
-	if(Npc_KnowsInfo(hero,info_gorn_mages))
+	if(Npc_KnowsInfo(hero,info_gorn_mages) && !Npc_KnowsInfo(hero,kdw_604_cronos_greet))
 	{
 		return TRUE;
 	};
@@ -346,7 +358,7 @@ instance INFO_GORN_RUINWAIT(C_INFO)
 
 func int info_gorn_ruinwait_condition()
 {
-	if(Npc_GetDistToWP(self,"OW_PATH_ABYSS_4") < 1000)
+	if(Npc_GetDistToWP(self,"OW_PATH_ABYSS_4") < 1000 && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return 1;
 	};
@@ -416,7 +428,7 @@ func int info_gorn_ruinfocus_condition()
 
 func void info_gorn_ruinfocus_info()
 {
-	AI_Output(other,self,"Info_Gorn_RUINFOCUS_15_01");	//Я ищу юнитор.  
+	AI_Output(other,self,"Info_Gorn_RUINFOCUS_15_01");	//Я ищу юнитор.
 	AI_Output(other,self,"Info_Gorn_RUINFOCUS_15_02");	//Он должен быть где-то здесь.
 	AI_Output(self,other,"Info_Gorn_RUINFOCUS_09_03");	//Наверное, эта штука находится в руинах старого монастыря по ту сторону ущелья.
 };
@@ -472,7 +484,7 @@ instance INFO_GORN_RUINABYSS(C_INFO)
 
 func int info_gorn_ruinabyss_condition()
 {
-	if(Npc_KnowsInfo(hero,info_gorn_ruinjoin) && (Npc_GetDistToWP(self,"OW_ABYSS_TO_CAVE_MOVE6") < 1000))
+	if(Npc_KnowsInfo(hero,info_gorn_ruinjoin) && (Npc_GetDistToWP(self,"OW_ABYSS_TO_CAVE_MOVE6") < 1000) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return 1;
 	};
@@ -501,7 +513,7 @@ instance INFO_GORN_RUINLEAVE(C_INFO)
 
 func int info_gorn_ruinleave_condition()
 {
-	if(Npc_KnowsInfo(hero,info_gorn_ruinjoin) && (Npc_GetDistToWP(hero,"OW_PATH_175_MEATBUG") > 15000) && !Npc_KnowsInfo(hero,info_gorn_ruingate))
+	if(Npc_KnowsInfo(hero,info_gorn_ruinjoin) && (Npc_GetDistToWP(hero,"OW_PATH_175_MEATBUG") > 15000) && !Npc_KnowsInfo(hero,info_gorn_ruingate) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return 1;
 	};
@@ -531,7 +543,7 @@ instance INFO_GORN_RUINWALL(C_INFO)
 
 func int info_gorn_ruinwall_condition()
 {
-	if((Npc_KnowsInfo(hero,info_gorn_ruinjoin) || Npc_KnowsInfo(hero,info_gorn_ruinleave)) && (Npc_GetDistToWP(hero,"OW_PATH_175_GATE1") < 1000))
+	if((Npc_KnowsInfo(hero,info_gorn_ruinjoin) || Npc_KnowsInfo(hero,info_gorn_ruinleave)) && (Npc_GetDistToWP(hero,"OW_PATH_175_GATE1") < 1000) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return 1;
 	};
@@ -586,7 +598,7 @@ instance INFO_GORN_RUINLEDGE(C_INFO)
 
 func int info_gorn_ruinledge_condition()
 {
-	if(Npc_KnowsInfo(hero,info_gorn_ruinjoin) && !Npc_KnowsInfo(hero,info_gorn_ruinsuccess) && (Npc_GetDistToWP(hero,"OW_MONSTER_NAVIGATE_02") < 1000))
+	if(Npc_KnowsInfo(hero,info_gorn_ruinjoin) && !Npc_KnowsInfo(hero,info_gorn_ruinsuccess) && (Npc_GetDistToWP(hero,"OW_MONSTER_NAVIGATE_02") < 1000) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return 1;
 	};
@@ -613,7 +625,7 @@ instance INFO_GORN_RUINPLATFORM(C_INFO)
 
 func int info_gorn_ruinplatform_condition()
 {
-	if(Npc_KnowsInfo(hero,info_gorn_ruinjoin) && !Npc_KnowsInfo(hero,info_gorn_ruinsuccess) && (Npc_GetDistToWP(hero,"OW_PATH_176_TEMPELFOCUS4") < 300))
+	if(Npc_KnowsInfo(hero,info_gorn_ruinjoin) && !Npc_KnowsInfo(hero,info_gorn_ruinsuccess) && (Npc_GetDistToWP(hero,"OW_PATH_176_TEMPELFOCUS4") < 300) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return 1;
 	};
@@ -640,7 +652,7 @@ instance INFO_GORN_RUINGATE(C_INFO)
 
 func int info_gorn_ruingate_condition()
 {
-	if((Npc_KnowsInfo(hero,info_gorn_ruinjoin) || Npc_KnowsInfo(hero,info_gorn_ruinleave)) && MONASTERYRUIN_GATEOPEN)
+	if((Npc_KnowsInfo(hero,info_gorn_ruinjoin) || Npc_KnowsInfo(hero,info_gorn_ruinleave)) && MONASTERYRUIN_GATEOPEN && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -671,7 +683,7 @@ instance INFO_GORN_RUINLEAVEINSIDE(C_INFO)
 
 func int info_gorn_ruinleaveinside_condition()
 {
-	if(Npc_KnowsInfo(hero,info_gorn_ruingate) && (Npc_GetDistToWP(hero,"OW_PATH_ABYSS_CROSS_6") < 1000) && !Npc_HasItems(hero,focus_4))
+	if(Npc_KnowsInfo(hero,info_gorn_ruingate) && (Npc_GetDistToWP(hero,"OW_PATH_ABYSS_CROSS_6") < 1000) && !Npc_HasItems(hero,focus_4) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -701,7 +713,7 @@ instance INFO_GORN_RUINSUCCESS(C_INFO)
 
 func int info_gorn_ruinsuccess_condition()
 {
-	if(Npc_KnowsInfo(hero,info_gorn_ruinjoin) && Npc_HasItems(hero,focus_4))
+	if(Npc_KnowsInfo(hero,info_gorn_ruinjoin) && Npc_HasItems(hero,focus_4) && !c_bodystatecontains(hero,BS_INVENTORY) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -732,7 +744,7 @@ instance INFO_GORN_RUINTROLL(C_INFO)
 
 func int info_gorn_ruintroll_condition()
 {
-	if(Npc_KnowsInfo(hero,info_gorn_ruinsuccess) && (Npc_GetDistToWP(hero,"OW_PATH_SNAPPER04_SPAWN01") < 1000))
+	if(Npc_KnowsInfo(hero,info_gorn_ruinsuccess) && (Npc_GetDistToWP(hero,"OW_PATH_SNAPPER04_SPAWN01") < 1000) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -765,7 +777,7 @@ func int info_gorn_ruinvictory_condition()
 {
 	var C_NPC ytroll;
 	ytroll = Hlp_GetNpc(youngtroll);
-	if(Npc_KnowsInfo(hero,info_gorn_ruintroll) && Npc_IsDead(ytroll))
+	if(Npc_KnowsInfo(hero,info_gorn_ruintroll) && Npc_IsDead(ytroll) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -815,9 +827,14 @@ func void info_gorn_diegomilten_info()
 	AI_Output(self,hero,"Info_Gorn_DIEGOMILTEN_09_04");	//Спасибо. Дружба - самое ценное, что у нас осталось.
 	AI_Output(self,hero,"Info_Gorn_DIEGOMILTEN_09_05");	//Ты уже почти один из нас. Ты заслужил наше доверие.
 	b_givexp(XP_MESSAGEFORGORN);
+	if(KAPITEL == 6)
+	{
+		Npc_ExchangeRoutine(self,"Reunion");
+	};
 	if(WARNED_GORN_OR_LESTER == FALSE)
 	{
 		WARNED_GORN_OR_LESTER = TRUE;
+		b_logentry(CH4_4FRIENDS,"Горн скоро направится на встречу с друзьями. Надеюсь, с ними все будет в порядке.");
 	}
 	else
 	{
@@ -938,6 +955,7 @@ func int info_gorn_post_condition()
 func void info_gorn_post_info()
 {
 	AI_GotoNpc(self,hero);
+	OC_BANNED = TRUE;
 	AI_Output(self,hero,"Info_Gorn_POST_09_01");	//Ты пришел вовремя. Мы готовимся нанести ответный удар.
 	AI_Output(self,hero,"Info_Gorn_POST_09_02");	//Сперва мы хотим отвоевать Свободную шахту.
 };
@@ -1015,7 +1033,7 @@ func void info_gorn_second_info()
 	AI_Output(hero,self,"Info_Gorn_SECOND_15_01");	//Сперва шахта, а что потом?
 	AI_Output(self,hero,"Info_Gorn_SECOND_09_02");	//Как только мы захватим шахту, мы будем искать тот проход в горах, которым воспользовались люди Гомеза.
 	AI_Output(self,hero,"Info_Gorn_SECOND_09_03");	//Когда мы его перекроем, мы снова сможем контролировать ситуацию.
-	AI_Output(hero,self,"Info_Gorn_SECOND_15_04");	//Понятно.  
+	AI_Output(hero,self,"Info_Gorn_SECOND_15_04");	//Понятно.
 };
 
 
@@ -1070,7 +1088,7 @@ func void info_gorn_kickbutt_info()
 {
 	AI_Output(hero,self,"Info_Gorn_KICKBUTT_15_01");	//Ладно, пойдем, покажем этим непрошенным гостям, что значит зариться на чужое добро!
 	AI_Output(self,hero,"Info_Gorn_KICKBUTT_09_02");	//Я так и думал, что ты согласишься!
-	AI_Output(self,hero,"Info_Gorn_KICKBUTT_09_03");	//Вот, возьми этот ключ. Он открывает дверь в караульную у входа в шахту.
+	//AI_Output(self,hero,"Info_Gorn_KICKBUTT_09_03");	//Вот, возьми этот ключ. Он открывает дверь в караульную у входа в шахту.
 	b_story_gornjoins();
 };
 
@@ -1098,7 +1116,6 @@ func void info_gorn_myway_info()
 {
 	AI_Output(hero,self,"Info_Gorn_MYWAY_15_01");	//Почему бы и нет. Мне все равно нужно попасть в шахту!
 	AI_Output(self,hero,"Info_Gorn_MYWAY_09_02");	//Я так и думал, что ты согласишься!
-	AI_Output(self,hero,"Info_Gorn_MYWAY_09_03");	//Вот, возьми этот ключ. Он открывает дверь в караульную у входа в шахту.
 	b_story_gornjoins();
 };
 
@@ -1163,7 +1180,7 @@ instance INFO_GORN_LEAVEFORPOST(C_INFO)
 
 func int info_gorn_leaveforpost_condition()
 {
-	if(GORN_JOINEDFORFM && (Npc_GetDistToWP(hero,"OW_PATH_074") < 2000) && (FREEMINEORC_LOOKINGULUMULU != LOG_RUNNING))
+	if(GORN_JOINEDFORFM && (Npc_GetDistToWP(hero,"OW_PATH_074") < 2000) && (FREEMINEORC_LOOKINGULUMULU != LOG_RUNNING) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -1231,7 +1248,7 @@ instance INFO_GORN_RAZOR(C_INFO)
 
 func int info_gorn_razor_condition()
 {
-	if(GORN_JOINEDFORFM && (Npc_GetDistToWP(hero,"OW_PATH_3000") < 1000))
+	if(GORN_JOINEDFORFM && (Npc_GetDistToWP(hero,"OW_PATH_3000") < 1000) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -1259,7 +1276,7 @@ instance INFO_GORN_FMCENTRANCE(C_INFO)
 
 func int info_gorn_fmcentrance_condition()
 {
-	if(GORN_JOINEDFORFM && (Npc_GetDistToWP(hero,"FMC_ENTRANCE") < 1000))
+	if(GORN_JOINEDFORFM && (Npc_GetDistToWP(hero,"FMC_ENTRANCE") < 1000) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -1269,8 +1286,23 @@ func void info_gorn_fmcentrance_info()
 {
 	AI_GotoNpc(self,hero);
 	AI_Output(self,hero,"Info_Gorn_FMCENTRANCE_09_01");	//Подожди-ка, видишь эти тела?
-	AI_Output(self,hero,"Info_Gorn_FMCENTRANCE_09_02");	//Иди к входу в шахту, а я буду тебя прикрывать. 
+	AI_Output(self,hero,"Info_Gorn_FMCENTRANCE_09_02");	//Иди к входу в шахту, а я буду тебя прикрывать.
 	AI_Output(self,hero,"Info_Gorn_FMCENTRANCE_09_03");	//Когда ты спустишься, я пойду за тобой.
+	var C_NPC jackal;
+	jackal = Hlp_GetNpc(grd_201_jackal);
+	jackal.flags = 0;
+	if(SLD_753_BALORO_SC_BESORGT_DEN_KRAM == LOG_RUNNING)
+	{
+		b_logentry(BALOROS_WAFFE,"Балоро не пережил нападение на Свободную шахту. Теперь я не узнаю, какое оружие он обещал мне.");
+		Log_SetTopicStatus(BALOROS_WAFFE,LOG_FAILED);
+		SLD_753_BALORO_SC_BESORGT_DEN_KRAM = LOG_FAILED;
+	};
+	if(Npc_IsDead(grd_201_jackal) || Npc_KnowsInfo(hero,info_jackal_payday))
+	{
+		AI_Output(self,hero,"Info_Gorn_MYWAY_09_03");	//Вот, возьми этот ключ. Он открывает дверь в караульную у входа в шахту.
+		CreateInvItem(self,itke_freemine);
+		b_giveinvitems(self,hero,itke_freemine,1);
+	};
 	Npc_ExchangeRoutine(self,"WaitFMC");
 	AI_StopProcessInfos(self);
 };
@@ -1288,7 +1320,7 @@ instance INFO_GORN_FMGATE(C_INFO)
 
 func int info_gorn_fmgate_condition()
 {
-	if(GORN_JOINEDFORFM && !FM_GATEOPEN && (Npc_GetDistToWP(hero,"FMC_FM_ENTRANCE") < 1000))
+	if(GORN_JOINEDFORFM && !FM_GATEOPEN && (Npc_GetDistToWP(hero,"FMC_FM_ENTRANCE") < 1500) && !Npc_KnowsInfo(hero,info_gorn_fm2))
 	{
 		return TRUE;
 	};
@@ -1298,7 +1330,16 @@ func void info_gorn_fmgate_info()
 {
 	AI_GotoNpc(self,hero);
 	AI_Output(self,hero,"Info_Gorn_FMGATE_09_01");	//Я слышал, как на тебя кто-то напал, и пришел на помощь.
-	AI_Output(hero,self,"Info_Gorn_FMGATE_15_02");	//А, это был один старый знакомый... Но с ним уже разобрались.
+	if(Npc_IsDead(grd_201_jackal))
+	{
+		AI_Output(hero,self,"Info_Gorn_FMGATE_15_02");	//А, это был один старый знакомый... Но с ним уже разобрались.
+	};
+	if(!Npc_HasItems(hero,itke_freemine))
+	{
+		AI_Output(self,hero,"Info_Gorn_MYWAY_09_03");	//Вот, возьми этот ключ. Он открывает дверь в караульную у входа в шахту.
+		CreateInvItem(self,itke_freemine);
+		b_giveinvitems(self,hero,itke_freemine,1);
+	};
 	AI_Output(self,hero,"Info_Gorn_FMGATE_09_03");	//Хорошо. Открывай ворота, а я прослежу за ситуацией.
 	Npc_ExchangeRoutine(self,"WaitFM");
 	AI_StopProcessInfos(self);
@@ -1331,6 +1372,12 @@ func void info_gorn_afterfm_info()
 	AI_Output(hero,self,"Info_Gorn_AFTERFM_15_03");	//Главное, что мы смогли освободить от них нашу шахту.
 	AI_Output(self,hero,"Info_Gorn_AFTERFM_09_04");	//Я останусь здесь и буду следить за тем, чтобы никто чужой сюда не прошел.
 	b_story_leftfm();
+	b_exchangeroutine(sld_709_cord,"FMTakenBack");
+	b_exchangeroutine(sld_735_soeldner,"FMTakenBack");
+	b_exchangeroutine(sld_736_soeldner,"FMTakenBack");
+	b_exchangeroutine(sld_755_soeldner,"fmcstart");
+	b_exchangeroutine(sfb_1040_schuerfer,"fmcstart");
+	b_exchangeroutine(sfb_1041_schuerfer,"fmcstart");
 	LEE_FREEMINEREPORT = 1;
 	AI_StopProcessInfos(self);
 };
@@ -1358,11 +1405,52 @@ func int info_gorn_fmwatch_condition()
 func void info_gorn_fmwatch_info()
 {
 	AI_Output(hero,self,"Info_Gorn_FMWATCH_15_01");	//Как дела?
-	AI_Output(self,hero,"Info_Gorn_FMWATCH_09_02");	//Кругом тихо, словно в Свободной шахте не осталось живых.
-	AI_Output(self,hero,"Info_Gorn_FMWATCH_09_03");	//Но если Ли не пришлет подкрепление, то эта тишина продлится недолго.
-	AI_Output(self,hero,"Info_Gorn_FMWATCH_09_04");	//Ну а я пока постараюсь расположиться поудобнее.
+	if(Npc_KnowsInfo(hero,info_gorn_diegomilten) && KAPITEL == 6)
+	{
+		AI_Output(self,hero,"Info_Gorn_AFTERFM_09_04");	//Я останусь здесь и буду следить за тем, чтобы никто чужой сюда не прошел.
+		AI_Output(self,hero,"Info_Gorn_DIEGOMILTEN_09_05");	//Ты уже почти один из нас. Ты заслужил наше доверие.
+	}
+	else
+	{
+		AI_Output(self,hero,"Info_Gorn_FMWATCH_09_02");	//Кругом тихо, словно в Свободной шахте не осталось живых.
+		AI_Output(self,hero,"Info_Gorn_FMWATCH_09_03");	//Но если Ли не пришлет подкрепление, то эта тишина продлится недолго.
+		AI_Output(self,hero,"Info_Gorn_FMWATCH_09_04");	//Ну а я пока постараюсь расположиться поудобнее.
+	};
 };
 
+
+instance INFO_GORN_FM2(C_INFO)
+{
+	npc = pc_fighter;
+	condition = info_gorn_fm2_condition;
+	information = info_gorn_fm2_info;
+	important = 0;
+	permanent = 0;
+	description = "Пойдем со мной, мне нужна твоя помощь.";
+};
+
+
+func int info_gorn_fm2_condition()
+{
+	if(Npc_KnowsInfo(hero,info_gorn_fmcentrance) && !Npc_KnowsInfo(hero,info_jackal_payday) && Npc_IsDead(grd_201_jackal))
+	{
+		return TRUE;
+	};
+};
+
+func void info_gorn_fm2_info()
+{
+	AI_Output(hero,self,"Info_GornFM_FOLLOW_15_01");	//Пойдем со мной, мне нужна твоя помощь.
+	if(!Npc_HasItems(hero,itke_freemine))
+	{
+		AI_Output(self,hero,"Info_Gorn_MYWAY_09_03");	//Вот, возьми этот ключ. Он открывает дверь в караульную у входа в шахту.
+		CreateInvItem(self,itke_freemine);
+		b_giveinvitems(self,hero,itke_freemine,1);
+	};
+	AI_Output(self,hero,"Info_Gorn_FMGATE_09_03");	//Хорошо. Открывай ворота, а я прослежу за ситуацией.
+	Npc_ExchangeRoutine(self,"WaitFM");
+	AI_StopProcessInfos(self);
+};
 
 instance INFO_GORN_FOUNDULUMULU(C_INFO)
 {
@@ -1385,7 +1473,7 @@ func int info_gorn_foundulumulu_condition()
 func void info_gorn_foundulumulu_info()
 {
 	AI_GotoNpc(self,hero);
-	AI_Output(self,hero,"Info_Gorn_FOUNDULUMULU_09_01");	//Какая странная у тебя штуковина на руке. Кажется, ее сделали орки.
+	AI_Output(self,hero,"Info_Gorn_FOUNDULUMULU_09_01");	//Какая странная у тебя штуковина. Кажется, ее сделали орки.
 	AI_Output(self,hero,"Info_Gorn_FOUNDULUMULU_09_02");	//Неужели ты взял ее у тех орков, что были рабами на Старой шахте?
 	AI_Output(hero,self,"Info_Gorn_FOUNDULUMULU_15_03");	//У орков он считается знаком дружбы. Я хочу с ним зайти в город орков.
 	AI_Output(self,hero,"Info_Gorn_FOUNDULUMULU_09_04");	//Очень надеюсь, что орки не трогают тех, кто носит этот... предмет!

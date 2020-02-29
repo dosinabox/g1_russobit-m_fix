@@ -13,6 +13,7 @@ instance ORG_862_JACKO(NPC_DEFAULT)
 	attribute[ATR_MANA] = 0;
 	attribute[ATR_HITPOINTS_MAX] = 136;
 	attribute[ATR_HITPOINTS] = 136;
+	aivar[43] = TRUE;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Relaxed.mds");
 	Mdl_SetVisualBody(self,"hum_body_Naked0",0,1,"Hum_Head_Bald",37,2,org_armor_l);
@@ -22,7 +23,7 @@ instance ORG_862_JACKO(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_BOW,1);
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	CreateInvItems(self,itkelockpick,3);
-	CreateInvItems(self,itminugget,95);
+	CreateInvItems(self,itminugget,50);
 	CreateInvItems(self,itlstorch,1);
 	CreateInvItems(self,itfo_potion_health_01,1);
 	EquipItem(self,itmw_1h_mace_03);

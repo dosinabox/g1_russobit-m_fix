@@ -47,11 +47,101 @@ func int zs_assessbody_loop()
 func void zs_assessbody_end()
 {
 	printdebugnpc(PD_ZS_FRAME,"ZS_AssessBody_End");
+	if(self.id == 251 && (ARENA_BET_KIRGO == TRUE || ARENA_BET_KHARIM == TRUE || ARENA_BET_GORHANIS == TRUE))
+	{
+		ARENA_BET_KIRGO_WON = TRUE;
+		//PrintScreen("Победил Кирго!",-1,-1,"font_old_20_white.tga",3);
+		b_removeweapon(self);
+		b_exchangeroutine(tpl_1422_gorhanis,"wait");
+		b_exchangeroutine(sld_729_kharim,"wait");
+		b_exchangeroutine(grd_251_kirgo,"wait");
+	};
+	if(self.id == 729 && (ARENA_BET_KIRGO == TRUE || ARENA_BET_KHARIM == TRUE || ARENA_BET_GORHANIS == TRUE))
+	{
+		ARENA_BET_KHARIM_WON = TRUE;
+		//PrintScreen("Победил Карим!",-1,-1,"font_old_20_white.tga",3);
+		b_removeweapon(self);
+		b_exchangeroutine(tpl_1422_gorhanis,"wait");
+		b_exchangeroutine(sld_729_kharim,"wait");
+		b_exchangeroutine(grd_251_kirgo,"wait");
+	};
+	if(self.id == 1422 && (ARENA_BET_KIRGO == TRUE || ARENA_BET_KHARIM == TRUE || ARENA_BET_GORHANIS == TRUE))
+	{
+		ARENA_BET_GORHANIS_WON = TRUE;
+		//PrintScreen("Победил Гор Ханис!",-1,-1,"font_old_20_white.tga",3);
+		b_removeweapon(self);
+		b_exchangeroutine(tpl_1422_gorhanis,"wait");
+		b_exchangeroutine(sld_729_kharim,"wait");
+		b_exchangeroutine(grd_251_kirgo,"wait");
+	};
 	if(other.aivar[AIV_PLUNDERED] == TRUE)
 	{
 		AI_ContinueRoutine(self);
 	};
-	if((self.fight_tactic != FAI_HUMAN_RANGED) && (self.npctype != NPCTYPE_FRIEND) && c_npcishuman(self))
+	if((Hlp_GetInstanceID(vlk_505_buddler) == Hlp_GetInstanceID(self) || Hlp_GetInstanceID(vlk_506_buddler) == Hlp_GetInstanceID(self)) && LETTER_TOLD == 2)
+	{
+		AI_PlayAni(self,"T_PLUNDER");
+		if(Npc_HasItems(hero,itwr_fire_letter_01))
+		{
+			Npc_RemoveInvItem(hero,itwr_fire_letter_01);
+			if(b_plunder())
+			{
+				b_say(self,other,"$GotLetterGotOre");
+			}
+			else
+			{
+				b_say(self,other,"$GotLetterNoOre");
+			};
+			AI_SetWalkMode(self,NPC_RUN);
+			self.guild = GIL_VLK;
+			Npc_SetTrueGuild(self,GIL_VLK);
+			AI_GotoWP(self,"OCC_CENTER_2");
+			LETTER_TOLD = 3;
+			CreateInvItems(self,itminugget,120);
+			if(PYROCAR_MESSENGER == LOG_RUNNING)
+			{
+				b_logentry(KDFLETTER,"У меня украли письмо! Не стоило болтать о нем кому попало...");
+				Log_SetTopicStatus(KDFLETTER,LOG_FAILED);
+				PYROCAR_MESSENGER = LOG_FAILED;
+			};
+			CreateInvItem(kdf_402_corristo,itwr_fire_letter_02);
+		}
+		else if(Npc_HasItems(hero,itwr_fire_letter_02))
+		{
+			Npc_RemoveInvItem(hero,itwr_fire_letter_02);
+			if(b_plunder())
+			{
+				b_say(self,other,"$GotLetterGotOre");
+			}
+			else
+			{
+				b_say(self,other,"$GotLetterNoOre");
+			};
+			AI_SetWalkMode(self,NPC_RUN);
+			self.guild = GIL_VLK;
+			Npc_SetTrueGuild(self,GIL_VLK);
+			AI_GotoWP(self,"OCC_CENTER_2");
+			LETTER_TOLD = 3;
+			CreateInvItems(self,itminugget,50);
+			if(PYROCAR_MESSENGER == LOG_RUNNING)
+			{
+				b_logentry(KDFLETTER,"У меня украли письмо! Не стоило болтать о нем кому попало...");
+				Log_SetTopicStatus(KDFLETTER,LOG_FAILED);
+				PYROCAR_MESSENGER = LOG_FAILED;
+			};
+			CreateInvItem(kdf_402_corristo,itwr_fire_letter_02);
+		}
+		else if(b_plunder())
+		{
+			b_say(self,other,"$NoLetterGotOre");
+		}
+		else
+		{
+			b_say(self,other,"$NoLetterNoOre");
+		};
+		other.aivar[AIV_PLUNDERED] = TRUE;
+	}
+	else if((self.fight_tactic != FAI_HUMAN_RANGED) && (self.npctype != NPCTYPE_FRIEND) && c_npcishuman(self))
 	{
 		printdebugnpc(PD_ZS_CHECK,"...kein purer Fernkдmpfer und kein NSC-Freund!");
 		AI_PlayAni(self,"T_PLUNDER");
@@ -65,7 +155,10 @@ func void zs_assessbody_end()
 		};
 		other.aivar[AIV_PLUNDERED] = TRUE;
 	};
-	AI_StartState(self,zs_assessbody_recoverweapon,1,"");
+	if(self.id != 251 && self.id != 729 && self.id != 1422)
+	{
+		AI_StartState(self,zs_assessbody_recoverweapon,1,"");
+	};
 };
 
 func void zs_assessbody_recoverweapon()
@@ -73,13 +166,19 @@ func void zs_assessbody_recoverweapon()
 	printdebugnpc(PD_ZS_FRAME,"ZS_AssessBody_RecoverWeapon");
 	b_setperception(self);
 	Npc_PerceiveAll(self);
-	if((Wld_DetectItem(self,ITEM_KAT_NF) || Wld_DetectItem(self,ITEM_KAT_FF)) && (Npc_GetDistToItem(self,item) < 300))
+	if(Wld_DetectItem(self,ITEM_KAT_NF) || Wld_DetectItem(self,ITEM_KAT_FF))
 	{
-		printdebugnpc(PD_ZS_CHECK,"...Nah- oder Fernkampfwaffe gefunden!");
-		b_sayoverlay(self,NULL,"$ITakeYourWeapon");
-		AI_TakeItem(self,item);
-		AI_EquipBestMeleeWeapon(self);
-		AI_EquipBestRangedWeapon(self);
+		if(Hlp_IsValidItem(item))
+		{
+			if(Npc_GetDistToItem(self,item) < 300)
+			{
+				printdebugnpc(PD_ZS_CHECK,"...Nah- oder Fernkampfwaffe gefunden!");
+				AI_TakeItem(self,item);
+				AI_EquipBestMeleeWeapon(self);
+				AI_EquipBestRangedWeapon(self);
+				b_say(self,other,"$ITakeYourWeapon");
+			};
+		};
 	};
 	AI_StartState(self,zs_healself,1,"");
 };

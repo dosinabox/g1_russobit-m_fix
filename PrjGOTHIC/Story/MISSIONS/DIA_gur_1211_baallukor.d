@@ -64,10 +64,10 @@ func void info_baallukor_dead_info()
 {
 	AI_Output(other,self,"Info_BaalLukor_DEAD_15_01");	//Я видел убитых Стражей, когда шел сюда. Что здесь произошло?
 	AI_Output(self,other,"Info_BaalLukor_DEAD_13_02");	//Учитель Кор Ангар прислал нас сюда, чтобы исследовать пещеры.
-	AI_Output(self,other,"Info_BaalLukor_DEAD_13_03");	//Мы думали, что не найдем здесь ничего, кроме мумий и забытых гробниц. 
+	AI_Output(self,other,"Info_BaalLukor_DEAD_13_03");	//Мы думали, что не найдем здесь ничего, кроме мумий и забытых гробниц.
 	AI_Output(self,other,"Info_BaalLukor_DEAD_13_04");	//Но тьма вокруг нас внезапно наполнилась движением, и нас окружили орки! Я не знаю, что им нужно было в этой пещере, но мы совершенно не ожидали их там увидеть!
 	AI_Output(other,self,"Info_BaalLukor_DEAD_15_05");	//А где Стражи, которые пошли с тобой?
-	AI_Output(self,other,"Info_BaalLukor_DEAD_13_06");	// Мертвы! Я стал причиной их смерти, когда повел их в эту ловушку. Да простит меня за это Спящий.
+	AI_Output(self,other,"Info_BaalLukor_DEAD_13_06");	//Мертвы! Я стал причиной их смерти, когда повел их в эту ловушку. Да простит меня за это Спящий.
 	b_logentry(CH3_ORCGRAVEYARD,"Я спас Гуру Идола Люкора от орков на кладбище. Все Стражи, которые пошли вместе с ним, были убиты ими.");
 };
 
@@ -80,7 +80,7 @@ instance INFO_BAALLUKOR_SUMMONING(C_INFO)
 	nr = 10;
 	permanent = 0;
 	important = 0;
-	description = "Я от Кор Ангара! Вы нашли то, что поможет отыскать Спящего?";
+	description = "Меня прислал Кор Ангар!";
 };
 
 
@@ -193,7 +193,7 @@ instance INFO_BAALLUKOR_FIRSTWAIT(C_INFO)
 
 func int info_baallukor_firstwait_condition()
 {
-	if(Npc_KnowsInfo(hero,info_baallukor_help) && (Npc_GetDistToWP(self,"GRYD_040") < 500))
+	if(Npc_KnowsInfo(hero,info_baallukor_help) && (Npc_GetDistToWP(self,"GRYD_040") < 500) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400) && !Npc_KnowsInfo(hero,info_baallukor_firstscroll))
 	{
 		return TRUE;
 	};
@@ -260,7 +260,7 @@ instance INFO_BAALLUKOR_SECONDWAIT(C_INFO)
 
 func int info_baallukor_secondwait_condition()
 {
-	if(Npc_KnowsInfo(hero,info_baallukor_help) && (Npc_GetDistToWP(self,"GRYD_047") < 500))
+	if(Npc_KnowsInfo(hero,info_baallukor_help) && (Npc_GetDistToWP(self,"GRYD_047") < 500) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400) && !Npc_KnowsInfo(hero,info_baallukor_secondscroll))
 	{
 		return TRUE;
 	};
@@ -288,7 +288,7 @@ instance INFO_BAALLUKOR_SECONDSCROLL(C_INFO)
 
 func int info_baallukor_secondscroll_condition()
 {
-	if(Npc_KnowsInfo(hero,info_baallukor_help) && Npc_HasItems(hero,orkparchmenttwo))
+	if(Npc_KnowsInfo(hero,info_baallukor_help) && Npc_HasItems(hero,orkparchmenttwo) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -356,7 +356,7 @@ instance INFO_BAALLUKOR_RUNES(C_INFO)
 
 func int info_baallukor_runes_condition()
 {
-	if(Npc_KnowsInfo(hero,info_baallukor_bothscrolls) && ((Npc_GetDistToWP(hero,"GRYD_025") < 600) || (Npc_GetDistToWP(hero,"GRYD_048") < 600)))
+	if(Npc_KnowsInfo(hero,info_baallukor_bothscrolls) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400) && ((Npc_GetDistToWP(hero,"GRYD_025") < 600) || (Npc_GetDistToWP(hero,"GRYD_048") < 600)))
 	{
 		return TRUE;
 	};
@@ -375,8 +375,6 @@ func void info_baallukor_runes_info()
 	AI_Output(self,other,"Info_BaalLukor_RUNES_13_07");	//Как странно!
 	Npc_RemoveInvItems(self,orkparchmentone,1);
 	Npc_RemoveInvItems(self,orkparchmenttwo,1);
-	CreateInvItem(self,itarscrollteleport4);
-	b_giveinvitems(self,hero,itarscrollteleport4,1);
 	b_logentry(CH3_ORCGRAVEYARD,"С помощью настенных надписей в большой зале Идол Люкор смог прочитать свиток. Это оказался свиток телепортации, переносящий кого-либо на очень короткие дистанции.");
 	Npc_ExchangeRoutine(self,"Follow");
 };
@@ -421,7 +419,7 @@ instance INFO_BAALLUKOR_HALLWITHOUT(C_INFO)
 
 func int info_baallukor_hallwithout_condition()
 {
-	if(!Npc_KnowsInfo(hero,info_baallukor_runes) && (Npc_GetDistToWP(hero,"GRYD_055") < 500))
+	if(!Npc_KnowsInfo(hero,info_baallukor_runes) && (Npc_GetDistToWP(hero,"GRYD_055") < 500) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -451,7 +449,7 @@ instance INFO_BAALLUKOR_HALLWITH(C_INFO)
 
 func int info_baallukor_hallwith_condition()
 {
-	if(Npc_KnowsInfo(hero,info_baallukor_runes) && (Npc_GetDistToWP(hero,"GRYD_055") < 500))
+	if(Npc_KnowsInfo(hero,info_baallukor_runes) && (Npc_GetDistToWP(hero,"GRYD_055") < 500) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -483,7 +481,7 @@ instance INFO_BAALLUKOR_DOOR(C_INFO)
 
 func int info_baallukor_door_condition()
 {
-	if(Npc_KnowsInfo(hero,info_baallukor_hallwith) && (Npc_GetDistToWP(hero,"GRYD_060") < 500))
+	if(Npc_KnowsInfo(hero,info_baallukor_hallwith) && (Npc_GetDistToWP(hero,"GRYD_060") < 500) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -497,6 +495,8 @@ func void info_baallukor_door_info()
 	AI_Output(self,other,"Info_BaalLukor_DOOR_13_01");	//За этой стеной... должно быть, это здесь!
 	AI_Output(self,other,"Info_BaalLukor_DOOR_13_02");	//Мне не хватит силы прочитать заклинание.
 	AI_Output(self,other,"Info_BaalLukor_DOOR_13_03");	//Прочти его сам. Встань перед этой стеной.
+	CreateInvItem(self,itarscrollteleport4);
+	b_giveinvitems(self,hero,itarscrollteleport4,1);
 	AI_StopProcessInfos(self);
 };
 
@@ -513,7 +513,7 @@ instance INFO_BAALLUKOR_TELEPORT(C_INFO)
 
 func int info_baallukor_teleport_condition()
 {
-	if(Npc_KnowsInfo(hero,info_baallukor_door) && Npc_CanSeeNpcFreeLOS(self,hero) && (Npc_GetDistToWP(hero,"GRYD_072") < 550))
+	if(Npc_KnowsInfo(hero,info_baallukor_door) && Npc_GetDistToWP(hero,"GRYD_072") < 550 && Npc_CanSeeNpcFreeLOS(self,hero) && Npc_GetDistToNpc(self,hero) < 1400)
 	{
 		return TRUE;
 	};
@@ -529,7 +529,7 @@ func void info_baallukor_teleport_info()
 	AI_Output(other,self,"Info_BaalLukor_TELEPORT_15_03");	//Это место больше похоже на какую-то гробницу.
 	AI_Output(self,other,"Info_BaalLukor_TELEPORT_13_04");	//Пойдем дальше.
 	AI_Output(self,other,"Info_BaalLukor_HELP_13_03");	//Ты иди вперед, а я пойду следом!
-	b_logentry(CH3_ORCGRAVEYARD,"С помощью оркского свитка телепортации я попал в тайную пещеру, выходящую из большой залы с колоннами.");
+	b_logentry(CH3_ORCGRAVEYARD,"С помощью свитка телепортации я попал в тайную пещеру, выходящую из большой залы с колоннами.");
 	AI_StopProcessInfos(self);
 	Npc_ExchangeRoutine(self,"TELEPORT");
 };
@@ -563,7 +563,7 @@ func void info_baallukor_altar_info()
 	AI_SetWalkMode(self,NPC_RUN);
 	AI_GotoWP(self,"GRYD_082");
 	AI_PlayAniBS(self,"T_STAND_2_PRAY",BS_SIT);
-	AI_Output(self,hero,"Info_BaalLukor_ALTAR_13_02");	//Нет!  
+	AI_Output(self,hero,"Info_BaalLukor_ALTAR_13_02");	//Нет!
 	AI_Output(self,hero,"Info_BaalLukor_ALTAR_13_03");	//Господин мой, я взываю к тебе!
 	AI_Output(self,hero,"Info_BaalLukor_ALTAR_13_04");	//Пробудись, яви свою силу! Нет!
 	AI_Output(self,hero,"Info_BaalLukor_ALTAR_13_05");	//Нет!
@@ -577,6 +577,7 @@ func void info_baallukor_altar_info()
 	AI_Output(self,hero,"Info_BaalLukor_ALTAR_13_11");	//Умри, неверный!
 	AI_Output(self,hero,"Info_BaalLukor_ALTAR_13_12");	//
 	self.flags = 0;
+	self.aivar[43] = TRUE;
 	self.npctype = NPCTYPE_MAIN;
 	BAALLUKOR_BRINGPARCHMENT = 4;
 	Npc_SetTempAttitude(self,ATT_HOSTILE);

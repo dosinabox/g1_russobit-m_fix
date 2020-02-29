@@ -77,8 +77,6 @@ func void dia_fingers_becomeshadow_teachme()
 	AI_Output(self,other,"DIA_Fingers_BecomeShadow_TeachMe_05_06");	//Поэтому для начала тебе следует избрать путь вора.
 	AI_Output(self,other,"DIA_Fingers_BecomeShadow_TeachMe_05_07");	//К счастью, я лучший вор, какого только можно найти в Старом лагере.
 	FINGERS_CANTEACH = TRUE;
-	Log_CreateTopic(GE_TEACHEROC,LOG_NOTE);
-	b_logentry(GE_TEACHEROC,"Фингерс может научить меня воровать и взламывать замки.");
 	Info_ClearChoices(dia_fingers_becomeshadow);
 };
 
@@ -110,11 +108,26 @@ func void dia_fingers_lehrer_info()
 	AI_Output(self,other,"DIA_Fingers_Lehrer_05_02");	//Зависит от того, что ты хочешь узнать.
 	Info_ClearChoices(dia_fingers_lehrer);
 	Info_AddChoice(dia_fingers_lehrer,DIALOG_BACK,dia_fingers_lehrer_back);
-	Info_AddChoice(dia_fingers_lehrer,b_buildlearnstring(NAME_LEARNPICKPOCKET_2,LPCOST_TALENT_PICKPOCKET_2,0),dia_fingers_lehrer_pickpocket2);
-	Info_AddChoice(dia_fingers_lehrer,b_buildlearnstring(NAME_LEARNPICKPOCKET_1,LPCOST_TALENT_PICKPOCKET_1,0),dia_fingers_lehrer_pickpocket);
-	Info_AddChoice(dia_fingers_lehrer,b_buildlearnstring(NAME_LEARNPICKLOCK_2,LPCOST_TALENT_PICKLOCK_2,0),dia_fingers_lehrer_lockpick2);
-	Info_AddChoice(dia_fingers_lehrer,b_buildlearnstring(NAME_LEARNPICKLOCK_1,LPCOST_TALENT_PICKLOCK_1,0),dia_fingers_lehrer_lockpick);
-	Info_AddChoice(dia_fingers_lehrer,"Я хочу научиться подкрадываться.",dia_fingers_lehrer_schleichen);
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKPOCKET) == 1)
+	{
+		Info_AddChoice(dia_fingers_lehrer,b_buildlearnstring(NAME_LEARNPICKPOCKET_2,LPCOST_TALENT_PICKPOCKET_2,0),dia_fingers_lehrer_pickpocket2);
+	};
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKPOCKET) == 0)
+	{
+		Info_AddChoice(dia_fingers_lehrer,b_buildlearnstring(NAME_LEARNPICKPOCKET_1,LPCOST_TALENT_PICKPOCKET_1,0),dia_fingers_lehrer_pickpocket);
+	};
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) == 1)
+	{
+		Info_AddChoice(dia_fingers_lehrer,b_buildlearnstring(NAME_LEARNPICKLOCK_2,LPCOST_TALENT_PICKLOCK_2,0),dia_fingers_lehrer_lockpick2);
+	};
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) == 0)
+	{
+		Info_AddChoice(dia_fingers_lehrer,b_buildlearnstring(NAME_LEARNPICKLOCK_1,LPCOST_TALENT_PICKLOCK_1,0),dia_fingers_lehrer_lockpick);
+	};
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_SNEAK) == 0)
+	{
+		Info_AddChoice(dia_fingers_lehrer,"Я хочу научиться подкрадываться.",dia_fingers_lehrer_schleichen);
+	};
 };
 
 func void dia_fingers_lehrer_schleichen()
@@ -133,6 +146,7 @@ func void dia_fingers_lehrer_lockpick()
 		AI_Output(self,other,"DIA_Fingers_Lehrer_Lockpick_05_01");	//Хочешь, я тебя научу? Это не слишком сложно.
 		AI_Output(self,other,"DIA_Fingers_Lehrer_Lockpick_05_02");	//Очень важно следить за тем, чтобы у тебя не сломалась отмычка.
 		AI_Output(self,other,"DIA_Fingers_Lehrer_Lockpick_05_03");	//Если ты будешь действовать очень осторожно, ты заметишь, что во многих случаях тебе не понадобится больше одной отмычки.
+		Info_AddChoice(dia_fingers_lehrer,b_buildlearnstring(NAME_LEARNPICKLOCK_2,LPCOST_TALENT_PICKLOCK_2,0),dia_fingers_lehrer_lockpick2);
 	};
 };
 
@@ -158,6 +172,7 @@ func void dia_fingers_lehrer_pickpocket()
 			AI_Output(self,other,"DIA_Fingers_Lehrer_PICKPOCKET_05_02");	//Риск будет оправдан только в том случае, если ты остаешься один на один со своей жертвой.
 			AI_Output(self,other,"DIA_Fingers_Lehrer_PICKPOCKET_05_03");	//Но только профессиональный вор может совершенно незаметно вытащить что-нибудь ценное из кармана зазевавшегося прохожего!
 			AI_Output(self,other,"DIA_Fingers_Lehrer_PICKPOCKET_05_04");	//Незаметно вытащить вещь из чьего-то кармана ты сможешь только тогда, когда станешь настоящим профессионалом.
+			Info_AddChoice(dia_fingers_lehrer,b_buildlearnstring(NAME_LEARNPICKPOCKET_2,LPCOST_TALENT_PICKPOCKET_2,0),dia_fingers_lehrer_pickpocket2);
 		};
 	}
 	else
@@ -196,7 +211,7 @@ instance DIA_FINGERS_WHERECAVALORN(C_INFO)
 
 func int dia_fingers_wherecavalorn_condition()
 {
-	if(FINGERS_WHERECAVALORN == TRUE)
+	if(FINGERS_WHERECAVALORN == TRUE && KAPITEL < 2)
 	{
 		return 1;
 	};
@@ -207,9 +222,13 @@ func void dia_fingers_wherecavalorn_info()
 	AI_Output(other,self,"DIA_Fingers_WhereCavalorn_15_00");	//Где можно найти Кавалорна?
 	AI_Output(self,other,"DIA_Fingers_WhereCavalorn_05_01");	//Он охотится в диких лесах. Ты найдешь его на пути к Новому лагерю. К западу от Старого лагеря расположено широкое ущелье.
 	AI_Output(self,other,"DIA_Fingers_WhereCavalorn_05_02");	//В нем ты увидишь старую хижину лесорубов. Он живет именно там.
-	b_logentry(GE_TEACHEROW,"Кавалорн может научить меня подкрадываться. Его дом находится в неглубоком ущелье к западу от Старого лагеря, по дороге в Новый лагерь.");
+	if(LOG_CAVALORNTRAIN_SNEAK == FALSE)
+	{
+		Log_CreateTopic(GE_TEACHEROW,LOG_NOTE);
+		b_logentry(GE_TEACHEROW,"Кавалорн может научить меня подкрадываться. Его дом находится в неглубоком ущелье к западу от Старого лагеря, по дороге в Новый лагерь.");
+		LOG_CAVALORNTRAIN_SNEAK = TRUE;
+	};
 };
-
 
 var int fingers_learnt;
 
@@ -234,6 +253,7 @@ func int dia_fingers_learnt_condition()
 
 func void dia_fingers_learnt_info()
 {
+	var int log;
 	AI_Output(other,self,"DIA_Fingers_Learnt_15_00");	//Ты можешь замолвить за меня словечко перед Диего?
 	if((Npc_GetTalentSkill(other,NPC_TALENT_PICKLOCK) + Npc_GetTalentSkill(other,NPC_TALENT_PICKPOCKET) + Npc_GetTalentSkill(other,NPC_TALENT_SNEAK)) > 0)
 	{
@@ -241,6 +261,8 @@ func void dia_fingers_learnt_info()
 		AI_Output(self,other,"DIA_Fingers_Learnt_05_02");	//Нам нужны опытные воры. Я отдам за тебя свой голос.
 		FINGERS_LEARNT = LOG_SUCCESS;
 		b_givexp(XP_FINGERSTRAIN);
+		Log_CreateTopic(CH1_JOINOC,LOG_MISSION);
+		Log_SetTopicStatus(CH1_JOINOC,LOG_RUNNING);
 		b_logentry(CH1_JOINOC,"Фингерсу нравится, как я работаю.");
 	}
 	else
@@ -250,7 +272,13 @@ func void dia_fingers_learnt_info()
 		AI_Output(other,self,"DIA_Fingers_Learnt_15_05");	//И как это сделать?
 		AI_Output(self,other,"DIA_Fingers_Learnt_05_06");	//Найди себе хорошего учителя. Когда ты научишься подкрадываться или открывать замки, тогда я смогу тебе помочь.
 		FINGERS_LEARNT = LOG_RUNNING;
-		b_logentry(CH1_JOINOC,"Фингерс сможет замолвить за меня словечко, если я смогу обучиться одному из воровских навыков.");
+		if(log == FALSE)
+		{
+			Log_CreateTopic(CH1_JOINOC,LOG_MISSION);
+			Log_SetTopicStatus(CH1_JOINOC,LOG_RUNNING);
+			b_logentry(CH1_JOINOC,"Фингерс сможет замолвить за меня словечко, если я смогу обучиться одному из воровских навыков.");
+			log = TRUE;
+		};
 	};
 };
 

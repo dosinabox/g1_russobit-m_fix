@@ -15,7 +15,6 @@ instance ORKPARCHMENTONE(C_ITEM)
 	text[0] = "Кажется, не хватает нижней половины.";
 	text[1] = "Письмена этого свитка очень похожи";
 	text[2] = "на руны, написанные на стенах пещеры.";
-	text[3] = "";
 };
 
 instance ORKPARCHMENTTWO(C_ITEM)
@@ -48,8 +47,6 @@ instance ITKE_PSI_KALOM_01(C_ITEM)
 	description = "Ключ из лаборатории";
 	text[0] = "Открывает сундук в алхимической лаборатории";
 	text[1] = "Болотного лагеря.";
-	text[5] = NAME_VALUE;
-	count[5] = value;
 };
 
 instance ITWRFOCIMAP(C_ITEM)
@@ -57,18 +54,19 @@ instance ITWRFOCIMAP(C_ITEM)
 	name = "Карта Сатураса";
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
-	value = 15;
-	visual = "ItWr_Map_01.3DS";
+	value = 40;
+	visual = "ItWrFociMap.3DS";
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	on_state[0] = usefocimap;
 	description = name;
-	text[0] = "Вершины пентаграммы отмечают";
-	text[1] = "места, в которых находятся пять юниторов,";
-	text[2] = "которые использовались при создании";
-	text[3] = "магического Барьера. Карта очень старая,";
-	text[4] = "и, возможно, сейчас юниторы находятся";
-	text[5] = "в других местах.";
+	text[0] = "Вершины пентаграммы указывают";
+	text[1] = "расположение пять юниторов, которые";
+	text[2] = "использовались при создании Барьера.";
+	text[3] = "Карта очень старая, возможно,";
+	text[4] = "юниторов там уже нет.";
+	text[5] = NAME_VALUE;
+	count[5] = value;
 };
 
 
@@ -89,7 +87,7 @@ instance ITWR_TROLL_01(C_ITEM)
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
 	value = 0;
-	visual = "ItWr_Scroll_01.3DS";
+	visual = "ITAR_SCROLL_01_EG.3DS";
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	on_state[0] = usetroll;
@@ -140,18 +138,14 @@ instance FOCUS_2(C_ITEM)
 
 instance ITKE_BERG_01(C_ITEM)
 {
-	name = "Ключ от сундука";
+	name = "Ржавый ключ";
 	mainflag = ITEM_KAT_NONE;
 	flags = 0;
 	value = 0;
 	visual = "ItKe_Key_01.3ds";
 	material = MAT_METAL;
 	description = name;
-	text[0] = "Ржавый ключ";
-	text[1] = "от сундука";
-	text[2] = "в горном форте.";
-	text[5] = NAME_VALUE;
-	count[5] = value;
+	text[0] = "Ключ от сундука в горном форте.";
 };
 
 instance ITWR_URKUNDE_01(C_ITEM)
@@ -159,8 +153,8 @@ instance ITWR_URKUNDE_01(C_ITEM)
 	name = "Завещание";
 	mainflag = ITEM_KAT_DOCS;
 	flags = 0;
-	value = 15;
-	visual = "ItWr_Scroll_01.3DS";
+	value = 0;
+	visual = "ItWr_Scroll_02.3DS";
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	on_state[0] = useurkunde;
@@ -168,7 +162,7 @@ instance ITWR_URKUNDE_01(C_ITEM)
 	text[0] = "Владелец этого документа";
 	text[1] = "может заявить о своих правах";
 	text[2] = "на форт и прилегающие земли.";
-	text[5] = "Цена                400 фунтов золотом";
+	text[5] = "Цена:                   400 фунтов золотом";
 };
 
 
@@ -177,14 +171,14 @@ func void useurkunde()
 	var int ndocid;
 	ndocid = Doc_Create();
 	Doc_SetPages(ndocid,1);
-	Doc_SetPage(ndocid,0,"letters.TGA",0);
+	Doc_SetPage(ndocid,0,"letters2.TGA",0);
 	Doc_SetMargins(ndocid,-1,50,50,50,50,1);
 	Doc_SetFont(ndocid,-1,"font_15_book.tga");
 	Doc_PrintLine(ndocid,0,"Завещание");
 	Doc_SetFont(ndocid,-1,"font_10_book.tga");
 	Doc_PrintLine(ndocid,0,"");
 	Doc_PrintLine(ndocid,0,"");
-	Doc_PrintLines(ndocid,0,"Я, Бергмар, граф, владелец земель до западного леса и наделов до Тимориса, которые находятся в землях Хориниса... завещаю... что я... владельцу данного документа... и дому Инноса мой феод с горным фортом (с положенной мне десятиной и всеми находящимися на этой земле шахтами) купленным за 400 фунтов золотом.");
+	Doc_PrintLines(ndocid,0,"Я, Бергмар, граф, владелец земель до западного леса и наделов до Тимориса, которые находятся в землях Хориниса, завещаю владельцу данного документа и дому Инноса мой феод с горным фортом (с положенной мне десятиной и всеми находящимися на этой земле шахтами) купленным за 400 фунтов золотом.");
 	Doc_Show(ndocid);
 };
 
@@ -227,17 +221,17 @@ instance ITKE_FOCUS4(C_ITEM)
 	name = "Ключ";
 	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MISSION;
-	value = 3;
+	value = 0;
 	visual = "ItKe_Key_01.3ds";
 	material = MAT_METAL;
 	description = name;
-	text[1] = "Это ключ из";
-	text[2] = "пещеры в разрушенном монастыре.";
+	text[0] = "Это ключ из пещеры";
+	text[1] = "в разрушенном монастыре.";
 };
 
 instance FOCUS_4(C_ITEM)
 {
-	name = "Юнитор из разрушенного монастыря";
+	name = "Юнитор из развалин монастыря";
 	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MISSION;
 	hp = 1;
@@ -286,17 +280,17 @@ instance ITKE_FOCUS5(C_ITEM)
 	name = "Ключ";
 	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MISSION;
-	value = 3;
+	value = 0;
 	visual = "ItKe_Key_02.3ds";
 	material = MAT_METAL;
 	description = name;
-	text[1] = "Это ключ из склепа";
-	text[2] = "внутри каменного кольца.";
+	text[0] = "Это ключ из склепа";
+	text[1] = "внутри круга камней.";
 };
 
 instance FOCUS_5(C_ITEM)
 {
-	name = "Юнитор из каменного кольца";
+	name = "Юнитор из круга камней";
 	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MISSION;
 	hp = 1;

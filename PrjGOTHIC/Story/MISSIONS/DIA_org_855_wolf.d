@@ -1,4 +1,28 @@
 
+func void b_wolflearn()
+{
+	Info_ClearChoices(org_855_wolf_teach);
+	Info_AddChoice(org_855_wolf_teach,DIALOG_BACK,org_855_wolf_teach_back);
+	if(hero.guild == GIL_ORG || hero.guild == GIL_SLD || hero.guild == GIL_KDW)
+	{
+		Info_AddChoice(org_855_wolf_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),org_855_wolf_teach_dex_5);
+		Info_AddChoice(org_855_wolf_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),org_855_wolf_teach_dex_1);
+	}
+	else
+	{
+		Info_AddChoice(org_855_wolf_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,OTHERCAMPLEARNPAY * 5),org_855_wolf_teach_dex_5);
+		Info_AddChoice(org_855_wolf_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,OTHERCAMPLEARNPAY),org_855_wolf_teach_dex_1);
+	};
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_BOW) == 0)
+	{
+		Info_AddChoice(org_855_wolf_teach,b_buildlearnstring(NAME_LEARNBOW_1,LPCOST_TALENT_BOW_1,50),org_855_wolf_train_info);
+	}
+	else if(Npc_GetTalentSkill(hero,NPC_TALENT_BOW) == 1)
+	{
+		Info_AddChoice(org_855_wolf_teach,b_buildlearnstring(NAME_LEARNBOW_2,LPCOST_TALENT_BOW_2,50),org_855_wolf_trainagain_info);
+	};
+};
+
 instance DIA_ORG_855_WOLF_EXIT(C_INFO)
 {
 	npc = org_855_wolf;
@@ -42,9 +66,9 @@ func void dia_wolf_hello_info()
 {
 	AI_Output(other,self,"DIA_Wolf_Hello_15_00");	//Кто ты?
 	AI_Output(self,other,"DIA_Wolf_Hello_09_01");	//Меня зовут Волк. Я делаю доспехи.
+	Log_CreateTopic(GE_TRADERNC,LOG_NOTE);
 	b_logentry(GE_TRADERNC,"Волк продает ворам доспехи. Его можно найти возле его дома, в большой пещере Нового лагеря.");
 };
-
 
 instance DIA_WOLF_GREETORG(C_INFO)
 {
@@ -82,16 +106,17 @@ instance ORG_855_WOLF_TRADE(C_INFO)
 	trade = 1;
 };
 
-
 func int org_855_wolf_trade_condition()
 {
-	return 1;
+	if(Npc_KnowsInfo(hero,org_855_wolf_sellbow))
+	{
+		return 1;
+	};
 };
 
 func void org_855_wolf_trade_info()
 {
-	AI_Output(other,self,"Org_855_Wolf_TRADE_15_00");	//А ты берешь в оплату что-нибудь еще?
-	AI_Output(self,other,"Org_855_Wolf_TRADE_09_01");	//Я покупаю меха и шкуры у охотников. Если у тебя найдется что-то подобное, с удовольствием куплю.
+	AI_Output(other,self,"Stt_311_Fisk_Trade_15_00");	//Покажи, что у тебя есть.
 };
 
 
@@ -101,23 +126,29 @@ instance ORG_855_WOLF_WHEREHUNTER(C_INFO)
 	nr = 900;
 	condition = org_855_wolf_wherehunter_condition;
 	information = org_855_wolf_wherehunter_info;
-	permanent = 1;
+	permanent = 0;
 	description = "Как добываются меха и шкуры?";
 };
 
 
 func int org_855_wolf_wherehunter_condition()
 {
-	return 1;
+	if(((KNOWS_GETTEETH == FALSE) || (KNOWS_GETFUR == FALSE) || (KNOWS_GETCLAWS == FALSE) || (KNOWS_GETHIDE == FALSE)) && Npc_KnowsInfo(hero,org_855_wolf_sellbow))
+	{
+		return 1;
+	};
 };
 
 func void org_855_wolf_wherehunter_info()
 {
 	AI_Output(other,self,"Org_855_Wolf_WhereHunter_15_00");	//Как добываются меха и шкуры?
 	AI_Output(self,other,"Org_855_Wolf_WhereHunter_09_01");	//По пути в Новый лагерь живет охотник Эйдан. Он может тебя научить, как правильно разделывать добычу.
-	AI_Output(self,other,"Org_855_Wolf_WhereHunter_09_02");	//Рэтфорд и Дракс живут в северной части Старого лагеря, по пути к рыночной площади. 
+	AI_Output(self,other,"Org_855_Wolf_WhereHunter_09_02");	//Ретфорд и Дракс живут в северной части Старого лагеря, по пути к рыночной площади.
 };
 
+
+var int wolf_armor_m_was_bought;
+var int wolf_armor_h_was_bought;
 
 instance DIA_WOLF_SELLARMOR(C_INFO)
 {
@@ -132,7 +163,7 @@ instance DIA_WOLF_SELLARMOR(C_INFO)
 
 func int dia_wolf_sellarmor_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_wolf_hello) && !Npc_KnowsInfo(hero,info_wolf_armorfinished))
+	if(Npc_KnowsInfo(hero,dia_wolf_hello) && !Npc_KnowsInfo(hero,info_wolf_armorfinished) && ((WOLF_ARMOR_M_WAS_BOUGHT != 1) || (WOLF_ARMOR_H_WAS_BOUGHT != 1)))
 	{
 		return 1;
 	};
@@ -141,13 +172,19 @@ func int dia_wolf_sellarmor_condition()
 func void dia_wolf_sellarmor_info()
 {
 	AI_Output(other,self,"DIA_Wolf_SellArmor_15_00");	//Мне нужен доспех получше.
-	if((Npc_GetTrueGuild(other) == GIL_ORG) || (Npc_GetTrueGuild(other) == GIL_SLD))
+	if(Npc_GetTrueGuild(other) == GIL_ORG)
 	{
 		AI_Output(self,other,"DIA_Wolf_SellArmor_09_01");	//Теперь ты один из нас, и можешь купить у меня все, что захочешь.
 		Info_ClearChoices(dia_wolf_sellarmor);
 		Info_AddChoice(dia_wolf_sellarmor,DIALOG_BACK,dia_wolf_sellarmor_back);
-		Info_AddChoice(dia_wolf_sellarmor,b_buildbuyarmorstring("Средний доспех: оружие 35, стрелы 5, огонь 15",VALUE_ORG_ARMOR_M),dia_wolf_sellarmor_m);
-		Info_AddChoice(dia_wolf_sellarmor,b_buildbuyarmorstring("Тяжелый доспех: оружия 40, стрелы 5, огонь 20",VALUE_ORG_ARMOR_H),dia_wolf_sellarmor_h);
+		if(WOLF_ARMOR_H_WAS_BOUGHT != 1)
+		{
+			Info_AddChoice(dia_wolf_sellarmor,b_buildbuyarmorstring("Тяжелый доспех вора: 40/5/20/0",VALUE_ORG_ARMOR_H),dia_wolf_sellarmor_h);
+		};
+		if(WOLF_ARMOR_M_WAS_BOUGHT != 1)
+		{
+			Info_AddChoice(dia_wolf_sellarmor,b_buildbuyarmorstring("Средний доспех вора: 35/5/15/0",VALUE_ORG_ARMOR_M),dia_wolf_sellarmor_m);
+		};
 	}
 	else
 	{
@@ -171,10 +208,10 @@ func void dia_wolf_sellarmor_m()
 	{
 		AI_Output(self,other,"DIA_Wolf_SellArmor_M_09_03");	//Хороший доспех. Правда не такой, как на мне, но он тоже сможет тебя защитить.
 		b_giveinvitems(hero,self,itminugget,VALUE_ORG_ARMOR_M);
-		CreateInvItem(hero,org_armor_m);
-		CreateInvItem(self,itamarrow);
-		b_giveinvitems(self,hero,itamarrow,1);
-		Npc_RemoveInvItem(hero,itamarrow);
+		CreateInvItem(self,org_armor_m);
+		b_giveinvitems(self,hero,org_armor_m,1);
+		AI_EquipArmor(hero,org_armor_m);
+		WOLF_ARMOR_M_WAS_BOUGHT = 1;
 	};
 };
 
@@ -190,61 +227,9 @@ func void dia_wolf_sellarmor_h()
 		AI_Output(self,other,"DIA_Wolf_SellArmor_H_09_03");	//Этот доспех защитит тебя от любой опасности. Я сам такой ношу, и, как видишь, до сих пор жив.
 		b_giveinvitems(hero,self,itminugget,VALUE_ORG_ARMOR_H);
 		CreateInvItem(hero,org_armor_h);
-		CreateInvItem(self,itamarrow);
-		b_giveinvitems(self,hero,itamarrow,1);
-		Npc_RemoveInvItem(hero,itamarrow);
-	};
-};
-
-
-instance ORG_855_WOLF_TRAINOFFER(C_INFO)
-{
-	npc = org_855_wolf;
-	nr = 100;
-	condition = org_855_wolf_trainoffer_condition;
-	information = org_855_wolf_trainoffer_info;
-	important = 0;
-	permanent = 0;
-	description = "Я хочу научиться стрелять из лука.";
-};
-
-
-func int org_855_wolf_trainoffer_condition()
-{
-	if(Npc_GetTalentSkill(hero,NPC_TALENT_BOW) != 2)
-	{
-		return TRUE;
-	};
-};
-
-func void org_855_wolf_trainoffer_info()
-{
-	AI_Output(other,self,"ORG_855_Wolf_TRAINOFFER_Info_15_01");	//Я хочу научиться стрелять из лука.
-	AI_Output(self,other,"ORG_855_Wolf_TRAINOFFER_Info_09_02");	//Я могу научить тебя, но не бесплатно. Мне тоже нужно на что-то жить.
-	AI_Output(other,self,"ORG_855_Wolf_TRAINOFFER_Info_15_03");	//Сколько ты хочешь?
-	AI_Output(self,other,"ORG_855_Wolf_TRAINOFFER_Info_09_04");	//Каждый мой урок стоит 50 кусков руды, и торг здесь неуместен.
-	Log_CreateTopic(GE_TEACHERNC,LOG_NOTE);
-	b_logentry(GE_TEACHERNC,"Вор Волк может научить меня стрелять из лука.");
-};
-
-
-instance ORG_855_WOLF_TRAIN(C_INFO)
-{
-	npc = org_855_wolf;
-	nr = 100;
-	condition = org_855_wolf_train_condition;
-	information = org_855_wolf_train_info;
-	important = 0;
-	permanent = 0;
-	description = b_buildlearnstring(NAME_LEARNBOW_1,LPCOST_TALENT_BOW_1,50);
-};
-
-
-func int org_855_wolf_train_condition()
-{
-	if(Npc_KnowsInfo(hero,org_855_wolf_trainoffer) && (Npc_GetTalentSkill(hero,NPC_TALENT_BOW) == 0))
-	{
-		return TRUE;
+		PrintScreen("Получен 1 предмет.",-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
+		AI_EquipArmor(hero,org_armor_h);
+		WOLF_ARMOR_H_WAS_BOUGHT = 1;
 	};
 };
 
@@ -253,34 +238,21 @@ func void org_855_wolf_train_info()
 	AI_Output(other,self,"ORG_855_Wolf_TRAIN_Info_15_01");	//Научи меня стрелять из лука.
 	if(Npc_HasItems(hero,itminugget) >= 50)
 	{
+		if(hero.lp >= LPCOST_TALENT_BOW_1)
+		{
+			b_giveinvitems(hero,self,itminugget,50);
+		};
 		if(b_giveskill(hero,NPC_TALENT_BOW,1,LPCOST_TALENT_BOW_1))
 		{
 			AI_Output(self,other,"ORG_855_Wolf_TRAIN_Info_09_02");	//Твоя ловкость влияет на точность стрельбы. Чем лучше ты владеешь телом, тем точнее будут твои выстрелы.
 			AI_Output(self,other,"ORG_855_Wolf_TRAIN_Info_09_03");	//Чем лучше ты освоишь стрельбу из лука, тем больше будет расстояние, на котором ты сможешь поразить свою цель. Ты должен развивать и то, и другое, чтобы стать хорошим лучником.
-			b_giveinvitems(hero,self,itminugget,50);
 		};
-	};
-};
-
-
-instance ORG_855_WOLF_TRAINAGAIN(C_INFO)
-{
-	npc = org_855_wolf;
-	nr = 100;
-	condition = org_855_wolf_trainagain_condition;
-	information = org_855_wolf_trainagain_info;
-	important = 0;
-	permanent = 0;
-	description = b_buildlearnstring(NAME_LEARNBOW_2,LPCOST_TALENT_BOW_2,50);
-};
-
-
-func int org_855_wolf_trainagain_condition()
-{
-	if(Npc_KnowsInfo(hero,org_855_wolf_trainoffer) && (Npc_GetTalentSkill(hero,NPC_TALENT_BOW) == 1))
+	}
+	else
 	{
-		return TRUE;
+		AI_Output(self,other,"DIA_Wolf_SellArmor_M_09_02");	//Без руды ты ничего не сможешь купить.
 	};
+	b_wolflearn();
 };
 
 func void org_855_wolf_trainagain_info()
@@ -288,15 +260,23 @@ func void org_855_wolf_trainagain_info()
 	AI_Output(other,self,"ORG_855_Wolf_TRAINAGAIN_Info_15_01");	//Я хочу научиться лучше стрелять из лука.
 	if(Npc_HasItems(hero,itminugget) >= 50)
 	{
+		if(hero.lp >= LPCOST_TALENT_BOW_2)
+		{
+			b_giveinvitems(hero,self,itminugget,50);
+		};
 		if(b_giveskill(hero,NPC_TALENT_BOW,2,LPCOST_TALENT_BOW_2))
 		{
 			AI_Output(self,other,"ORG_855_Wolf_TRAINAGAIN_Info_09_02");	//Ты уже хороший охотник. Тебе осталось выучить последнюю премудрость.
 			AI_Output(self,other,"ORG_855_Wolf_TRAINAGAIN_Info_09_03");	//Ты должен научиться двигаться бессознательно, не раздумывая над тем, что делать в следующий момент.
 			AI_Output(self,other,"ORG_855_Wolf_TRAINAGAIN_Info_09_04");	//Запомни закон: рассчитываешь расстояние до цели, скорость полета, силу натяжения тетивы - и стрела летит в цель. Будь всегда внимателен.
 			AI_Output(self,other,"ORG_855_Wolf_TRAINAGAIN_Info_09_05");	//Технику ты очень хорошо освоил. Теперь настало время применить свои знания на практике.
-			b_giveinvitems(hero,self,itminugget,50);
 		};
+	}
+	else
+	{
+		AI_Output(self,other,"DIA_Wolf_SellArmor_M_09_02");	//Без руды ты ничего не сможешь купить.
 	};
+	b_wolflearn();
 };
 
 
@@ -313,7 +293,7 @@ instance ORG_855_WOLF_TEACH(C_INFO)
 
 func int org_855_wolf_teach_condition()
 {
-	if(Npc_GetTrueGuild(hero) == GIL_GRD)
+	if(Npc_KnowsInfo(hero,dia_wolf_hello))
 	{
 		return TRUE;
 	};
@@ -328,11 +308,17 @@ func void org_855_wolf_teach_info()
 		Log_CreateTopic(GE_TEACHERNC,LOG_NOTE);
 		b_logentry(GE_TEACHERNC,"Вор Волк может помочь мне увеличить ловкость.");
 		LOG_WOLFTRAIN = TRUE;
+		if(Npc_GetTalentSkill(hero,NPC_TALENT_BOW) != 2)
+		{
+			AI_Output(other,self,"ORG_855_Wolf_TRAINOFFER_Info_15_01");	//Я хочу научиться стрелять из лука.
+			AI_Output(self,other,"ORG_855_Wolf_TRAINOFFER_Info_09_02");	//Я могу научить тебя, но не бесплатно. Мне тоже нужно на что-то жить.
+			AI_Output(other,self,"ORG_855_Wolf_TRAINOFFER_Info_15_03");	//Сколько ты хочешь?
+			AI_Output(self,other,"ORG_855_Wolf_TRAINOFFER_Info_09_04");	//Каждый мой урок стоит 50 кусков руды, и торг здесь неуместен.
+			Log_CreateTopic(GE_TEACHERNC,LOG_NOTE);
+			b_logentry(GE_TEACHERNC,"Вор Волк может научить меня стрелять из лука.");
+		};
 	};
-	Info_ClearChoices(org_855_wolf_teach);
-	Info_AddChoice(org_855_wolf_teach,DIALOG_BACK,org_855_wolf_teach_back);
-	Info_AddChoice(org_855_wolf_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),org_855_wolf_teach_dex_5);
-	Info_AddChoice(org_855_wolf_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),org_855_wolf_teach_dex_1);
+	b_wolflearn();
 };
 
 func void org_855_wolf_teach_back()
@@ -342,22 +328,47 @@ func void org_855_wolf_teach_back()
 
 func void org_855_wolf_teach_dex_1()
 {
-	b_buyattributepoints(other,ATR_DEXTERITY,LPCOST_ATTRIBUTE_DEXTERITY);
-	Info_ClearChoices(org_855_wolf_teach);
-	Info_AddChoice(org_855_wolf_teach,DIALOG_BACK,org_855_wolf_teach_back);
-	Info_AddChoice(org_855_wolf_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),org_855_wolf_teach_dex_5);
-	Info_AddChoice(org_855_wolf_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),org_855_wolf_teach_dex_1);
+	if(hero.guild == GIL_ORG || hero.guild == GIL_SLD || hero.guild == GIL_KDW)
+	{
+		b_buyattributepoints(other,ATR_DEXTERITY,LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY)
+	{
+		if(hero.lp >= 1 && hero.attribute[ATR_DEXTERITY] < 100)
+		{
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
+		};
+		b_buyattributepoints(other,ATR_DEXTERITY,LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"DIA_Wolf_SellArmor_M_09_02");	//Без руды ты ничего не сможешь купить.
+	};
+	b_wolflearn();
 };
 
 func void org_855_wolf_teach_dex_5()
 {
-	b_buyattributepoints(other,ATR_DEXTERITY,5 * LPCOST_ATTRIBUTE_DEXTERITY);
-	Info_ClearChoices(org_855_wolf_teach);
-	Info_AddChoice(org_855_wolf_teach,DIALOG_BACK,org_855_wolf_teach_back);
-	Info_AddChoice(org_855_wolf_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),org_855_wolf_teach_dex_5);
-	Info_AddChoice(org_855_wolf_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),org_855_wolf_teach_dex_1);
+	if(hero.guild == GIL_ORG || hero.guild == GIL_SLD || hero.guild == GIL_KDW)
+	{
+		b_buyattributepoints(other,ATR_DEXTERITY,5 * LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY * 5)
+	{
+		if(hero.lp >= 5 && hero.attribute[ATR_DEXTERITY] < 96)
+		{
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
+		};
+		b_buyattributepoints(other,ATR_DEXTERITY,5 * LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"DIA_Wolf_SellArmor_M_09_02");	//Без руды ты ничего не сможешь купить.
+	};
+	b_wolflearn();
 };
-
 
 instance INFO_WOLF_GOOD(C_INFO)
 {
@@ -414,7 +425,7 @@ func void info_wolf_speak_info()
 	AI_Output(hero,self,"Info_Wolf_SPEAK_15_01");	//И что ты хочешь?
 	AI_Output(self,hero,"Info_Wolf_SPEAK_09_02");	//Я придумал, как улучшить свойства наших доспехов.
 	AI_Output(hero,self,"Info_Wolf_SPEAK_15_03");	//Да? И как?
-	AI_Output(self,hero,"Info_Wolf_SPEAK_09_04");	//Самый прочный материал в колонии - панцири ползунов. 
+	AI_Output(self,hero,"Info_Wolf_SPEAK_09_04");	//Самый прочный материал в колонии - панцири ползунов.
 	AI_Output(self,hero,"Info_Wolf_SPEAK_09_05");	//Конечно, не тех мелких ползунков, которые прячутся в шахте Гомеза...
 	AI_Output(self,hero,"Info_Wolf_SPEAK_09_06");	//...Нет. Я говорю о других ползунах, о тех, что живут в нашей шахте.
 	AI_Output(self,hero,"Info_Wolf_SPEAK_09_07");	//Их панцири почти невозможно пробить. Их не берет никакое оружие.
@@ -453,7 +464,7 @@ func void info_wolf_skin_info()
 	Log_SetTopicStatus(CH4_MCPLATEARMOR,LOG_RUNNING);
 	b_logentry(CH4_MCPLATEARMOR,"Вор по имени Волк из Нового лагеря предложил мне добыть панцирные пластины ползунов, из которых он сможет сделать доспех. Он рассказал мне, как добывать эти пластины.");
 	Log_CreateTopic(GE_ANIMALTROPHIES,LOG_NOTE);
-	b_logentry(GE_ANIMALTROPHIES,"Навык добычи панцирных пластин: ползун-воин.");
+	b_logentry(GE_ANIMALTROPHIES,"Навык добычи панцирных пластин ползунов-воинов.");
 	AI_StopProcessInfos(self);
 };
 
@@ -540,7 +551,9 @@ func void info_wolf_mcplatesenough_info()
 	MCPLATESDELIVERED = TRUE;
 	b_logentry(CH4_MCPLATEARMOR,"Я отдал Волку 15 панцирных пластин. Он сказал, что ему нужно время. Я зайду к нему позже.");
 	b_givexp(XP_DELIVEREDMCPLATES);
-	b_giveinvitems(hero,self,itat_crawler_02,15);
+	//b_giveinvitems(hero,self,itat_crawler_02,15);
+	Npc_RemoveInvItems(hero,itat_crawler_02,15);
+	PrintScreen("Предметов отдано: 15",-1,_YPOS_MESSAGE_GIVEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_GIVEN);
 	AI_StopProcessInfos(self);
 };
 
@@ -605,6 +618,7 @@ func void info_wolf_armorfinished_info()
 	b_givexp(XP_GORMCPLATEARMOR);
 	CreateInvItem(self,crw_armor_h);
 	b_giveinvitems(self,hero,crw_armor_h,1);
+	AI_EquipArmor(hero,crw_armor_h);
 };
 
 
@@ -621,14 +635,42 @@ instance ORG_855_WOLF_SELLBOW(C_INFO)
 
 func int org_855_wolf_sellbow_condition()
 {
-	return TRUE;
+	if(Npc_KnowsInfo(hero,dia_wolf_hello))
+	{
+		return 1;
+	};
 };
 
 func void org_855_wolf_sellbow_info()
 {
 	AI_Output(other,self,"Org_855_Wolf_SELLBOW_Info_15_01");	//Где здесь продаются хорошие луки?
 	AI_Output(self,other,"Org_855_Wolf_SELLBOW_Info_09_02");	//Ты пришел туда, куда нужно. Ты можешь купить у меня хороший лук, если у тебя есть руда.
+	AI_Output(self,other,"Org_855_Wolf_TRADE_09_01");	//Я покупаю меха и шкуры у охотников. Если у тебя найдется что-то подобное, с удовольствием куплю.
 	Log_CreateTopic(GE_TRADERNC,LOG_NOTE);
 	b_logentry(GE_TRADERNC,"Вор Волк продает луки.");
+};
+
+instance ORG_855_WOLF_FISK(C_INFO)
+{
+	npc = org_855_wolf;
+	nr = 2;
+	condition = org_855_wolf_fisk_condition;
+	information = org_855_wolf_fisk_info;
+	permanent = 0;
+	description = "Фиску из Старого лагеря нужен помощник.";
+};
+
+func int org_855_wolf_fisk_condition()
+{
+	if(FISK_GETNEWHEHLER == LOG_RUNNING && !Npc_KnowsInfo(hero,org_843_sharky_fisk))
+	{
+		return TRUE;
+	};
+};
+
+func void org_855_wolf_fisk_info()
+{
+	AI_Output(other,self,"Org_843_Sharky_Fisk_Info_15_00");	//Фиску из Старого лагеря нужен помощник.
+	AI_Output(self,other,"SVM_9_NotNow");	//Нет, не сейчас.
 };
 

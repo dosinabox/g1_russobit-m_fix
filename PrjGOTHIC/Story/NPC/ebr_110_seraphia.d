@@ -30,3 +30,9 @@ func void rtn_start_110()
 	ta_babe_fan(8,30,0,1,"OCC_BARONS_GREATHALL_BERATER");
 };
 
+func void rtn_flee_110()
+{
+	ta_stay(0,0,12,0,"WP_INTRO01");
+	ta_stay(12,0,24,0,"WP_INTRO01");
+};
+

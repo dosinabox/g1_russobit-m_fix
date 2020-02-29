@@ -9,7 +9,7 @@ func void zs_firespit()
 	AI_RemoveWeapon(self);
 };
 
-func int zs_firespit_loop()
+func void zs_firespit_loop()
 {
 	var int spitreaktion;
 	printdebugnpc(PD_ZS_LOOP,"ZS_Firespit_Loop");

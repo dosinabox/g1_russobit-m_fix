@@ -26,6 +26,7 @@ func int zs_followpc_loop()
 		{
 			AI_SetWalkMode(self,NPC_RUN);
 		};
+		c_stoplookat(self);
 		AI_GotoNpc(self,hero);
 	}
 	else
@@ -53,9 +54,12 @@ func void b_followpc_assesssc()
 	if(Npc_CheckInfo(self,1))
 	{
 		printdebugnpc(PD_TA_CHECK,"...wichtige Info zu vergeben!");
-		hero.aivar[AIV_IMPORTANT] = TRUE;
-		b_fullstop(other);
-		b_fullstop(self);
+		if(!hero.aivar[AIV_INVINCIBLE])
+		{
+			hero.aivar[AIV_IMPORTANT] = TRUE;
+			b_fullstop(other);
+			b_fullstop(self);
+		};
 		AI_StartState(self,zs_talk,0,"");
 		return;
 	};

@@ -33,7 +33,7 @@ func void rtn_start_221()
 	ta_practicesword(7,40,20,10,"OCC_CENTER_4_TRAIN3");
 	ta_roastscavenger(20,10,22,10,"OCC_SHADOWS_CORNER_MOVEMENT2");
 	ta_standaround(22,10,0,10,"OCC_SHADOWS_CORNER_MOVEMENT");
-	ta_sleep(0,10,7,40,"OCC_MERCS_UPPER_RIGHT_ROOM_BED3");
+	ta_sleep(0,10,7,40,"OCC_MERCS_UPPER_RIGHT_ROOM_BED6");
 };
 
 func void rtn_ot_221()

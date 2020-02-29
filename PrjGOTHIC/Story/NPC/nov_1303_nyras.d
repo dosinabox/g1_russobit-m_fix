@@ -42,3 +42,9 @@ func void rtn_prepareritual_1303()
 	ta_stay(7,0,24,0,"WP_CIRCLE_01");
 };
 
+func void rtn_hide_1303()
+{
+	ta_sitaround(0,0,7,0,"OW_FOGTOWER_TOP");
+	ta_sitaround(7,0,24,0,"OW_FOGTOWER_TOP");
+};
+

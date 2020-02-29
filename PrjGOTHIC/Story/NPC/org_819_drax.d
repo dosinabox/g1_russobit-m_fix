@@ -4,15 +4,15 @@ instance ORG_819_DRAX(NPC_DEFAULT)
 	name[0] = "Дракс";
 	npctype = NPCTYPE_MAIN;
 	guild = GIL_ORG;
-	level = 3;
+	level = 9;
 	voice = 6;
 	id = 819;
 	attribute[ATR_STRENGTH] = 30;
 	attribute[ATR_DEXTERITY] = 30;
 	attribute[ATR_MANA_MAX] = 0;
 	attribute[ATR_MANA] = 0;
-	attribute[ATR_HITPOINTS_MAX] = 136;
-	attribute[ATR_HITPOINTS] = 136;
+	attribute[ATR_HITPOINTS_MAX] = 150;
+	attribute[ATR_HITPOINTS] = 150;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_SetVisualBody(self,"hum_body_Naked0",0,1,"Hum_Head_FatBald",39,2,org_armor_l);
 	b_scale(self);
@@ -42,5 +42,11 @@ func void rtn_start_819()
 {
 	ta_smalltalk(0,0,23,0,"OW_PATH_1_5_B");
 	ta_smalltalk(23,0,0,0,"OW_PATH_1_5_B");
+};
+
+func void rtn_fmtaken_819()
+{
+	ta_guard(7,0,23,0,"PATH_OC_NC_21");
+	ta_guard(23,0,7,0,"PATH_OC_NC_21");
 };
 

@@ -53,7 +53,7 @@ instance INFO_SFB_2_EINERVONEUCHWERDEN(C_INFO)
 
 func int info_sfb_2_einervoneuchwerden_condition()
 {
-	if(Npc_GetTrueGuild(other) == GIL_NONE)
+	if(Npc_GetTrueGuild(other) == GIL_NONE && FMTAKEN == FALSE)
 	{
 		return TRUE;
 	};
@@ -78,7 +78,10 @@ instance INFO_SFB_2_WICHTIGEPERSONEN(C_INFO)
 
 func int info_sfb_2_wichtigepersonen_condition()
 {
-	return 1;
+	if(FMTAKEN == FALSE)
+	{
+		return TRUE;
+	};
 };
 
 func void info_sfb_2_wichtigepersonen_info()
@@ -101,7 +104,10 @@ instance INFO_SFB_2_DASLAGER(C_INFO)
 
 func int info_sfb_2_daslager_condition()
 {
-	return 1;
+	if(FMTAKEN == FALSE)
+	{
+		return TRUE;
+	};
 };
 
 func void info_sfb_2_daslager_info()
@@ -123,7 +129,10 @@ instance INFO_SFB_2_DIELAGE(C_INFO)
 
 func int info_sfb_2_dielage_condition()
 {
-	return 1;
+	if(FMTAKEN == FALSE)
+	{
+		return TRUE;
+	};
 };
 
 func void info_sfb_2_dielage_info()

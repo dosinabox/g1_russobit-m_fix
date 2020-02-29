@@ -201,7 +201,7 @@ func int dia_gomez_dabei_condition()
 
 func void dia_gomez_dabei_info()
 {
-	AI_Output(other,self,"DIA_Gomez_Dabei_15_00");	// Это значит, что я принят?
+	AI_Output(other,self,"DIA_Gomez_Dabei_15_00");	//Это значит, что я принят?
 	AI_Output(self,other,"DIA_Gomez_Dabei_11_01");	//Ты прав. Теперь ты один из нас.
 	AI_Output(self,other,"DIA_Gomez_Dabei_11_02");	//Иди к Равену. Он все тебе расскажет.
 	Npc_SetTrueGuild(hero,GIL_STT);
@@ -215,6 +215,32 @@ func void dia_gomez_dabei_info()
 	Log_CreateTopic(CH1_JOINPSI,LOG_MISSION);
 	Log_SetTopicStatus(CH1_JOINPSI,LOG_FAILED);
 	b_logentry(CH1_JOINPSI,"Теперь Старый лагерь стал моим домом. Братство Спящего сможет обойтись без меня.");
+	Log_CreateTopic(GE_TEACHEROC,LOG_NOTE);
+	b_logentry(GE_TEACHEROC,"Я вступил в Старый лагерь и теперь некоторые учителя будут согласны учить меня бесплатно.");
+	LOG_THORUSTRAIN = TRUE;
+	if(BAALORUN_FETCHWEED == LOG_RUNNING)
+	{
+		b_logentry(CH1_DELIVERWEED,"Я теперь Призрак и больше не хочу быть на побегушках у этих болотных придурков. Думаю, у них и без меня найдется, кому таскать тюки с травой.");
+		Log_SetTopicStatus(CH1_DELIVERWEED,LOG_FAILED);
+		BAALORUN_FETCHWEED = LOG_FAILED;
+	};
+	if(GETNEWGUY_STARTED == TRUE)
+	{
+		b_logentry(CH1_RECRUITDUSTY,"Пускай сектанты сами ищут простаков, готовых вкалывать на болотах. Я же теперь должен защищать интересы Старого Лагеря.");
+		Log_SetTopicStatus(CH1_RECRUITDUSTY,LOG_FAILED);
+		GETNEWGUY_STARTED = LOG_FAILED;
+	};
+	if(KIRGO_CHARGED == TRUE && KIRGO_CHARGED_END == FALSE)
+	{
+		KIRGO_CHARGED = FALSE;
+		b_exchangeroutine(grd_251_kirgo,"START");
+	};
+	if(KHARIM_CHARGED == TRUE && KHARIM_CHARGED_END == FALSE)
+	{
+		KHARIM_CHARGED = FALSE;
+		b_exchangeroutine(sld_729_kharim,"START");
+	};
+	b_exchangeroutine(tpl_1422_gorhanis,"START");
 	AI_StopProcessInfos(self);
 };
 
@@ -242,6 +268,7 @@ func void dia_gomez_nurso_info()
 {
 	AI_Output(other,self,"DIA_Gomez_NurSo_15_00");	//Я всего лишь хотел доложить, что вернулся.
 	AI_Output(self,other,"DIA_Gomez_NurSo_11_00");	//Иди и поговори с Равеном. И никогда не заходи сюда без разрешения!
+	AI_StopProcessInfos(self);
 };
 
 
@@ -257,7 +284,7 @@ instance DIA_EBR_100_GOMEZ_WAIT4SC(C_INFO)
 
 func int dia_ebr_100_gomez_wait4sc_condition()
 {
-	if(EXPLORESUNKENTOWER)
+	if(EXPLORESUNKENTOWER && (Npc_GetDistToNpc(hero,self) < 500))
 	{
 		return TRUE;
 	};
@@ -271,6 +298,9 @@ func void dia_ebr_100_gomez_wait4sc_info()
 	AI_Output(self,other,"DIA_EBR_100_Gomez_Wait4SC_11_04");	//А ты смел, если можешь со мной, Гомезом, разговаривать таким тоном. Но все равно глупо было появляться здесь.
 	AI_Output(self,other,"DIA_EBR_100_Gomez_Wait4SC_11_05");	//Я лично прослежу, чтобы ты больше никак не смог навредить моим планам.
 	AI_StopProcessInfos(self);
+	npc_setpermattitude(self,ATT_HOSTILE);
+	Npc_SetTarget(self,other);
+	AI_StartState(self,zs_attack,1,"");
 	self.guild = GIL_EBR;
 	Npc_SetTrueGuild(self,GIL_EBR);
 };

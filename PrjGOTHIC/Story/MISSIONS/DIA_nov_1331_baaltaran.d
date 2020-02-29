@@ -208,12 +208,12 @@ func void dia_baaltaran_waytost_info()
 	AI_Output(other,self,"DIA_BaalTaran_WayToST_15_00");	//Как я могу найти лагерь Братства?
 	AI_Output(self,other,"DIA_BaalTaran_WayToST_05_01");	//Сейчас у меня много дел. Ты можешь обратиться к Идолу Парвезу, который тоже пришел в этот лагерь.
 	AI_Output(self,other,"DIA_BaalTaran_WayToST_05_02");	//Его можно найти недалеко от рынка, по другую сторону замка. По-моему, у него там есть своя хижина.
-	if(Npc_GetTrueGuild(hero) == GIL_NONE)
+	if((Npc_GetTrueGuild(hero) == GIL_NONE) && (KAPITEL < 2))
 	{
 		Log_CreateTopic(CH1_JOINPSI,LOG_MISSION);
 		Log_SetTopicStatus(CH1_JOINPSI,LOG_RUNNING);
+		b_logentry(CH1_JOINPSI,"Послушник по имени Идол Парвез может отвести меня в Болотный лагерь. Я смогу найти его на рыночной площади за замком в Старом лагере.");
 	};
-	b_logentry(CH1_JOINPSI,"Послушник по имени Идол Парвез может отвести меня в Болотный лагерь. Я смогу найти его на рыночной площади за замком в Старом лагере.");
 };
 
 
@@ -223,14 +223,14 @@ instance DIA_BAALTARAN_INTOCASTLE(C_INFO)
 	nr = 10;
 	condition = dia_baaltaran_intocastle_condition;
 	information = dia_baaltaran_intocastle_info;
-	permanent = 1;
+	permanent = 0;
 	description = "Мне нужно попасть в замок. Ты можешь мне помочь?";
 };
 
 
 func int dia_baaltaran_intocastle_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_baaltaran_greet))
+	if(Npc_KnowsInfo(hero,dia_baaltaran_greet) && (Npc_HasItems(hero,itwr_fire_letter_01) || Npc_HasItems(hero,itwr_fire_letter_02)))
 	{
 		return 1;
 	};
@@ -264,6 +264,22 @@ func void dia_baaltaran_intocastle_letter()
 	AI_Output(self,other,"DIA_BaalTaran_IntoCastle_Letter_05_02");	//Тебе не следует рассказывать об этом. Но не волнуйся - сам я никому ничего не скажу.
 	AI_Output(self,other,"DIA_BaalTaran_IntoCastle_Letter_05_03");	//Но ради собственной безопасности не говори о нем никому, хорошо? Из-за него тебя могут убить на месте.
 	AI_Output(self,other,"DIA_BaalTaran_IntoCastle_Letter_05_04");	//Каждому захочется получить награду, положенную гонцу, доставившему письмо из внешнего мира.
+	if(LETTER_TOLD == 0)
+	{
+		LETTER_TOLD = 1;
+	}
+	else if(LETTER_TOLD == 1)
+	{
+		LETTER_TOLD = 2;
+		if(!Npc_IsDead(vlk_505_buddler))
+		{
+			b_exchangeroutine(vlk_505_buddler,"letterwait");
+		};
+		if(!Npc_IsDead(vlk_506_buddler))
+		{
+			b_exchangeroutine(vlk_506_buddler,"letterwait");
+		};
+	};
 	Info_ClearChoices(dia_baaltaran_intocastle);
 };
 

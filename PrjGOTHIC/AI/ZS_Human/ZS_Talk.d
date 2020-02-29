@@ -31,11 +31,11 @@ func void zs_talk()
 	};
 	if(c_bodystatecontains(self,BS_WALK) || c_bodystatecontains(self,BS_RUN))
 	{
-		b_say(other,self,"$SC_HEYWAITASECOND");
+		b_say(hero,self,"$SC_HEYWAITASECOND");
 	}
 	else if(!Npc_CanSeeNpc(self,hero))
 	{
-		b_say(other,self,"$SC_HEYTURNAROUND");
+		b_say(hero,self,"$SC_HEYTURNAROUND");
 	}
 	else
 	{
@@ -62,6 +62,7 @@ func void zs_talk()
 	};
 	b_assignambientinfos(self);
 	self.aivar[AIV_FINDABLE] = TRUE;
+	other.aivar[AIV_LASTTARGET] = Hlp_GetInstanceID(self);
 	AI_ProcessInfos(self);
 };
 
@@ -74,6 +75,7 @@ func int zs_talk_loop()
 		{
 			AI_LookAtNpc(self,other);
 		};
+		AI_LookAtNpc(self,other);
 	};
 	if(InfoManager_HasFinished())
 	{
@@ -89,5 +91,14 @@ func int zs_talk_loop()
 func void zs_talk_end()
 {
 	printdebugnpc(PD_ZS_FRAME,"ZS_Talk_End");
+	c_stoplookat(self);
+	if(!InfoManager_HasFinished())
+	{
+		//PrintScreen("<<< Ошибка при завершении диалога! >>>",-1,78,"FONT_OLD_10_WHITE.TGA",5);
+		self.aivar[AIV_INVINCIBLE] = FALSE;
+		hero.aivar[AIV_INVINCIBLE] = FALSE;
+		b_resetfaceexpression(self);
+		AI_StopProcessInfos(self);
+	};
 };
 

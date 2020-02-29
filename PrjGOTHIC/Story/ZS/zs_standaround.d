@@ -8,6 +8,7 @@ func void zs_standaround()
 		Npc_PercEnable(self,PERC_NPCCOMMAND,b_smalltalk);
 	};
 	AI_SetWalkMode(self,NPC_WALK);
+	AI_RemoveWeapon(self);
 	b_clearitem(self);
 	if(!Npc_IsOnFP(self,"CAMPFIRE"))
 	{
@@ -119,6 +120,13 @@ func int zs_standaround_loop()
 				b_pee(self);
 			}
 			else if(choice < 100)
+			{
+				b_bored(self);
+			};
+		}
+		else
+		{
+			if(choice < 50)
 			{
 				b_bored(self);
 			};

@@ -40,9 +40,9 @@ func int dia_snaf_hello_condition()
 func void dia_snaf_hello_info()
 {
 	AI_Output(other,self,"DIA_Snaf_Hello_15_00");	//Как у тебя дела?
-	AI_Output(self,other,"DIA_Snaf_Hello_01_01");	//Не плохо. Если умеешь хорошо готовить, друзья к тебе сами придут.
+	AI_Output(self,other,"DIA_Snaf_Hello_01_01");	//Неплохо. Если умеешь хорошо готовить, друзья к тебе сами придут.
 	AI_Output(self,other,"DIA_Snaf_Hello_01_02");	//Хочешь попробовать тушеный рис? Вот возьми, и сам убедись, как это вкусно.
-	AI_Output(other,self,"DIA_Snaf_Hello_15_03");	//Спасибо.  
+	AI_Output(other,self,"DIA_Snaf_Hello_15_03");	//Спасибо.
 	AI_Output(self,other,"DIA_Snaf_Hello_01_04");	//А ты мог бы мне помочь.
 	CreateInvItem(self,itforice);
 	b_giveinvitems(self,other,itforice,1);
@@ -74,8 +74,9 @@ func int dia_snaf_zutaten_condition()
 func void dia_snaf_zutaten_info()
 {
 	AI_Output(other,self,"DIA_Snaf_Zutaten_15_00");	//Что тебе нужно?
-	AI_Output(self,other,"DIA_Snaf_Zutaten_01_01");	//Думаю, ты любишь вкусно поесть. Я придумал новое блюдо: рагу из мясных жуков а ля Снеф с рисом и грибами.
+	AI_Output(self,other,"DIA_Snaf_Zutaten_01_01");	//Думаю, ты любишь вкусно поесть. Я придумал новое блюдо: рагу из мясных жуков а-ля Снэф с рисом и грибами.
 	AI_Output(self,other,"DIA_Snaf_Zutaten_01_02");	//Я дам тебе столько рагу, сколько захочешь, но для его приготовления мне нужно три жука и немного грибов. Пяти должно быть достаточно.
+	AI_Output(self,other,"DIA_Snaf_WhereMushrooms_01_01");	//Когда ты выйдешь через южные ворота - там, где разрушенная башня, - ты сразу увидишь поляну, на которой они растут.
 	Info_ClearChoices(dia_snaf_zutaten);
 	Info_AddChoice(dia_snaf_zutaten,"Ты хочешь меня отравить?",dia_snaf_zutaten_kotz);
 	Info_AddChoice(dia_snaf_zutaten,"Мне нравится идея с рагу.",dia_snaf_zutaten_doit);
@@ -89,7 +90,7 @@ func void dia_snaf_zutaten_kotz()
 	SNAF_ZUTATEN = LOG_RUNNING;
 	Log_CreateTopic(CH1_SNAFSRECIPE,LOG_MISSION);
 	Log_SetTopicStatus(CH1_SNAFSRECIPE,LOG_RUNNING);
-	b_logentry(CH1_SNAFSRECIPE,"Повар Снэф из Старого лагеря попросил меня найти для него 3-х мясных жуков и 5 адских грибов. Он хочет приготовить новое блюдо.");
+	b_logentry(CH1_SNAFSRECIPE,"Повар Снэф из Старого лагеря попросил меня найти для него трех мясных жуков и пять адских грибов. Он хочет приготовить новое блюдо.");
 	Info_ClearChoices(dia_snaf_zutaten);
 };
 
@@ -102,7 +103,7 @@ func void dia_snaf_zutaten_doit()
 	SNAF_FREEMBRAGOUT = TRUE;
 	Log_CreateTopic(CH1_SNAFSRECIPE,LOG_MISSION);
 	Log_SetTopicStatus(CH1_SNAFSRECIPE,LOG_RUNNING);
-	b_logentry(CH1_SNAFSRECIPE,"Повар Снэф из Старого лагеря попросил меня найти для него 3 мясных жуков и 5 адских грибов. Он хочет приготовить новое блюдо. Я тоже смогу его попробовать.");
+	b_logentry(CH1_SNAFSRECIPE,"Повар Снэф из Старого лагеря попросил меня найти для него трех мясных жуков и пять адских грибов. Он хочет приготовить новое блюдо. Я тоже смогу его попробовать.");
 	Info_ClearChoices(dia_snaf_zutaten);
 };
 
@@ -130,12 +131,16 @@ func void dia_snaf_zutatensuccess_info()
 {
 	AI_Output(other,self,"DIA_Snaf_ZutatenSuccess_15_00");	//Я достал все ингредиенты, посмотри.
 	AI_Output(self,other,"DIA_Snaf_ZutatenSuccess_01_01");	//Хорошо! Теперь их нужно положить в котел, и рагу будет готово... Вот так...
-	CreateInvItems(other,itfo_plants_mushroom_01,3);
-	b_giveinvitems(other,self,itfo_plants_mushroom_01,8);
-	Npc_RemoveInvItems(self,itfo_plants_mushroom_01,8);
-	Npc_RemoveInvItems(other,itat_meatbug_01,3);
+	AI_UseMob(self,"CAULDRON",1);
+	AI_Wait(self,0.5);
+	AI_UseMob(self,"CAULDRON",-1);
+	//CreateInvItems(other,itfo_plants_mushroom_01,3);
+	b_giveinvitems(hero,self,itfo_plants_mushroom_01,5);
+	Npc_RemoveInvItems(self,itfo_plants_mushroom_01,5);
+	b_giveinvitems(hero,self,itat_meatbug_01,3);
+	Npc_RemoveInvItems(self,itat_meatbug_01,3);
 	CreateInvItems(self,itfomeatbugragout,3);
-	b_giveinvitems(self,other,itfomeatbugragout,3);
+	b_giveinvitems(self,hero,itfomeatbugragout,3);
 	SNAF_ZUTATEN = LOG_SUCCESS;
 	Log_SetTopicStatus(CH1_SNAFSRECIPE,LOG_SUCCESS);
 	b_logentry(CH1_SNAFSRECIPE,"Снэф остался доволен тем, что я принес ему необходимые ингредиенты.");
@@ -214,33 +219,6 @@ func void dia_snaf_wheremeatbugs_info()
 };
 
 
-instance DIA_SNAF_WHEREMUSHROOMS(C_INFO)
-{
-	npc = vlk_581_snaf;
-	nr = 4;
-	condition = dia_snaf_wheremushrooms_condition;
-	information = dia_snaf_wheremushrooms_info;
-	permanent = 0;
-	description = "Где мне найти адские грибы?";
-};
-
-
-func int dia_snaf_wheremushrooms_condition()
-{
-	if(SNAF_ZUTATEN == LOG_RUNNING)
-	{
-		return 1;
-	};
-};
-
-func void dia_snaf_wheremushrooms_info()
-{
-	AI_Output(other,self,"DIA_Snaf_WhereMushrooms_15_00");	//Где мне найти адские грибы?
-	AI_Output(self,other,"DIA_Snaf_WhereMushrooms_01_01");	//Когда ты выйдешь через южные ворота - там, где разрушенная башня, - ты сразу увидишь поляну, на которой они растут.
-	b_logentry(CH1_SNAFSRECIPE,"Адские грибы растут на поляне перед разрушенной башней у южных ворот.");
-};
-
-
 instance DIA_SNAF_WHERENEK(C_INFO)
 {
 	npc = vlk_581_snaf;
@@ -269,7 +247,7 @@ func void dia_snaf_wherenek_info()
 	{
 		Log_CreateTopic(CH1_LOSTNEK,LOG_MISSION);
 		Log_SetTopicStatus(CH1_LOSTNEK,LOG_RUNNING);
+		b_logentry(CH1_LOSTNEK,"Повар Снэф послал Нека за грибами. После этого он его ни разу не видел.");
 	};
-	b_logentry(CH1_LOSTNEK,"Повар Снэф послал Нека за грибами. После этого он его ни разу не видел.");
 };
 

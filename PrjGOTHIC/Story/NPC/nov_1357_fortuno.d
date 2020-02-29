@@ -7,7 +7,8 @@ instance NOV_1357_FORTUNO(NPC_DEFAULT)
 	level = 9;
 	voice = 5;
 	id = 1357;
-	attribute[ATR_STRENGTH] = 15;
+	flags = NPC_FLAG_IMMORTAL;
+	attribute[ATR_STRENGTH] = 10;
 	attribute[ATR_DEXTERITY] = 15;
 	attribute[ATR_MANA_MAX] = 0;
 	attribute[ATR_MANA] = 0;
@@ -21,10 +22,8 @@ instance NOV_1357_FORTUNO(NPC_DEFAULT)
 	fight_tactic = FAI_HUMAN_MASTER;
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	EquipItem(self,fortunos_keule);
-	CreateInvItems(self,itmijoint_1,30);
-	CreateInvItems(self,itmijoint_2,20);
-	CreateInvItems(self,itmijoint_3,10);
-	CreateInvItems(self,itminugget,237);
+	CreateInvItem(self,alchemybook);
+	b_give_fortunochapter1herbs();
 	daily_routine = rtn_start_1357;
 };
 
@@ -33,5 +32,11 @@ func void rtn_start_1357()
 {
 	ta_sleep(1,0,6,0,"PSI_32_HUT_IN");
 	ta_stand(6,0,1,0,"PSI_HERB_SHOP");
+};
+
+func void rtn_lab_1357()
+{
+	ta_potionalchemy(15,0,22,0,"PSI_LABOR_IN");
+	ta_potionalchemy(22,0,15,0,"PSI_LABOR_IN");
 };
 

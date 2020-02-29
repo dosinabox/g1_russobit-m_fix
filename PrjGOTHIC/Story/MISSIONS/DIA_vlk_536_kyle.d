@@ -35,7 +35,7 @@ instance DIA_KYLE_HUTRAGE(C_INFO)
 
 func int dia_kyle_hutrage_condition()
 {
-	if((Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,other) <= ZIVILANQUATSCHDIST))
+	if((Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,other) <= ZIVILANQUATSCHDIST) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -72,6 +72,6 @@ func void dia_kyle_problem_info()
 	AI_Output(self,other,"DIA_Kyle_Problem_10_04");	//Ќо никто не сказал почему. » € все же построил его именно на краю обрыва.
 	AI_Output(self,other,"DIA_Kyle_Problem_10_05");	//ј когда € через несколько дней пришел из шахты, у мен€ по€вилась втора€ дверь.
 	AI_Output(self,other,"DIA_Kyle_Problem_10_06");	//ѕредатели! я их ненавижу! “ы даже представить себе не можешь, как € их ненавижу!
-	AI_Output(self,other,"DIA_Kyle_Problem_10_07");	//ј теперь все эти идиоты ход€т через мой дом. 
+	AI_Output(self,other,"DIA_Kyle_Problem_10_07");	//ј теперь все эти идиоты ход€т через мой дом.
 };
 

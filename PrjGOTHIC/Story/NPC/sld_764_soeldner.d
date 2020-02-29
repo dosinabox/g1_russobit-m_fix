@@ -25,14 +25,8 @@ instance SLD_764_SOELDNER(NPC_DEFAULT)
 	EquipItem(self,itrw_bow_long_01);
 	CreateInvItems(self,itamarrow,20);
 	CreateInvItems(self,itforice,7);
-	CreateInvItems(self,itfoloaf,5);
-	CreateInvItems(self,itfomutton,4);
-	CreateInvItems(self,itminugget,15);
 	CreateInvItems(self,itfobooze,5);
-	CreateInvItems(self,itlstorch,5);
-	CreateInvItems(self,itfo_potion_health_02,7);
-	CreateInvItem(self,itmi_stuff_barbknife_01);
-	CreateInvItem(self,itmi_stuff_mug_01);
+	CreateInvItems(self,itfo_potion_health_01,3);
 	daily_routine = rtn_fmcstart_764;
 };
 

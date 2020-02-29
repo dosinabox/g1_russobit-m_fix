@@ -22,12 +22,7 @@ instance ORG_806_ORGANISATOR(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	CreateInvItems(self,itkelockpick,1);
 	CreateInvItems(self,itminugget,14);
-	CreateInvItems(self,itforice,7);
-	CreateInvItems(self,itfobooze,2);
-	CreateInvItems(self,itlstorch,1);
 	CreateInvItems(self,itfo_potion_health_01,1);
-	CreateInvItem(self,itmi_stuff_cup_01);
-	CreateInvItem(self,itfoloaf);
 	CreateInvItem(self,itat_teeth_01);
 	EquipItem(self,itmw_1h_mace_03);
 	EquipItem(self,itrw_bow_long_01);
@@ -40,5 +35,13 @@ func void rtn_start_806()
 {
 	ta_sleep(0,0,7,30,"NC_HUT20_IN");
 	ta_smalltalk(7,30,0,0,"NC_PLACE06");
+};
+
+func void rtn_ch5_806()
+{
+	ta_sleep(0,0,7,30,"NC_HUT20_IN");
+	ta_smalltalk(7,30,16,0,"NC_PLACE06");
+	ta_standaround(16,0,17,0,"NC_PLACE06");
+	ta_smalltalk(17,0,0,0,"NC_PLACE06");
 };
 

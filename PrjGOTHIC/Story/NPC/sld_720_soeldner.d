@@ -44,3 +44,9 @@ func void rtn_start_720()
 	ta_sitaround(22,0,0,30,"NC_PLACE03_MOVEMENT");
 };
 
+func void rtn_fmtaken_720()
+{
+	ta_practicesword(0,30,8,0,"NC_PATH62");
+	ta_practicesword(8,0,0,30,"NC_PATH62");
+};
+

@@ -51,7 +51,6 @@ func void set_icegolem_visuals()
 	Mdl_SetVisualBody(self,"Gol_Ice_Body",DEFAULT,DEFAULT,"",DEFAULT,DEFAULT,-1);
 };
 
-
 instance STONEGOLEM(MST_DEFAULT_GOLEM)
 {
 	name[0] = "Каменный голем";
@@ -64,8 +63,9 @@ instance STONEGOLEM(MST_DEFAULT_GOLEM)
 
 instance SUMMONEDBYPC_STONEGOLEM(MST_DEFAULT_GOLEM)
 {
-	name[0] = "Голем";
+	name[0] = "Призванный голем";
 	aivar[AIV_IMPORTANT] = ID_STONEGOLEM;
+	level = 0;
 	set_stonegolem_visuals();
 	Npc_SetToFistMode(self);
 	protection[PROT_EDGE] = 100;
@@ -119,7 +119,8 @@ instance ICEGOLEM(MST_DEFAULT_GOLEM)
 
 instance BRIDGEGOLEM(MST_DEFAULT_GOLEM)
 {
-	name[0] = "Кирпичный голем";
+	name[0] = "Каменный голем";
+	aivar[AIV_IMPORTANT] = ID_STONEGOLEM;
 	level = 50;
 	set_stonegolem_visuals();
 	Npc_SetToFistMode(self);

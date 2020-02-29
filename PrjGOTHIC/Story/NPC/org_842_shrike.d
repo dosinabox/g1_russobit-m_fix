@@ -47,6 +47,7 @@ func void rtn_prestart_842()
 func void rtn_start_842()
 {
 	ta_sleep(23,30,8,0,"NC_HUT18_IN");
-	ta_smoke(8,0,23,30,"NC_PATH09");
+	ta_smoke(8,0,19,30,"NC_PATH09");
+	ta_standaround(19,30,23,30,"NC_TAVERN_MORDRAG_SHRIKE");
 };
 

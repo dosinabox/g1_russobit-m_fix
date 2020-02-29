@@ -24,7 +24,7 @@ instance VLK_573_GRAHAM(NPC_DEFAULT)
 	EquipItem(self,itmw_1h_mace_light_01);
 	CreateInvItem(self,itfo_potion_water_01);
 	CreateInvItem(self,itwrommap);
-	CreateInvItem(self,itwrworldmap);
+	CreateInvItems(self,itwrworldmap,2);
 	CreateInvItem(self,itwrocmap);
 	CreateInvItem(self,itwrpinup);
 	daily_routine = rtn_start_573;

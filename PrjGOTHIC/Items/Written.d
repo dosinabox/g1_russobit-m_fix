@@ -1,14 +1,14 @@
 
 instance ITWR_BOOK_CIRCLE_01(C_ITEM)
 {
-	name = "Посох Мастера";
+	name = "Первый круг магии";
 	mainflag = ITEM_KAT_DOCS;
 	flags = 0;
 	value = 50;
-	visual = "ItWr_Book_02_03.3ds";
+	visual = "ItWr_Book_Magic.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
-	description = "1-й Круг магии";
+	description = "Первый круг магии";
 	text[5] = NAME_VALUE;
 	count[5] = value;
 	on_state[0] = useitwr_book_circle_01;
@@ -30,7 +30,7 @@ func void useitwr_book_circle_01()
 	Doc_SetPage(ndocid,1,"Book_Mage_R.tga",0);
 	Doc_SetFont(ndocid,-1,"font_15_book.tga");
 	Doc_SetMargins(ndocid,0,275,20,30,20,1);
-	Doc_PrintLine(ndocid,0,"1-й Круг магии");
+	Doc_PrintLine(ndocid,0,"Первый круг магии");
 	Doc_PrintLine(ndocid,0,"---------------");
 	Doc_SetFont(ndocid,-1,"font_10_book.TGA");
 	Doc_PrintLine(ndocid,0,"");
@@ -57,14 +57,14 @@ func void useitwr_book_circle_01()
 
 instance ITWR_BOOK_CIRCLE_02(C_ITEM)
 {
-	name = "2-й Круг магии";
+	name = "Второй круг магии";
 	mainflag = ITEM_KAT_DOCS;
 	flags = 0;
 	value = 100;
-	visual = "ItWr_Book_02_03.3ds";
+	visual = "ItWr_Book_Magic.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
-	description = "2-й Круг магии";
+	description = "Второй круг магии";
 	text[5] = NAME_VALUE;
 	count[5] = value;
 	on_state[0] = useitwr_book_circle_02;
@@ -82,13 +82,12 @@ func void useitwr_book_circle_02()
 	Doc_SetPage(ndocid,1,"Book_Mage_R.tga",0);
 	Doc_SetFont(ndocid,-1,"font_15_book.tga");
 	Doc_SetMargins(ndocid,0,275,20,30,20,1);
-	Doc_PrintLine(ndocid,0,"2-й Круг магии");
+	Doc_PrintLine(ndocid,0,"Второй круг магии");
 	Doc_PrintLine(ndocid,0,"---------------");
 	Doc_SetFont(ndocid,-1,"font_10_book.TGA");
 	Doc_PrintLine(ndocid,0,"");
 	Doc_PrintLine(ndocid,0,"");
 	Doc_PrintLines(ndocid,0,"Все заклинания высвобождают магическую энергию силой того, кто их использует. Такого человека называют магом.");
-	Doc_PrintLine(ndocid,0,"");
 	Doc_PrintLine(ndocid,0,"");
 	Doc_PrintLines(ndocid,0,"Каждое применение заклинания отбирает у мага часть энергии, которая называется магической силой.");
 	Doc_PrintLine(ndocid,0,"");
@@ -98,10 +97,8 @@ func void useitwr_book_circle_02()
 	Doc_PrintLine(ndocid,1,"Исцеление");
 	Doc_PrintLine(ndocid,1,"---------------");
 	Doc_PrintLines(ndocid,1,"Аданос увидел, что люди не бессмертны, что они умирают по воле Белиара. И он решил, что не будет подчиняться Белиару, а даст людям возможность исцелять свои тела.");
-	Doc_PrintLine(ndocid,1,"");
-	Doc_PrintLine(ndocid,1,"");
 	Doc_PrintLines(ndocid,1,"Это заклинание освобождает силу, исцеляющую мага.");
-	Doc_PrintLine(ndocid,1,"Инвестир. заклинание");
+	Doc_PrintLine(ndocid,1,"Инвестируемое заклинание");
 	Doc_PrintLine(ndocid,1,text_1);
 	Doc_PrintLine(ndocid,1,"");
 	Doc_PrintLine(ndocid,1,"");
@@ -111,14 +108,14 @@ func void useitwr_book_circle_02()
 
 instance ITWR_BOOK_CIRCLE_03(C_ITEM)
 {
-	name = "3-й Круг магии";
+	name = "Третий круг магии";
 	mainflag = ITEM_KAT_DOCS;
 	flags = 0;
 	value = 150;
-	visual = "ItWr_Book_02_03.3ds";
+	visual = "ItWr_Book_Magic.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
-	description = "3-й Круг магии";
+	description = "Третий круг магии";
 	text[5] = NAME_VALUE;
 	count[5] = value;
 	on_state[0] = useitwr_book_circle_03;
@@ -140,7 +137,7 @@ func void useitwr_book_circle_03()
 	Doc_SetPage(ndocid,1,"Book_Mage_R.tga",0);
 	Doc_SetFont(ndocid,-1,"font_15_book.tga");
 	Doc_SetMargins(ndocid,0,275,20,30,20,1);
-	Doc_PrintLine(ndocid,0,"3-й Круг магии");
+	Doc_PrintLine(ndocid,0,"Третий круг магии");
 	Doc_PrintLine(ndocid,0,"---------------");
 	Doc_SetFont(ndocid,-1,"font_10_book.TGA");
 	Doc_PrintLine(ndocid,0,"");
@@ -159,7 +156,6 @@ func void useitwr_book_circle_03()
 	Doc_PrintLine(ndocid,1,"Ледяная глыба");
 	Doc_PrintLine(ndocid,1,"---------------");
 	Doc_PrintLines(ndocid,1,"Жертва превращается в ледяную глыбу. Это заклинание Круга Воды.");
-	Doc_PrintLine(ndocid,1,"");
 	Doc_PrintLine(ndocid,1,text_1);
 	Doc_PrintLine(ndocid,1,"");
 	Doc_PrintLine(ndocid,1,"Шаровая молния");
@@ -172,14 +168,14 @@ func void useitwr_book_circle_03()
 
 instance ITWR_BOOK_CIRCLE_04(C_ITEM)
 {
-	name = "4-й Круг магии";
+	name = "Четвертый круг магии";
 	mainflag = ITEM_KAT_DOCS;
 	flags = 0;
 	value = 200;
-	visual = "ItWr_Book_02_03.3ds";
+	visual = "ItWr_Book_Magic.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
-	description = "4-й Круг магии";
+	description = "Четвертый круг магии";
 	text[5] = NAME_VALUE;
 	count[5] = value;
 	on_state[0] = useitwr_book_circle_04;
@@ -201,23 +197,21 @@ func void useitwr_book_circle_04()
 	Doc_SetPage(ndocid,1,"Book_Mage_R.tga",0);
 	Doc_SetFont(ndocid,-1,"font_15_book.tga");
 	Doc_SetMargins(ndocid,0,275,20,30,20,1);
-	Doc_PrintLine(ndocid,0,"4-й Круг магии");
+	Doc_PrintLine(ndocid,0,"Четвертый круг магии");
 	Doc_PrintLine(ndocid,0,"---------------");
 	Doc_SetFont(ndocid,-1,"font_10_book.TGA");
 	Doc_PrintLine(ndocid,0,"");
 	Doc_PrintLine(ndocid,0,"Магия");
 	Doc_PrintLine(ndocid,0,"телепортации");
 	Doc_PrintLine(ndocid,0,"---------------");
-	Doc_PrintLine(ndocid,0,"");
-	Doc_PrintLine(ndocid,0,"");
 	Doc_PrintLines(ndocid,0,"Главная особенность: несмотря на то, что заклинание заключено в руну, оно может быть прочитано каждым, кто обладает магической силой. При этом энергия заклинания сразу освобождается. Для него не существует ограничений.");
 	Doc_SetMargins(ndocid,-1,30,20,275,20,1);
 	Doc_PrintLine(ndocid,1,"Огненный шторм");
 	Doc_PrintLine(ndocid,1,"---------------");
 	Doc_PrintLines(ndocid,1,"Это заклинание действует как огненный шар на одного противника, а потом переносится на других, стоящих возле него.");
 	Doc_PrintLine(ndocid,1,"Зарядное заклинание");
-	Doc_PrintLine(ndocid,1,"");
 	Doc_PrintLine(ndocid,1,text);
+	Doc_PrintLine(ndocid,1,"");
 	Doc_PrintLine(ndocid,1,"Молния");
 	Doc_PrintLine(ndocid,1,"---------------");
 	Doc_PrintLines(ndocid,1,"Заклинание действует на многих врагов. Его силу сложно контролировать, магу следует осторожно его использовать.");
@@ -233,14 +227,14 @@ func void useitwr_book_circle_04()
 
 instance ITWR_BOOK_CIRCLE_05(C_ITEM)
 {
-	name = "5-й Круг магии";
+	name = "Пятый круг магии";
 	mainflag = ITEM_KAT_DOCS;
 	flags = 0;
 	value = 250;
-	visual = "ItWr_Book_02_03.3ds";
+	visual = "ItWr_Book_Magic.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
-	description = "5-й Круг магии";
+	description = "Пятый круг магии";
 	text[5] = NAME_VALUE;
 	count[5] = value;
 	on_state[0] = useitwr_book_circle_05;
@@ -260,7 +254,7 @@ func void useitwr_book_circle_05()
 	Doc_SetPage(ndocid,1,"Book_Mage_R.tga",0);
 	Doc_SetFont(ndocid,-1,"font_15_book.tga");
 	Doc_SetMargins(ndocid,0,275,20,30,20,1);
-	Doc_PrintLine(ndocid,0,"5-й Круг магии");
+	Doc_PrintLine(ndocid,0,"Пятый круг магии");
 	Doc_PrintLine(ndocid,0,"---------------");
 	Doc_SetFont(ndocid,-1,"font_10_book.TGA");
 	Doc_PrintLine(ndocid,0,"");
@@ -282,14 +276,14 @@ func void useitwr_book_circle_05()
 
 instance ITWR_BOOK_CIRCLE_06(C_ITEM)
 {
-	name = "6-й Круг магии";
+	name = "Шестой круг магии";
 	mainflag = ITEM_KAT_DOCS;
 	flags = 0;
 	value = 300;
-	visual = "ItWr_Book_02_03.3ds";
+	visual = "ItWr_Book_Magic2.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
-	description = "6-й Круг магии";
+	description = "Шестой круг магии";
 	text[5] = NAME_VALUE;
 	count[5] = value;
 	on_state[0] = useitwr_book_circle_06;
@@ -307,7 +301,8 @@ func void useitwr_book_circle_06()
 	Doc_SetPage(ndocid,1,"Book_Mage_R.tga",0);
 	Doc_SetFont(ndocid,-1,"font_15_book.tga");
 	Doc_SetMargins(ndocid,0,275,20,30,20,1);
-	Doc_PrintLine(ndocid,0,"6-й Круг магии");
+	Doc_PrintLine(ndocid,0,"Шестой круг магии");
+	Doc_PrintLine(ndocid,0,"---------------");
 	Doc_SetFont(ndocid,-1,"font_10_book.TGA");
 	Doc_PrintLine(ndocid,0,"");
 	Doc_PrintLine(ndocid,0,"");
@@ -316,10 +311,8 @@ func void useitwr_book_circle_06()
 	Doc_PrintLine(ndocid,0,"Дыхание смерти");
 	Doc_PrintLine(ndocid,0,"---------------");
 	Doc_PrintLines(ndocid,0,"Дыхание Белиара. Облако забирающего жизнь Ничто, способное мгновенно убить жертву.");
-	Doc_PrintLine(ndocid,0,"");
 	Doc_PrintLine(ndocid,0,text);
 	Doc_SetMargins(ndocid,-1,30,20,275,20,1);
-	Doc_PrintLine(ndocid,1,"");
 	Doc_PrintLine(ndocid,1,"");
 	Doc_PrintLine(ndocid,1,"Волна Смерти");
 	Doc_PrintLine(ndocid,1,"---------------");
@@ -354,10 +347,10 @@ func void usegoettergabe()
 	Doc_SetPage(ndocid,0,"Book_Mage_L.tga",0);
 	Doc_SetPage(ndocid,1,"Book_Mage_R.tga",0);
 	Doc_SetFont(ndocid,-1,"font_15_book.tga");
+	Doc_SetMargins(ndocid,0,275,20,30,20,1);
 	Doc_PrintLine(ndocid,0,"Магия");
 	Doc_PrintLine(ndocid,0,"");
-	Doc_SetMargins(ndocid,0,275,20,30,20,1);
-	Doc_PrintLine(ndocid,0," ");
+	Doc_PrintLine(ndocid,0,"");
 	Doc_SetFont(ndocid,-1,"font_10_book.TGA");
 	Doc_PrintLine(ndocid,0,"Дар богов");
 	Doc_PrintLine(ndocid,0,"");
@@ -587,7 +580,7 @@ func void usedas_magische_erz()
 	Doc_SetMargins(ndocid,-1,30,20,275,20,1);
 	Doc_PrintLine(ndocid,1,"");
 	Doc_PrintLine(ndocid,1,"");
-	Doc_PrintLines(ndocid,1,"Нет такого щита или доспеха, который смог бы устоять перед ним. Короли и герои древних времен носили оружие из лучшей стали Хориниса, и во всей Мертане оно ценилось очень высоко. Но магическая руда стоит очень дорого. Очень много сил уходит на ее добычу. Кажется, будто руда сама не желает покидать недра земли.");
+	Doc_PrintLines(ndocid,1,"Нет такого щита или доспеха, который смог бы устоять перед ним. Короли и герои древних времен носили оружие из лучшей стали Хориниса, и во всей Миртане оно ценилось очень высоко. Но магическая руда стоит очень дорого. Очень много сил уходит на ее добычу. Кажется, будто руда сама не желает покидать недра земли.");
 	Doc_Show(ndocid);
 };
 
@@ -635,7 +628,7 @@ instance SCHLACHT_UM_VARANT2(C_ITEM)
 	mainflag = ITEM_KAT_DOCS;
 	flags = 0;
 	value = 100;
-	visual = "ItWr_Book_02_05.3ds";
+	visual = "ItWr_Book_02_04.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	description = "Битва при Варанте";
@@ -659,21 +652,21 @@ func void useschlacht_um_varant2()
 	Doc_PrintLines(ndocid,0,"Исход войны был известен. Варант, захваченный иноземцами, был полностью разграблен. Король Робар решил не оставаться на полях Варанта, а приказал своим генералам самим расправиться с оставшимися врагами. В разгромленном государстве остались еще войска, которыми руководил Люккор, самый способный военачальник Варанта. Он провел множество блестящих сражений.");
 	Doc_SetMargins(ndocid,-1,30,20,275,20,1);
 	Doc_PrintLine(ndocid,1,"");
-	Doc_PrintLines(ndocid,1,"Но теперь его войско попало в засаду. Вражеские солдаты готовились к наступлению. Ли, один из лучших генералов Мертаны, загнал его в ловушку. Тяжелая конница Варанта не могла сражаться на заболоченной местности. Вся долина была окружена солдатами генерала Ли, которые нападали на врагов и убивали их одного за другим. Отчаянные попытки выбраться из ловушки не имели успеха. Он был побежден.");
+	Doc_PrintLines(ndocid,1,"Но теперь его войско попало в засаду. Вражеские солдаты готовились к наступлению. Ли, один из лучших генералов Миртаны, загнал его в ловушку. Тяжелая конница Варанта не могла сражаться на заболоченной местности. Вся долина была окружена солдатами генерала Ли, которые нападали на врагов и убивали их одного за другим. Отчаянные попытки выбраться из ловушки не имели успеха. Он был побежден.");
 	Doc_Show(ndocid);
 };
 
 
 instance MYRTANAS_LYRIK(C_ITEM)
 {
-	name = "Лирика Мертаны";
+	name = "Лирика Миртаны";
 	mainflag = ITEM_KAT_DOCS;
 	flags = 0;
 	value = 100;
 	visual = "ItWr_Book_02_02.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
-	description = "Лирика Мертаны";
+	description = "Лирика Миртаны";
 	text[5] = NAME_VALUE;
 	count[5] = value;
 	on_state[0] = usemyrtanas_lyrik;
@@ -774,7 +767,7 @@ instance LEHREN_DER_GOETTER2(C_ITEM)
 	mainflag = ITEM_KAT_DOCS;
 	flags = 0;
 	value = 100;
-	visual = "ItWr_Book_02_02.3ds";
+	visual = "ItWr_Book_02_01.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	description = "Учение богов";
@@ -809,7 +802,7 @@ instance LEHREN_DER_GOETTER3(C_ITEM)
 	mainflag = ITEM_KAT_DOCS;
 	flags = 0;
 	value = 100;
-	visual = "ItWr_Book_02_03.3ds";
+	visual = "ItWr_Book_02_01.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	description = "Учение богов";
@@ -925,9 +918,25 @@ instance DIE_GRUFT(C_ITEM)
 	visual = "ItWr_Book_02_03.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
-	description = "Искусство войны";
+	description = "Могила";
 	text[5] = NAME_VALUE;
 	count[5] = value;
+	on_state[0] = usegruft;
+};
+
+func void usegruft()
+{
+	var int ndocid;
+	ndocid = Doc_Create();
+	Doc_SetPages(ndocid,2);
+	Doc_SetPage(ndocid,0,"Book_Gruft_L.tga",0);
+	Doc_SetPage(ndocid,1,"Book_Gruft_R.tga",0);
+	Doc_SetMargins(ndocid,0,275,20,30,20,1);
+	Doc_SetFont(ndocid,-1,"font_10_book.tga");
+	Doc_PrintLine(ndocid,0,"");
+	Doc_SetMargins(ndocid,-1,30,20,275,20,1);
+	Doc_PrintLine(ndocid,1,"");
+	Doc_Show(ndocid);
 };
 
 instance ASTRONOMIE(C_ITEM)
@@ -961,7 +970,7 @@ func void useastronomie()
 	Doc_PrintLines(ndocid,0,"В космической иерархии человек занимает место преемника. Его душа связывает его с высшим бытием, божественным духом, его преходящее тело напротив состоит из материи Морграда. В нем отражена картина целого мира.");
 	Doc_SetMargins(ndocid,-1,30,20,275,20,1);
 	Doc_PrintLine(ndocid,1,"");
-	Doc_PrintLines(ndocid,1,"Время обращения планет, или время, за которое они совершают полный оборот по отношению к Мордрагу, не всегда постоянно, из чего мы можем сделать вывод, что наш мир движется так же, как и другие планеты.");
+	Doc_PrintLines(ndocid,1,"Время обращения планет, или время, за которое они совершают полный оборот по отношению к Морграду, не всегда постоянно, из чего мы можем сделать вывод, что наш мир движется так же, как и другие планеты.");
 	Doc_PrintLine(ndocid,1,"");
 	Doc_PrintLines(ndocid,1,"При составлении календаря человек стал рассчитывать фазы луны, чтобы точно вычислить солнечный год.");
 	Doc_Show(ndocid);
@@ -1131,14 +1140,12 @@ func void useitwr_bloodfly_01()
 	Doc_SetMargins(ndocid,0,275,20,30,20,1);
 	Doc_PrintLine(ndocid,0,"Шершни");
 	Doc_PrintLine(ndocid,0,"");
-	Doc_PrintLine(ndocid,0,"");
 	Doc_SetFont(ndocid,-1,"font_10_book.TGA");
-	Doc_PrintLine(ndocid,0,"О шершнях.");
-	Doc_PrintLine(ndocid,0,"");
 	Doc_PrintLines(ndocid,0,"Но там, где земля затоплена водой, а воздух тяжел, обитают огромные шершни, привлекаемые запахом живого тела. Они убивают свою жертву ядом и выпивают ее кровь.");
 	Doc_PrintLine(ndocid,0,"");
+	Doc_PrintLines(ndocid,0,"Соты шершней с давних времен считались целебными и часто использовались для приготовления магических зелий. Трудность нахождения сот делает их редким и ценным деликатесом.");
+	Doc_PrintLine(ndocid,0,"");
 	Doc_SetMargins(ndocid,-1,30,20,275,20,1);
-	Doc_PrintLine(ndocid,1,"");
 	Doc_PrintLine(ndocid,1,"");
 	Doc_PrintLine(ndocid,1,"");
 	Doc_PrintLine(ndocid,1,"");
@@ -1146,12 +1153,1132 @@ func void useitwr_bloodfly_01()
 	Doc_PrintLine(ndocid,1,"");
 	Doc_PrintLine(ndocid,1,"");
 	Doc_Show(ndocid);
+	if(HONEYCOMB < 5 && HONEYCOMBBOOK == 0)
+	{
+		Log_CreateTopic("Соты шершней",LOG_NOTE);
+		b_logentry("Соты шершней","Из книги про шершней я узнал про магические свойства их сот. Попробую найти столько, сколько смогу.");
+		HONEYCOMBBOOK = 1;
+	};
 	if(KNOWS_GETBFSTING == FALSE)
 	{
 		KNOWS_GETBFSTING = TRUE;
 		Log_CreateTopic(GE_ANIMALTROPHIES,LOG_NOTE);
-		b_logentry(GE_ANIMALTROPHIES,"Навык добычи жала шершня");
-		PrintScreen("Навык: добыча жала",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+		b_logentry(GE_ANIMALTROPHIES,"Навык добычи жала шершня.");
+		PrintScreen("Навык: добыча жала шершня",-1,-1,"FONT_OLD_20_WHITE.TGA",10);
+	};
+};
+
+instance BALORONOTE(C_ITEM)
+{
+	name = "Список Балоро";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 0;
+	visual = "ITAR_SCROLL_01_EG.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Список Балоро";
+	on_state[0] = usebaloronote;
+};
+
+
+func void usebaloronote()
+{
+	var int ndocid;
+	ndocid = Doc_Create();
+	Doc_SetPages(ndocid,1);
+	Doc_SetPage(ndocid,0,"letters.TGA",0);
+	Doc_SetFont(ndocid,-1,"font_10_book.tga");
+	Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+	Doc_PrintLine(ndocid,0,"");
+	Doc_PrintLine(ndocid,0,"  - 5 яблок");
+	Doc_PrintLine(ndocid,0,"  - 2 бутылки шнапса");
+	Doc_PrintLine(ndocid,0,"  - 5 бутылок пива");
+	Doc_PrintLine(ndocid,0,"  - 3 буханки хлеба");
+	Doc_PrintLine(ndocid,0,"  - 2 куска сыра");
+	Doc_PrintLine(ndocid,0,"  - 2 грозди винограда");
+	Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+	Doc_Show(ndocid);
+	if(SLD_753_BALORO_SC_BESORGT_DEN_KRAM == LOG_RUNNING)
+	{
+		b_logentry(BALOROS_WAFFE,"Балоро не пережил нападение на Свободную шахту. Теперь я не узнаю, какое оружие он обещал мне.");
+		Log_SetTopicStatus(BALOROS_WAFFE,LOG_FAILED);
+		SLD_753_BALORO_SC_BESORGT_DEN_KRAM = LOG_FAILED;
+	};
+};
+
+instance QUENTINNOTE(C_ITEM)
+{
+	name = "Записка";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 0;
+	visual = "ITAR_SCROLL_01_EG.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Записка Квентина";
+	on_state[0] = usequentinnote;
+};
+
+
+func void usequentinnote()
+{
+	var int ndocid;
+	ndocid = Doc_Create();
+	Doc_SetPages(ndocid,1);
+	Doc_SetPage(ndocid,0,"letters.TGA",0);
+	Doc_SetFont(ndocid,-1,"font_10_book.tga");
+	Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+	Doc_PrintLines(ndocid,0,"Парни, займите позицию около Нового лагеря. Ваша главная цель - амулет Братства, который могут носить некоторые послушники из лагеря сектантов. Обращайте внимание на всех проходящих мимо, при необходимости - обыскивайте! Для маскировки возьмите одежду воров в нашем тайнике.");
+	Doc_PrintLine(ndocid,0,"");
+	Doc_PrintLine(ndocid,0,"  - Квентин");
+	Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+	Doc_Show(ndocid);
+	if(QUENTIN_GANG_QUEST_STARTED != LOG_RUNNING && QUENTIN_GANG_QUEST_STARTED != LOG_SUCCESS && QUENTIN_GANG_QUEST_STARTED != LOG_FAILED)
+	{
+		QUENTIN_GANG_QUEST_STARTED = LOG_RUNNING;
+		Log_CreateTopic(QUENTIN_GANG,LOG_MISSION);
+		Log_SetTopicStatus(QUENTIN_GANG,LOG_RUNNING);
+		b_logentry(QUENTIN_GANG,"Похоже, что разбойники около Нового лагеря - не те, за кого себя выдают. На самом деле они не воры Ларса, а работают на некого Квентина... Мне следует поискать их убежище и разузнать, что замышляет эта шайка.");
+	};
+};
+
+instance CALASHNOTE(C_ITEM)
+{
+	name = "Письмо";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 0;
+	visual = "ItWr_Scroll_02.3DS";
+	material = MAT_LEATHER;
+	scemename = "MAPSEALED";
+	description = "Письмо для Калеша";
+	text[1] = "Лучше его не читать.";
+	text[2] = "Но хочется.";
+	on_state[0] = usecalashnote;
+};
+
+
+func void usecalashnote()
+{
+	var int ndocid;
+	ndocid = Doc_Create();
+	Doc_SetPages(ndocid,1);
+	Doc_SetPage(ndocid,0,"letters.TGA",0);
+	Doc_SetFont(ndocid,-1,"font_10_book.tga");
+	Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+	Doc_PrintLines(ndocid,0,"Калеш! Перед тобой стоит болван, который нашел наш лагерь в горах. Отмудохай его как следует и забери его руду, пусть держится от нас подальше!");
+	Doc_PrintLine(ndocid,0,"");
+	Doc_PrintLine(ndocid,0,"  - Квентин");
+	Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+	Doc_Show(ndocid);
+	CreateInvItem(hero,calashnote2);
+	if(Npc_KnowsInfo(hero,info_calash_dia1))
+	{
+		b_logentry(QUENTIN_GANG,"Теперь понятно, почему Калеш оказался таким буйным. Квентин обманул меня и в письме приказал своему подручному избить меня! Я возмущен!");
+	}
+	else
+	{
+		b_logentry(QUENTIN_GANG,"Квентин обманул меня! Если бы я пошел в лагерь рудокопов, то мне бы досталось от его подручного. Я возмущен!");
+	};
+};
+
+instance CALASHNOTE2(C_ITEM)
+{
+	name = "Записка";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 0;
+	visual = "ITAR_SCROLL_01_EG.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Письмо для Калеша";
+	on_state[0] = usecalashnote2;
+};
+
+
+func void usecalashnote2()
+{
+	var int ndocid;
+	ndocid = Doc_Create();
+	Doc_SetPages(ndocid,1);
+	Doc_SetPage(ndocid,0,"letters.TGA",0);
+	Doc_SetFont(ndocid,-1,"font_10_book.tga");
+	Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+	Doc_PrintLines(ndocid,0,"Калеш! Перед тобой стоит болван, который нашел наш лагерь в горах. Отмудохай его как следует и забери его руду, пусть держится от нас подальше!");
+	Doc_PrintLine(ndocid,0,"");
+	Doc_PrintLine(ndocid,0,"  - Квентин");
+	Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+	Doc_Show(ndocid);
+};
+
+instance ALCHEMYBOOK(C_ITEM)
+{
+	name = "Основы алхимии";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 800;
+	visual = "ITWR_BOOK_ALCHEMY.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Основы алхимии";
+	text[1] = "Позволяет изучить искусство зельеварения.";
+	text[2] = "(требуется 10 очков обучения)";
+	text[5] = NAME_VALUE;
+	count[5] = value;
+	on_state[0] = usealchemybook;
+};
+
+func void usealchemybook()
+{
+	if(hero.lp < 10 && ALCHEMYACTIVE == FALSE)
+	{
+		PrintScreen("Недостаточно очков обучения!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else if(hero.lp >= 10 || ALCHEMYACTIVE == TRUE)
+	{
+		var int ndocid;
+		ndocid = Doc_Create();
+		Doc_SetPages(ndocid,2);
+		Doc_SetPage(ndocid,0,"Book_Alchemy_L.tga",0);
+		Doc_SetPage(ndocid,1,"Book_Alchemy_R.tga",0);
+		Doc_SetFont(ndocid,-1,"font_15_book.tga");
+		Doc_SetMargins(ndocid,0,275,20,30,20,1);
+		Doc_PrintLine(ndocid,0,"Основы алхимии");
+		Doc_SetFont(ndocid,-1,"font_10_book.TGA");
+		Doc_PrintLine(ndocid,0,"");
+		Doc_PrintLines(ndocid,0,"Начать следует с подготовки рабочего места. Алхимик должен иметь под рукой небольшой котел, набор пробирок для смешивания и перегонный куб со змеевиком. Стол необходимо всегда держать в чистоте, чтобы избежать примесей в полученных веществах.");
+		Doc_PrintLine(ndocid,0,"");
+		Doc_PrintLines(ndocid,0,"Для хранения готовых веществ требуется чистая емкость из стекла: для этого идеально подходит обычный алхимический флакон стандартного размера. Обязательно используйте отдельную");
+		Doc_SetMargins(ndocid,-1,30,20,275,20,1);
+		Doc_PrintLines(ndocid,1,"емкость для каждого нового процесса, смешивание или повторное применение не допускаются!");
+		Doc_PrintLine(ndocid,1,"");
+		Doc_PrintLines(ndocid,1,"Для простых зелий достаточно одного растения, которое можно найти в ближайшем лесу или поле. А вот зелья с долговременным эффектом уже требуют несколько компонентов: два или даже три. Алхимик должен обладать солидным терпением и часто совершать прогулки в поисках редких растений.");
+		Doc_Show(ndocid);
+		if(ALCHEMYACTIVE == FALSE)
+		{
+			Log_CreateTopic("Алхимия",LOG_NOTE);
+			b_logentry("Алхимия","В одной книге я прочитал о базовых требованиях для приготовления зелий. Теперь нужно искать рецепты.");
+			PrintScreen("Изучен навык алхимии!",-1,11,"FONT_OLD_20_WHITE.TGA",4);
+			hero.lp = hero.lp - 10;
+			ALCHEMYACTIVE = TRUE;
+			Npc_SetTalentSkill(hero,NPC_TALENT_REGENERATE,1);
+			if(Npc_HasItems(kdf_405_torrez,alchemybook))
+			{
+				Npc_RemoveInvItem(kdf_405_torrez,alchemybook);
+			};
+			if(Npc_HasItems(kdw_604_cronos,alchemybook))
+			{
+				Npc_RemoveInvItem(kdw_604_cronos,alchemybook);
+			};
+			if(Npc_HasItems(nov_1357_fortuno,alchemybook))
+			{
+				Npc_RemoveInvItem(nov_1357_fortuno,alchemybook);
+			};
+			if(Npc_HasItems(stt_329_dexter,alchemybook))
+			{
+				Npc_RemoveInvItem(stt_329_dexter,alchemybook);
+			};
+			if(Npc_HasItems(kdw_605_riordian,alchemybook))
+			{
+				Npc_RemoveInvItem(kdw_605_riordian,alchemybook);
+			};
+		};
+	};
+};
+
+instance ALCHEMY_HP1(C_ITEM)
+{
+	name = "Рецепт";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 0;
+	visual = "HP1RECIPE.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Рецепт эссенции исцеления";
+	text[1] = NAME_BONUS_HP;
+	count[1] = 50;
+	on_state[0] = usehp1recipe;
+};
+
+func void usehp1recipe()
+{
+	if(ALCHEMYACTIVE == FALSE)
+	{
+		PrintScreen("Необходимо изучение навыка алхимии!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else
+	{
+		var int ndocid;
+		ndocid = Doc_Create();
+		Doc_SetPages(ndocid,1);
+		Doc_SetPage(ndocid,0,"letters.TGA",0);
+		Doc_SetFont(ndocid,-1,"font_10_book.tga");
+		Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+		Doc_PrintLines(ndocid,0,"Целебная трава - самое простое лечебное растение, которое можно найти где угодно. Ее листья еще слишком молоды, чтобы обладать каким-либо серьезным эффектом, но они могут быстро снять боль от небольших порезов. Если быстро истолочь траву, то из полученной кашицы можно сварить эссенцию исцеления.");
+		Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+		Doc_Show(ndocid);
+		if(HP1RECIPE == FALSE)
+		{
+			PrintScreen("Изучен новый рецепт!",-1,12,"FONT_OLD_20_WHITE.TGA",4);
+			b_logentry("Алхимия","Изучен рецепт эссенции исцеления (жизненная сила +50). Требуется: целебная трава (1).");
+			HP1RECIPE = TRUE;
+		};
+	};
+};
+
+instance ALCHEMY_HP2(C_ITEM)
+{
+	name = "Рецепт";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 0;
+	visual = "HP2RECIPE.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Рецепт экстракта исцеления";
+	text[1] = NAME_BONUS_HP;
+	count[1] = 70;
+	on_state[0] = usehp2recipe;
+};
+
+func void usehp2recipe()
+{
+	if(ALCHEMYACTIVE == FALSE)
+	{
+		PrintScreen("Необходимо изучение навыка алхимии!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else
+	{
+		var int ndocid;
+		ndocid = Doc_Create();
+		Doc_SetPages(ndocid,1);
+		Doc_SetPage(ndocid,0,"letters.TGA",0);
+		Doc_SetFont(ndocid,-1,"font_10_book.tga");
+		Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+		Doc_PrintLines(ndocid,0,"Целебное растение быстро вырастает из травы при должном уходе или в хорошей почве в диких условиях. Из оранжевых листьев можно получить экстракт исцеления: для этого требуется их сок.");
+		Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+		Doc_Show(ndocid);
+		if(HP2RECIPE == FALSE)
+		{
+			PrintScreen("Изучен новый рецепт!",-1,12,"FONT_OLD_20_WHITE.TGA",4);
+			b_logentry("Алхимия","Изучен рецепт экстракта исцеления (жизненная сила +70). Требуется: целебное растение (1).");
+			HP2RECIPE = TRUE;
+		};
+	};
+};
+
+instance ALCHEMY_HP3(C_ITEM)
+{
+	name = "Рецепт";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 0;
+	visual = "HP3RECIPE.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Рецепт зелья исцеления";
+	text[1] = NAME_BONUS_HP;
+	count[1] = 100;
+	on_state[0] = usehp3recipe;
+};
+
+func void usehp3recipe()
+{
+	if(ALCHEMYACTIVE == FALSE)
+	{
+		PrintScreen("Необходимо изучение навыка алхимии!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else
+	{
+		var int ndocid;
+		ndocid = Doc_Create();
+		Doc_SetPages(ndocid,1);
+		Doc_SetPage(ndocid,0,"letters.TGA",0);
+		Doc_SetFont(ndocid,-1,"font_10_book.tga");
+		Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+		Doc_PrintLines(ndocid,0,"Зрелый целебный корень вырастает примерно за месяц, после этого его можно аккуратно отделить и приготовить зелье исцеления - самое действенное средство против серьезных ран или увечий. Поместите корень вместе с оранжевыми листьями в емкость и кипятите до получения отвара.");
+		Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+		Doc_Show(ndocid);
+		if(HP3RECIPE == FALSE)
+		{
+			PrintScreen("Изучен новый рецепт!",-1,12,"FONT_OLD_20_WHITE.TGA",4);
+			b_logentry("Алхимия","Изучен рецепт зелья исцеления (жизненная сила +100). Требуется: целебный корень (1).");
+			HP3RECIPE = TRUE;
+		};
+	};
+};
+
+instance ALCHEMY_MP1(C_ITEM)
+{
+	name = "Рецепт";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 0;
+	visual = "MP1RECIPE.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Рецепт эссенции магической энергии";
+	text[1] = NAME_BONUS_MANA;
+	count[1] = 30;
+	on_state[0] = usemp1recipe;
+};
+
+func void usemp1recipe()
+{
+	if(ALCHEMYACTIVE == FALSE)
+	{
+		PrintScreen("Необходимо изучение навыка алхимии!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else
+	{
+		var int ndocid;
+		ndocid = Doc_Create();
+		Doc_SetPages(ndocid,1);
+		Doc_SetPage(ndocid,0,"letters.TGA",0);
+		Doc_SetFont(ndocid,-1,"font_10_book.tga");
+		Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+		Doc_PrintLines(ndocid,0,"Далеко не все знают, что серафис обладает магическими свойствами. Сам по себе он никак не поможет для укрепления духа, но при должной обработке из него можно получить эссенцию магической энергии: отделите ягоду от листьев, измельчите в кашицу и отварите.");
+		Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+		Doc_Show(ndocid);
+		if(MP1RECIPE == FALSE)
+		{
+			PrintScreen("Изучен новый рецепт!",-1,12,"FONT_OLD_20_WHITE.TGA",4);
+			b_logentry("Алхимия","Изучен рецепт эссенции магической энергии (магическая сила +30). Требуется: серафис (1).");
+			MP1RECIPE = TRUE;
+		};
+	};
+};
+
+instance ALCHEMY_MP2(C_ITEM)
+{
+	name = "Рецепт";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 0;
+	visual = "MP2RECIPE.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Рецепт экстракта магической энергии";
+	text[1] = NAME_BONUS_MANA;
+	count[1] = 50;
+	on_state[0] = usemp2recipe;
+};
+
+func void usemp2recipe()
+{
+	if(ALCHEMYACTIVE == FALSE)
+	{
+		PrintScreen("Необходимо изучение навыка алхимии!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else
+	{
+		var int ndocid;
+		ndocid = Doc_Create();
+		Doc_SetPages(ndocid,1);
+		Doc_SetPage(ndocid,0,"letters.TGA",0);
+		Doc_SetFont(ndocid,-1,"font_10_book.tga");
+		Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+		Doc_PrintLines(ndocid,0,"Обычно воронья трава растет в темных местах: в пещерах, в тени скал. Удалите сухие части растения и отварите целиком, вместе с корнями: так можно получить экстракт магической энергии.");
+		Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+		Doc_Show(ndocid);
+		if(MP2RECIPE == FALSE)
+		{
+			PrintScreen("Изучен новый рецепт!",-1,12,"FONT_OLD_20_WHITE.TGA",4);
+			b_logentry("Алхимия","Изучен рецепт экстракта магической энергии (магическая сила +50). Требуется: воронья трава (1).");
+			MP2RECIPE = TRUE;
+		};
+	};
+};
+
+instance ALCHEMY_MP3(C_ITEM)
+{
+	name = "Рецепт";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 0;
+	visual = "MP3RECIPE.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Рецепт зелья магической энергии";
+	text[1] = NAME_BONUS_MANA;
+	count[1] = 70;
+	on_state[0] = usemp3recipe;
+};
+
+func void usemp3recipe()
+{
+	if(ALCHEMYACTIVE == FALSE)
+	{
+		PrintScreen("Необходимо изучение навыка алхимии!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else
+	{
+		var int ndocid;
+		ndocid = Doc_Create();
+		Doc_SetPages(ndocid,1);
+		Doc_SetPage(ndocid,0,"letters.TGA",0);
+		Doc_SetFont(ndocid,-1,"font_10_book.tga");
+		Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+		Doc_PrintLines(ndocid,0,"Одним из самых сильных магических растений считается каменный корень. Наружу из земли торчит только малая часть растения, насыщая крепкие корни, которые и являются главным компонентом зелья восстановления магической энергии. Некоторые начинающие алхимики ошибочно считают, что в приготовлении используется также стебель и листья. На самом деле, для отвара необходим только корень.");
+		Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+		Doc_Show(ndocid);
+		if(MP3RECIPE == FALSE)
+		{
+			PrintScreen("Изучен новый рецепт!",-1,12,"FONT_OLD_20_WHITE.TGA",4);
+			b_logentry("Алхимия","Изучен рецепт зелья магической энергии (магическая сила +70). Требуется: каменный корень (1).");
+			MP3RECIPE = TRUE;
+		};
+	};
+};
+
+instance ALCHEMY_MPMAX(C_ITEM)
+{
+	name = "Рецепт";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 0;
+	visual = "MPMAXRECIPE.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Рецепт эссенции силы духа";
+	text[1] = NAME_BONUS_MANAMAX;
+	count[1] = 5;
+	on_state[0] = usempmaxrecipe;
+};
+
+func void usempmaxrecipe()
+{
+	if(ALCHEMYACTIVE == FALSE)
+	{
+		PrintScreen("Необходимо изучение навыка алхимии!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else
+	{
+		var int ndocid;
+		ndocid = Doc_Create();
+		Doc_SetPages(ndocid,1);
+		Doc_SetPage(ndocid,0,"letters.TGA",0);
+		Doc_SetFont(ndocid,-1,"font_10_book.tga");
+		Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+		Doc_PrintLines(ndocid,0,"Данное зелье будет полезно практикующим магам и рекомендуется им для регулярного употребления. Чтобы приготовить его, нужно два ингредиента: горный мох и лунная тень. Измельченные растения помещаются в теплую воду и настаиваются около трех часов в темном месте. Варка не требуется, поскольку самое активное вещество лунной тени может почти полностью испариться.");
+		Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+		Doc_Show(ndocid);
+		if(MPMAXRECIPE == FALSE)
+		{
+			PrintScreen("Изучен новый рецепт!",-1,12,"FONT_OLD_20_WHITE.TGA",4);
+			b_logentry("Алхимия","Изучен рецепт эссенции силы духа (максимальная магическая сила +5). Требуется: горный мох (1) и лунная тень (1).");
+			MPMAXRECIPE = TRUE;
+		};
+	};
+};
+
+instance ALCHEMY_HPMAX(C_ITEM)
+{
+	name = "Рецепт";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 0;
+	visual = "HPMAXRECIPE.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Рецепт эссенции жизни";
+	text[1] = NAME_BONUS_HPMAX;
+	count[1] = 5;
+	on_state[0] = usehpmaxrecipe;
+};
+
+func void usehpmaxrecipe()
+{
+	if(ALCHEMYACTIVE == FALSE)
+	{
+		PrintScreen("Необходимо изучение навыка алхимии!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else
+	{
+		var int ndocid;
+		ndocid = Doc_Create();
+		Doc_SetPages(ndocid,1);
+		Doc_SetPage(ndocid,0,"letters.TGA",0);
+		Doc_SetFont(ndocid,-1,"font_10_book.tga");
+		Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+		Doc_PrintLines(ndocid,0,"Для эссенции, укрепляющей жизненную силу, нужен крупный дубовый лист. Чтобы значительно продлить оздоровительный эффект, используется горный мох. Чистые ингредиенты помещаются без измельчения в сосуд с водой и отвариваются около получаса. Не допускайте перегрева и следите за выделением пара: белый пар свидетельствует о слишком малом объеме воды в отваре.");
+		Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+		Doc_Show(ndocid);
+		if(HPMAXRECIPE == FALSE)
+		{
+			PrintScreen("Изучен новый рецепт!",-1,12,"FONT_OLD_20_WHITE.TGA",4);
+			b_logentry("Алхимия","Изучен рецепт эссенции жизни (максимальная жизненная сила +5). Требуется: горный мох (1) и дубовый лист (1).");
+			HPMAXRECIPE = TRUE;
+		};
+	};
+};
+
+instance ALCHEMY_DEX(C_ITEM)
+{
+	name = "Рецепт";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 0;
+	visual = "DEXRECIPE.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Рецепт эссенции ловкости";
+	text[1] = NAME_BONUS_DEX;
+	count[1] = 3;
+	on_state[0] = usedexrecipe;
+};
+
+func void usedexrecipe()
+{
+	if(ALCHEMYACTIVE == FALSE)
+	{
+		PrintScreen("Необходимо изучение навыка алхимии!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else
+	{
+		var int ndocid;
+		ndocid = Doc_Create();
+		Doc_SetPages(ndocid,1);
+		Doc_SetPage(ndocid,0,"letters.TGA",0);
+		Doc_SetFont(ndocid,-1,"font_10_book.tga");
+		Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+		Doc_PrintLines(ndocid,0,"Для эссенции ловкости обязателен высушенный могильный мох. Также необходима одна свежая вишня троллей и один сухой темный лист. После смешивания всех ингредиентов, полученную смесь необходимо обработать кипящей водой и затем варить. Только в таком сочетании можно нейтрализовать ядовитые свойства вишни троллей. Будьте осторожны и не употребляйте ее в пищу!");
+		Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+		Doc_Show(ndocid);
+		if(DEXRECIPE == FALSE)
+		{
+			PrintScreen("Изучен новый рецепт!",-1,12,"FONT_OLD_20_WHITE.TGA",4);
+			b_logentry("Алхимия","Изучен рецепт эссенции ловкости (ловкость +3). Требуется: могильный мох (1), вишня троллей (1) и темный лист (1).");
+			DEXRECIPE = TRUE;
+		};
+	};
+};
+
+instance ALCHEMY_STR(C_ITEM)
+{
+	name = "Рецепт";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 0;
+	visual = "STRRECIPE.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Рецепт эссенции силы";
+	text[1] = NAME_BONUS_STR;
+	count[1] = 3;
+	on_state[0] = usestrrecipe;
+};
+
+func void usestrrecipe()
+{
+	if(ALCHEMYACTIVE == FALSE)
+	{
+		PrintScreen("Необходимо изучение навыка алхимии!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else
+	{
+		var int ndocid;
+		ndocid = Doc_Create();
+		Doc_SetPages(ndocid,1);
+		Doc_SetPage(ndocid,0,"letters.TGA",0);
+		Doc_SetFont(ndocid,-1,"font_10_book.tga");
+		Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+		Doc_PrintLines(ndocid,0,"Как и для других зелий с долговременным действием, здесь понадобится высушенный могильный мох. К нему добавляется целый драконий корень и одна огненная ягода. Полученная смесь варится, пока не приобретет насыщенный желтый цвет. Это означает, что драконий корень полностью отдал свои соки в отвар.");
+		Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+		Doc_Show(ndocid);
+		if(STRRECIPE == FALSE)
+		{
+			PrintScreen("Изучен новый рецепт!",-1,12,"FONT_OLD_20_WHITE.TGA",4);
+			b_logentry("Алхимия","Изучен рецепт эссенции силы (сила +3). Требуется: могильный мох (1), драконий корень (1) и огненная ягода (1).");
+			STRRECIPE = TRUE;
+		};
+	};
+};
+
+instance ALCHEMY_EGG(C_ITEM)
+{
+	name = "Рецепт";
+	mainflag = ITEM_KAT_DOCS;
+	flags = ITEM_MISSION;
+	value = 0;
+	visual = "EGGRECIPE.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Рецепт зелья из яиц Королевы ползунов";
+	text[1] = NAME_BONUS_MANAMAX;
+	count[1] = 10;
+	on_state[0] = useeggrecipe;
+};
+
+func void useeggrecipe()
+{
+	if(ALCHEMYACTIVE == FALSE)
+	{
+		PrintScreen("Необходимо изучение навыка алхимии!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else
+	{
+		var int ndocid;
+		ndocid = Doc_Create();
+		Doc_SetPages(ndocid,1);
+		Doc_SetPage(ndocid,0,"letters.TGA",0);
+		Doc_SetFont(ndocid,-1,"font_10_book.tga");
+		Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+		Doc_PrintLines(ndocid,0,"Послушник! Тебе предстоит важная миссия! Долгое время мы пытаемся создать зелье, достаточно мощное для призыва Спящего, но вещество из челюстей ползунов оказывается слишком слабым... В час отчаяния мне было видение, сам Спящий обратился ко мне. Он сказал, что самое сильное вещество для зелья может содержаться в яйцах ползунов, и что он выбрал ТЕБЯ для этого испытания. Отправляйся в заброшенную шахту у места обмена и принеси мне столько яиц, сколько сможешь найти. ");
+		Doc_PrintLines(ndocid,0,"По моим расчетам, для одного зелья нужно три яйца и шесть растений болотника: скорлупа моется, извлекается зародыш ползуна, листья и стебли вымачиваются в содержимом, а затем варятся. После тщательного изучения вещества я смогу придумать наиболее эффективный рецепт.");
+		Doc_PrintLine(ndocid,0,"");
+		Doc_PrintLines(ndocid,0,"Да пребудет с тобой Спящий!");
+		Doc_PrintLine(ndocid,0,"");
+		Doc_PrintLines(ndocid,0,"- Галом");
+		Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+		Doc_Show(ndocid);
+		if(EGGRECIPE == FALSE)
+		{
+			PrintScreen("Изучен новый рецепт!",-1,12,"FONT_OLD_20_WHITE.TGA",4);
+			b_logentry("Алхимия","Изучен рецепт зелья из яиц Королевы ползунов (максимальная магическая сила +10). Требуется: яйца ползунов (3) и болотник (6).");
+			EGGRECIPE = TRUE;
+		};
+	};
+};
+
+instance ALCHEMY_FORTUNO(C_ITEM)
+{
+	name = "Рецепт";
+	mainflag = ITEM_KAT_DOCS;
+	flags = ITEM_MISSION;
+	value = 0;
+	visual = "YBRECIPE.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Рецепт лечебного зелья Фортуно";
+	text[1] = NAME_BONUS_MANAMAX;
+	count[1] = 10;
+	text[2] = NAME_BONUS_HPMAX;
+	count[2] = 10;
+	on_state[0] = usefortunorecipe;
+};
+
+func void usefortunorecipe()
+{
+	if(ALCHEMYACTIVE == FALSE)
+	{
+		PrintScreen("Необходимо изучение навыка алхимии!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else
+	{
+		var int ndocid;
+		ndocid = Doc_Create();
+		Doc_SetPages(ndocid,1);
+		Doc_SetPage(ndocid,0,"letters2.TGA",0);
+		Doc_SetFont(ndocid,-1,"font_10_book.tga");
+		Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+		Doc_PrintLines(ndocid,0,"Выдави из каждого листа сок, стебель сдави в кашу. Затем перелей все в бутылочку с основой и хорошо взболтай.");
+		Doc_PrintLine(ndocid,0,"");
+		Doc_PrintLines(ndocid,0,"Основу зелья я приготовил из чистого спирта, в который добавил высушенные и измельченные семена бука.");
+		Doc_PrintLine(ndocid,0,"");
+		Doc_PrintLines(ndocid,0,"- Фортуно");
+		Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+		Doc_Show(ndocid);
+		if(FORTUNORECIPE == FALSE)
+		{
+			PrintScreen("Изучен новый рецепт!",-1,12,"FONT_OLD_20_WHITE.TGA",4);
+			b_logentry("Алхимия","Изучен рецепт лечебного зелья Фортуно (максимальная магическая и жизненная сила +10). Требуется: мертвый лист (1), чистый спирт (1) и семена бука (1).");
+			FORTUNORECIPE = TRUE;
+		};
+	};
+};
+
+instance ALCHEMY_MASTER(C_ITEM)
+{
+	name = "Рецепт";
+	mainflag = ITEM_KAT_DOCS;
+	flags = ITEM_MISSION;
+	value = 1200;
+	visual = "MASTERRECIPE.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Рецепт зелья мощи";
+	text[1] = NAME_BONUS_DEX;
+	count[1] = 4;
+	text[2] = NAME_BONUS_STR;
+	count[2] = 4;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+	on_state[0] = usemasterrecipe;
+};
+
+func void usemasterrecipe()
+{
+	if(ALCHEMYACTIVE == FALSE)
+	{
+		PrintScreen("Необходимо изучение навыка алхимии!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else
+	{
+		var int ndocid;
+		ndocid = Doc_Create();
+		Doc_SetPages(ndocid,1);
+		Doc_SetPage(ndocid,0,"letters2.TGA",0);
+		Doc_SetFont(ndocid,-1,"font_10_book.tga");
+		Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+		Doc_PrintLines(ndocid,0,"Эффект от эссенции силы и ловкости можно немного увеличить, смешав их в одном сосуде. Предварительно необходимо довести до кипения эссенцию силы, а эссенцию ловкости взболтать круговыми движениями. Впрочем, такой способ не подойдет для более сильных зелий из-за их концентрации.");
+		Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+		Doc_Show(ndocid);
+		if(MASTERRECIPE == FALSE)
+		{
+			PrintScreen("Изучен новый рецепт!",-1,12,"FONT_OLD_20_WHITE.TGA",4);
+			b_logentry("Алхимия","Изучен рецепт зелья мощи (ловкость и сила +4). Требуется: эссенция ловкости (1) и эссенция силы (1).");
+			MASTERRECIPE = TRUE;
+		};
+	};
+};
+	
+////////////рецепты торговцев/////////////////////
+
+instance ALCHEMY_HP1_PRICED(C_ITEM)
+{
+	name = "Рецепт";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 100;
+	visual = "HP1RECIPE.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Рецепт эссенции исцеления";
+	text[1] = NAME_BONUS_HP;
+	count[1] = 50;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+	on_state[0] = usehp1recipe_priced;
+};
+
+instance ALCHEMY_HP2_PRICED(C_ITEM)
+{
+	name = "Рецепт";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 200;
+	visual = "HP2RECIPE.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Рецепт экстракта исцеления";
+	text[1] = NAME_BONUS_HP;
+	count[1] = 70;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+	on_state[0] = usehp2recipe_priced;
+};
+
+instance ALCHEMY_HP3_PRICED(C_ITEM)
+{
+	name = "Рецепт";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 300;
+	visual = "HP3RECIPE.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Рецепт зелья исцеления";
+	text[1] = NAME_BONUS_HP;
+	count[1] = 100;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+	on_state[0] = usehp3recipe_priced;
+};
+
+instance ALCHEMY_MP1_PRICED(C_ITEM)
+{
+	name = "Рецепт";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 100;
+	visual = "MP1RECIPE.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Рецепт эссенции магической энергии";
+	text[1] = NAME_BONUS_MANA;
+	count[1] = 30;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+	on_state[0] = usemp1recipe_priced;
+};
+
+instance ALCHEMY_MP2_PRICED(C_ITEM)
+{
+	name = "Рецепт";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 200;
+	visual = "MP2RECIPE.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Рецепт экстракта магической энергии";
+	text[1] = NAME_BONUS_MANA;
+	count[1] = 50;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+	on_state[0] = usemp2recipe_priced;
+};
+
+instance ALCHEMY_MP3_PRICED(C_ITEM)
+{
+	name = "Рецепт";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 300;
+	visual = "MP3RECIPE.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Рецепт зелья магической энергии";
+	text[1] = NAME_BONUS_MANA;
+	count[1] = 70;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+	on_state[0] = usemp3recipe_priced;
+};
+
+instance ALCHEMY_MPMAX_PRICED(C_ITEM)
+{
+	name = "Рецепт";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 600;
+	visual = "MPMAXRECIPE.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Рецепт эссенции силы духа";
+	text[1] = NAME_BONUS_MANAMAX;
+	count[1] = 5;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+	on_state[0] = usempmaxrecipe_priced;
+};
+
+//////////////////////////////////////////
+
+func void usehp1recipe_priced()
+{
+	if(ALCHEMYACTIVE == FALSE)
+	{
+		PrintScreen("Необходимо изучение навыка алхимии!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else
+	{
+		var int ndocid;
+		ndocid = Doc_Create();
+		Doc_SetPages(ndocid,1);
+		Doc_SetPage(ndocid,0,"letters2.TGA",0);
+		Doc_SetFont(ndocid,-1,"font_10_book.tga");
+		Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+		Doc_PrintLines(ndocid,0,"Выписка из 'Большой книги ядов, зелий и растений' Логара, 562 г.");
+		Doc_PrintLines(ndocid,0,"-------------------");
+		Doc_PrintLines(ndocid,0,"...понадобятся листья целебной травы. От их свежести зависит эффективность извлекаемой эссенции. Напоминаю, что листья, цветки и ягоды хранятся гораздо дольше, если не отделены от стебля.");
+		Doc_PrintLines(ndocid,0," ");
+		Doc_PrintLines(ndocid,0,"...достаточно четырех или пяти листьев. С помощью пестика в ступке растолките листья до появления характерного горьковатого запаха. Переложите кашицу в жаропрочную посуду, добавьте немного воды и доведите до кипения на горелке. Перелейте выделившуюся жидкость в чистую склянку подходящего объема и выжмите листья. Разбавьте водой в пропорции один к десяти. Встряхивайте пузырек, пока содержимое не обретет однородный красноватый цвет. Эссенция исцеления готова к употреблению.");
+		Doc_PrintLines(ndocid,0," ");
+		Doc_PrintLines(ndocid,0,"Примечание. Разведение водой необходимо для того, чтобы облегчить усваивание телом горькой эссенции. Более высокие концентрации наряду с исцеляющим эффектом способны вызывать рвоту и диарею.");
+		Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+		Doc_Show(ndocid);
+		if(HP1RECIPE == FALSE)
+		{
+			PrintScreen("Изучен новый рецепт!",-1,12,"FONT_OLD_20_WHITE.TGA",4);
+			b_logentry("Алхимия","Изучен рецепт эссенции исцеления (жизненная сила +50). Требуется: целебная трава (1).");
+			HP1RECIPE = TRUE;
+		};
+	};
+};
+
+func void usehp2recipe_priced()
+{
+	if(ALCHEMYACTIVE == FALSE)
+	{
+		PrintScreen("Необходимо изучение навыка алхимии!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else
+	{
+		var int ndocid;
+		ndocid = Doc_Create();
+		Doc_SetPages(ndocid,1);
+		Doc_SetPage(ndocid,0,"letters2.TGA",0);
+		Doc_SetFont(ndocid,-1,"font_10_book.tga");
+		Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+		Doc_PrintLines(ndocid,0,"Выписка из 'Большой книги ядов, зелий и растений' Логара, 562 г.");
+		Doc_PrintLines(ndocid,0,"-------------------");
+		Doc_PrintLines(ndocid,0,"...потребуется так называемое целебное растение. Напоминаю, автор использует просторечные названия намеренно, ибо книга нацелена на алхимиков средней руки.");
+		Doc_PrintLines(ndocid,0," ");
+		Doc_PrintLines(ndocid,0,"...измельченный побег растения засыпьте в колбу с высоким горлышком, налейте воды до половины и подключите змеевик. Колбу поместите на горелку, а выходной конец змеевика опустите в склянку с плоским дном так, чтобы он его не касался. Выпаривайте на очень медленном огне до тех пор, пока не закончится вода в колбе. К полученному объему экстракта долейте в пять раз больше частей воды...");
+		Doc_PrintLines(ndocid,0," ");
+		Doc_PrintLines(ndocid,0,"Примечание. Старайтесь не допускать нагревания стеблей в отсутствие воды. Полученные таким образом пары хорошо растворяются в воде и способны вызывать обильнейшее слюноотделение.");
+		Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+		Doc_Show(ndocid);
+		if(HP2RECIPE == FALSE)
+		{
+			PrintScreen("Изучен новый рецепт!",-1,12,"FONT_OLD_20_WHITE.TGA",4);
+			b_logentry("Алхимия","Изучен рецепт экстракта исцеления (жизненная сила +70). Требуется: целебное растение (1).");
+			HP2RECIPE = TRUE;
+		};
+	};
+};
+
+func void usehp3recipe_priced()
+{
+	if(ALCHEMYACTIVE == FALSE)
+	{
+		PrintScreen("Необходимо изучение навыка алхимии!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else
+	{
+		var int ndocid;
+		ndocid = Doc_Create();
+		Doc_SetPages(ndocid,1);
+		Doc_SetPage(ndocid,0,"letters2.TGA",0);
+		Doc_SetFont(ndocid,-1,"font_10_book.tga");
+		Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+		Doc_PrintLines(ndocid,0,"Выписка из 'Большой книги ядов, зелий и растений' Логара, 562 г.");
+		Doc_PrintLines(ndocid,0,"-------------------");
+		Doc_PrintLines(ndocid,0,"...необходим довольно редкий целебный корень. Отметим, что его листья вполне можно употреблять в пищу за неимением альтернатив. Для алхимии они ценности не представляют.");
+		Doc_PrintLines(ndocid,0," ");
+		Doc_PrintLines(ndocid,0,"Избавьте растение от листьев и нарежьте его тонкими кусками. Растолките в ступке до выделения молочного цвета пузырящейся жидкости и отставьте в сторону. Тем временем в подготовленную заранее колбу с высоким горлышком залейте воду примерно до половины и доведите до кипения, а затем отправьте туда содержимое ступки и моментально подключите змеевик, конец которого должен быть заблаговременно помещен в колбу с узким горлышком. Выпаренную жидкость разбавьте водой в пропорции два к пяти...");
+		Doc_PrintLines(ndocid,0," ");
+		Doc_PrintLines(ndocid,0,"Примечание. Возможно, эффект зелья усилится, если разбавленный состав повторно довести до кипения и достаточно быстро остудить.");
+		Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+		Doc_Show(ndocid);
+		if(HP3RECIPE == FALSE)
+		{
+			PrintScreen("Изучен новый рецепт!",-1,12,"FONT_OLD_20_WHITE.TGA",4);
+			b_logentry("Алхимия","Изучен рецепт зелья исцеления (жизненная сила +100). Требуется: целебный корень (1).");
+			HP3RECIPE = TRUE;
+		};
+	};
+};
+
+func void usemp1recipe_priced()
+{
+	if(ALCHEMYACTIVE == FALSE)
+	{
+		PrintScreen("Необходимо изучение навыка алхимии!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else
+	{
+		var int ndocid;
+		ndocid = Doc_Create();
+		Doc_SetPages(ndocid,1);
+		Doc_SetPage(ndocid,0,"letters2.TGA",0);
+		Doc_SetFont(ndocid,-1,"font_10_book.tga");
+		Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+		Doc_PrintLines(ndocid,0,"Выписка из 'Большой книги ядов, зелий и растений' Логара, 562 г.");
+		Doc_PrintLines(ndocid,0,"-------------------");
+		Doc_PrintLines(ndocid,0,"...вполне можно использовать и обычный серафис. Нам понадобятся только ягоды этого растения...");
+		Doc_PrintLines(ndocid,0," ");
+		Doc_PrintLines(ndocid,0,"Засыпьте дно жаропрочной посуды давленными ягодами и щедро залейте их водой. Поместите сосуд на горелку, доведите смесь до кипения и убавьте огонь. Не забывайте помешивать отвар. Постепенно жидкость начнет окрашиваться в лунный цвет. Снимите колбу с огня, как только почувствуете сладковатый аромат. Дайте отвару остыть и через сито перелейте его в склянку для хранения.");
+		Doc_PrintLines(ndocid,0," ");
+		Doc_PrintLines(ndocid,0,"Примечание. Избегайте попадания листьев серафиса в отвар. Такого рода оплошность может привести к временной потере слуха и обоняния, однако отдельно от ягод листья могут быть использованы для приготовления целебных настоек.");
+		Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+		Doc_Show(ndocid);
+		if(MP1RECIPE == FALSE)
+		{
+			PrintScreen("Изучен новый рецепт!",-1,12,"FONT_OLD_20_WHITE.TGA",4);
+			b_logentry("Алхимия","Изучен рецепт эссенции магической энергии (магическая сила +30). Требуется: серафис (1).");
+			MP1RECIPE = TRUE;
+		};
+	};
+};
+
+func void usemp2recipe_priced()
+{
+	if(ALCHEMYACTIVE == FALSE)
+	{
+		PrintScreen("Необходимо изучение навыка алхимии!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else
+	{
+		var int ndocid;
+		ndocid = Doc_Create();
+		Doc_SetPages(ndocid,1);
+		Doc_SetPage(ndocid,0,"letters2.TGA",0);
+		Doc_SetFont(ndocid,-1,"font_10_book.tga");
+		Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+		Doc_PrintLines(ndocid,0,"Выписка из 'Большой книги ядов, зелий и растений' Логара, 562 г.");
+		Doc_PrintLines(ndocid,0,"-------------------");
+		Doc_PrintLines(ndocid,0,"...далеко не всем мастерам известно, что для стимуляции духа можно использовать и воронью траву...");
+		Doc_PrintLines(ndocid,0," ");
+		Doc_PrintLines(ndocid,0,"Тщательно измельчите крупные листья вороньей травы, добавьте к ним немного спирта и сожгите в каменной чаше. Маленькие желтые листочки из середины растения раздавите в ступке и соедините с пеплом в колбе. Заполните колбу водой на треть, подключите змеевик и поставьте на горелку. Свободный конец змеевика поместите в склянку с плоским дном. По мере выпаривания воды, в ней должна начать конденсироваться небесного цвета жидкость... в полученный экстракт добавьте большое количество воды и тщательно перемешайте.");
+		Doc_PrintLines(ndocid,0," ");
+		Doc_PrintLines(ndocid,0,"Примечание. Присутствие в пепле недогоревших листьев может привести к нежелательным эффектам, в частности временной слепоте.");
+		Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+		Doc_Show(ndocid);
+		if(MP2RECIPE == FALSE)
+		{
+			PrintScreen("Изучен новый рецепт!",-1,12,"FONT_OLD_20_WHITE.TGA",4);
+			b_logentry("Алхимия","Изучен рецепт экстракта магической энергии (магическая сила +50). Требуется: воронья трава (1).");
+			MP2RECIPE = TRUE;
+		};
+	};
+};
+
+func void usemp3recipe_priced()
+{
+	if(ALCHEMYACTIVE == FALSE)
+	{
+		PrintScreen("Необходимо изучение навыка алхимии!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else
+	{
+		var int ndocid;
+		ndocid = Doc_Create();
+		Doc_SetPages(ndocid,1);
+		Doc_SetPage(ndocid,0,"letters2.TGA",0);
+		Doc_SetFont(ndocid,-1,"font_10_book.tga");
+		Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+		Doc_PrintLines(ndocid,0,"Выписка из 'Большой книги ядов, зелий и растений' Логара, 562 г.");
+		Doc_PrintLines(ndocid,0,"-------------------");
+		Doc_PrintLines(ndocid,0,"...для создания сильного зелья магической энергии сгодится и каменный корень. Его стимулирующее воздействие можно усилить в разы следующим нехитрым способом.");
+		Doc_PrintLines(ndocid,0," ");
+		Doc_PrintLines(ndocid,0,"Раздавите стебель и сломайте его в нескольких местах таким образом, чтобы растение поместилось в реторту. Залейте растение водой с небольшим добавлением спирта и тщательно перемешайте. Зажгите огонь и доведите жидкость до кипения. Убавьте огонь под ретортой и включите горелку под соединенной с ней колбой для выпаривания. Синеватого цвета продукт растворите в большом количестве воды.");
+		Doc_PrintLines(ndocid,0," ");
+		Doc_PrintLines(ndocid,0,"Примечание. Неосторожное вдыхание паров каменного корня может привести к потере сознания.");
+		Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+		Doc_Show(ndocid);
+		if(MP3RECIPE == FALSE)
+		{
+			PrintScreen("Изучен новый рецепт!",-1,12,"FONT_OLD_20_WHITE.TGA",4);
+			b_logentry("Алхимия","Изучен рецепт зелья магической энергии (магическая сила +70). Требуется: каменный корень (1).");
+			MP3RECIPE = TRUE;
+		};
+	};
+};
+
+func void usempmaxrecipe_priced()
+{
+	if(ALCHEMYACTIVE == FALSE)
+	{
+		PrintScreen("Необходимо изучение навыка алхимии!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else
+	{
+		var int ndocid;
+		ndocid = Doc_Create();
+		Doc_SetPages(ndocid,1);
+		Doc_SetPage(ndocid,0,"letters2.TGA",0);
+		Doc_SetFont(ndocid,-1,"font_10_book.tga");
+		Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+		Doc_PrintLines(ndocid,0,"Выписка из 'Большой книги ядов, зелий и растений' Логара, 562 г.");
+		Doc_PrintLines(ndocid,0,"-------------------");
+		Doc_PrintLines(ndocid,0,"...в случае отсутствия оного для усиления магических способностей может быть использована комбинация горного мха и лунной тени.");
+		Doc_PrintLines(ndocid,0," ");
+		Doc_PrintLines(ndocid,0,"...мох залейте небольшим количеством воды и отставьте в сторону. Тем временем острым ножом нарежьте листья лунной тени тонкими полосками вдоль волокон. Переместите мох в колбу для выпаривания. Дайте ему немного подсохнуть, а затем залейте в колбу воду. Пока закипает вода, мелко нарежьте полоски лунной тени поперек и засыпьте их в колбу. Убавьте огонь и подключите перегонный куб... К полученной жидкости добавьте равное количество воды...");
+		Doc_PrintLines(ndocid,0," ");
+		Doc_PrintLines(ndocid,0,"Примечание. Лишний раз убедитесь, что вы используете горный, а не похожий на него, мох. Неправильный ингредиент может привести к нежелательным эффектам, которые автор предсказать не берется даже приблизительно.");
+		Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+		Doc_Show(ndocid);
+		if(MPMAXRECIPE == FALSE)
+		{
+			PrintScreen("Изучен новый рецепт!",-1,12,"FONT_OLD_20_WHITE.TGA",4);
+			b_logentry("Алхимия","Изучен рецепт эссенции силы духа (максимальная магическая сила +5). Требуется: горный мох (1) и лунная тень (1).");
+			MPMAXRECIPE = TRUE;
+		};
 	};
 };
 

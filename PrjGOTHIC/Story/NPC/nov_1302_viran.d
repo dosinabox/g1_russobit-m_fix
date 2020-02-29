@@ -1,7 +1,7 @@
 
 instance NOV_1302_VIRAN(NPC_DEFAULT)
 {
-	name[0] = "Виран";
+	name[0] = "Вайран";
 	npctype = NPCTYPE_MAIN;
 	guild = GIL_NOV;
 	level = 15;
@@ -15,7 +15,7 @@ instance NOV_1302_VIRAN(NPC_DEFAULT)
 	attribute[ATR_HITPOINTS] = 100;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Mage.mds");
-	Mdl_SetVisualBody(self,"hum_body_Naked0",1,1,"Hum_Head_Bald",26,3,nov_armor_l);
+	Mdl_SetVisualBody(self,"hum_body_Naked0",1,1,"Hum_Head_Bald",26,3,nov_armor_m);
 	b_scale(self);
 	Mdl_SetModelFatness(self,-1);
 	fight_tactic = FAI_HUMAN_STRONG;
@@ -30,7 +30,7 @@ instance NOV_1302_VIRAN(NPC_DEFAULT)
 
 func void rtn_start_1302()
 {
-	ta_boss(7,0,19,0,"PATH_TAKE_HERB_2_1");
-	ta_boss(19,0,7,0,"PATH_TAKE_HERB_2_1");
+	ta_boss(6,0,21,0,"PATH_TAKE_HERB_2_1");
+	ta_sitcampfire(21,0,6,0,"PATH_TAKE_HERB_2_1");
 };
 

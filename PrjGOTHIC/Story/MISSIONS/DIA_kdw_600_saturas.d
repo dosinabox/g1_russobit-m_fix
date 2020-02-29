@@ -82,7 +82,7 @@ instance INFO_SATURAS_YBERION(C_INFO)
 	information = info_saturas_yberion_info;
 	permanent = 0;
 	important = 0;
-	description = "Юберион умер! Это случилось после Церемонии вызова Спящего!";
+	description = "Гуру Братства провели одну церемонию. Они вызывали Спящего.";
 };
 
 
@@ -96,17 +96,34 @@ func int info_saturas_yberion_condition()
 
 func void info_saturas_yberion_info()
 {
-	AI_Output(other,self,"Info_Saturas_YBERION_15_01");	//Юберион умер! Это случилось после великой Церемонии вызова Спящего!
-	AI_Output(self,other,"Info_Saturas_YBERION_14_02");	//Это худшая новость из всех возможных.
+	AI_Output(other,self,"Info_Cronos_YBERION_15_03");	//Гуру Братства провели одну церемонию. Они вызывали Спящего.
+	AI_Output(other,self,"Info_Cronos_YBERION_15_04");	//Но умственное напряжение плохо сказалось на Юберионе. Он этого не выдержал.
+	if(YBERION_DIED == TRUE)
+	{
+		AI_Output(other,self,"Info_Saturas_YBERION_15_01");	//Юберион умер! Это случилось после великой Церемонии вызова Спящего!
+		AI_Output(self,other,"Info_Saturas_YBERION_14_02");	//Это худшая новость из всех возможных.
+	};
 	AI_Output(self,other,"Info_Saturas_YBERION_14_03");	//Кто же возглавил братство? Не этот ли безумный властолюбец Кор Галом?
 	AI_Output(other,self,"Info_Saturas_YBERION_15_04");	//Нет! Кор Галом отвернулся от Братства. Он взял с собой нескольких Стражей и ушел неизвестно куда.
 	AI_Output(self,other,"Info_Saturas_YBERION_14_05");	//Как странно! Он же должен был стать преемником Юбериона!
 	AI_Output(other,self,"Info_Saturas_YBERION_15_06");	//Эти события убедили Гуру в том, что они ошиблись, избрав Спящего своим богом. Он оказался злым демоном.
 	AI_Output(other,self,"Info_Saturas_YBERION_15_07");	//Один из Гуру попытался убить меня, подпав под влияние Спящего, хотя перед этим я спас ему жизнь.
 	AI_Output(other,self,"Info_Saturas_YBERION_15_08");	//Кор Галом был единственным Гуру, который не отказался от своей веры в Спящего, несмотря на его истинную природу. Поэтому он покинул Болотный лагерь.
-	AI_Output(self,other,"Info_Saturas_YBERION_14_09");	//Все ясно! Что ж, я думаю, это к лучшему. Кор Ангар хороший человек, строгий, но честный.
-	AI_Output(self,other,"Info_Saturas_YBERION_14_10");	//Если кому-нибудь и удастся наладить ситуацию в Братстве после такой духовной катастрофы, то только ему.
-	b_logentry(CH3_ESCAPEPLANNC,"Я сообщил Сатурасу о событиях в Болотном лагере. Он обрадовался тому, что теперь Братство будет возглавлять Кор Ангар, а не Кор Галом.");
+	if(YBERION_DIED == TRUE)
+	{
+		AI_Output(self,other,"Info_Saturas_YBERION_14_09");	//Все ясно! Что ж, я думаю, это к лучшему. Кор Ангар хороший человек, строгий, но честный.
+		AI_Output(self,other,"Info_Saturas_YBERION_14_10");	//Если кому-нибудь и удастся наладить ситуацию в Братстве после такой духовной катастрофы, то только ему.
+		b_logentry(CH3_ESCAPEPLANNC,"Я сообщил Сатурасу о событиях в Болотном лагере. Он обрадовался тому, что теперь Братство будет возглавлять Кор Ангар, а не Кор Галом.");
+	}
+	else
+	{
+		AI_Output(self,other,"SVM_14_HeyHeyHey");	//Хм.
+		b_exchangeroutine(gur_1204_baalnamib,"yberion");
+		b_exchangeroutine(gur_1207_natalia,"wash");
+		b_exchangeroutine(gur_1205_chani,"wash");
+		b_logentry(CH3_ESCAPEPLANNC,"Я сообщил Сатурасу о событиях в Болотном лагере.");
+	};
+	b_exchangeroutine(gur_1202_corangar,"guru");
 };
 
 
@@ -233,7 +250,7 @@ func void info_saturas_offer_info()
 	AI_Output(self,other,"Info_Saturas_OFFER_14_05");	//Тебе придется положиться только на свои силы.
 	AI_Output(other,self,"Info_Saturas_OFFER_15_06");	//Что ж... переживу. Я уже привык делать все сам.
 	AI_Output(self,other,"Info_Saturas_OFFER_14_07");	//Твоя уверенность похвальна, но кое-что тебе все же может пригодиться.
-	AI_Output(self,other,"Info_Saturas_OFFER_14_08");	//Возьми это карту. Она довольно старая, поэтому на ней можно найти места, в которых располагались юниторы до того, как мы создали этот Барьер.
+	AI_Output(self,other,"Info_Saturas_OFFER_14_08");	//Возьми эту карту. Она довольно старая, поэтому на ней можно найти места, в которых располагались юниторы до того, как мы создали этот Барьер.
 	AI_Output(self,other,"Info_Saturas_OFFER_14_09");	//Тебе понадобится это заклинание, оно поможет быстрее вернуться в лагерь.
 	AI_Output(self,other,"Info_Saturas_OFFER_14_10");	//И еще: поговори с Риорданом. Он готовит для нас зелья.
 	AI_Output(self,other,"Info_Saturas_OFFER_14_11");	//Его дом ты найдешь на верхнем уровне.
@@ -252,7 +269,7 @@ func void b_deliverfocus()
 	}
 	else if(SATURAS_BRINGFOCI == 2)
 	{
-		AI_Output(self,other,"Info_Saturas_BRINGFOCUS_14_04");	//Хорошо, это уже второй камень. 
+		AI_Output(self,other,"Info_Saturas_BRINGFOCUS_14_04");	//Хорошо, это уже второй камень.
 		AI_Output(self,other,"Info_Saturas_BRINGFOCUS_14_05");	//Скоро мы сможем осуществить наш план.
 		AI_Output(self,other,"Info_Saturas_BRINGFOCUS_14_06");	//Смело иди вперед и достань нам еще два камня.
 		SATURAS_BRINGFOCI = 3;
@@ -610,7 +627,7 @@ instance KDW_600_SATURAS_NOMOREOC(C_INFO)
 
 func int kdw_600_saturas_nomoreoc_condition()
 {
-	if(Npc_KnowsInfo(hero,info_saturas_murder) && ((OLDHEROGUILD == GIL_GRD) || (OLDHEROGUILD == GIL_KDF)))
+	if(Npc_KnowsInfo(hero,info_saturas_murder) && (OC_BANNED == TRUE) && ((OLDHEROGUILD == GIL_GRD) || (OLDHEROGUILD == GIL_KDF) || (OLDHEROGUILD == GIL_STT)))
 	{
 		return TRUE;
 	};
@@ -640,7 +657,7 @@ instance KDW_600_SATURAS_GOTOLEE(C_INFO)
 
 func int kdw_600_saturas_gotolee_condition()
 {
-	if((OLDHEROGUILD == GIL_GRD) && Npc_KnowsInfo(hero,kdw_600_saturas_nomoreoc))
+	if((OLDHEROGUILD == GIL_GRD || OLDHEROGUILD == GIL_STT) && Npc_KnowsInfo(hero,kdw_600_saturas_nomoreoc))
 	{
 		return TRUE;
 	};
@@ -722,10 +739,10 @@ func void kdw_600_saturas_kdwaufnahme_info()
 	AI_Output(other,self,"KDW_600_Saturas_KDWAUFNAHME_Info_15_11");	//...до тех пор, пока мое бренное тело не обретет покой в чертогах Белиара и не иссякнет источник моей жизни.
 	AI_Output(self,other,"KDW_600_Saturas_KDWAUFNAHME_Info_14_12");	//Эта клятва соединила в тебе силу Огня и благословение Воды.
 	AI_Output(self,other,"KDW_600_Saturas_KDWAUFNAHME_Info_14_13");	//Соединила то, что до тебя было несоединимым. Отныне твоя жизнь будет знаком объединения стихий.
-	AI_Output(self,other,"KDW_600_Saturas_KDWAUFNAHME_Info_14_14");	//Возьми это одеяние и носи его в знак союза со священной Водой и с Аданосом. 
+	AI_Output(self,other,"KDW_600_Saturas_KDWAUFNAHME_Info_14_14");	//Возьми это одеяние и носи его в знак союза со священной Водой и с Аданосом.
 	CreateInvItem(self,kdw_armor_l);
 	b_giveinvitems(self,other,kdw_armor_l,1);
-	AI_EquipBestArmor(hero);
+	AI_EquipArmor(hero,kdw_armor_l);
 	Snd_Play("MFX_Heal_Cast");
 	Npc_SetTrueGuild(hero,GIL_KDW);
 	hero.guild = GIL_KDW;
@@ -804,7 +821,7 @@ func void kdw_600_saturas_kreis1_info()
 		AI_Output(self,other,"KDW_600_Saturas_KREIS1_Info_14_02");	//Вступление в Первый Круг магии даст тебе умение использовать магические руны.
 		AI_Output(self,other,"KDW_600_Saturas_KREIS1_Info_14_03");	//Каждая руна содержит в себе одно магическое заклинание.
 		AI_Output(self,other,"KDW_600_Saturas_KREIS1_Info_14_04");	//Используя свою магическую силу, ты сможешь прочитать это заклинание.
-		AI_Output(self,other,"KDW_600_Saturas_KREIS1_Info_14_05");	//Но в отличие от магических свитков, которые теряют свою силу после первого прочтения, заклинание руны можно читать снова и снова, и оно не иссякнет. 
+		AI_Output(self,other,"KDW_600_Saturas_KREIS1_Info_14_05");	//Но в отличие от магических свитков, которые теряют свою силу после первого прочтения, заклинание руны можно читать снова и снова, и оно не иссякнет.
 		AI_Output(self,other,"KDW_600_Saturas_KREIS1_Info_14_06");	//Каждая руна является источником магической силы, которая может быть задействована в любое время.
 		AI_Output(self,other,"KDW_600_Saturas_KREIS1_Info_14_07");	//Как я уже сказал, при прочтении заклинания руны или свитка будет расходоваться твоя магическая сила.
 		AI_Output(self,other,"KDW_600_Saturas_KREIS1_Info_14_08");	//Знания каждого нового Круга помогут тебе читать более сложные заклинания рун.
@@ -957,6 +974,7 @@ func void kdw_600_saturas_kreis5_info()
 	};
 };
 
+var int kdw_armor_h_was_bought;
 
 instance KDW_600_SATURAS_HEAVYARMOR(C_INFO)
 {
@@ -966,13 +984,13 @@ instance KDW_600_SATURAS_HEAVYARMOR(C_INFO)
 	information = kdw_600_saturas_heavyarmor_info;
 	important = 0;
 	permanent = 1;
-	description = b_buildbuyarmorstring("Одеяние верховного мага",VALUE_KDW_ARMOR_H);
+	description = b_buildbuyarmorstring("Одеяние верховного мага: 70/10/45/20",VALUE_KDW_ARMOR_H);
 };
 
 
 func int kdw_600_saturas_heavyarmor_condition()
 {
-	if(Npc_GetTrueGuild(hero) == GIL_KDW)
+	if((Npc_GetTrueGuild(hero) == GIL_KDW) && (KDW_ARMOR_H_WAS_BOUGHT != 1))
 	{
 		return TRUE;
 	};
@@ -991,14 +1009,14 @@ func void kdw_600_saturas_heavyarmor_info()
 	}
 	else
 	{
+		//AI_EquipArmor(self,kdw_armor_h);
 		AI_Output(self,other,"KDW_600_Saturas_HEAVYARMOR_Info_14_04");	//Я вижу, что ты уже достоин носить облачение верховного мага Круга Воды.
-		kdw_600_saturas_heavyarmor.permanent = 0;
 		b_giveinvitems(hero,self,itminugget,VALUE_KDW_ARMOR_H);
-		CreateInvItem(hero,kdw_armor_h);
-		CreateInvItem(self,itamarrow);
-		b_giveinvitems(self,hero,itamarrow,1);
-		Npc_RemoveInvItem(hero,itamarrow);
-		AI_EquipBestArmor(hero);
+		CreateInvItems(hero,kdw_armor_h,1);
+		//b_giveinvitems(self,hero,kdw_armor_h,1);
+		PrintScreen("Получен 1 предмет.",-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
+		AI_EquipArmor(hero,kdw_armor_h);
+		KDW_ARMOR_H_WAS_BOUGHT = 1;
 	};
 };
 
@@ -1047,10 +1065,7 @@ func int info_saturas_xardas_condition()
 {
 	if(Npc_KnowsInfo(hero,info_saturas_collapse) && Npc_KnowsInfo(hero,info_saturas_murder))
 	{
-		if((Npc_GetTrueGuild(hero) != GIL_GRD) && (Npc_GetTrueGuild(hero) != GIL_KDF))
-		{
-			return TRUE;
-		};
+		return TRUE;
 	};
 };
 
@@ -1313,7 +1328,7 @@ instance KDW_600_SATURAS_HOGEAUFNAHME(C_INFO)
 
 func int kdw_600_saturas_hogeaufnahme_condition()
 {
-	if(Npc_KnowsInfo(hero,info_saturas_murder) && (Npc_GetTrueGuild(hero) == GIL_SLD))
+	if(Npc_KnowsInfo(hero,info_nefarius_ocnews2))
 	{
 		return 1;
 	};
@@ -1324,7 +1339,7 @@ func void kdw_600_saturas_hogeaufnahme_info()
 	AI_Output(other,self,"KDW_600_Saturas_HogeAUFNAHME_15_00");	//Нефариус сказал, что я уже готов носить одеяние мага Воды.
 	AI_Output(self,other,"KDW_600_Saturas_NOMOREOC_Info_14_03");	//Мы с радостью примем тебя!
 	AI_Output(other,self,"KDW_600_Saturas_OATH_Info_15_01");	//Значит ли это, что я буду принят в гильдию магов Круга Воды?
-	AI_Output(self,other,"KDW_600_Saturas_OATH_Info_14_02");	//Нет. Сначала ты должен принести клятву воды.
+	AI_Output(self,other,"KDW_600_Saturas_OATH_Info_14_02");	//Нет. Сначала ты должен принести клятву Воды.
 };
 
 
@@ -1360,7 +1375,7 @@ func void kdw_600_saturas_hogeaufnahmeteil2_info()
 	AI_Output(other,self,"KDW_600_Saturas_KDWAUFNAHME_Info_15_09");	//...что знания и действа мои будут служить Воде отныне и до скончания веков...
 	AI_Output(self,other,"KDW_600_Saturas_KDWAUFNAHME_Info_14_10");	//...до тех пор, пока мое бренное тело не обретет покой в чертогах Белиара и не иссякнет источник моей жизни.
 	AI_Output(other,self,"KDW_600_Saturas_KDWAUFNAHME_Info_15_11");	//...до тех пор, пока мое бренное тело не обретет покой в чертогах Белиара и не иссякнет источник моей жизни.
-	AI_Output(self,other,"KDW_600_Saturas_KDWAUFNAHME_Info_14_14");	//Возьми это одеяние и носи его в знак союза со священной Водой и с Аданосом. 
+	AI_Output(self,other,"KDW_600_Saturas_KDWAUFNAHME_Info_14_14");	//Возьми это одеяние и носи его в знак союза со священной Водой и с Аданосом.
 	CreateInvItem(self,kdw_armor_l);
 	b_giveinvitems(self,other,kdw_armor_l,1);
 	AI_EquipBestArmor(hero);

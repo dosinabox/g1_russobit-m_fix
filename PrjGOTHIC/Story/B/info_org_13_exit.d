@@ -88,7 +88,14 @@ func int info_org_13_daslager_condition()
 func void info_org_13_daslager_info()
 {
 	AI_Output(other,self,"Info_Org_13_DasLager_15_00");	//Я бы хотел ознакомиться с лагерем.
-	AI_Output(self,other,"Info_Org_13_DasLager_13_01");	//Так иди и осмотри его сам. Ты не из людей Гомеза, как я вижу, так что тебя никто не тронет.
+	if(Npc_GetTrueGuild(other) != GIL_STT && Npc_GetTrueGuild(other) != GIL_GRD && Npc_GetTrueGuild(other) != GIL_KDF)
+	{
+		AI_Output(self,other,"Info_Org_13_DasLager_13_01");	//Так иди и осмотри его сам. Ты не из людей Гомеза, как я вижу, так что тебя никто не тронет.
+	}
+	else
+	{
+		AI_Output(self,other,"SVM_13_WhatDoYouWant");	//Что тебе от меня нужно?
+	};
 };
 
 
@@ -110,7 +117,7 @@ func int info_org_13_dielage_condition()
 func void info_org_13_dielage_info()
 {
 	AI_Output(other,self,"Info_Org_13_DieLage_15_00");	//Как идут дела?
-	AI_Output(self,other,"Info_Org_13_DieLage_13_01");	//А тебе что от меня нужно? 
+	AI_Output(self,other,"Info_Org_13_DieLage_13_01");	//А тебе что от меня нужно?
 };
 
 

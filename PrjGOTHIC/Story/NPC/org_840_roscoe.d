@@ -40,7 +40,7 @@ instance ORG_840_ROSCOE(NPC_DEFAULT)
 
 func void rtn_start_840()
 {
-	ta_guardpassage(23,0,7,0,"NC_HUT22_OUT_MOVEMENT");
-	ta_guardpassage(7,0,23,0,"NC_HUT22_OUT_MOVEMENT");
+	ta_guardpassage(2,0,6,0,"NC_HUT22_OUT_MOVEMENT");
+	ta_guardpassage(6,0,2,0,"NC_HUT22_OUT_MOVEMENT");
 };
 

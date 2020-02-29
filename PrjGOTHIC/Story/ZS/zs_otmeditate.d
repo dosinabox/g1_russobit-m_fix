@@ -31,16 +31,21 @@ func void zs_otmeditate()
 
 func void zs_otmeditate_loop()
 {
+	if(Npc_IsDead(gur_1212_madcorkalom))
+	{
+		b_fullstop(self);
+		b_whirlaround(self,hero);
+		npc_setpermattitude(self,ATT_HOSTILE);
+		Npc_SetTarget(self,hero);
+		AI_StartState(self,zs_attack,0,"");
+		//return LOOP_END;
+	};
 	var int praytime;
 	printdebugnpc(PD_TA_LOOP,"ZS_Meditate_Loop");
 	praytime = Hlp_Random(100);
-	if(praytime <= 2)
+	if(praytime >= 50)
 	{
 		AI_PlayAniBS(self,"T_PRAY_RANDOM",BS_SIT);
-	};
-	if(praytime >= 98)
-	{
-		AI_Output(self,NULL,"ZS_Meditate_Om");	//
 	};
 	AI_Wait(self,1);
 };
@@ -61,9 +66,9 @@ func void b_otmeditate_assessmurder()
 	if(npcinstance == gur_1212_madcorkalom)
 	{
 		b_fullstop(self);
-		b_whirlaround(self,other);
+		b_whirlaround(self,hero);
 		npc_setpermattitude(self,ATT_HOSTILE);
-		Npc_SetTarget(self,other);
+		Npc_SetTarget(self,hero);
 		AI_StartState(self,zs_attack,0,"");
 		SLF_FIRE = TRUE;
 	};

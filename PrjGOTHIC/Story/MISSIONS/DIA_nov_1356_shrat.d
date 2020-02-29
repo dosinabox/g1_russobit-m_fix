@@ -43,7 +43,7 @@ func void dia_shrat_whyhere_info()
 	AI_Output(other,self,"DIA_Shrat_WhyHere_15_00");	//Что ты здесь делаешь?
 	AI_Output(self,other,"DIA_Shrat_WhyHere_02_01");	//Разве я позволил тебе обратиться ко мне?
 	AI_Output(self,other,"DIA_Shrat_WhyHere_02_02");	//Шучу! Я здесь, потому что эти недоумки действуют мне на нервы!
-	AI_Output(self,other,"DIA_Shrat_WhyHere_02_03");	//Не смей обращаться ко мне: 'Моли Спящего о прощении! Это задание необычайной важности!'
+	AI_Output(self,other,"DIA_Shrat_WhyHere_02_03");	//'Не смей обращаться ко мне! Моли Спящего о прощении! Это задание необычайной важности!'
 	AI_Output(self,other,"DIA_Shrat_WhyHere_02_04");	//Когда вокруг тебя столько психов, этого достаточно, чтобы свести человека с ума.
 	AI_Output(self,other,"DIA_Shrat_WhyHere_02_05");	//Я Шрет, ученик первого ранга, им же и останусь!
 };

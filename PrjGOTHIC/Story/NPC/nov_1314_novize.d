@@ -6,7 +6,7 @@ instance NOV_1314_NOVIZE(NPC_DEFAULT)
 	guild = GIL_NOV;
 	level = 9;
 	voice = 2;
-	id = 1310;
+	id = 1314;
 	attribute[ATR_STRENGTH] = 15;
 	attribute[ATR_DEXTERITY] = 15;
 	attribute[ATR_MANA_MAX] = 0;
@@ -28,5 +28,11 @@ func void rtn_start_1314()
 {
 	ta_sleep(0,30,7,30,"PSI_13_HUT_IN");
 	ta_smoke(7,30,0,30,"PSI_PATH_4_2");
+};
+
+func void rtn_ritual_1314()
+{
+	ta_stay(8,0,13,0,"PSI_CEREMONY_NEW1");
+	ta_stay(13,0,8,0,"PSI_CEREMONY_NEW1");
 };
 

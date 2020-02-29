@@ -25,12 +25,8 @@ instance ORG_810_ORGANISATOR(NPC_DEFAULT)
 	CreateInvItems(self,itkelockpick,1);
 	CreateInvItems(self,itminugget,15);
 	CreateInvItems(self,itforice,8);
-	CreateInvItems(self,itfobooze,5);
-	CreateInvItems(self,itlstorch,1);
 	CreateInvItems(self,itfo_potion_health_01,1);
-	CreateInvItem(self,itmi_stuff_barbknife_01);
 	CreateInvItem(self,itfoloaf);
-	CreateInvItem(self,itat_teeth_01);
 	EquipItem(self,itmw_1h_mace_war_02);
 	EquipItem(self,itrw_bow_long_01);
 	CreateInvItems(self,itamarrow,20);

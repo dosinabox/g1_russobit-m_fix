@@ -42,5 +42,6 @@ instance MINECRAWLERQUEEN(MST_DEFAULT_MINECRAWLERQUEEN)
 {
 	set_minecrawlerqueen_visuals();
 	Npc_SetToFistMode(self);
+	//CreateInvItems(self,itat_crawlerqueen,3);
 };
 

@@ -42,7 +42,7 @@ func int grd_260_drake_gefahr_condition()
 func void grd_260_drake_gefahr_info()
 {
 	AI_Output(other,self,"Grd_260_Drake_Gefahr_Info_15_01");	//Расскажи мне, чего здесь следует остерегаться.
-	AI_Output(self,other,"Grd_260_Drake_Gefahr_Info_11_02");	//Главную опасность представляют ползуны. 
+	AI_Output(self,other,"Grd_260_Drake_Gefahr_Info_11_02");	//Главную опасность представляют ползуны.
 	AI_Output(self,other,"Grd_260_Drake_Gefahr_Info_11_03");	//Из-за них мы вынуждены были оставить несколько забоев. Они даже съели нескольких рудокопов.
 	AI_Output(other,self,"Grd_260_Drake_Gefahr_Info_15_04");	//Расскажи мне о ползунах.
 	AI_Output(self,other,"Grd_260_Drake_Gefahr_Info_11_05");	//У меня в горле совсем пересохло...
@@ -56,14 +56,14 @@ instance GRD_260_DRAKE_CRAWLER_OKAY(C_INFO)
 	condition = grd_260_drake_crawler_okay_condition;
 	information = grd_260_drake_crawler_okay_info;
 	important = 0;
-	permanent = 0;
+	permanent = 1;
 	description = "(предложить пиво)";
 };
 
 
 func int grd_260_drake_crawler_okay_condition()
 {
-	if(Npc_KnowsInfo(hero,grd_260_drake_gefahr))
+	if(Npc_KnowsInfo(hero,grd_260_drake_gefahr) && (DRAKE_BEER == FALSE))
 	{
 		return 1;
 	};
@@ -71,10 +71,11 @@ func int grd_260_drake_crawler_okay_condition()
 
 func void grd_260_drake_crawler_okay_info()
 {
+	AI_Output(hero,self,"Grd_260_Drake_Crawler_Okay_15_01");	//Вот, выпей это за мое здоровье!
 	if(Npc_HasItems(hero,itfobeer))
 	{
-		AI_Output(hero,self,"Grd_260_Drake_Crawler_Okay_15_01");	//Вот, выпей это за мое здоровье!
 		b_giveinvitems(hero,self,itfobeer,1);
+		DRAKE_BEER = TRUE;
 		if(c_bodystatecontains(self,BS_SIT))
 		{
 			AI_Standup(self);
@@ -88,7 +89,6 @@ func void grd_260_drake_crawler_okay_info()
 	else
 	{
 		AI_Output(self,other,"Grd_260_Drake_Crawler_Okay_11_06");	//Ты шутишь, да? Приходи, когда у тебя будет пиво.
-		grd_260_drake_crawler_okay.permanent = 1;
 	};
 };
 
@@ -141,7 +141,7 @@ func void grd_260_drake_mine_mehr_info()
 {
 	AI_Output(other,self,"Grd_260_Drake_Mine_Mehr_Info_15_01");	//Расскажи об этом что-нибудь еще.
 	AI_Output(self,other,"Grd_260_Drake_Mine_Mehr_Info_11_02");	//Я думаю, Вайпер сможет рассказать тебе больше. Спроси его. Он наш плавильщик.
-	AI_Output(self,other,"Grd_260_Drake_Mine_Mehr_Info_11_03");	//Или поговори с Яном. Он управляет всеми делами шахты. 
+	AI_Output(self,other,"Grd_260_Drake_Mine_Mehr_Info_11_03");	//Или поговори с Яном. Он управляет всеми делами шахты.
 };
 
 
@@ -197,6 +197,6 @@ func void grd_260_drake_gardeaufnahme_info()
 	AI_Output(self,other,"Grd_260_Drake_GARDEAUFNAHME_Info_11_01");	//Эй! Ты отлично расправился с ползунами! Думаю, теперь ты заслуживаешь должности стражника.
 	AI_Output(self,other,"Grd_260_Drake_GARDEAUFNAHME_Info_11_02");	//Иди в Старый лагерь и поговори с Торусом!
 	Log_CreateTopic(GE_BECOMEGUARD,LOG_NOTE);
-	b_logentry(GE_BECOMEGUARD,"Когда я принесу яйца, я должен буду поговорить с Торусом. Может быть, он примет меня в стражники.");
+	b_logentry(GE_BECOMEGUARD,"Когда я вынесу яйца ползунов из шахты, то должен буду поговорить с Торусом. Может быть, он зачислит меня в ряды стражников.");
 };
 

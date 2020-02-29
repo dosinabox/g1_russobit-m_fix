@@ -57,3 +57,9 @@ func void rtn_orcassault_1432()
 	ta_guardpassage(8,0,21,0,"PSI_TEMPLE_GUARD_04");
 };
 
+func void rtn_remove_1432()
+{
+	ta_stay(23,0,7,45,"WP_INTRO01");
+	ta_stay(7,45,23,0,"WP_INTRO01");
+};
+

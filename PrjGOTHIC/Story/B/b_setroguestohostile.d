@@ -1,73 +1,24 @@
 
 func void b_setroguestohostile()
 {
-	var C_NPC quentin;
-	var C_NPC rog863;
-	var C_NPC rog864;
-	var C_NPC rog865;
-	var C_NPC rog866;
-	var C_NPC rog867;
-	var C_NPC rog868;
-	var C_NPC rog869;
-	var C_NPC rog870;
-	var C_NPC rog871;
-	var C_NPC rog874;
 	var C_NPC renyu;
 	var C_NPC killian;
 	var C_NPC jacko;
-	quentin = Hlp_GetNpc(org_858_quentin);
-	Npc_SetTempAttitude(quentin,ATT_HOSTILE);
-	Npc_SetAttitude(quentin,ATT_HOSTILE);
-	rog863 = Hlp_GetNpc(org_863_raeuber);
-	Npc_SetTempAttitude(rog863,ATT_HOSTILE);
-	Npc_SetAttitude(rog863,ATT_HOSTILE);
-	rog864 = Hlp_GetNpc(org_864_raeuber);
-	Npc_SetTempAttitude(rog864,ATT_HOSTILE);
-	Npc_SetAttitude(rog864,ATT_HOSTILE);
-	rog865 = Hlp_GetNpc(org_865_raeuber);
-	Npc_SetTempAttitude(rog865,ATT_HOSTILE);
-	Npc_SetAttitude(rog865,ATT_HOSTILE);
-	rog866 = Hlp_GetNpc(org_866_raeuber);
-	Npc_SetTempAttitude(rog866,ATT_HOSTILE);
-	Npc_SetAttitude(rog866,ATT_HOSTILE);
-	rog867 = Hlp_GetNpc(org_867_raeuber);
-	Npc_SetTempAttitude(rog867,ATT_HOSTILE);
-	Npc_SetAttitude(rog867,ATT_HOSTILE);
-	rog868 = Hlp_GetNpc(org_868_raeuber);
-	Npc_SetTempAttitude(rog868,ATT_HOSTILE);
-	Npc_SetAttitude(rog868,ATT_HOSTILE);
-	rog869 = Hlp_GetNpc(org_869_raeuber);
-	Npc_SetTempAttitude(rog869,ATT_HOSTILE);
-	Npc_SetAttitude(rog869,ATT_HOSTILE);
-	rog870 = Hlp_GetNpc(org_870_raeuber);
-	Npc_SetTempAttitude(rog870,ATT_HOSTILE);
-	Npc_SetAttitude(rog870,ATT_HOSTILE);
-	rog871 = Hlp_GetNpc(org_871_raeuber);
-	Npc_SetTempAttitude(rog871,ATT_HOSTILE);
-	Npc_SetAttitude(rog871,ATT_HOSTILE);
-	rog874 = Hlp_GetNpc(org_874_raeuber);
-	Npc_SetTempAttitude(rog874,ATT_HOSTILE);
-	Npc_SetAttitude(rog874,ATT_HOSTILE);
-	if(STOOGES_FLED == TRUE)
-	{
-		renyu = Hlp_GetNpc(org_860_renyu);
-		if(Hlp_IsValidNpc(renyu))
-		{
-			Npc_SetTempAttitude(renyu,ATT_HOSTILE);
-			Npc_SetAttitude(renyu,ATT_HOSTILE);
-		};
-		killian = Hlp_GetNpc(org_861_killian);
-		if(Hlp_IsValidNpc(killian))
-		{
-			Npc_SetTempAttitude(killian,ATT_HOSTILE);
-			Npc_SetAttitude(killian,ATT_HOSTILE);
-		};
-		jacko = Hlp_GetNpc(org_862_jacko);
-		if(Hlp_IsValidNpc(jacko))
-		{
-			Npc_SetTempAttitude(jacko,ATT_HOSTILE);
-			Npc_SetAttitude(jacko,ATT_HOSTILE);
-		};
-	};
+	var C_NPC weg1501;
+	var C_NPC weg1502;
+	var C_NPC weg1503;
+	var C_NPC weg1504;
+	weg1501 = Hlp_GetNpc(non_1501_wegelagerer);
+	Npc_SetTempAttitude(weg1501,ATT_HOSTILE);
+	Npc_SetAttitude(weg1501,ATT_HOSTILE);
+	weg1502 = Hlp_GetNpc(non_1502_wegelagerer);
+	Npc_SetTempAttitude(weg1502,ATT_HOSTILE);
+	Npc_SetAttitude(weg1502,ATT_HOSTILE);
+	weg1503 = Hlp_GetNpc(non_1503_wegelagerer);
+	Npc_SetTempAttitude(weg1503,ATT_HOSTILE);
+	Npc_SetAttitude(weg1503,ATT_HOSTILE);
+	weg1504 = Hlp_GetNpc(non_1504_wegelagerer);
+	Npc_SetTempAttitude(weg1504,ATT_HOSTILE);
+	Npc_SetAttitude(weg1504,ATT_HOSTILE);
 };
 

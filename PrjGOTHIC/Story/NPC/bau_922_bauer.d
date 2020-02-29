@@ -15,7 +15,7 @@ instance BAU_922_BAUER(NPC_DEFAULT)
 	attribute[ATR_HITPOINTS] = 76;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Tired.mds");
-	Mdl_SetVisualBody(self,"hum_body_Naked0",2,2,"Hum_Head_Pony",51,2,-1);
+	Mdl_SetVisualBody(self,"hum_body_Naked0",2,1,"Hum_Head_Pony",51,2,-1);
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_COWARD;

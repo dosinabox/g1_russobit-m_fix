@@ -60,8 +60,7 @@ instance BABE_ROCKEFELLER(NPC_DEFAULT)
 	name[0] = "Леди-Рокфеллер";
 	guild = GIL_BAB;
 	level = 1;
-	flags = 0;
-	voice = 19;
+	voice = 16;
 	id = 110;
 	flags = NPC_FLAG_IMMORTAL;
 	attribute[ATR_STRENGTH] = 6;

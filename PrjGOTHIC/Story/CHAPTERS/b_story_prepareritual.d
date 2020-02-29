@@ -18,12 +18,15 @@ func void b_story_prepareritual()
 	var C_NPC novize_11;
 	var C_NPC templer;
 	var C_NPC templer_1;
+	var C_NPC baaltyon;
+	var C_NPC talas;
 	CORKALOM_BRINGBOOK = LOG_SUCCESS;
 	yberion = Hlp_GetNpc(gur_1200_yberion);
 	Npc_ExchangeRoutine(yberion,"CALLSLEEPER");
 	AI_ContinueRoutine(yberion);
 	corkalom = Hlp_GetNpc(gur_1201_corkalom);
 	Npc_ExchangeRoutine(corkalom,"CALLSLEEPER");
+	AI_SetWalkMode(corangar,NPC_RUN);
 	corangar = Hlp_GetNpc(gur_1202_corangar);
 	Npc_ExchangeRoutine(corangar,"CALLSLEEPER");
 	AI_ContinueRoutine(corangar);
@@ -67,11 +70,26 @@ func void b_story_prepareritual()
 	novize_11 = Hlp_GetNpc(nov_1337_novize);
 	Npc_ExchangeRoutine(novize_11,"RITUAL");
 	AI_ContinueRoutine(novize_11);
+	baaltyon = Hlp_GetNpc(gur_1210_baaltyon);
+	Npc_ExchangeRoutine(baaltyon,"RITUAL");
+	AI_ContinueRoutine(baaltyon);
+	talas = Hlp_GetNpc(nov_1300_talas);
+	Npc_ExchangeRoutine(talas,"RITUAL");
+	AI_ContinueRoutine(talas);
 	templer = Hlp_GetNpc(tpl_1431_templer);
 	templer.senses = SENSE_SEE | SENSE_HEAR | SENSE_SMELL;
 	templer_1 = Hlp_GetNpc(tpl_1430_templer);
 	templer_1.senses = SENSE_SEE | SENSE_HEAR | SENSE_SMELL;
-	b_exchangeroutine(nov_1300_talas,"BackInCamp");
+	b_exchangeroutine(gur_1204_baalnamib,"RITUAL");
+	b_exchangeroutine(nov_1314_novize,"RITUAL");
+	b_exchangeroutine(nov_1354_novize,"RITUAL");
+	b_exchangeroutine(nov_1355_novize,"RITUAL");
+	b_exchangeroutine(nov_1323_novize,"RITUAL");
+	b_exchangeroutine(nov_1324_novize,"RITUAL");
+	b_exchangeroutine(tpl_1425_templer,"RITUAL");
+	b_exchangeroutine(tpl_1410_templer,"RITUAL");
+	b_exchangeroutine(tpl_1423_templer,"RITUAL");
+	//b_exchangeroutine(nov_1300_talas,"BackInCamp");
 };
 
 func int c_timeforgreatprayer()

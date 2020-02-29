@@ -15,7 +15,7 @@ instance SLD_758_SOELDNER(NPC_DEFAULT)
 	attribute[ATR_HITPOINTS] = 256;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Militia.mds");
-	Mdl_SetVisualBody(self,"hum_body_Naked0",1,1,"Hum_Head_Pony",53,1,sld_armor_m);
+	Mdl_SetVisualBody(self,"hum_body_Naked0",1,1,"Hum_Head_Bald",53,1,sld_armor_m);
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_RANGED;
@@ -27,20 +27,20 @@ instance SLD_758_SOELDNER(NPC_DEFAULT)
 	CreateInvItems(self,itamarrow,20);
 	CreateInvItems(self,itforice,7);
 	CreateInvItems(self,itfoloaf,6);
-	CreateInvItems(self,itfomutton,4);
-	CreateInvItems(self,itminugget,22);
-	CreateInvItems(self,itfobooze,5);
-	CreateInvItems(self,itlstorch,5);
 	CreateInvItems(self,itfo_potion_health_02,7);
-	CreateInvItem(self,itmi_stuff_barbknife_01);
-	CreateInvItem(self,itmi_stuff_amphore_01);
 	daily_routine = rtn_fmcstart_758;
 };
 
 
 func void rtn_fmcstart_758()
 {
-	ta_guardpalisade(1,0,13,0,"FMC_PATH06");
-	ta_guardpalisade(13,0,1,0,"FMC_PATH06");
+	ta_guardpalisade(6,0,23,0,"FMC_PATH06");
+	ta_sleep(23,0,6,0,"FMC_HUT15_IN");
+};
+
+func void rtn_dead_758()
+{
+	ta_stay(6,0,23,0,"FMC_PATH06");
+	ta_stay(23,0,6,0,"FMC_PATH06");
 };
 

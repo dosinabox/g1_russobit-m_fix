@@ -26,6 +26,7 @@ instance GRD_271_ULBERT(NPC_DEFAULT)
 	EquipItem(self,itrw_crossbow_01);
 	fight_tactic = FAI_HUMAN_STRONG;
 	daily_routine = rtn_start_271;
+	//aivar[AIV_ITEMSCHWEIN] = TRUE;
 };
 
 

@@ -20,6 +20,7 @@ instance ORC_2001_SKLAVE(NPC_DEFAULT)
 	Mdl_SetVisual(self,"orc.mds");
 	Mdl_SetVisualBody(self,"Orc_BodySlave",DEFAULT,DEFAULT,"Orc_HeadSlave",DEFAULT,DEFAULT,-1);
 	fight_tactic = FAI_ORC;
+	CreateInvItem(self,itmi_alchemy_syrianoil_01);
 	senses_range = 2000;
 	daily_routine = rtn_nothing_2001;
 };

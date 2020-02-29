@@ -1,7 +1,31 @@
 
 var int sld_753_baloro_sc_choice;
 var int sld_753_baloro_sc_wills_wissen;
-var int sld_753_baloro_sc_besorgt_den_kram;
+
+instance INFO_BALORO_EXIT2(C_INFO)
+{
+	npc = sld_753_baloro;
+	nr = 999;
+	condition = info_baloro_exit2_condition;
+	information = info_baloro_exit2_info;
+	important = 0;
+	permanent = 1;
+	description = DIALOG_ENDE;
+};
+
+func int info_baloro_exit2_condition()
+{
+	if(Npc_KnowsInfo(hero,dia_sld_753_baloro_worumgehts))
+	{
+		return 1;
+	};
+};
+
+func void info_baloro_exit2_info()
+{
+	AI_StopProcessInfos(self);
+};
+
 
 instance DIA_SLD_753_BALORO(C_INFO)
 {
@@ -31,7 +55,7 @@ instance DIA_SLD_753_BALORO_WASMEINSTDU(C_INFO)
 	information = dia_sld_753_baloro_wasmeinstdu_info;
 	important = 0;
 	permanent = 0;
-	description = "Привет!  ";
+	description = "Привет!";
 };
 
 
@@ -42,7 +66,7 @@ func int dia_sld_753_baloro_wasmeinstdu_condition()
 
 func void dia_sld_753_baloro_wasmeinstdu_info()
 {
-	AI_Output(other,self,"DIA_SLD_753_Baloro_Wasmeinstdu_Info_15_01");	//Привет!  
+	AI_Output(other,self,"DIA_SLD_753_Baloro_Wasmeinstdu_Info_15_01");	//Привет!
 	AI_Output(self,other,"DIA_SLD_753_Baloro_Wasmeinstdu_Info_08_02");	//Ты ходишь здесь, словно тебе нужно что-то найти!
 	AI_Output(other,self,"DIA_SLD_753_Baloro_Wasmeinstdu_Info_15_03");	//Ты так думаешь? Быть может, ты и прав.
 	AI_Output(self,other,"DIA_SLD_753_Baloro_Wasmeinstdu_Info_08_04");	//Отлично! Спроси меня! Может, я и помогу тебе!
@@ -78,7 +102,7 @@ func void dia_sld_753_baloro_worumgehts_info()
 	AI_Output(self,other,"DIA_SLD_753_Baloro_Worumgehts_Info_08_04");	//За это ты окажешь мне маленькую услугу. И оружие будет у тебя в руках! Договорились?
 	Info_ClearChoices(dia_sld_753_baloro_worumgehts);
 	Info_AddChoice(dia_sld_753_baloro_worumgehts,"А что для этого нужно сделать?",dia_sld_753_baloro_worumgehts_ja);
-	Info_AddChoice(dia_sld_753_baloro_worumgehts,"Мне это не нужно!",dia_sld_753_baloro_exit_info);
+	Info_AddChoice(dia_sld_753_baloro_worumgehts,"Мне это не нужно!",dia_sld_753_baloro_worumgehts_nein);
 };
 
 func void dia_sld_753_baloro_worumgehts_ja()
@@ -89,7 +113,7 @@ func void dia_sld_753_baloro_worumgehts_ja()
 	AI_Output(self,other,"DIA_SLD_753_Baloro_Worumgehts_ja_08_05");	//Поверь мне, ты об этом не пожалеешь. Как я сказал, этим оружием можно победить любого врага!
 	Info_ClearChoices(dia_sld_753_baloro_worumgehts);
 	Info_AddChoice(dia_sld_753_baloro_worumgehts,"Ладно! Я постараюсь все это найти!",dia_sld_753_baloro_worumgehts_jaklar);
-	Info_AddChoice(dia_sld_753_baloro_worumgehts,"Этот тип пытается меня провести!",dia_sld_753_baloro_exit_info);
+	Info_AddChoice(dia_sld_753_baloro_worumgehts,"Мне это не нужно!",dia_sld_753_baloro_worumgehts_nein);
 };
 
 func void dia_sld_753_baloro_worumgehts_jaklar()
@@ -105,6 +129,13 @@ func void dia_sld_753_baloro_worumgehts_jaklar()
 	AI_StopProcessInfos(self);
 };
 
+func void dia_sld_753_baloro_worumgehts_nein()
+{
+	AI_Output(other,self,"DIA_SLD_753_Baloro_Exit_Info_15_01");	//Мне это не нужно!
+	AI_Output(self,other,"DIA_SLD_753_Baloro_Exit_Info_08_02");	//Как скажешь! Я дал тебе шанс!
+	AI_StopProcessInfos(self);
+	SLD_753_BALORO_SC_CHOICE = 1;
+};
 
 instance DIA_SLD_753_BALORO_HABSNICHTDABEI(C_INFO)
 {
@@ -113,7 +144,7 @@ instance DIA_SLD_753_BALORO_HABSNICHTDABEI(C_INFO)
 	information = dia_sld_753_baloro_habsnichtdabei_info;
 	important = 0;
 	permanent = 1;
-	description = "Я еще не все достал! Повтори, что ты хотел. Этих вещей так много!";
+	description = "Я еще не все достал! Повтори, что ты хотел.";
 };
 
 
@@ -176,7 +207,7 @@ func void dia_sld_753_baloro_habsdabei_info()
 	AI_Output(other,self,"DIA_SLD_753_Baloro_habsdabei_Info_15_03");	//Теперь твоя очередь. Давай то, что обещал!
 	AI_Output(self,other,"DIA_SLD_753_Baloro_habsdabei_Info_08_03");	//Да забудь об этом!
 	AI_Output(other,self,"DIA_SLD_753_Baloro_habsdabei_Info_15_04");	//Что?
-	AI_Output(self,other,"DIA_SLD_753_Baloro_habsdabei_Info_08_04");	//Ты действительно думал, что я тебе что-то дам? Ты так легко поверил во всю эту чушь. Грех было тебя не обмануть! 
+	AI_Output(self,other,"DIA_SLD_753_Baloro_habsdabei_Info_08_04");	//Ты действительно думал, что я тебе что-то дам? Ты так легко поверил во всю эту чушь. Грех было тебя не обмануть!
 	AI_Output(self,other,"DIA_SLD_753_Baloro_habsdabei_Info_08_05");	//Удивительно еще, что ты до сих пор жив! Если ты и дальше будешь всем доверять, ты долго не протянешь!
 	AI_Output(self,other,"DIA_SLD_753_Baloro_habsdabei_Info_08_06");	//Но, это уже не важно. Теперь у нас есть так много еды, можно целый праздник устроить! Спасибо! Может быть, мы еще встретимся.
 	SLD_753_BALORO_SC_BESORGT_DEN_KRAM = LOG_SUCCESS;
@@ -214,7 +245,6 @@ func void dia_sld_753_baloro_letztes_wort_info()
 	AI_StopProcessInfos(self);
 };
 
-
 instance DIA_SLD_753_BALORO_SC_WILLS_WISSEN(C_INFO)
 {
 	npc = sld_753_baloro;
@@ -225,7 +255,6 @@ instance DIA_SLD_753_BALORO_SC_WILLS_WISSEN(C_INFO)
 	description = "Кажется, настало время проучить тебя!";
 };
 
-
 func int dia_sld_753_baloro_sc_wills_wissen_condition()
 {
 	if(SLD_753_BALORO_SC_WILLS_WISSEN == 1)
@@ -234,27 +263,21 @@ func int dia_sld_753_baloro_sc_wills_wissen_condition()
 	};
 };
 
-func void dia_sld_753_baloro_attack()
-{
-	AI_StopProcessInfos(self);
-	Npc_SetTarget(self,hero);
-	AI_StartState(self,zs_attack,1,"");
-};
-
 func void dia_sld_753_baloro_sc_wills_wissen_info()
 {
 	AI_Output(other,self,"DIA_SLD_753_Baloro_SC_wills_wissen_Info_15_01");	//Кажется, настало время проучить тебя!
 	AI_Output(self,other,"DIA_SLD_753_Baloro_SC_wills_wissen_Info_08_01");	//Мы отлично повеселились. А теперь тебе пора убраться отсюда!
 	AI_Output(other,self,"DIA_SLD_753_Baloro_SC_wills_wissen_Info_15_02");	//Я думаю, ты меня не так понял!
 	AI_Output(self,other,"DIA_SLD_753_Baloro_SC_wills_wissen_Info_08_02");	//Ну, как хочешь! Раз ты по-другому не понимаешь! Я тебя предупредил!
-	dia_sld_753_baloro_attack();
+	AI_StopProcessInfos(self);
+	Npc_SetTarget(self,hero);
+	AI_StartState(self,zs_attack,1,"");
 };
-
 
 instance DIA_SLD_753_BALORO_EXIT(C_INFO)
 {
 	npc = sld_753_baloro;
-	nr = 999;
+	nr = 998;
 	condition = dia_sld_753_baloro_exit_condition;
 	information = dia_sld_753_baloro_exit_info;
 	important = 0;
@@ -262,10 +285,9 @@ instance DIA_SLD_753_BALORO_EXIT(C_INFO)
 	description = "Извини! У меня сейчас нет времени на разговоры.";
 };
 
-
 func int dia_sld_753_baloro_exit_condition()
 {
-	if((SLD_753_BALORO_SC_WILLS_WISSEN == 0) && (SLD_753_BALORO_SC_BESORGT_DEN_KRAM == 0))
+	if((SLD_753_BALORO_SC_WILLS_WISSEN == 0) && (SLD_753_BALORO_SC_BESORGT_DEN_KRAM == 0) && (!Npc_KnowsInfo(hero,dia_sld_753_baloro_worumgehts)))
 	{
 		return 1;
 	};
@@ -273,20 +295,10 @@ func int dia_sld_753_baloro_exit_condition()
 
 func void dia_sld_753_baloro_exit_info()
 {
-	if(Npc_KnowsInfo(hero,dia_sld_753_baloro_wasmeinstdu) && (SLD_753_BALORO_SC_CHOICE == 0))
-	{
-		AI_Output(other,self,"DIA_SLD_753_Baloro_Exit_Info_15_01");	//Мне это не нужно!
-		AI_Output(self,other,"DIA_SLD_753_Baloro_Exit_Info_08_02");	//Как скажешь! Я дал тебе шанс!
-		SLD_753_BALORO_SC_CHOICE = 1;
-	}
-	else
-	{
-		AI_Output(other,self,"DIA_SLD_753_Baloro_Exit_Info_15_03");	//Извини! У меня сейчас нет времени на разговоры.
-		AI_Output(self,other,"DIA_SLD_753_Baloro_Exit_Info_08_04");	//О, так у тебя много дел, да? Ну, еще увидимся!
-	};
+	AI_Output(other,self,"DIA_SLD_753_Baloro_Exit_Info_15_03");	//Извини! У меня сейчас нет времени на разговоры.
+	AI_Output(self,other,"DIA_SLD_753_Baloro_Exit_Info_08_04");	//О, так у тебя много дел, да? Ну, еще увидимся!
 	AI_StopProcessInfos(self);
 };
-
 
 instance DIA_SLD_753_BALORO_ANGEBOTDOCHANNEHMEN(C_INFO)
 {

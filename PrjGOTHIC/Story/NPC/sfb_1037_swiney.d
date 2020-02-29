@@ -20,19 +20,25 @@ instance SFB_1037_SWINEY(NPC_DEFAULT)
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_COWARD;
-	EquipItem(self,itmwpickaxe);
 	CreateInvItems(self,itforice,6);
-	CreateInvItems(self,itminugget,10);
+	CreateInvItems(self,itfoloaf,4);
+	CreateInvItems(self,itfomutton,2);
 	CreateInvItem(self,itmi_stuff_cup_01);
 	CreateInvItem(self,itfobooze);
-	CreateInvItem(self,itmw_1h_hatchet_01);
+	EquipItem(self,itmw_1h_hatchet_01);
 	daily_routine = rtn_fmcstart_1037;
 };
 
 
 func void rtn_fmcstart_1037()
 {
-	ta_smoke(1,0,13,0,"FMC_HUT11_OUT");
-	ta_smoke(13,0,1,0,"FMC_HUT11_OUT");
+	ta_boss(7,0,23,0,"FMC_HUT11_OUT");
+	ta_sleep(23,0,7,0,"FMC_HUT11_IN");
+};
+
+func void rtn_dead_1037()
+{
+	ta_stay(7,0,23,0,"FMC_HUT11_IN");
+	ta_stay(23,0,7,0,"FMC_HUT11_IN");
 };
 

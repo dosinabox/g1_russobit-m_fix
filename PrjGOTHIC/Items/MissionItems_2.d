@@ -5,7 +5,7 @@ instance ITWRFOCUSMAPPSI(C_ITEM)
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
 	value = 15;
-	visual = "ItWr_Map_01.3ds";
+	visual = "ItWrFocusMapPsi.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	on_state[0] = usefocusmappsi;
@@ -13,6 +13,8 @@ instance ITWRFOCUSMAPPSI(C_ITEM)
 	text[1] = "На этой карте отмечена дорога";
 	text[2] = "к юнитору, который нужен Юбериону";
 	text[3] = "для вызова Спящего.";
+	text[5] = NAME_VALUE;
+	count[5] = value;
 };
 
 
@@ -39,8 +41,8 @@ instance FOCUS_1(C_ITEM)
 	visual = "ItMi_Focus_01.3ds";
 	material = MAT_STONE;
 	description = name;
-	text[1] = "Один из пяти юниторов, которые были";
-	text[2] = "использованы для создания магического Барьера.";
+	text[1] = "Один из пяти юниторов, которые использовались";
+	text[2] = "для создания магического Барьера.";
 };
 
 instance ITMI_STUFF_GEARWHEEL_01(C_ITEM)
@@ -80,7 +82,7 @@ instance ITWRFOKUSBUCH(C_ITEM)
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
 	value = 0;
-	visual = "ItWr_Book_02_03.3ds";
+	visual = "ItWr_Book_Almanac.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	on_state[0] = useitwrfokusbuch;

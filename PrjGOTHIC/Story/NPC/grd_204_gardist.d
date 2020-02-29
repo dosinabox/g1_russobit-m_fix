@@ -38,6 +38,6 @@ func void rtn_start_204()
 {
 	ta_practicesword(7,30,20,0,"OCC_CENTER_4_TRAIN");
 	ta_standaround(20,0,0,0,"OCC_SHADOWS_CORNER_MOVEMENT4");
-	ta_sleep(0,0,7,30,"OCC_MERCS_UPPER_RIGHT_ROOM_BED1");
+	ta_sleep(0,0,7,30,"OCC_MERCS_UPPER_LEFT_ROOM_MOVEMENT");
 };
 

@@ -15,7 +15,7 @@ instance SLD_736_SOELDNER(NPC_DEFAULT)
 	attribute[ATR_HITPOINTS] = 172;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Militia.mds");
-	Mdl_SetVisualBody(self,"hum_body_Naked0",0,1,"Hum_Head_FatBald",48,1,sld_armor_m);
+	Mdl_SetVisualBody(self,"hum_body_Naked0",0,5,"Hum_Head_FatBald",48,1,sld_armor_l);
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_STRONG;
@@ -47,5 +47,11 @@ func void rtn_fmtaken_736()
 {
 	ta_stay(0,0,23,0,"OW_PATH_075_GUARD");
 	ta_stay(23,0,24,0,"OW_PATH_075_GUARD");
+};
+
+func void rtn_fmtakenback_736()
+{
+	ta_stayneutral(5,0,17,0,"FMC_ENTRANCE");
+	ta_stayneutral(17,0,5,0,"FMC_ENTRANCE");
 };
 

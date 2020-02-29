@@ -69,6 +69,7 @@ func void dia_shrike_getlost_info()
 {
 	AI_Output(other,self,"DIA_Shrike_GetLost_15_00");	//Убирайся.
 	AI_Output(self,other,"DIA_Shrike_GetLost_07_01");	//Мы еще поговорим об этом!
+	self.guild = GIL_NONE;
 	Log_CreateTopic(CH1_SHRIKESHUT,LOG_MISSION);
 	Log_SetTopicStatus(CH1_SHRIKESHUT,LOG_RUNNING);
 	b_logentry(CH1_SHRIKESHUT,"Я 'убедил' Шрайка найти другой дом. Интересно, что на это скажет Горн.");

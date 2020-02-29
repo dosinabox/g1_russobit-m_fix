@@ -32,7 +32,6 @@ instance SLD_704_BLADE(NPC_DEFAULT)
 	CreateInvItems(self,itfobooze,7);
 	CreateInvItems(self,itlstorch,5);
 	CreateInvItems(self,itfo_potion_health_02,11);
-	CreateInvItem(self,itmi_stuff_barbknife_01);
 	CreateInvItem(self,itmi_stuff_mug_01);
 	CreateInvItem(self,itmi_stuff_amphore_01);
 	daily_routine = rtn_start_704;
@@ -43,5 +42,11 @@ func void rtn_start_704()
 {
 	ta_sleep(23,0,7,30,"NC_HUT10_IN");
 	ta_smalltalk(7,30,23,0,"NC_HUT09_OUT");
+};
+
+func void rtn_fmtaken_704()
+{
+	ta_smalltalk(23,0,7,30,"OW_PATH_069");
+	ta_smalltalk(7,30,23,0,"OW_PATH_069");
 };
 

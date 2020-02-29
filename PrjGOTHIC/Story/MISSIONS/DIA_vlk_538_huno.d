@@ -17,6 +17,26 @@ func int dia_huno_exit_condition()
 
 func void dia_huno_exit_info()
 {
+	if(Npc_HasItems(self,itmiswordraw) < 5)
+	{
+		CreateInvItems(self,itmiswordraw,5);
+	};
+	if(Npc_HasItems(self,itmiswordbladehot) >= 1)
+	{
+		Npc_RemoveInvItems(self,itmiswordbladehot,Npc_HasItems(self,itmiswordbladehot));
+	};
+	if(Npc_HasItems(self,itmiswordrawhot) >= 1)
+	{
+		Npc_RemoveInvItems(self,itmiswordrawhot,Npc_HasItems(self,itmiswordrawhot));
+	};
+	if(Npc_HasItems(self,itmiswordblade) >= 1)
+	{
+		Npc_RemoveInvItems(self,itmiswordblade,Npc_HasItems(self,itmiswordblade));
+	};
+	if(Npc_HasItems(self,goldensword))
+	{
+		Npc_RemoveInvItem(self,goldensword);
+	};
 	AI_StopProcessInfos(self);
 };
 
@@ -93,7 +113,7 @@ instance DIA_HUNO_HOWSYOURBUSINESS(C_INFO)
 
 func int dia_huno_howsyourbusiness_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_huno_youknowyourjob))
+	if(Npc_KnowsInfo(hero,dia_huno_youknowyourjob) && HUNO_GOLDENSWORD == FALSE && KAPITEL < 4)
 	{
 		return TRUE;
 	};
@@ -105,8 +125,25 @@ func void dia_huno_howsyourbusiness_info()
 	AI_Output(self,other,"DIA_Huno_HowsYourBusiness_09_01");	//ј зачем ты хочешь это знать?
 	AI_Output(other,self,"DIA_Huno_HowsYourBusiness_15_02");	//ћожет быть, € закажу тебе что-нибудь.
 	AI_Output(self,other,"DIA_Huno_HowsYourBusiness_09_03");	//ѕравда? » что же это?
-	AI_Output(other,self,"DIA_Huno_HowsYourBusiness_15_04");	//я еще не решил.
-	AI_Output(self,other,"DIA_Huno_HowsYourBusiness_09_05");	//ѕриходи ко мне, когда тебе действительно что-нибудь понадобитс€, и не тревожь мен€ по пуст€кам.
+	if(Npc_HasItems(hero,goldensword))
+	{
+		AI_UnequipWeapons(other);
+		AI_Output(other,self,"Info_Xardas_LOADSWORD_15_01");	//я нашел один очень странный меч.
+		CreateInvItem(self,goldensword);
+		AI_EquipBestMeleeWeapon(self);
+		AI_ReadyMeleeWeapon(self);
+		AI_PlayAni(self,"T_URISELINSPECT");
+		AI_RemoveWeapon(self);
+		AI_UnequipWeapons(self);
+		AI_Output(self,other,"Info_Wolf_MCPLATESENOUGH_09_04");	//Ќе знаю. я же никогда еще не обрабатывал такой материал.
+		AI_Output(self,other,"SVM_9_NotNow");	//Ќет, не сейчас.
+		HUNO_GOLDENSWORD = TRUE;
+	}
+	else
+	{
+		AI_Output(other,self,"DIA_Huno_HowsYourBusiness_15_04");	//я еще не решил.
+		AI_Output(self,other,"DIA_Huno_HowsYourBusiness_09_05");	//ѕриходи ко мне, когда тебе действительно что-нибудь понадобитс€, и не тревожь мен€ по пуст€кам.
+	};
 };
 
 
@@ -138,11 +175,31 @@ func void dia_huno_learnsmith_info()
 	AI_Output(self,other,"DIA_Huno_LEARNSMITH_09_01");	//“ак, так... только с первого раза у теб€ все равно не получитс€ выковать хороший клинок!
 	AI_Output(other,self,"DIA_Huno_LEARNSMITH_15_02");	//„то мне нужно делать?
 	AI_Output(self,other,"DIA_Huno_LEARNSMITH_09_03");	//„то ж, возьми заготовку и подержи ее над огнем.
-	AI_Output(self,other,"DIA_Huno_LEARNSMITH_09_04");	//–аскаленную докрасна заготовку положи на наковальню и сформируй меч. 
+	AI_Output(self,other,"DIA_Huno_LEARNSMITH_09_04");	//–аскаленную докрасна заготовку положи на наковальню и сформируй меч.
 	AI_Output(self,other,"DIA_Huno_LEARNSMITH_09_05");	// огда он будет готов, его нужно закалить, опустив в ведро с водой.
 	AI_Output(self,other,"DIA_Huno_LEARNSMITH_09_06");	//ѕотом охлажденный клинок нужно будет заточить на точильном камне.
 	AI_Output(other,self,"DIA_Huno_LEARNSMITH_15_07");	//я все пон€л.
-	AI_Output(self,other,"DIA_Huno_LEARNSMITH_09_08");	//Ќо без материалов у теб€ ничего не выйдет. ≈сли хочешь, можешь купить их у мен€. 
+	AI_Output(self,other,"DIA_Huno_LEARNSMITH_09_08");	//Ќо без материалов у теб€ ничего не выйдет. ≈сли хочешь, можешь купить их у мен€.
+	if(Npc_HasItems(self,itmiswordraw) < 5)
+	{
+		CreateInvItems(self,itmiswordraw,5);
+	};
+	if(Npc_HasItems(self,itmiswordbladehot) >= 1)
+	{
+		Npc_RemoveInvItems(self,itmiswordbladehot,Npc_HasItems(self,itmiswordbladehot));
+	};
+	if(Npc_HasItems(self,itmiswordrawhot) >= 1)
+	{
+		Npc_RemoveInvItems(self,itmiswordrawhot,Npc_HasItems(self,itmiswordrawhot));
+	};
+	if(Npc_HasItems(self,itmiswordblade) >= 1)
+	{
+		Npc_RemoveInvItems(self,itmiswordblade,Npc_HasItems(self,itmiswordblade));
+	};
+	if(Npc_HasItems(self,goldensword))
+	{
+		Npc_RemoveInvItem(self,goldensword);
+	};
 	HUNO_LEARNSMITH = TRUE;
 };
 
@@ -162,7 +219,7 @@ instance DIA_HUNO_BUYSMITH(C_INFO)
 
 func int dia_huno_buysmith_condition()
 {
-	if(HUNO_LEARNSMITH == TRUE)
+	if(HUNO_LEARNSMITH == TRUE && KAPITEL < 4)
 	{
 		return TRUE;
 	};
@@ -170,22 +227,26 @@ func int dia_huno_buysmith_condition()
 
 func void dia_huno_buysmith_info()
 {
-	AI_Output(other,self,"DIA_Huno_BUYSMITH_15_00");	//я хочу купить у теб€ заготовки.
 	if(Npc_HasItems(self,itmiswordraw) < 5)
 	{
 		CreateInvItems(self,itmiswordraw,5);
 	};
-	if(Npc_HasItems(self,itmiswordrawhot) < 5)
+	if(Npc_HasItems(self,itmiswordbladehot) >= 1)
 	{
-		CreateInvItems(self,itmiswordrawhot,5);
+		Npc_RemoveInvItems(self,itmiswordbladehot,Npc_HasItems(self,itmiswordbladehot));
 	};
-	if(Npc_HasItems(self,itmiswordbladehot) < 5)
+	if(Npc_HasItems(self,itmiswordrawhot) >= 1)
 	{
-		CreateInvItems(self,itmiswordbladehot,5);
+		Npc_RemoveInvItems(self,itmiswordrawhot,Npc_HasItems(self,itmiswordrawhot));
 	};
-	if(Npc_HasItems(self,itmiswordblade) < 5)
+	if(Npc_HasItems(self,itmiswordblade) >= 1)
 	{
-		CreateInvItems(self,itmiswordblade,5);
+		Npc_RemoveInvItems(self,itmiswordblade,Npc_HasItems(self,itmiswordblade));
 	};
+	if(Npc_HasItems(self,goldensword))
+	{
+		Npc_RemoveInvItem(self,goldensword);
+	};
+	AI_Output(other,self,"DIA_Huno_BUYSMITH_15_00");	//я хочу купить у теб€ заготовки.
 };
 

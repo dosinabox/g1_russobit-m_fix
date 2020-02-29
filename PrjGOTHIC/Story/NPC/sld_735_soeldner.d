@@ -24,14 +24,11 @@ instance SLD_735_SOELDNER(NPC_DEFAULT)
 	EquipItem(self,itmw_1h_mace_war_02);
 	EquipItem(self,itrw_bow_long_01);
 	CreateInvItems(self,itamarrow,20);
-	CreateInvItems(self,itforice,7);
 	CreateInvItems(self,itfoloaf,5);
-	CreateInvItems(self,itfomutton,4);
 	CreateInvItems(self,itminugget,20);
 	CreateInvItems(self,itfobooze,7);
-	CreateInvItems(self,itlstorch,3);
+	CreateInvItems(self,itlstorch,2);
 	CreateInvItems(self,itfo_potion_health_02,6);
-	CreateInvItem(self,itmi_stuff_amphore_01);
 	daily_routine = rtn_start_735;
 };
 
@@ -48,3 +45,8 @@ func void rtn_fmtaken_735()
 	ta_stay(23,0,24,0,"OW_PATH_075_GUARD2");
 };
 
+func void rtn_fmtakenback_735()
+{
+	ta_stayneutral(5,0,17,0,"FMC_PATH03");
+	ta_stayneutral(17,0,5,0,"FMC_PATH03");	
+};

@@ -29,20 +29,17 @@ func int zs_mm_summonedbypc_loop()
 		Npc_ClearAIQueue(self);
 		AI_StartState(self,zs_mm_attack,0,"");
 	}
-	else
+	else if(Npc_GetDistToNpc(self,hero) > self.aivar[AIV_HASDEFEATEDSC])
 	{
-		if(Npc_GetDistToNpc(self,hero) > self.aivar[AIV_HASDEFEATEDSC])
-		{
-			AI_GotoNpc(self,hero);
-		}
-		else if(!Npc_CanSeeNpc(self,hero))
-		{
-			AI_TurnToNPC(self,hero);
-			AI_TurnToNPC(self,hero);
-			AI_TurnToNPC(self,hero);
-		};
-		return LOOP_CONTINUE;
+		AI_GotoNpc(self,hero);
+	}
+	else if(!Npc_CanSeeNpc(self,hero))
+	{
+		AI_TurnToNPC(self,hero);
+		AI_TurnToNPC(self,hero);
+		AI_TurnToNPC(self,hero);
 	};
+	return LOOP_CONTINUE;
 };
 
 func void zs_mm_summonedbypc_end()

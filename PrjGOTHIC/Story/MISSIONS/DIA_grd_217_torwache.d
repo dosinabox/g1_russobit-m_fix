@@ -28,7 +28,7 @@ instance DIA_GRD_217_FIRST(C_INFO)
 	condition = dia_grd_217_first_condition;
 	information = dia_grd_217_first_info;
 	permanent = 1;
-	description = "Привет!  ";
+	description = "Привет!";
 };
 
 
@@ -39,7 +39,7 @@ func int dia_grd_217_first_condition()
 
 func void dia_grd_217_first_info()
 {
-	AI_Output(other,self,"DIA_Grd_217_First_15_00");	//Привет!  
+	AI_Output(other,self,"DIA_Grd_217_First_15_00");	//Привет!
 	AI_Output(self,other,"DIA_Grd_217_First_06_01");	//Ну, шевелись! Или туда или обратно, только поживее давай.
 	AI_StopProcessInfos(self);
 };

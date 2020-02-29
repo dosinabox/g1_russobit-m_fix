@@ -155,13 +155,34 @@ func void info_nefarius_ocnews_info()
 	AI_Output(self,other,"Info_Nefarius_OCNews_04_00");	//Ты можешь рассказать что-нибудь о наших друзьях из Старого лагеря?
 	AI_Output(other,self,"Info_Nefarius_OCNews_15_01");	//Гомез уничтожил всех магов Огня!
 	AI_Output(self,other,"Info_Nefarius_OCNews_04_02");	//Нет! Как он посмел?! Я же предупреждал Корристо, что ему нельзя доверять! Ты должен рассказать об этом Сатурасу!
-	if(Npc_GetTrueGuild(hero) == GIL_SLD)
+	AI_StopProcessInfos(self);
+};
+
+instance INFO_NEFARIUS_OCNEWS2(C_INFO)
+{
+	npc = kdw_603_nefarius;
+	nr = 1;
+	condition = info_nefarius_ocnews2_condition;
+	information = info_nefarius_ocnews2_info;
+	permanent = 0;
+	important = 1;
+};
+
+
+func int info_nefarius_ocnews2_condition()
+{
+	if((Npc_GetTrueGuild(hero) == GIL_SLD) && (FMTAKEN == TRUE))
 	{
-		AI_Output(self,other,"Info_Nefarius_OCNews_04_03");	//Постой!
-		AI_Output(self,other,"Info_Nefarius_OCNews_04_04");	//Ты подвергал себя большой опасности, чтобы помочь нам.
-		AI_Output(self,other,"Info_Nefarius_OCNews_04_05");	//Думаю, теперь ты достоин носить одеяние магов Воды.
-		AI_Output(self,other,"Info_Nefarius_OCNews_04_06");	//Но теперь иди и поговори с Сатурасом! Быстрее!
+		return TRUE;
 	};
+};
+
+func void info_nefarius_ocnews2_info()
+{
+	AI_Output(self,other,"Info_Nefarius_OCNews_04_03");	//Постой!
+	AI_Output(self,other,"Info_Nefarius_OCNews_04_04");	//Ты подвергал себя большой опасности, чтобы помочь нам.
+	AI_Output(self,other,"Info_Nefarius_OCNews_04_05");	//Думаю, теперь ты достоин носить одеяние магов Воды.
+	AI_Output(self,other,"Info_Nefarius_OCNews_04_06");	//Но теперь иди и поговори с Сатурасом! Быстрее!
 	AI_StopProcessInfos(self);
 };
 

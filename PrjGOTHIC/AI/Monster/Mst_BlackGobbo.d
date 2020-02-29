@@ -59,3 +59,23 @@ instance BLACKGOBBOWARRIOR(MST_DEFAULT_BLACKGOBBO)
 	name[0] = "Гоблин-воин";
 };
 
+func void set_blackgobboleader_visuals()
+{
+	Mdl_SetVisual(self,"Gobbo.mds");
+	Mdl_SetVisualBody(self,"Gob_Body",2,DEFAULT,"",DEFAULT,DEFAULT,-1);
+	Mdl_SetModelScale(self,1.15,1.15,1.15);
+};
+
+instance BLACKGOBBOLEADER(MST_DEFAULT_BLACKGOBBO)
+{
+	level = 17;
+	set_blackgobboleader_visuals();
+	Npc_SetToFightMode(self,itmw_1h_sword_short_01);
+	attribute[ATR_STRENGTH] = 60 + 30;
+	attribute[ATR_HITPOINTS_MAX] = 115;
+	attribute[ATR_HITPOINTS] = 115;
+	protection[PROT_BLUNT] = 60;
+	protection[PROT_EDGE] = 60;
+	name[0] = "Гоблин-вожак";
+};
+

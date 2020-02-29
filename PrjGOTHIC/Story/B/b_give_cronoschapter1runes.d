@@ -3,7 +3,10 @@ func void b_give_cronoschapter1runes()
 {
 	var C_NPC npc;
 	npc = Hlp_GetNpc(kdw_604_cronos);
+	CreateInvItem(npc,itarrunelight);
+	CreateInvItem(npc,itarrunethunderbolt);
 	CreateInvItem(npc,itwrncmap);
+	CreateInvItem(npc,itarscrollsleep);
 	CreateInvItems(npc,itarscrollheal,5);
 	CreateInvItems(npc,itarscrolllight,8);
 	CreateInvItems(npc,itarscrollthunderbolt,8);
@@ -17,15 +20,18 @@ func void b_give_cronoschapter1runes()
 	CreateInvItem(npc,lehren_der_goetter3);
 	CreateInvItem(npc,itwr_book_circle_01);
 	CreateInvItem(npc,itwr_book_circle_02);
+	CreateInvItems(npc,itmiflask,10);
+	CreateInvItem(npc,alchemy_mp1_priced);
 };
 
 func void b_give_cronoschapter2runes()
 {
 	var C_NPC npc;
 	npc = Hlp_GetNpc(kdw_604_cronos);
+	CreateInvItem(npc,itarruneheal);
+	CreateInvItem(npc,itarruneicecube);
 	CreateInvItems(npc,itarscrollheal,5);
 	CreateInvItems(npc,itarscrolllight,7);
-	CreateInvItems(npc,itarscrollfirebolt,8);
 	CreateInvItems(npc,itarscrollthunderbolt,6);
 	CreateInvItems(npc,itarscrollicecube,2);
 	CreateInvItems(npc,itarscrollchainlightning,4);
@@ -39,17 +45,13 @@ func void b_give_cronoschapter2runes()
 	CreateInvItem(npc,ring_des_lebens2);
 	CreateInvItem(npc,staerkering2);
 	CreateInvItem(npc,itwr_book_circle_03);
-	CreateInvItem(npc,itwr_book_circle_04);
+	CreateInvItems(npc,itmiflask,9);
 };
 
 func void b_give_cronoschapter3runes()
 {
 	var C_NPC npc;
 	npc = Hlp_GetNpc(kdw_604_cronos);
-	CreateInvItem(npc,itarrunelight);
-	CreateInvItem(npc,itarruneheal);
-	CreateInvItem(npc,itarrunethunderbolt);
-	CreateInvItem(npc,itarruneicecube);
 	CreateInvItem(npc,itarrunethunderball);
 	CreateInvItems(npc,itarscrollheal,5);
 	CreateInvItems(npc,itarscrolllight,12);
@@ -65,16 +67,16 @@ func void b_give_cronoschapter3runes()
 	CreateInvItem(npc,staerkeamulett);
 	CreateInvItem(npc,lebensamulett);
 	CreateInvItem(npc,amulett_der_magie);
+	CreateInvItem(npc,itwr_book_circle_04);
 	CreateInvItem(npc,itwr_book_circle_05);
-	CreateInvItem(npc,itwr_book_circle_06);
+	CreateInvItems(npc,itmiflask,10);
 };
 
 func void b_give_cronoschapter4runes()
 {
 	var C_NPC npc;
 	npc = Hlp_GetNpc(kdw_604_cronos);
-	CreateInvItem(npc,itarruneicewave);
-	CreateInvItem(npc,itarrunefirestorm);
+	CreateInvItem(npc,itarrunechainlightning);
 	CreateInvItems(npc,itarscrollheal,8);
 	CreateInvItems(npc,itarscrolllight,8);
 	CreateInvItems(npc,itarscrollthunderbolt,10);
@@ -86,19 +88,20 @@ func void b_give_cronoschapter4runes()
 	CreateInvItems(npc,itarscrolltrfsnapper,3);
 	CreateInvItems(npc,itarscrolltrforcdog,4);
 	CreateInvItems(npc,itarscrolltrfbloodfly,2);
-	CreateInvItems(npc,itarscrollfirebolt,10);
-	CreateInvItems(npc,itarscrollfireball,10);
+	//CreateInvItems(npc,itarscrollfirebolt,10);
+	//CreateInvItems(npc,itarscrollfireball,10);
 	CreateInvItem(npc,schutzamulett_feuer);
 	CreateInvItem(npc,schutzamulett_magie);
 	CreateInvItem(npc,schutzamulett_waffen);
 	CreateInvItem(npc,schutzamulett_geschosse);
+	CreateInvItems(npc,itmiflask,15);
 };
 
 func void b_give_cronoschapter5runes()
 {
 	var C_NPC npc;
 	npc = Hlp_GetNpc(kdw_604_cronos);
-	CreateInvItem(npc,itarrunedestroyundead);
+	CreateInvItem(npc,itarruneicewave);
 	CreateInvItems(npc,itarscrollheal,5);
 	CreateInvItems(npc,itarscrolllight,10);
 	CreateInvItems(npc,itarscrollthunderbolt,10);
@@ -113,11 +116,6 @@ func void b_give_cronoschapter5runes()
 	CreateInvItem(npc,schutzamulett_magie_feuer);
 	CreateInvItem(npc,schutzamulett_waffen_geschosse);
 	CreateInvItem(npc,schutzamulett_total);
-};
-
-func void b_give_cronoschapter6runes()
-{
-	var C_NPC npc;
-	npc = Hlp_GetNpc(kdw_604_cronos);
+	CreateInvItems(npc,itmiflask,13);
 };
 

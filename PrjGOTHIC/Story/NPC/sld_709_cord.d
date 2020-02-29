@@ -50,3 +50,8 @@ func void rtn_fmtaken_709()
 	ta_stay(23,0,24,0,"OW_PATH_075");
 };
 
+func void rtn_fmtakenback_709()
+{
+	ta_stayneutral(5,0,17,0,"FMC_HUT10_OUT");
+	ta_stayneutral(17,0,5,0,"FMC_HUT10_OUT");
+};

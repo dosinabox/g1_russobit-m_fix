@@ -31,7 +31,7 @@ instance DIA_SLD_752_OKYL_EXIT(C_INFO)
 	information = dia_sld_752_okyl_exit_info;
 	important = 0;
 	permanent = 1;
-	description = "Я должен уходить!";
+	description = "Я пойду, ладно?";
 };
 
 
@@ -113,7 +113,7 @@ func int dia_sld_752_okyl_inmine_condition()
 func void dia_sld_752_okyl_inmine_info()
 {
 	AI_Output(other,self,"DIA_SLD_752_OKYL_INMINE_INFO_15_01");	//Я хотел просто посмотреть, что там у вас в шахте.
-	AI_Output(self,other,"DIA_SLD_752_OKYL_INMINE_INFO_11_02");	//А, просто заглянуть в шахту.
+	AI_Output(self,other,"DIA_SLD_752_OKYL_INMINE_INFO_11_02");	//А, просто заглянуть в шахту...
 	AI_Output(self,other,"DIA_SLD_752_OKYL_INMINE_INFO_11_03");	//Похоже, ты совершенно ни в чем не разбираешься. Никто не может попасть в шахту без моего разрешения.
 	AI_Output(self,other,"DIA_SLD_752_OKYL_INMINE_INFO_11_04");	//Заруби это себе на носу. Тот, кто попадет в шахту без моего согласия, долго не проживет!
 };

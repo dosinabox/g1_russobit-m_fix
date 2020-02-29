@@ -36,3 +36,10 @@ func void rtn_start_515()
 	ta_arenaspectator(19,0,23,0,"OCR_ARENA_06");
 };
 
+func void rtn_noarena_515()
+{
+	ta_sleep(23,0,6,15,"OCR_HUT_23");
+	ta_smalltalk(8,0,17,0,"OCR_OUTSIDE_HUT_24");
+	ta_sitaround(17,0,23,0,"OCR_HUT_23");
+};
+

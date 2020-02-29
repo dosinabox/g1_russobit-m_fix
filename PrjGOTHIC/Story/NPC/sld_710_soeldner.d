@@ -24,22 +24,22 @@ instance SLD_710_SOELDNER(NPC_DEFAULT)
 	EquipItem(self,itmw_1h_mace_war_03);
 	EquipItem(self,itrw_bow_long_01);
 	CreateInvItems(self,itamarrow,20);
-	CreateInvItems(self,itforice,7);
 	CreateInvItems(self,itfoloaf,5);
-	CreateInvItems(self,itfomutton,4);
 	CreateInvItems(self,itminugget,18);
-	CreateInvItems(self,itfobooze,6);
-	CreateInvItems(self,itlstorch,6);
 	CreateInvItems(self,itfo_potion_health_02,8);
-	CreateInvItem(self,itmi_stuff_barbknife_01);
-	CreateInvItem(self,itmi_stuff_amphore_01);
 	daily_routine = rtn_start_710;
 };
 
 
 func void rtn_start_710()
 {
-	ta_sleep(22,55,7,35,"NC_HUT10_IN");
+	ta_sleep(22,55,7,35,"NC_HUT09_IN");
 	ta_smalltalk(7,35,22,55,"NC_HUT10_OUT");
+};
+
+func void rtn_fmtaken_710()
+{
+	ta_smalltalk(22,55,7,35,"OW_PATH_069");
+	ta_smalltalk(7,35,22,55,"OW_PATH_069");
 };
 

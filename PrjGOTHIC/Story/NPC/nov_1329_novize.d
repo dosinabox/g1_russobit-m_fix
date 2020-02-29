@@ -26,7 +26,7 @@ instance NOV_1329_NOVIZE(NPC_DEFAULT)
 
 func void rtn_start_1329()
 {
-	ta_pickrice(7,0,19,0,"PATH_TAKE_HERB_2_1");
-	ta_pickrice(19,0,7,0,"PATH_TAKE_HERB_2_1");
+	ta_pickrice(6,0,21,0,"PATH_TAKE_HERB_2_1");
+	ta_sitcampfire(21,0,6,0,"PATH_TAKE_HERB_2_1");
 };
 

@@ -25,14 +25,20 @@ instance NOV_1331_BAALTARAN(NPC_DEFAULT)
 	CreateInvItems(self,itforice,5);
 	CreateInvItems(self,itfobooze,3);
 	CreateInvItems(self,itmijoint_1,13);
-	CreateInvItem(self,itmi_stuff_oldcoin_02);
+	CreateInvItem(self,itmi_stuff_oldcoin_01);
 	daily_routine = rtn_start_1331;
 };
 
 
 func void rtn_start_1331()
 {
-	ta_smalltalk(0,0,8,0,"OCR_TO_HUT_6");
+	ta_sleep(0,0,8,0,"OCR_HUT_59");
 	ta_standaround(8,0,0,0,"OCR_OUTSIDE_HUT_77_INSERT");
+};
+
+func void rtn_dead_1331()
+{
+	ta_stay(8,0,20,0,"OCC_CELLAR_BAN_ROOM_2");
+	ta_stay(20,0,8,0,"OCC_CELLAR_BAN_ROOM_2");
 };
 

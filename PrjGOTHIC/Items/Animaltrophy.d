@@ -30,8 +30,8 @@ instance ITAT_TEETH_01(C_ITEM)
 	visual = "ItAt_Teeth_01.3DS";
 	material = MAT_LEATHER;
 	description = name;
-	text[4] = NAME_VALUE;
-	count[4] = VALUE_ZеHNE;
+	text[5] = NAME_VALUE;
+	count[5] = VALUE_ZеHNE;
 };
 
 instance ITAT_WOLF_01(C_ITEM)
@@ -43,8 +43,8 @@ instance ITAT_WOLF_01(C_ITEM)
 	visual = "ItAt_Wolf_01.3DS";
 	material = MAT_LEATHER;
 	description = name;
-	text[4] = NAME_VALUE;
-	count[4] = VALUE_WOLFSFELL;
+	text[5] = NAME_VALUE;
+	count[5] = VALUE_WOLFSFELL;
 };
 
 instance ITAT_WOLF_02(C_ITEM)
@@ -56,8 +56,8 @@ instance ITAT_WOLF_02(C_ITEM)
 	visual = "ItAt_Wolf_02.3DS";
 	material = MAT_LEATHER;
 	description = name;
-	text[4] = NAME_VALUE;
-	count[4] = VALUE_ORKHUNDFELL;
+	text[5] = NAME_VALUE;
+	count[5] = VALUE_ORKHUNDFELL;
 };
 
 instance ITAT_WARAN_01(C_ITEM)
@@ -69,8 +69,8 @@ instance ITAT_WARAN_01(C_ITEM)
 	visual = "ItAt_Waran_01.3DS";
 	material = MAT_LEATHER;
 	description = name;
-	text[4] = NAME_VALUE;
-	count[4] = VALUE_FEUERZUNGE;
+	text[5] = NAME_VALUE;
+	count[5] = VALUE_FEUERZUNGE;
 };
 
 instance ITAT_CLAWS_01(C_ITEM)
@@ -82,8 +82,8 @@ instance ITAT_CLAWS_01(C_ITEM)
 	visual = "ItAt_Claws_01.3DS";
 	material = MAT_LEATHER;
 	description = name;
-	text[4] = NAME_VALUE;
-	count[4] = VALUE_KRALLEN;
+	text[5] = NAME_VALUE;
+	count[5] = VALUE_KRALLEN;
 };
 
 instance ITAT_CRAWLER_02(C_ITEM)
@@ -95,8 +95,8 @@ instance ITAT_CRAWLER_02(C_ITEM)
 	visual = "ItAt_Crawler_02.3DS";
 	material = MAT_WOOD;
 	description = "Панцирная пластина ползуна-воина";
-	text[4] = NAME_VALUE;
-	count[4] = VALUE_PANZERPLATTE;
+	text[5] = NAME_VALUE;
+	count[5] = VALUE_PANZERPLATTE;
 };
 
 instance ITAT_CRAWLER_01(C_ITEM)
@@ -108,8 +108,8 @@ instance ITAT_CRAWLER_01(C_ITEM)
 	visual = "ItAt_Crawler_01.3DS";
 	material = MAT_LEATHER;
 	description = name;
-	text[4] = NAME_VALUE;
-	count[4] = VALUE_CRAWLERZANGEN;
+	text[5] = NAME_VALUE;
+	count[5] = VALUE_CRAWLERZANGEN;
 };
 
 instance ITAT_SHADOW_01(C_ITEM)
@@ -121,8 +121,8 @@ instance ITAT_SHADOW_01(C_ITEM)
 	visual = "ItAt_Shadowbeast_01.3DS";
 	material = MAT_LEATHER;
 	description = "Шкура мракориса";
-	text[4] = NAME_VALUE;
-	count[4] = VALUE_SHADOWBEASTFELL;
+	text[5] = NAME_VALUE;
+	count[5] = VALUE_SHADOWBEASTFELL;
 };
 
 instance ITAT_SHADOW_02(C_ITEM)
@@ -134,8 +134,8 @@ instance ITAT_SHADOW_02(C_ITEM)
 	visual = "ItAt_Shadowbeast_02.3DS";
 	material = MAT_LEATHER;
 	description = "Рог мракориса";
-	text[4] = NAME_VALUE;
-	count[4] = VALUE_SHADOWBEASTHORN;
+	text[5] = NAME_VALUE;
+	count[5] = VALUE_SHADOWBEASTHORN;
 };
 
 instance ITAT_LURKER_01(C_ITEM)
@@ -147,8 +147,8 @@ instance ITAT_LURKER_01(C_ITEM)
 	visual = "ItAt_Lurker_01.3DS";
 	material = MAT_LEATHER;
 	description = name;
-	text[4] = NAME_VALUE;
-	count[4] = VALUE_LURKERKLAUE;
+	text[5] = NAME_VALUE;
+	count[5] = VALUE_LURKERKLAUE;
 };
 
 instance ITAT_LURKER_02(C_ITEM)
@@ -160,8 +160,8 @@ instance ITAT_LURKER_02(C_ITEM)
 	visual = "ItAt_Lurker_02.3DS";
 	material = MAT_LEATHER;
 	description = name;
-	text[4] = NAME_VALUE;
-	count[4] = VALUE_LURKERHAUT;
+	text[5] = NAME_VALUE;
+	count[5] = VALUE_LURKERHAUT;
 };
 
 instance ITAT_TROLL_02(C_ITEM)
@@ -173,8 +173,8 @@ instance ITAT_TROLL_02(C_ITEM)
 	visual = "ItAt_Troll_02.3DS";
 	material = MAT_LEATHER;
 	description = name;
-	text[4] = NAME_VALUE;
-	count[4] = VALUE_TROLLHAUER;
+	text[5] = NAME_VALUE;
+	count[5] = VALUE_TROLLHAUER;
 };
 
 instance ITAT_TROLL_01(C_ITEM)
@@ -186,8 +186,8 @@ instance ITAT_TROLL_01(C_ITEM)
 	visual = "ItAt_Troll_01.3DS";
 	material = MAT_LEATHER;
 	description = name;
-	text[4] = NAME_VALUE;
-	count[4] = VALUE_TROLLFELL;
+	text[5] = NAME_VALUE;
+	count[5] = VALUE_TROLLFELL;
 };
 
 instance ITAT_SWAMPSHARK_01(C_ITEM)
@@ -199,8 +199,8 @@ instance ITAT_SWAMPSHARK_01(C_ITEM)
 	visual = "ItAt_Swampshark_01.3DS";
 	material = MAT_LEATHER;
 	description = name;
-	text[4] = NAME_VALUE;
-	count[4] = VALUE_SUMPFHAIHAUT;
+	text[5] = NAME_VALUE;
+	count[5] = VALUE_SUMPFHAIHAUT;
 };
 
 instance ITAT_SWAMPSHARK_02(C_ITEM)
@@ -212,8 +212,8 @@ instance ITAT_SWAMPSHARK_02(C_ITEM)
 	visual = "ItAt_Swampshark_02.3DS";
 	material = MAT_LEATHER;
 	description = name;
-	text[4] = NAME_VALUE;
-	count[4] = VALUE_SUMPFHAIZеHNE;
+	text[5] = NAME_VALUE;
+	count[5] = VALUE_SUMPFHAIZеHNE;
 };
 
 instance ITAT_BLOODFLY_01(C_ITEM)
@@ -225,8 +225,8 @@ instance ITAT_BLOODFLY_01(C_ITEM)
 	visual = "ItAt_Bloodfly_01.3DS";
 	material = MAT_LEATHER;
 	description = name;
-	text[4] = NAME_VALUE;
-	count[4] = VALUE_FLьGEL;
+	text[5] = NAME_VALUE;
+	count[5] = VALUE_FLьGEL;
 };
 
 instance ITAT_BLOODFLY_02(C_ITEM)
@@ -238,8 +238,8 @@ instance ITAT_BLOODFLY_02(C_ITEM)
 	visual = "ItAt_Bloodfly_02.3DS";
 	material = MAT_LEATHER;
 	description = name;
-	text[4] = NAME_VALUE;
-	count[4] = VALUE_STACHEL;
+	text[5] = NAME_VALUE;
+	count[5] = VALUE_STACHEL;
 };
 
 instance ITAT_STONEGOLEM_01(C_ITEM)
@@ -303,14 +303,12 @@ instance ITAT_ICEGOLEM_02(C_ITEM)
 	flags = 0;
 	spell = SPL_THUNDERBOLT;
 	value = VALUE_EISTUECK;
-	cond_atr[2] = ATR_MANA_MAX;
-	cond_value[2] = 500;
 	visual = "ItAt_IceGolem_01.3DS";
 	material = MAT_STONE;
 	description = name;
 	text[0] = "Это осколок от тела";
 	text[1] = "убитого ледяного голема.";
-	text[4] = NAME_VALUE;
-	count[4] = VALUE_EISTUECK;
+	text[5] = NAME_VALUE;
+	count[5] = VALUE_EISTUECK;
 };
 

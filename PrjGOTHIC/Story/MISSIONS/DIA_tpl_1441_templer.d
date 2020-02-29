@@ -23,7 +23,7 @@ func int info_tpl_1441_firstwarn_condition()
 func void info_tpl_1441_firstwarn_info()
 {
 	printglobals(PD_MISSION);
-	AI_Output(self,hero,"Info_TPL_1441_FirstWarn_13_01");	//Стой! Только с разрешения одного из Гуру, ты можешь зайти в храм.
+	AI_Output(self,hero,"Info_TPL_1441_FirstWarn_13_01");	//Стой! Только с разрешения одного из Гуру ты можешь зайти в храм.
 	hero.aivar[AIV_LASTDISTTOWP] = Npc_GetDistToWP(hero,TPL_1441_CHECKPOINT);
 	hero.aivar[AIV_GUARDPASSAGE_STATUS] = AIV_GPS_FIRSTWARN;
 	if(Npc_KnowsInfo(hero,pc_psionic_send))
@@ -76,7 +76,7 @@ func int info_tpl_1441_lastwarn_condition()
 	};
 };
 
-func int info_tpl_1441_lastwarn_info()
+func void info_tpl_1441_lastwarn_info()
 {
 	AI_Output(self,hero,"Info_TPL_1441_LastWarn_13_01");	//Еще шаг, и пеняй на себя!
 	hero.aivar[AIV_LASTDISTTOWP] = Npc_GetDistToWP(hero,TPL_1441_CHECKPOINT);
@@ -104,7 +104,7 @@ func int info_tpl_1441_attack_condition()
 	};
 };
 
-func int info_tpl_1441_attack_info()
+func void info_tpl_1441_attack_info()
 {
 	hero.aivar[AIV_LASTDISTTOWP] = 0;
 	hero.aivar[AIV_GUARDPASSAGE_STATUS] = AIV_GPS_PUNISH;

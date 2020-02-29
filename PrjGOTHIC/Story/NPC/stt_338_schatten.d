@@ -13,6 +13,7 @@ instance STT_338_SCHATTEN(NPC_DEFAULT)
 	attribute[ATR_MANA] = 0;
 	attribute[ATR_HITPOINTS_MAX] = 124;
 	attribute[ATR_HITPOINTS] = 124;
+	aivar[43] = TRUE;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Relaxed.mds");
 	Mdl_SetVisualBody(self,"hum_body_Naked0",1,1,"Hum_Head_Psionic",94,1,stt_armor_m);

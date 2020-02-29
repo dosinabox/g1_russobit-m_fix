@@ -144,7 +144,10 @@ func void info_grd_13_dielage_info()
 {
 	AI_Output(other,self,"Info_grd_13_DieLage_15_00");	// ак дела?
 	AI_Output(self,other,"Info_grd_13_DieLage_13_01");	//¬се спокойно. Ѕыла, правда, пара разборок с людьми Ќового лагер€, да вот еще эти болотные сектанты загл€дывают.
-	AI_Output(self,other,"Info_grd_13_DieLage_13_02");	//“ы здесь еще новенький, поэтому дл€ теб€ это не так важно, но когда ты присоединишьс€ к одному из лагерей, ты узнаешь, что приобретешь не только друзей.
+	if(Npc_GetTrueGuild(other) == GIL_NONE)
+	{
+		AI_Output(self,other,"Info_grd_13_DieLage_13_02");	//“ы здесь еще новенький, поэтому дл€ теб€ это не так важно, но когда ты присоединишьс€ к одному из лагерей, ты узнаешь, что приобретешь не только друзей.
+	};	
 };
 
 func void b_assignambientinfos_grd_13(var C_NPC slf)

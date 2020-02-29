@@ -32,19 +32,23 @@ func void rtn_start_1301()
 {
 	ta_sleep(23,0,8,0,"PSI_21_HUT_IN");
 	ta_potionalchemy(8,0,9,0,"PSI_LABOR_BASEMENT_1");
-	ta_smoke(9,0,10,0,"PSI_21_HUT_EX");
+	ta_herbalchemy(9,0,10,0,"PSI_LABOR_BASEMENT_1");
 	ta_potionalchemy(10,0,11,0,"PSI_LABOR_BASEMENT_1");
-	ta_smoke(11,0,12,0,"PSI_21_HUT_EX");
+	ta_herbalchemy(11,0,12,0,"PSI_LABOR_BASEMENT_1");
 	ta_potionalchemy(12,0,13,0,"PSI_LABOR_BASEMENT_1");
-	ta_smoke(13,0,14,0,"PSI_21_HUT_EX");
-	ta_potionalchemy(14,0,15,0,"PSI_LABOR_BASEMENT_1");
-	ta_smoke(15,0,16,0,"PSI_21_HUT_EX");
+	ta_smoke(13,0,15,0,"PSI_21_HUT_EX");
+	ta_herbalchemy(15,0,16,0,"PSI_LABOR_BASEMENT_1");
 	ta_potionalchemy(16,0,17,0,"PSI_LABOR_BASEMENT_1");
-	ta_smoke(17,0,18,0,"PSI_21_HUT_EX");
+	ta_herbalchemy(17,0,18,0,"PSI_LABOR_BASEMENT_1");
 	ta_potionalchemy(18,0,19,0,"PSI_LABOR_BASEMENT_1");
-	ta_smoke(19,0,20,0,"PSI_21_HUT_EX");
+	ta_herbalchemy(19,0,20,0,"PSI_LABOR_BASEMENT_1");
 	ta_potionalchemy(20,0,21,0,"PSI_LABOR_BASEMENT_1");
-	ta_smoke(21,0,22,0,"PSI_21_HUT_EX");
-	ta_potionalchemy(22,0,23,0,"PSI_LABOR_BASEMENT_1");
+	ta_smoke(21,0,23,0,"PSI_21_HUT_EX");
+};
+
+func void rtn_flee_1301()
+{
+	ta_stay(0,0,12,0,"WP_INTRO01");
+	ta_stay(12,0,24,0,"WP_INTRO01");
 };
 

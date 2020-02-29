@@ -34,7 +34,7 @@ func int c_stoplookat(var C_NPC slf)
 func void b_smartturntonpc(var C_NPC slf,var C_NPC oth)
 {
 	printdebugnpc(PD_ZS_DETAIL,"B_SmartTurnToNpc");
-	if(!(c_bodystatecontains(slf,BS_SIT) || c_bodystatecontains(slf,BS_ITEMINTERACT) || c_bodystatecontains(slf,BS_MOBINTERACT) || c_bodystatecontains(slf,BS_MOBINTERACT_INTERRUPT)))
+	if(!c_bodystatecontains(slf,BS_SIT) || c_bodystatecontains(slf,BS_ITEMINTERACT) || c_bodystatecontains(slf,BS_MOBINTERACT) || c_bodystatecontains(slf,BS_MOBINTERACT_INTERRUPT))
 	{
 		printdebugnpc(PD_ZS_DETAIL,"...sitzt nicht und ist nicht am Mobsi");
 		if(!Npc_CanSeeNpc(slf,oth))
@@ -52,7 +52,7 @@ func void b_smartturntonpc(var C_NPC slf,var C_NPC oth)
 func void b_say(var C_NPC slf,var C_NPC oth,var string text)
 {
 	var string pipe;
-	pipe = ConcatStrings("B_Say:",text);
+	pipe = ConcatStrings("B_Say: ",text);
 	printdebugnpc(PD_ZS_FRAME,pipe);
 	b_smartturntonpc(slf,oth);
 	AI_OutputSVM(slf,oth,text);
@@ -61,7 +61,7 @@ func void b_say(var C_NPC slf,var C_NPC oth,var string text)
 func void b_sayoverlay(var C_NPC slf,var C_NPC oth,var string text)
 {
 	var string pipe;
-	pipe = ConcatStrings("B_SayOverlay:",text);
+	pipe = ConcatStrings("B_SayOverlay: ",text);
 	printdebugnpc(PD_ZS_FRAME,pipe);
 	b_smartturntonpc(slf,oth);
 	AI_OutputSVM_Overlay(slf,oth,text);
@@ -192,10 +192,10 @@ func void b_gotofp(var C_NPC slf,var string fp)
 	printdebugnpc(PD_TA_LOOP,"B_GotoFP");
 	if(!Npc_IsOnFP(self,fp))
 	{
-		printdebugstring(PD_TA_CHECK,"...nicht auf passendem Freepoint",fp);
+		printdebugstring(PD_TA_CHECK,"...nicht auf passendem Freepoint ",fp);
 		if(Wld_IsNextFPAvailable(self,fp))
 		{
-			printdebugstring(PD_TA_CHECK,"Gehe zu Freepoint",fp);
+			printdebugstring(PD_TA_CHECK,"Gehe zu Freepoint ",fp);
 			AI_SetWalkMode(self,NPC_WALK);
 			AI_GotoNextFP(self,fp);
 		};
@@ -226,7 +226,7 @@ func void b_killnpc(var int npcinstance)
 	printdebugnpc(PD_ZS_DETAIL,"B_KillNpc");
 	npc = Hlp_GetNpc(npcinstance);
 	npc.flags = 0;
-	CreateInvItem(npc,itmi_stuff_oldcoin_02);
+	CreateInvItem(npc,itmi_stuff_oldcoin_01);
 	Npc_ChangeAttribute(npc,ATR_HITPOINTS,-npc.attribute[ATR_HITPOINTS_MAX]);
 	if(Npc_GetInvItemBySlot(npc,INV_WEAPON,1))
 	{
@@ -316,17 +316,17 @@ func void b_giveinvitems(var C_NPC giver,var C_NPC taker,var int iteminstance,va
 	{
 		if(iteminstance == itminugget)
 		{
-			msg = ConcatStrings(IntToString(amount),_STR_MESSAGE_ORE_GIVEN);
+			msg = ConcatStrings(_STR_MESSAGE_ORE_GIVEN,IntToString(amount));
 			PrintScreen(msg,-1,_YPOS_MESSAGE_GIVEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_GIVEN);
 		}
 		else if(amount == 1)
 		{
-			msg = ConcatStrings(IntToString(amount),_STR_MESSAGE_ITEM_GIVEN);
+			msg = _STR_MESSAGE_ITEM_GIVEN;
 			PrintScreen(msg,-1,_YPOS_MESSAGE_GIVEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_GIVEN);
 		}
 		else
 		{
-			msg = ConcatStrings(IntToString(amount),_STR_MESSAGE_ITEMS_GIVEN);
+			msg = ConcatStrings(_STR_MESSAGE_ITEMS_GIVEN,IntToString(amount));
 			PrintScreen(msg,-1,_YPOS_MESSAGE_GIVEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_GIVEN);
 		};
 	}
@@ -334,17 +334,17 @@ func void b_giveinvitems(var C_NPC giver,var C_NPC taker,var int iteminstance,va
 	{
 		if(iteminstance == itminugget)
 		{
-			msg = ConcatStrings(IntToString(amount),_STR_MESSAGE_ORE_TAKEN);
+			msg = ConcatStrings(_STR_MESSAGE_ORE_TAKEN,IntToString(amount));
 			PrintScreen(msg,-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
 		}
 		else if(amount == 1)
 		{
-			msg = ConcatStrings(IntToString(amount),_STR_MESSAGE_ITEM_TAKEN);
+			msg = _STR_MESSAGE_ITEM_TAKEN;
 			PrintScreen(msg,-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
 		}
 		else
 		{
-			msg = ConcatStrings(IntToString(amount),_STR_MESSAGE_ITEMS_TAKEN);
+			msg = ConcatStrings(_STR_MESSAGE_ITEMS_TAKEN,IntToString(amount));
 			PrintScreen(msg,-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
 		};
 	};
@@ -402,13 +402,37 @@ func int b_checkforimportantinfo(var C_NPC slf,var C_NPC oth)
 func void b_initguildattitudes()
 {
 	printdebugnpc(PD_ZS_FRAME,"B_InitGuildAttitudes");
-	if(KAPITEL <= 3)
+	if(OC_BANNED == FALSE)
 	{
 		Wld_ExchangeGuildAttitudes("GIL_ATTITUDES");
 	}
 	else
 	{
 		Wld_ExchangeGuildAttitudes("GIL_ATTITUDES_FMTAKEN");
+	};
+	if(NC_BANNED == TRUE)
+	{
+		b_setpermattitude(kdw_600_saturas,ATT_HOSTILE);
+	    b_setpermattitude(kdw_601_myxir,ATT_HOSTILE);
+	    b_setpermattitude(kdw_602_merdarion,ATT_HOSTILE);
+	    b_setpermattitude(kdw_603_nefarius,ATT_HOSTILE);
+	    b_setpermattitude(kdw_604_cronos,ATT_HOSTILE);
+	    b_setpermattitude(kdw_605_riordian,ATT_HOSTILE);
+		b_setpermattitude(sld_726_soeldner,ATT_HOSTILE);
+		b_setpermattitude(sld_723_soeldner,ATT_HOSTILE);
+	    b_setpermattitude(sld_732_soeldner,ATT_HOSTILE);
+	    b_clearimmortal(kdw_600_saturas);
+	    b_clearimmortal(kdw_601_myxir);
+	    b_clearimmortal(kdw_602_merdarion);
+	    b_clearimmortal(kdw_603_nefarius);
+	    b_clearimmortal(kdw_604_cronos);
+	    b_clearimmortal(kdw_605_riordian);
+	    b_setnpctype(kdw_600_saturas,NPCTYPE_MAIN);
+	    b_setnpctype(kdw_601_myxir,NPCTYPE_MAIN);
+	    b_setnpctype(kdw_602_merdarion,NPCTYPE_MAIN);
+	    b_setnpctype(kdw_603_nefarius,NPCTYPE_MAIN);
+	    b_setnpctype(kdw_604_cronos,NPCTYPE_MAIN);
+	    b_setnpctype(kdw_605_riordian,NPCTYPE_MAIN);
 	};
 };
 

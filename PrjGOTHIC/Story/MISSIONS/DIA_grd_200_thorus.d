@@ -1,4 +1,24 @@
 
+func void b_thoruslearn()
+{
+	Info_ClearChoices(grd_200_thorus_teach);
+	Info_AddChoice(grd_200_thorus_teach,DIALOG_BACK,grd_200_thorus_teach_back);
+	if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF)
+	{
+		Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),grd_200_thorus_teach_str_5);
+		Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),grd_200_thorus_teach_str_1);
+		Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),grd_200_thorus_teach_dex_5);
+		Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),grd_200_thorus_teach_dex_1);
+	}
+	else
+	{
+		Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,OTHERCAMPLEARNPAY * 5),grd_200_thorus_teach_str_5);
+		Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,OTHERCAMPLEARNPAY),grd_200_thorus_teach_str_1);
+		Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,OTHERCAMPLEARNPAY * 5),grd_200_thorus_teach_dex_5);
+		Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,OTHERCAMPLEARNPAY),grd_200_thorus_teach_dex_1);
+	};
+};
+
 instance INFO_THORUS_EXIT(C_INFO)
 {
 	npc = grd_200_thorus;
@@ -34,7 +54,7 @@ instance INFO_THORUS_ENTERCASTLE(C_INFO)
 
 func int info_thorus_entercastle_condition()
 {
-	if(!c_npcbelongstooldcamp(other) && (DIEGO_GOMEZAUDIENCE == FALSE))
+	if(!c_npcbelongstooldcamp(other) && (DIEGO_GOMEZAUDIENCE == FALSE) && (THORUS_PASSGATE == FALSE))
 	{
 		return 1;
 	};
@@ -86,7 +106,7 @@ instance INFO_THORUS_DIEGOSENTME(C_INFO)
 
 func int info_thorus_diegosentme_condition()
 {
-	if(Npc_KnowsInfo(hero,info_thorus_workforgomez) && Npc_KnowsInfo(hero,info_diego_joinoldcamp))
+	if(Npc_KnowsInfo(hero,info_thorus_workforgomez) && Npc_KnowsInfo(hero,info_diego_joinoldcamp) && (Npc_GetTrueGuild(hero) == GIL_NONE))
 	{
 		return 1;
 	};
@@ -116,7 +136,7 @@ instance INFO_THORUS_TRYME(C_INFO)
 
 func int info_thorus_tryme_condition()
 {
-	if(Npc_KnowsInfo(hero,info_thorus_workforgomez))
+	if(Npc_KnowsInfo(hero,info_thorus_workforgomez) && (Npc_GetTrueGuild(hero) == GIL_NONE))
 	{
 		return 1;
 	};
@@ -144,7 +164,7 @@ instance INFO_THORUS_TRYMEAGAIN(C_INFO)
 
 func int info_thorus_trymeagain_condition()
 {
-	if(Npc_KnowsInfo(hero,info_thorus_tryme))
+	if(Npc_KnowsInfo(hero,info_thorus_tryme) && (Npc_GetTrueGuild(hero) == GIL_NONE))
 	{
 		return 1;
 	};
@@ -171,7 +191,7 @@ instance INFO_THORUS_TRYMEICANDOIT(C_INFO)
 
 func int info_thorus_trymeicandoit_condition()
 {
-	if(Npc_KnowsInfo(hero,info_thorus_trymeagain))
+	if(Npc_KnowsInfo(hero,info_thorus_trymeagain) && (Npc_GetTrueGuild(hero) == GIL_NONE))
 	{
 		return 1;
 	};
@@ -200,7 +220,7 @@ instance INFO_THORUS_MORDRAGKO_OFFER(C_INFO)
 
 func int info_thorus_mordragko_offer_condition()
 {
-	if(Npc_KnowsInfo(hero,info_thorus_trymeicandoit))
+	if(Npc_KnowsInfo(hero,info_thorus_trymeicandoit) && (Npc_GetTrueGuild(hero) == GIL_NONE))
 	{
 		return 1;
 	};
@@ -244,9 +264,14 @@ func void info_thorus_mordragko_killhim()
 
 func void info_thorus_mordragko_where()
 {
+	var int log;
 	AI_Output(other,self,"Info_Thorus_MordragKo_Where_15_00");	//Где я могу найти Мордрага?
-	AI_Output(self,other,"Info_Thorus_MordragKo_Where_09_01");	//На другой стороне замка, возле южных ворот. Не осмеливается совсем заходить в лагерь.  
-	b_logentry(CH1_MORDRAGKO,"Мордрага я смогу найти у южных ворот, с противоположной стороны замка.");
+	AI_Output(self,other,"Info_Thorus_MordragKo_Where_09_01");	//На другой стороне замка, возле южных ворот. Не осмеливается совсем заходить в лагерь.
+	if(log == FALSE)
+	{
+		b_logentry(CH1_MORDRAGKO,"Мордрага я смогу найти у южных ворот, с противоположной стороны замка.");
+		log = TRUE;
+	};
 };
 
 func void info_thorus_mordragko_magesprotect()
@@ -292,6 +317,10 @@ func void info_thorus_mordragko_analyze_info()
 	Info_ClearChoices(info_thorus_mordragko_analyze);
 	Info_AddChoice(info_thorus_mordragko_analyze,"Я позабочусь об этом.",info_thorus_mordragko_analyze_back);
 	Info_AddChoice(info_thorus_mordragko_analyze,"Где я могу найти Мордрага?",info_thorus_mordragko_where);
+	if(THORUS_MORDRAGMAGEMESSENGER == FALSE)
+	{
+		Info_AddChoice(info_thorus_mordragko_analyze,"А почему маги защищают Мордрага?",info_thorus_mordragko_magesprotect);
+	};
 	mordrag = Hlp_GetNpc(org_826_mordrag);
 	if(Npc_IsDead(mordrag))
 	{
@@ -375,7 +404,7 @@ instance INFO_THORUS_BRIBEGUARD(C_INFO)
 
 func int info_thorus_bribeguard_condition()
 {
-	if(Npc_KnowsInfo(hero,info_thorus_entercastle) && (Npc_GetTrueGuild(other) != GIL_STT) && (Npc_GetTrueGuild(other) != GIL_GRD))
+	if(Npc_KnowsInfo(hero,info_thorus_entercastle) && (Npc_GetTrueGuild(other) != GIL_STT) && (Npc_GetTrueGuild(other) != GIL_GRD) && (THORUS_PASSGATE == FALSE))
 	{
 		return 1;
 	};
@@ -407,7 +436,9 @@ instance INFO_THORUS_GIVE1000ORE(C_INFO)
 
 func int info_thorus_give1000ore_condition()
 {
-	if(Npc_KnowsInfo(hero,info_thorus_bribeguard))
+	var C_NPC wache212;
+	wache212 = Hlp_GetNpc(grd_212_torwache);
+	if(Npc_KnowsInfo(hero,info_thorus_bribeguard) && (wache212.aivar[AIV_PASSGATE] != TRUE) && (THORUS_PASSGATE == FALSE))
 	{
 		return 1;
 	};
@@ -426,10 +457,13 @@ func void info_thorus_give1000ore_info()
 		wache213 = Hlp_GetNpc(grd_213_torwache);
 		wache212.aivar[AIV_PASSGATE] = TRUE;
 		wache213.aivar[AIV_PASSGATE] = TRUE;
+		THORUS_PASSGATE = TRUE;
+		AI_StopProcessInfos(self);
 	}
 	else
 	{
 		AI_Output(self,other,"Info_Thorus_Give1000Ore_09_02");	//Не пытайся надуть меня, малыш! У тебя нет тысячи кусков!
+		AI_StopProcessInfos(self);
 	};
 };
 
@@ -440,14 +474,14 @@ instance INFO_THORUS_LETTERFORMAGES(C_INFO)
 	nr = 1;
 	condition = info_thorus_letterformages_condition;
 	information = info_thorus_letterformages_info;
-	permanent = 1;
+	permanent = 0;
 	description = "Мне нужно попасть в замок. У меня есть письмо...";
 };
 
 
 func int info_thorus_letterformages_condition()
 {
-	if(Npc_KnowsInfo(hero,info_thorus_entercastle) && (Npc_HasItems(hero,itwr_fire_letter_01) || Npc_HasItems(hero,itwr_fire_letter_02)))
+	if(Npc_KnowsInfo(hero,info_thorus_entercastle) && (Npc_HasItems(hero,itwr_fire_letter_01) || Npc_HasItems(hero,itwr_fire_letter_02)) && (THORUS_PASSGATE == FALSE))
 	{
 		return 1;
 	};
@@ -456,13 +490,44 @@ func int info_thorus_letterformages_condition()
 func void info_thorus_letterformages_info()
 {
 	AI_Output(other,self,"Info_Thorus_LetterForMages_15_00");	//Мне нужно попасть в замок. У меня есть письмо для Верховного Мага Круга Огня.
-	AI_Output(self,other,"Info_Thorus_LetterForMages_09_01");	//И ты надеешься, что я просто пропущу тебя в замок, чтобы ты мог получить свою награду?
-	AI_Output(other,self,"Info_Thorus_LetterForMages_15_02");	//Да.  
 	AI_Output(self,other,"Info_Thorus_LetterForMages_09_03");	//Хорошо, покажи мне это письмо.
-	AI_Output(other,self,"Info_Thorus_LetterForMages_15_04");	//Думаешь, я позволю тебе прикарманить его! Забудь про него!
-	AI_Output(self,other,"Info_Thorus_LetterForMages_09_05");	//Хорошо, уже забыл.
+	Info_ClearChoices(info_thorus_letterformages);
+	Info_AddChoice(info_thorus_letterformages,"Вот оно.",info_thorus_letter_yes);
+	Info_AddChoice(info_thorus_letterformages,"Думаешь, я позволю тебе прикарманить его? Забудь про него!",info_thorus_letter_no);
 };
 
+func void info_thorus_letter_yes()
+{
+	AI_Output(other,self,"DIA_Torrez_BriefTausch_15_04");	//Вот оно.
+	AI_Output(self,other,"Info_Thorus_LetterForMages_09_01");	//И ты надеешься, что я просто пропущу тебя в замок, чтобы ты мог получить свою награду?
+	AI_Output(other,self,"Info_Thorus_LetterForMages_15_02");	//Да.
+	AI_Output(self,other,"SVM_9_GetOutOfHere");	//Пошел вон!
+	if(LETTER_TOLD == 0)
+	{
+		LETTER_TOLD = 1;
+	}
+	else if(LETTER_TOLD == 1)
+	{
+		LETTER_TOLD = 2;
+		if(!Npc_IsDead(vlk_505_buddler))
+		{
+			b_exchangeroutine(vlk_505_buddler,"letterwait");
+		};
+		if(!Npc_IsDead(vlk_506_buddler))
+		{
+			b_exchangeroutine(vlk_506_buddler,"letterwait");
+		};
+	};
+	AI_StopProcessInfos(self);
+};
+
+func void info_thorus_letter_no()
+{
+	AI_Output(other,self,"Info_Thorus_LetterForMages_15_04");	//Думаешь, я позволю тебе прикарманить его? Забудь про него!
+	AI_Output(self,other,"Info_Thorus_LetterForMages_09_05");	//Хорошо, уже забыл.
+	AI_Output(self,other,"Info_Thorus_KdWSiegel_09_02");	//Мне ничего от магов не надо, так что перестань надоедать мне, хорошо?
+	Info_ClearChoices(info_thorus_letterformages);
+};
 
 instance INFO_THORUS_READYFORGOMEZ(C_INFO)
 {
@@ -501,6 +566,9 @@ func void info_thorus_readyforgomez_info()
 	wache212.aivar[AIV_PASSGATE] = TRUE;
 	wache213.aivar[AIV_PASSGATE] = TRUE;
 	wache218.aivar[AIV_PASSGATE] = TRUE;
+	THORUS_PASSGATE = TRUE;
+	THORUS_KRAUTBOTE_PASS = TRUE;
+	AI_StopProcessInfos(self);
 };
 
 
@@ -510,14 +578,14 @@ instance INFO_THORUS_KRAUTBOTE(C_INFO)
 	nr = 4;
 	condition = info_thorus_krautbote_condition;
 	information = info_thorus_krautbote_info;
-	permanent = 0;
+	permanent = 1;
 	description = "Кор Галом передал Гомезу болотник.";
 };
 
 
 func int info_thorus_krautbote_condition()
 {
-	if(KALOM_KRAUTBOTE == LOG_RUNNING)
+	if((KALOM_KRAUTBOTE == LOG_RUNNING) && (THORUS_KRAUTBOTE_PASS == FALSE))
 	{
 		return 1;
 	};
@@ -532,6 +600,7 @@ func void info_thorus_krautbote_info()
 	AI_Output(self,other,"Info_Thorus_Krautbote_09_01");	//Покажи!
 	if(Npc_HasItems(other,itmijoint_3) >= 30)
 	{
+		AI_Output(other,self,"ORG_801_Lares_BringList_15_03");	//Вот он...
 		AI_Output(self,other,"Info_Thorus_Krautbote_09_02");	//Хм...
 		AI_Output(self,other,"Info_Thorus_Krautbote_09_03");	//Хорошо! Проходи. Отправляйся к дому Баронов. Бартоло встретит тебя там.
 		wache212 = Hlp_GetNpc(grd_212_torwache);
@@ -540,10 +609,15 @@ func void info_thorus_krautbote_info()
 		wache212.aivar[AIV_PASSGATE] = TRUE;
 		wache213.aivar[AIV_PASSGATE] = TRUE;
 		wache218.aivar[AIV_PASSGATE] = TRUE;
+		THORUS_KRAUTBOTE_PASS = TRUE;
+		THORUS_PASSGATE = TRUE;
+		AI_StopProcessInfos(self);
 	}
 	else
 	{
+		AI_Output(other,self,"KDW_600_Saturas_TIMESUP_Info_15_01");	//Ну...
 		AI_Output(self,other,"Info_Thorus_Krautbote_09_04");	//У тебя слишком мало болотника! Надеюсь, ты не продал его на сторону. Будет нормальный запас, тогда и приходи.
+		AI_StopProcessInfos(self);
 	};
 };
 
@@ -563,7 +637,7 @@ instance INFO_THORUS_KDWSIEGEL(C_INFO)
 
 func int info_thorus_kdwsiegel_condition()
 {
-	if((Npc_KnowsInfo(hero,org_826_mordrag_courier) || (Npc_HasItems(other,kdw_amulett) >= 1)) && (THORUS_AMULETTGEZEIGT == FALSE))
+	if((Npc_HasItems(other,kdw_amulett) >= 1) && (THORUS_AMULETTGEZEIGT == FALSE) && (THORUS_PASSGATE == FALSE))
 	{
 		return 1;
 	};
@@ -574,20 +648,17 @@ func void info_thorus_kdwsiegel_info()
 	var C_NPC wache212;
 	var C_NPC wache213;
 	AI_Output(other,self,"Info_Thorus_KdWSiegel_15_00");	//Меня прислали маги Воды. Мне нужно попасть в замок.
-	if(Npc_HasItems(other,kdw_amulett) >= 1)
-	{
-		AI_Output(self,other,"Info_Thorus_KdWSiegel_09_01");	//Ты можешь пройти мимо стражи, только если у тебя есть амулет.
-		AI_Output(self,other,"Info_Thorus_KdWSiegel_09_02");	//Мне ничего от магов не надо, так что перестань надоедать мне, хорошо?
-		wache212 = Hlp_GetNpc(grd_212_torwache);
-		wache213 = Hlp_GetNpc(grd_213_torwache);
-		wache212.aivar[AIV_PASSGATE] = TRUE;
-		wache213.aivar[AIV_PASSGATE] = TRUE;
-		THORUS_AMULETTGEZEIGT = TRUE;
-	}
-	else
-	{
-		AI_Output(self,other,"Info_Thorus_KdWSiegel_09_03");	//Конечно, конечно! А амулет у тебя для этого есть, а?
-	};
+	AI_Output(self,other,"Info_Thorus_KdWSiegel_09_03");	//Конечно, конечно! А амулет у тебя для этого есть, а?
+	AI_Output(self,other,"Info_Thorus_KdWSiegel_09_01");	//Ты можешь пройти мимо стражи, только если у тебя есть амулет.
+	AI_Output(other,self,"ORG_801_Lares_BringList_15_03");	//Вот он...
+	AI_Output(self,other,"Info_Thorus_Give1000Ore_09_01");	//Ладно, проходи. Но не натвори там глупостей, понял?
+	wache212 = Hlp_GetNpc(grd_212_torwache);
+	wache213 = Hlp_GetNpc(grd_213_torwache);
+	wache212.aivar[AIV_PASSGATE] = TRUE;
+	wache213.aivar[AIV_PASSGATE] = TRUE;
+	THORUS_AMULETTGEZEIGT = TRUE;
+	THORUS_PASSGATE = TRUE;
+	AI_StopProcessInfos(self);
 };
 
 
@@ -763,7 +834,7 @@ instance GRD_200_THORUS_WANNABEMAGE(C_INFO)
 
 func int grd_200_thorus_wannabemage_condition()
 {
-	if(Npc_KnowsInfo(hero,grd_200_thorus_gardist) && !Npc_KnowsInfo(hero,grd_200_thorus_aufnahme))
+	if(Npc_KnowsInfo(hero,grd_200_thorus_gardist) && !Npc_KnowsInfo(hero,grd_200_thorus_aufnahme) && (Npc_GetTrueGuild(hero) == GIL_STT))
 	{
 		return TRUE;
 	};
@@ -809,12 +880,7 @@ func void grd_200_thorus_teach_info()
 		b_logentry(GE_TEACHEROC,"Торус может помочь мне увеличить силу и ловкость.");
 		LOG_THORUSTRAIN = TRUE;
 	};
-	Info_ClearChoices(grd_200_thorus_teach);
-	Info_AddChoice(grd_200_thorus_teach,DIALOG_BACK,grd_200_thorus_teach_back);
-	Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),grd_200_thorus_teach_str_5);
-	Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),grd_200_thorus_teach_str_1);
-	Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),grd_200_thorus_teach_dex_5);
-	Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),grd_200_thorus_teach_dex_1);
+	b_thoruslearn();
 };
 
 func void grd_200_thorus_teach_back()
@@ -824,46 +890,90 @@ func void grd_200_thorus_teach_back()
 
 func void grd_200_thorus_teach_str_1()
 {
-	b_buyattributepoints(other,ATR_STRENGTH,LPCOST_ATTRIBUTE_STRENGTH);
-	Info_ClearChoices(grd_200_thorus_teach);
-	Info_AddChoice(grd_200_thorus_teach,DIALOG_BACK,grd_200_thorus_teach_back);
-	Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),grd_200_thorus_teach_str_5);
-	Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),grd_200_thorus_teach_str_1);
-	Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),grd_200_thorus_teach_dex_5);
-	Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),grd_200_thorus_teach_dex_1);
+	if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF)
+	{
+		b_buyattributepoints(other,ATR_STRENGTH,LPCOST_ATTRIBUTE_STRENGTH);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY)
+	{
+		if(hero.lp >= 1 && hero.attribute[ATR_STRENGTH] < 100)
+		{
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
+		};
+		b_buyattributepoints(other,ATR_STRENGTH,LPCOST_ATTRIBUTE_STRENGTH);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"DIA_Wolf_SellArmor_M_09_02");	//Без руды ты ничего не сможешь купить.
+	};
+	b_thoruslearn();
 };
 
 func void grd_200_thorus_teach_str_5()
 {
-	b_buyattributepoints(other,ATR_STRENGTH,5 * LPCOST_ATTRIBUTE_STRENGTH);
-	Info_ClearChoices(grd_200_thorus_teach);
-	Info_AddChoice(grd_200_thorus_teach,DIALOG_BACK,grd_200_thorus_teach_back);
-	Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),grd_200_thorus_teach_str_5);
-	Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),grd_200_thorus_teach_str_1);
-	Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),grd_200_thorus_teach_dex_5);
-	Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),grd_200_thorus_teach_dex_1);
+	if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF)
+	{
+		b_buyattributepoints(other,ATR_STRENGTH,5 * LPCOST_ATTRIBUTE_STRENGTH);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY * 5)
+	{
+		if(hero.lp >= 5 && hero.attribute[ATR_STRENGTH] < 96)
+		{
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
+		};
+		b_buyattributepoints(other,ATR_STRENGTH,5 * LPCOST_ATTRIBUTE_STRENGTH);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"DIA_Wolf_SellArmor_M_09_02");	//Без руды ты ничего не сможешь купить.
+	};
+	b_thoruslearn();
 };
 
 func void grd_200_thorus_teach_dex_1()
 {
-	b_buyattributepoints(other,ATR_DEXTERITY,LPCOST_ATTRIBUTE_DEXTERITY);
-	Info_ClearChoices(grd_200_thorus_teach);
-	Info_AddChoice(grd_200_thorus_teach,DIALOG_BACK,grd_200_thorus_teach_back);
-	Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),grd_200_thorus_teach_str_5);
-	Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),grd_200_thorus_teach_str_1);
-	Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),grd_200_thorus_teach_dex_5);
-	Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),grd_200_thorus_teach_dex_1);
+	if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF)
+	{
+		b_buyattributepoints(other,ATR_DEXTERITY,LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY)
+	{
+		if(hero.lp >= 1 && hero.attribute[ATR_DEXTERITY] < 100)
+		{
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
+		};
+		b_buyattributepoints(other,ATR_DEXTERITY,LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"DIA_Wolf_SellArmor_M_09_02");	//Без руды ты ничего не сможешь купить.
+	};
+	b_thoruslearn();
 };
 
 func void grd_200_thorus_teach_dex_5()
 {
-	b_buyattributepoints(other,ATR_DEXTERITY,5 * LPCOST_ATTRIBUTE_DEXTERITY);
-	Info_ClearChoices(grd_200_thorus_teach);
-	Info_AddChoice(grd_200_thorus_teach,DIALOG_BACK,grd_200_thorus_teach_back);
-	Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),grd_200_thorus_teach_str_5);
-	Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),grd_200_thorus_teach_str_1);
-	Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),grd_200_thorus_teach_dex_5);
-	Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),grd_200_thorus_teach_dex_1);
+	if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF)
+	{
+		b_buyattributepoints(other,ATR_DEXTERITY,5 * LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY * 5)
+	{
+		if(hero.lp >= 5 && hero.attribute[ATR_DEXTERITY] < 96)
+		{
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
+		};
+		b_buyattributepoints(other,ATR_DEXTERITY,5 * LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"DIA_Wolf_SellArmor_M_09_02");	//Без руды ты ничего не сможешь купить.
+	};
+	b_thoruslearn();
 };
 
 
@@ -937,7 +1047,7 @@ func void grd_200_thorus_zweihand2_info()
 		AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND2_Info_09_04");	//У противника не будет ни единого шанса к тебе подобраться.
 		AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND2_Info_09_05");	//Из этого же положения можно нанести резкий колющий удар вперед, чтобы отогнать врага.
 		AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND2_Info_09_06");	//Развернись, чтобы придать мечу должный разгон, - и еще один рубящий удар!
-		AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND2_Info_09_07");	//Если этого окажется недостаточно, по инерции возвращайся в прежнее положение. 
+		AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND2_Info_09_07");	//Если этого окажется недостаточно, по инерции возвращайся в прежнее положение.
 		AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND2_Info_09_08");	//Когда закончишь серию, защищайся и жди момента, чтобы атаковать снова.
 		AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND2_Info_09_09");	//Секрет успеха кроется в чередовании ударов и своевременной защите.
 		grd_200_thorus_zweihand2.permanent = 0;

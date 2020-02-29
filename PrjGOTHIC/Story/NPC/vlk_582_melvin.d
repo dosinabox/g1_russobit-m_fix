@@ -32,3 +32,9 @@ func void rtn_start_582()
 	ta_listen(8,0,0,0,"PSI_12_HUT_EX_TEACH");
 };
 
+func void rtn_remove_582()
+{
+	ta_stay(0,0,8,0,"WP_INTRO01");
+	ta_stay(8,0,0,0,"WP_INTRO01");
+};
+

@@ -69,8 +69,16 @@ func void dia_grd_215_torwache_first_justlooking()
 	AI_Output(other,self,"DIA_Grd_215_Torwache_First_JustLooking_15_00");	//Да просто хотел посмотреть, что здесь есть.
 	AI_Output(self,other,"DIA_Grd_215_Torwache_First_JustLooking_06_01");	//За это с тебя десять кусков руды.
 	Info_ClearChoices(dia_grd_215_torwache_first);
-	Info_AddChoice(dia_grd_215_torwache_first,"А, забудь об этом.",dia_grd_215_torwache_first_nopay);
-	Info_AddChoice(dia_grd_215_torwache_first,"Ладно, вот твои десять кусков.",dia_grd_215_torwache_first_pay);
+	if(Npc_HasItems(other,itminugget) >= 10)
+	{
+		Info_AddChoice(dia_grd_215_torwache_first,"А, забудь об этом.",dia_grd_215_torwache_first_nopay);
+	    Info_AddChoice(dia_grd_215_torwache_first,"Ладно, вот твои десять кусков.",dia_grd_215_torwache_first_pay);
+	}
+	else
+	{
+		Info_AddChoice(dia_grd_215_torwache_first,"Но у меня не так много руды.",dia_grd_215_torwache_first_nomoney);
+	};
+	
 };
 
 func void dia_grd_215_torwache_first_diego()
@@ -78,6 +86,15 @@ func void dia_grd_215_torwache_first_diego()
 	AI_Output(other,self,"DIA_Grd_215_Torwache_First_Diego_15_00");	//Диего сказал, что я должен встретиться с ним в лагере.
 	AI_Output(self,other,"DIA_Grd_215_Torwache_First_Diego_06_01");	//Ладно, раз так - проходи.
 	Info_ClearChoices(dia_grd_215_torwache_first);
+	AI_StopProcessInfos(self);
+};
+
+func void dia_grd_215_torwache_first_nomoney()
+{
+	AI_Output(other,self,"DIA_Grd_215_Torwache_First_Pay_NoOre_15_00");	//Но у меня не так много руды.
+	AI_Output(self,other,"DIA_Grd_215_Torwache_First_Pay_NoOre_06_01");	//Хорошо, сделаю исключение для тебя, как для новенького. Но только один раз.
+	Info_ClearChoices(dia_grd_215_torwache_first);
+	AI_StopProcessInfos(self);
 };
 
 func void dia_grd_215_torwache_first_nopay()
@@ -85,22 +102,16 @@ func void dia_grd_215_torwache_first_nopay()
 	AI_Output(other,self,"DIA_Grd_215_Torwache_First_NoPay_15_00");	//А, забудь об этом.
 	AI_Output(self,other,"DIA_Grd_215_Torwache_First_NoPay_06_01");	//Тогда убирайся.
 	Info_ClearChoices(dia_grd_215_torwache_first);
+	AI_StopProcessInfos(self);
+	Npc_SetTarget(self,other);
+	AI_StartState(self,zs_attack,1,"");
 };
 
 func void dia_grd_215_torwache_first_pay()
 {
-	if(Npc_HasItems(other,itminugget) >= 10)
-	{
-		AI_Output(other,self,"DIA_Grd_215_Torwache_First_Pay_15_00");	//Ладно, вот твои десять кусков.
-		AI_Output(self,other,"DIA_Grd_215_Torwache_First_Pay_06_01");	//Другой разговор, заходи.
-		b_giveinvitems(other,self,itminugget,10);
-		CreateInvItems(self,itminugget,10);
-	}
-	else
-	{
-		AI_Output(other,self,"DIA_Grd_215_Torwache_First_Pay_NoOre_15_00");	//Но у меня не так много руды.
-		AI_Output(self,other,"DIA_Grd_215_Torwache_First_Pay_NoOre_06_01");	//Хорошо, сделаю исключение для тебя, как для новенького. Но только один раз.
-	};
+	AI_Output(other,self,"DIA_Grd_215_Torwache_First_Pay_15_00");	//Ладно, вот твои десять кусков.
+	AI_Output(self,other,"DIA_Grd_215_Torwache_First_Pay_06_01");	//Другой разговор, заходи.
+	b_giveinvitems(other,self,itminugget,10);
 	Info_ClearChoices(dia_grd_215_torwache_first);
 	AI_StopProcessInfos(self);
 };

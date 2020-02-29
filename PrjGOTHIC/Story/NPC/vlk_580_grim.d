@@ -52,3 +52,9 @@ func void rtn_inextremo_580()
 	ta_watchinextremo(22,0,10,0,"OCR_AUDIENCE_01");
 };
 
+func void rtn_remove_580()
+{
+	ta_stay(10,0,22,0,"WP_INTRO01");
+	ta_stay(22,0,10,0,"WP_INTRO01");
+};
+

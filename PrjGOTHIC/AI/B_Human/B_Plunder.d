@@ -195,7 +195,7 @@ func int b_plunder()
 	{
 		amountplundered = amountplundered + 1;
 	};
-	printdebugint(PD_ZS_CHECK,"...Anzahl geplünderter Items:",amountplundered);
+	printdebugint(PD_ZS_CHECK,"...Anzahl geplünderter Items: ",amountplundered);
 	return amountplundered;
 };
 

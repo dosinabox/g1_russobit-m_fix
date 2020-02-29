@@ -15,11 +15,11 @@ func void b_stopmagicfreeze()
 	};
 };
 
-func int zs_magicfreeze()
+func void zs_magicfreeze()
 {
 	printdebugnpc(PD_MAGIC,"ZS_MagicFreeze");
 	printglobals(PD_MAGIC);
-	Npc_PercEnable(self,PERC_ASSESSMAGIC,zs_magicfreeze);
+	//Npc_PercEnable(self,PERC_ASSESSMAGIC,zs_magicfreeze);
 	if(!c_bodystatecontains(self,BS_UNCONSCIOUS))
 	{
 		AI_PlayAniBS(self,"T_STAND_2_FREEZE_VICTIM",BS_UNCONSCIOUS);

@@ -48,7 +48,7 @@ func void dia_baaltyon_notalk_info()
 {
 	Info_ClearChoices(dia_baaltyon_notalk);
 	Info_AddChoice(dia_baaltyon_notalk,DIALOG_ENDE,dia_baaltyon_notalk_ende);
-	if(Npc_HasItems(other,specialjoint) >= 1)
+	if((Npc_HasItems(other,specialjoint) >= 1) && (Npc_GetTrueGuild(hero) == GIL_NONE) && (KAPITEL < 2))
 	{
 		Info_AddChoice(dia_baaltyon_notalk,"(предложить улучшенный 'Зов мечты')",dia_baaltyon_specialjoint);
 	};
@@ -114,7 +114,7 @@ instance DIA_BAALTYON_VISION(C_INFO)
 
 func int dia_baaltyon_vision_condition()
 {
-	if((BAALTYON_ANSPRECHBAR == TRUE) && (Npc_RefuseTalk(self) == FALSE))
+	if((BAALTYON_ANSPRECHBAR == TRUE) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetTrueGuild(hero) == GIL_NONE) && (KAPITEL < 2))
 	{
 		return 1;
 	};
@@ -131,6 +131,8 @@ func void dia_baaltyon_vision_info()
 	self.npctype = NPCTYPE_MAIN;
 	self.flags = 0;
 	BAALTYON_ANSPRECHBAR = FALSE;
+	Log_CreateTopic(CH1_JOINPSI,LOG_MISSION);
+	Log_SetTopicStatus(CH1_JOINPSI,LOG_RUNNING);
 	b_logentry(CH1_JOINPSI,"Благодаря моему особому подарку Идола Тиона посетило видение! Он хочет, чтобы я поговорил с Кор Галомом!");
 	b_givexp(XP_IMPRESSEDBAALTYON);
 	AI_StopProcessInfos(self);

@@ -25,14 +25,10 @@ instance ORG_804_ORGANISATOR(NPC_DEFAULT)
 	CreateInvItems(self,itminugget,12);
 	CreateInvItems(self,itforice,8);
 	CreateInvItems(self,itfobooze,2);
-	CreateInvItems(self,itlstorch,1);
 	CreateInvItems(self,itfo_potion_health_01,1);
 	CreateInvItem(self,itmi_stuff_cup_01);
 	CreateInvItem(self,itfomutton);
-	CreateInvItem(self,itfoloaf);
-	CreateInvItem(self,itat_teeth_01);
 	EquipItem(self,itmw_1h_mace_war_02);
-	CreateInvItem(self,itfobooze);
 	EquipItem(self,itrw_bow_long_01);
 	CreateInvItems(self,itamarrow,20);
 	daily_routine = rtn_start_804;

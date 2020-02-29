@@ -93,7 +93,7 @@ instance DIA_BAALORUN_FIRSTTALK(C_INFO)
 
 func int dia_baalorun_firsttalk_condition()
 {
-	if(GHORIM_KICKHARLOK == LOG_SUCCESS)
+	if((GHORIM_KICKHARLOK == LOG_SUCCESS) && (Npc_GetTrueGuild(hero) == GIL_NONE) && (KAPITEL < 2))
 	{
 		BAALORUN_ANSPRECHBAR = TRUE;
 		return 1;
@@ -102,6 +102,9 @@ func int dia_baalorun_firsttalk_condition()
 
 func void dia_baalorun_firsttalk_info()
 {
+	var C_NPC harlok;
+	harlok = Hlp_GetNpc(nov_1358_harlok);
+	harlok.attribute[ATR_HITPOINTS] = harlok.attribute[ATR_HITPOINTS_MAX];
 	AI_Output(self,other,"DIA_BaalOrun_FirstTalk_12_00");	//Горим сказал мне, что ты очень помог братьям нашим - это мудрый поступок.
 	AI_Output(self,other,"DIA_BaalOrun_FirstTalk_12_01");	//Именно поэтому тебя выбрали для выполнения особого задания.
 	AI_Output(self,other,"DIA_BaalOrun_FirstTalk_12_02");	//Кор Галом постоянно экспериментирует и ему нужен болотник.
@@ -114,7 +117,7 @@ func void dia_baalorun_firsttalk_info()
 	b_logentry(CH1_DELIVERWEED,"Я сумел уговорить Харлока, и это произвело хорошее впечатление на Идола Орана. Теперь я должен отнести весь урожай болотника Кор Галому.");
 	BAALORUN_FETCHWEED = LOG_RUNNING;
 	Info_ClearChoices(dia_baalorun_firsttalk);
-	Info_AddChoice(dia_baalorun_firsttalk,"Ничего не говорить.",dia_baalorun_firsttalk_muteende);
+	Info_AddChoice(dia_baalorun_firsttalk,"(ничего не говорить)",dia_baalorun_firsttalk_muteende);
 	Info_AddChoice(dia_baalorun_firsttalk,"Где я могу найти этих сборщиков?",dia_baalorun_firsttalk_where);
 };
 
@@ -161,12 +164,12 @@ func void dia_baalorun_gotweed_info()
 	AI_Output(self,other,"DIA_BaalOrun_GotWeed_12_01");	//Это не просто любопытство к нам, это проявление веры в Спящего.
 	AI_Output(self,other,"DIA_BaalOrun_GotWeed_12_02");	//Я вижу, ты достоин носить робу послушника.
 	BAALORUN_ANSPRECHBAR = TRUE;
-	Log_CreateTopic(CH1_JOINPSI,LOG_MISSION);
-	if(Npc_GetTrueGuild(hero) == GIL_NONE)
+	if((Npc_GetTrueGuild(hero) == GIL_NONE) && (KAPITEL < 2))
 	{
+		Log_CreateTopic(CH1_JOINPSI,LOG_MISSION);
 		Log_SetTopicStatus(CH1_JOINPSI,LOG_RUNNING);
+		b_logentry(CH1_JOINPSI,"Идол Оран назвал меня верным последователем Спящего, так как я смог избавить сборщиков болотника от шершней.");
 	};
-	b_logentry(CH1_JOINPSI,"Идол Оран назвал меня верным последователем Спящего, так как я смог избавить сборщиков болотника от шершней.");
 	b_givexp(XP_IMPRESSEDBAALORUN);
 };
 
@@ -194,7 +197,7 @@ func void dia_baalorun_weedatkaloms_info()
 {
 	AI_Output(other,self,"DIA_BaalOrun_WeedAtKaloms_15_00");	//Я доставил болотник Кор Галому.
 	AI_Output(self,other,"DIA_BaalOrun_WeedAtKaloms_12_01");	//Неплохо поработал. Вот тебе за это небольшая награда.
-	AI_Output(self,other,"DIA_BaalOrun_WeedAtKaloms_12_02");	//Это магическое Заклинание Сна. Ты сможешь воспользоваться им только один раз, но я надеюсь, что оно сослужит тебе хорошую службу.
+	AI_Output(self,other,"DIA_BaalOrun_WeedAtKaloms_12_02");	//Это магическое заклинание Сна. Ты сможешь воспользоваться им только один раз, но я надеюсь, что оно сослужит тебе хорошую службу.
 	BAALORUN_ANSPRECHBAR = TRUE;
 	b_givexp(XP_REPORTTOBAALORUN);
 	CreateInvItem(self,itarscrollsleep);
@@ -226,5 +229,34 @@ func void dia_baalorun_perm_info()
 	AI_Output(other,self,"DIA_BaalOrun_Perm_15_00");	//Как идет сбор урожая?
 	AI_Output(self,other,"DIA_BaalOrun_Perm_12_01");	//Мы со всем усердием трудимся день и ночь, поэтому у нас много болотника. И себе хватает и на продажу в другие лагеря.
 	AI_Output(self,other,"DIA_BaalOrun_Perm_12_02");	//Это жертва, которую наши послушники с готовностью приносят Спящему.
+};
+
+instance DIA_BAALORUN_HARLOKDEAD(C_INFO)
+{
+	npc = gur_1209_baalorun;
+	nr = 1;
+	condition = dia_baalorun_harlokdead_condition;
+	information = dia_baalorun_harlokdead_info;
+	permanent = 0;
+	important = 1;
+};
+
+
+func int dia_baalorun_harlokdead_condition()
+{
+	if(Npc_IsDead(nov_1358_harlok) && !Npc_KnowsInfo(hero,dia_harlok_sendharlok) && GHORIM_KICKHARLOK == LOG_RUNNING)
+	{
+		return 1;
+	};
+};
+
+func void dia_baalorun_harlokdead_info()
+{
+	AI_Output(self,other,"SVM_12_YouKilledPSIfolk");	//Убит один из последователей Братства. Кто-то говорит, что ты принимал в этом участие.
+	AI_Output(self,other,"SVM_12_GetThingsRight");	//Ты не сможешь уйти от ответственности!
+	b_logentry(CH1_GHORIMSRELIEF,"Я перегнул палку, Харлок погиб. Теперь у меня проблемы...");
+	Log_SetTopicStatus(CH1_GHORIMSRELIEF,LOG_FAILED);
+	GHORIM_KICKHARLOK = LOG_FAILED;
+	AI_StopProcessInfos(self);
 };
 

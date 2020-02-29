@@ -2,7 +2,7 @@
 instance SFB_1033_SCHUERFER(NPC_DEFAULT)
 {
 	name[0] = NAME_SCHUERFER;
-	npctype = NPCTYPE_MAIN;
+	npctype = NPCTYPE_AMBIENT;
 	guild = GIL_SFB;
 	level = 6;
 	flags = 0;
@@ -30,7 +30,13 @@ instance SFB_1033_SCHUERFER(NPC_DEFAULT)
 
 func void rtn_fmcstart_1033()
 {
-	ta_pickore(1,0,13,0,"FMC_ORE_05");
-	ta_pickore(13,0,1,0,"FMC_ORE_05");
+	ta_pickore(6,0,23,0,"FMC_ORE_05");
+	ta_sleep(23,0,6,0,"FMC_HUT16_IN");
+};
+
+func void rtn_dead_1033()
+{
+	ta_stay(6,0,23,0,"FMC_HUT16_IN");
+	ta_stay(23,0,6,0,"FMC_HUT16_IN");
 };
 

@@ -3,6 +3,8 @@ func void zs_babe_flee()
 {
 	b_fullstop(self);
 	printdebugnpc(PD_ZS_FRAME,"ZS_Babe_Flee");
+	Npc_PercEnable(self,PERC_MOVEMOB,b_movemob);
+	Npc_PercEnable(self,PERC_ASSESSMAGIC,b_assessmagic);
 	AI_SetWalkMode(self,NPC_RUN);
 	b_say(self,NULL,"$HELP");
 	AI_UnequipArmor(self);
@@ -20,7 +22,7 @@ func void zs_babe_flee()
 	};
 };
 
-func int zs_babe_flee_loop()
+func void zs_babe_flee_loop()
 {
 	var int state_time;
 	var string state_time_str;

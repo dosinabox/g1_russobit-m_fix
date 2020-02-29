@@ -7,6 +7,15 @@ func void zs_xardasdemon()
 	npc_setpermattitude(self,ATT_FRIENDLY);
 	AI_GotoWP(self,self.wp);
 	AI_AlignToWP(self);
+	if (Npc_KnowsInfo(hero,info_xardasdemon_intro))
+    {
+        Mdl_SetVisualBody(self,"Dem_Body",DEFAULT,DEFAULT,"",DEFAULT,DEFAULT,-1);
+		self.name = "Пламенный демон";
+    }
+    else
+    {
+        Mdl_SetVisualBody(self,"",DEFAULT,DEFAULT,"",DEFAULT,DEFAULT,-1);
+    };
 };
 
 func void zs_xardasdemon_loop()

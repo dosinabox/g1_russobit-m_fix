@@ -6,7 +6,7 @@ instance SLD_708_SOELDNER(NPC_DEFAULT)
 	guild = GIL_SLD;
 	level = 8;
 	voice = 11;
-	id = 856;
+	id = 708;
 	attribute[ATR_STRENGTH] = 30;
 	attribute[ATR_DEXTERITY] = 20;
 	attribute[ATR_MANA_MAX] = 0;
@@ -43,5 +43,11 @@ func void rtn_start_708()
 {
 	ta_sleep(0,0,8,0,"NC_HUT07_IN");
 	ta_sitaround(8,0,0,0,"NC_PLACE03");
+};
+
+func void rtn_fmtaken_708()
+{
+	ta_guardpassage(0,0,8,0,"NC_PATH44");
+	ta_guardpassage(8,0,0,0,"NC_PATH44");
 };
 

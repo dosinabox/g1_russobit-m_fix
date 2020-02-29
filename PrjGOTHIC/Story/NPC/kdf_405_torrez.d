@@ -7,10 +7,11 @@ instance KDF_405_TORREZ(NPC_DEFAULT)
 	level = 26;
 	voice = 4;
 	id = 405;
-	attribute[ATR_STRENGTH] = 40;
-	attribute[ATR_DEXTERITY] = 40;
-	attribute[ATR_MANA_MAX] = 85;
-	attribute[ATR_MANA] = 85;
+	flags = NPC_FLAG_IMMORTAL;
+	attribute[ATR_STRENGTH] = 1;
+	attribute[ATR_DEXTERITY] = 1;
+	attribute[ATR_MANA_MAX] = 100;
+	attribute[ATR_MANA] = 100;
 	attribute[ATR_HITPOINTS_MAX] = 352;
 	attribute[ATR_HITPOINTS] = 352;
 	Mdl_SetVisual(self,"HUMANS.MDS");
@@ -20,9 +21,9 @@ instance KDF_405_TORREZ(NPC_DEFAULT)
 	Mdl_SetModelFatness(self,0);
 	aivar[AIV_IMPORTANT] = TRUE;
 	fight_tactic = FAI_HUMAN_MAGE;
-	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,6);
+	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,4);
 	EquipItem(self,itarrunefireball);
-	CreateInvItem(self,itmi_stuff_oldcoin_02);
+	CreateInvItem(self,alchemybook);
 	b_give_torrezchapter1runes();
 	daily_routine = rtn_start_405;
 };
@@ -30,7 +31,7 @@ instance KDF_405_TORREZ(NPC_DEFAULT)
 
 func void rtn_start_405()
 {
-	ta_sitcampfire(22,5,6,55,"OCC_CHAPEL_MAGE_05");
+	ta_sleep(22,5,6,55,"OCC_CHAPEL_LEFT_ROOM");
 	ta_smalltalk(6,55,22,5,"OCC_CENTER_2");
 };
 
@@ -38,5 +39,11 @@ func void rtn_kdfritual_405()
 {
 	ta_position(8,0,20,0,"OCC_CHAPEL_MAGE_02");
 	ta_position(20,0,8,0,"OCC_CHAPEL_MAGE_02");
+};
+
+func void rtn_dead_405()
+{
+	ta_stay(8,0,20,0,"OCC_CELLAR_BAN_ROOM_MAG5");
+	ta_stay(20,0,8,0,"OCC_CELLAR_BAN_ROOM_MAG5");
 };
 

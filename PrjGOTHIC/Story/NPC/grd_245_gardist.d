@@ -45,3 +45,9 @@ func void rtn_ot_245()
 	ta_guard(20,0,7,0,"OCC_WELL_FIGHT01");
 };
 
+func void rtn_qc_245()
+{
+	ta_guardpassage(7,0,20,0,"LOCATION_11_13");
+	ta_guardpassage(20,0,7,0,"LOCATION_11_13");
+};
+

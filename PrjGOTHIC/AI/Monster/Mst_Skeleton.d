@@ -87,7 +87,7 @@ instance SKELETONSH(MST_DEFAULT_SKELETON)
 
 instance SKELETONSCOUT(MST_DEFAULT_SKELETON)
 {
-	name[0] = "Скелет-копейщик";
+	name[0] = "Скелет-разведчик";
 	aivar[AIV_IMPORTANT] = id_skeletonscout;
 	set_skeletonscout_visuals();
 	Npc_SetToFightMode(self,itmw_1h_scythe_01);
@@ -144,7 +144,9 @@ instance SKELETONMAGE_FOGTOWER(MST_DEFAULT_SKELETON)
 
 instance SUMMONEDBYPC_SKELETON(MST_DEFAULT_SKELETON)
 {
+	name[0] = "Призванный скелет";
 	aivar[AIV_IMPORTANT] = ID_SKELETON;
+	level = 0;
 	set_skeleton_visuals();
 	Npc_SetToFightMode(self,itmw_1h_sword_old_01);
 	attribute[ATR_STRENGTH] = attribute[ATR_STRENGTH] + 10;
@@ -166,8 +168,8 @@ instance SUMMONEDBYNPC_SKELETON(MST_DEFAULT_SKELETON)
 
 instance SUMMONEDBYPC_SKELETONWARRIOR(MST_DEFAULT_SKELETON)
 {
-	name[0] = "Скелет-боец";
-	level = 30;
+	name[0] = "Призванный скелет-боец";
+	level = 0;
 	attribute[ATR_STRENGTH] = 120;
 	senses = SENSE_HEAR | SENSE_SEE;
 	aivar[AIV_IMPORTANT] = ID_SKELETONWARRIOR;

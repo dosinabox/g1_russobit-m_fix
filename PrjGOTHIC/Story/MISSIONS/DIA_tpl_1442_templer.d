@@ -23,7 +23,7 @@ func int info_tpl_1442_firstwarn_condition()
 func void info_tpl_1442_firstwarn_info()
 {
 	printglobals(PD_MISSION);
-	AI_Output(self,hero,"Info_TPL_1442_FirstWarn_13_01");	//Стой! Только с разрешения одного из Гуру, ты можешь зайти в храм.
+	AI_Output(self,hero,"Info_TPL_1442_FirstWarn_13_01");	//Стой! Только с разрешения одного из Гуру ты можешь зайти в храм.
 	hero.aivar[AIV_LASTDISTTOWP] = Npc_GetDistToWP(hero,TPL_1442_CHECKPOINT);
 	hero.aivar[AIV_GUARDPASSAGE_STATUS] = AIV_GPS_FIRSTWARN;
 	if(Npc_KnowsInfo(hero,pc_psionic_send))
@@ -41,7 +41,7 @@ func void info_tpl_1442_firstwarn_info()
 func void info_tpl_1442_firstwarn_condition_yberion()
 {
 	AI_Output(hero,self,"Info_TPL_1442_FirstWarn_Condition_YBERION_15_01");	//Сам Юберион дал мне свое высочайшее разрешение.
-	AI_Output(self,hero,"Info_TPL_1442_FirstWarn_Condition_YBERION_13_02");	//Ты знаешь, что мы делаем с теми кто лжет? Хорошенько подумай, если тебе дорог твой язык.
+	AI_Output(self,hero,"Info_TPL_1442_FirstWarn_Condition_YBERION_13_02");	//Ты знаешь, что мы делаем с теми, кто лжет? Хорошенько подумай, если тебе дорог твой язык.
 };
 
 func void info_tpl_1442_firstwarn_condition_lester()
@@ -76,7 +76,7 @@ func int info_tpl_1442_lastwarn_condition()
 	};
 };
 
-func int info_tpl_1442_lastwarn_info()
+func void info_tpl_1442_lastwarn_info()
 {
 	AI_Output(self,hero,"Info_TPL_1442_LastWarn_13_01");	//Еще шаг, и пеняй на себя!
 	hero.aivar[AIV_LASTDISTTOWP] = Npc_GetDistToWP(hero,TPL_1442_CHECKPOINT);
@@ -104,7 +104,7 @@ func int info_tpl_1442_attack_condition()
 	};
 };
 
-func int info_tpl_1442_attack_info()
+func void info_tpl_1442_attack_info()
 {
 	hero.aivar[AIV_LASTDISTTOWP] = 0;
 	hero.aivar[AIV_GUARDPASSAGE_STATUS] = AIV_GPS_PUNISH;

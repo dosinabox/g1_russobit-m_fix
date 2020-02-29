@@ -11,10 +11,7 @@ func int spell_logic_berzerk(var int manainvested)
 	{
 		Npc_SendSinglePerc(self,other,PERC_ASSESSMAGIC);
 		return SPL_SENDCAST;
-	}
-	else
-	{
-		return SPL_RECEIVEINVEST;
 	};
+	return SPL_RECEIVEINVEST;
 };
 

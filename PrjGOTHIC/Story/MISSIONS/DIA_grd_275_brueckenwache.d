@@ -12,7 +12,7 @@ instance INFO_GRD_275_PREEXIT(C_INFO)
 
 func int info_grd_275_preexit_condition()
 {
-	if(KAPITEL <= 1)
+	if(KAPITEL == 1)
 	{
 		return 1;
 	};
@@ -20,7 +20,7 @@ func int info_grd_275_preexit_condition()
 
 func void info_grd_275_preexit_info()
 {
-	AI_Output(self,other,"Info_GRD_275_PreExit_06_01");	//Наведайся в Старый лагерь, думаю, они найдут для тебя хорошую кирку. 
+	AI_Output(self,other,"Info_GRD_275_PreExit_06_01");	//Не забудь заглянуть в Старый лагерь, у них уже есть для тебя кирка, ха-ха-ха!
 	AI_StopProcessInfos(self);
 };
 
@@ -69,8 +69,8 @@ func int info_grd_275_wasmachtihrhier_condition()
 func void info_grd_275_wasmachtihrhier_info()
 {
 	AI_Output(other,self,"Info_GRD_275_WasMachtIhrHier_15_00");	//Что вы здесь делаете?
-	AI_Output(self,other,"Info_GRD_275_WasMachtIhrHier_06_01");	//А ты как думаешь? Мост охраняем.
-	AI_Output(self,other,"Info_GRD_275_WasMachtIhrHier_06_02");	//Следим, чтобы ни один мерзкий ползун не перебрался через реку.
+	AI_Output(self,other,"Info_GRD_275_WasMachtIhrHier_06_01");	//А как по-твоему? Охраняем мост, конечно.
+	AI_Output(self,other,"Info_GRD_275_WasMachtIhrHier_06_02");	//Мы следим за тем, чтобы ни одна хищная тварь не перебралась на другую сторону реки.
 };
 
 
@@ -93,7 +93,7 @@ func int info_grd_275_tips_condition()
 func void info_grd_275_tips_info()
 {
 	AI_Output(other,self,"Info_GRD_275_Tips_15_00");	//У тебя есть для меня какой-нибудь совет?
-	AI_Output(self,other,"Info_GRD_275_Tips_06_01");	//Есть. Не броди сам по лесу...
-	AI_Output(self,other,"Info_GRD_275_Tips_06_02");	//...ну, если, конечно, не намерен перебить всех тварей живущих там.
+	AI_Output(self,other,"Info_GRD_275_Tips_06_01");	//Ага. Никогда не ходи в лес в одиночку...
+	AI_Output(self,other,"Info_GRD_275_Tips_06_02");	//...если, конечно, не собираешься перебить всех тварей, которые там обитают.
 };
 

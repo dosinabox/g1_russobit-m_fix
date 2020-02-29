@@ -56,6 +56,11 @@ func void set_zombie4_visuals()
 	Mdl_SetVisualBody(self,"Zom_Body",0,1,"Zom_Head",1,3,-1);
 };
 
+func void set_zombie5_visuals()
+{
+	Mdl_SetVisual(self,"Zombie.mds");
+	Mdl_SetVisualBody(self,"hum_body_Naked0",4,2,"Zom_Head",1,3,zom_armor);
+};
 
 instance ZOMBIE(MST_DEFAULT_ZOMBIE)
 {
@@ -83,10 +88,10 @@ instance ZOMBIE4(MST_DEFAULT_ZOMBIE)
 
 instance ZOMBIETHEKEEPER(MST_DEFAULT_ZOMBIE)
 {
-	name[0] = "Стражник";
+	name[0] = "Страж";
 	level = 150;
 	id = MID_THEKEEPER;
-	set_zombie4_visuals();
+	set_zombie5_visuals();
 	Npc_SetToFistMode(self);
 	protection[PROT_BLUNT] = 150;
 	protection[PROT_EDGE] = 150;

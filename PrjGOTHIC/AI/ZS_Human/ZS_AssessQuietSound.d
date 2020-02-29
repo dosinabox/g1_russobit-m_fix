@@ -3,7 +3,7 @@ func int zs_assessquietsound()
 {
 	printdebugnpc(PD_ZS_FRAME,"ZS_AssessQuietSound");
 	c_zsinit();
-	if(self.guild == GIL_MEATBUG)
+	if(hero.guild == GIL_MEATBUG)
 	{
 		AI_ContinueRoutine(self);
 		return 0;
@@ -24,6 +24,7 @@ func int zs_assessquietsound()
 	Npc_PercEnable(self,PERC_ASSESSENTERROOM,b_assessenterroom);
 	Npc_PercEnable(self,PERC_ASSESSUSEMOB,b_assessusemob);
 	AI_TurnToNPC(self,other);
+	return 1;
 };
 
 func int zs_assessquietsound_loop()
@@ -56,12 +57,12 @@ func int zs_assessquietsound_loop()
 		else
 		{
 			AI_Wait(self,1);
-			return 0;
 		};
 	};
+	return 0;
 };
 
-func int zs_assessquietsound_end()
+func void zs_assessquietsound_end()
 {
 	printdebugnpc(PD_ZS_FRAME,"ZS_AssessQuietSound_End");
 };

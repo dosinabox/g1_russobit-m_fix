@@ -38,8 +38,8 @@ func int zs_flee_loop()
 		Npc_GetTarget(self);
 		AI_Flee(self);
 		AI_Wait(self,1);
-		return LOOP_CONTINUE;
 	};
+	return LOOP_CONTINUE;
 };
 
 func void zs_flee_end()

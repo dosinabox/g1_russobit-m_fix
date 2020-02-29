@@ -42,7 +42,8 @@ func int org_860_renyu_getlost_condition()
 
 func void org_860_renyu_getlost_info()
 {
-	AI_Output(self,other,"Org_860_Renyu_GetLost_Info_06_00");	//Убирайся!
+	//AI_Output(self,other,"Org_860_Renyu_GetLost_Info_06_00");	//Убирайся!
+	AI_Output(self,other,"SVM_14_WhatDidYouInThere");	//Тебе здесь не место! Ясно?
 	AI_StopProcessInfos(self);
 };
 

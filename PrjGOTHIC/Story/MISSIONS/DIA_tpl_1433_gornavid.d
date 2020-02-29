@@ -44,12 +44,12 @@ func int tpl_1433_gornavid_health_condition()
 
 func void tpl_1433_gornavid_health_info()
 {
-	AI_Output(other,self,"Tpl_1433_GorNaVid_HEALTH_Info_15_01");	//Ты можешь мне помочь?  
+	AI_Output(other,self,"Tpl_1433_GorNaVid_HEALTH_Info_15_01");	//Ты можешь мне помочь?
 	AI_Output(other,self,"Tpl_1433_GorNaVid_HEALTH_Info_15_02");	//Мне нужно добыть слюну ползунов для Кор Галома. Я знаю, где находится логово этих тварей.
 	AI_Output(other,self,"Tpl_1433_GorNaVid_HEALTH_Info_15_03");	//Сможешь ли ты прикрыть меня, когда я открою ворота?
 	AI_Output(self,other,"Tpl_1433_GorNaVid_HEALTH_Info_13_04");	//Охота на ползунов без крови не обходится. Если бы у меня был целебный эликсир, и я не задумываясь бы помог тебе.
+	b_logentry(CH2_MCEGGS,"Я должен отдать Гор На Виду лечебное зелье, прежде чем он сможет помочь Асгхану защищать ворота от ползунов.");
 };
-
 
 instance TPL_1433_GORNAVID_IAN(C_INFO)
 {
@@ -84,7 +84,7 @@ instance TPL_1433_GORNAVID_HEALTH_SUC(C_INFO)
 	information = tpl_1433_gornavid_health_suc_info;
 	important = 0;
 	permanent = 0;
-	description = "(Отдать лечебное зелье)";
+	description = "(отдать лечебное зелье)";
 };
 
 
@@ -119,8 +119,8 @@ func void tpl_1433_gornavid_health_suc_info()
 	};
 	Npc_ExchangeRoutine(self,"GATE");
 	npc_setpermattitude(self,ATT_FRIENDLY);
+	b_logentry(CH2_MCEGGS,"Я отдал Гор На Виду лечебное зелье и теперь он поможет мне.");
 	b_givexp(XP_HIREGORNAVID);
-	b_logentry(CH2_MCEGGS,"Я должен отдать Гор На Виду лечебное зелье, прежде чем он сможет помочь Асгхану защищать ворота от ползунов.");
 	AI_StopProcessInfos(self);
 };
 

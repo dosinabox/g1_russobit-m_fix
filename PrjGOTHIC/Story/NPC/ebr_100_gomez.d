@@ -20,6 +20,7 @@ instance EBR_100_GOMEZ(NPC_DEFAULT)
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	aivar[AIV_IMPORTANT] = TRUE;
+	aivar[43] = TRUE;
 	Npc_SetTalentSkill(self,NPC_TALENT_2H,2);
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,2);
 	Npc_SetTalentSkill(self,NPC_TALENT_BOW,2);

@@ -26,13 +26,19 @@ instance NOV_1358_HARLOK(NPC_DEFAULT)
 
 func void rtn_prestart_1358()
 {
-	ta_smoke(8,0,20,0,"PSI_31_HUT_EX");
-	ta_smoke(20,0,8,0,"PSI_31_HUT_EX");
+	ta_smoke(6,0,23,30,"PSI_31_HUT_EX");
+	ta_sleep(23,30,6,0,"PSI_31_HUT_IN");
 };
 
 func void rtn_start_1358()
 {
 	ta_herbalchemy(6,55,23,55,"PSI_HERB_PLACE_1");
 	ta_herbalchemy(23,55,6,55,"PSI_HERB_PLACE_1");
+};
+
+func void rtn_ch2_1358()
+{
+	ta_herbalchemy(6,0,23,30,"PSI_HERB_PLACE_1");
+	ta_sleep(23,30,6,0,"PSI_31_HUT_IN");
 };
 

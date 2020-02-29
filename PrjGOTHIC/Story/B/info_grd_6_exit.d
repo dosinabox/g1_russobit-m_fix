@@ -32,7 +32,7 @@ instance INFO_GRD_6_EINERVONEUCHWERDEN(C_INFO)
 
 func int info_grd_6_einervoneuchwerden_condition()
 {
-	if((Npc_GetTrueGuild(other) != GIL_GRD) && (Npc_GetTrueGuild(other) != GIL_KDF) && !c_npcbelongstonewcamp(other) && !c_npcbelongstopsicamp(other))
+	if((Npc_GetTrueGuild(other) != GIL_GRD) && (Npc_GetTrueGuild(other) != GIL_STT) && (Npc_GetTrueGuild(other) != GIL_KDF) && !c_npcbelongstonewcamp(other) && !c_npcbelongstopsicamp(other))
 	{
 		return TRUE;
 	};
@@ -135,7 +135,7 @@ func int info_grd_6_dielage_condition()
 func void info_grd_6_dielage_info()
 {
 	AI_Output(other,self,"Info_Grd_6_DieLage_15_00");	//Как дела?
-	AI_Output(self,other,"Info_Grd_6_DieLage_06_01");	//Ищешь неприятностей? 
+	AI_Output(self,other,"Info_Grd_6_DieLage_06_01");	//Ищешь неприятностей?
 };
 
 func void b_assignambientinfos_grd_6(var C_NPC slf)

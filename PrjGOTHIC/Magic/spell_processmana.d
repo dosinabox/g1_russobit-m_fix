@@ -2,8 +2,8 @@
 func int spell_processmana(var int manainvested)
 {
 	printdebugnpc(PD_MAGIC,"Spell_ProcessMana called");
-	printdebugint(PD_MAGIC,"### MAGIC ###-> invested Mana:",manainvested);
-	printdebugint(PD_MAGIC,"### MAGIC ###-> Spell-Level:",Npc_GetActiveSpellLevel(self));
+	printdebugint(PD_MAGIC,"### MAGIC ###-> invested Mana: ",manainvested);
+	printdebugint(PD_MAGIC,"### MAGIC ###-> Spell-Level: ",Npc_GetActiveSpellLevel(self));
 	if(Npc_GetActiveSpell(self) == SPL_LIGHT)
 	{
 		return spell_logic_light(manainvested);
@@ -184,5 +184,6 @@ func int spell_processmana(var int manainvested)
 	{
 		return spell_logic_shrink(manainvested);
 	};
+	return 0;
 };
 

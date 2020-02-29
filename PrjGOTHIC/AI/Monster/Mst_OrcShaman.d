@@ -21,6 +21,7 @@ prototype MST_DEFAULT_ORCSHAMAN(C_NPC)
 	fight_tactic = FAI_HUMAN_MAGE;
 	senses = SENSE_HEAR | SENSE_SEE | SENSE_SMELL;
 	senses_range = 3000;
+	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,8);
 	aivar[AIV_FINDABLE] = PASSIVE;
 	aivar[AIV_PCISSTRONGER] = 1200;
 	aivar[AIV_BEENATTACKED] = 1000;

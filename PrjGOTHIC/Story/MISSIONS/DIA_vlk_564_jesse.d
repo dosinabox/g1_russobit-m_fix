@@ -91,7 +91,7 @@ instance DIA_JESSE_MISSION(C_INFO)
 
 func int dia_jesse_mission_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_jesse_mission))
+	if(Npc_KnowsInfo(hero,dia_jesse_warn))
 	{
 		return 1;
 	};
@@ -110,7 +110,7 @@ func void dia_jesse_mission_info()
 func void dia_jesse_mission_forgetit()
 {
 	AI_Output(other,self,"DIA_Jesse_Mission_ForgetIt_15_00");	//Я тебе ничего не должен!
-	AI_Output(self,other,"DIA_Jesse_Mission_ForgetIt_03_01");	// Тогда забудь об этом и убирайся!
+	AI_Output(self,other,"DIA_Jesse_Mission_ForgetIt_03_01");	//Тогда забудь об этом и убирайся!
 	npc_setpermattitude(self,ATT_ANGRY);
 	Info_ClearChoices(dia_jesse_mission);
 	AI_StopProcessInfos(self);
@@ -122,6 +122,7 @@ func void dia_jesse_mission_what()
 	AI_Output(self,other,"DIA_Jesse_Mission_What_03_01");	//У меня совсем не осталось руды. Бладвин забрал у меня все до последнего кусочка.
 	AI_Output(self,other,"DIA_Jesse_Mission_What_03_02");	//И ему все равно не хватило. Я должен ему 10 кусков. Ты можешь отдать ему руду и сказать, что она от меня.
 	Npc_SetTrueGuild(self,GIL_NONE);
+	Info_ClearChoices(dia_jesse_mission);
 	Info_AddChoice(dia_jesse_mission,"Платить за тебя? Я не стану этого делать!",dia_jesse_mission_no);
 	Info_AddChoice(dia_jesse_mission,"Я посмотрю, что тут можно сделать...",dia_jesse_mission_yes);
 };
@@ -167,7 +168,6 @@ func void dia_jesse_missuccess_info()
 	AI_Output(other,self,"DIA_Jesse_MisSuccess_15_00");	//Я отдал руду Бладвину!
 	AI_Output(self,other,"DIA_Jesse_MisSuccess_03_01");	//Да? Отлично! Теперь мы в расчете.
 	Npc_SetTrueGuild(self,GIL_VLK);
-	Info_ClearChoices(dia_jesse_missuccess);
 	Info_AddChoice(dia_jesse_missuccess,"Что? И ради этого я заплатил десять кусков?",dia_jesse_missuccess_waaas);
 	Info_AddChoice(dia_jesse_missuccess,"Да. Ты мне - я тебе. Как всегда.",dia_jesse_missuccess_ok);
 };
@@ -176,10 +176,16 @@ func void dia_jesse_missuccess_waaas()
 {
 	AI_Output(other,self,"DIA_Jesse_MisSuccess_Waaas_15_00");	//Что? И ради этого я заплатил десять кусков?
 	AI_Output(self,other,"DIA_Jesse_MisSuccess_Waaas_03_01");	//Кажется, да.
+	b_givexp(50);
+	Info_ClearChoices(dia_jesse_missuccess);
+	AI_StopProcessInfos(self);
 };
 
 func void dia_jesse_missuccess_ok()
 {
 	AI_Output(other,self,"DIA_Jesse_MisSuccess_Ok_15_00");	//Да. Ты мне - я тебе. Как всегда.
+	b_givexp(100);
+	Info_ClearChoices(dia_jesse_missuccess);
+	AI_StopProcessInfos(self);
 };
 

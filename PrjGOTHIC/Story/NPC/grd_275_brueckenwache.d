@@ -35,3 +35,9 @@ func void rtn_start_275()
 	ta_guard(21,0,6,0,"OW_PATH_1_1");
 };
 
+func void rtn_fmtaken_275()
+{
+	ta_guard(6,0,21,0,"OW_PATH_1_16");
+	ta_guard(21,0,6,0,"OW_PATH_1_16");
+};
+

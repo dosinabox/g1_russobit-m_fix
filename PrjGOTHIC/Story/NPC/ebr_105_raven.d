@@ -26,6 +26,7 @@ instance EBR_105_RAVEN(NPC_DEFAULT)
 	EquipItem(self,rabenrecht);
 	CreateInvItem(self,itfo_potion_health_03);
 	daily_routine = rtn_prestart_105;
+	aivar[AIV_ITEMSCHWEIN] = TRUE;
 };
 
 
@@ -52,5 +53,11 @@ func void rtn_ot_105()
 {
 	ta_guard(7,0,20,0,"OCC_CENTER_1");
 	ta_guard(20,0,7,0,"OCC_CENTER_1");
+};
+
+func void rtn_flee_105()
+{
+	ta_stay(0,0,12,0,"WP_INTRO01");
+	ta_stay(12,0,24,0,"WP_INTRO01");
 };
 

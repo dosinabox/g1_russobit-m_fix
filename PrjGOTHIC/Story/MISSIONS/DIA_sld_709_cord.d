@@ -44,7 +44,14 @@ func int sld_709_cord_trainoffer_condition()
 func void sld_709_cord_trainoffer_info()
 {
 	AI_Output(other,self,"SLD_709_Cord_TRAINOFFER_Info_15_01");	//Я хочу научиться владеть одноручным мечом.
-	AI_Output(self,other,"SLD_709_Cord_TRAINOFFER_Info_14_02");	//Хорошо. Но не бесплатно. За это я хочу тридцать кусков руды.
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_1H) == 0)
+	{
+		AI_Output(self,other,"SLD_709_Cord_TRAINOFFER_Info_14_02");	//Хорошо. Но не бесплатно. За это я хочу тридцать кусков руды.
+	}
+	else
+	{
+		AI_Output(self,other,"SVM_14_WiseMove");	//Вот это правильно!
+	};
 	Log_CreateTopic(GE_TEACHERNC,LOG_NOTE);
 	b_logentry(GE_TEACHERNC,"Наемник Корд может научить меня обращаться с одноручным мечом. Он постоянно тренируется на площадке возле озера.");
 };
@@ -77,12 +84,12 @@ func void sld_709_cord_train_info()
 		if(b_giveskill(hero,NPC_TALENT_1H,1,LPCOST_TALENT_1H_1))
 		{
 			AI_Output(self,other,"SLD_709_Cord_TRAIN_14_01");	//Правильное решение! Но прежде, чем освоить технику боя, тебе нужно научиться правильно держать меч.
-			AI_Output(self,other,"SLD_709_Cord_TRAIN_14_02");	//Почти все новички привыкли держать оружие двумя руками. Это неправильно. 
+			AI_Output(self,other,"SLD_709_Cord_TRAIN_14_02");	//Почти все новички привыкли держать оружие двумя руками. Это неправильно.
 			AI_Output(self,other,"SLD_709_Cord_TRAIN_14_03");	//Всегда держи меч одной рукой, острием вверх.
 			AI_Output(self,other,"SLD_709_Cord_TRAIN_14_04");	//Он должен стать продолжением твоей руки, слиться с ее движением. Это позволит тебе атаковать намного быстрее.
 			AI_Output(self,other,"SLD_709_Cord_TRAIN_14_05");	//Если усвоишь все, что я тебе сказал, твои удары станут более изящными и быстрыми.
 			b_practicecombat("NC_WATERFALL_TOP01");
-			AI_Output(self,other,"SLD_709_Cord_TRAIN_14_06");	//И еще: есть ряд более мощных ударов, но у новичка не так уж много шансов повторить их. 
+			AI_Output(self,other,"SLD_709_Cord_TRAIN_14_06");	//И еще: есть ряд более мощных ударов, но у новичка не так уж много шансов повторить их.
 			AI_Output(self,other,"SLD_709_Cord_TRAIN_14_07");	//Но как говорится: тяжело в учении, зато легко в бою. Тренируйся, парень!
 			b_giveinvitems(hero,self,itminugget,30);
 			sld_709_cord_train.permanent = 0;
@@ -108,7 +115,7 @@ instance SLD_709_CORD_TRAINAGAIN(C_INFO)
 
 func int sld_709_cord_trainagain_condition()
 {
-	if(Npc_KnowsInfo(hero,sld_709_cord_trainoffer) && (Npc_GetTalentSkill(hero,NPC_TALENT_1H) < 2))
+	if(Npc_KnowsInfo(hero,sld_709_cord_trainoffer) && (Npc_GetTalentSkill(hero,NPC_TALENT_1H) == 1))
 	{
 		return TRUE;
 	};

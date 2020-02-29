@@ -1,26 +1,4 @@
 
-instance DIA_GRD_218_EXIT(C_INFO)
-{
-	npc = grd_218_gardist;
-	nr = 999;
-	condition = dia_grd_218_exit_condition;
-	information = dia_grd_218_exit_info;
-	permanent = 1;
-	description = DIALOG_ENDE;
-};
-
-
-func int dia_grd_218_exit_condition()
-{
-	return 1;
-};
-
-func void dia_grd_218_exit_info()
-{
-	AI_StopProcessInfos(self);
-};
-
-
 instance DIA_GRD_218_FIRSTIN(C_INFO)
 {
 	npc = grd_218_gardist;
@@ -99,13 +77,13 @@ instance INFO_GRD_218_ATTACK(C_INFO)
 
 func int info_grd_218_attack_condition()
 {
-	if((hero.aivar[AIV_GUARDPASSAGE_STATUS] == AIV_GPS_FIRSTWARN) && (self.aivar[AIV_PASSGATE] == FALSE) && (Npc_GetAttitude(self,hero) != ATT_FRIENDLY) && (Npc_GetDistToWP(hero,GRD_218_CHECKPOINT) < (hero.aivar[AIV_LASTDISTTOWP] - 100)) && Hlp_StrCmp(Npc_GetNearestWP(self),self.wp))
+	if((hero.aivar[AIV_GUARDPASSAGE_STATUS] == AIV_GPS_FIRSTWARN) && (self.aivar[AIV_PASSGATE] == FALSE) && (Npc_GetAttitude(self,hero) != ATT_FRIENDLY) && (Npc_GetDistToWP(hero,GRD_218_CHECKPOINT) < (hero.aivar[AIV_LASTDISTTOWP] - 200)) && Hlp_StrCmp(Npc_GetNearestWP(self),self.wp))
 	{
 		return TRUE;
 	};
 };
 
-func int info_grd_218_attack_info()
+func void info_grd_218_attack_info()
 {
 	hero.aivar[AIV_LASTDISTTOWP] = 0;
 	hero.aivar[AIV_GUARDPASSAGE_STATUS] = AIV_GPS_PUNISH;

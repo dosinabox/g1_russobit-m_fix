@@ -15,7 +15,7 @@ func int spell_logic_shrink(var int manainvested)
 	else
 	{
 		printdebugnpc(PD_MAGIC,"...Ziel ist KEIN Monster!");
-		return SPL_SENDSTOP;
 	};
+	return SPL_SENDSTOP;
 };
 

@@ -37,3 +37,9 @@ func void rtn_start_1310()
 	ta_sleep(23,55,6,55,"PSI_6_HUT_IN_BED3");
 };
 
+func void rtn_ch2_1310()
+{
+	ta_smoke(8,0,22,0,"PSI_HANGAROUND");
+	ta_sleep(22,0,8,0,"PSI_6_HUT_IN_BED3");
+};
+

@@ -42,3 +42,9 @@ func void rtn_start_834()
 	ta_guardwheelopen(8,0,23,30,"OW_PATH_067_WHEEL");
 };
 
+func void rtn_fmtaken_834()
+{
+	ta_guardwheelclosed(23,30,8,0,"OW_PATH_067_WHEEL");
+	ta_guardwheelclosed(8,0,23,30,"OW_PATH_067_WHEEL");
+};
+

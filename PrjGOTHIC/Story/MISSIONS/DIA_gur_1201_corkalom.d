@@ -38,7 +38,7 @@ instance GUR_1201_CORKALOM_WANNAJOIN(C_INFO)
 
 func int gur_1201_corkalom_wannajoin_condition()
 {
-	if(Npc_GetTrueGuild(hero) == GIL_NONE)
+	if((Npc_GetTrueGuild(hero) == GIL_NONE) && (KAPITEL < 2))
 	{
 		return 1;
 	};
@@ -97,7 +97,7 @@ instance GUR_1201_CORKALOM_EXPERIMENTE(C_INFO)
 
 func int gur_1201_corkalom_experimente_condition()
 {
-	if(KAPITEL <= 2)
+	if(KAPITEL < 2)
 	{
 		return 1;
 	};
@@ -147,10 +147,13 @@ func void gur_1201_corkalom_bringweed_info()
 		Log_SetTopicStatus(CH1_DELIVERWEED,LOG_SUCCESS);
 		b_givexp(XP_DELIVEREDWEEDHARVEST);
 		BAALORUN_FETCHWEED = LOG_SUCCESS;
+		//BALOR_CAN_GIVE = TRUE;
 		AI_StopProcessInfos(self);
 	};
 };
 
+
+var int corkalom_potions;
 
 instance GUR_1201_CORKALOM_CRAWLERZANGEN(C_INFO)
 {
@@ -174,17 +177,19 @@ func int gur_1201_corkalom_crawlerzangen_condition()
 func void gur_1201_corkalom_crawlerzangen_info()
 {
 	AI_Output(other,self,"GUR_1201_CorKalom_Crawlerzangen_15_00");	//Я принес тебе челюсти ползунов...
-	if(Npc_HasItems(other,itat_crawler_01) > 9)
+	if(Npc_HasItems(other,itat_crawler_01) > 15)
 	{
 		AI_Output(self,other,"GUR_1201_CorKalom_Crawlerzangen_10_01");	//Очень хорошо. Вот, возьми за это некоторые из моих лучших зелий.
-		CreateInvItems(self,itfo_potion_mana_03,3);
-		b_giveinvitems(self,hero,itfo_potion_mana_03,3);
+		CORKALOM_POTIONS = Npc_HasItems(hero,itat_crawler_01) / 3;
+		CreateInvItems(self,itfo_potion_mana_03,CORKALOM_POTIONS);
+		b_giveinvitems(self,hero,itfo_potion_mana_03,CORKALOM_POTIONS);
 	}
-	else if(Npc_HasItems(other,itat_crawler_01) > 2)
+	else if(Npc_HasItems(other,itat_crawler_01) > 5)
 	{
 		AI_Output(self,other,"GUR_1201_CorKalom_Crawlerzangen_10_02");	//Хорошо. Возьми несколько моих зелий в качестве награды.
-		CreateInvItems(self,itfo_potion_mana_02,2);
-		b_giveinvitems(self,hero,itfo_potion_mana_02,2);
+		CORKALOM_POTIONS = Npc_HasItems(hero,itat_crawler_01) / 2;
+		CreateInvItems(self,itfo_potion_mana_03,CORKALOM_POTIONS);
+		b_giveinvitems(self,hero,itfo_potion_mana_03,CORKALOM_POTIONS);
 	}
 	else
 	{
@@ -256,11 +261,14 @@ func void gur_1201_corkalom_joinpsi_info()
 			AI_Output(self,other,"GUR_1201_CorKalom_JoinPSI_10_09");	//Вот, возьми эту одежду. А теперь иди и постарайся быть полезным.
 			CreateInvItem(self,nov_armor_m);
 			b_giveinvitems(self,hero,nov_armor_m,1);
-			AI_EquipBestArmor(other);
+			AI_EquipArmor(hero,nov_armor_m);
 			Npc_SetTrueGuild(hero,GIL_NOV);
 			hero.guild = GIL_NOV;
 			b_logentry(CH1_JOINPSI,"Сегодня Кор Галом зачислил меня в послушники. Он мог бы вести себя и получше, но, как бы то ни было, теперь я принят в Братство.");
+			Log_CreateTopic(GE_TRADERPSI,LOG_NOTE);
 			b_logentry(GE_TRADERPSI,"Доспехи послушников я могу получить у Идола Намиба.");
+			Log_CreateTopic(GE_TEACHERPSI,LOG_NOTE);
+			b_logentry(GE_TEACHERPSI,"Я вступил в Болотный лагерь и теперь некоторые учителя будут согласны учить меня бесплатно.");
 			Log_SetTopicStatus(CH1_JOINPSI,LOG_SUCCESS);
 			b_givexp(XP_BECOMENOVICE);
 			Log_CreateTopic(CH1_JOINOC,LOG_MISSION);
@@ -269,6 +277,40 @@ func void gur_1201_corkalom_joinpsi_info()
 			Log_CreateTopic(CH1_JOINNC,LOG_MISSION);
 			Log_SetTopicStatus(CH1_JOINNC,LOG_FAILED);
 			b_logentry(CH1_JOINNC,"Теперь меня не смогут принять в шайку воров из Нового лагеря, так как Братство стало моим новым домом.");
+			if(KIRGO_CHARGED == TRUE && KIRGO_CHARGED_END == FALSE)
+			{
+				KIRGO_CHARGED = FALSE;
+				b_exchangeroutine(grd_251_kirgo,"START");
+			};
+			if(KHARIM_CHARGED == TRUE && KHARIM_CHARGED_END == FALSE)
+			{
+				KHARIM_CHARGED = FALSE;
+				b_exchangeroutine(sld_729_kharim,"START");
+			};
+			b_exchangeroutine(tpl_1422_gorhanis,"START");
+			if(THORUS_MORDRAGKO == LOG_RUNNING)
+			{
+				THORUS_MORDRAGKO = LOG_FAILED;
+				Log_SetTopicStatus(CH1_MORDRAGKO,LOG_FAILED);
+				b_logentry(CH1_MORDRAGKO,"Пусть Торус сам разбирается со своими проблемами, они меня больше не касаются.");
+			};
+			if(DEXTER_GETKALOMSRECIPE == LOG_RUNNING)
+			{
+				DEXTER_GETKALOMSRECIPE = LOG_FAILED;
+				Log_SetTopicStatus(CH1_KALOMSRECIPE,LOG_FAILED);
+				if(!Npc_KnowsInfo(hero,gur_1201_corkalom_recipe))
+				{
+					b_logentry(CH1_KALOMSRECIPE,"Я стал одним из последователей Братства Спящего, разве я осмелюсь открывать тайны Гуру неверным из других лагерей?");
+				}
+				else if(Npc_HasItems(hero,kalomsrecipe) > 0)
+				{
+					b_logentry(CH1_KALOMSRECIPE,"Я стал одним из последователей Братства Спящего, разве я осмелюсь красть у Гуру? Пожалуй, верну рецепт Кор Галома на место!");
+				}
+				else
+				{
+					b_logentry(CH1_KALOMSRECIPE,"Я стал одним из последователей Братства Спящего, разве я осмелюсь красть у Гуру?");
+				};
+			};
 		}
 		else
 		{
@@ -280,6 +322,7 @@ func void gur_1201_corkalom_joinpsi_info()
 	else
 	{
 		b_printguildcondition(5);
+		AI_Output(self,other,"SVM_10_NoLearnYouAlreadyKnow");	//Сначала тебе нужно освоить основы, и только потом ты сможешь достичь мастерства.
 	};
 };
 
@@ -333,7 +376,7 @@ instance INFO_KALOM_DRUGMONOPOL(C_INFO)
 
 func int info_kalom_drugmonopol_condition()
 {
-	if(Npc_GetTrueGuild(other) == GIL_NOV)
+	if(KALOM_KRAUTBOTE == LOG_SUCCESS)
 	{
 		return 1;
 	};
@@ -388,12 +431,7 @@ func void info_kalom_success_info()
 	jacko = Hlp_GetNpc(org_862_jacko);
 	AI_Output(other,self,"Mis_1_Psi_Kalom_Success_15_00");	//По поводу торговли болотником в Новом лагере...
 	AI_Output(self,other,"Mis_1_Psi_Kalom_Success_10_01");	//Да?
-	if(STOOGES_FLED != TRUE)
-	{
-		AI_Output(other,self,"Mis_1_Psi_Kalom_Success_15_02");	//Я не смог никого найти.
-		AI_Output(self,other,"Mis_1_Psi_Kalom_Success_10_03");	//Да, так я думал. Разве тебе можно было доверить это дело?!
-	}
-	else if((STOOGES_FLED == TRUE) || (Npc_IsDead(jacko) && Npc_IsDead(renyu) && Npc_IsDead(killian)))
+	if((STOOGES_FLED == TRUE) || (Npc_IsDead(jacko) && Npc_IsDead(renyu) && Npc_IsDead(killian)))
 	{
 		AI_Output(other,self,"Mis_1_Psi_Kalom_Success_15_04");	//Я справился с твоим заданием.
 		AI_Output(self,other,"Mis_1_Psi_Kalom_Success_10_05");	//Я удивлен. Я недооценивал тебя. Может быть, ты действительно будешь нам полезен.
@@ -401,6 +439,11 @@ func void info_kalom_success_info()
 		b_logentry(CH1_DRUGMONOPOL,"Я рассказал Кор Галому все, что смог узнать о конкурентах. Он был как обычно очень 'любезен'.");
 		Log_SetTopicStatus(CH1_DRUGMONOPOL,LOG_SUCCESS);
 		b_givexp(XP_DRUGMONOPOL);
+	}
+	else
+	{
+		AI_Output(other,self,"Mis_1_Psi_Kalom_Success_15_02");	//Я не смог никого найти.
+		AI_Output(self,other,"Mis_1_Psi_Kalom_Success_10_03");	//Да, так я думал. Разве тебе можно было доверить это дело?!
 	};
 };
 
@@ -418,7 +461,7 @@ instance INFO_KALOM_KRAUTBOTEBACK(C_INFO)
 
 func int info_kalom_krautboteback_condition()
 {
-	if(KALOM_DELIVEREDWEED)
+	if((KALOM_DELIVEREDWEED == TRUE) && (KALOM_KRAUTBOTE == LOG_RUNNING))
 	{
 		return TRUE;
 	};
@@ -430,12 +473,11 @@ func void info_kalom_krautboteback_info()
 	if(Npc_HasItems(hero,itminugget) >= 500)
 	{
 		AI_Output(self,other,"Mis_1_Psi_Kalom_KrautboteBACK_10_01");	//Хорошо. Иди, найди себе какое-нибудь дело.
-		KALOM_DRUGMONOPOL = LOG_SUCCESS;
+		KALOM_KRAUTBOTE = LOG_SUCCESS;
 		b_logentry(CH1_KRAUTBOTE,"Кор Галом получил руду за болотник для Баронов из Старого лагеря.");
 		Log_SetTopicStatus(CH1_KRAUTBOTE,LOG_SUCCESS);
 		b_giveinvitems(hero,self,itminugget,500);
 		b_givexp(XP_WEEDSHIPMENTREPORTED);
-		info_kalom_krautboteback.permanent = 0;
 	}
 	else
 	{
@@ -783,7 +825,7 @@ instance INFO_CORKALOM_BRINGMCQBALLS_SUCCESS(C_INFO)
 
 func int info_corkalom_bringmcqballs_success_condition()
 {
-	if(Npc_HasItems(hero,itat_crawlerqueen) >= 3)
+	if(Npc_HasItems(hero,itat_crawlerqueen) >= 3 && CORKALOM_BRINGMCQBALLS == LOG_RUNNING)
 	{
 		return 1;
 	};
@@ -804,8 +846,19 @@ func void info_corkalom_bringmcqballs_success_info()
 	b_givexp(XP_BRINGMCEGGS);
 	b_logentry(CH2_MCEGGS,"Я отдал Кор Галому три яйца ползунов. Он был невежлив, как и всегда. Мне почти расхотелось брать из его рук свою награду!");
 	Log_SetTopicStatus(CH2_MCEGGS,LOG_SUCCESS);
-	b_logentry(CH1_GOTOPSICAMP,"Думаю, теперь мне известно достаточно о том, что захотели сделать Гуру. Я должен сообщить об этом Мордрагу.");
-	b_logentry(CH1_GOTOPSI,"Думаю, теперь я знаю, что именно захотели сделать Гуру Братства. Я должен рассказать об этом Равену из Старого лагеря.");
+	b_exchangeroutine(tpl_1439_gornadrak,"GC");
+	b_exchangeroutine(tpl_1440_templer,"GC");
+	Wld_InsertNpc(tpl_1400_gornabar_psi,"PSI_24_HUT_EX_SMALLTALK");
+	Wld_InsertNpc(tpl_1401_gornakosh_psi,"PSI_24_HUT_EX_SMALLTALK");
+	Wld_InsertNpc(tpl_1433_gornavid_psi,"PSI_24_HUT_EX_SMALLTALK");
+	if(c_npcbelongstonewcamp(hero))
+	{
+		b_logentry(CH1_GOTOPSICAMP,"Думаю, теперь мне известно достаточно о том, что захотели сделать Гуру. Я должен сообщить об этом Мордрагу.");
+	};
+	if(c_npcbelongstooldcamp(hero))
+	{
+		b_logentry(CH1_GOTOPSI,"Думаю, теперь я знаю, что именно захотели сделать Гуру Братства. Я должен рассказать об этом Равену из Старого лагеря.");
+	};
 	Info_ClearChoices(info_corkalom_bringmcqballs_success);
 	Info_AddChoice(info_corkalom_bringmcqballs_success,"Руну.",info_corkalom_bringmcqballs_success_rune);
 	Info_AddChoice(info_corkalom_bringmcqballs_success,"Оружие.",info_corkalom_bringmcqballs_success_waffe);
@@ -854,8 +907,16 @@ func void info_corkalom_bringmcqballs_success_mana()
 {
 	AI_Output(other,self,"Mis_2_PSI_Kalom_BringMCQEggs_Success_MANA_15_01");	//Зелье магической силы.
 	AI_Output(self,other,"Mis_2_PSI_Kalom_BringMCQEggs_Success_MANA_10_02");	//Пусть это зелье увеличит твою магическую силу!
-	CreateInvItem(self,itfo_potion_mana_perma_01);
-	b_giveinvitems(self,hero,itfo_potion_mana_perma_01,1);
+	if(!c_npcbelongstopsicamp(hero))
+	{
+		CreateInvItem(self,itfo_potion_mana_perma_01);
+		b_giveinvitems(self,hero,itfo_potion_mana_perma_01,1);
+	}
+	else
+	{
+		CreateInvItem(self,itfo_potion_elixier_egg);
+		b_giveinvitems(self,hero,itfo_potion_elixier_egg,1);
+	};
 	Info_ClearChoices(info_corkalom_bringmcqballs_success);
 };
 

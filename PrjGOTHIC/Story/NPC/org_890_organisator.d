@@ -21,24 +21,24 @@ instance ORG_890_ORGANISATOR(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_BOW,1);
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	CreateInvItems(self,itkelockpick,2);
-	CreateInvItems(self,itminugget,12);
-	CreateInvItems(self,itforice,7);
 	CreateInvItems(self,itfobooze,2);
-	CreateInvItems(self,itlstorch,1);
-	CreateInvItems(self,itfo_potion_health_01,3);
-	CreateInvItem(self,itmi_stuff_barbknife_01);
-	CreateInvItem(self,itfomutton);
-	CreateInvItem(self,itat_claws_01);
+	CreateInvItems(self,itfo_potion_health_02,2);
 	EquipItem(self,itmw_1h_mace_03);
-	EquipItem(self,itrw_bow_long_01);
-	CreateInvItems(self,itamarrow,20);
 	daily_routine = rtn_fmcstart_890;
 };
 
 
 func void rtn_fmcstart_890()
 {
-	ta_sitaround(1,0,13,0,"FMC_HUT06_OUT");
-	ta_sitaround(13,0,1,0,"FMC_HUT06_OUT");
+	ta_sitaround(7,0,13,0,"FMC_HUT06_IN");
+	ta_smoke(13,0,14,0,"FMC_HUT06_OUT");
+	ta_sitaround(14,0,23,0,"FMC_HUT06_IN");
+	ta_sleep(23,0,7,0,"FMC_HUT06_IN");
+};
+
+func void rtn_dead_890()
+{
+	ta_stay(7,0,23,0,"FMC_HUT06_IN");
+	ta_stay(23,0,7,0,"FMC_HUT06_IN");
 };
 

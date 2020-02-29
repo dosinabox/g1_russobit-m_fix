@@ -1,14 +1,14 @@
 
 instance CH(NPC_DEFAULT)
 {
-	name[0] = "Помощник";
+	name[0] = "Помощник по персонажу";
 	npctype = NPCTYPE_MAIN;
 	guild = GIL_NONE;
 	level = 10;
 	voice = 15;
 	id = 0;
 	Mdl_SetVisual(self,"HUMANS.MDS");
-	Mdl_SetVisualBody(self,"hum_body_Naked0",4,1,"Hum_Head_Pony",9,0,-1);
+	Mdl_SetVisualBody(self,"hum_body_Naked0",4,1,"Hum_Head_Pony",9,0,ebr_armor_m);
 	start_aistate = zs_ch_hangaround;
 };
 
@@ -53,6 +53,7 @@ func void b_setheroequipment()
 	CreateInvItems(hero,itminugget,1000);
 	CreateInvItems(hero,itfo_potion_health_03,10);
 	CreateInvItems(hero,itfo_potion_mana_03,10);
+	CreateInvItems(hero,itfo_potion_haste_03,10);
 	CreateInvItems(hero,itkelockpick,30);
 	CreateInvItems(hero,itwrworldmap,1);
 };
@@ -87,40 +88,34 @@ func void b_setheroweapon()
 	{
 		CreateInvItem(hero,itmw_1h_mace_02);
 		CreateInvItem(hero,itrw_bow_small_04);
-		PrintScreen("nцtig STR 11  DEX 16",-1,-1,"font_old_20_white.tga",10);
 	}
 	else if(hero.level <= 10)
 	{
 		CreateInvItem(hero,itmw_1h_sword_long_01);
 		CreateInvItem(hero,itrw_bow_long_02);
-		PrintScreen("nцtig STR 17  DEX 22",-1,-1,"font_old_20_white.tga",10);
 	}
 	else if(hero.level <= 15)
 	{
 		CreateInvItem(hero,itmw_1h_sword_broad_01);
 		CreateInvItem(hero,itrw_bow_long_05);
-		PrintScreen("nцtig: STR 26  DEX 28",-1,-1,"font_old_20_white.tga",10);
 	}
 	else if(hero.level <= 20)
 	{
 		CreateInvItem(hero,itmw_2h_sword_light_01);
 		CreateInvItem(hero,itmw_1h_sword_broad_04);
 		CreateInvItem(hero,itrw_bow_long_08);
-		PrintScreen("nцtig STR 52  DEX 34",-1,-1,"font_old_20_white.tga",10);
 	}
 	else if(hero.level <= 25)
 	{
 		CreateInvItem(hero,itmw_2h_sword_03);
 		CreateInvItem(hero,itmw_1h_sword_broad_04);
 		CreateInvItem(hero,itrw_bow_war_02);
-		PrintScreen("nцtig STR 62  DEX 40",-1,-1,"font_old_20_white.tga",10);
 	}
 	else if(hero.level <= 30)
 	{
 		CreateInvItem(hero,itmw_2h_axe_heavy_04);
 		CreateInvItem(hero,itmw_1h_sword_broad_04);
 		CreateInvItem(hero,itrw_bow_war_05);
-		PrintScreen("nцtig STR 78  DEX 50",-1,-1,"font_old_20_white.tga",10);
 	};
 	AI_EquipBestMeleeWeapon(hero);
 	AI_EquipBestRangedWeapon(hero);
@@ -178,7 +173,7 @@ func int ch_level_condition()
 func void ch_level_info()
 {
 	Info_ClearChoices(ch_level);
-	Info_AddChoice(ch_level,"BACK",ch_level_back);
+	Info_AddChoice(ch_level,"НАЗАД",ch_level_back);
 	Info_AddChoice(ch_level,"Уровень 1 - 5",ch_level1);
 	Info_AddChoice(ch_level,"Уровень 6 - 10",ch_level6);
 	Info_AddChoice(ch_level,"Уровень 11 - 15",ch_level11);
@@ -190,7 +185,7 @@ func void ch_level_info()
 func void ch_level26()
 {
 	Info_ClearChoices(ch_level);
-	Info_AddChoice(ch_level,"BACK",ch_level_back);
+	Info_AddChoice(ch_level,"НАЗАД",ch_level_back);
 	Info_AddChoice(ch_level,"Уровень 26",ch_level_26);
 	Info_AddChoice(ch_level,"Уровень 27",ch_level_27);
 	Info_AddChoice(ch_level,"Уровень 28",ch_level_28);
@@ -201,7 +196,7 @@ func void ch_level26()
 func void ch_level21()
 {
 	Info_ClearChoices(ch_level);
-	Info_AddChoice(ch_level,"BACK",ch_level_back);
+	Info_AddChoice(ch_level,"НАЗАД",ch_level_back);
 	Info_AddChoice(ch_level,"Уровень 21",ch_level_21);
 	Info_AddChoice(ch_level,"Уровень 22",ch_level_22);
 	Info_AddChoice(ch_level,"Уровень 23",ch_level_23);
@@ -212,7 +207,7 @@ func void ch_level21()
 func void ch_level16()
 {
 	Info_ClearChoices(ch_level);
-	Info_AddChoice(ch_level,"BACK",ch_level_back);
+	Info_AddChoice(ch_level,"НАЗАД",ch_level_back);
 	Info_AddChoice(ch_level,"Уровень 16",ch_level_16);
 	Info_AddChoice(ch_level,"Уровень 17",ch_level_17);
 	Info_AddChoice(ch_level,"Уровень 18",ch_level_18);
@@ -223,7 +218,7 @@ func void ch_level16()
 func void ch_level11()
 {
 	Info_ClearChoices(ch_level);
-	Info_AddChoice(ch_level,"BACK",ch_level_back);
+	Info_AddChoice(ch_level,"НАЗАД",ch_level_back);
 	Info_AddChoice(ch_level,"Уровень 11",ch_level_11);
 	Info_AddChoice(ch_level,"Уровень 12",ch_level_12);
 	Info_AddChoice(ch_level,"Уровень 13",ch_level_13);
@@ -234,7 +229,7 @@ func void ch_level11()
 func void ch_level6()
 {
 	Info_ClearChoices(ch_level);
-	Info_AddChoice(ch_level,"BACK",ch_level_back);
+	Info_AddChoice(ch_level,"НАЗАД",ch_level_back);
 	Info_AddChoice(ch_level,"Уровень 6",ch_level_6);
 	Info_AddChoice(ch_level,"Уровень 7",ch_level_7);
 	Info_AddChoice(ch_level,"Уровень 8",ch_level_8);
@@ -245,7 +240,7 @@ func void ch_level6()
 func void ch_level1()
 {
 	Info_ClearChoices(ch_level);
-	Info_AddChoice(ch_level,"BACK",ch_level_back);
+	Info_AddChoice(ch_level,"НАЗАД",ch_level_back);
 	Info_AddChoice(ch_level,"Уровень 1",ch_level_1);
 	Info_AddChoice(ch_level,"Уровень 2",ch_level_2);
 	Info_AddChoice(ch_level,"Уровень 3",ch_level_3);
@@ -581,39 +576,61 @@ func int ch_guild_condition()
 func void ch_guild_info()
 {
 	Info_ClearChoices(ch_guild);
-	Info_AddChoice(ch_guild,"BACK",ch_guild_back);
-	if((hero.level >= 6) && (hero.level <= 10))
+	Info_AddChoice(ch_guild,"НАЗАД",ch_guild_back);
+	Info_AddChoice(ch_guild,"Призрак",ch_shadow);
+	Info_AddChoice(ch_guild,"Стражник",ch_guard);
+	Info_AddChoice(ch_guild,"Маг Огня",ch_firemage);
+	Info_AddChoice(ch_guild,"Вор",ch_bandit);
+	Info_AddChoice(ch_guild,"Наемник",ch_mercenary);
+	Info_AddChoice(ch_guild,"Маг Воды",ch_watermage);
+	Info_AddChoice(ch_guild,"Послушник",ch_novice);
+	Info_AddChoice(ch_guild,"Страж",ch_templar);
+	Info_AddChoice(ch_guild,"Барон",ch_ebr);
+	Info_AddChoice(ch_guild,"Некромант",ch_dmb);
+	Info_AddChoice(ch_guild,"Гуру",ch_gur);
+};
+
+func void ch_ebr()
+{
+	Info_ClearChoices(ch_guild);
+	hero.guild = GIL_EBR;
+	Npc_SetTrueGuild(hero,GIL_EBR);
+	if(hero.level <= 15)
 	{
-		Info_AddChoice(ch_guild,"Призрак",ch_shadow);
-	};
-	if((hero.level >= 10) && (hero.level <= 15))
+		CreateInvItem(hero,ebr_armor_m);
+		AI_EquipArmor(hero,ebr_armor_m);
+	}
+	else
 	{
-		Info_AddChoice(ch_guild,"Стражник",ch_guard);
+		CreateInvItem(hero,ebr_armor_h2);
+		AI_EquipArmor(hero,ebr_armor_h2);
 	};
-	if((hero.level >= 10) && (hero.level <= 15))
+};
+
+func void ch_gur()
+{
+	Info_ClearChoices(ch_guild);
+	hero.guild = GIL_GUR;
+	Npc_SetTrueGuild(hero,GIL_GUR);
+	if(hero.level <= 15)
 	{
-		Info_AddChoice(ch_guild,"Маг Огня",ch_firemage);
-	};
-	if((hero.level >= 6) && (hero.level <= 10))
+		CreateInvItem(hero,gur_armor_m);
+		AI_EquipArmor(hero,gur_armor_m);
+	}
+	else
 	{
-		Info_AddChoice(ch_guild,"Вор",ch_bandit);
+		CreateInvItem(hero,gur_armor_h);
+		AI_EquipArmor(hero,gur_armor_h);
 	};
-	if(hero.level >= 10)
-	{
-		Info_AddChoice(ch_guild,"Наемник",ch_mercenary);
-	};
-	if(hero.level >= 16)
-	{
-		Info_AddChoice(ch_guild,"Маг Воды",ch_watermage);
-	};
-	if((hero.level >= 6) && (hero.level <= 10))
-	{
-		Info_AddChoice(ch_guild,"Послушник",ch_novice);
-	};
-	if(hero.level >= 10)
-	{
-		Info_AddChoice(ch_guild,"Страж",ch_templar);
-	};
+};
+
+func void ch_dmb()
+{
+	Info_ClearChoices(ch_guild);
+	hero.guild = GIL_DMB;
+	Npc_SetTrueGuild(hero,GIL_DMB);
+	CreateInvItem(hero,dmb_armor_m);
+	AI_EquipArmor(hero,dmb_armor_m);
 };
 
 func void ch_templar()
@@ -714,8 +731,8 @@ func void ch_guard()
 	}
 	else
 	{
-		CreateInvItem(hero,org_armor_h);
-		AI_EquipArmor(hero,org_armor_h);
+		CreateInvItem(hero,grd_armor_h);
+		AI_EquipArmor(hero,grd_armor_h);
 	};
 };
 
@@ -976,7 +993,7 @@ instance CH_TRAINING_MANA(C_INFO)
 	information = ch_training_mana_info;
 	important = 0;
 	permanent = 1;
-	description = "Атрибут: маг. сила";
+	description = "Атрибут: мана";
 };
 
 
@@ -991,8 +1008,8 @@ func int ch_training_mana_condition()
 func void ch_training_mana_info()
 {
 	Info_ClearChoices(ch_training_mana);
-	Info_AddChoice(ch_training_mana,"BACK",ch_training_mana_back);
-	Info_AddChoice(ch_training_mana,"Маг. сила (на оставшиеся очки обучения)",ch_mana_all);
+	Info_AddChoice(ch_training_mana,"НАЗАД",ch_training_mana_back);
+	Info_AddChoice(ch_training_mana,"Магическая сила (на оставшиеся очки обучения)",ch_mana_all);
 	if(hero.lp >= 20)
 	{
 		Info_AddChoice(ch_training_mana,b_buildlearnstring(NAME_LEARNMANA_20,20 * LPCOST_ATTRIBUTE_MANA,0),ch_mana20);
@@ -1076,7 +1093,7 @@ func int ch_training_combat_condition()
 func void ch_training_combat_info()
 {
 	Info_ClearChoices(ch_training_combat);
-	Info_AddChoice(ch_training_combat,"BACK",ch_training_combat_back);
+	Info_AddChoice(ch_training_combat,"НАЗАД",ch_training_combat_back);
 	if((hero.lp >= LPCOST_TALENT_CROSSBOW_2) && (Npc_GetTalentSkill(hero,NPC_TALENT_CROSSBOW) == 1))
 	{
 		Info_AddChoice(ch_training_combat,b_buildlearnstring(NAME_LEARNCROSSBOW_2,LPCOST_TALENT_CROSSBOW_2,0),ch_crossbowl2);
@@ -1187,7 +1204,7 @@ func int ch_training_magic_condition()
 func void ch_training_magic_info()
 {
 	Info_ClearChoices(ch_training_magic);
-	Info_AddChoice(ch_training_magic,"BACK",ch_training_magic_back);
+	Info_AddChoice(ch_training_magic,"НАЗАД",ch_training_magic_back);
 	if((hero.level >= 24) && (hero.lp >= LPCOST_TALENT_MAGE_6) && (Npc_GetTalentSkill(hero,NPC_TALENT_MAGE) == 5))
 	{
 		Info_AddChoice(ch_training_magic,b_buildlearnstring(NAME_LEARNMAGE_6,LPCOST_TALENT_MAGE_6,0),ch_magic6);
@@ -1316,7 +1333,7 @@ func int ch_training_thievery_condition()
 func void ch_training_thievery_info()
 {
 	Info_ClearChoices(ch_training_thievery);
-	Info_AddChoice(ch_training_thievery,"BACK",ch_training_thievery_back);
+	Info_AddChoice(ch_training_thievery,"НАЗАД",ch_training_thievery_back);
 	if((hero.lp >= LPCOST_TALENT_ACROBAT) && (Npc_GetTalentSkill(hero,NPC_TALENT_ACROBAT) == 0))
 	{
 		Info_AddChoice(ch_training_thievery,b_buildlearnstring(NAME_LEARNACROBAT,LPCOST_TALENT_ACROBAT,0),ch_acrobat);

@@ -4,15 +4,15 @@ instance SLD_700_LEE(NPC_DEFAULT)
 	name[0] = "ห่";
 	npctype = NPCTYPE_MAIN;
 	guild = GIL_SLD;
-	level = 19;
+	level = 50;
 	voice = 8;
 	id = 700;
 	attribute[ATR_STRENGTH] = 100;
 	attribute[ATR_DEXTERITY] = 75;
 	attribute[ATR_MANA_MAX] = 0;
 	attribute[ATR_MANA] = 0;
-	attribute[ATR_HITPOINTS_MAX] = 268;
-	attribute[ATR_HITPOINTS] = 268;
+	attribute[ATR_HITPOINTS_MAX] = 400;
+	attribute[ATR_HITPOINTS] = 400;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Militia.mds");
 	Mdl_SetVisualBody(self,"hum_body_Naked0",1,1,"Hum_Head_Pony",88,0,sld_armor_h);

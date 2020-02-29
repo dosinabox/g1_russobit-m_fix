@@ -32,6 +32,6 @@ instance VLK_536_KYLE(NPC_DEFAULT)
 func void rtn_start_536()
 {
 	ta_sleep(22,0,8,0,"OCR_HUT_68");
-	ta_stand(8,0,22,0,"OCR_HUT_68_BACK");
+	ta_stay(8,0,22,0,"OCR_HUT_68_BACK");
 };
 

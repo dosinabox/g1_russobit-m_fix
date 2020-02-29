@@ -31,14 +31,23 @@ instance STT_301_IAN(NPC_DEFAULT)
 	EquipItem(self,itmw_1h_sword_04);
 	EquipItem(self,itrw_bow_small_04);
 	CreateInvItems(self,itamarrow,25);
+	CreateInvItem(self,thelist);
 	daily_routine = rtn_start_301;
 };
 
 
 func void rtn_start_301()
 {
-	ta_standaround(8,0,18,0,"OM_CAVE1_47_IAN");
-	ta_standaround(18,0,8,0,"OM_CAVE1_47_IAN");
+	ta_standaround(8,0,10,0,"OM_CAVE1_47_IAN");
+	ta_standaround(10,0,12,0,"OM_CAVE1_45");
+	ta_standaround(12,0,14,0,"OM_CAVE1_47_IAN");
+	ta_standaround(14,0,16,0,"OM_CAVE1_45");
+	ta_standaround(16,0,18,0,"OM_CAVE1_47_IAN");
+	ta_standaround(18,0,20,0,"OM_CAVE1_45");
+	ta_standaround(20,0,22,0,"OM_CAVE1_47_IAN");
+	ta_standaround(0,0,2,0,"OM_CAVE1_45");
+	ta_standaround(2,0,6,0,"OM_CAVE1_47_IAN");
+	ta_standaround(6,0,8,0,"OM_CAVE1_45");
 };
 
 func void rtn_kapitel2_301()

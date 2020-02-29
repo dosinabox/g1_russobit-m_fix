@@ -47,7 +47,10 @@ func void dia_scorpio_hello_info()
 	AI_Output(self,other,"DIA_Scorpio_Hello_13_02");	//И что тебе здесь нужно?
 	Info_ClearChoices(dia_scorpio_hello);
 	Info_AddChoice(dia_scorpio_hello,"Просто захотелось посмотреть.",dia_scorpio_hello_justlooking);
-	Info_AddChoice(dia_scorpio_hello,"У меня есть послание для магов.",dia_scorpio_hello_mages);
+	if(Npc_HasItems(hero,itwr_fire_letter_01) || Npc_HasItems(hero,itwr_fire_letter_02))
+	{
+		Info_AddChoice(dia_scorpio_hello,"У меня есть послание для магов.",dia_scorpio_hello_mages);
+	};
 	if(KALOM_KRAUTBOTE == LOG_RUNNING)
 	{
 		Info_AddChoice(dia_scorpio_hello,"Я принес болотник для Гомеза.",dia_scorpio_hello_kraut);
@@ -69,6 +72,22 @@ func void dia_scorpio_hello_mages()
 {
 	AI_Output(other,self,"DIA_Scorpio_Hello_Mages_15_00");	//У меня есть послание для магов.
 	AI_Output(self,other,"DIA_Scorpio_Hello_Mages_13_01");	//Ты работаешь на магов? До них мне нет никакого дела...
+	if(LETTER_TOLD == 0)
+	{
+		LETTER_TOLD = 1;
+	}
+	else if(LETTER_TOLD == 1)
+	{
+		LETTER_TOLD = 2;
+		if(!Npc_IsDead(vlk_505_buddler))
+		{
+			b_exchangeroutine(vlk_505_buddler,"letterwait");
+		};
+		if(!Npc_IsDead(vlk_506_buddler))
+		{
+			b_exchangeroutine(vlk_506_buddler,"letterwait");
+		};
+	};
 	Info_ClearChoices(dia_scorpio_hello);
 };
 
@@ -102,7 +121,7 @@ instance DIA_SCORPIO_REFUSETRAIN(C_INFO)
 
 func int dia_scorpio_refusetrain_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_scorpio_hello) && (Npc_GetTrueGuild(hero) != GIL_GRD))
+	if(Npc_KnowsInfo(hero,dia_scorpio_hello) && (Npc_GetTrueGuild(hero) != GIL_GRD) && (KAPITEL < 4))
 	{
 		return 1;
 	};
@@ -153,7 +172,7 @@ instance GRD_205_SCORPIO_CROSSBOW(C_INFO)
 
 func int grd_205_scorpio_crossbow_condition()
 {
-	if((KAPITEL >= 4) || (Npc_GetTrueGuild(hero) == GIL_GRD))
+	if(((KAPITEL >= 4) || (Npc_GetTrueGuild(hero) == GIL_GRD)) && (Npc_GetTalentSkill(hero,NPC_TALENT_CROSSBOW) == 0))
 	{
 		return TRUE;
 	};
@@ -163,21 +182,21 @@ func void grd_205_scorpio_crossbow_info()
 {
 	AI_Output(other,self,"GRD_205_Scorpio_CROSSBOW_Info_15_01");	//Ты можешь научить меня чему-нибудь?
 	AI_Output(self,other,"GRD_205_Scorpio_CROSSBOW_Info_13_02");	//Если у тебя есть руда, то я могу научить тебя стрелять из арбалета. Это будет стоить 200 кусков.
-	if((LOG_SCORPIOCROSSBOW == FALSE) && (KAPITEL <= 4))
+	if((LOG_SCORPIOCROSSBOW == FALSE) && (KAPITEL < 4))
 	{
 		Log_CreateTopic(GE_TEACHEROC,LOG_NOTE);
 		b_logentry(GE_TEACHEROC,"Скорпио может научить меня стрелять из арбалета.");
 		LOG_SCORPIOCROSSBOW = TRUE;
 	}
-	else if((LOG_SCORPIOCROSSBOW == FALSE) && (KAPITEL > 4))
+	else if((LOG_SCORPIOCROSSBOW == FALSE) && (KAPITEL >= 4))
 	{
 		Log_CreateTopic(GE_TEACHEROW,LOG_NOTE);
 		b_logentry(GE_TEACHEROW,"Скорпио может научить меня стрелять из арбалета.");
 		LOG_SCORPIOCROSSBOW = TRUE;
 	};
 	Info_ClearChoices(grd_205_scorpio_crossbow);
-	Info_AddChoice(grd_205_scorpio_crossbow,b_buildlearnstring(NAME_LEARNCROSSBOW_1,LPCOST_TALENT_CROSSBOW_1,200),grd_205_scorpio_crossbow_ok);
 	Info_AddChoice(grd_205_scorpio_crossbow,DIALOG_BACK,grd_205_scorpio_crossbow_back);
+	Info_AddChoice(grd_205_scorpio_crossbow,b_buildlearnstring(NAME_LEARNCROSSBOW_1,LPCOST_TALENT_CROSSBOW_1,200),grd_205_scorpio_crossbow_ok);
 };
 
 func void grd_205_scorpio_crossbow_back()
@@ -197,7 +216,7 @@ func void grd_205_scorpio_crossbow_ok()
 			AI_Output(self,other,"GRD_205_Scorpio_CROSSBOW_OK_13_04");	//Сначала твое плечо будет сильно уставать и болеть.
 			AI_Output(self,other,"GRD_205_Scorpio_CROSSBOW_OK_13_05");	//Но через неделю тренировок ты его даже не узнаешь!
 			AI_Output(self,other,"GRD_205_Scorpio_CROSSBOW_OK_13_06");	//Прицелься и нажимай на курок. Болт летит гораздо быстрее, чем стрела, и наносит большее повреждение врагу!
-			b_giveinvitems(hero,other,itminugget,200);
+			b_giveinvitems(other,self,itminugget,200);
 			grd_205_scorpio_crossbow.permanent = 0;
 		};
 	}
@@ -231,14 +250,26 @@ func void grd_205_scorpio_crossbow2_info()
 {
 	AI_Output(other,self,"GRD_205_Scorpio_CROSSBOW2_Info_15_01");	//Я хочу научиться еще лучше стрелять из арбалета.
 	AI_Output(self,other,"GRD_205_Scorpio_CROSSBOW2_Info_13_02");	//Это будет стоить 300 кусков руды.
+	if((LOG_SCORPIOCROSSBOW == FALSE) && (KAPITEL < 4))
+	{
+		Log_CreateTopic(GE_TEACHEROC,LOG_NOTE);
+		b_logentry(GE_TEACHEROC,"Скорпио может научить меня стрелять из арбалета.");
+		LOG_SCORPIOCROSSBOW = TRUE;
+	}
+	else if((LOG_SCORPIOCROSSBOW == FALSE) && (KAPITEL >= 4))
+	{
+		Log_CreateTopic(GE_TEACHEROW,LOG_NOTE);
+		b_logentry(GE_TEACHEROW,"Скорпио может научить меня стрелять из арбалета.");
+		LOG_SCORPIOCROSSBOW = TRUE;
+	};
 	Info_ClearChoices(grd_205_scorpio_crossbow2);
-	Info_AddChoice(grd_205_scorpio_crossbow2,b_buildlearnstring(NAME_LEARNCROSSBOW_2,LPCOST_TALENT_CROSSBOW_2,300),grd_205_scorpio_crossbow2_ok);
 	Info_AddChoice(grd_205_scorpio_crossbow2,DIALOG_BACK,grd_205_scorpio_crossbow2_back);
+	Info_AddChoice(grd_205_scorpio_crossbow2,b_buildlearnstring(NAME_LEARNCROSSBOW_2,LPCOST_TALENT_CROSSBOW_2,300),grd_205_scorpio_crossbow2_ok);
 };
 
 func void grd_205_scorpio_crossbow2_back()
 {
-	Info_ClearChoices(grd_205_scorpio_crossbow);
+	Info_ClearChoices(grd_205_scorpio_crossbow2);
 };
 
 func void grd_205_scorpio_crossbow2_ok()
@@ -253,8 +284,9 @@ func void grd_205_scorpio_crossbow2_ok()
 			AI_Output(self,other,"GRD_205_Scorpio_CROSSBOW2_OK_13_04");	//Выстрел должен быть направлен по ходу его движения, тогда ты сможешь в него попасть.
 			AI_Output(self,other,"GRD_205_Scorpio_CROSSBOW2_OK_13_05");	//Если у тебя несколько целей, не пропускай ни одной из них, но веди по ним прицельный огонь по очереди.
 			AI_Output(self,other,"GRD_205_Scorpio_CROSSBOW2_OK_13_06");	//Я научил тебя всему, что знаю сам.
-			b_giveinvitems(hero,other,itminugget,300);
+			b_giveinvitems(other,self,itminugget,300);
 			grd_205_scorpio_crossbow2.permanent = 0;
+			AI_StopProcessInfos(self);
 		};
 	}
 	else

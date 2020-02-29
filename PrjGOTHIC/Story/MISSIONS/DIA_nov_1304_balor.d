@@ -50,11 +50,11 @@ func void dia_balor_fetchweed_info()
 	AI_Output(self,other,"DIA_Balor_FetchWeed_01_02");	//Не забудь заглянуть к Вайрану, на другую сторону болота, если ты у него еще не был.
 	AI_Output(self,other,"DIA_Balor_FetchWeed_01_03");	//Иначе наш дневной урожай кое-кому покажется слишком маленьким. Могут подумать, что ты половину присвоил.
 	b_giveinvitems(self,other,itmi_plants_swampherb_01,50);
-	b_logentry(CH1_DELIVERWEED,"Балор передал мне дневной урожай болотника для Кор Галома.");
+	b_logentry(CH1_DELIVERWEED,"Бэлор передал мне дневной урожай болотника для Кор Галома.");
 	b_givexp(XP_WEEDFROMBALOR);
 	if(!Npc_KnowsInfo(hero,dia_viran_what) && !Npc_KnowsInfo(hero,dia_viran_fetchweed))
 	{
-		b_logentry(CH1_DELIVERWEED,"По словам Балора на другой стороне болота есть еще одна группа сборщиков болотника. Я не расспросил как следует Идола Орана. Теперь мне придется разыскивать эту группу и постараться не попасться на глаза болотожорам.");
+		b_logentry(CH1_DELIVERWEED,"По словам Бэлора, на другой стороне болота есть еще одна группа сборщиков болотника. Я не расспросил как следует Идола Орана. Теперь мне придется разыскивать эту группу и постараться не попасться на глаза болотожорам.");
 	};
 	BALOR_BOTENDAY = Wld_GetDay();
 };
@@ -83,7 +83,7 @@ func int dia_balor_sellunder_condition()
 
 func void dia_balor_sellunder_info()
 {
-	AI_Output(other,self,"DIA_Balor_SellUnder_15_00");	//Да как я могу? И потом: куда мне его девать? Продать кому-то?
+	AI_Output(other,self,"DIA_Balor_SellUnder_15_00");	//Да как я могу? И потом... куда мне его девать? Продать кому-то?
 	AI_Output(self,other,"DIA_Balor_SellUnder_01_01");	//А, я подсказал тебе хорошую идею, да?
 	Info_ClearChoices(dia_balor_sellunder);
 	Info_AddChoice(dia_balor_sellunder,"Забудь, это была просто шутка.",dia_balor_sellunder_forgetit);
@@ -113,7 +113,7 @@ func void dia_balor_sellunder_comeon()
 };
 
 
-var int balor_tellsncdealer;
+
 
 instance DIA_BALOR_TELLDEALER(C_INFO)
 {
@@ -128,7 +128,7 @@ instance DIA_BALOR_TELLDEALER(C_INFO)
 
 func int dia_balor_telldealer_condition()
 {
-	if((BALOR_PLAYERCHEATING == TRUE) && (BALOR_TELLSNCDEALER == FALSE))
+	if((BALOR_PLAYERCHEATING == TRUE) && (BALOR_TELLSNCDEALER == FALSE) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -138,7 +138,7 @@ func void dia_balor_telldealer_info()
 {
 	AI_Output(other,self,"DIA_Balor_TellDealer_15_00");	//Я учту. Так кому в Новом лагере можно продать болотник?
 	AI_Output(self,other,"DIA_Balor_TellDealer_01_01");	//Конечно, я назову тебе этого человека, а ты сбежишь с нашей травой. Даже не надейся!
-	AI_Output(self,other,"DIA_Balor_TellDealer_01_02");	//Мне нужен задаток пятьдесят кусков руды. Тогда и поговорим.
+	AI_Output(self,other,"DIA_Balor_TellDealer_01_02");	//Мне нужен задаток, пятьдесят кусков руды. Тогда и поговорим.
 	Info_ClearChoices(dia_balor_telldealer);
 	Info_AddChoice(dia_balor_telldealer,"Забудь об этом.",dia_balor_telldealer_forgetit);
 	Info_AddChoice(dia_balor_telldealer,"Пятьдесят кусков? Хорошо, держи.",dia_balor_telldealer_pay);
@@ -153,11 +153,14 @@ func void dia_balor_telldealer_pay()
 		AI_Output(self,other,"DIA_Balor_TellDealer_Pay_01_02");	//Но будь с ним осторожен. Смотри, чтобы он тебя не обманул.
 		Info_ClearChoices(dia_balor_telldealer);
 		b_giveinvitems(other,self,itminugget,50);
+		b_giveinvitems(self,other,weedpack,1);
 		BALOR_TELLSNCDEALER = TRUE;
-		b_logentry(CH1_DELIVERWEED,"Балор назвал мне человека из Нового лагеря. Его зовут Сайфер. Я смогу найти его в баре на озере. Гуру будут очень недовольны, если я продам болотник на сторону.");
+		b_logentry(CH1_DELIVERWEED,"Бэлор назвал мне человека из Нового лагеря. Его зовут Сайфер. Я смогу найти его в баре на озере. Гуру будут очень недовольны, если я продам болотник на сторону.");
 		b_givexp(XP_BALORNAMEDCIPHER);
 		Log_CreateTopic(GE_TRADERNC,LOG_NOTE);
-		b_logentry(GE_TRADERNC,"Сайфер продает и покупает разные товары. Он интересуется крупными партиями болотника. Его можно найти в баре на озере.");
+		b_logentry(GE_TRADERNC,"Сайфер продает и покупает разные товары. Он интересуется крупными партиями болотника. Его можно найти в баре на озере около Нового лагеря.");
+		b_logentry(GE_TRADERNC,"Я договорился с Бэлором. Каждые несколько дней он будет собирать для меня пакет с урожаем болотника, который я смогу выгодно продать Сайферу.");
+		BALOR_BOTENDAY = Wld_GetDay();
 	}
 	else
 	{
@@ -181,14 +184,14 @@ instance DIA_BALOR_RIPOFF(C_INFO)
 	nr = 5;
 	condition = dia_balor_ripoff_condition;
 	information = dia_balor_ripoff_info;
-	permanent = 0;
+	permanent = 1;
 	description = "Это снова я. Мне нужно забрать следующую партию.";
 };
 
 
 func int dia_balor_ripoff_condition()
 {
-	if((BALOR_BOTENDAY <= (Wld_GetDay() - 2)) && Npc_KnowsInfo(hero,dia_balor_fetchweed))
+	if(Npc_KnowsInfo(hero,dia_balor_fetchweed) && (BALOR_CAN_GIVE == TRUE) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -197,20 +200,61 @@ func int dia_balor_ripoff_condition()
 func void dia_balor_ripoff_info()
 {
 	AI_Output(other,self,"DIA_Balor_RipOff_15_00");	//Это снова я. Мне нужно забрать следующую партию.
-	if(BALOR_PLAYERCHEATING == TRUE)
+	if((BALOR_BOTENDAY <= (Wld_GetDay() - 2)))
 	{
-		AI_Output(self,other,"DIA_Balor_RipOff_01_01");	//Еще бы! Чтобы снова отнести его в Новый лагерь.
-		AI_Output(self,other,"DIA_Balor_RipOff_01_02");	//Дай мне задаток пятьдесят кусков руды.
+		if(BALOR_TELLSNCDEALER == TRUE)
+		{
+			AI_Output(self,other,"DIA_Balor_RipOff_01_01");	//Еще бы! Чтобы снова отнести его в Новый лагерь.
+			AI_Output(self,other,"DIA_Balor_RipOff_01_02");	//Дай мне задаток: пятьдесят кусков руды.
+			Info_ClearChoices(dia_balor_ripoff);
+			Info_AddChoice(dia_balor_ripoff,"Забудь об этом.",dia_balor_telldealer_forgetit2);
+			Info_AddChoice(dia_balor_ripoff,"Ладно, вот тебе руда!",dia_balor_telldealer_pay2);
+		}
+		else
+		{
+			AI_Output(self,other,"DIA_Balor_RipOff_01_03");	//А, это снова ты? Ладно, бери, но только не вздумай нас обмануть!
+			AI_Output(other,self,"DIA_Balor_RipOff_15_04");	//Да что ты, я и не собирался.
+			CreateInvItems(self,itmi_plants_swampherb_01,50);
+			b_giveinvitems(self,hero,itmi_plants_swampherb_01,50);
+			BALOR_CAN_GIVE = FALSE;
+			BALOR_BOTENDAY = Wld_GetDay();
+		};
 	}
 	else
 	{
-		AI_Output(self,other,"DIA_Balor_RipOff_01_03");	//А, это снова ты? Ладно, бери, но только не вздумай нас обмануть!
-		AI_Output(other,self,"DIA_Balor_RipOff_15_04");	//Да что ты, я и не собирался.
-		CreateInvItems(self,itmi_plants_swampherb_01,50);
-		b_giveinvitems(self,hero,itmi_plants_swampherb_01,50);
+		if(BALOR_TELLSNCDEALER == TRUE)
+		{
+			AI_PlayAni(self,"T_SEARCH");
+		};
+		AI_Output(self,other,"SVM_1_NotNow");	//Я занят!
+		AI_StopProcessInfos(self);
 	};
 };
 
+func void dia_balor_telldealer_pay2()
+{
+	AI_Output(other,self,"Info_Grd_237_FirstWarn_15_06");	//Ладно, вот тебе руда!
+	if(Npc_HasItems(other,itminugget) >= 50)
+	{
+		Info_ClearChoices(dia_balor_ripoff);
+		b_giveinvitems(other,self,itminugget,50);
+		b_giveinvitems(self,other,weedpack,1);
+		BALOR_BOTENDAY = Wld_GetDay();
+		BALOR_CAN_GIVE = FALSE;
+	}
+	else
+	{
+		AI_Output(self,other,"DIA_Balor_TellDealer_Pay_NoOre_01_00");	//Я не вижу руду. Пятьдесят кусков и ни куском меньше, понял?
+		Info_ClearChoices(dia_balor_ripoff);
+	};
+};
+
+func void dia_balor_telldealer_forgetit2()
+{
+	AI_Output(other,self,"DIA_Balor_TellDealer_ForgetIt_15_00");	//Забудь об этом.
+	AI_Output(self,other,"SVM_1_OkayKeepIt");	//Хорошо, как хочешь! Оставь себе!
+	Info_ClearChoices(dia_balor_ripoff);
+};
 
 instance DIA_BALOR_PERM(C_INFO)
 {
@@ -235,5 +279,36 @@ func void dia_balor_perm_info()
 {
 	AI_Output(other,self,"DIA_Balor_Perm_15_00");	//Что ж, работай хорошо.
 	AI_Output(self,other,"DIA_Balor_Perm_01_01");	//Конечно, а что еще, по-твоему, здесь делаю? Валяюсь в болоте?
+};
+
+instance BALOR_GETLOST(C_INFO)
+{
+	npc = nov_1304_balor;
+	nr = 1;
+	condition = balor_getlost_condition;
+	information = balor_getlost_info;
+	permanent = 1;
+	important = 1;
+};
+
+func int balor_getlost_condition()
+{
+	if((self.aivar[AIV_WASDEFEATEDBYSC] == TRUE) && (Npc_IsInState(self,zs_talk)) && (KAPITEL > 1))
+	{
+		return TRUE;
+	};
+};
+
+func void balor_getlost_info()
+{
+	if(Npc_KnowsInfo(hero,dia_balor_fetchweed))
+	{
+		AI_Output(self,other,"SVM_1_YouDefeatedNOV_Guard");	//От тебя здесь одни неприятности. Так дальше не может продолжаться!
+	}
+	else
+	{
+		AI_Output(self,other,"SVM_1_SuckerDefeatedNov_Guard");	//Думаешь, ты можешь безнаказанно обижать здесь послушников?
+	};
+	AI_StopProcessInfos(self);
 };
 

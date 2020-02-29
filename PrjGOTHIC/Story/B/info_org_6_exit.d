@@ -116,7 +116,10 @@ instance INFO_ORG_6_DIELAGE(C_INFO)
 
 func int info_org_6_dielage_condition()
 {
-	return 1;
+	if(FMTAKEN == FALSE)
+	{
+		return 1;
+	};
 };
 
 func void info_org_6_dielage_info()

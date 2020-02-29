@@ -51,22 +51,22 @@ func void dia_harlok_fetchharlok_info()
 	Info_AddChoice(dia_harlok_fetchharlok,"Я должен напомнить тебе, что пора работать.",dia_harlok_fetchharlok_please);
 };
 
-func int dia_harlok_fetchharlok_please()
+func void dia_harlok_fetchharlok_please()
 {
 	AI_Output(other,self,"DIA_Harlok_FetchHarlok_Please_15_00");	//Я должен напомнить тебе, что пора работать.
 	AI_Output(self,other,"DIA_Harlok_FetchHarlok_Please_01_01");	//Ой, какой ты добрый. Напомни мне об этом, когда я высплюсь, ладно?
 };
 
-func int dia_harlok_fetchharlok_orelse()
+func void dia_harlok_fetchharlok_orelse()
 {
 	AI_Output(other,self,"DIA_Harlok_FetchHarlok_OrElse_15_00");	//Быстро иди к прессу и начинай работать, иначе тебе будет худо!
 	AI_Output(self,other,"DIA_Harlok_FetchHarlok_OrElse_01_01");	//Только попробуй подойти ко мне еще раз, щенок!
 	AI_StopProcessInfos(self);
 };
 
-func int dia_harlok_fetchharlok_back()
+func void dia_harlok_fetchharlok_back()
 {
-	AI_Output(other,self,"DIA_Harlok_FetchHarlok_BACK_15_00");	//Да, ладно, не волнуйся так.
+	AI_Output(other,self,"DIA_Harlok_FetchHarlok_BACK_15_00");	//Да ладно, не волнуйся так.
 	Info_ClearChoices(dia_harlok_fetchharlok);
 };
 
@@ -123,7 +123,8 @@ func void dia_harlok_sendharlok_info()
 	AI_Output(other,self,"DIA_Harlok_SendHarlok_15_00");	//Ну, что, ты уже готов сменить своего друга?
 	AI_Output(self,other,"DIA_Harlok_SendHarlok_01_01");	//Сколько можно приставать ко мне?! Не суй свой нос в чужие дела!
 	AI_Output(other,self,"DIA_Harlok_SendHarlok_15_02");	//Просто хотел посмотреть, как ты работаешь.
-	AI_Output(self,other,"DIA_Harlok_SendHarlok_01_03");	//Ладно уж, иду... Я уже иду... 
+	AI_Output(self,other,"DIA_Harlok_SendHarlok_01_03");	//Ладно уж, иду... Я уже иду...
+	self.flags = NPC_FLAG_IMMORTAL;
 	b_logentry(CH1_GHORIMSRELIEF,"Харлок меня правильно понял. Он согласен сменить Горима.");
 	b_givexp(XP_SENTHARLOK);
 	Npc_ExchangeRoutine(self,"START");
@@ -149,7 +150,7 @@ instance DIA_HARLOK_ANGRY(C_INFO)
 
 func int dia_harlok_angry_condition()
 {
-	if(Npc_IsInState(self,zs_talk) && (GHORIM_KICKHARLOK == LOG_SUCCESS))
+	if(Npc_IsInState(self,zs_talk) && (GHORIM_KICKHARLOK == LOG_SUCCESS) && !Npc_KnowsInfo(hero,dia_baalorun_firsttalk) && (Npc_GetTrueGuild(hero) == GIL_NONE))
 	{
 		return 1;
 	};

@@ -76,7 +76,7 @@ func void zs_orc_stonemill_loop()
 {
 	printdebugnpc(PD_ZS_FRAME,"ZS_Orc_Stonemill_Loop");
 	AI_UseMob(self,"STONEMILL",1);
-	AI_UseMob(self,"STONEMILL",0);
+	//AI_UseMob(self,"STONEMILL",0);
 	AI_UseMob(self,"STONEMILL",-1);
 };
 
@@ -105,7 +105,7 @@ func void zs_orc_stomper_loop()
 {
 	printdebugnpc(PD_TA_FRAME,"ZS_Orc_Stomper_Loop");
 	AI_UseMob(self,"STOMPER",1);
-	AI_UseMob(self,"STOMPER",0);
+	//AI_UseMob(self,"STOMPER",0);
 	AI_UseMob(self,"STOMPER",-1);
 };
 
@@ -223,7 +223,8 @@ func void zs_orc_drum()
 		};
 		AI_UseMob(self,"DRUM",1);
 	};
-	orcdefaultpercdoing();
+	//orcdefaultpercdoing();
+	orcdefaultperc();
 };
 
 func int zs_orc_drum_loop()
@@ -267,7 +268,7 @@ func void zs_orc_speech()
 	orcdefaultperc();
 };
 
-func int zs_orc_speech_loop()
+func void zs_orc_speech_loop()
 {
 	var int ani;
 	printdebugnpc(PD_ZS_LOOP,"ZS_Orc_Speech_Loop");
@@ -439,7 +440,8 @@ func void zs_orc_dance()
 	{
 		AI_GotoWP(self,self.wp);
 	};
-	orcdefaultpercdoing();
+	//orcdefaultpercdoing();
+	orcdefaultperc();
 };
 
 func void zs_orc_dance_loop()

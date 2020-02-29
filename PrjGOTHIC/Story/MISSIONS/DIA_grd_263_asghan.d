@@ -80,7 +80,7 @@ func void grd_263_asghan_open_info()
 	AI_Output(self,other,"Grd_263_Asghan_OPEN_Info_06_04");	//Ну, если Ян согласен за это отвечать... Но есть одно условие!
 	AI_Output(other,self,"Grd_263_Asghan_OPEN_Info_15_05");	//И что это за условие?
 	AI_Output(self,other,"Grd_263_Asghan_OPEN_Info_06_06");	//Мне нужна помощь. Двух-трех стражей будет достаточно. А то не хочется приветствовать всех этих ползунов в одиночестве!
-	b_logentry(CH2_MCEGGS,"Ян разрешил мне зайти в Заброшенную шахту. Но мне нужно еще заручиться поддержкой нескольких Стражей. Тогда Асгхан откроет мне ворота.");
+	b_logentry(CH2_MCEGGS,"Ян разрешил мне зайти в заброшенную часть шахты. Но мне нужно еще заручиться поддержкой нескольких Стражей. Тогда Асгхан откроет мне ворота.");
 	AI_StopProcessInfos(self);
 };
 
@@ -106,13 +106,18 @@ func int grd_263_asghan_open_now_condition()
 
 func void grd_263_asghan_open_now_info()
 {
+	var C_NPC sklave;
 	AI_Output(other,self,"Grd_263_Asghan_OPEN_NOW_Info_15_01");	//Теперь все готово. Можно открыть ворота!
 	AI_Output(self,other,"Grd_263_Asghan_OPEN_NOW_Info_06_02");	//Давай, открывай. Представление начинается!
 	npc_setpermattitude(self,ATT_FRIENDLY);
 	Npc_ExchangeRoutine(self,"opengate");
 	b_givexp(XP_OPENASGHANSGATE);
-	b_logentry(CH2_MCEGGS,"Я собрал нескольких Стражей у ворот в Заброшенную шахту. Что ждет нас впереди?");
+	b_logentry(CH2_MCEGGS,"Я собрал нескольких Стражей у ворот в заброшенную часть шахты. Что ждет нас впереди?");
+	sklave = Hlp_GetNpc(orc_2001_sklave);
+	Npc_ExchangeRoutine(sklave,"STOMPER");
+	AI_ContinueRoutine(sklave);
 	AI_StopProcessInfos(self);
+	Snd_Play("AMBIENTCRAWLERSCREAM");
 };
 
 
@@ -129,7 +134,8 @@ instance GRD_263_ASGHAN_LAIRFOUND(C_INFO)
 
 func int grd_263_asghan_lairfound_condition()
 {
-	if((Npc_HasItems(hero,itat_crawlerqueen) >= 3) && (Npc_GetTrueGuild(hero) == GIL_STT))
+	MINECRAWLERQUEEN = Hlp_GetNpc(minecrawlerqueen);
+	if((Npc_HasItems(hero,itat_crawlerqueen) >= 3) && (Npc_GetTrueGuild(hero) == GIL_STT) && Npc_IsDead(minecrawlerqueen))
 	{
 		return TRUE;
 	};
@@ -138,7 +144,7 @@ func int grd_263_asghan_lairfound_condition()
 func void grd_263_asghan_lairfound_info()
 {
 	AI_Output(other,self,"Grd_263_Asghan_LAIRFOUND_Info_15_01");	//Ползуны больше не будут угрожать рудокопам!
-	AI_Output(self,other,"Grd_263_Asghan_LAIRFOUND_Info_06_02");	//Отличная новость. Надо сообщит это Торусу!
+	AI_Output(self,other,"Grd_263_Asghan_LAIRFOUND_Info_06_02");	//Отличная новость. Надо сообщить это Торусу!
 	AI_StopProcessInfos(self);
 };
 

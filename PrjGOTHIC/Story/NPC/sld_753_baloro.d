@@ -22,16 +22,8 @@ instance SLD_753_BALORO(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,2);
 	Npc_SetTalentSkill(self,NPC_TALENT_2H,1);
 	EquipItem(self,itmw_1h_mace_war_03);
-	CreateInvItems(self,itforice,8);
-	CreateInvItems(self,itfoloaf,8);
 	CreateInvItems(self,itfomutton,6);
-	CreateInvItems(self,itminugget,15);
-	CreateInvItems(self,itfobooze,6);
-	CreateInvItems(self,itlstorch,5);
 	CreateInvItems(self,itfo_potion_health_02,7);
-	CreateInvItem(self,itmi_stuff_barbknife_01);
-	CreateInvItem(self,itmi_stuff_amphore_01);
-	CreateInvItem(self,itmi_stuff_oldcoin_02);
 	daily_routine = rtn_fmcstart_753;
 };
 

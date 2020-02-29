@@ -8,6 +8,7 @@ func void zs_clearroom()
 	Npc_PercEnable(self,PERC_ASSESSUSEMOB,b_clearroomusemob);
 	Npc_PercEnable(self,PERC_ASSESSFIGHTSOUND,b_assessfightsound);
 	Npc_PercEnable(self,PERC_MOVENPC,b_stopgotohero);
+	Npc_PercEnable(self,PERC_ASSESSTHEFT,b_assesstheft);
 	c_zsinit();
 	b_whirlaround(self,other);
 	AI_PointAtNpc(self,other);
@@ -15,6 +16,7 @@ func void zs_clearroom()
 	AI_StopPointAt(self);
 	AI_SetWalkMode(self,NPC_RUN);
 	Npc_SetTarget(self,other);
+	Npc_SetRefuseTalk(hero,10);
 };
 
 func int zs_clearroom_loop()
@@ -54,7 +56,7 @@ func void zs_clearroom_end()
 	else
 	{
 		printdebugnpc(PD_ZS_CHECK,"...Nsc ist schwächer!");
-		b_say(self,other,"$WHYAREYOUINHERE");
+		b_say(self,other,"$WHYAREYOUINHERE ");
 		AI_StartState(self,zs_clearroomwait,0,"");
 	};
 };
@@ -67,12 +69,14 @@ func void zs_clearroomwait()
 	Npc_PercEnable(self,PERC_ASSESSENTERROOM,b_clearroomenterroom);
 	Npc_PercEnable(self,PERC_ASSESSUSEMOB,b_clearroomusemob);
 	Npc_PercEnable(self,PERC_ASSESSFIGHTSOUND,b_assessfightsound);
+	Npc_PercEnable(self,PERC_ASSESSTHEFT,b_assesstheft);
 	c_zsinit();
 };
 
 func void zs_clearroomwait_loop()
 {
 	printdebugnpc(PD_ZS_LOOP,"ZS_ClearRoomWait_Loop");
+	Npc_SetRefuseTalk(hero,10);
 	if(Npc_GetStateTime(self) > 8)
 	{
 		printdebugnpc(PD_ZS_CHECK,"...NSC wartet seit 8 Sekunden!");
@@ -90,6 +94,7 @@ func void zs_clearroomwait_loop()
 			b_say(self,other,"$YOUASKEDFORIT");
 			Npc_SetTarget(self,other);
 			AI_StartState(self,zs_attack,0,"");
+			Npc_SetRefuseTalk(hero,60);
 		}
 		else
 		{
@@ -111,7 +116,7 @@ func void b_clearroomenterroom()
 	if(Npc_CanSeeNpcFreeLOS(self,other))
 	{
 		printdebugnpc(PD_ZS_CHECK,"...NSC kann SC sehen!");
-		if(Wld_GetPlayerPortalGuild() == GIL_NONE)
+		if((Wld_GetPlayerPortalGuild() == GIL_NONE) || (Npc_GetAttitude(self,other) == ATT_FRIENDLY))
 		{
 			printdebugnpc(PD_ZS_CHECK,"...SC nicht mehr im Raum!");
 			if(c_amistronger(self,other))
@@ -144,21 +149,25 @@ func void b_clearroomenterroom()
 func void b_clearroomusemob()
 {
 	printdebugnpc(PD_ZS_FRAME,"B_ClearRoomUseMob");
-	if(Npc_IsDetectedMobOwnedByNpc(other,self) || Npc_IsDetectedMobOwnedByGuild(other,self.guild))
+	if(Npc_CanSeeNpcFreeLOS(self,other))
 	{
-		printdebugnpc(PD_ZS_CHECK,"...MOB gehört NSC oder seiner Gilde!");
-		b_fullstop(self);
-		Npc_PercDisable(self,PERC_ASSESSUSEMOB);
-		b_assessandmemorize(NEWS_THEFT,NEWS_SOURCE_WITNESS,self,other,self);
-		if(c_amistronger(self,other))
+		if(Npc_IsDetectedMobOwnedByNpc(other,self) || Npc_IsDetectedMobOwnedByGuild(other,self.guild))
 		{
-			b_say(self,other,"$DIRTYTHIEF");
-			Npc_SetTarget(self,other);
-			AI_StartState(self,zs_attack,0,"");
-		}
-		else
-		{
-			AI_StartState(self,zs_callguardsonenterroom,0,"");
+			printdebugnpc(PD_ZS_CHECK,"...MOB gehört NSC oder seiner Gilde!");
+			b_fullstop(self);
+			Npc_PercDisable(self,PERC_ASSESSUSEMOB);
+			b_assessandmemorize(NEWS_THEFT,NEWS_SOURCE_WITNESS,self,other,self);
+			if(c_amistronger(self,other))
+			{
+				b_say(self,other,"$DIRTYTHIEF");
+				Npc_SetTarget(self,other);
+				AI_StartState(self,zs_attack,0,"");
+				Npc_SetRefuseTalk(hero,60);
+			}
+			else
+			{
+				AI_StartState(self,zs_callguardsonenterroom,0,"");
+			};
 		};
 	};
 };

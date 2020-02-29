@@ -91,13 +91,13 @@ instance VLK_584_SNIPES_DEAL_2(C_INFO)
 	information = vlk_584_snipes_deal_2_info;
 	important = 0;
 	permanent = 1;
-	description = "(Купить ключ)";
+	description = "(купить ключ)";
 };
 
 
 func int vlk_584_snipes_deal_2_condition()
 {
-	if(Npc_KnowsInfo(hero,vlk_584_snipes_deal_run) && Npc_HasItems(self,itke_om_02))
+	if(Npc_KnowsInfo(hero,vlk_584_snipes_deal_run) && Npc_HasItems(self,itke_om_02) && SNIPES_KEY == FALSE)
 	{
 		return 1;
 	};
@@ -113,7 +113,7 @@ func void vlk_584_snipes_deal_2_info()
 		AI_Output(self,other,"VLK_584_Snipes_DEAL_2_Info_07_04");	//Да, знаешь, мне просто приятно, что я смогу обвести кого-то из стражников вокруг пальца. А если что-то из этого сундука окажется у меня, мне не жить.
 		b_giveinvitems(hero,self,itminugget,30);
 		b_giveinvitems(self,hero,itke_om_02,1);
-		vlk_584_snipes_deal_2.permanent = 0;
+		SNIPES_KEY = TRUE;
 		b_logentry(CH2_SNIPESDEAL,"Я купил у Снайпса ключ от сундука. Интересно, что мне скажет об этом Аарон, когда я расскажу ему об этом?");
 	}
 	else

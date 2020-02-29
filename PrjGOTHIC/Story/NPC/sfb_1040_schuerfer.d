@@ -21,7 +21,6 @@ instance SFB_1040_SCHUERFER(NPC_DEFAULT)
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_COWARD;
 	CreateInvItems(self,itforice,2);
-	CreateInvItems(self,itminugget,6);
 	CreateInvItem(self,itmi_stuff_plate_01);
 	EquipItem(self,itmwpickaxe);
 	CreateInvItem(self,itmw_1h_sword_short_01);
@@ -31,7 +30,13 @@ instance SFB_1040_SCHUERFER(NPC_DEFAULT)
 
 func void rtn_fmcstart_1040()
 {
-	ta_sitaround(1,0,13,0,"FMC_HUT01_OUT");
-	ta_sitaround(13,0,1,0,"FMC_HUT01_OUT");
+	ta_smalltalk(7,0,22,0,"FMC_HUT01_OUT");
+	ta_sleep(22,0,7,0,"FMC_HUT01_IN");
+};
+
+func void rtn_saved_1040()
+{
+	ta_sleep(7,0,22,0,"OW_PATH_081_H2");
+	ta_standaround(22,0,7,0,"OW_PATH_081_H3");
 };
 

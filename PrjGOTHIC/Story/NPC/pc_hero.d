@@ -232,11 +232,99 @@ instance XP_MAP(C_ITEM)
 	on_state[0] = use_xp_map;
 };
 
-
 func void use_xp_map()
 {
 	CreateInvItems(self,itminugget,1000);
-	hero.lp = hero.lp + 20;
-	PrintScreen("+1000 кусков руды",-1,40,"font_10_book.tga",10);
+	hero.lp = hero.lp + 10;
+	PrintScreen("+1000 кусков руды, +10 очков обучения",-1,-1,"font_old_20_white.tga",5);
+};
+
+instance D36TESTBOOK(C_ITEM)
+{
+	name = "Книга тестов";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 36;
+	visual = "ITWR_BOOK_ALCHEMY.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	on_state[0] = use_d36testbook;
+};
+
+func void use_d36testbook()
+{
+	PrintScreen("тестим...",-1,30,"font_old_20_white.tga",4);
+	OC_BANNED = TRUE;
+	Wld_ExchangeGuildAttitudes("GIL_ATTITUDES_FMTAKEN");
+};
+
+instance ALCHEMYKIT(C_ITEM)
+{
+	name = "Набор юного алхимика";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 36;
+	visual = "ITWR_BOOK_ALCHEMY.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAPSEALED";
+	on_state[0] = use_alchemykit;
+};
+
+func void use_alchemykit()
+{
+	hero.lp = hero.lp + 10;
+	CreateInvItem(self,alchemybook);
+	CreateInvItem(self,alchemy_hp1);
+	CreateInvItem(self,alchemy_hp2);
+	CreateInvItem(self,alchemy_hp3);
+	CreateInvItem(self,alchemy_hpmax);
+	CreateInvItem(self,alchemy_mp1);
+	CreateInvItem(self,alchemy_mp2);
+	CreateInvItem(self,alchemy_mp3);
+	CreateInvItem(self,alchemy_mpmax);
+	CreateInvItem(self,alchemy_dex);
+	CreateInvItem(self,alchemy_str);
+	CreateInvItem(self,alchemy_egg);
+	CreateInvItem(self,alchemy_fortuno);
+	CreateInvItem(self,alchemy_master);
+	CreateInvItem(self,kalomsrecipe);
+	CreateInvItems(self,itmiflask,20);
+	CreateInvItems(self,itfo_plants_nightshadow_01,5);
+	CreateInvItems(self,itfo_plants_herb_01,5);
+	CreateInvItems(self,itfo_plants_herb_02,5);
+	CreateInvItems(self,itfo_plants_herb_03,5);
+	CreateInvItems(self,itfo_plants_seraphis_01,5);
+	CreateInvItems(self,itfo_plants_ravenherb_01,5);
+	CreateInvItems(self,itfo_plants_stoneroot_01,5);
+	CreateInvItems(self,itfo_plants_mountainmoos_01,5);
+	CreateInvItems(self,itfo_plants_nightshadow_02,5);
+	CreateInvItems(self,itfo_plants_orcherb_02,5);
+	CreateInvItems(self,itfo_plants_mountainmoos_02,5);
+	CreateInvItems(self,itfo_plants_trollberrys_01,5);
+	CreateInvItems(self,itfo_plants_ravenherb_02,5);
+	CreateInvItems(self,itfo_plants_stoneroot_02,5);
+	CreateInvItems(self,itfo_plants_flameberry_01,5);
+	CreateInvItems(self,itat_crawlerqueen,9);
+	CreateInvItems(self,itmi_plants_swampherb_01,18);
+	CreateInvItems(self,itmi_alchemy_alcohol_01,5);
+	CreateInvItems(self,itfo_plants_bloodwood_01,5);
+	CreateInvItems(self,itfo_plants_deadleaf,5);
+};
+
+instance ALCHEMYFIX(C_ITEM)
+{
+	name = "Лекарство от бага";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 36;
+	visual = "ITWR_BOOK_ALCHEMY.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	on_state[0] = use_alchemyfix;
+};
+
+func void use_alchemyfix()
+{
+	Npc_SetTalentSkill(hero,NPC_TALENT_REGENERATE,0);
 };
 

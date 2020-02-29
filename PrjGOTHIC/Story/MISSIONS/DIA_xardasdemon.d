@@ -18,7 +18,7 @@ func int info_xardasdemon_exit_condition()
 
 func void info_xardasdemon_exit_info()
 {
-	AI_Output(self,other,"DIA_BaalCadar_NoTalk_Hi_02_01");	//
+	AI_Output(self,other,"DEM_AMBIENT02");	//
 	AI_Output(hero,self,"Info_Saturas_EXIT_15_01");	//... Я?.. Смертный?.. Я уже ухожу!
 	AI_StopProcessInfos(self);
 };
@@ -44,14 +44,18 @@ func int info_xardasdemon_intro_condition()
 
 func void info_xardasdemon_intro_info()
 {
+	Wld_PlayEffect("SPELLFX_SLEEPER_FIREBALL",self,self,3,0,DAM_FIRE,TRUE);
+	Mdl_SetVisualBody(self,"Dem_Body",DEFAULT,DEFAULT,"",DEFAULT,DEFAULT,-1);
+	AI_PlayAni(self,"T_SPAWN");
 	AI_TurnAway(hero,self);
+	AI_PlayAni(hero,"T_SEARCH");
 	AI_Output(hero,self,"Info_XardasDemon_INTRO_15_01");	//Так... Кто... Кто это говорит?
 	AI_WhirlAround(hero,self);
 	AI_Output(hero,self,"Info_XardasDemon_INTRO_15_02");	//Так это ты со мной говоришь? А как... а почему твой голос звучит только в моей голове?
-	AI_Output(self,other,"DIA_BaalCadar_NoTalk_Hi_02_01");	//
+	AI_Output(self,other,"DEM_AMBIENT02");	//
 	AI_Output(hero,self,"Info_XardasDemon_INTRO_15_03");	//Кто ты?.. простой слуга своего хозяина?
 	AI_Output(hero,self,"Info_XardasDemon_INTRO_15_04");	//Мне кажется, ты - одно из порождений бога Тьмы!
-	AI_Output(self,other,"DIA_BaalCadar_NoTalk_Hi_02_01");	//
+	AI_Output(self,other,"DEM_AMBIENT03");	//
 	AI_Output(hero,self,"Info_XardasDemon_INTRO_15_05");	//Мне замолчать?
 };
 
@@ -78,7 +82,7 @@ func int info_xardasdemon_masterwho_condition()
 func void info_xardasdemon_masterwho_info()
 {
 	AI_Output(hero,self,"Info_XardasDemon_MASTERWHO_15_01");	//А твой хозяин, случайно, не Ксардас?
-	AI_Output(self,other,"DIA_BaalCadar_NoTalk_Hi_02_01");	//
+	AI_Output(self,other,"DEM_AMBIENT04");	//
 	AI_Output(hero,self,"Info_XardasDemon_MASTERWHO_15_02");	//Ах, так... имена не имеют значения... ладно.
 	AI_Output(hero,self,"Info_XardasDemon_MASTERWHO_15_03");	//Просто мне сказали, что где-то здесь должна быть башня Ксардаса. По-моему, это она и есть.
 };
@@ -97,7 +101,7 @@ instance INFO_XARDASDEMON_MASTERHOW(C_INFO)
 
 func int info_xardasdemon_masterhow_condition()
 {
-	if(Npc_KnowsInfo(hero,info_xardasdemon_intro))
+	if(Npc_KnowsInfo(hero,info_xardasdemon_masterwho))
 	{
 		return TRUE;
 	};
@@ -106,9 +110,9 @@ func int info_xardasdemon_masterhow_condition()
 func void info_xardasdemon_masterhow_info()
 {
 	AI_Output(hero,self,"Info_XardasDemon_MASTERHOW_15_01");	//Я хочу поговорить с твоим хозяином!
-	AI_Output(self,other,"DIA_BaalCadar_NoTalk_Hi_02_01");	//
+	AI_Output(self,other,"DEM_AMBIENT03");	//
 	AI_Output(hero,self,"Info_XardasDemon_MASTERHOW_15_02");	//Я?.. Недостоин?.. А что за испытание?..
-	AI_Output(self,other,"DIA_BaalCadar_NoTalk_Hi_02_01");	//
+	AI_Output(self,other,"DEM_AMBIENT01");	//
 	AI_Output(hero,self,"Info_XardasDemon_MASTERHOW_15_03");	//... А-а... Понимаю... если кто-то хочет поговорить с твоим хозяином, он должен доказать, что он этого достоин!
 	AI_Output(hero,self,"Info_XardasDemon_MASTERHOW_15_04");	//... Подожди, как ты сказал?.. Доказательство?.. Какая-то победа?.. Над стихиями?
 	AI_Output(hero,self,"Info_XardasDemon_MASTERHOW_15_05");	//... Камень?.. Лед?.. Огонь?
@@ -139,7 +143,7 @@ func int info_xardasdemon_noheart_condition()
 func void info_xardasdemon_noheart_info()
 {
 	AI_Output(hero,self,"Info_XardasDemon_NOHEART_15_01");	//Я не понимаю! Загадки какие-то.
-	AI_Output(self,other,"DIA_BaalCadar_NoTalk_Hi_02_01");	//
+	AI_Output(self,other,"DEM_AMBIENT04");	//
 	AI_Output(hero,self,"Info_XardasDemon_NOHEART_15_02");	//... Это я уже слышал, зачем ты это повторяешь?..
 	AI_Output(hero,self,"Info_XardasDemon_NOHEART_15_03");	//... А, так тебе нужны доказательства победы над стихиями Огня, Льда и Камня!
 };
@@ -148,21 +152,21 @@ func void b_xardasdemon_giveheart()
 {
 	if(FINDGOLEMHEARTS == 1)
 	{
-		AI_Output(self,other,"DIA_BaalCadar_NoTalk_Hi_02_01");	//
+		AI_Output(self,other,"DEM_AMBIENT02");	//
 		AI_Output(hero,self,"Info_XardasDemon_GIVEHEART_15_01");	//... Что? А-а!.. Убедительное доказательство!
 		AI_Output(hero,self,"Info_XardasDemon_GIVEHEART_15_02");	//...Отсутствуют? Двух еще нет?
 		FINDGOLEMHEARTS = 2;
 	}
 	else if(FINDGOLEMHEARTS == 2)
 	{
-		AI_Output(self,other,"DIA_BaalCadar_NoTalk_Hi_02_01");	//
+		AI_Output(self,other,"DEM_AMBIENT01");	//
 		AI_Output(hero,self,"Info_XardasDemon_GIVEHEART_15_03");	//... Второе доказательство?.. Теперь у тебя их два?
 		AI_Output(hero,self,"Info_XardasDemon_GIVEHEART_15_04");	//... Не хватает еще одного?
 		FINDGOLEMHEARTS = 3;
 	}
 	else if(FINDGOLEMHEARTS == 3)
 	{
-		AI_Output(self,other,"DIA_BaalCadar_NoTalk_Hi_02_01");	//
+		AI_Output(self,other,"DEM_WARN01");	//
 		AI_Output(hero,self,"Info_XardasDemon_GIVEHEART_15_05");	//... Совершенство?.. Я достоин?
 		AI_Output(hero,self,"Info_XardasDemon_GIVEHEART_15_06");	//Если это так, то я хочу поговорить с твоим хозяином!
 		AI_Output(hero,self,"Info_XardasDemon_GIVEHEART_15_07");	//... Опровержение?.. Опровержение чего?.. Руна?.. Ты дашь мне руну?

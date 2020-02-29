@@ -10,9 +10,9 @@ const int HP_WASSER = 5;
 const int VALUE_BIER = 10;
 const int HP_BIER = 3;
 const int VALUE_WEIN = 13;
-const int HP_WEIN = 3;
+const int HP_WEIN = 5;
 const int VALUE_REISSCHNAPS = 15;
-const int HP_REISSCHNAPS = 3;
+const int HP_REISSCHNAPS = 7;
 const int VALUE_REIS = 5;
 const int HP_REIS = 10;
 const int VALUE_WURZELSUPPE = 3;
@@ -22,13 +22,13 @@ const int HP_RAGOUT = 9;
 const int VALUE_CRAWLERSUPPE = 10;
 const int HP_CRAWLERSUPPE = 15;
 const int VALUE_FLEISCHROH = 5;
-const int HP_FLEISCHROH = 10;
+const int HP_FLEISCHROH = 7;
 const int VALUE_BROT = 8;
 const int HP_BROT = 12;
 const int VALUE_KеSE = 10;
 const int HP_KеSE = 15;
 const int VALUE_FLEISCH = 8;
-const int HP_FLEISCH = 15;
+const int HP_FLEISCH = 18;
 const int VALUE_SCHINKEN = 12;
 const int HP_SCHINKEN = 18;
 const int VALUE_WALDBEEREN = 5;
@@ -36,12 +36,12 @@ const int HP_WALDBEEREN = 10;
 const int VALUE_FLAMMENDORN = 6;
 const int HP_FLAMMENDORN = 12;
 const int VALUE_SERAPHIS = 7;
-const int HP_SERAPHIS = 14;
+const int HP_SERAPHIS = 5;
 const int VALUE_VELAYIS = 8;
 const int HP_VELAYIS = 16;
-const int VALUE_BERGMOOS = 9;
+const int VALUE_BERGMOOS = 50;
 const int HP_BERGMOOS = 18;
-const int VALUE_GRABMOOS = 10;
+const int VALUE_GRABMOOS = 70;
 const int HP_GRABMOOS = 20;
 const int VALUE_NACHTSCHATTEN = 11;
 const int HP_NACHTSCHATTEN = 22;
@@ -79,7 +79,7 @@ const int MANA_DRACHENWURZEL = 30;
 instance ITAT_MEATBUG_01(C_ITEM)
 {
 	name = "Мясо жука";
-	mainflag = ITEM_KAT_NONE;
+	mainflag = ITEM_KAT_FOOD;
 	flags = ITEM_MULTI;
 	value = VALUE_BUGMEAT;
 	visual = "ItAt_Meatbug_01.3DS";
@@ -388,17 +388,13 @@ instance ITFOBEER(C_ITEM)
 	value = VALUE_BIER;
 	visual = "ItFo_Beer_01.3ds";
 	material = MAT_GLAS;
-	on_state[0] = usebeer;
+	on_state[0] = usebooze;
 	scemename = "POTION";
 	description = name;
+	text[1] = NAME_BONUS_HP;
+	count[1] = HP_REISSCHNAPS;
 	text[5] = NAME_VALUE;
 	count[5] = VALUE_BIER;
-};
-
-
-func void usebeer()
-{
-	Npc_ChangeAttribute(self,ATR_HITPOINTS,HP_BIER);
 };
 
 
@@ -410,19 +406,14 @@ instance ITFOWINE(C_ITEM)
 	value = VALUE_WEIN;
 	visual = "ItFo_Wine_01.3ds";
 	material = MAT_LEATHER;
-	on_state[0] = usewine;
+	on_state[0] = usebooze;
 	scemename = "POTION";
 	description = name;
+	text[1] = NAME_BONUS_HP;
+	count[1] = HP_REISSCHNAPS;
 	text[5] = NAME_VALUE;
 	count[5] = VALUE_WEIN;
 };
-
-
-func void usewine()
-{
-	Npc_ChangeAttribute(self,ATR_HITPOINTS,HP_WEIN);
-};
-
 
 instance ITFOBOOZE(C_ITEM)
 {
@@ -435,6 +426,8 @@ instance ITFOBOOZE(C_ITEM)
 	on_state[0] = usebooze;
 	scemename = "POTION";
 	description = name;
+	text[1] = NAME_BONUS_HP;
+	count[1] = HP_REISSCHNAPS;
 	text[5] = NAME_VALUE;
 	count[5] = VALUE_REISSCHNAPS;
 };
@@ -442,6 +435,10 @@ instance ITFOBOOZE(C_ITEM)
 
 func void usebooze()
 {
+	if(Npc_IsPlayer(self) && (hero.attribute[ATR_HITPOINTS] == hero.attribute[ATR_HITPOINTS_MAX]))
+	{
+		Mdl_ApplyOverlayMdsTimed(self,"HUMANS_DRUNKEN.MDS",50000);
+	};
 	Npc_ChangeAttribute(self,ATR_HITPOINTS,HP_REISSCHNAPS);
 };
 
@@ -527,7 +524,7 @@ instance ITFO_PLANTS_VELAYIS_01(C_ITEM)
 	mainflag = ITEM_KAT_FOOD;
 	flags = ITEM_MULTI;
 	value = VALUE_VELAYIS;
-	visual = "ItFo_Plants_Seraphis_01.3ds";
+	visual = "ItFo_Plants_Flameberry_02.3ds";
 	material = MAT_WOOD;
 	on_state[0] = usevelayis;
 	scemename = "FOOD";
@@ -577,7 +574,7 @@ instance ITFO_PLANTS_MOUNTAINMOOS_02(C_ITEM)
 	mainflag = ITEM_KAT_FOOD;
 	flags = ITEM_MULTI;
 	value = VALUE_GRABMOOS;
-	visual = "ItFo_Plants_mountainmoos_01.3ds";
+	visual = "ItFo_Plants_mountainmoos_02.3ds";
 	material = MAT_WOOD;
 	on_state[0] = usemoos2;
 	scemename = "FOOD";
@@ -627,12 +624,12 @@ instance ITFO_PLANTS_NIGHTSHADOW_02(C_ITEM)
 	mainflag = ITEM_KAT_FOOD;
 	flags = ITEM_MULTI;
 	value = VALUE_MONDSCHATTEN;
-	visual = "ItFo_Plants_Nightshadow_01.3ds";
+	visual = "ItFo_Plants_Moonshadow.3ds";
 	material = MAT_WOOD;
 	on_state[0] = usemoon;
 	scemename = "FOOD";
 	description = name;
-	text[1] = NAME_BONUS_HP;
+	text[1] = NAME_BONUS_MANA;
 	count[1] = HP_MONDSCHATTEN;
 	text[5] = NAME_VALUE;
 	count[5] = VALUE_MONDSCHATTEN;
@@ -641,7 +638,7 @@ instance ITFO_PLANTS_NIGHTSHADOW_02(C_ITEM)
 
 func void usemoon()
 {
-	Npc_ChangeAttribute(self,ATR_HITPOINTS,HP_MONDSCHATTEN);
+	Npc_ChangeAttribute(self,ATR_MANA,HP_MONDSCHATTEN);
 	printdebugnpc(PD_ITEM_MOBSI,"Я ем лунную тень.");
 };
 
@@ -677,7 +674,7 @@ instance ITFO_PLANTS_ORCHERB_02(C_ITEM)
 	mainflag = ITEM_KAT_FOOD;
 	flags = ITEM_MULTI;
 	value = VALUE_EICHENBLATT;
-	visual = "ItFo_Plants_OrcHerb_01.3ds";
+	visual = "ItFo_Plants_OakHerb.3ds";
 	material = MAT_WOOD;
 	on_state[0] = useorc2;
 	scemename = "FOOD";
@@ -727,7 +724,7 @@ instance ITFO_PLANTS_MUSHROOM_02(C_ITEM)
 	mainflag = ITEM_KAT_FOOD;
 	flags = ITEM_MULTI;
 	value = VALUE_SKLAVENBROT;
-	visual = "ItFo_Plants_mushroom_01.3ds";
+	visual = "ItFo_Plants_mushroom_02.3ds";
 	material = MAT_WOOD;
 	on_state[0] = usemush2;
 	scemename = "FOOD";
@@ -773,7 +770,7 @@ func void useplants1()
 
 instance ITFO_PLANTS_HERB_02(C_ITEM)
 {
-	name = "Целебная трава";
+	name = "Целебное растение";
 	mainflag = ITEM_KAT_FOOD;
 	flags = ITEM_MULTI;
 	value = VALUE_HEILKRеUTER2;
@@ -798,7 +795,7 @@ func void useplants2()
 
 instance ITFO_PLANTS_HERB_03(C_ITEM)
 {
-	name = "Целебная трава";
+	name = "Целебный корень";
 	mainflag = ITEM_KAT_FOOD;
 	flags = ITEM_MULTI;
 	value = VALUE_HEILKRеUTER3;
@@ -848,26 +845,66 @@ func void useblood()
 
 instance ITFO_PLANTS_TOWERWOOD_01(C_ITEM)
 {
-	name = "Желуди";
+	name = "Соты шершня";
 	mainflag = ITEM_KAT_FOOD;
 	flags = ITEM_MULTI;
-	value = VALUE_TURMEICHE;
-	visual = "ItFo_Plants_Bloodwood_01.3ds";
+	value = 100;
+	visual = "ItFo_Plants_Honey_01.3ds";
 	material = MAT_WOOD;
-	on_state[0] = useblood2;
-	scemename = "FOOD";
+	on_state[0] = usehoneycomb;
+	scemename = "FOODHUGE";
 	description = name;
-	text[1] = NAME_BONUS_MANA;
-	count[1] = MANA_TURMEICHE;
+	text[1] = "Трофей настоящего путешественника.";
+	text[2] = "Содержат вкусный мед!";
 	text[5] = NAME_VALUE;
-	count[5] = VALUE_TURMEICHE;
+	count[5] = 100;
 };
 
 
-func void useblood2()
+func void usehoneycomb()
 {
-	Npc_ChangeAttribute(self,ATR_MANA,MANA_TURMEICHE);
-	printdebugnpc(PD_ITEM_MOBSI,"Я ем желуди.");
+	if(HONEYCOMB == 0)
+	{
+		HONEYCOMB = 1;
+		PrintScreen("Найдено сот: 1/5",-1,40,"FONT_OLD_20_WHITE.TGA",5);
+		Log_CreateTopic("Соты шершней",LOG_NOTE);
+		b_logentry("Соты шершней","Я нашел соты шершня и решил попробовать на вкус их мед. Довольно вкусно!");
+		b_givexp(100);
+	}
+	else if(HONEYCOMB == 1)
+	{
+		HONEYCOMB = 2;
+		PrintScreen("Найдено сот: 2/5",-1,40,"FONT_OLD_20_WHITE.TGA",5);
+		b_logentry("Соты шершней","Вторая порция оказалась еще вкуснее!");
+		b_givexp(100);
+	}
+	else if(HONEYCOMB == 2)
+	{
+		HONEYCOMB = 3;
+		PrintScreen("Найдено сот: 3/5",-1,40,"FONT_OLD_20_WHITE.TGA",5);
+		b_logentry("Соты шершней","Съел третие соты. Жаль, что их так сложно найти.");
+		b_givexp(100);
+	}
+	else if(HONEYCOMB == 3)
+	{
+		HONEYCOMB = 4;
+		PrintScreen("Найдено сот: 4/5",-1,40,"FONT_OLD_20_WHITE.TGA",5);
+		b_logentry("Соты шершней","Четвертая находка. Может, начать выращивать шершней и открыть свое дело?");
+		b_givexp(100);
+	}
+	else if(HONEYCOMB == 4)
+	{
+		HONEYCOMB = 5;
+		PrintScreen("Найдено сот: 5/5",-1,40,"FONT_OLD_20_WHITE.TGA",5);
+		PrintScreen("+10 очков обучения",-1,47,"FONT_OLD_20_WHITE.TGA",5);
+		hero.lp = hero.lp + 10;
+		Snd_Play("BLO_WARN_A1");
+		b_logentry("Соты шершней","Думаю, пяти сот будет достаточно. Я и правда чувствую себя сильнее!");
+	}
+	else if(HONEYCOMB == 5)
+	{
+		b_givexp(100);
+	};
 };
 
 
@@ -902,7 +939,7 @@ instance ITFO_PLANTS_RAVENHERB_02(C_ITEM)
 	mainflag = ITEM_KAT_FOOD;
 	flags = ITEM_MULTI;
 	value = VALUE_DUNKELKRAUT;
-	visual = "ItFo_Plants_RavenHerb_01.3ds";
+	visual = "ItFo_Plants_DarkHerb.3ds";
 	material = MAT_WOOD;
 	on_state[0] = useraven2;
 	scemename = "FOOD";
@@ -948,11 +985,11 @@ func void useroot()
 
 instance ITFO_PLANTS_STONEROOT_02(C_ITEM)
 {
-	name = "Драконовый корень";
+	name = "Драконий корень";
 	mainflag = ITEM_KAT_FOOD;
 	flags = ITEM_MULTI;
 	value = VALUE_DRACHENWURZEL;
-	visual = "ItFo_Plants_Stoneroot_01.3ds";
+	visual = "ItFo_Plants_Dragonroot.3ds";
 	material = MAT_WOOD;
 	on_state[0] = useroot2;
 	scemename = "FOOD";
@@ -967,7 +1004,7 @@ instance ITFO_PLANTS_STONEROOT_02(C_ITEM)
 func void useroot2()
 {
 	Npc_ChangeAttribute(self,ATR_MANA,MANA_DRACHENWURZEL);
-	printdebugnpc(PD_ITEM_MOBSI,"Я ем драконовый корень.");
+	printdebugnpc(PD_ITEM_MOBSI,"Я ем драконий корень.");
 };
 
 
@@ -982,6 +1019,8 @@ instance ITFO_PLANTS_TROLLBERRYS_01(C_ITEM)
 	on_state[0] = usetrollberrys;
 	scemename = "FOOD";
 	description = name;
+	text[1] = NAME_BONUS_HP;
+	count[1] = HP_TROLLKIRSCHE;
 	text[5] = NAME_VALUE;
 	count[5] = VALUE_TROLLKIRSCHE;
 };
@@ -991,5 +1030,28 @@ func void usetrollberrys()
 {
 	Npc_ChangeAttribute(self,ATR_HITPOINTS,HP_TROLLKIRSCHE);
 	printdebugnpc(PD_ITEM_MOBSI,"Я ем вишню троллей.");
+};
+
+instance ITFO_PLANTS_DEADLEAF(C_ITEM)
+{
+	name = "Мертвый лист";
+	mainflag = ITEM_KAT_FOOD;
+	flags = ITEM_MULTI;
+	value = 50;
+	visual = "ItFo_Plants_Deadleaf.3ds";
+	material = MAT_WOOD;
+	on_state[0] = usedeadleaf;
+	scemename = "FOOD";
+	description = name;
+	text[1] = NAME_BONUS_MANA;
+	count[1] = 35;
+	text[5] = NAME_VALUE;
+	count[5] = 50;
+};
+
+
+func void usedeadleaf()
+{
+	Npc_ChangeAttribute(self,ATR_MANA,35);
 };
 

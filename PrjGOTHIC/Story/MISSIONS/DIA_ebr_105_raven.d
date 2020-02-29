@@ -84,7 +84,7 @@ instance DIA_RAVEN_KRAUTBOTE(C_INFO)
 
 func int dia_raven_krautbote_condition()
 {
-	if(KALOM_KRAUTBOTE == LOG_RUNNING)
+	if(KALOM_KRAUTBOTE == LOG_RUNNING && KALOM_DELIVEREDWEED == FALSE)
 	{
 		return 1;
 	};
@@ -124,8 +124,8 @@ func void dia_raven_aufnahme_info()
 	AI_Output(other,self,"DIA_Raven_Aufnahme_15_00");	//Я хочу видеть Гомеза. Торус сказал, что меня могут взять в Призраки.
 	AI_Output(self,other,"DIA_Raven_Aufnahme_10_01");	//Надежные люди нам всегда нужны. А на тебя можно положиться, раз тебя прислал Торус. Думаю, ты нам подойдешь.
 	AI_Output(self,other,"DIA_Raven_Aufnahme_10_02");	//Я отведу тебя к Гомезу. Иди за мной. Только ничего не трогай!
-	AI_StopProcessInfos(self);
 	Npc_ExchangeRoutine(self,"GUIDE");
+	AI_StopProcessInfos(self);
 };
 
 
@@ -152,7 +152,7 @@ func void dia_raven_there_info()
 {
 	AI_Output(self,other,"DIA_Raven_There_10_01");	//Вон там сидит Гомез. Если ты выберешь неверный тон, я лично научу тебя хорошим манерам, ясно?
 	AI_StopProcessInfos(self);
-	Npc_ExchangeRoutine(self,"START");
+	Npc_ExchangeRoutine(self,"PRESTART");
 };
 
 
@@ -203,18 +203,13 @@ func int dia_raven_bindabei_condition()
 
 func void dia_raven_bindabei_info()
 {
-	CreateInvItem(hero,stt_armor_m);
-	CreateInvItem(self,itamarrow);
-	b_giveinvitems(self,hero,itamarrow,1);
-	Npc_RemoveInvItem(hero,itamarrow);
 	AI_Output(other,self,"DIA_Raven_BinDabei_15_00");	//Гомез сказал, что теперь я работаю на вас.
 	AI_Output(self,other,"DIA_Raven_BinDabei_10_01");	//Хорошо. У меня как раз есть для тебя одно задание.
 	AI_Output(self,other,"DIA_Raven_BinDabei_10_02");	//Если у тебя действительно хорошие связи, у тебя с ним не возникнет никаких проблем.
-	AI_EquipBestArmor(hero);
+	CreateInvItem(self,stt_armor_m);
+	b_giveinvitems(self,hero,stt_armor_m,1);
+	AI_EquipArmor(hero,stt_armor_m);
 };
-
-
-var int raven_spysect;
 
 instance DIA_RAVEN_SPYSECT(C_INFO)
 {
@@ -314,6 +309,7 @@ func void dia_raven_spybericht_info()
 		{
 			AI_Output(other,self,"Org_826_Mordrag_RUNNING_15_04");	//Они провели Великую Церемонию.
 			AI_Output(self,other,"DIA_Raven_SpyBericht_10_04");	//Ты хорошо поработал.
+			Npc_ExchangeRoutine(self,"START");
 			RAVEN_SPYSECT = LOG_SUCCESS;
 			b_givexp(XP_REPORTTORAVEN);
 			Log_SetTopicStatus(CH1_GOTOPSI,LOG_SUCCESS);
@@ -329,6 +325,7 @@ func void dia_raven_spybericht_info()
 			else
 			{
 				AI_Output(self,other,"DIA_Raven_SpyBericht_10_04");	//Ты хорошо поработал.
+				Npc_ExchangeRoutine(self,"START");
 				RAVEN_SPYSECT = LOG_SUCCESS;
 				b_givexp(XP_REPORTTORAVEN);
 				Log_SetTopicStatus(CH1_GOTOPSI,LOG_SUCCESS);
@@ -341,5 +338,80 @@ func void dia_raven_spybericht_info()
 		AI_Output(other,self,"DIA_Raven_SpyBericht_15_05");	//Я еще не знаю, что они там собираются делать.
 		AI_Output(self,other,"DIA_Raven_SpyBericht_10_06");	//Так зачем же ты меня отвлекаешь?
 	};
+};
+
+instance DIA_RAVEN_QUENTIN(C_INFO)
+{
+	npc = ebr_105_raven;
+	nr = 1;
+	condition = dia_raven_quentin_condition;
+	information = dia_raven_quentin_info;
+	permanent = 0;
+	description = "У тебя есть для меня еще какое-нибудь задание?";
+};
+
+
+func int dia_raven_quentin_condition()
+{
+	if(RAVEN_SPYSECT == LOG_SUCCESS)
+	{
+		return 1;
+	};
+};
+
+func void dia_raven_quentin_info()
+{
+	AI_Output(other,self,"Mis_1_Psi_Kalom_DrugMonopol_15_00");	//У тебя есть для меня еще какое-нибудь задание?
+	AI_Output(self,other,"DIA_Quentin_Raven_01");	//Есть. Пропали несколько наших рудокопов. Похоже, что здесь замешаны люди некого Квентина.
+	AI_Output(self,other,"DIA_Quentin_Raven_02");	//Он недавно объявился в колонии и быстро стал довольно влиятельным. Некоторые воры из Нового лагеря переметнулись к нему.
+	AI_Output(self,other,"DIA_Quentin_Raven_03");	//Найди их убежище и разберись с этой проблемой. Свободен!
+	QUENTIN_GANG_QUEST_STARTED = LOG_RUNNING;
+	Log_CreateTopic(QUENTIN_GANG,LOG_MISSION);
+	Log_SetTopicStatus(QUENTIN_GANG,LOG_RUNNING);
+	b_logentry(QUENTIN_GANG,"Равен дал мне новое задание: найти логово бандитов Квентина и разобраться с ними. Звучит невероятно сложно, как всегда...");
+	AI_StopProcessInfos(self);
+};
+
+instance DIA_RAVEN_QUENTIN_DONE(C_INFO)
+{
+	npc = ebr_105_raven;
+	nr = 1;
+	condition = dia_raven_quentin_done_condition;
+	information = dia_raven_quentin_done_info;
+	permanent = 0;
+	description = "С Квентином покончено!";
+};
+
+
+func int dia_raven_quentin_done_condition()
+{
+	if(Npc_IsDead(org_858_quentin) && Npc_KnowsInfo(hero,dia_raven_quentin))
+	{
+		return 1;
+	};
+};
+
+func void dia_raven_quentin_done_info()
+{
+	AI_Output(other,self,"DIA_Quentin_Raven_04");	//С Квентином покончено!
+	AI_Output(other,self,"DIA_Quentin_Raven_05");	//Он нашел небольшое месторождение руды в горах недалеко от места обмена.
+	AI_Output(other,self,"DIA_Quentin_Raven_06");	//Ему удалось собрать вокруг себя банду, а похищенных людей они использовали как рабов для добычи.
+	AI_Output(self,other,"DIA_Quentin_Raven_07");	//Интересно... Я направлю туда наших людей. Теперь это наша руда!
+	if(Npc_KnowsInfo(hero,dia_vlk595_quentin_done))
+	{
+		AI_Output(self,other,"DIA_Quentin_Raven_08");	//А что с нашими рудокопами?
+		AI_Output(other,self,"DIA_Quentin_Raven_09");	//Вернулись в лагерь.
+	};
+	AI_Output(self,other,"DIA_Quentin_Raven_10");	//Гомез будет в полном восторге!
+	AI_Output(self,other,"DIA_Quentin_Raven_11");	//Ну все, ступай, ступай... Я передам ему эту новость сам.
+	AI_Output(self,other,"DIA_Quentin_Raven_12");	//А ты теперь сможешь купить тяжелый доспех у Стоуна. Считай, что заслужил.
+	CAN_BUY_GRD_ARMOR_H = TRUE;
+	b_givexp(1000);
+	b_giveinvitems(self,other,itminugget,500);
+	QUENTIN_GANG_QUEST_STARTED = LOG_SUCCESS;
+	Log_SetTopicStatus(QUENTIN_GANG,LOG_SUCCESS);
+	b_logentry(QUENTIN_GANG,"Задание выполнено, Равен отблагодарил меня рудой. Но, похоже, Гомез не узнает о моих подвигах.");
+	b_clearquentincamp();
+	AI_StopProcessInfos(self);
 };
 

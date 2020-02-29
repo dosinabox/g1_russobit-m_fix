@@ -1,5 +1,5 @@
 
-func int b_stopmagicsleep()
+func void b_stopmagicsleep()
 {
 	Npc_PercDisable(self,PERC_ASSESSDAMAGE);
 	Npc_ClearAIQueue(self);
@@ -26,12 +26,10 @@ func void zs_magicsleep()
 	if(c_bodystatecontains(self,BS_SWIM) || c_bodystatecontains(self,BS_DIVE))
 	{
 		AI_ContinueRoutine(self);
-		return;
 	};
 	if(Npc_WasInState(self,zs_unconscious))
 	{
 		AI_ContinueRoutine(self);
-		return;
 	};
 	Npc_ClearAIQueue(self);
 	if(!Npc_HasBodyFlag(self,BS_FLAG_INTERRUPTABLE))

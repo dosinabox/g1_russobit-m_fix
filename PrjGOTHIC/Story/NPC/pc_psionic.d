@@ -23,6 +23,7 @@ instance PC_PSIONIC(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,2);
 	EquipItem(self,streitschlichter);
 	CreateInvItem(self,itfosoup);
+	CreateInvItems(self,itfo_potion_health_02,3);
 	daily_routine = rtn_start_4;
 	senses = SENSE_HEAR | SENSE_SEE | SENSE_SMELL;
 	senses_range = 1500;
@@ -33,6 +34,12 @@ func void rtn_start_4()
 {
 	ta_smalltalk(8,0,23,0,"PSI_GUARD_TREE_EX");
 	ta_smalltalk(23,0,8,0,"PSI_GUARD_TREE_EX");
+};
+
+func void rtn_startch2_4()
+{
+	ta_smalltalk(8,0,23,0,"PSI_GUARD_TREE_EX");
+	ta_sleep(23,0,8,0,"PSI_GUARD_TREE_IN");
 };
 
 func void rtn_fortresswait_4()
@@ -87,5 +94,12 @@ func void rtn_guidetoherb_4()
 {
 	ta_guidepc(8,0,23,0,"PSI_WALK_06");
 	ta_guidepc(23,0,8,0,"PSI_WALK_06");
+};
+
+func void rtn_reunion_4()
+{
+	ta_guard(16,0,0,5,"LOCATION_02_03");
+	ta_sleep(0,5,8,5,"LOCATION_02_07");
+	ta_smalltalk(8,5,16,0,"LOCATION_02_04");
 };
 

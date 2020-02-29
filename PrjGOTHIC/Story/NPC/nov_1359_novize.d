@@ -14,6 +14,7 @@ instance NOV_1359_NOVIZE(NPC_DEFAULT)
 	attribute[ATR_MANA] = 0;
 	attribute[ATR_HITPOINTS_MAX] = 250;
 	attribute[ATR_HITPOINTS] = 250;
+	aivar[43] = TRUE;
 	protection[PROT_BLUNT] = 500;
 	protection[PROT_EDGE] = 500;
 	protection[PROT_POINT] = 500;

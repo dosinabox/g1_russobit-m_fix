@@ -8,7 +8,9 @@ instance ITMI_AMULET_PSI_01(C_ITEM)
 	visual = "ItMi_Amulet_Psi_01.3ds";
 	visual_skin = 0;
 	material = MAT_METAL;
-	description = "Знак Братства";
+	description = "Амулет Братства";
+	text[1] = "Знак отличия последователей";
+	text[2] = "Спящего.";
 	text[5] = NAME_VALUE;
 	count[5] = value;
 };
@@ -381,7 +383,7 @@ instance LEBENSAMULETT(C_ITEM)
 	on_equip = equip_lebensamulett;
 	on_unequip = unequip_lebensamulett;
 	description = "Амулет жизненной силы";
-	text[2] = NAME_BONUS_HP;
+	text[2] = NAME_BONUS_HPMAX;
 	count[2] = 30;
 	text[5] = NAME_VALUE;
 	count[5] = value;
@@ -420,7 +422,7 @@ instance AMULETT_DER_MAGIE(C_ITEM)
 	on_equip = equip_amulett_der_magie;
 	on_unequip = unequip_amulett_der_magie;
 	description = "Амулет магии";
-	text[2] = NAME_BONUS_MANA;
+	text[2] = NAME_BONUS_MANAMAX;
 	count[2] = 10;
 	text[5] = NAME_VALUE;
 	count[5] = value;
@@ -435,7 +437,14 @@ func void equip_amulett_der_magie()
 
 func void unequip_amulett_der_magie()
 {
-	self.attribute[ATR_MANA] = self.attribute[ATR_MANA] - 10;
+	if(self.attribute[ATR_MANA] >= 10)
+	{
+		self.attribute[ATR_MANA] = self.attribute[ATR_MANA] - 10;
+	}
+	else
+	{
+		self.attribute[ATR_MANA] = 0;
+	};
 	self.attribute[ATR_MANA_MAX] = self.attribute[ATR_MANA_MAX] - 10;
 };
 
@@ -486,9 +495,9 @@ instance AMULETT_DER_ERLEUCHTUNG(C_ITEM)
 	on_equip = equip_amulett_der_erleuchtung;
 	on_unequip = unequip_amulett_der_erleuchtung;
 	description = "Амулет освещения";
-	text[2] = NAME_BONUS_HP;
+	text[2] = NAME_BONUS_HPMAX;
 	count[2] = 25;
-	text[3] = NAME_BONUS_MANA;
+	text[3] = NAME_BONUS_MANAMAX;
 	count[3] = 25;
 	text[5] = NAME_VALUE;
 	count[5] = value;
@@ -505,7 +514,14 @@ func void equip_amulett_der_erleuchtung()
 
 func void unequip_amulett_der_erleuchtung()
 {
-	self.attribute[ATR_MANA] = self.attribute[ATR_MANA] - 25;
+	if(self.attribute[ATR_MANA] >= 25)
+	{
+		self.attribute[ATR_MANA] = self.attribute[ATR_MANA] - 25;
+	}
+	else
+	{
+		self.attribute[ATR_MANA] = 0;
+	};
 	self.attribute[ATR_MANA_MAX] = self.attribute[ATR_MANA_MAX] - 25;
 	self.attribute[ATR_HITPOINTS_MAX] = self.attribute[ATR_HITPOINTS_MAX] - 25;
 	if(self.attribute[ATR_HITPOINTS] > 26)

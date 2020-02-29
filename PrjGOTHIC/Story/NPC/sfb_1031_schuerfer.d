@@ -15,24 +15,27 @@ instance SFB_1031_SCHUERFER(NPC_DEFAULT)
 	attribute[ATR_HITPOINTS] = 76;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Tired.mds");
-	Mdl_SetVisualBody(self,"hum_body_Naked0",3,1,"Hum_Head_Fighter",44,3,-1);
+	Mdl_SetVisualBody(self,"hum_body_Naked0",3,1,"Hum_Head_Fighter",44,3,sfb_armor_l);
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_COWARD;
 	CreateInvItems(self,itforice,6);
-	CreateInvItems(self,itminugget,5);
 	CreateInvItem(self,itmi_stuff_cup_01);
-	CreateInvItem(self,itmi_stuff_plate_01);
 	EquipItem(self,itmwpickaxe);
 	CreateInvItem(self,itmw_1h_hatchet_01);
-	CreateInvItem(self,itmi_stuff_oldcoin_02);
 	daily_routine = rtn_fmcstart_1031;
 };
 
 
 func void rtn_fmcstart_1031()
 {
-	ta_pickore(1,0,13,0,"FMC_ORE_03");
-	ta_pickore(13,0,1,0,"FMC_ORE_03");
+	ta_pickore(6,0,23,0,"FMC_ORE_03");
+	ta_sleep(23,0,6,0,"FMC_HUT14_IN");
+};
+
+func void rtn_dead_1031()
+{
+	ta_stay(6,0,23,0,"FMC_ORE_03");
+	ta_stay(23,0,6,0,"FMC_ORE_03");
 };
 

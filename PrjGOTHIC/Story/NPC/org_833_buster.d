@@ -1,7 +1,7 @@
 
 instance ORG_833_BUSTER(NPC_DEFAULT)
 {
-	name[0] = "Бустер";
+	name[0] = "Бастер";
 	npctype = NPCTYPE_MAIN;
 	guild = GIL_ORG;
 	level = 4;

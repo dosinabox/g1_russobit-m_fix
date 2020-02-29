@@ -28,7 +28,7 @@ instance TPL_1437_TEMPLER_NERV(C_INFO)
 	condition = tpl_1437_templer_nerv_condition;
 	information = tpl_1437_templer_nerv_info;
 	important = 0;
-	permanent = 1;
+	permanent = 0;
 	description = "Как дела?";
 };
 

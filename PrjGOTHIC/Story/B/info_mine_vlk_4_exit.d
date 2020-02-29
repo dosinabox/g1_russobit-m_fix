@@ -92,7 +92,7 @@ func int info_mine_vlk_4_minecrawler_condition()
 func void info_mine_vlk_4_minecrawler_info()
 {
 	AI_Output(other,self,"Info_Mine_Vlk_4_Minecrawler_15_00");	//Что ты знаешь о ползунах?
-	AI_Output(self,other,"Info_Mine_Vlk_4_Minecrawler_01_01");	//Если ты встретишь одного из них, врежь ему как следует киркой по голове. Но если не попадешь с первого раза, второго шанса он тебе не даст. 
+	AI_Output(self,other,"Info_Mine_Vlk_4_Minecrawler_01_01");	//Если ты встретишь одного из них, врежь ему как следует киркой по голове. Но если не попадешь с первого раза, второго шанса он тебе не даст.
 };
 
 

@@ -85,7 +85,7 @@ func int info_mine_org_6_dielage_condition()
 func void info_mine_org_6_dielage_info()
 {
 	AI_Output(other,self,"Info_Mine_Org_6_DieLage_15_00");	//Вижу, ты не перерабатываешь.
-	AI_Output(self,other,"Info_Mine_Org_6_DieLage_06_01");	//Чтобы я? работал? Если бы я работал как все, меня бы сюда не посадили, если ты понимаешь, о чем я говорю.
+	AI_Output(self,other,"Info_Mine_Org_6_DieLage_06_01");	//Чтобы я? Работал? Если бы я работал как все, меня бы сюда не посадили, если ты понимаешь, о чем я говорю.
 };
 
 func void b_assignambientinfos_mine_org_6(var C_NPC slf)

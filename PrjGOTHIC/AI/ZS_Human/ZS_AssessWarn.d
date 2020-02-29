@@ -120,7 +120,7 @@ func void zs_assesswarn_end()
 	}
 	else
 	{
-		printdebugnpc(PD_ZS_CHECK,"ZS_AssessWarn  End// Can_T See");
+		printdebugnpc(PD_ZS_CHECK,"ZS_AssessWarn  End// Can´T See");
 		return;
 	};
 };

@@ -15,7 +15,7 @@ instance GRD_260_DRAKE(NPC_DEFAULT)
 	attribute[ATR_HITPOINTS] = 220;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Militia.mds");
-	Mdl_SetVisualBody(self,"hum_body_Naked0",0,3,"Hum_Head_Fighter",110,1,grd_armor_m);
+	Mdl_SetVisualBody(self,"hum_body_Naked0",0,1,"Hum_Head_Fighter",110,1,grd_armor_m);
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	aivar[AIV_IMPORTANT] = TRUE;

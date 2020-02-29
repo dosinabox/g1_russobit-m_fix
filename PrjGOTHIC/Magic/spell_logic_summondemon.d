@@ -15,10 +15,7 @@ func int spell_logic_summondemon(var int manainvested)
 			Wld_SpawnNpcRange(self,summonedbynpc_demon,1,1000);
 		};
 		return SPL_SENDCAST;
-	}
-	else
-	{
-		return SPL_NEXTLEVEL;
 	};
+	return SPL_NEXTLEVEL;
 };
 

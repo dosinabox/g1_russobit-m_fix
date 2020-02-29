@@ -13,6 +13,7 @@ instance NON_1500_GILBERT(NPC_DEFAULT)
 	attribute[ATR_MANA] = 0;
 	attribute[ATR_HITPOINTS_MAX] = 148;
 	attribute[ATR_HITPOINTS] = 148;
+	aivar[43] = TRUE;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Tired.mds");
 	Mdl_SetVisualBody(self,"hum_body_Naked0",2,0,"Hum_Head_Thief",16,1,vlk_armor_l);
@@ -22,28 +23,20 @@ instance NON_1500_GILBERT(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	EquipItem(self,itmw_1h_axe_old_01);
 	CreateInvItems(self,itkelockpick,5);
-	CreateInvItems(self,itmiscoop,1);
-	CreateInvItems(self,itmihammer,1);
-	CreateInvItems(self,itmistomper,1);
-	CreateInvItems(self,itmiswordraw,3);
-	CreateInvItems(self,itmilute,1);
-	CreateInvItems(self,itlstorch,4);
-	CreateInvItems(self,itmi_stuff_barbknife_01,1);
-	CreateInvItems(self,itmi_stuff_oldcoin_02,17);
-	CreateInvItems(self,itmi_stuff_cup_01,1);
-	CreateInvItems(self,itmi_stuff_pan_01,1);
-	CreateInvItems(self,itmi_stuff_mug_01,1);
-	CreateInvItems(self,itfobeer,3);
-	CreateInvItems(self,itfocheese,5);
-	CreateInvItems(self,itfomutton,4);
-	CreateInvItems(self,itfoloaf,2);
+	CreateInvItem(self,itke_gilbert);
 	daily_routine = rtn_start_1500;
 };
 
 
 func void rtn_start_1500()
 {
-	ta_sitaround(22,0,5,0,"LOCATION_01_07");
-	ta_sitaround(5,0,22,0,"LOCATION_01_07");
+	ta_standaround(22,0,5,0,"LOCATION_01_07");
+	ta_standaround(5,0,22,0,"LOCATION_01_07");
+};
+
+func void rtn_start2_1500()
+{
+	ta_sleep(22,0,8,0,"LOCATION_01_07");
+	ta_sitaround(8,0,22,0,"LOCATION_01_07");
 };
 

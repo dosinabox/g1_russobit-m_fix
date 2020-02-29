@@ -70,8 +70,7 @@ instance ITMW1HSWORDBURNING(C_ITEM)
 	damage[DAM_INDEX_MAGIC] = 70;
 	description = "Легендарный короткий меч прижигания";
 	text[1] = "Это отличный меч, убивающий всех,";
-	text[2] = "кто пытается";
-	text[3] = "убить тебя.";
+	text[2] = "кто пытается убить тебя.";
 	text[5] = "Урон";
 	count[5] = damagetotal;
 };
@@ -102,6 +101,7 @@ instance ITRWWARBOWBURNING(C_ITEM)
 	flags = ITEM_BOW;
 	material = MAT_WOOD;
 	damagetype = DAM_FIRE | DAM_POINT | DAM_FLY;
+	munition = itamarrow;
 	damagetotal = 200;
 	value = 30000;
 	damage[DAM_INDEX_POINT] = 75;

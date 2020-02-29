@@ -47,13 +47,13 @@ instance INFO_SFB_5_EINERVONEUCHWERDEN(C_INFO)
 	condition = info_sfb_5_einervoneuchwerden_condition;
 	information = info_sfb_5_einervoneuchwerden_info;
 	permanent = 1;
-	description = "Я вот думаю присоединиться к вам.";
+	description = "Я думаю присоединиться к вам.";
 };
 
 
 func int info_sfb_5_einervoneuchwerden_condition()
 {
-	if(Npc_GetTrueGuild(other) == GIL_NONE)
+	if(Npc_GetTrueGuild(other) == GIL_NONE && FMTAKEN == FALSE)
 	{
 		return TRUE;
 	};
@@ -64,7 +64,7 @@ func void info_sfb_5_einervoneuchwerden_info()
 	AI_Output(other,self,"Info_SFB_5_EinerVonEuchWerden_15_00");	//Я думаю присоединиться к вам.
 	AI_Output(self,other,"Info_SFB_5_EinerVonEuchWerden_02_01");	//Хочешь присоединиться, да? Водоносом хочешь стать, что ли?
 	AI_Output(other,self,"Info_SFB_5_EinerVonEuchWerden_15_02");	//Нет, рудокопом.
-	AI_Output(self,other,"Info_SFB_5_EinerVonEuchWerden_02_03");	//Лучше послушай меня: Никто в этой проклятой шахте не работает добровольно.
+	AI_Output(self,other,"Info_SFB_5_EinerVonEuchWerden_02_03");	//Лучше послушай меня: никто в этой проклятой шахте не работает добровольно.
 	AI_Output(self,other,"Info_SFB_5_EinerVonEuchWerden_02_04");	//Но раз ты так хочешь... Иди и найди Суини. Уж он-то снабдит тебя старой киркой, которая может еще пойти в дело.
 };
 
@@ -81,7 +81,10 @@ instance INFO_SFB_5_WICHTIGEPERSONEN(C_INFO)
 
 func int info_sfb_5_wichtigepersonen_condition()
 {
-	return 1;
+	if(FMTAKEN == FALSE)
+	{
+		return TRUE;
+	};
 };
 
 func void info_sfb_5_wichtigepersonen_info()
@@ -106,7 +109,10 @@ instance INFO_SFB_5_DASLAGER(C_INFO)
 
 func int info_sfb_5_daslager_condition()
 {
-	return 1;
+	if(FMTAKEN == FALSE)
+	{
+		return TRUE;
+	};
 };
 
 func void info_sfb_5_daslager_info()
@@ -128,7 +134,10 @@ instance INFO_SFB_5_DIELAGE(C_INFO)
 
 func int info_sfb_5_dielage_condition()
 {
-	return 1;
+	if(FMTAKEN == FALSE)
+	{
+		return TRUE;
+	};
 };
 
 func void info_sfb_5_dielage_info()

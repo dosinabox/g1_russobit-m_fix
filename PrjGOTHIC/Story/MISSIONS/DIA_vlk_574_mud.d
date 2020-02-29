@@ -112,7 +112,10 @@ instance DIA_MUD_GETLOST(C_INFO)
 
 func int dia_mud_getlost_condition()
 {
-	return 1;
+	if(Npc_KnowsInfo(hero,dia_mud_firstexit) && !Npc_KnowsInfo(hero,dia_mud_defeated))
+	{
+		return 1;
+	};
 };
 
 func void dia_mud_getlost_info()
@@ -313,7 +316,7 @@ func int dia_mud_nerve_5_condition()
 
 func void dia_mud_nerve_5_info()
 {
-	AI_Output(self,other,"DIA_Mud_Nerve_5_07_00");	//С тобой так интересно. Как хорошо, что ты взял меня с собой. Можем, нам стоит чаще ходить куда-нибудь вместе? 
+	AI_Output(self,other,"DIA_Mud_Nerve_5_07_00");	//С тобой так интересно. Как хорошо, что ты взял меня с собой. Можем, нам стоит чаще ходить куда-нибудь вместе?
 	Npc_SetRefuseTalk(self,NERVESEC);
 	MUD_NERVE = 6;
 	AI_StopProcessInfos(self);

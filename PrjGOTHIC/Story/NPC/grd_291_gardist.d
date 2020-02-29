@@ -5,8 +5,9 @@ instance GRD_291_GARDIST(NPC_DEFAULT)
 	guild = GIL_GRD;
 	npctype = NPCTYPE_GUARD;
 	level = 20;
-	voice = 13;
+	voice = 8;
 	id = 291;
+	aivar[43] = TRUE;
 	attribute[ATR_STRENGTH] = 35;
 	attribute[ATR_DEXTERITY] = 35;
 	attribute[ATR_MANA_MAX] = 0;

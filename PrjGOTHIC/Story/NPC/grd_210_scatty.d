@@ -3,7 +3,7 @@ instance GRD_210_SCATTY(NPC_DEFAULT)
 {
 	name[0] = "Скатти";
 	npctype = NPCTYPE_MAIN;
-	guild = GIL_GRD;
+	guild = GIL_STT;
 	level = 15;
 	voice = 1;
 	id = 210;
@@ -39,7 +39,8 @@ func void rtn_start_210()
 	ta_sleep(0,0,8,0,"OCR_HUT_19");
 	ta_sitaround(8,0,10,0,"OCR_ARENABATTLE_BENCH");
 	ta_smalltalk(10,0,16,0,"OCR_SMALLTALK_A_OC_ARENA");
-	ta_stand(16,0,20,0,"OCR_STAND_WETT");
-	ta_sitaround(20,0,0,0,"OCR_ARENABATTLE_BENCH");
+	ta_stand(16,0,18,45,"OCR_STAND_WETT");
+	ta_sitaround(18,45,23,0,"OCR_ARENA_BARONS_HUT_ROOFTOP");
+	ta_sitaround(23,0,0,0,"OCR_ARENABATTLE_BENCH");
 };
 

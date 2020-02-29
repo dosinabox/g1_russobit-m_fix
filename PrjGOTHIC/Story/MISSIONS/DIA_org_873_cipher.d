@@ -35,10 +35,7 @@ instance ORG_873_CIPHER_HELLO(C_INFO)
 
 func int org_873_cipher_hello_condition()
 {
-	if(BALOR_TELLSNCDEALER == TRUE)
-	{
-		return 1;
-	};
+	return 1;
 };
 
 func void org_873_cipher_hello_info()
@@ -64,7 +61,7 @@ instance ORG_873_CIPHER_FISK(C_INFO)
 
 func int org_873_cipher_fisk_condition()
 {
-	if(FISK_GETNEWHEHLER == LOG_RUNNING)
+	if(FISK_GETNEWHEHLER == LOG_RUNNING && !Npc_KnowsInfo(hero,org_843_sharky_fisk))
 	{
 		return 1;
 	};
@@ -93,7 +90,7 @@ instance ORG_873_CIPHER_FROMBALOR(C_INFO)
 
 func int org_873_cipher_frombalor_condition()
 {
-	if(Npc_KnowsInfo(hero,org_873_cipher_hello))
+	if(Npc_KnowsInfo(hero,org_873_cipher_hello) && CIPHER_TRADE == FALSE)
 	{
 		return 1;
 	};
@@ -125,13 +122,12 @@ instance ORG_873_CIPHER_TRADE(C_INFO)
 	information = org_873_cipher_trade_info;
 	permanent = 1;
 	description = "Предлагаю сделку.";
-	trade = 1;
 };
 
 
 func int org_873_cipher_trade_condition()
 {
-	if(CIPHER_TRADE == TRUE)
+	if(CIPHER_TRADE == TRUE && BALOR_CAN_GIVE == FALSE)
 	{
 		return 1;
 	};
@@ -140,6 +136,44 @@ func int org_873_cipher_trade_condition()
 func void org_873_cipher_trade_info()
 {
 	AI_Output(other,self,"DIA_Cipher_TRADE_15_00");	//Предлагаю сделку.
-	AI_Output(self,other,"DIA_Cipher_TRADE_12_01");	//Что ты хочешь?
+	AI_Output(self,other,"SVM_12_WhatDoYouWant");	//Чем могу помочь?
+	AI_Output(other,self,"Info_Org_6_Krautprobe_15_00");	//У меня есть болотник. Хочешь?
+	if(Npc_HasItems(other,weedpack) >= 1)
+	{
+		AI_Output(self,other,"Stt_311_Fisk_WhistlersSword_TakeIt_12_01");	//Договорились!
+		Npc_RemoveInvItems(hero,weedpack,1);
+		PrintScreen("Отдан 1 предмет.",-1,_YPOS_MESSAGE_GIVEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_GIVEN);
+		b_giveinvitems(self,other,itminugget,250);
+		BALOR_CAN_GIVE = TRUE;
+	}
+	else
+	{
+		AI_Output(self,other,"SVM_12_YouWannaFoolMe");	//Обмануть меня захотел? Только попробуй!
+	};
+};
+
+instance ORG_873_CIPHER_TRADE2(C_INFO)
+{
+	npc = org_873_cipher;
+	nr = 1;
+	condition = org_873_cipher_trade2_condition;
+	information = org_873_cipher_trade2_info;
+	permanent = 1;
+	description = "Покажи мне свои товары.";
+	trade = 1;
+};
+
+
+func int org_873_cipher_trade2_condition()
+{
+	if(CIPHER_TRADE == TRUE)
+	{
+		return 1;
+	};
+};
+
+func void org_873_cipher_trade2_info()
+{
+	AI_Output(other,self,"DIA_BaalKagan_TRADE_15_00");	//Покажи мне свои товары.
 };
 

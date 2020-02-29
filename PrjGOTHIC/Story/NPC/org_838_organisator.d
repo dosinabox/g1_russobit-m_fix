@@ -40,6 +40,6 @@ func void rtn_start_838()
 {
 	ta_sleep(2,35,8,5,"NC_HUT31_IN");
 	ta_smalltalk(8,5,18,5,"NC_HUT31_OUT");
-	ta_smalltalk(18,5,2,35,"NC_TAVERN_TOP02");
+	ta_smalltalk(18,5,2,35,"NC_TAVERN_TOP04");
 };
 

@@ -5,7 +5,7 @@ instance SLD_701_ORIK(NPC_DEFAULT)
 	npctype = NPCTYPE_AMBIENT;
 	guild = GIL_SLD;
 	level = 18;
-	voice = 8;
+	voice = 12;
 	id = 701;
 	attribute[ATR_STRENGTH] = 90;
 	attribute[ATR_DEXTERITY] = 70;
@@ -24,15 +24,9 @@ instance SLD_701_ORIK(NPC_DEFAULT)
 	EquipItem(self,oriks_axt);
 	EquipItem(self,itrw_bow_long_01);
 	CreateInvItems(self,itamarrow,20);
-	CreateInvItems(self,itforice,7);
-	CreateInvItems(self,itfoloaf,5);
-	CreateInvItems(self,itfomutton,4);
 	CreateInvItems(self,itminugget,19);
-	CreateInvItems(self,itfobooze,5);
-	CreateInvItems(self,itlstorch,5);
 	CreateInvItems(self,itfo_potion_health_02,9);
-	CreateInvItem(self,itmi_stuff_barbknife_01);
-	CreateInvItem(self,itmi_stuff_amphore_01);
+	CreateInvItem(self,orik_key);
 	daily_routine = rtn_start_701;
 };
 

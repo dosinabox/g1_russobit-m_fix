@@ -69,7 +69,8 @@ func int info_grd_276_bla_condition()
 func void info_grd_276_bla_info()
 {
 	AI_Output(other,self,"Info_GRD_276_Bla_15_00");	//Там, за тобой, Старый лагерь, да?
-	AI_Output(self,other,"Info_GRD_276_Bla_07_01");	//Нет, там находится Новый лагерь. Старый лагерь дальше, за мостом.
+	//AI_Output(self,other,"Info_GRD_276_Bla_07_01");	//Нет, там находится Новый лагерь. Старый лагерь дальше, за мостом.
+	AI_Output(self,other,"SVM_7_OutOfMyWay");	//Уйди с дороги!
 	AI_StopProcessInfos(self);
 };
 

@@ -56,7 +56,7 @@ instance ORCPEASANTEATANDDRINK(MST_DEFAULT_ORCSCOUT)
 
 instance ORCSCOUTGYD(MST_DEFAULT_ORCSCOUT)
 {
-	name[0] = "Орк-копейщик";
+	name[0] = "Орк-разведчик";
 	level = 18;
 	attribute[ATR_STRENGTH] = 30;
 	aivar[AIV_PCISSTRONGER] = 1500;

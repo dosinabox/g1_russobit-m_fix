@@ -33,7 +33,7 @@ func void rtn_start_1439()
 	ta_smalltalk(14,0,6,0,"OW_OM_ENTRANCE02");
 };
 
-func void rtn_fmtaken_1439()
+func void rtn_gc_1439()
 {
 	ta_smalltalk(6,0,14,0,"PSI_WALK_05");
 	ta_smalltalk(14,0,6,0,"PSI_WALK_05");

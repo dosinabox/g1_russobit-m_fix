@@ -30,7 +30,7 @@ instance VLK_549_BUDDLER(NPC_DEFAULT)
 
 func void rtn_start_549()
 {
-	ta_pickore(0,0,23,0,"OM_PICKORE_05B");
-	ta_pickore(23,0,24,0,"OM_PICKORE_05B");
+	ta_pickore(0,0,23,0,"OM_PICKORE_06");
+	ta_pickore(23,0,24,0,"OM_PICKORE_06");
 };
 

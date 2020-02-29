@@ -45,7 +45,9 @@ func void grd_261_brandick_aleph_info()
 {
 	AI_Output(other,self,"GRD_261_Brandick_ALEPH_Info_15_01");	//Слушай, этот Алеф бездельничает, когда ты за ним не наблюдаешь.
 	AI_Output(self,other,"GRD_261_Brandick_ALEPH_Info_06_02");	//Правда?
-	AI_Output(self,other,"GRD_261_Brandick_ALEPH_Info_06_03");	//Ты знаешь, кого я не люблю больше, чем лоботрясов? Предателей. Так что убирайся отсюда! 
+	AI_Output(self,other,"GRD_261_Brandick_ALEPH_Info_06_03");	//Ты знаешь, кого я не люблю больше, чем лоботрясов? Предателей. Так что убирайся отсюда!
+	Npc_ExchangeRoutine(self,"WATCH");
+	b_exchangeroutine(vlk_585_aleph,"BUSY");
 	AI_StopProcessInfos(self);
 };
 

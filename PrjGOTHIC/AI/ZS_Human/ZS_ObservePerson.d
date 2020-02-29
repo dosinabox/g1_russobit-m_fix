@@ -27,6 +27,7 @@ func int zs_observeperson_loop()
 	{
 		return 1;
 	};
+	return 0;
 };
 
 func void zs_observeperson_end()

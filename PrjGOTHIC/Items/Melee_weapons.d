@@ -26,7 +26,7 @@ instance ITMW_1H_CLUB_01(C_ITEM)
 
 instance ITMW_1H_POKER_01(C_ITEM)
 {
-	name = "Скребок";
+	name = "Кочерга";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_SWD;
 	material = MAT_METAL;
@@ -95,12 +95,12 @@ instance ITMWPICKAXE(C_ITEM)
 
 instance ITMW_1H_SLEDGEHAMMER_01(C_ITEM)
 {
-	name = "Молот";
+	name = "Кузнечный молот";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_AXE;
 	material = MAT_WOOD;
-	value = 5;
-	damagetotal = 10;
+	value = 50;
+	damagetotal = 8;
 	damagetype = DAM_BLUNT;
 	range = 100;
 	cond_atr[2] = ATR_STRENGTH;
@@ -118,7 +118,7 @@ instance ITMW_1H_SLEDGEHAMMER_01(C_ITEM)
 
 instance ITMW_1H_MACE_LIGHT_01(C_ITEM)
 {
-	name = "Дубина";
+	name = "Палица";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_AXE;
 	material = MAT_WOOD;
@@ -187,7 +187,7 @@ instance ITMW_1H_SWORD_OLD_01(C_ITEM)
 
 instance ITMW_1H_NAILMACE_01(C_ITEM)
 {
-	name = "Булава с гвоздями";
+	name = "Дубина с гвоздями";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_AXE;
 	material = MAT_WOOD;
@@ -394,7 +394,7 @@ instance ITMW_2H_STAFF_01(C_ITEM)
 
 instance ITMW_2H_STAFF_02(C_ITEM)
 {
-	name = "Хороший посох";
+	name = "Посох судьи";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_AXE;
 	material = MAT_WOOD;
@@ -417,7 +417,7 @@ instance ITMW_2H_STAFF_02(C_ITEM)
 
 instance ITMW_2H_STAFF_03(C_ITEM)
 {
-	name = "Посох жреца";
+	name = "Посох священника";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_AXE;
 	material = MAT_WOOD;
@@ -555,7 +555,7 @@ instance ITMW_1H_MACE_04(C_ITEM)
 
 instance ITMW_1H_SWORD_01(C_ITEM)
 {
-	name = "Незаточенный меч";
+	name = "Обычный меч";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_SWD;
 	material = MAT_METAL;
@@ -739,7 +739,7 @@ instance ITMW_1H_MACE_WAR_03(C_ITEM)
 
 instance ITMW_1H_MACE_WAR_04(C_ITEM)
 {
-	name = "Пронзающий сердца";
+	name = "Разбивающий сердца";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_AXE;
 	material = MAT_WOOD;
@@ -877,7 +877,7 @@ instance ITMW_1H_SWORD_LONG_05(C_ITEM)
 
 instance ITMW_1H_WARHAMMER_01(C_ITEM)
 {
-	name = "Молот орков";
+	name = "Орочий молот";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_AXE;
 	material = MAT_WOOD;
@@ -900,7 +900,7 @@ instance ITMW_1H_WARHAMMER_01(C_ITEM)
 
 instance ITMW_1H_WARHAMMER_02(C_ITEM)
 {
-	name = "Военный молот";
+	name = "Боевой молот";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_AXE;
 	material = MAT_WOOD;
@@ -1015,7 +1015,7 @@ instance ITMW_1H_AXE_03(C_ITEM)
 
 instance ITMW_1H_SWORD_BROAD_01(C_ITEM)
 {
-	name = "Широкий меч";
+	name = "Палаш";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_SWD;
 	material = MAT_METAL;
@@ -1111,7 +1111,7 @@ instance ITMW_2H_SWORD_OLD_01(C_ITEM)
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_SWD;
 	material = MAT_METAL;
-	value = 1480;
+	value = 150;
 	damagetotal = 61;
 	damagetype = DAM_EDGE;
 	range = 150;
@@ -1153,7 +1153,7 @@ instance ITMW_1H_SWORD_BASTARD_01(C_ITEM)
 
 instance ITMW_1H_SWORD_BASTARD_02(C_ITEM)
 {
-	name = "Убийца";
+	name = "Палач";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_SWD;
 	material = MAT_METAL;
@@ -1169,7 +1169,7 @@ instance ITMW_1H_SWORD_BASTARD_02(C_ITEM)
 	count[2] = damagetotal;
 	text[3] = NAME_STR_NEEDED;
 	count[3] = cond_value[2];
-	text[4] = NAME_TWOHANDED;
+	text[4] = NAME_ONEHANDED;
 	text[5] = NAME_VALUE;
 	count[5] = value;
 };
@@ -1245,7 +1245,7 @@ instance ITMW_2H_AXE_OLD_01(C_ITEM)
 
 instance ITMW_2H_AXE_OLD_02(C_ITEM)
 {
-	name = "Кровопийца";
+	name = "Кровавая жатва";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_AXE;
 	material = MAT_WOOD;
@@ -1272,7 +1272,7 @@ instance ITMW_2H_AXE_OLD_03(C_ITEM)
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_AXE;
 	material = MAT_WOOD;
-	value = 1880;
+	value = 940;
 	damagetotal = 69;
 	damagetype = DAM_EDGE;
 	range = 150;
@@ -1291,7 +1291,30 @@ instance ITMW_2H_AXE_OLD_03(C_ITEM)
 
 instance ITMW_2H_SWORD_LIGHT_01(C_ITEM)
 {
-	name = "Легкий двуручный меч";
+	name = "Легкий двуручник";
+	mainflag = ITEM_KAT_NF;
+	flags = ITEM_2HD_SWD;
+	material = MAT_METAL;
+	value = 190;
+	damagetotal = 70;
+	damagetype = DAM_EDGE;
+	range = 150;
+	cond_atr[2] = ATR_STRENGTH;
+	cond_value[2] = 42;
+	visual = "ItMw_2H_Sword_Light_01.3DS";
+	description = name;
+	text[2] = NAME_DAMAGE;
+	count[2] = damagetotal;
+	text[3] = NAME_STR_NEEDED;
+	count[3] = cond_value[2];
+	text[4] = NAME_TWOHANDED;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+};
+
+instance ITMW_2H_SWORD_LIGHT_01_PRICED(C_ITEM)
+{
+	name = "Легкий двуручник";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_SWD;
 	material = MAT_METAL;
@@ -1313,6 +1336,29 @@ instance ITMW_2H_SWORD_LIGHT_01(C_ITEM)
 };
 
 instance ITMW_2H_SWORD_LIGHT_02(C_ITEM)
+{
+	name = "Хранитель";
+	mainflag = ITEM_KAT_NF;
+	flags = ITEM_2HD_SWD;
+	material = MAT_METAL;
+	value = 200;
+	damagetotal = 71;
+	damagetype = DAM_EDGE;
+	range = 150;
+	cond_atr[2] = ATR_STRENGTH;
+	cond_value[2] = 44;
+	visual = "ItMw_2H_Sword_Light_02.3DS";
+	description = name;
+	text[2] = NAME_DAMAGE;
+	count[2] = damagetotal;
+	text[3] = NAME_STR_NEEDED;
+	count[3] = cond_value[2];
+	text[4] = NAME_TWOHANDED;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+};
+
+instance ITMW_2H_SWORD_LIGHT_02_PRICED(C_ITEM)
 {
 	name = "Хранитель";
 	mainflag = ITEM_KAT_NF;
@@ -1383,7 +1429,7 @@ instance ITMW_2H_SWORD_LIGHT_04(C_ITEM)
 
 instance ITMW_2H_SWORD_LIGHT_05(C_ITEM)
 {
-	name = "Клинок демонов";
+	name = "Клинок демона";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_SWD;
 	material = MAT_METAL;
@@ -1475,7 +1521,7 @@ instance ITMW_2H_AXE_LIGHT_03(C_ITEM)
 
 instance ITMW_2H_SWORD_01(C_ITEM)
 {
-	name = "Двуручный меч";
+	name = "Двуручник";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_SWD;
 	material = MAT_METAL;
@@ -1544,7 +1590,7 @@ instance ITMW_2H_SWORD_03(C_ITEM)
 
 instance ITMW_2H_SWORD_HEAVY_01(C_ITEM)
 {
-	name = "Тяжелый двуручный меч";
+	name = "Тяжелый двуручник";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_SWD;
 	material = MAT_METAL;
@@ -1613,7 +1659,7 @@ instance ITMW_2H_SWORD_HEAVY_03(C_ITEM)
 
 instance ITMW_2H_SWORD_HEAVY_04(C_ITEM)
 {
-	name = "Месть тролля";
+	name = "Мстительная сталь";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_SWD;
 	material = MAT_METAL;
@@ -1659,7 +1705,7 @@ instance ITMW_2H_AXE_HEAVY_01(C_ITEM)
 
 instance ITMW_2H_AXE_HEAVY_02(C_ITEM)
 {
-	name = "Клич воина";
+	name = "Глас воина";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_AXE;
 	material = MAT_WOOD;
@@ -1728,11 +1774,11 @@ instance ITMW_2H_AXE_HEAVY_04(C_ITEM)
 
 instance ITMW2HORCSWORD01(C_ITEM)
 {
-	name = "Круш Варрок";
+	name = "Краш Варрок";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_SWD;
 	material = MAT_WOOD;
-	value = 30;
+	value = 10;
 	damagetotal = 45;
 	damagetype = DAM_EDGE;
 	range = 150;
@@ -1751,11 +1797,11 @@ instance ITMW2HORCSWORD01(C_ITEM)
 
 instance ITMW2HORCAXE01(C_ITEM)
 {
-	name = "Круш Пах";
+	name = "Краш Пагх";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_AXE;
 	material = MAT_WOOD;
-	value = 35;
+	value = 14;
 	damagetotal = 50;
 	damagetype = DAM_EDGE;
 	range = 150;
@@ -1774,11 +1820,11 @@ instance ITMW2HORCAXE01(C_ITEM)
 
 instance ITMW2HORCAXE02(C_ITEM)
 {
-	name = "Круш УрРок";
+	name = "Краш Уррок";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_AXE;
 	material = MAT_WOOD;
-	value = 38;
+	value = 18;
 	damagetotal = 55;
 	damagetype = DAM_EDGE;
 	range = 150;
@@ -1797,11 +1843,11 @@ instance ITMW2HORCAXE02(C_ITEM)
 
 instance ITMW2HORCAXE03(C_ITEM)
 {
-	name = "Круш Агаш";
+	name = "Краш Агаш";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_AXE;
 	material = MAT_WOOD;
-	value = 40;
+	value = 20;
 	damagetotal = 60;
 	damagetype = DAM_EDGE;
 	range = 150;
@@ -1820,11 +1866,11 @@ instance ITMW2HORCAXE03(C_ITEM)
 
 instance ITMW2HORCAXE04(C_ITEM)
 {
-	name = "Круш БрокДар";
+	name = "Краш Брокдар";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_AXE;
 	material = MAT_WOOD;
-	value = 43;
+	value = 22;
 	damagetotal = 65;
 	damagetype = DAM_EDGE;
 	range = 150;
@@ -1843,11 +1889,11 @@ instance ITMW2HORCAXE04(C_ITEM)
 
 instance ITMW2HORCMACE01(C_ITEM)
 {
-	name = "Круш Каррок";
+	name = "Краш Каррок";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_AXE;
 	material = MAT_WOOD;
-	value = 50;
+	value = 24;
 	damagetotal = 75;
 	damagetype = DAM_BLUNT;
 	range = 150;
@@ -1870,11 +1916,15 @@ instance ITRWORCSTAFF(C_ITEM)
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_AXE;
 	material = MAT_WOOD;
-	value = 0;
+	value = 24;
 	damagetotal = 0;
 	damagetype = DAM_BLUNT;
+	range = 140;
+	cond_atr[2] = ATR_STRENGTH;
+	cond_value[2] = 75;
 	visual = "ItRw_2H_Orcstaff_01.3DS";
 	description = name;
+	mag_circle = 8;
 	text[5] = NAME_VALUE;
 	count[5] = value;
 };
@@ -1885,11 +1935,82 @@ instance ITRWUDORCSTAFF(C_ITEM)
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_AXE;
 	material = MAT_WOOD;
-	value = 0;
+	value = 24;
 	damagetotal = 0;
 	damagetype = DAM_BLUNT;
 	visual = "ItRw_2H_Orcstaff_01.3DS";
 	description = name;
+	mag_circle = 8;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+};
+
+instance GOLDENSWORD(C_ITEM)
+{
+	name = "Длань предка";
+	mainflag = ITEM_KAT_NF;
+	flags = ITEM_2HD_SWD;
+	material = MAT_METAL;
+	value = 500;
+	damagetotal = 41;
+	damagetype = DAM_EDGE;
+	range = 100;
+	cond_atr[2] = ATR_STRENGTH;
+	cond_value[2] = 20;
+	visual = "ItMw_Beta_Sword_Gold.3DS";
+	description = name;
+	//text[0] = "Возможно, кузнец починит этот золотой меч.";
+	text[2] = NAME_DAMAGE;
+	count[2] = damagetotal;
+	text[3] = NAME_STR_NEEDED;
+	count[3] = cond_value[2];
+	text[4] = NAME_TWOHANDED;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+};
+
+instance GS1H(C_ITEM)
+{
+	name = "Длань предка";
+	mainflag = ITEM_KAT_NF;
+	flags = ITEM_SWD;
+	material = MAT_METAL;
+	value = 1000;
+	damagetotal = 55;
+	damagetype = DAM_EDGE;
+	range = 130;
+	cond_atr[2] = ATR_STRENGTH;
+	cond_value[2] = 20;
+	visual = "ItMw_Beta_Sword_Gold.3DS";
+	description = name;
+	text[2] = NAME_DAMAGE;
+	count[2] = damagetotal;
+	text[3] = NAME_STR_NEEDED;
+	count[3] = cond_value[2];
+	text[4] = NAME_ONEHANDED;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+};
+
+instance GS2H(C_ITEM)
+{
+	name = "Длань предка";
+	mainflag = ITEM_KAT_NF;
+	flags = ITEM_2HD_SWD;
+	material = MAT_METAL;
+	value = 1000;
+	damagetotal = 60;
+	damagetype = DAM_EDGE;
+	range = 150;
+	cond_atr[2] = ATR_STRENGTH;
+	cond_value[2] = 20;
+	visual = "ItMw_Beta_Sword_Gold.3DS";
+	description = name;
+	text[2] = NAME_DAMAGE;
+	count[2] = damagetotal;
+	text[3] = NAME_STR_NEEDED;
+	count[3] = cond_value[2];
+	text[4] = NAME_TWOHANDED;
 	text[5] = NAME_VALUE;
 	count[5] = value;
 };

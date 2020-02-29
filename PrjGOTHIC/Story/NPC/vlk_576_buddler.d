@@ -31,6 +31,12 @@ instance VLK_576_BUDDLER(NPC_DEFAULT)
 func void rtn_start_576()
 {
 	ta_sleep(22,0,8,30,"OCR_HUT_30");
-	ta_smith_sharp(8,30,22,5,"OCR_HUT_34");
+	ta_smith_sharp(8,30,10,30,"OCR_HUT_34");
+	ta_standaround(10,30,12,30,"OCR_OUTSIDE_HUT_30");
+	ta_smith_sharp(12,30,14,30,"OCR_HUT_34");
+	ta_standaround(14,30,16,30,"OCR_OUTSIDE_HUT_30");
+	ta_smith_sharp(16,30,18,30,"OCR_HUT_34");
+	ta_standaround(18,30,19,10,"OCR_OUTSIDE_HUT_30");
+	ta_sitaround(19,10,22,0,"OCR_HUT_30");
 };
 

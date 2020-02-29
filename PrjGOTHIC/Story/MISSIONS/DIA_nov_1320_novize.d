@@ -19,7 +19,6 @@ func int nov_1320_novize_callsleeper_condition()
 	{
 		return TRUE;
 	};
-	return PrintScreen("реоепэ бяе ъямн.",-1,-1,"font_old_20_white.tga",3);
 };
 
 func void nov_1320_novize_callsleeper_info()

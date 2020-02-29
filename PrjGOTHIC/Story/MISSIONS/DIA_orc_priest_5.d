@@ -1,4 +1,6 @@
 
+var int highpriest5ishostile;
+
 instance INFO_HIGHPRIEST5(C_INFO)
 {
 	npc = orc_priest_5;
@@ -18,7 +20,7 @@ func void info_highpriest5_info()
 {
 	AI_SetWalkMode(self,NPC_WALK);
 	AI_GotoNpc(self,other);
-	if(Npc_HasItems(hero,mythrilklinge02) || Npc_HasItems(hero,urizielrune))
+	if(Npc_HasItems(hero,mythrilklinge02) || Npc_HasItems(hero,itarruneurizielrune))
 	{
 		AI_Output(self,other,"Info_HighPriest5_17_04");	//У ТЕБЯ ЕСТЬ ОРУЖИЕ!
 		AI_Output(self,other,"Info_HighPriest5_17_05");	//Я ОСТАНОВЛЮ ТЕБЯ!
@@ -26,6 +28,7 @@ func void info_highpriest5_info()
 		self.npctype = NPCTYPE_MAIN;
 		Npc_SetAttitude(self,ATT_HOSTILE);
 		Npc_SetTempAttitude(self,ATT_HOSTILE);
+		HIGHPRIEST5ISHOSTILE = 1;
 	}
 	else
 	{
@@ -50,7 +53,7 @@ instance INFO_HIGHPRIEST5FAILED(C_INFO)
 
 func int info_highpriest5failed_condition()
 {
-	if(Npc_KnowsInfo(hero,info_highpriest5) && (self.aivar[AIV_MISSION1] >= HIGHPRIEST_MAXHIT) && !Npc_HasItems(hero,mythrilklinge02) && !Npc_HasItems(hero,urizielrune))
+	if(Npc_KnowsInfo(hero,info_highpriest5) && (self.aivar[AIV_MISSION1] >= HIGHPRIEST_MAXHIT) && !Npc_HasItems(hero,mythrilklinge02) && !Npc_HasItems(hero,itarruneurizielrune))
 	{
 		return TRUE;
 	};
@@ -66,8 +69,42 @@ func void info_highpriest5failed_info()
 	self.npctype = NPCTYPE_MAIN;
 	Npc_SetAttitude(self,ATT_HOSTILE);
 	Npc_SetTempAttitude(self,ATT_HOSTILE);
-	b_logentry(CH4_ENTERTEMPLE,"Вот и Граш-Варраг-Арушт, и судя по всему, он не нежить, как остальные. Он гораздо сильнее их, а мое оружие не причинит ему вреда. Мне нужно другое оружие!");
+	HIGHPRIEST5ISHOSTILE = 1;
+	b_logentry(CH4_ENTERTEMPLE,"Вот и Граш-Варраг-Арушат, и судя по всему, он не нежить, как остальные. Он гораздо сильнее их, а мое оружие не причинит ему вреда. Мне нужно другое оружие!");
 	b_givexp(XP_RETREATFROMLASTPRIEST);
 	AI_StopProcessInfos(self);
+};
+
+
+instance INFO_HIGHPRIEST5_2(C_INFO)
+{
+	npc = orc_priest_5;
+	nr = 1;
+	condition = info_highpriest5_2_condition;
+	information = info_highpriest5_2_info;
+	permanent = 0;
+	important = 1;
+};
+
+
+func int info_highpriest5_2_condition()
+{
+	if(Npc_KnowsInfo(hero,info_highpriest5) && (ENCOUNTEREDHIGHPRIEST == TRUE) && !Npc_KnowsInfo(hero,info_highpriest5failed) && (Npc_HasItems(hero,mythrilklinge02) || Npc_HasItems(hero,itarruneurizielrune)))
+	{
+		return TRUE;
+	};
+};
+
+func void info_highpriest5_2_info()
+{
+	AI_SetWalkMode(self,NPC_WALK);
+	AI_GotoNpc(self,other);
+	AI_Output(self,other,"Info_HighPriest5_17_04");	//У ТЕБЯ ЕСТЬ ОРУЖИЕ!
+	AI_Output(self,other,"Info_HighPriest5_17_05");	//Я ОСТАНОВЛЮ ТЕБЯ!
+	AI_StopProcessInfos(self);
+	self.npctype = NPCTYPE_MAIN;
+	Npc_SetAttitude(self,ATT_HOSTILE);
+	Npc_SetTempAttitude(self,ATT_HOSTILE);
+	HIGHPRIEST5ISHOSTILE = 1;
 };
 

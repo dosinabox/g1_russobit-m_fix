@@ -28,13 +28,15 @@ instance INFO_HORATIO_WASSER(C_INFO)
 	condition = info_horatio_wasser_condition;
 	information = info_horatio_wasser_info;
 	permanent = 1;
-	description = "Меня Лефти послал. Я принес воды.";
+	description = "Меня послал Лефти. Я принес тебе воды.";
 };
 
 
 func int info_horatio_wasser_condition()
 {
-	if(((LEFTY_MISSION == LOG_RUNNING) || ((LEFTY_MISSION == LOG_SUCCESS) && Npc_HasItems(other,itfo_potion_water_01))) && (self.aivar[AIV_DEALDAY] <= Wld_GetDay()))
+	var C_NPC lefty;
+	lefty = Hlp_GetNpc(org_844_lefty);
+	if(((LEFTY_MISSION == LOG_RUNNING) || ((LEFTY_MISSION == LOG_SUCCESS) && Npc_HasItems(other,itfo_potion_water_01))) && (self.aivar[AIV_DEALDAY] <= Wld_GetDay()) && (lefty.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -318,16 +320,8 @@ func void dia_horatio_thoughtstr_ricelord()
 
 func void dia_horatio_helpstr_learn_now()
 {
-	if(other.attribute[ATR_STRENGTH] <= (100 - 5))
-	{
-		other.attribute[ATR_STRENGTH] = other.attribute[ATR_STRENGTH] + 5;
-		PrintScreen("Сила + 5",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
-	}
-	else
-	{
-		other.attribute[ATR_STRENGTH] = 100;
-		PrintScreen("Сила: 100",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
-	};
+	Npc_ChangeAttribute(other,ATR_STRENGTH,5);
+	PrintScreen("Сила +5",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
 	AI_Output(self,other,"DIA_Horatio_HelpSTR_LEARN_NOW_09_00");	//Если хочешь иметь сильный удар, ты должен знать основные принципы, как это делается. Это первое, что должен знать кузнец.
 	AI_Output(self,other,"DIA_Horatio_HelpSTR_LEARN_NOW_09_01");	//Старайся наносить удар всей рукой, от плеча до запястья.
 	AI_Output(self,other,"DIA_Horatio_HelpSTR_LEARN_NOW_09_02");	//Чем лучше у тебя это получится, тем сильнее удар. Я думаю, научиться этому тебе будет не так уж сложно.
@@ -387,5 +381,66 @@ func void dia_horatio_thanks_info()
 {
 	AI_Output(other,self,"DIA_Horatio_Thanks_15_00");	//Спасибо, что помог!
 	AI_Output(self,other,"DIA_Horatio_Thanks_09_01");	//Используй свою силу только в крайних случаях и никак больше.
+};
+
+instance INFO_HORATIO_WASSER_NOLEFTY(C_INFO)
+{
+	npc = bau_901_horatio;
+	nr = 800;
+	condition = info_horatio_wasser_nolefty_condition;
+	information = info_horatio_wasser_nolefty_info;
+	permanent = 1;
+	description = "Я принес тебе воды.";
+};
+
+func int info_horatio_wasser_nolefty_condition()
+{
+	var C_NPC lefty;
+	lefty = Hlp_GetNpc(org_844_lefty);
+	if(Npc_HasItems(other,itfo_potion_water_01) && (lefty.aivar[AIV_WASDEFEATEDBYSC] == TRUE) && (self.aivar[AIV_DEALDAY] <= Wld_GetDay()))
+	{
+		return 1;
+	};
+};
+
+func void info_horatio_wasser_nolefty_info()
+{
+	AI_Output(other,self,"Info_Wasser_NoLefty");	//Я принес тебе воды.
+	AI_Output(self,other,"SVM_9_LookAway");	//Да! Погода сегодня отличная!
+	self.aivar[AIV_DEALDAY] = Wld_GetDay() + 1;
+	b_giveinvitems(other,self,itfo_potion_water_01,1);
+	if(c_bodystatecontains(self,BS_SIT))
+	{
+		AI_Standup(self);
+		AI_TurnToNPC(self,hero);
+	};
+	AI_UseItem(self,itfo_potion_water_01);
+};
+
+instance DIA_HORATIO_HELLO2(C_INFO)
+{
+	npc = bau_901_horatio;
+	nr = 1;
+	condition = dia_horatio_hello2_condition;
+	information = dia_horatio_hello2_info;
+	permanent = 0;
+	important = 1;
+};
+
+
+func int dia_horatio_hello2_condition()
+{
+	var C_NPC lefty;
+	lefty = Hlp_GetNpc(org_844_lefty);
+	if((lefty.aivar[AIV_WASDEFEATEDBYSC] == TRUE) && (Npc_KnowsInfo(hero,dia_horatio_helpstr)))
+	{
+		return 1;
+	};
+};
+
+func void dia_horatio_hello2_info()
+{
+	AI_Output(self,other,"SVM_9_YouDefeatedMeWell");	//Хороший бой! Учеба пошла тебе на пользу.
+	AI_StopProcessInfos(self);
 };
 

@@ -29,8 +29,7 @@ instance ORG_843_SHARKY_FISK(C_INFO)
 	condition = org_843_sharky_fisk_condition;
 	information = org_843_sharky_fisk_info;
 	permanent = 0;
-	description = "Фиск из Старого лагеря ищет нового поставщика.";
-	trade = 1;
+	description = "Фиску из Старого лагеря нужен помощник.";
 };
 
 
@@ -48,6 +47,7 @@ func void org_843_sharky_fisk_info()
 	AI_Output(self,other,"Org_843_Sharky_Fisk_Info_10_01");	//И зачем ты рассказываешь это мне?
 	AI_Output(other,self,"Org_843_Sharky_Fisk_Info_15_02");	//Я подумал, что ты захочешь заработать немного руды.
 	AI_Output(self,other,"Org_843_Sharky_Fisk_Info_10_03");	//Хм, почему бы и нет...Скажи Фиску, что он может рассчитывать на меня.
+	b_logentry(CH1_FISKNEWDEALER,"Шарки согласился работать с Фиском.");
 };
 
 

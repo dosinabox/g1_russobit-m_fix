@@ -22,10 +22,11 @@ instance ORC_2200_SHAMAN(MST_DEFAULT_ORCSHAMAN)
 	protection[PROT_MAGIC] = 0;
 	Mdl_SetVisual(self,"Orc.mds");
 	Mdl_SetVisualBody(self,"Orc_BodyShaman",DEFAULT,DEFAULT,"Orc_HeadShaman",DEFAULT,DEFAULT,-1);
+	Mdl_ApplyOverlayMds(self,"Orc_Shaman.mds");
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_MAGE;
-	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,6);
+	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,8);
 	EquipItem(self,itrworcstaff);
 	CreateInvItem(self,itarrunefireball);
 	daily_routine = rtn_fmtaken_2200;

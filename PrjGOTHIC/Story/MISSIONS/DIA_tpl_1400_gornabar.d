@@ -44,7 +44,7 @@ func int tpl_1400_gornabar_suggest_condition()
 
 func void tpl_1400_gornabar_suggest_info()
 {
-	AI_Output(other,self,"Tpl_1400_GorNaBar_SUGGEST_Info_15_01");	//Ты можешь мне помочь?  
+	AI_Output(other,self,"Tpl_1400_GorNaBar_SUGGEST_Info_15_01");	//Ты можешь мне помочь?
 	AI_Output(other,self,"Tpl_1400_GorNaBar_SUGGEST_Info_15_02");	//Мне нужно добыть слюну ползунов для Кор Галома. Я знаю, где находится логово этих тварей.
 	AI_Output(other,self,"Tpl_1400_GorNaBar_SUGGEST_Info_15_03");	//Сможешь ли ты прикрыть меня, когда я открою ворота?
 	AI_Output(self,other,"Tpl_1400_GorNaBar_SUGGEST_Info_09_04");	//Логово ползунов! Наконец-то! Мой меч к твоим услугам!
@@ -105,7 +105,10 @@ func void tpl_1400_gornabar_victory_info()
 {
 	AI_Output(other,self,"Tpl_1400_GorNaBar_VICTORY_Info_15_01");	//Я нашел логово королевы ползунов!
 	AI_Output(self,other,"Tpl_1400_GorNaBar_VICTORY_Info_09_02");	//Ты смел и силен духом, и ты сумел доказать это. Нам нужны такие люди, как ты!
-	Log_CreateTopic(GE_BECOMETEMPLAR,LOG_NOTE);
-	b_logentry(GE_BECOMETEMPLAR,"Как только я приду в Болотный лагерь, мне нужно будет поговорить с Кор Ангаром. может быть, он сделает меня одним из Стражей.");
+	if(Npc_GetTrueGuild(hero) == GIL_NOV)
+	{
+		Log_CreateTopic(GE_BECOMETEMPLAR,LOG_NOTE);
+		b_logentry(GE_BECOMETEMPLAR,"Как только я приду в Болотный лагерь, мне нужно будет поговорить с Кор Ангаром. может быть, он сделает меня одним из Стражем.");
+	};
 };
 

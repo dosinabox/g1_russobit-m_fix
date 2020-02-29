@@ -34,7 +34,10 @@ instance DIA_SFB_1001_HELLO(C_INFO)
 
 func int dia_sfb_1001_hello_condition()
 {
-	return 1;
+	if(FMTAKEN == FALSE)
+	{
+		return 1;
+	};
 };
 
 func void dia_sfb_1001_hello_info()

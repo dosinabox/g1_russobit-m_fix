@@ -42,6 +42,13 @@ func void set_scavenger_visuals()
 };
 
 
+func void set_yscavenger_visuals()
+{
+	Mdl_SetVisual(self,"Scavenger.mds");
+	Mdl_SetVisualBody(self,"Sca_Body",1,DEFAULT,"",DEFAULT,DEFAULT,-1);
+};
+
+
 instance SCAVENGER(MST_DEFAULT_SCAVENGER)
 {
 	set_scavenger_visuals();
@@ -60,7 +67,7 @@ instance YSCAVENGER(MST_DEFAULT_SCAVENGER)
 	protection[PROT_BLUNT] = 8;
 	protection[PROT_EDGE] = 8;
 	fight_tactic = FAI_MONSTER_COWARD;
-	set_scavenger_visuals();
+	set_yscavenger_visuals();
 	Mdl_SetModelScale(self,0.9,0.9,0.9);
 	Npc_SetToFistMode(self);
 	CreateInvItems(self,itfomuttonraw,1);

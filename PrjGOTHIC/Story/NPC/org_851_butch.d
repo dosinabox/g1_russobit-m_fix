@@ -5,7 +5,7 @@ instance ORG_851_BUTCH(NPC_DEFAULT)
 	npctype = NPCTYPE_MAIN;
 	guild = GIL_ORG;
 	level = 15;
-	voice = 13;
+	voice = 19;
 	id = 851;
 	attribute[ATR_STRENGTH] = 80;
 	attribute[ATR_DEXTERITY] = 60;

@@ -1,7 +1,7 @@
 
 func void startup_ai_testlevel_monsterparse()
 {
-	Wld_InsertNpc(bloodfly,"WP_Scorpion");
+	Wld_InsertNpc(bloodfly,"WP_SCORPION");
 	Wld_InsertNpc(demon,"WP_DEMON");
 	Wld_InsertNpc(demonlord,"WP_DEMON");
 	Wld_InsertNpc(harpie,"WP_DEMON");

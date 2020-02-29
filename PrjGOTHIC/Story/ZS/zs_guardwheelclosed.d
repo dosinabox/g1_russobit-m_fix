@@ -1,4 +1,42 @@
 
+func int guardcheckgatestate(var C_NPC slf)
+{
+	printdebugnpc(PD_TA_FRAME,"GuardCheckGateState");
+	if(Hlp_StrCmp(slf.wp,"OW_PATH_1_16_C"))
+	{
+		return GATE_01_STATE;
+	}
+	else if(Hlp_StrCmp(slf.wp,"OCC_MAINGATE_VWHEEL"))
+	{
+		return GATE_02_STATE;
+	}
+	else if(Hlp_StrCmp(slf.wp,"OCR_NORTHGATE_VWHEEL"))
+	{
+		return GATE_03_STATE;
+	}
+	else if(Hlp_StrCmp(slf.wp,"OCC_GATE_VWHEEL"))
+	{
+		return GATE_04_STATE;
+	}
+	else if(Hlp_StrCmp(slf.wp,"OW_PATH_067_WHEEL"))
+	{
+		return GATE_05_STATE;
+	}
+	else if(Hlp_StrCmp(slf.wp,"NC_MAINGATE_VWHEEL"))
+	{
+		return GATE_06_STATE;
+	}
+	else if(Hlp_StrCmp(slf.wp,"OW_OM_ENTRANCE02_WHEEL_USE"))
+	{
+		return GATE_07_STATE;
+	}
+	else if(Hlp_StrCmp(slf.wp,"OCR_ARENA_VWHEEL"))
+	{
+		return GATE_11_STATE;
+	};
+	return -1;
+};
+
 func void zs_guardwheelclosed()
 {
 	printdebugnpc(PD_TA_FRAME,"ZS_GuardWheelClosed");
@@ -6,12 +44,13 @@ func void zs_guardwheelclosed()
 	AI_Standup(self);
 	AI_SetWalkMode(self,NPC_WALK);
 	AI_GotoWP(self,self.wp);
-	if(Wld_GetMobState(self,"VWHEEL") == 0)
+	if(guardcheckgatestate(self) == 0)
 	{
 		printdebugnpc(PD_TA_CHECK,"...Tor offen!");
 		AI_UseMob(self,"VWHEEL",1);
+		AI_Wait(self,0.5);
 		AI_UseMob(self,"VWHEEL",-1);
-		AI_AlignToWP(self);
+		AI_GotoWP(self,self.wp);
 	};
 };
 
@@ -35,5 +74,6 @@ func int zs_guardwheelclosed_loop()
 func void zs_guardwheelclosed_end()
 {
 	printdebugnpc(PD_TA_FRAME,"ZS_GuardWheelClosed_End");
+	AI_StopLookAt(self);
 };
 

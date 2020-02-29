@@ -20,7 +20,6 @@ instance NOV_1349_NOVIZE(NPC_DEFAULT)
 	Mdl_SetModelFatness(self,-1);
 	fight_tactic = FAI_HUMAN_COWARD;
 	EquipItem(self,itmw_1h_hatchet_01);
-	EquipItem(self,itmilute);
 	daily_routine = rtn_start_1349;
 };
 
@@ -28,7 +27,7 @@ instance NOV_1349_NOVIZE(NPC_DEFAULT)
 func void rtn_start_1349()
 {
 	ta_smalltalk(8,0,23,0,"PSI_TEMPLE_STAIRS_3");
-	ta_smalltalk(23,0,8,0,"PSI_TEMPLE_STAIRS_3");
+	ta_sleep(23,0,8,0,"PSI_5_HUT_IN");
 };
 
 func void rtn_ritual_1349()

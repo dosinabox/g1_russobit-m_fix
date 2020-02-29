@@ -15,10 +15,7 @@ func int spell_logic_armyofdarkness(var int manainvested)
 			Wld_SpawnNpcRange(self,summonedbynpc_skeletonwarrior,3,800);
 		};
 		return SPL_SENDCAST;
-	}
-	else
-	{
-		return SPL_NEXTLEVEL;
 	};
+	return SPL_NEXTLEVEL;
 };
 

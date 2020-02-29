@@ -23,7 +23,8 @@ func void b_awakesit()
 func void zs_waitforrescue()
 {
 	Npc_PercEnable(self,PERC_ASSESSMAGIC,b_assessmagic);
-	Npc_PercEnable(self,PERC_ASSESSTALK,b_situp);
+	//Npc_PercEnable(self,PERC_ASSESSTALK,b_situp);
+	Npc_PercEnable(self,PERC_ASSESSTALK,zs_talk);
 	printdebugnpc(PD_ZS_FRAME,"WaitForRescue");
 	if(!c_bodystatecontains(self,BS_SIT))
 	{
@@ -55,7 +56,7 @@ func void zs_waitforrescue_end()
 
 instance FREEMINEORC(C_NPC)
 {
-	name[0] = "Орк-раб";
+	name[0] = "Таррок";
 	guild = GIL_NONE;
 	level = 3;
 	flags = NPC_FLAG_IMMORTAL;

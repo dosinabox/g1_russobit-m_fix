@@ -4,7 +4,7 @@ instance KDF_406_OTXARDAS(NPC_DEFAULT)
 	name[0] = "Ксардас";
 	npctype = NPCTYPE_MAIN;
 	guild = GIL_NONE;
-	level = 30;
+	level = 50;
 	voice = 14;
 	id = 406;
 	flags = NPC_FLAG_IMMORTAL;
@@ -23,7 +23,7 @@ instance KDF_406_OTXARDAS(NPC_DEFAULT)
 	fight_tactic = FAI_HUMAN_MAGE;
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,6);
 	CreateInvItems(self,itarscrollsummondemon,20);
-	CreateInvItem(self,itarrunefireball);
+	EquipItem(self,itarrunefireball);
 	CreateInvItems(self,itfo_potion_health_03,3);
 	CreateInvItems(self,itfo_potion_mana_03,3);
 	EquipItem(self,amulett_der_erleuchtung);
@@ -50,5 +50,11 @@ func void rtn_drained_406()
 {
 	ta_drained_yberion(23,0,7,0,"TPL_331");
 	ta_drained_yberion(7,0,23,0,"TPL_331");
+};
+
+func void rtn_remove_406()
+{
+	ta_stay(23,0,7,0,"TPL_408");
+	ta_stay(7,0,23,0,"TPL_408");
 };
 

@@ -34,10 +34,7 @@ instance DIA_DEXTER_FIRST(C_INFO)
 
 func int dia_dexter_first_condition()
 {
-	if(Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST)
-	{
-		return 1;
-	};
+	return 1;
 };
 
 func void dia_dexter_first_info()
@@ -76,7 +73,7 @@ instance DIA_DEXTER_TRADE(C_INFO)
 	condition = dia_dexter_trade_condition;
 	information = dia_dexter_trade_info;
 	permanent = 1;
-	description = "Покажи мне твои товары.";
+	description = "Покажи мне свои товары.";
 	trade = 1;
 };
 
@@ -88,7 +85,7 @@ func int dia_dexter_trade_condition()
 
 func void dia_dexter_trade_info()
 {
-	AI_Output(other,self,"DIA_Dexter_Trade_15_00");	//Покажи мне твои товары.
+	AI_Output(other,self,"DIA_BaalKagan_TRADE_15_00");	//Покажи мне свои товары.
 	AI_Output(self,other,"DIA_Dexter_Trade_10_01");	//У меня все самое лучшее...
 	if(DEXTER_TRADED == FALSE)
 	{
@@ -97,9 +94,6 @@ func void dia_dexter_trade_info()
 		DEXTER_TRADED = TRUE;
 	};
 };
-
-
-var int dexter_getkalomsrecipe;
 
 instance DIA_DEXTER_JOINOC(C_INFO)
 {
@@ -191,6 +185,7 @@ func void dia_dexter_joinoc_forgetit()
 	b_logentry(CH1_KALOMSRECIPE,"Декстер хочет, чтобы я пошел в Лагерь сектантов и сделал вид, будто хочу присоединиться к ним.");
 	CreateInvItems(self,itminugget,50);
 	b_giveinvitems(self,other,itminugget,50);
+	DEXTER_ORE_PREPAID = 1;
 	Info_ClearChoices(dia_dexter_joinoc);
 };
 
@@ -203,7 +198,7 @@ instance DIA_DEXTER_WHEREST(C_INFO)
 	nr = 800;
 	condition = dia_dexter_wherest_condition;
 	information = dia_dexter_wherest_info;
-	permanent = 1;
+	permanent = 0;
 	description = "Где находится Лагерь сектантов?";
 };
 
@@ -260,9 +255,14 @@ func void dia_dexter_kalomsrecipesuccess_info()
 	b_usefakescroll();
 	AI_Output(self,other,"DIA_Dexter_KalomsRecipeSuccess_10_02");	//Теперь я сам смогу готовить такой эликсир.
 	AI_Output(self,other,"DIA_Dexter_KalomsRecipeSuccess_10_03");	//Ты парень что надо! Я скажу об этом Диего!
-	AI_Output(self,other,"DIA_Dexter_KalomsRecipeSuccess_10_04");	//Вот, это тебе... за помощь...
-	CreateInvItems(other,itminugget,50);
+	if(DEXTER_ORE_PREPAID != 1)
+	{
+		AI_Output(self,other,"DIA_Dexter_KalomsRecipeSuccess_10_04");	//Вот, это тебе... за помощь...
+		CreateInvItems(other,itminugget,50);
+		b_giveinvitems(self,other,itminugget,50);
+	};
 	b_giveinvitems(other,self,kalomsrecipe,1);
+	Npc_RemoveInvItem(self,kalomsrecipe);
 	DEXTER_GETKALOMSRECIPE = LOG_SUCCESS;
 	if(Npc_GetTrueGuild(hero) == GIL_NONE)
 	{
@@ -272,7 +272,7 @@ func void dia_dexter_kalomsrecipesuccess_info()
 	else
 	{
 		Log_SetTopicStatus(CH1_KALOMSRECIPE,LOG_SUCCESS);
-		b_logentry(CH1_KALOMSRECIPE,"Декстер был удивлен. К сожалению, я не смогу воспользоваться его помощью, так как не смогу стать Призраком.");
+		b_logentry(CH1_KALOMSRECIPE,"Декстер был удивлен. Но его помощь мне уже не требуется.");
 	};
 	b_givexp(XP_DEXTERKALOM);
 };

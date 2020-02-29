@@ -43,7 +43,7 @@ func void b_assessfighter()
 			printdebugnpc(PD_ZS_CHECK,"...Fighter ist im Dialog!");
 			return;
 		};
-		if(Npc_IsInFightMode(other,FMODE_MELEE))
+		if(Npc_IsInFightMode(other,FMODE_MELEE) && (!c_npcisguarding(self)))
 		{
 			printdebugnpc(PD_ZS_CHECK,"...Fighter führt Nahkampfwaffe!");
 			if(Npc_GetDistToNpc(self,other) < HAI_DIST_MELEE)
@@ -56,7 +56,7 @@ func void b_assessfighter()
 				return;
 			};
 		};
-		if(Npc_IsInFightMode(other,FMODE_FAR))
+		if(Npc_IsInFightMode(other,FMODE_FAR) && (!c_npcisguarding(self)))
 		{
 			printdebugnpc(PD_ZS_CHECK,"...Fighter führt Fernkampfwaffe!");
 			if(Npc_GetDistToNpc(self,other) < HAI_DIST_RANGED)
@@ -67,7 +67,7 @@ func void b_assessfighter()
 				return;
 			};
 		};
-		if(Npc_IsInFightMode(other,FMODE_MAGIC))
+		if(Npc_IsInFightMode(other,FMODE_MAGIC) && (!c_npcisguarding(self)))
 		{
 			printdebugnpc(PD_ZS_CHECK,"...Fighter führt Zauberspruch!");
 			if((Npc_GetDistToNpc(self,other) < HAI_DIST_RANGED) && (Npc_GetActiveSpellCat(other) == SPELL_BAD))

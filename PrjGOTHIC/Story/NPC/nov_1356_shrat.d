@@ -1,7 +1,7 @@
 
 instance NOV_1356_SHRAT(NPC_DEFAULT)
 {
-	name[0] = "״נ‎ע";
+	name[0] = "״נוע";
 	npctype = NPCTYPE_MAIN;
 	guild = GIL_NOV;
 	level = 3;

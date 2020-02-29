@@ -218,7 +218,7 @@ instance SCHUTZRING_MAGIE2(C_ITEM)
 	name = NAME_RING;
 	mainflag = ITEM_KAT_MAGIC;
 	flags = ITEM_RING;
-	value = 400;
+	value = 120;
 	visual = "ItMi_Ring_01.3ds";
 	visual_skin = 0;
 	material = MAT_METAL;
@@ -545,7 +545,7 @@ instance RING_DES_LEBENS(C_ITEM)
 	on_equip = equip_ring_des_lebens;
 	on_unequip = unequip_ring_des_lebens;
 	description = "Кольцо жизненной силы";
-	text[2] = NAME_BONUS_HP;
+	text[2] = NAME_BONUS_HPMAX;
 	count[2] = 10;
 	text[5] = NAME_VALUE;
 	count[5] = value;
@@ -584,7 +584,7 @@ instance RING_DES_LEBENS2(C_ITEM)
 	on_equip = equip_ring_des_lebens2;
 	on_unequip = unequip_ring_des_lebens2;
 	description = "Кольцо здоровья";
-	text[2] = NAME_BONUS_HP;
+	text[2] = NAME_BONUS_HPMAX;
 	count[2] = 20;
 	text[5] = NAME_VALUE;
 	count[5] = value;
@@ -683,7 +683,7 @@ instance RING_DER_MAGIE(C_ITEM)
 	on_equip = equip_ring_der_magie;
 	on_unequip = unequip_ring_der_magie;
 	description = "Кольцо магической энергии";
-	text[2] = NAME_BONUS_MANA;
+	text[2] = NAME_BONUS_MANAMAX;
 	count[2] = 10;
 	text[5] = NAME_VALUE;
 	count[5] = value;
@@ -698,7 +698,14 @@ func void equip_ring_der_magie()
 
 func void unequip_ring_der_magie()
 {
-	self.attribute[ATR_MANA] = self.attribute[ATR_MANA] - 10;
+	if(self.attribute[ATR_MANA] >= 10)
+	{
+		self.attribute[ATR_MANA] = self.attribute[ATR_MANA] - 10;
+	}
+	else
+	{
+		self.attribute[ATR_MANA] = 0;
+	};
 	self.attribute[ATR_MANA_MAX] = self.attribute[ATR_MANA_MAX] - 10;
 };
 
@@ -715,9 +722,9 @@ instance RING_DER_ERLEUCHTUNG(C_ITEM)
 	on_equip = equip_ring_der_erleuchtung;
 	on_unequip = unequip_ring_der_erleuchtung;
 	description = "Кольцо просвещения";
-	text[2] = NAME_BONUS_MANA;
+	text[2] = NAME_BONUS_MANAMAX;
 	count[2] = 15;
-	text[3] = NAME_BONUS_HP;
+	text[3] = NAME_BONUS_HPMAX;
 	count[3] = 15;
 	text[5] = NAME_VALUE;
 	count[5] = value;
@@ -734,7 +741,14 @@ func void equip_ring_der_erleuchtung()
 
 func void unequip_ring_der_erleuchtung()
 {
-	self.attribute[ATR_MANA] = self.attribute[ATR_MANA] - 15;
+	if(self.attribute[ATR_MANA] >= 15)
+	{
+		self.attribute[ATR_MANA] = self.attribute[ATR_MANA] - 15;
+	}
+	else
+	{
+		self.attribute[ATR_MANA] = 0;
+	};
 	self.attribute[ATR_MANA_MAX] = self.attribute[ATR_MANA_MAX] - 15;
 	self.attribute[ATR_HITPOINTS_MAX] = self.attribute[ATR_HITPOINTS_MAX] - 15;
 	if(self.attribute[ATR_HITPOINTS] > 16)

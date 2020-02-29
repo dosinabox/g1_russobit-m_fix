@@ -24,6 +24,7 @@ instance GRD_212_TORWACHE(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,2);
 	Npc_SetTalentSkill(self,NPC_TALENT_2H,1);
 	Npc_SetTalentSkill(self,NPC_TALENT_CROSSBOW,1);
+	EquipItem(self,itmw_1h_sword_03);
 	EquipItem(self,itrw_crossbow_01);
 	CreateInvItems(self,itambolt,30);
 	CreateInvItem(self,itfocheese);

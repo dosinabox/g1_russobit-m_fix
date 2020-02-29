@@ -36,7 +36,7 @@ instance GRD_229_GARDIST(NPC_DEFAULT)
 func void rtn_start_229()
 {
 	ta_guardpalisade(8,0,22,0,"OCR_PALISADE_ABOVE_MARKETPLACE_01");
-	ta_sleep(22,0,8,0,"OCC_MERCS_UPPER_RIGHT_ROOM_FRONT");
+	ta_sleep(22,0,8,0,"OCC_MERCS_LEFT_ROOM_BED5");
 };
 
 func void rtn_fmtaken_229()

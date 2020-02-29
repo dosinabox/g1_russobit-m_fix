@@ -83,7 +83,7 @@ func int zs_orc_watchfight_loop()
 		AI_Dodge(self);
 	};
 	AI_TurnToNPC(self,other);
-	if(!Hlp_IsValidNpc(other) || !Hlp_IsValidNpc(victim) || Npc_IsDead(other) || Npc_IsDead(victim) || Npc_IsInState(other,zs_unconscious) || Npc_IsInState(victim,zs_unconscious) || (!Npc_IsInFightMode(other,FMODE_FIST) && !Npc_IsInFightMode(other,FMODE_MAGIC) && !Npc_HasReadiedWeapon(other) && !Npc_IsInFightMode(victim,FMODE_FIST) && !Npc_IsInFightMode(victim,FMODE_MAGIC) && !Npc_HasReadiedWeapon(victim)))
+	if(!Hlp_IsValidNpc(other) || !Hlp_IsValidNpc(victim) || Npc_IsDead(other) || Npc_IsDead(victim) || Npc_IsInState(other,zs_unconscious) || Npc_IsInState(victim,zs_unconscious) || !(Npc_IsInFightMode(other,FMODE_FIST) && !Npc_IsInFightMode(other,FMODE_MAGIC) && !Npc_HasReadiedWeapon(other) && !Npc_IsInFightMode(victim,FMODE_FIST) && !Npc_IsInFightMode(victim,FMODE_MAGIC) && !Npc_HasReadiedWeapon(victim)))
 	{
 		printdebugnpc(PD_ORC_LOOP,"ZS_Orc_WatchFight_Loop: einer der Kaempfer tot oder bewusstlos");
 		Npc_ClearAIQueue(self);

@@ -2,7 +2,6 @@
 func void b_story_gornjoins()
 {
 	var C_NPC gorn;
-	CreateInvItem(hero,itke_freemine);
 	Wld_InsertNpc(razor,"OW_PATH_3001_MOVE");
 	Wld_InsertNpc(razor,"OW_PATH_3001_MOVE2");
 	Wld_InsertNpc(razor,"OW_PATH_3001_MOVE3");

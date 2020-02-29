@@ -13,7 +13,7 @@ func void b_assesscaster()
 		printdebugnpc(PD_ZS_CHECK,"...NSC ist NPCTYPE_FRIEND oder ATT_FRIENDLY!");
 		return;
 	};
-	if(Npc_GetActiveSpellCat(other) == SPELL_BAD)
+	if(Npc_GetActiveSpellCat(other) == SPELL_BAD && (!c_npcisguarding(self)))
 	{
 		printdebugnpc(PD_ZS_CHECK,"...böser Zauber!");
 		b_fullstop(self);

@@ -15,6 +15,7 @@ func void zs_observesuspect()
 	Npc_PercEnable(self,PERC_ASSESSTHREAT,b_assessthreat);
 	Npc_PercEnable(self,PERC_ASSESSUSEMOB,b_assessusemob);
 	Npc_PercEnable(self,PERC_ASSESSENTERROOM,b_assessenterroom);
+	Npc_PercEnable(self,PERC_ASSESSTHEFT,b_assesstheft);
 	AI_TurnToNPC(self,other);
 	AI_LookAtNpc(self,other);
 	AI_PointAtNpc(self,other);
@@ -33,12 +34,13 @@ func int zs_observesuspect_loop()
 {
 	printdebugnpc(PD_ZS_LOOP,"ZS_ObserveSuspect_Loop");
 	b_smartturntonpc(self,other);
-	if((Npc_GetDistToNpc(self,other) > PERC_DIST_INTERMEDIAT) || !c_bodystatecontains(other,BS_SNEAK))
+	AI_Wait(self,5);
+	b_say(self,other,"$GETOUTOFHERE");
+	if((Npc_GetDistToNpc(self,hero) > 800))
 	{
 		printdebugnpc(PD_ZS_LOOP,"... loop end");
 		return LOOP_END;
 	};
-	AI_Wait(self,1);
 	return LOOP_CONTINUE;
 };
 

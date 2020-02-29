@@ -34,8 +34,8 @@ func void info_xardas_ot_info()
 	AI_Output(other,self,"Info_Xardas_OT_15_13");	//„то с тобой?
 	AI_Output(self,other,"Info_Xardas_OT_14_14");	//я... должен...
 	Npc_ExchangeRoutine(self,"DRAINED");
-	Log_CreateTopic(CH6_SLEEPER,LOG_MISSION);
-	Log_SetTopicStatus(CH6_SLEEPER,LOG_RUNNING);
+	//Log_CreateTopic(CH6_SLEEPER,LOG_MISSION);
+	//Log_SetTopicStatus(CH6_SLEEPER,LOG_RUNNING);
 	b_logentry(CH6_SLEEPER,"„то ж, кажетс€, € уже недалеко от места, где устроилс€ —п€щий.  сардас неожиданно по€вилс€ передо мной и дал мне несколько советов перед предсто€щей битвой. я должен проткнуть клинками п€ть сердец бессмертных орков-шаманов, которые заперты в саркофагах. “олько так € смогу победить —п€щего.  ажетс€, это не так уж сложно...");
 	AI_StopProcessInfos(self);
 };

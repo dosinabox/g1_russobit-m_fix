@@ -29,6 +29,7 @@ func void zs_reacttocall()
 	else
 	{
 		printdebugnpc(PD_ZS_CHECK,"...nicht feindlich!");
+		b_say(hero,self,"$SC_HEYWAITASECOND");
 		AI_PlayAni(self,"T_COMEOVERHERE");
 		AI_StartState(self,zs_reacttocall_wait,0,"");
 	};
@@ -62,6 +63,7 @@ func int zs_reacttocall_wait_loop()
 	{
 		return 1;
 	};
+	return 0;
 };
 
 func int zs_reacttocall_wait_end()
