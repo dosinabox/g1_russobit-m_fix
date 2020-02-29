@@ -130,6 +130,7 @@ Story\B\b_initializestory.d
 Story\B\b_setdaytolerance.d
 Story\B\b_respawn.d
 Story\B\b_setroguestohostile.d
+Story\B\b_failch4quests.d
 Story\Text.d
 Story\guilds.d
 Story\svm.d

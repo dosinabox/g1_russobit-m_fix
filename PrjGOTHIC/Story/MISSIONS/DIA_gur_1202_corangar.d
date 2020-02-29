@@ -34,7 +34,10 @@ instance DIA_CORANGAR_LATERTRAINER(C_INFO)
 
 func int dia_corangar_latertrainer_condition()
 {
-	return 1;
+	if(Npc_GetTrueGuild(hero) != GIL_TPL)
+	{
+		return 1;
+	};
 };
 
 func void dia_corangar_latertrainer_info()
@@ -45,6 +48,34 @@ func void dia_corangar_latertrainer_info()
 	AI_Output(self,other,"GUR_1202_CorAngar_LaterTrainer_08_03");	//Я обучаю лишь тех, кто входит в священный круг Стражей.
 };
 
+instance DIA_CORANGAR_LATERTRAINER2(C_INFO)
+{
+	npc = gur_1202_corangar;
+	nr = 6;
+	condition = dia_corangar_latertrainer2_condition;
+	information = dia_corangar_latertrainer2_info;
+	permanent = 0;
+	description = "Ты можешь научить меня чему-нибудь?";
+};
+
+
+func int dia_corangar_latertrainer2_condition()
+{
+	if(Npc_GetTrueGuild(hero) == GIL_TPL)
+	{
+		return 1;
+	};
+};
+
+func void dia_corangar_latertrainer2_info()
+{
+	AI_Output(other,self,"GUR_1202_CorAngar_LaterTrainer_15_00");	//Ты можешь научить меня чему-нибудь?
+	AI_Output(self,other,"GUR_1202_CorAngar_LaterTrainer_08_01");	//Хочешь стать хорошим воином? Да, тебе действительно нужно найти опытного учителя.
+	AI_Output(self,other,"Sld_700_Lee_Teach_08_01");	//Я могу помочь тебе стать более ловким и сильным.
+	Log_CreateTopic(GE_TEACHERPSI,LOG_NOTE);
+	b_logentry(GE_TEACHERPSI,"Кор Ангар может помочь мне увеличить силу и ловкость. Я смогу найти его на тренировочной площадке Стражей, на втором уровне.");
+	b_logentry(GE_TEACHERPSI,"Кор Ангар может научить меня обращаться с двуручным мечом. Но это произойдет после того, как я освою бой с одноручным оружием.");
+};
 
 instance DIA_CORANGAR_WIETEMPLER(C_INFO)
 {
@@ -87,7 +118,7 @@ instance GUR_1202_CORANGAR_TEACH(C_INFO)
 
 func int gur_1202_corangar_teach_condition()
 {
-	if(c_npcbelongstopsicamp(hero))
+	if(Npc_KnowsInfo(hero,dia_corangar_latertrainer2) && Npc_GetTrueGuild(hero) == GIL_TPL)
 	{
 		return TRUE;
 	};
@@ -195,8 +226,6 @@ func void gur_1202_corangar_wannabetpl_info()
 		hero.guild = GIL_TPL;
 		Log_CreateTopic(GE_BECOMETEMPLAR,LOG_NOTE);
 		b_logentry(GE_BECOMETEMPLAR,"Сегодня Кор Ангар назначил меня Стражем. Я смогу взять свой новый доспех у Гор На Тофа. Обычно он стоит на тренировочной площадке.");
-		Log_CreateTopic(GE_TEACHERPSI,LOG_NOTE);
-		b_logentry(GE_TEACHERPSI,"Кор Ангар может помочь мне увеличить силу и ловкость и научить обращаться с двуручным мечом. Но это произойдет после того, как я освою бой с одноручным оружием. Я смогу найти его на тренировочной площадке Стражей, на втором уровне.");
 	};
 };
 
@@ -215,7 +244,7 @@ instance GUR_1202_CORANGAR_ZWEIHAND1(C_INFO)
 
 func int gur_1202_corangar_zweihand1_condition()
 {
-	if((Npc_GetTalentSkill(hero,NPC_TALENT_2H) < 1) && (Npc_GetTalentSkill(hero,NPC_TALENT_1H) == 2) && (Npc_GetTrueGuild(hero) == GIL_TPL))
+	if((Npc_GetTalentSkill(hero,NPC_TALENT_2H) < 1) && (Npc_GetTrueGuild(hero) == GIL_TPL) && (Npc_KnowsInfo(hero,dia_corangar_latertrainer2)))
 	{
 		return TRUE;
 	};
@@ -224,7 +253,12 @@ func int gur_1202_corangar_zweihand1_condition()
 func void gur_1202_corangar_zweihand1_info()
 {
 	AI_Output(other,self,"GUR_1202_CorAngar_ZWEIHAND1_Info_15_01");	//Научи меня вести бой двуручным мечом.
-	if(b_giveskill(other,NPC_TALENT_2H,1,LPCOST_TALENT_2H_1))
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_1H) < 2)
+	{
+		AI_Output(self,other,"SVM_8_NoLearnYouAlreadyKnow");	//Сначала ты должен изучить основы и только потом переходить к более сложным вещам.
+		PrintScreen("Требуется мастерство одноручного оружия!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else if(b_giveskill(other,NPC_TALENT_2H,1,LPCOST_TALENT_2H_1))
 	{
 		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND1_Info_08_02");	//Чтобы овладеть техникой боя с двуручным мечом, нужна определенная сила и ловкость.
 		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND1_Info_08_03");	//Ты справишься с таким оружием только тогда, когда сможешь управлять не только своим телом, но и духом.
@@ -316,6 +350,7 @@ func void gur_1202_corangar_sends_earn()
 {
 	AI_Output(other,self,"GUR_1202_CorAngar_SENDS_EARN_Info_15_01");	//А что я за это получу?
 	AI_Output(self,other,"GUR_1202_CorAngar_SENDS_EARN_Info_08_02");	//Тебе нужна руда? Наверное, я ошибся в тебе. Но мне все равно нужна твоя помощь. Вот сто кусков руды. Больше у меня нет!
+	b_printtrademsg1("Получено руды: 100");
 	CreateInvItems(self,itminugget,100);
 	b_giveinvitems(self,hero,itminugget,100);
 };
@@ -324,6 +359,7 @@ func void gur_1202_corangar_sends_know()
 {
 	AI_Output(other,self,"GUR_1202_CorAngar_SENDS_KNOW_Info_15_01");	//Я сейчас же пойду туда!
 	AI_Output(self,other,"GUR_1202_CorAngar_SENDS_KNOW_Info_08_02");	//Возьми вот это кольцо. Оно сможет защитить тебя в битве!
+	b_printtrademsg1("Получено кольцо деревянной кожи.");
 	b_story_gotoorcgraveyard();
 	CreateInvItem(self,schutzring_geschosse1);
 	b_giveinvitems(self,hero,schutzring_geschosse1,1);
@@ -558,6 +594,7 @@ func void info_corangar_findherb_success_info()
 	angar = Hlp_GetNpc(gur_1202_corangar);
 	b_giveinvitems(other,self,itfo_plants_herb_03,5);
 	AI_Output(other,self,"Info_CorAngar_FindHerb_Success_15_01");	//Я добыл целебные травы для Юбериона.
+	b_printtrademsg1("Отдано 5 целебных корней.");
 	AI_Output(self,other,"Info_CorAngar_FindHerb_Success_08_02");	//Отлично. Когда ты уходил, Юберион очнулся ненадолго.
 	AI_Output(other,self,"Info_CorAngar_FindHerb_Success_15_03");	//Он что-нибудь сказал?
 	AI_Output(self,other,"Info_CorAngar_FindHerb_Success_08_04");	//Да, он сказал, что Спящий на самом деле не является тем, что мы о нем думаем. Мы не должны пытаться разбудить его.
@@ -593,6 +630,7 @@ func void info_corangar_findherb_success_info()
 	AI_Output(self,other,"GUR_1202_CorAngar_DEATH_Info_08_07");	//После слов Юбериона он ужасно рассердился и отправился сам искать путь к Спящему, взяв с собой нескольких Стражей.
 	AI_Output(other,self,"GUR_1202_CorAngar_DEATH_Info_15_08");	//Как же мы теперь сможем забрать юнитор?
 	AI_Output(self,other,"GUR_1202_CorAngar_DEATH_Info_08_09");	//Я думаю, он оставил юнитор и книгу в своей лаборатории. Вот тебе ключ от его сундука.
+	b_printtrademsg2("Получен ключ из лаборатории.");
 	CreateInvItem(self,itarrunepyrokinesis);
 	CreateInvItem(self,stab_des_lichts);
 	if(YBERION_KEY_STOLEN == FALSE)
@@ -656,6 +694,7 @@ func void info_corangar_teleport_info()
 	AI_Output(self,hero,"Info_CorAngar_TELEPORT_08_01");	//Подожди!
 	AI_Output(hero,self,"Info_CorAngar_TELEPORT_15_02");	//В чем дело?
 	AI_Output(self,hero,"Info_CorAngar_TELEPORT_08_03");	//Возьми эту руну в знак нашей благодарности за твою помощь.
+	b_printtrademsg1("Получена руна телепортацит в Болотный лагерь.");
 	AI_Output(self,hero,"Info_CorAngar_TELEPORT_08_04");	//Она даст тебе возможность быстро перенестись на площадь перед нашим Храмом.
 	AI_Output(hero,self,"Info_CorAngar_TELEPORT_15_05");	//Спасибо тебе!
 	if(YBERION_DIED == TRUE)
@@ -773,6 +812,7 @@ func void info_corangar_yberion_died_info()
 	AI_Output(self,other,"GUR_1202_CorAngar_DEATH_Info_08_07_New");	//Отправился сам искать путь к Спящему, взяв с собой нескольких Стражей.
 	AI_Output(other,self,"GUR_1202_CorAngar_DEATH_Info_15_08");	//Как же мы теперь сможем забрать юнитор?
 	AI_Output(self,other,"GUR_1202_CorAngar_DEATH_Info_08_09");	//Я думаю, он оставил юнитор и книгу в своей лаборатории. Вот тебе ключ от его сундука.
+	b_printtrademsg1("Получен ключ из лаборатории.");
 	b_logentry(CH3_FINDHERBS,"Я не успел принести Юбериону лечебные травы... Глава Братства умер...");
 	CORANGAR_FINDHERB = LOG_FAILED;
 	Log_SetTopicStatus(CH3_FINDHERBS,LOG_FAILED);
@@ -841,6 +881,7 @@ func void info_corangar_healthwater_info()
 	};
 	CORANGAR_SENDTONC = TRUE;
 	AI_Output(other,self,"Tpl_1433_GorNaVid_HEALTH_SUC_Info_15_01_New");	//Вот, может быть, это поможет.
+	b_printtrademsg1("Отдано лечебное зелье Фортуно.");
 	AI_Output(self,other,"Info_CorAngar_FindHerb_Success_08_05");	//Теперь нам остается надеяться на то, что Юбериона можно вылечить.
 	AI_Wait(self,0.5);
 	AI_GotoWP(self,"PSI_TEMPLE_ROOMS_IN_02");
@@ -864,6 +905,7 @@ func void info_corangar_healthwater_info()
 	AI_Output(self,other,"GUR_1202_CorAngar_DEATH_Info_08_07_New");	//Отправился сам искать путь к Спящему, взяв с собой нескольких Стражей.
 	AI_Output(other,self,"GUR_1202_CorAngar_DEATH_Info_15_08");	//Как же мы теперь сможем забрать юнитор?
 	AI_Output(self,other,"GUR_1202_CorAngar_DEATH_Info_08_09");	//Я думаю, он оставил юнитор и книгу в своей лаборатории. Вот тебе ключ от его сундука.
+	b_printtrademsg2("Получен ключ из лаборатории.");
 	b_logentry(CH3_FINDHERBS,"Зелье Фортуно сработало! Юберион пришел в себя и успел немного поговорить с Кор Ангаром, прежде чем потерял сознание. Он все еще слаб, но уже не при смерти. Надеюсь, он поправится.");
 	CORANGAR_FINDHERB = LOG_SUCCESS;
 	Log_SetTopicStatus(CH3_FINDHERBS,LOG_SUCCESS);

@@ -104,8 +104,8 @@ func void dia_torrez_belohnung_str()
 {
 	AI_Output(other,self,"DIA_Torrez_Belohnung_Str_15_00");	//Я возьму Кольцо силы.
 	AI_Output(self,other,"DIA_Torrez_Belohnung_Str_04_01");	//Твой выбор не был неожиданным. Вот, возьми кольцо.
-	CreateInvItem(self,staerkering);
-	b_giveinvitems(self,hero,staerkering,1);
+	b_printtrademsg1("Получено кольцо силы.");
+	CreateInvItem(hero,staerkering);
 	Info_ClearChoices(dia_torrez_belohnung);
 };
 
@@ -113,8 +113,8 @@ func void dia_torrez_belohnung_dex()
 {
 	AI_Output(other,self,"DIA_Torrez_Belohnung_Dex_15_00");	//Я возьму Кольцо ловкости.
 	AI_Output(self,other,"DIA_Torrez_Belohnung_Dex_04_01");	//Ловкость побеждает силу. Я одобряю твой выбор.
-	CreateInvItem(self,ring_des_geschicks);
-	b_giveinvitems(self,hero,ring_des_geschicks,1);
+	b_printtrademsg1("Получено кольцо ловкости.");
+	CreateInvItem(hero,ring_des_geschicks);
 	Info_ClearChoices(dia_torrez_belohnung);
 };
 
@@ -122,9 +122,8 @@ func void dia_torrez_belohnung_scrolls()
 {
 	AI_Output(other,self,"DIA_Torrez_Belohnung_Scrolls_15_00");	//Дай мне магические свитки.
 	AI_Output(self,other,"DIA_Torrez_Belohnung_Scrolls_04_01");	//Используй их с умом и помни, что ты можешь прочитать заклинание из свитка только один раз!
-	CreateInvItems(self,itarscrollfireball,3);
-	b_giveinvitems(self,hero,itarscrollfireball,3);
-	Npc_RemoveInvItems(other,itarscrollfireball,2);
+	b_printtrademsg1("Получены свитки: огненный шар, молния и превращение в падальщика.");
+	CreateInvItem(other,itarscrollfireball);
 	CreateInvItem(other,itarscrolltrfscavenger);
 	CreateInvItem(other,itarscrollchainlightning);
 	Info_ClearChoices(dia_torrez_belohnung);
@@ -134,8 +133,8 @@ func void dia_torrez_belohnung_manamax()
 {
 	AI_Output(other,self,"DIA_Torrez_Belohnung_ManaMax_15_00");	//Я возьму зелье!
 	AI_Output(self,other,"DIA_Torrez_Belohnung_ManaMax_04_01");	//Твой выбор говорит о твоей мудрости. Это самое ценное из того, что ты мог взять у меня. Выпей это зелье, и оно увеличит твою силу!
-	CreateInvItem(self,itfo_potion_mana_perma_01);
-	b_giveinvitems(self,hero,itfo_potion_mana_perma_01,1);
+	b_printtrademsg1("Получена эссенция силы духа.");
+	CreateInvItem(hero,itfo_potion_mana_perma_01);
 	Info_ClearChoices(dia_torrez_belohnung);
 };
 
@@ -169,23 +168,23 @@ func void dia_torrez_brieftausch_info()
 	AI_Output(other,self,"DIA_Torrez_BriefTausch_15_04");	//Вот оно.
 	if(Npc_HasItems(other,itwr_fire_letter_01) >= 1)
 	{
+		b_printtrademsg1("Отдано запечатанное письмо.");
 		AI_Output(self,other,"DIA_Torrez_BriefTausch_04_05");	//Вот твоя награда - Кольцо силы. Редкий артефакт, к тому же очень полезный.
+		b_printtrademsg2("Получено кольцо силы.");
 		AI_Output(self,other,"DIA_Torrez_BriefTausch_04_06");	//А теперь иди!
-		b_giveinvitems(other,self,itwr_fire_letter_01,1);
-		Npc_RemoveInvItems(self,itwr_fire_letter_01,1);
-		CreateInvItems(self,staerkering,1);
-		b_giveinvitems(self,other,staerkering,1);
+		Npc_RemoveInvItems(hero,itwr_fire_letter_01,1);
+		CreateInvItems(hero,staerkering,1);
 		b_givexp(XP_XARDASLETTER);
 	}
 	else if(Npc_HasItems(other,itwr_fire_letter_02) >= 1)
 	{
+		b_printtrademsg1("Отдано вскрытое письмо.");
 		AI_Output(self,other,"DIA_Torrez_BriefTausch_04_07");	//Печать сломана.
 		AI_Output(other,self,"DIA_Torrez_BriefTausch_15_08");	//Ну, это была простая случайность.
 		AI_Output(self,other,"DIA_Torrez_BriefTausch_04_09");	//Что ж, вот твоя награда - целебное зелье. Это тоже неплохо. Обычно гонец, принесший письмо без печати, не получает ничего.
-		b_giveinvitems(other,self,itwr_fire_letter_02,1);
-		Npc_RemoveInvItems(self,itwr_fire_letter_02,1);
-		CreateInvItems(self,itfo_potion_health_03,1);
-		b_giveinvitems(self,other,itfo_potion_health_03,1);
+		b_printtrademsg2("Получено зелье исцеления.");
+		Npc_RemoveInvItems(hero,itwr_fire_letter_02,1);
+		CreateInvItems(hero,itfo_potion_health_03,1);
 		b_givexp(XP_XARDASLETTEROPEN);
 	};
 	corristo = Hlp_GetNpc(kdf_402_corristo);
@@ -249,7 +248,7 @@ func void kdf_405_torrez_book_info()
 {
 	AI_Output(self,other,"KDF_405_Torrez_BOOK_Info_04_01");	//Каждый Круг магии описан в специальной книге. Читай их и ты приобретешь знание. А в знании - сила!
 	AI_Output(self,other,"KDF_405_Torrez_BOOK_Info_04_02");	//Вот, возьми книгу Первого Круга. Она научит тебя понимать Огонь.
-	CreateInvItem(self,itwr_book_circle_01);
+	b_printtrademsg1("Получена книга 'Первый круг магии'.");
 	b_giveinvitems(self,hero,itwr_book_circle_01,1);
 	AI_StopProcessInfos(self);
 };
@@ -349,6 +348,7 @@ func void kdf_405_torrez_mana_man_1()
 	{
 		if(hero.lp >= 1 && hero.attribute[ATR_MANA_MAX] < 100)
 		{
+			b_printtrademsg1("Отдано руды: 10");
 			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
 		};
 		b_buyattributepoints(other,ATR_MANA_MAX,1);
@@ -371,6 +371,7 @@ func void kdf_405_torrez_mana_man_5()
 	{
 		if(hero.lp >= 5 && hero.attribute[ATR_MANA_MAX] < 96)
 		{
+			b_printtrademsg1("Отдано руды: 50");
 			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
 		};
 		b_buyattributepoints(other,ATR_MANA_MAX,5);

@@ -53,7 +53,11 @@ func void b_movenpc()
 			AI_StartState(self,zs_movenpcfriendlywait,0,"");
 			return;
 		}
-		else if(((Npc_GetAttitude(self,other) == ATT_ANGRY) || (Npc_GetAttitude(self,other) == ATT_NEUTRAL)) && c_amistronger(self,other) && !c_npcisguard(self) && !c_npcisguardarcher(self))
+		else if(c_npcisguard(self) && c_npcisguardarcher(self))
+		{
+			return;
+		}
+		else if(((Npc_GetAttitude(self,other) == ATT_ANGRY) || (Npc_GetAttitude(self,other) == ATT_NEUTRAL)) && c_amistronger(self,other))
 		{
 			b_fullstop(self);
 			b_smartturntonpc(self,other);

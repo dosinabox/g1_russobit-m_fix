@@ -97,6 +97,7 @@ func void info_alex_letsgo_info()
 	b_givexp(300);
 	if(FMTAKEN == FALSE)
 	{
+		b_printtrademsg1("Отдана маскировка и карта.");
 		b_giveinvitems(hero,self,alexstuff,1);
 		b_giveinvitems(hero,self,itwrocmap,1);
 		Npc_RemoveInvItem(self,alexstuff);

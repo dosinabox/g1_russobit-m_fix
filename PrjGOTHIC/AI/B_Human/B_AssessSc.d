@@ -93,7 +93,7 @@ func void b_assesssc()
 	{
 		printdebugnpc(PD_ZS_CHECK,"...SC wurde von Durchgangswachen verwarnt!");
 		printdebugint(PD_ZS_CHECK,"hero.aivar[AIV_GUARDPASSAGE_STATUS] = ",hero.aivar[AIV_GUARDPASSAGE_STATUS]);
-		if(Npc_IsInState(self,zs_guardpassage) && (Npc_GetDistToNpc(self,hero) > HAI_DIST_GUARDPASSAGE_RESET))
+		if((Npc_IsInState(self,zs_guardpassage) || Npc_IsInState(self,zs_guardpalisade)) && (Npc_GetDistToNpc(self,hero) > HAI_DIST_GUARDPASSAGE_RESET))
 		{
 			printdebugnpc(PD_ZS_CHECK,"...Status für Durchgangswachen zurücksetzen!");
 			hero.aivar[AIV_GUARDPASSAGE_STATUS] = AIV_GPS_BEGIN;

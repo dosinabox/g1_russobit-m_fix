@@ -32,9 +32,9 @@ func void info_highpriest5_info()
 	}
 	else
 	{
-		AI_Output(self,other,"Info_HighPriest5_17_01");	//УХОДИ ОТСЮДА!
 		AI_Output(self,other,"Info_HighPriest5_17_02");	//НИКТО НЕ СМЕЕТ ТРЕВОЖИТЬ СОН МОЕГО ПОВЕЛИТЕЛЯ!
 		AI_Output(other,self,"Info_HighPriest5_15_03");	//Ошибаешься, твой драгоценный Спящий скоро проснется!
+		AI_Output(self,other,"Info_HighPriest5_17_01");	//УХОДИ ОТСЮДА!
 		AI_StopProcessInfos(self);
 		b_story_encounteredhighpriest();
 	};

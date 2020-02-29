@@ -19,9 +19,8 @@ instance BAU_927_BAUER(NPC_DEFAULT)
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_COWARD;
-	CreateInvItems(self,itforice,4);
+	CreateInvItems(self,itforice,2);
 	CreateInvItem(self,itfobooze);
-	CreateInvItem(self,itmi_stuff_plate_01);
 	EquipItem(self,itmw_1h_sickle_01);
 	daily_routine = rtn_start_927;
 };

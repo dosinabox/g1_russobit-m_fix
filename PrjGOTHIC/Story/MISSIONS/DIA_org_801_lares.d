@@ -119,9 +119,14 @@ func void org_801_lares_bringlist_info()
 	AI_Output(self,other,"ORG_801_Lares_BringList_11_01");	//Да ты что? Невероятно! А ты смелый парень, как я погляжу.
 	AI_Output(self,other,"ORG_801_Lares_BringList_11_02");	//Покажи его мне!
 	AI_Output(other,self,"ORG_801_Lares_BringList_15_03");	//Вот он...
+	b_printtrademsg1("Отдан список.");
 	b_usefakescroll();
 	AI_Output(self,other,"ORG_801_Lares_BringList_11_04");	//Так, так. Знаешь, что мы сейчас сделаем? Мы его немного подправим, а потом ты отнесешь его в Старый лагерь.
-	AI_Output(self,other,"ORG_801_Lares_BringList_11_05");	//А потом, когда они доставят товар в шахту, мы просто заберем его себе! Ну, вот, сейчас мы все сделаем... Есть! Вот и списочек. Ты знаешь, что делать.
+	//AI_Output(self,other,"ORG_801_Lares_BringList_11_05");	//А потом, когда они доставят товар в шахту, мы просто заберем его себе! Ну, вот, сейчас мы все сделаем... Есть! Вот и списочек. Ты знаешь, что делать.
+	AI_Output(self,other,"ORG_801_Lares_BringList_11_05_01");	//А потом, когда они доставят товар в шахту, мы просто заберем его себе! Ну, вот, сейчас мы все сделаем...
+	b_usefakescroll();
+	AI_Output(self,other,"ORG_801_Lares_BringList_11_05_02");	//Есть! Вот и списочек. Ты знаешь, что делать.
+	b_printtrademsg2("Получен дополненный список.");
 	//b_logentry(CH1_BRINGLIST,"Ларс, главарь воров, дополнил список и велел отнести его Диего.");
 	POINTS_NC = POINTS_NC + 10;
 	LARES_BRINGLISTBACK = LOG_RUNNING;
@@ -283,6 +288,7 @@ func void org_801_lares_mordragsentme_info()
 {
 	b_giveinvitems(other,self,mordragsring,1);
 	AI_Output(other,self,"ORG_801_Lares_MordragSentMe_15_00");	//Меня прислал Мордраг. Он передал тебе это кольцо.
+	b_printtrademsg1("Отдано кольцо Мордрага.");
 	AI_Output(self,other,"ORG_801_Lares_MordragSentMe_11_01");	//Хорошая вещица! У нас так принято: взял что-то, поделись с главарем шайки.
 	AI_Output(self,other,"ORG_801_Lares_MordragSentMe_11_02");	//Но то, что он доверил это кольцо тебе, говорит в твою пользу.
 	AI_Output(self,other,"ORG_801_Lares_MordragSentMe_11_03");	//Я хочу, чтобы ты сходил к нему и передал ему кое-что от меня.
@@ -392,6 +398,7 @@ func void org_801_lares_400ore_info()
 	AI_Output(other,self,"ORG_801_Lares_400Ore_15_00");	//У меня есть четыреста кусков руды.
 	if(Npc_HasItems(other,itminugget) >= 400)
 	{
+		b_printtrademsg1("Отдано руды: 400");
 		AI_Output(self,other,"ORG_801_Lares_400Ore_11_01");	//Отлично! Конечно, это более чем достаточно.
 		LARES_GET400ORE = LOG_SUCCESS;
 		POINTS_NC = POINTS_NC + 10;
@@ -432,6 +439,7 @@ func void org_801_lares_reicht_info()
 	{
 		AI_Output(self,other,"ORG_801_Lares_Reicht_AUFNAHME_11_00");	//Думаю, да.
 		AI_Output(self,other,"ORG_801_Lares_Reicht_AUFNAHME_11_01");	//Я даже приготовил тебе подарок - доспех, если быть точным. Подарок, конечно, небольшой, но заслуженный.
+		b_printtrademsg1("Получен легкий доспех вора.");
 		hero.guild = GIL_ORG;
 		Npc_SetTrueGuild(hero,GIL_ORG);
 		CreateInvItem(self,org_armor_l);

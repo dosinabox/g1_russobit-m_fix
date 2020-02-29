@@ -468,6 +468,7 @@ func void info_grd872_om0_info()
 func void info_grd872_om_1()
 {
 	AI_Output(hero,self,"Info_Grd_237_FirstWarn_15_06");	//Ладно, вот тебе руда!
+	b_printtrademsg1("Отдано руды: 300");
 	b_giveinvitems(hero,self,itminugget,300);
 	AI_Output(self,hero,"OM_GRD_04");	//Не знаю, что ты задумал, но в шахте полно стражников - если решишь что-то стащить, то тебя мигом порубят на куски.
 	AI_Output(self,hero,"OM_GRD_05");	//Пойду-ка я посплю...

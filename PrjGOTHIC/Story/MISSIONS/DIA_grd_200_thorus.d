@@ -89,7 +89,7 @@ func int info_thorus_workforgomez_condition()
 func void info_thorus_workforgomez_info()
 {
 	AI_Output(other,self,"Info_WorkForGomez_15_00");	//Я хочу стать одним из людей Гомеза.
-	AI_Output(self,other,"Info_WorkForGomez_09_01");	//Да, что ты говоришь? И почему это ты думаешь, что можешь быть полезен Гомезу.
+	AI_Output(self,other,"Info_WorkForGomez_09_01");	//Да, что ты говоришь? И почему это ты думаешь, что можешь быть полезен Гомезу?
 };
 
 
@@ -100,7 +100,7 @@ instance INFO_THORUS_DIEGOSENTME(C_INFO)
 	condition = info_thorus_diegosentme_condition;
 	information = info_thorus_diegosentme_info;
 	permanent = 0;
-	description = "Диего, сказал, что это от тебя зависит.";
+	description = "Диего сказал, что это от тебя зависит.";
 };
 
 
@@ -203,9 +203,6 @@ func void info_thorus_trymeicandoit_info()
 	AI_Output(self,other,"Info_Thorus_TryMeICanDoIt_09_01");	//Да ну? Вижу, не терпится стать героем, да? Вообще-то есть одно дело - как раз для того, кто не засветился с Гомезом.
 	AI_Output(self,other,"Info_Thorus_TryMeICanDoIt_09_02");	//Но смотри, провалишь дело - получишь море неприятностей.
 };
-
-
-var int thorus_mordragko;
 
 instance INFO_THORUS_MORDRAGKO_OFFER(C_INFO)
 {
@@ -451,6 +448,7 @@ func void info_thorus_give1000ore_info()
 	AI_Output(other,self,"Info_Thorus_Give1000Ore_15_00");	//У меня есть тысяча кусков руды. Пропусти меня!
 	if(Npc_HasItems(other,itminugget) >= 1000)
 	{
+		b_printtrademsg1("Отдано руды: 1000");
 		b_giveinvitems(other,self,itminugget,1000);
 		AI_Output(self,other,"Info_Thorus_Give1000Ore_09_01");	//Ладно, проходи. Но не натвори там глупостей, понял?
 		wache212 = Hlp_GetNpc(grd_212_torwache);
@@ -898,6 +896,7 @@ func void grd_200_thorus_teach_str_1()
 	{
 		if(hero.lp >= 1 && hero.attribute[ATR_STRENGTH] < 100)
 		{
+			b_printtrademsg1("Отдано руды: 10");
 			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
 		};
 		b_buyattributepoints(other,ATR_STRENGTH,LPCOST_ATTRIBUTE_STRENGTH);
@@ -920,6 +919,7 @@ func void grd_200_thorus_teach_str_5()
 	{
 		if(hero.lp >= 5 && hero.attribute[ATR_STRENGTH] < 96)
 		{
+			b_printtrademsg1("Отдано руды: 50");
 			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
 		};
 		b_buyattributepoints(other,ATR_STRENGTH,5 * LPCOST_ATTRIBUTE_STRENGTH);
@@ -942,6 +942,7 @@ func void grd_200_thorus_teach_dex_1()
 	{
 		if(hero.lp >= 1 && hero.attribute[ATR_DEXTERITY] < 100)
 		{
+			b_printtrademsg1("Отдано руды: 10");
 			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
 		};
 		b_buyattributepoints(other,ATR_DEXTERITY,LPCOST_ATTRIBUTE_DEXTERITY);
@@ -964,6 +965,7 @@ func void grd_200_thorus_teach_dex_5()
 	{
 		if(hero.lp >= 5 && hero.attribute[ATR_DEXTERITY] < 96)
 		{
+			b_printtrademsg1("Отдано руды: 50");
 			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
 		};
 		b_buyattributepoints(other,ATR_DEXTERITY,5 * LPCOST_ATTRIBUTE_DEXTERITY);
@@ -990,7 +992,7 @@ instance GRD_200_THORUS_ZWEIHAND1(C_INFO)
 
 func int grd_200_thorus_zweihand1_condition()
 {
-	if((Npc_GetTalentSkill(hero,NPC_TALENT_1H) == 2) && (Npc_GetTalentSkill(hero,NPC_TALENT_2H) < 1) && (Npc_GetTrueGuild(hero) == GIL_GRD))
+	if((Npc_GetTalentSkill(hero,NPC_TALENT_2H) < 1) && (Npc_GetTrueGuild(hero) == GIL_GRD))
 	{
 		return TRUE;
 	};
@@ -1005,7 +1007,12 @@ func void grd_200_thorus_zweihand1_info()
 		LOG_THORUSFIGHT = TRUE;
 	};
 	AI_Output(other,self,"GRD_200_Thorus_ZWEIHAND1_Info_15_01");	//Научи меня владеть двуручным мечом.
-	if(b_giveskill(other,NPC_TALENT_2H,1,LPCOST_TALENT_2H_1))
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_1H) < 2)
+	{
+		AI_Output(self,other,"SVM_9_NoLearnNoPoints");	//Ты недостаточно опытен, чтобы я смог тебя учить.
+		PrintScreen("Требуется мастерство одноручного оружия!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else if(b_giveskill(other,NPC_TALENT_2H,1,LPCOST_TALENT_2H_1))
 	{
 		AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND1_Info_09_02");	//Хорошо, тогда давай начнем с легкого.
 		AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND1_Info_09_03");	//Меч нужно держать горизонтально. Тебе придется хорошо замахнуться, чтобы атаковать противника тяжелым оружием.

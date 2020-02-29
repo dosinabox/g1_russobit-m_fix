@@ -35,9 +35,14 @@ prototype MST_DEFAULT_MOLERAT(C_NPC)
 func void set_molerat_visuals()
 {
 	Mdl_SetVisual(self,"Molerat.mds");
-	Mdl_SetVisualBody(self,"Mol_Body",DEFAULT,DEFAULT,"",DEFAULT,DEFAULT,-1);
+	Mdl_SetVisualBody(self,"Mol_Body",1,DEFAULT,"",DEFAULT,DEFAULT,-1);
 };
 
+func void set_ymolerat_visuals()
+{
+	Mdl_SetVisual(self,"Molerat.mds");
+	Mdl_SetVisualBody(self,"Mol_Body",DEFAULT,DEFAULT,"",DEFAULT,DEFAULT,-1);
+};
 
 instance MOLERAT(MST_DEFAULT_MOLERAT)
 {
@@ -57,8 +62,8 @@ instance YMOLERAT(MST_DEFAULT_MOLERAT)
 	protection[PROT_BLUNT] = 8;
 	protection[PROT_EDGE] = 8;
 	fight_tactic = FAI_MONSTER_COWARD;
-	set_molerat_visuals();
-	Mdl_SetModelScale(self,0.9,0.9,0.9);
+	set_ymolerat_visuals();
+	Mdl_SetModelScale(self,0.8,0.8,0.8);
 	Npc_SetToFistMode(self);
 	CreateInvItems(self,itfomuttonraw,1);
 };

@@ -25,15 +25,11 @@ instance SLD_704_BLADE(NPC_DEFAULT)
 	EquipItem(self,itmw_1h_mace_war_03);
 	EquipItem(self,itrw_bow_long_01);
 	CreateInvItems(self,itamarrow,22);
-	CreateInvItems(self,itforice,9);
 	CreateInvItems(self,itfoloaf,5);
 	CreateInvItems(self,itfomutton,4);
 	CreateInvItems(self,itminugget,18);
-	CreateInvItems(self,itfobooze,7);
 	CreateInvItems(self,itlstorch,5);
-	CreateInvItems(self,itfo_potion_health_02,11);
-	CreateInvItem(self,itmi_stuff_mug_01);
-	CreateInvItem(self,itmi_stuff_amphore_01);
+	CreateInvItems(self,itfo_potion_health_02,5);
 	daily_routine = rtn_start_704;
 };
 

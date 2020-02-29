@@ -19,7 +19,7 @@ instance SFB_1031_SCHUERFER(NPC_DEFAULT)
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_COWARD;
-	CreateInvItems(self,itforice,6);
+	CreateInvItems(self,itforice,2);
 	CreateInvItem(self,itmi_stuff_cup_01);
 	EquipItem(self,itmwpickaxe);
 	CreateInvItem(self,itmw_1h_hatchet_01);

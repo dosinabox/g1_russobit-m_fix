@@ -28,7 +28,7 @@ instance GRD_262_AARON_CHEST(C_INFO)
 	condition = grd_262_aaron_chest_condition;
 	information = grd_262_aaron_chest_info;
 	important = 0;
-	permanent = 1;
+	permanent = 0;
 	description = "Что ты здесь делаешь?";
 };
 
@@ -212,7 +212,9 @@ func int grd_262_aaron_sellnow_condition()
 func void grd_262_aaron_sellnow_info()
 {
 	AI_Output(other,self,"Info_Aaron_SELLNOW_15_01");	//Вот твой ключ.
+	b_printtrademsg1("Отдан ключ.");
 	AI_Output(self,other,"Info_Aaron_SELLNOW_09_02");	//Мой ключ, точно. Вот, как мы и договаривались, твои двадцать кусков руды.
+	b_printtrademsg2("Получено руды: 20");
 	AI_Output(self,other,"Info_Aaron_SELLNOW_09_03");	//Но, в будущем я с тебя глаз уже не спущу!
 	CreateInvItems(self,itminugget,20);
 	b_giveinvitems(self,other,itminugget,20);

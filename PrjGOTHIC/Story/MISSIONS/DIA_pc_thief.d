@@ -654,6 +654,7 @@ func void info_diego_teach_str_1()
 	{
 		if(hero.lp >= 1 && hero.attribute[ATR_STRENGTH] < 100)
 		{
+			b_printtrademsg1("Отдано руды: 10");
 			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
 		};
 		b_buyattributepoints(other,ATR_STRENGTH,LPCOST_ATTRIBUTE_STRENGTH);
@@ -676,6 +677,7 @@ func void info_diego_teach_str_5()
 	{
 		if(hero.lp >= 5 && hero.attribute[ATR_STRENGTH] < 96)
 		{
+			b_printtrademsg1("Отдано руды: 50");
 			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
 		};
 		b_buyattributepoints(other,ATR_STRENGTH,5 * LPCOST_ATTRIBUTE_STRENGTH);
@@ -698,6 +700,7 @@ func void info_diego_teach_dex_1()
 	{
 		if(hero.lp >= 1 && hero.attribute[ATR_DEXTERITY] < 100)
 		{
+			b_printtrademsg1("Отдано руды: 10");
 			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
 		};
 		b_buyattributepoints(other,ATR_DEXTERITY,LPCOST_ATTRIBUTE_DEXTERITY);
@@ -720,6 +723,7 @@ func void info_diego_teach_dex_5()
 	{
 		if(hero.lp >= 5 && hero.attribute[ATR_DEXTERITY] < 96)
 		{
+			b_printtrademsg1("Отдано руды: 50");
 			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
 		};
 		b_buyattributepoints(other,ATR_DEXTERITY,5 * LPCOST_ATTRIBUTE_DEXTERITY);
@@ -847,6 +851,7 @@ func int info_diego_bringlist_success_condition()
 
 func void info_diego_bringlist_success_info()
 {
+	b_printtrademsg1("Отдан список.");
 	AI_Output(hero,self,"Info_Diego_BringList_Success_15_00");	//Ян передал мне список.
 	if(Npc_HasItems(hero,thelist) && Npc_KnowsInfo(hero,info_diego_bringlist_offer))
 	{
@@ -859,6 +864,7 @@ func void info_diego_bringlist_success_info()
 	else if(Npc_HasItems(hero,thelistnc))
 	{
 		b_giveinvitems(hero,self,thelistnc,1);
+		b_printtrademsg1("Отдан дополненный список.");
 		if(Npc_KnowsInfo(hero,info_diego_bringlist_offer))
 		{
 			b_logentry(CH1_BRINGLIST,"Диего остался доволен моей работой. Кажется, он не заметил, что Ларс подделал список. Или все же заметил?");
@@ -1054,7 +1060,7 @@ instance INFO_DIEGO_WHATTOSAYTOGOMEZ(C_INFO)
 
 func int info_diego_whattosaytogomez_condition()
 {
-	if(DIEGO_GOMEZAUDIENCE == TRUE)
+	if(DIEGO_GOMEZAUDIENCE == TRUE && !Npc_KnowsInfo(hero,dia_gomez_dabei))
 	{
 		return 1;
 	};
@@ -1075,7 +1081,7 @@ instance PC_THIEF_ARMOR(C_INFO)
 	information = pc_thief_armor_info;
 	important = 0;
 	permanent = 1;
-	description = b_buildbuyarmorstring("Тяжелый доспех Призрака: 40/5/20/0",VALUE_STT_ARMOR_H);
+	description = b_buildbuyarmorstring("Тяжелый доспех Призрака, защита: 40/5/20/0",VALUE_STT_ARMOR_H);
 };
 
 
@@ -1093,10 +1099,11 @@ func void pc_thief_armor_info()
 	if(Npc_HasItems(hero,itminugget) >= VALUE_STT_ARMOR_H)
 	{
 		AI_Output(self,hero,"PC_Thief_ARMOR_Info_11_02");	//А руды у тебя хватит?
+		b_printtrademsg1("Отдано руды: 1200");
 		AI_Output(hero,self,"DIA_SLD_753_Baloro_Worumgehts_ja_15_07");	//Конечно!
 		b_giveinvitems(hero,self,itminugget,VALUE_STT_ARMOR_H);
+		b_printtrademsg2("Получен доспех Призрака.");
 		CreateInvItem(hero,stt_armor_h);
-		PrintScreen("Получен 1 предмет.",-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
 		AI_EquipArmor(hero,stt_armor_h);
 	}
 	else
@@ -1362,58 +1369,7 @@ func void info_diego_ocwarn_info()
 		AI_Output(hero,self,"Info_Diego_OCWARN_15_07");	//Слышал что?
 		AI_Output(self,hero,"Info_Diego_OCWARN_11_08");	//В Старой шахте обвал, все Маги Огня мертвы, а на Свободную шахту готовится нападение.
 		AI_Output(hero,self,"Info_Diego_OCWARN_15_09");	//Что? О чем ты говоришь?
-		if(GETNEWGUY_STARTED == TRUE)
-	    {
-	    	b_logentry(CH1_RECRUITDUSTY,"Теперь я не смогу вывести кого-либо из Старого лагеря.");
-	    	Log_SetTopicStatus(CH1_RECRUITDUSTY,LOG_FAILED);
-	    	GETNEWGUY_STARTED = LOG_FAILED;
-	    };
-		if(Npc_KnowsInfo(hero,grd_271_ulbert_trick) && !Npc_KnowsInfo(hero,grd_271_ulbert_angry))
-	    {
-	    	b_logentry(CH2_STORAGESHED,"В Старой шахте произошел обвал, теперь туда не попасть!");
-	    	Log_SetTopicStatus(CH2_STORAGESHED,LOG_FAILED);
-	    };
-		if(Npc_KnowsInfo(hero,vlk_584_snipes_deal) && !Npc_KnowsInfo(hero,grd_262_aaron_sellnow))
-	    {
-	    	b_logentry(CH2_SNIPESDEAL,"Старая шахта обрушилась! Я не смогу выполнить просьбу Снайпса...");
-	    	Log_SetTopicStatus(CH2_SNIPESDEAL,LOG_FAILED);
-	    };
-		if(Npc_KnowsInfo(hero,org_801_lares_newlist) && !Npc_KnowsInfo(hero,org_801_lares_bringlistback))
-	    {
-	    	b_logentry(THELISTFORNC,"Список припасов для Старой шахты и план Ларса больше не имеют никакого смысла.");
-	    	Log_SetTopicStatus(THELISTFORNC,LOG_FAILED);
-			LARES_BRINGLISTBACK = LOG_FAILED;
-			DIEGO_BRINGLIST = LOG_FAILED;
-	    };
-		if(Npc_KnowsInfo(hero,info_diego_bringlist_offer) && !Npc_KnowsInfo(hero,info_diego_bringlist_success))
-	    {
-	    	b_logentry(CH1_BRINGLIST,"Список припасов для Старой шахты больше не имеет никакого смысла.");
-	    	Log_SetTopicStatus(CH1_BRINGLIST,LOG_FAILED);
-			LARES_BRINGLISTBACK = LOG_FAILED;
-			DIEGO_BRINGLIST = LOG_FAILED;
-	    };
-		if(CRONOS_MESSENGER == LOG_RUNNING && !Npc_KnowsInfo(hero,dia_milten_nocheinbrief))
-	    {
-	    	b_logentry(KDWLETTER,"Все маги Огня мертвы, я не успел передать им письмо...");
-	    	Log_SetTopicStatus(KDWLETTER,LOG_FAILED);
-			CRONOS_MESSENGER = LOG_FAILED;
-	    };
-		if(PYROCAR_MESSENGER == LOG_RUNNING)
-	    {
-	    	b_logentry(KDFLETTER,"Все маги Огня мертвы, я не успел передать им письмо...");
-	    	Log_SetTopicStatus(KDFLETTER,LOG_FAILED);
-			PYROCAR_MESSENGER = LOG_FAILED;
-	    };
-		if(DEXTER_GETKALOMSRECIPE == LOG_RUNNING)
-		{
-			DEXTER_GETKALOMSRECIPE = LOG_FAILED;
-			Log_SetTopicStatus(CH1_KALOMSRECIPE,LOG_FAILED);
-		};
-		if(FISK_GETNEWHEHLER == LOG_RUNNING)
-		{
-			FISK_GETNEWHEHLER = LOG_FAILED;
-			Log_SetTopicStatus(CH1_FISKNEWDEALER,LOG_FAILED);
-		};
+		b_failch4quests();
 	};
 };
 

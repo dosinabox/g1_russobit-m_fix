@@ -183,7 +183,10 @@ func void dia_gorn_becomesld_info()
 	AI_Output(other,self,"DIA_Gorn_BecomeSLD_15_00");	//Что я должен сделать, чтобы меня приняли в Новый лагерь?
 	AI_Output(self,other,"DIA_Gorn_BecomeSLD_09_01");	//Ты должен научиться хорошо владеть оружием, чтобы Ли взял тебя на службу. Неважно, какое оружие ты будешь использовать.
 	AI_Output(self,other,"DIA_Gorn_BecomeSLD_09_02");	//Еще ты должен знать наши законы и разбираться в жизни лагеря.
-	AI_Output(self,other,"DIA_Gorn_BecomeSLD_09_03");	//Если ты не собираешься присоединяться к другому лагерю, обратись к ворам, и только потом приходи к нам.
+	if(KAPITEL == 1)
+	{
+		AI_Output(self,other,"DIA_Gorn_BecomeSLD_09_03");	//Если ты не собираешься присоединяться к другому лагерю, обратись к ворам, и только потом приходи к нам.
+	};
 };
 
 
@@ -203,7 +206,7 @@ instance DIA_GORN_TRADE(C_INFO)
 
 func int dia_gorn_trade_condition()
 {
-	if(Npc_KnowsInfo(hero,org_801_lares_bringlistanteil))
+	if(Npc_KnowsInfo(hero,dia_gorn_duhehler))
 	{
 		return 1;
 	};
@@ -241,17 +244,15 @@ func void dia_gorn_duhehler_info()
 	AI_Output(self,other,"DIA_Gorn_DuHehler_09_01");	//А кто сказал, что я в нем участвовал?
 	AI_Output(other,self,"DIA_Gorn_DuHehler_15_02");	//Почему же у тебя так много товара?
 	AI_Output(self,other,"DIA_Gorn_DuHehler_09_03");	//Ну, разве можно было забрать все это за один раз?
-	AI_Output(other,self,"DIA_Gorn_DuHehler_15_04");	//Так ты постоянно участвуешь в налетах?
-	AI_Output(self,other,"DIA_Gorn_DuHehler_09_05");	//А если и так, я все равно ничего не буду тебе рассказывать. Ли не держит болтливых людей.
-	AI_Output(other,self,"DIA_Gorn_DuHehler_15_06");	//Понятно.
-	CreateInvItems(self,itfoapple,21);
-	b_giveinvitems(self,other,itfoapple,21);
-	Npc_RemoveInvItems(other,itfoapple,21);
+	b_printtrademsg1("Получен легкий меч стражника и припасы.");
 	CreateInvItems(other,itmw_1h_lightguardssword_03,1);
 	CreateInvItems(other,itfoapple,5);
 	CreateInvItems(other,itfoloaf,5);
 	CreateInvItems(other,itfocheese,5);
 	CreateInvItems(other,itfobeer,5);
+	AI_Output(other,self,"DIA_Gorn_DuHehler_15_04");	//Так ты постоянно участвуешь в налетах?
+	AI_Output(self,other,"DIA_Gorn_DuHehler_09_05");	//А если и так, я все равно ничего не буду тебе рассказывать. Ли не держит болтливых людей.
+	AI_Output(other,self,"DIA_Gorn_DuHehler_15_06");	//Понятно.
 };
 
 
@@ -447,7 +448,7 @@ instance INFO_GORN_RUINJOIN(C_INFO)
 
 func int info_gorn_ruinjoin_condition()
 {
-	if(Npc_KnowsInfo(hero,info_gorn_ruinfocus) && Npc_KnowsInfo(hero,info_gorn_ruinwhat))
+	if(Npc_KnowsInfo(hero,info_gorn_ruinfocus) && Npc_KnowsInfo(hero,info_gorn_ruinwhat) && !GORN_FOCUS4_FOUND)
 	{
 		return 1;
 	};
@@ -461,14 +462,23 @@ func void info_gorn_ruinjoin_info()
 	AI_Output(self,other,"Info_Gorn_RUINJOIN_09_04");	//А стая расправится с любым воином в два счета.
 	AI_Output(other,self,"Info_Gorn_RUINJOIN_15_05");	//Мы идем вместе?
 	AI_Output(self,other,"Info_Gorn_RUINJOIN_09_06");	//Да, но сначала я осмотрю ущелье, а уж потом перейду на другую сторону. Лучше всегда знать, что у тебя за спиной.
-	AI_Output(self,other,"Info_Gorn_RUINJOIN_09_07");	//Идем, я нашел дорогу.
+	self.aivar[AIV_PARTYMEMBER] = TRUE;
+	if(Npc_HasItems(hero,itke_focus4))
+	{
+		AI_Output(other,self,"Info_Gorn_RUINJOIN_15_06");	//В этом нет необходимости. Я уже побывал там.
+		AI_Output(self,other,"Info_Gorn_RUINJOIN_09_08");	//Да? Ну, как скажешь.
+		Npc_ExchangeRoutine(self,"RuinFollow");
+	}
+	else
+	{
+		AI_Output(self,other,"Info_Gorn_RUINJOIN_09_07");	//Идем, я нашел дорогу.
+		Npc_ExchangeRoutine(self,"RuinAbyss");
+	};
 	Log_CreateTopic(CH3_MONASTERYRUIN,LOG_MISSION);
 	Log_SetTopicStatus(CH3_MONASTERYRUIN,LOG_RUNNING);
 	b_logentry(CH3_MONASTERYRUIN,"По дороге к развалинам монастыря я встретил наемника Горна. Его привело сюда желание найти древние сокровища.");
 	b_logentry(CH3_MONASTERYRUIN,"Мы решили вместе продолжить наши поиски. Горн сказал мне, что впереди нас ждет стая зверюг, которые гораздо сильнее глорхов.");
-	self.aivar[AIV_PARTYMEMBER] = TRUE;
 	AI_StopProcessInfos(self);
-	Npc_ExchangeRoutine(self,"RuinAbyss");
 };
 
 
@@ -484,7 +494,7 @@ instance INFO_GORN_RUINABYSS(C_INFO)
 
 func int info_gorn_ruinabyss_condition()
 {
-	if(Npc_KnowsInfo(hero,info_gorn_ruinjoin) && (Npc_GetDistToWP(self,"OW_ABYSS_TO_CAVE_MOVE6") < 1000) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
+	if(Npc_KnowsInfo(hero,info_gorn_ruinjoin) && (Npc_GetDistToWP(self,"OW_ABYSS_TO_CAVE_MOVE6") < 1000) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400) && !GORN_FOCUS4_FOUND)
 	{
 		return 1;
 	};
@@ -522,9 +532,18 @@ func int info_gorn_ruinleave_condition()
 func void info_gorn_ruinleave_info()
 {
 	AI_GotoNpc(self,hero);
-	AI_Output(self,other,"Info_Gorn_RUINLEAVE_09_01");	//Мне кажется, руины тебе больше неинтересны.
-	AI_Output(self,other,"Info_Gorn_RUINLEAVE_09_02");	//Я пойду один.
-	AI_Output(self,other,"Info_Gorn_RUINLEAVE_09_03");	//Следуй за мной, если передумаешь.
+	if(!GORN_FOCUS4_FOUND)
+	{
+		AI_Output(self,other,"Info_Gorn_RUINLEAVE_09_01");	//Мне кажется, руины тебе больше неинтересны.
+		AI_Output(self,other,"Info_Gorn_RUINLEAVE_09_02");	//Я пойду один.
+		AI_Output(self,other,"Info_Gorn_RUINLEAVE_09_03");	//Следуй за мной, если передумаешь.
+	}
+	else
+	{
+		AI_Output(self,other,"Info_Gorn_RUINVICTORY_09_05");	//Здесь наши пути расходятся. Я хочу еще немного изучить это место.
+		AI_Output(self,other,"Info_Gorn_RUINVICTORY_09_06");	//Но мы еще увидимся, я уверен. До встречи, друг.
+	};
+	
 	self.aivar[AIV_PARTYMEMBER] = FALSE;
 	Npc_ExchangeRoutine(self,"RuinWall");
 	AI_StopProcessInfos(self);
@@ -543,7 +562,7 @@ instance INFO_GORN_RUINWALL(C_INFO)
 
 func int info_gorn_ruinwall_condition()
 {
-	if((Npc_KnowsInfo(hero,info_gorn_ruinjoin) || Npc_KnowsInfo(hero,info_gorn_ruinleave)) && (Npc_GetDistToWP(hero,"OW_PATH_175_GATE1") < 1000) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
+	if((Npc_KnowsInfo(hero,info_gorn_ruinjoin) || Npc_KnowsInfo(hero,info_gorn_ruinleave)) && (Npc_GetDistToWP(hero,"OW_PATH_175_GATE1") < 1000) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400) && !GORN_FOCUS4_FOUND && !MONASTERYRUIN_GATEOPEN)
 	{
 		return 1;
 	};
@@ -573,7 +592,7 @@ instance INFO_GORN_RUINWALLWHAT(C_INFO)
 
 func int info_gorn_ruinwallwhat_condition()
 {
-	if(Npc_KnowsInfo(hero,info_gorn_ruinwall) && !Npc_KnowsInfo(hero,info_gorn_ruingate))
+	if(Npc_KnowsInfo(hero,info_gorn_ruinwall) && !Npc_KnowsInfo(hero,info_gorn_ruingate) && !GORN_FOCUS4_FOUND && !MONASTERYRUIN_GATEOPEN)
 	{
 		return TRUE;
 	};
@@ -598,7 +617,7 @@ instance INFO_GORN_RUINLEDGE(C_INFO)
 
 func int info_gorn_ruinledge_condition()
 {
-	if(Npc_KnowsInfo(hero,info_gorn_ruinjoin) && !Npc_KnowsInfo(hero,info_gorn_ruinsuccess) && (Npc_GetDistToWP(hero,"OW_MONSTER_NAVIGATE_02") < 1000) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
+	if(Npc_KnowsInfo(hero,info_gorn_ruinjoin) && !Npc_KnowsInfo(hero,info_gorn_ruinsuccess) && (Npc_GetDistToWP(hero,"OW_MONSTER_NAVIGATE_02") < 1000) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400) && !GORN_FOCUS4_FOUND)
 	{
 		return 1;
 	};
@@ -625,7 +644,7 @@ instance INFO_GORN_RUINPLATFORM(C_INFO)
 
 func int info_gorn_ruinplatform_condition()
 {
-	if(Npc_KnowsInfo(hero,info_gorn_ruinjoin) && !Npc_KnowsInfo(hero,info_gorn_ruinsuccess) && (Npc_GetDistToWP(hero,"OW_PATH_176_TEMPELFOCUS4") < 300) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
+	if(Npc_KnowsInfo(hero,info_gorn_ruinjoin) && !Npc_KnowsInfo(hero,info_gorn_ruinsuccess) && (Npc_GetDistToWP(hero,"OW_PATH_176_TEMPELFOCUS4") < 300) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400) && !GORN_FOCUS4_FOUND)
 	{
 		return 1;
 	};
@@ -652,7 +671,7 @@ instance INFO_GORN_RUINGATE(C_INFO)
 
 func int info_gorn_ruingate_condition()
 {
-	if((Npc_KnowsInfo(hero,info_gorn_ruinjoin) || Npc_KnowsInfo(hero,info_gorn_ruinleave)) && MONASTERYRUIN_GATEOPEN && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
+	if((Npc_KnowsInfo(hero,info_gorn_ruinjoin) || Npc_KnowsInfo(hero,info_gorn_ruinleave)) && MONASTERYRUIN_GATEOPEN && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400) && !GORN_FOCUS4_FOUND && (Npc_GetDistToWP(hero,"OW_PATH_175_GATE1") < 1000))
 	{
 		return TRUE;
 	};
@@ -661,10 +680,13 @@ func int info_gorn_ruingate_condition()
 func void info_gorn_ruingate_info()
 {
 	AI_GotoNpc(self,hero);
-	AI_Output(self,other,"Info_Gorn_RUINGATE_09_01");	//Тебе удалось открыть ворота. Как вовремя ты использовал это заклинание!
+	if(TRF_MEATBUG_USED == TRUE)
+	{
+		AI_Output(self,other,"Info_Gorn_RUINGATE_09_01");	//Тебе удалось открыть ворота. Как вовремя ты использовал это заклинание!
+		b_logentry(CH3_MONASTERYRUIN,"Я прочитал найденный на складе свиток и превратился в жука. Конечно же, мне удалось пролезть в узкую щель и попасть во внутренний двор.");
+		b_logentry(CH3_MONASTERYRUIN,"Теперь проход открыт.");
+	};
 	AI_Output(other,self,"Info_Gorn_RUINGATE_15_02");	//Нам нужно идти дальше.
-	b_logentry(CH3_MONASTERYRUIN,"Я прочитал найденный на складе свиток и превратился в жука. Конечно же, мне удалось пролезть в узкую щель и попасть во внутренний двор.");
-	b_logentry(CH3_MONASTERYRUIN,"Теперь проход открыт.");
 	self.aivar[AIV_PARTYMEMBER] = TRUE;
 	Npc_ExchangeRoutine(self,"RuinFollowInside");
 	AI_StopProcessInfos(self);
@@ -692,11 +714,26 @@ func int info_gorn_ruinleaveinside_condition()
 func void info_gorn_ruinleaveinside_info()
 {
 	AI_GotoNpc(self,hero);
-	AI_Output(self,other,"Info_Gorn_RUINLEAVEINSIDE_09_01");	//Мне кажется, руины тебе больше неинтересны.
-	AI_Output(self,other,"Info_Gorn_RUINLEAVEINSIDE_09_02");	//Я пойду один.
-	AI_Output(self,other,"Info_Gorn_RUINLEAVEINSIDE_09_03");	//Следуй за мной, если передумаешь.
+	if(!GORN_FOCUS4_FOUND)
+	{
+		AI_Output(self,other,"Info_Gorn_RUINLEAVEINSIDE_09_01");	//Мне кажется, руины тебе больше неинтересны.
+		AI_Output(self,other,"Info_Gorn_RUINLEAVEINSIDE_09_02");	//Я пойду один.
+		AI_Output(self,other,"Info_Gorn_RUINLEAVEINSIDE_09_03");	//Следуй за мной, если передумаешь.
+	}
+	else
+	{
+		AI_Output(self,other,"Info_Gorn_RUINVICTORY_09_05");	//Здесь наши пути расходятся. Я хочу еще немного изучить это место.
+		AI_Output(self,other,"Info_Gorn_RUINVICTORY_09_06");	//Но мы еще увидимся, я уверен. До встречи, друг.
+	};
 	self.aivar[AIV_PARTYMEMBER] = FALSE;
-	Npc_ExchangeRoutine(self,"RuinStay");
+	if(MONASTERYRUIN_GATEOPEN)
+	{
+		Npc_ExchangeRoutine(self,"RuinStay");
+	}
+	else
+	{
+		Npc_ExchangeRoutine(self,"RuinWall");
+	};
 	AI_StopProcessInfos(self);
 };
 
@@ -724,10 +761,30 @@ func void info_gorn_ruinsuccess_info()
 	AI_GotoNpc(self,hero);
 	AI_Output(self,other,"Info_Gorn_RUINSUCCESS_09_01");	//Так ты нашел свой артефакт!
 	AI_Output(other,self,"Info_Gorn_RUINSUCCESS_15_02");	//Да. Я должен отнести его магам Воды.
-	AI_Output(self,other,"Info_Gorn_RUINSUCCESS_09_03");	//Я еще немного провожу тебя.
-	b_logentry(CH3_MONASTERYRUIN,"В помещении, похожем на учебный класс, я нашел один из юниторов. Горн решил сопровождать меня еще немного.");
+	if(Npc_GetDistToWP(hero,"OW_PATH_ABYSS_4") > 1400)
+	{
+		AI_Output(self,other,"Info_Gorn_RUINSUCCESS_09_03");	//Я еще немного провожу тебя.
+		self.aivar[AIV_PARTYMEMBER] = TRUE;
+		Npc_ExchangeRoutine(self,"RuinYard");
+		b_logentry(CH3_MONASTERYRUIN,"В помещении, похожем на учебный класс, я нашел один из юниторов. Горн решил сопровождать меня еще немного.");
+	}
+	else
+	{
+		AI_Output(self,other,"Info_Gorn_RUINVICTORY_09_05");	//Здесь наши пути расходятся. Я хочу еще немного изучить это место.
+		AI_Output(self,other,"Info_Gorn_RUINVICTORY_09_06");	//Но мы еще увидимся, я уверен. До встречи, друг.
+		self.aivar[AIV_PARTYMEMBER] = FALSE;
+		if(MONASTERYRUIN_GATEOPEN)
+		{
+			Npc_ExchangeRoutine(self,"RuinStay");
+		}
+		else
+		{
+			Npc_ExchangeRoutine(self,"RuinWall");
+		};
+		b_logentry(CH3_MONASTERYRUIN,"В помещении, похожем на учебный класс, я нашел один из юниторов.");
+	};
+	GORN_FOCUS4_FOUND = TRUE;
 	AI_StopProcessInfos(self);
-	Npc_ExchangeRoutine(self,"RuinYard");
 	Wld_InsertNpc(youngtroll,"OW_PATH_176");
 };
 
@@ -1288,9 +1345,9 @@ func void info_gorn_fmcentrance_info()
 	AI_Output(self,hero,"Info_Gorn_FMCENTRANCE_09_01");	//Подожди-ка, видишь эти тела?
 	AI_Output(self,hero,"Info_Gorn_FMCENTRANCE_09_02");	//Иди к входу в шахту, а я буду тебя прикрывать.
 	AI_Output(self,hero,"Info_Gorn_FMCENTRANCE_09_03");	//Когда ты спустишься, я пойду за тобой.
-	var C_NPC jackal;
-	jackal = Hlp_GetNpc(grd_201_jackal);
-	jackal.flags = 0;
+	//var C_NPC jackal;
+	//jackal = Hlp_GetNpc(grd_201_jackal);
+	//jackal.flags = 0;
 	if(SLD_753_BALORO_SC_BESORGT_DEN_KRAM == LOG_RUNNING)
 	{
 		b_logentry(BALOROS_WAFFE,"Балоро не пережил нападение на Свободную шахту. Теперь я не узнаю, какое оружие он обещал мне.");
@@ -1300,6 +1357,7 @@ func void info_gorn_fmcentrance_info()
 	if(Npc_IsDead(grd_201_jackal) || Npc_KnowsInfo(hero,info_jackal_payday))
 	{
 		AI_Output(self,hero,"Info_Gorn_MYWAY_09_03");	//Вот, возьми этот ключ. Он открывает дверь в караульную у входа в шахту.
+		b_printtrademsg1("Получен ключ от Свободной шахты.");
 		CreateInvItem(self,itke_freemine);
 		b_giveinvitems(self,hero,itke_freemine,1);
 	};
@@ -1337,6 +1395,7 @@ func void info_gorn_fmgate_info()
 	if(!Npc_HasItems(hero,itke_freemine))
 	{
 		AI_Output(self,hero,"Info_Gorn_MYWAY_09_03");	//Вот, возьми этот ключ. Он открывает дверь в караульную у входа в шахту.
+		b_printtrademsg1("Получен ключ от Свободной шахты.");
 		CreateInvItem(self,itke_freemine);
 		b_giveinvitems(self,hero,itke_freemine,1);
 	};
@@ -1444,6 +1503,7 @@ func void info_gorn_fm2_info()
 	if(!Npc_HasItems(hero,itke_freemine))
 	{
 		AI_Output(self,hero,"Info_Gorn_MYWAY_09_03");	//Вот, возьми этот ключ. Он открывает дверь в караульную у входа в шахту.
+		b_printtrademsg1("Получен ключ от Свободной шахты.");
 		CreateInvItem(self,itke_freemine);
 		b_giveinvitems(self,hero,itke_freemine,1);
 	};

@@ -65,6 +65,7 @@ func void info_jackal_hello_info()
 func void info_jackal_hello_pay()
 {
 	AI_Output(other,self,"Info_Jackal_Hello_Pay_15_00");	//Вот, возьми свои десять кусков. Твоя помощь может мне пригодиться.
+	b_printtrademsg1("Отдано руды: 10");
 	AI_Output(self,other,"Info_Jackal_Hello_Pay_07_01");	//Если я буду неподалеку, ты можешь на меня рассчитывать. Ты всегда сможешь найти меня между рынком и южными воротами.
 	AI_Output(self,other,"Info_Jackal_Hello_Pay_07_02");	//За порядком в других районах следят Флетчер и Бладвин.
 	b_giveinvitems(other,self,itminugget,10);
@@ -134,6 +135,7 @@ func void info_jackal_schutz_info()
 	AI_Output(other,self,"Info_Jackal_Schutz_15_00");	//Я обдумал твое предложение. Вот тебе десять кусков.
 	if(Npc_HasItems(other,itminugget) >= 10)
 	{
+		b_printtrademsg1("Отдано руды: 10");
 		AI_Output(self,other,"Info_Jackal_Schutz_07_01");	//Хорошее решение! Теперь я буду тебя защищать!
 		b_giveinvitems(other,self,itminugget,10);
 		JACKAL_PROTECTIONPAID = TRUE;
@@ -231,7 +233,7 @@ func void info_jackal_payday_info()
 			AI_Output(self,other,"Info_Jackal_PAYDAY_07_04");	//Если бы ты в свое время принял правильное решение, ты бы был один из нас - победителей!
 		};
 	}
-	else
+	else if(c_npcbelongstopsicamp(hero))
 	{
 		AI_Output(self,other,"Info_Jackal_PAYDAY_07_05");	//Так, так, это еще кто? Один из сумасшедших из Болотного лагеря!
 		AI_Output(self,other,"Info_Jackal_PAYDAY_07_06");	//Ты так долго с ними общался, что сам стал похож на этих безголовых!
@@ -253,8 +255,8 @@ func void info_jackal_payday_info()
 	Wld_ExchangeGuildAttitudes("GIL_ATTITUDES_FMTAKEN");
 	if(GETNEWGUY_STARTED == TRUE && OC_BANNED == FALSE)
 	{
-	    b_logentry(CH1_RECRUITDUSTY,"Теперь я не смогу вывести кого-либо из Старого лагеря.");
-	    Log_SetTopicStatus(CH1_RECRUITDUSTY,LOG_FAILED);
+		b_logentry(CH1_RECRUITDUSTY,"Теперь я не смогу вывести кого-либо из Старого лагеря.");
+		Log_SetTopicStatus(CH1_RECRUITDUSTY,LOG_FAILED);
 		GETNEWGUY_STARTED = LOG_FAILED;
 	};
 	if(c_npcbelongstooldcamp(hero))

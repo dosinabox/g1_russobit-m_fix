@@ -106,6 +106,7 @@ func void dia_org_833_buster_train1()
 		{
 			if(hero.lp >= LPCOST_TALENT_ACROBAT)
 			{
+				b_printtrademsg1("Отдано руды: 100");
 				b_giveinvitems(other,self,itminugget,100);
 			};
 			if(b_giveskill(other,NPC_TALENT_ACROBAT,1,LPCOST_TALENT_ACROBAT))

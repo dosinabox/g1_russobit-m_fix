@@ -24,22 +24,18 @@ instance SLD_736_SOELDNER(NPC_DEFAULT)
 	EquipItem(self,itmw_1h_mace_war_02);
 	EquipItem(self,itrw_bow_long_01);
 	CreateInvItems(self,itamarrow,20);
-	CreateInvItems(self,itforice,8);
 	CreateInvItems(self,itfoloaf,5);
 	CreateInvItems(self,itfomutton,6);
 	CreateInvItems(self,itminugget,10);
-	CreateInvItems(self,itfobooze,5);
-	CreateInvItems(self,itlstorch,5);
 	CreateInvItems(self,itfo_potion_health_02,9);
-	CreateInvItem(self,itmi_stuff_barbknife_01);
-	CreateInvItem(self,itmi_stuff_mug_01);
 	daily_routine = rtn_start_736;
 };
 
 
 func void rtn_start_736()
 {
-	ta_sleep(20,50,7,10,"NC_HUT08_IN");
+	ta_sleep(20,50,6,50,"NC_HUT08_IN");
+	ta_washself(6,50,7,10,"NC_WASH_03");
 	ta_practicesword(7,10,20,50,"NC_WATERFALL_TOP02");
 };
 

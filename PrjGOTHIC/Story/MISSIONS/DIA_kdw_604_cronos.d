@@ -109,7 +109,7 @@ instance KDW_604_CRONOS_WANNAJOIN(C_INFO)
 
 func int kdw_604_cronos_wannajoin_condition()
 {
-	if(Npc_KnowsInfo(hero,kdw_604_cronos_greet))
+	if(Npc_KnowsInfo(hero,kdw_604_cronos_greet) && KAPITEL < 2)
 	{
 		return 1;
 	};
@@ -135,7 +135,7 @@ instance KDW_604_CRONOS_WANNAMAGE(C_INFO)
 
 func int kdw_604_cronos_wannamage_condition()
 {
-	if(Npc_KnowsInfo(hero,kdw_604_cronos_wannajoin))
+	if(Npc_KnowsInfo(hero,kdw_604_cronos_wannajoin) && KAPITEL < 2)
 	{
 		return 1;
 	};
@@ -205,9 +205,9 @@ func void kdw_604_cronos_briefback_info()
 {
 	AI_Output(other,self,"DIA_Cronos_BriefBack_15_00");	//Я передал послание!
 	AI_Output(self,other,"DIA_Cronos_BriefBack_08_01");	//А, хорошо! Возьми это в награду за твои труды...
+	b_printtrademsg1("Получено руды: 200");
 	CRONOS_MESSENGER = LOG_SUCCESS;
-	CreateInvItems(self,itminugget,200);
-	b_giveinvitems(self,other,itminugget,200);
+	CreateInvItems(hero,itminugget,200);
 	b_givexp(XP_CRONOSLETTER);
 	Log_SetTopicStatus(KDWLETTER,LOG_SUCCESS);
 	b_logentry(KDWLETTER,"Маги Воды довольны моей услугой.");
@@ -248,7 +248,7 @@ instance INFO_CRONOS_KALOM(C_INFO)
 	information = info_cronos_kalom_info;
 	permanent = 0;
 	important = 0;
-	description = "Кор Галом с несколькими фанатиками Стражами ушли из Братства!";
+	description = "Кор Галом с несколькими фанатиками-Стражами ушли из Братства!";
 };
 
 
@@ -262,7 +262,7 @@ func int info_cronos_kalom_condition()
 
 func void info_cronos_kalom_info()
 {
-	AI_Output(other,self,"Info_Cronos_KALOM_15_01");	//Кор Галом с несколькими фанатиками Стражами ушли из Братства!
+	AI_Output(other,self,"Info_Cronos_KALOM_15_01");	//Кор Галом с несколькими фанатиками-Стражами ушли из Братства!
 	AI_Output(other,self,"Info_Cronos_KALOM_15_02");	//Они сами хотят найти Спящего и прервать его тысячелетний сон.
 	AI_Output(self,other,"Info_Cronos_KALOM_08_03");	//Я никогда ему не доверял. Не важно, какое место он занимает, важно то, что его ослепила жажда власти. Он способен на все.
 	AI_Output(self,other,"Info_Cronos_KALOM_08_04");	//Думаю, без него в Братстве будет гораздо лучше!
@@ -396,13 +396,13 @@ func void info_cronos_reward_info()
 	AI_Output(other,self,"Info_Cronos_REWARD_15_01");	//Сатурас сказал, что у тебя есть для меня награда.
 	AI_Output(self,other,"Info_Cronos_REWARD_08_02");	//Как хранитель руды я дам тебе небольшую часть наших запасов, как награду за твои труды.
 	AI_Output(self,other,"Info_Cronos_REWARD_08_03");	//Надеюсь, ты сможешь разумно использовать ее.
+	b_printtrademsg1("Получено руды: 1000");
 	b_logentry(CH3_BRINGFOCI,"Кронос дал мне достаточно много руды, но от этого рудная гора нисколько не уменьшилась.");
 	if(Npc_KnowsInfo(hero,info_riordian_reward))
 	{
 		Log_SetTopicStatus(CH3_BRINGFOCI,LOG_SUCCESS);
 	};
-	CreateInvItems(self,itminugget,1000);
-	b_giveinvitems(self,hero,itminugget,1000);
+	CreateInvItems(hero,itminugget,1000);
 };
 
 
@@ -473,6 +473,7 @@ func void kdw_604_cronos_mana_man_1()
 	{
 		if(hero.lp >= 1 && hero.attribute[ATR_MANA_MAX] < 100)
 		{
+			b_printtrademsg1("Отдано руды: 10");
 			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
 		};
 		b_buyattributepoints(other,ATR_MANA_MAX,LPCOST_ATTRIBUTE_MANA);
@@ -495,6 +496,7 @@ func void kdw_604_cronos_mana_man_5()
 	{
 		if(hero.lp >= 5 && hero.attribute[ATR_MANA_MAX] < 96)
 		{
+			b_printtrademsg1("Отдано руды: 50");
 			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
 		};
 		b_buyattributepoints(other,ATR_MANA_MAX,5 * LPCOST_ATTRIBUTE_MANA);

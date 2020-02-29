@@ -43,10 +43,21 @@ func int dia_scorpio_hello_condition()
 func void dia_scorpio_hello_info()
 {
 	AI_Output(self,other,"DIA_Scorpio_Hello_13_00");	//Кто пропустил тебя?
-	AI_Output(other,self,"DIA_Scorpio_Hello_15_01");	//Торус.
+	if(THORUS_PASSGATE == TRUE)
+	{
+		AI_Output(other,self,"DIA_Scorpio_Hello_15_01");	//Торус.
+	}
+	else
+	{
+		AI_Output(other,self,"DIA_BaalCadar_SleepSpell_15_02");	//Никто. Это было не слишком сложно.
+	};
 	AI_Output(self,other,"DIA_Scorpio_Hello_13_02");	//И что тебе здесь нужно?
 	Info_ClearChoices(dia_scorpio_hello);
 	Info_AddChoice(dia_scorpio_hello,"Просто захотелось посмотреть.",dia_scorpio_hello_justlooking);
+	if(Npc_HasItems(hero,cronos_brief))
+	{
+		Info_AddChoice(dia_scorpio_hello,"У меня есть письмо от магов Воды.",dia_scorpio_hello_cronosbrief);
+	};
 	if(Npc_HasItems(hero,itwr_fire_letter_01) || Npc_HasItems(hero,itwr_fire_letter_02))
 	{
 		Info_AddChoice(dia_scorpio_hello,"У меня есть послание для магов.",dia_scorpio_hello_mages);
@@ -59,6 +70,13 @@ func void dia_scorpio_hello_info()
 	{
 		Info_AddChoice(dia_scorpio_hello,"Я хочу встретиться с Гомезом. Я собираюсь присоединиться к вам.",dia_scorpio_hello_join);
 	};
+};
+
+func void dia_scorpio_hello_cronosbrief()
+{
+	AI_Output(other,self,"DIA_Milten_NochEinBrief_15_00");	//У меня есть письмо от магов Воды.
+	AI_Output(self,other,"DIA_Scorpio_Hello_Mages_13_01");	//Ты работаешь на магов? До них мне нет никакого дела...
+	Info_ClearChoices(dia_scorpio_hello);
 };
 
 func void dia_scorpio_hello_justlooking()
@@ -212,6 +230,7 @@ func void grd_205_scorpio_crossbow_ok()
 		if(b_giveskill(other,NPC_TALENT_CROSSBOW,1,LPCOST_TALENT_CROSSBOW_1))
 		{
 			AI_Output(self,other,"GRD_205_Scorpio_CROSSBOW_OK_13_02");	//Хорошо, начнем прямо сейчас.
+			b_printtrademsg1("Отдано руды: 200");
 			AI_Output(self,other,"GRD_205_Scorpio_CROSSBOW_OK_13_03");	//Возьми рукоятку арбалета. Ее необходимо упереть в плечо, что поможет тебе точнее прицелиться.
 			AI_Output(self,other,"GRD_205_Scorpio_CROSSBOW_OK_13_04");	//Сначала твое плечо будет сильно уставать и болеть.
 			AI_Output(self,other,"GRD_205_Scorpio_CROSSBOW_OK_13_05");	//Но через неделю тренировок ты его даже не узнаешь!
@@ -279,6 +298,7 @@ func void grd_205_scorpio_crossbow2_ok()
 	{
 		if(b_giveskill(other,NPC_TALENT_CROSSBOW,2,LPCOST_TALENT_CROSSBOW_2))
 		{
+			b_printtrademsg1("Отдано руды: 300");
 			AI_Output(self,other,"GRD_205_Scorpio_CROSSBOW2_OK_13_02");	//Преимущество арбалета состоит в том, что точность стрельбы повышается при выстреле с колена.
 			AI_Output(self,other,"GRD_205_Scorpio_CROSSBOW2_OK_13_03");	//Но тебе также предстоит научиться оценивать скорость противника.
 			AI_Output(self,other,"GRD_205_Scorpio_CROSSBOW2_OK_13_04");	//Выстрел должен быть направлен по ходу его движения, тогда ты сможешь в него попасть.

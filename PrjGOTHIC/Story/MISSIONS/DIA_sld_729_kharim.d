@@ -151,7 +151,7 @@ instance INFO_KHARIM_INARENA(C_INFO)
 
 func int info_kharim_inarena_condition()
 {
-	if((KHARIM_CHARGED == TRUE) && (Npc_GetDistToWP(hero,"OCR_ARENABATTLE_TRAIN") < 400))
+	if((KHARIM_CHARGED == TRUE) && (Npc_GetDistToWP(hero,"OCR_ARENABATTLE_TRAIN") < 600))
 	{
 		return 1;
 	};

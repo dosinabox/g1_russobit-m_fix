@@ -54,3 +54,33 @@ func void b_buyattributepoints(var C_NPC typ,var int atr,var int atrplus)
 	};
 };
 
+func void learn_str_1()
+{
+	b_buyattributepoints(other,ATR_STRENGTH,1);
+};
+
+func void learn_str_5()
+{
+	b_buyattributepoints(other,ATR_STRENGTH,5);
+};
+
+func void learn_dex_1()
+{
+	b_buyattributepoints(other,ATR_DEXTERITY,1);
+};
+
+func void learn_dex_5()
+{
+	b_buyattributepoints(other,ATR_DEXTERITY,5);
+};
+
+func void learn_mana_1()
+{
+	b_buyattributepoints(other,ATR_MANA_MAX,1);
+};
+
+func void learn_mana_5()
+{
+	b_buyattributepoints(other,ATR_MANA_MAX,5);
+};
+

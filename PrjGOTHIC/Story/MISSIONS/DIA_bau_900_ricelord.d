@@ -154,6 +154,7 @@ func void dia_ricelord_getwater_info()
 	else if(LEFTY_WORKDAY == Wld_GetDay())
 	{
 		AI_Output(self,other,"DIA_Ricelord_GetWater_12_01");	//Отлично. Держи. Дюжина бутылок с водой.
+		b_printtrademsg1("Получено 12 бутылок с водой.");
 		AI_Output(self,other,"DIA_Ricelord_GetWater_12_02");	//Крестьян там намного больше, так что следи, чтобы всем досталось поровну.
 		CreateInvItems(self,itfo_potion_water_01,12);
 		b_giveinvitems(self,other,itfo_potion_water_01,12);

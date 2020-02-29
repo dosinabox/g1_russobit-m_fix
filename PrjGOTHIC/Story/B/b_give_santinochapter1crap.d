@@ -8,9 +8,12 @@ func void b_give_santinochapter1crap()
 	CreateInvItems(npc,itminugget,120);
 	CreateInvItems(npc,itlstorch,15);
 	CreateInvItems(npc,itfobeer,7);
+	CreateInvItems(npc,itfomutton,10);
+	CreateInvItems(npc,itfocheese,5);
+	CreateInvItems(npc,itfoloaf,8);
 	CreateInvItems(npc,itfo_potion_mana_01,7);
 	CreateInvItems(npc,itfo_potion_health_01,6);
-	CreateInvItems(npc,itamarrow,200);
-	CreateInvItems(npc,itambolt,200);
+	CreateInvItems(npc,itamarrow,100);
+	CreateInvItems(npc,itambolt,100);
 };
 

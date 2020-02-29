@@ -21,6 +21,7 @@ instance STT_335_SANTINO(NPC_DEFAULT)
 	fight_tactic = FAI_HUMAN_STRONG;
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	b_give_santinochapter1crap();
+	EquipItem(self,itmw_1h_sword_01);
 	daily_routine = rtn_start_335;
 };
 

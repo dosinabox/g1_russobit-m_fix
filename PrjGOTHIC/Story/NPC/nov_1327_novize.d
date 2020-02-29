@@ -30,3 +30,34 @@ func void rtn_start_1327()
 	ta_stand(7,0,0,0,"PSI_31_HUT_EX");
 };
 
+func void rtn_wait_1327()
+{
+	ta_stand(0,0,7,0,"PSI_31_HUT_EX");
+	ta_stand(7,0,0,0,"PSI_31_HUT_EX");
+};
+
+instance DIA_WHEREISFORTUNO(C_INFO)
+{
+	npc = nov_1327_novize;
+	condition = dia_whereisfortuno_condition;
+	information = dia_whereisfortuno_info;
+	important = 1;
+	permanent = 0;
+};
+
+
+func int dia_whereisfortuno_condition()
+{
+	if(CORKALOMLEFT == TRUE && !Npc_KnowsInfo(hero,dia_fortuno_help))
+	{
+		return TRUE;
+	};
+};
+
+func void dia_whereisfortuno_info()
+{
+	AI_Output(self,other,"Info_WhereIsFortuno_01");	//Если ты ищешь Фортуно, то он теперь работает в лаборатории Кор Галома. Варит какие-то зелья и провонял всю мою хижину!
+	Npc_ExchangeRoutine(self,"start");
+	AI_StopProcessInfos(self);
+};
+

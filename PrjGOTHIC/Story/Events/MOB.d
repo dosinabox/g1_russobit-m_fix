@@ -442,6 +442,74 @@ func void evt_wheel_d03_s1()
 	};
 };
 
+//orc prison
+
+func int evt_wheel_d05_conditionfunc()
+{
+	return TRUE;
+};
+
+func void evt_wheel_d05_s0()
+{
+	if(GATE_D05_STATE == 1)
+	{
+		Wld_SendUntrigger("EVT_SURF_ORCSECRET_01");
+		GATE_D05_STATE = 0;
+	}
+	else if(GATE_D05_STATE == 0)
+	{
+		Wld_SendTrigger("EVT_SURF_ORCSECRET_01");
+		GATE_D05_STATE = 1;
+	};
+};
+
+func void evt_wheel_d05_s1()
+{
+	if(GATE_D05_STATE == 1)
+	{
+		Wld_SendUntrigger("EVT_SURF_ORCSECRET_01");
+		GATE_D05_STATE = 0;
+	}
+	else if(GATE_D05_STATE == 0)
+	{
+		Wld_SendTrigger("EVT_SURF_ORCSECRET_01");
+		GATE_D05_STATE = 1;
+	};
+};
+
+func int evt_wheel_d06_conditionfunc()
+{
+	return TRUE;
+};
+
+func void evt_wheel_d06_s0()
+{
+	if(GATE_D06_STATE == 1)
+	{
+		Wld_SendUntrigger("EVT_SURF_ORCSECRET_02");
+		GATE_D06_STATE = 0;
+	}
+	else if(GATE_D06_STATE == 0)
+	{
+		Wld_SendTrigger("EVT_SURF_ORCSECRET_02");
+		GATE_D06_STATE = 1;
+	};
+};
+
+func void evt_wheel_d06_s1()
+{
+	if(GATE_D06_STATE == 1)
+	{
+		Wld_SendUntrigger("EVT_SURF_ORCSECRET_02");
+		GATE_D06_STATE = 0;
+	}
+	else if(GATE_D06_STATE == 0)
+	{
+		Wld_SendTrigger("EVT_SURF_ORCSECRET_02");
+		GATE_D06_STATE = 1;
+	};
+};
+
 func int evt_wheel_08_conditionfunc()
 {
 	return TRUE;
@@ -526,9 +594,8 @@ func void evt_wheel_10_s0()
 {
 	if(CORANGAR_GOTOOGY == TRUE)
 	{
-		Wld_SendTrigger("EVT_ORCGRAVYARD_MOVER_01");
-		GATE_10_STATE = 1;
-		b_corkalomleft();
+		Wld_SendUntrigger("EVT_ORCGRAVYARD_MOVER_01");
+		GATE_10_STATE = 0;
 	}
 	else
 	{
@@ -548,14 +615,18 @@ func void evt_wheel_10_s1()
 		AI_PlayAni(self,"T_DONTKNOW");
 		AI_OutputSVM(self,self,"$DoesntWork");
 	}
-	else if(GATE_10_STATE == 0)
+	else if(GATE_10_STATE == 1)
 	{
 		AI_UseMob(hero,"VWHEEL",0);	
 	}
-	else if(GATE_10_STATE == 1)
+	else if(GATE_10_STATE == 0)
 	{
-		Wld_SendUntrigger("EVT_ORCGRAVYARD_MOVER_01");
-		GATE_10_STATE = 0;
+		Wld_SendTrigger("EVT_ORCGRAVYARD_MOVER_01");
+		if(CORKALOMLEFT == FALSE)
+		{
+			b_corkalomleft();
+		};
+		GATE_10_STATE = 1;
 	};
 };
 
@@ -666,5 +737,345 @@ func void evt_teleportstation_func()
 	Snd_Play("MFX_TELEPORT_CAST");
 	Npc_ClearAIQueue(hero);
 	AI_Teleport(hero,"DT_E1_05");
+};
+
+func int ll1_cf()
+{
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) < 1)
+	{
+		PrintScreen(_STR_CANNOTUSE_LOCKS_NO_SKILL,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	}
+	else if(Npc_HasItems(hero,itkelockpick))
+	{
+		return TRUE;
+	}
+	else
+	{
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY_NO_LOCKPICK,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int ll2_cf()
+{
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) < 1)
+	{
+		PrintScreen(_STR_CANNOTUSE_LOCKS_NO_SKILL,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	}
+	else if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) < 2)
+	{
+		PrintScreen(_STR_CANNOTUSE_LOCKS_LOW_SKILL,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	}
+	else if(Npc_HasItems(hero,itkelockpick))
+	{
+		return TRUE;
+	}
+	else
+	{
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY_NO_LOCKPICK,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int ll2_itke_gomez_01_cf()
+{
+	if(Npc_HasItems(hero,itke_gomez_01))
+	{
+		return TRUE;
+	}
+	else if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) < 1)
+	{
+		PrintScreen(_STR_CANNOTUSE_LOCKS_NO_SKILL,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	}
+	else if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) < 2)
+	{
+		PrintScreen(_STR_CANNOTUSE_LOCKS_LOW_SKILL,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	}
+	else if(Npc_HasItems(hero,itkelockpick))
+	{
+		return TRUE;
+	}
+	else
+	{
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY_NO_LOCKPICK,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itke_gomez_01_cf()
+{
+	if(Npc_HasItems(hero,itke_gomez_01))
+	{
+		return TRUE;
+	}
+	else
+	{
+		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itke_quentin_cf()
+{
+	if(Npc_HasItems(hero,itke_quentin))
+	{
+		return TRUE;
+	}
+	else
+	{
+		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itke_berg_01_cf()
+{
+	if(Npc_HasItems(hero,itke_berg_01))
+	{
+		return TRUE;
+	}
+	else
+	{
+		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itke_focus5_cf()
+{
+	if(Npc_HasItems(hero,itke_focus5))
+	{
+		return TRUE;
+	}
+	else
+	{
+		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itke_sunkentower_cf()
+{
+	if(Npc_HasItems(hero,itke_sunkentower))
+	{
+		return TRUE;
+	}
+	else
+	{
+		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itke_focus4_cf()
+{
+	if(Npc_HasItems(hero,itke_focus4))
+	{
+		return TRUE;
+	}
+	else
+	{
+		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itkecavalorn01_cf()
+{
+	if(Npc_HasItems(hero,itkecavalorn01))
+	{
+		return TRUE;
+	}
+	else
+	{
+		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itke_freemine_cf()
+{
+	if(Npc_HasItems(hero,itke_freemine))
+	{
+		return TRUE;
+	}
+	else
+	{
+		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itke_yberion_cf()
+{
+	if(Npc_HasItems(hero,itke_yberion))
+	{
+		return TRUE;
+	}
+	else
+	{
+		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itke_psi_kalom_01_cf()
+{
+	if(Npc_HasItems(hero,itke_psi_kalom_01))
+	{
+		return TRUE;
+	}
+	else
+	{
+		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int dungeonkey_cf()
+{
+	if(Npc_HasItems(hero,dungeonkey))
+	{
+		return TRUE;
+	}
+	else
+	{
+		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itke_gilbert_cf()
+{
+	if(Npc_HasItems(hero,itke_gilbert))
+	{
+		return TRUE;
+	}
+	else
+	{
+		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itkey_ob_smith_01_cf()
+{
+	if(Npc_HasItems(hero,itkey_ob_smith_01))
+	{
+		return TRUE;
+	}
+	else
+	{
+		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itke_storage_01_cf()
+{
+	if(Npc_HasItems(hero,itke_storage_01))
+	{
+		return TRUE;
+	}
+	else
+	{
+		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int ll2_itkey_rb_01_cf()
+{
+	if(Npc_HasItems(hero,itkey_rb_01))
+	{
+		return TRUE;
+	}
+	else if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) < 1)
+	{
+		PrintScreen(_STR_CANNOTUSE_LOCKS_NO_SKILL,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	}
+	else if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) < 2)
+	{
+		PrintScreen(_STR_CANNOTUSE_LOCKS_LOW_SKILL,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	}
+	else if(Npc_HasItems(hero,itkelockpick))
+	{
+		return TRUE;
+	}
+	else
+	{
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY_NO_LOCKPICK,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int ll2_orik_key_cf()
+{
+	if(Npc_HasItems(hero,orik_key))
+	{
+		return TRUE;
+	}
+	else if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) < 1)
+	{
+		PrintScreen(_STR_CANNOTUSE_LOCKS_NO_SKILL,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	}
+	else if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) < 2)
+	{
+		PrintScreen(_STR_CANNOTUSE_LOCKS_LOW_SKILL,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	}
+	else if(Npc_HasItems(hero,itkelockpick))
+	{
+		return TRUE;
+	}
+	else
+	{
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY_NO_LOCKPICK,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int ll2_itke_tower_01_cf()
+{
+	if(Npc_HasItems(hero,itke_tower_01))
+	{
+		return TRUE;
+	}
+	else if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) < 1)
+	{
+		PrintScreen(_STR_CANNOTUSE_LOCKS_NO_SKILL,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	}
+	else if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) < 2)
+	{
+		PrintScreen(_STR_CANNOTUSE_LOCKS_LOW_SKILL,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	}
+	else if(Npc_HasItems(hero,itkelockpick))
+	{
+		return TRUE;
+	}
+	else
+	{
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY_NO_LOCKPICK,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itke_om_02_cf()
+{
+	if(Npc_HasItems(hero,itke_om_02))
+	{
+		return TRUE;
+	}
+	else
+	{
+		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itke_om_03_cf()
+{
+	if(Npc_HasItems(hero,itke_om_03))
+	{
+		return TRUE;
+	}
+	else
+	{
+		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
 };
 

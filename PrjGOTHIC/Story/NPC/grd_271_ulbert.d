@@ -26,14 +26,14 @@ instance GRD_271_ULBERT(NPC_DEFAULT)
 	EquipItem(self,itrw_crossbow_01);
 	fight_tactic = FAI_HUMAN_STRONG;
 	daily_routine = rtn_start_271;
-	//aivar[AIV_ITEMSCHWEIN] = TRUE;
+	aivar[AIV_ITEMSCHWEIN] = TRUE;
 };
 
 
 func void rtn_start_271()
 {
-	ta_guard(0,0,12,0,"OM_014B");
-	ta_guard(12,0,24,0,"OM_014B");
+	ta_guard(0,0,12,0,"OM_014C");
+	ta_guard(12,0,24,0,"OM_014C");
 };
 
 func void rtn_away_271()

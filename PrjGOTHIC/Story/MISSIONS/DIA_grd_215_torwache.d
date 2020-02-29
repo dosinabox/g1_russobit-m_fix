@@ -72,7 +72,7 @@ func void dia_grd_215_torwache_first_justlooking()
 	if(Npc_HasItems(other,itminugget) >= 10)
 	{
 		Info_AddChoice(dia_grd_215_torwache_first,"А, забудь об этом.",dia_grd_215_torwache_first_nopay);
-	    Info_AddChoice(dia_grd_215_torwache_first,"Ладно, вот твои десять кусков.",dia_grd_215_torwache_first_pay);
+		Info_AddChoice(dia_grd_215_torwache_first,"Ладно, вот твои десять кусков.",dia_grd_215_torwache_first_pay);
 	}
 	else
 	{
@@ -110,6 +110,7 @@ func void dia_grd_215_torwache_first_nopay()
 func void dia_grd_215_torwache_first_pay()
 {
 	AI_Output(other,self,"DIA_Grd_215_Torwache_First_Pay_15_00");	//Ладно, вот твои десять кусков.
+	b_printtrademsg1("Отдано руды: 10");
 	AI_Output(self,other,"DIA_Grd_215_Torwache_First_Pay_06_01");	//Другой разговор, заходи.
 	b_giveinvitems(other,self,itminugget,10);
 	Info_ClearChoices(dia_grd_215_torwache_first);

@@ -53,14 +53,17 @@ func void butch_getlost_info()
 		if(Npc_HasItems(other,itmijoint_1))
 		{
 			b_giveinvitems(other,self,itmijoint_1,1);
+			b_printtrademsg1("Отдан 'Новичок'.");
 		}
 		else if(Npc_HasItems(other,itmijoint_2))
 		{
 			b_giveinvitems(other,self,itmijoint_2,1);
+			b_printtrademsg1("Отдан 'Северный темный'.");
 		}
 		else if(Npc_HasItems(other,itmijoint_3))
 		{
 			b_giveinvitems(other,self,itmijoint_3,1);
+			b_printtrademsg1("Отдан 'Зов мечты'.");
 		};
 		NC_JOINTS_VERTEILT = NC_JOINTS_VERTEILT + 1;
 		AI_Output(self,other,"DIA_Butch_GS_02");	//О, давай его сюда! Гуляй пока, малыш...

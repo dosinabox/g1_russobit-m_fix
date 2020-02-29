@@ -111,6 +111,7 @@ func void org_859_aidan_creatures_zahn()
 		if(other.lp >= 1)
 		{
 			other.lp = other.lp - 1;
+			b_printtrademsg1("Отдано руды: 50");
 			b_giveinvitems(other,self,itminugget,50);
 			PrintScreen("Навык: добыча клыков",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
 			AI_Output(self,other,"Org_859_Aidan_Creatures_Zahn_13_01");	//Ты должен следить за тем, чтобы клыки не сломались. Чтобы этого избежать, используй очень острый нож.
@@ -139,6 +140,7 @@ func void org_859_aidan_creatures_fell()
 		if(other.lp >= 1)
 		{
 			other.lp = other.lp - 1;
+			b_printtrademsg1("Отдано руды: 100");
 			b_giveinvitems(other,self,itminugget,100);
 			PrintScreen("Навык: добыча шкур",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
 			AI_Output(self,other,"Org_859_Aidan_Creatures_Fell_13_01");	//Важно знать, что начинать разделывать тушу следует с головы. Шкуры здесь высоко ценятся, поэтому главное не повредить их при снятии.
@@ -166,6 +168,7 @@ func void org_859_aidan_creatures_kralle()
 		if(other.lp >= 1)
 		{
 			other.lp = other.lp - 1;
+			b_printtrademsg1("Отдано руды: 50");
 			b_giveinvitems(other,self,itminugget,50);
 			PrintScreen("Навык: добыча когтей",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
 			AI_Output(other,self,"Org_859_Aidan_Creatures_Kralle_15_00");	//Научи меня добывать когти.
@@ -194,6 +197,7 @@ func void org_859_aidan_creatures_haut()
 		if(other.lp >= 1)
 		{
 			other.lp = other.lp - 1;
+			b_printtrademsg1("Отдано руды: 100");
 			b_giveinvitems(other,self,itminugget,100);
 			PrintScreen("Навык: добыча шкур рептилий",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
 			AI_Output(other,self,"Org_859_Aidan_Creatures_Haut_15_00");	//Что мне нужно знать, чтобы добывать шкуры рептилий?

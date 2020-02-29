@@ -19,9 +19,8 @@ instance BAU_908_BAUER(NPC_DEFAULT)
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_COWARD;
-	CreateInvItems(self,itforice,5);
+	CreateInvItem(self,itforice);
 	CreateInvItem(self,itmi_stuff_plate_01);
-	CreateInvItem(self,itfobooze);
 	EquipItem(self,itmw_1h_scythe_01);
 	daily_routine = rtn_start_908;
 };

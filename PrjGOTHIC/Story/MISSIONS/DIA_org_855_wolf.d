@@ -179,11 +179,11 @@ func void dia_wolf_sellarmor_info()
 		Info_AddChoice(dia_wolf_sellarmor,DIALOG_BACK,dia_wolf_sellarmor_back);
 		if(WOLF_ARMOR_H_WAS_BOUGHT != 1)
 		{
-			Info_AddChoice(dia_wolf_sellarmor,b_buildbuyarmorstring("Тяжелый доспех вора: 40/5/20/0",VALUE_ORG_ARMOR_H),dia_wolf_sellarmor_h);
+			Info_AddChoice(dia_wolf_sellarmor,b_buildbuyarmorstring("Тяжелый доспех вора, защита: 40/5/20/0",VALUE_ORG_ARMOR_H),dia_wolf_sellarmor_h);
 		};
 		if(WOLF_ARMOR_M_WAS_BOUGHT != 1)
 		{
-			Info_AddChoice(dia_wolf_sellarmor,b_buildbuyarmorstring("Средний доспех вора: 35/5/15/0",VALUE_ORG_ARMOR_M),dia_wolf_sellarmor_m);
+			Info_AddChoice(dia_wolf_sellarmor,b_buildbuyarmorstring("Средний доспех вора, защита: 35/5/15/0",VALUE_ORG_ARMOR_M),dia_wolf_sellarmor_m);
 		};
 	}
 	else
@@ -206,7 +206,9 @@ func void dia_wolf_sellarmor_m()
 	}
 	else
 	{
+		b_printtrademsg1("Отдано руды: 1050");
 		AI_Output(self,other,"DIA_Wolf_SellArmor_M_09_03");	//Хороший доспех. Правда не такой, как на мне, но он тоже сможет тебя защитить.
+		b_printtrademsg2("Получен средний доспех вора.");
 		b_giveinvitems(hero,self,itminugget,VALUE_ORG_ARMOR_M);
 		CreateInvItem(self,org_armor_m);
 		b_giveinvitems(self,hero,org_armor_m,1);
@@ -224,10 +226,11 @@ func void dia_wolf_sellarmor_h()
 	}
 	else
 	{
+		b_printtrademsg1("Отдано руды: 1200");
 		AI_Output(self,other,"DIA_Wolf_SellArmor_H_09_03");	//Этот доспех защитит тебя от любой опасности. Я сам такой ношу, и, как видишь, до сих пор жив.
 		b_giveinvitems(hero,self,itminugget,VALUE_ORG_ARMOR_H);
 		CreateInvItem(hero,org_armor_h);
-		PrintScreen("Получен 1 предмет.",-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
+		b_printtrademsg2("Получен тяжелый доспех вора.");
 		AI_EquipArmor(hero,org_armor_h);
 		WOLF_ARMOR_H_WAS_BOUGHT = 1;
 	};
@@ -240,6 +243,7 @@ func void org_855_wolf_train_info()
 	{
 		if(hero.lp >= LPCOST_TALENT_BOW_1)
 		{
+			b_printtrademsg1("Отдано руды: 50");
 			b_giveinvitems(hero,self,itminugget,50);
 		};
 		if(b_giveskill(hero,NPC_TALENT_BOW,1,LPCOST_TALENT_BOW_1))
@@ -262,6 +266,7 @@ func void org_855_wolf_trainagain_info()
 	{
 		if(hero.lp >= LPCOST_TALENT_BOW_2)
 		{
+			b_printtrademsg1("Отдано руды: 50");
 			b_giveinvitems(hero,self,itminugget,50);
 		};
 		if(b_giveskill(hero,NPC_TALENT_BOW,2,LPCOST_TALENT_BOW_2))
@@ -336,6 +341,7 @@ func void org_855_wolf_teach_dex_1()
 	{
 		if(hero.lp >= 1 && hero.attribute[ATR_DEXTERITY] < 100)
 		{
+			b_printtrademsg1("Отдано руды: 10");
 			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
 		};
 		b_buyattributepoints(other,ATR_DEXTERITY,LPCOST_ATTRIBUTE_DEXTERITY);
@@ -358,6 +364,7 @@ func void org_855_wolf_teach_dex_5()
 	{
 		if(hero.lp >= 5 && hero.attribute[ATR_DEXTERITY] < 96)
 		{
+			b_printtrademsg1("Отдано руды: 50");
 			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
 		};
 		b_buyattributepoints(other,ATR_DEXTERITY,5 * LPCOST_ATTRIBUTE_DEXTERITY);
@@ -501,14 +508,14 @@ instance INFO_WOLF_MCPLATESFEW(C_INFO)
 	condition = info_wolf_mcplatesfew_condition;
 	information = info_wolf_mcplatesfew_info;
 	important = 0;
-	permanent = 0;
+	permanent = 1;
 	description = "Я нашел несколько пластин с панцирей ползунов!";
 };
 
 
 func int info_wolf_mcplatesfew_condition()
 {
-	if(KNOWS_GETMCPLATES && (Npc_HasItems(hero,itat_crawler_02) > 0) && (Npc_HasItems(hero,itat_crawler_02) < 15))
+	if(KNOWS_GETMCPLATES && (Npc_HasItems(hero,itat_crawler_02) > 0) && (Npc_HasItems(hero,itat_crawler_02) < 15) && (MCPLATESDELIVERED == FALSE))
 	{
 		return TRUE;
 	};
@@ -544,6 +551,7 @@ func int info_wolf_mcplatesenough_condition()
 func void info_wolf_mcplatesenough_info()
 {
 	AI_Output(hero,self,"Info_Wolf_MCPLATESENOUGH_15_01");	//Я собрал пластины всех убитых ползунов!
+	b_printtrademsg1("Отдано 15 панцирных пластин.");
 	AI_Output(self,hero,"Info_Wolf_MCPLATESENOUGH_09_02");	//Отлично! Я займусь этим прямо сейчас!
 	AI_Output(hero,self,"Info_Wolf_MCPLATESENOUGH_15_03");	//Это займет много времени?
 	AI_Output(self,hero,"Info_Wolf_MCPLATESENOUGH_09_04");	//Не знаю. Я же никогда еще не обрабатывал такой материал.
@@ -551,9 +559,7 @@ func void info_wolf_mcplatesenough_info()
 	MCPLATESDELIVERED = TRUE;
 	b_logentry(CH4_MCPLATEARMOR,"Я отдал Волку 15 панцирных пластин. Он сказал, что ему нужно время. Я зайду к нему позже.");
 	b_givexp(XP_DELIVEREDMCPLATES);
-	//b_giveinvitems(hero,self,itat_crawler_02,15);
 	Npc_RemoveInvItems(hero,itat_crawler_02,15);
-	PrintScreen("Предметов отдано: 15",-1,_YPOS_MESSAGE_GIVEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_GIVEN);
 	AI_StopProcessInfos(self);
 };
 
@@ -611,6 +617,7 @@ func void info_wolf_armorfinished_info()
 	AI_Output(self,hero,"Info_Wolf_ARMORFINISHED_09_02");	//Я придумал, как скрепить пластины. У меня получилось.
 	AI_Output(hero,self,"Info_Wolf_ARMORFINISHED_15_03");	//Это значит, что доспехи уже готовы?
 	AI_Output(self,hero,"Info_Wolf_ARMORFINISHED_09_04");	//Да, конечно. Вот они. Они прочнее всех доспехов в нашем лагере, это сразу видно.
+	b_printtrademsg1("Получен доспех из панцирных пластин.");
 	AI_Output(hero,self,"Info_Wolf_ARMORFINISHED_15_05");	//Спасибо. Я твой должник.
 	AI_Output(self,hero,"Info_Wolf_ARMORFINISHED_09_06");	//А, не беспокойся! Я всегда найду способ взять свое.
 	b_logentry(CH4_MCPLATEARMOR,"Доспех готов. Отличная работа, к тому же это лучший доспех, который я когда-либо видел.");

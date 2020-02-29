@@ -186,6 +186,7 @@ func int dia_joru_jointsrunning_condition()
 func void dia_joru_jointsrunning_info()
 {
 	AI_Output(other,self,"DIA_Joru_JointsRunning_15_00");	//У меня есть болотник. Возьми его.
+	b_printtrademsg1("Отдано 3 'Северных темных'.");
 	AI_Output(self,other,"DIA_Joru_JointsRunning_07_01");	//Хорошо! Наверное, ты уже заметил, что ни один из Гуру не хочет с тобой разговаривать.
 	AI_Output(self,other,"DIA_Joru_JointsRunning_07_02");	//Они заговорят с тобой только тогда, когда ты сможешь произвести на них впечатление. Я могу рассказать тебе, как это сделать.
 	b_giveinvitems(other,self,itmijoint_2,3);

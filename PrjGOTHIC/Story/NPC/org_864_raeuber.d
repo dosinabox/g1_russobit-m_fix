@@ -5,7 +5,7 @@ instance ORG_864_RAEUBER(NPC_DEFAULT)
 	npctype = NPCTYPE_MAIN;
 	guild = GIL_NONE;
 	level = 12;
-	voice = 6;
+	voice = 14;
 	id = 864;
 	attribute[ATR_STRENGTH] = 60;
 	attribute[ATR_DEXTERITY] = 30;
@@ -69,8 +69,8 @@ func int org_864_raeuber_alert_condition()
 
 func void org_864_raeuber_alert_info()
 {
-	AI_Output(self,hero,"SVM_6_YouViolatedForbiddenTerritory");	//Эй! Откуда ты пришел?
-	AI_Output(self,hero,"SVM_6_IntruderAlert");	//Тревога!
+	AI_Output(self,hero,"SVM_14_YouViolatedForbiddenTerritory");	//Как ты здесь оказался?
+	AI_Output(self,hero,"SVM_14_IntruderAlert");	//Чужой!
 	b_setorg2hostile();
 	AI_StopProcessInfos(self);
 	if(QUENTIN_GANG_QUEST_STARTED == LOG_RUNNING)

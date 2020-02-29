@@ -46,7 +46,7 @@ func void org_843_sharky_fisk_info()
 	AI_Output(other,self,"Org_843_Sharky_Fisk_Info_15_00");	//Фиску из Старого лагеря нужен помощник.
 	AI_Output(self,other,"Org_843_Sharky_Fisk_Info_10_01");	//И зачем ты рассказываешь это мне?
 	AI_Output(other,self,"Org_843_Sharky_Fisk_Info_15_02");	//Я подумал, что ты захочешь заработать немного руды.
-	AI_Output(self,other,"Org_843_Sharky_Fisk_Info_10_03");	//Хм, почему бы и нет...Скажи Фиску, что он может рассчитывать на меня.
+	AI_Output(self,other,"Org_843_Sharky_Fisk_Info_10_03");	//Хм, почему бы и нет... Скажи Фиску, что он может рассчитывать на меня.
 	b_logentry(CH1_FISKNEWDEALER,"Шарки согласился работать с Фиском.");
 };
 

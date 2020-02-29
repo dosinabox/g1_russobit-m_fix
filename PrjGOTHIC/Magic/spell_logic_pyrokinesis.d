@@ -6,6 +6,10 @@ func int spell_logic_pyrokinesis(var int manainvested)
 	{
 		return SPL_SENDSTOP;
 	};
-	return SPL_NEXTLEVEL;
+	if(manainvested >= 1)
+	{
+		return SPL_NEXTLEVEL;
+	};
+	return SPL_RECEIVEINVEST;
 };
 

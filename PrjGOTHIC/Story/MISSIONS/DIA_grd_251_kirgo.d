@@ -113,6 +113,7 @@ func void info_kirgo_charge_beer()
 {
 	AI_Output(other,self,"Info_Kirgo_Charge_Beer_15_00");	//Ладно, давай выпьем пиво!
 	AI_Output(self,other,"Info_Kirgo_Charge_Beer_05_01");	//Это тебе!
+	b_printtrademsg1("Получено пиво.");
 	AI_Output(other,self,"Info_Kirgo_Charge_Beer_15_02");	//Спасибо! Боюсь, я не слишком много смогу рассказать о внешнем мире. Меня два месяца держали в яме, перед тем как забросить сюда.
 	AI_Output(self,other,"Info_Kirgo_Charge_Beer_05_03");	//Жаль... Ну, что ж... для человека, который два месяца отсидел в яме, ты выглядишь очень неплохо.
 	AI_Output(other,self,"Info_Kirgo_Charge_Beer_15_04");	//Постараюсь остаться таким и в дальнейшем.
@@ -185,7 +186,7 @@ instance INFO_KIRGO_INARENA(C_INFO)
 
 func int info_kirgo_inarena_condition()
 {
-	if((KIRGO_CHARGED == TRUE) && (Npc_GetDistToWP(hero,"OCR_ARENABATTLE_TRAIN") < 400))
+	if((KIRGO_CHARGED == TRUE) && (Npc_GetDistToWP(hero,"OCR_ARENABATTLE_TRAIN") < 600))
 	{
 		return 1;
 	};

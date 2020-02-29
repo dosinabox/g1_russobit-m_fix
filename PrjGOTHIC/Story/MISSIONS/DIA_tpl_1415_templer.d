@@ -157,7 +157,7 @@ func void tpl_1415_templer_rock_info()
 	AI_Output(self,other,"Tpl_1415_Templer_ROCK_Info_13_04");	//Только не подумай, что это бесплатно!
 	Info_ClearChoices(tpl_1415_templer_rock);
 	Info_AddChoice(tpl_1415_templer_rock,DIALOG_BACK,tpl_1415_templer_rock_back);
-	Info_AddChoice(tpl_1415_templer_rock,b_buildbuyarmorstring("Одежда послушника: 15/0/10/0",VALUE_NOV_ARMOR_L),tpl_1415_templer_rock_buy);
+	Info_AddChoice(tpl_1415_templer_rock,b_buildbuyarmorstring("Одежда послушника, защита: 15/0/10/0",VALUE_NOV_ARMOR_L),tpl_1415_templer_rock_buy);
 };
 
 func void tpl_1415_templer_rock_back()
@@ -174,7 +174,9 @@ func void tpl_1415_templer_rock_buy()
 	}
 	else
 	{
+		b_printtrademsg1("Отдано руды: 500");
 		AI_Output(self,other,"Tpl_1415_Templer_ROCK_BUY_13_03");	//Эта нехитрая одежда может спасти тебе жизнь!
+		b_printtrademsg2("Получена одежда послушника.");
 		b_giveinvitems(hero,self,itminugget,VALUE_NOV_ARMOR_L);
 		CreateInvItem(self,nov_armor_l);
 		b_giveinvitems(self,hero,nov_armor_l,1);

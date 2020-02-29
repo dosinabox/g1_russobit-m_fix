@@ -1,7 +1,7 @@
 
 instance ITWRFOCUSMAPPSI(C_ITEM)
 {
-	name = "Карта Юбериона";
+	name = "Карта";
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
 	value = 15;
@@ -9,7 +9,7 @@ instance ITWRFOCUSMAPPSI(C_ITEM)
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	on_state[0] = usefocusmappsi;
-	description = name;
+	description = "Карта Юбериона";
 	text[1] = "На этой карте отмечена дорога";
 	text[2] = "к юнитору, который нужен Юбериону";
 	text[3] = "для вызова Спящего.";
@@ -31,7 +31,7 @@ func void usefocusmappsi()
 
 instance FOCUS_1(C_ITEM)
 {
-	name = "Юнитор со скалы";
+	name = "Юнитор";
 	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MISSION;
 	hp = 1;
@@ -40,7 +40,7 @@ instance FOCUS_1(C_ITEM)
 	value = 1;
 	visual = "ItMi_Focus_01.3ds";
 	material = MAT_STONE;
-	description = name;
+	description = "Юнитор со скалы";
 	text[1] = "Один из пяти юниторов, которые использовались";
 	text[2] = "для создания магического Барьера.";
 };

@@ -181,6 +181,7 @@ func void sld_700_lee_becomesldnow_noother()
 {
 	AI_Output(other,self,"Sld_700_Lee_BECOMESLDNOW_NOOTHER_15_01");	//Другие лагеря того не стоят.
 	AI_Output(self,other,"Sld_700_Lee_BECOMESLDNOW_NOOTHER_08_02");	//Да, единственное, что хоть чего-то стоит в этой колонии - это надежда на освобождение. Добро пожаловать, наемник!
+	b_printtrademsg1("Получен легкий доспех наемника.");
 	CreateInvItem(self,sld_armor_l);
 	b_giveinvitems(self,hero,sld_armor_l,1);
 	AI_EquipArmor(hero,sld_armor_l);
@@ -193,6 +194,7 @@ func void sld_700_lee_becomesldnow_freedom()
 {
 	AI_Output(other,self,"Sld_700_Lee_BECOMESLDNOW_FREEDOM_15_01");	//Я хотел свободы с тех пор как попал сюда.
 	AI_Output(self,other,"Sld_700_Lee_BECOMESLDNOW_FREEDOM_08_02");	//И мы вернем ее себе. Добро пожаловать, наемник!
+	b_printtrademsg1("Получен легкий доспех наемника.");
 	CreateInvItem(self,sld_armor_l);
 	b_giveinvitems(self,hero,sld_armor_l,1);
 	AI_EquipArmor(hero,sld_armor_l);
@@ -205,6 +207,7 @@ func void sld_700_lee_becomesldnow_justbecause()
 {
 	AI_Output(other,self,"Sld_700_Lee_BECOMESLDNOW_JUSTBECAUSE_15_01");	//Так уж вышло.
 	AI_Output(self,other,"Sld_700_Lee_BECOMESLDNOW_JUSTBECAUSE_08_02");	//Главное, чтобы мы не остались в плену этого Барьера навечно. Добро пожаловать, наемник!
+	b_printtrademsg1("Получен легкий доспех наемника.");
 	CreateInvItem(self,sld_armor_l);
 	b_giveinvitems(self,hero,sld_armor_l,1);
 	AI_EquipArmor(hero,sld_armor_l);
@@ -285,6 +288,7 @@ func void sld_700_lee_fmtaken_info()
 		AI_Output(hero,self,"Info_FreemineOrc_EXIT_15_03");	//Спасибо. А теперь мне нужно уходить.
 		AI_Output(self,hero,"Info_CorAngar_TELEPORT_08_01");	//Подожди!
 		AI_Output(self,hero,"Info_CorAngar_TELEPORT_08_03");	//Возьми эту руну в знак нашей благодарности за твою помощь.
+		b_printtrademsg1("Получена руна огненного шторма.");
 		AI_Output(hero,self,"Info_CorAngar_TELEPORT_15_05");	//Спасибо тебе!
 		AI_Output(hero,self,"Info_Exit_Info_15_01");	//До встречи!
 		b_logentry(CH4_BANNEDFROMOC,"Я рассказал Ли о том, что мы с Горном очистили Свободную шахту. Он был очень доволен.");
@@ -327,16 +331,18 @@ func void sld_700_lee_changeside_info()
 	AI_Output(self,other,"Sld_700_Lee_CHANGESIDE_Info_08_04");	//Возьми эти доспехи. Я рад, что ты пришел к нам.
 	if(Hlp_IsItem(eqarmor,grd_armor_h))
 	{
+		b_printtrademsg1("Получен тяжелый доспех наемника.");
 		CreateInvItem(hero,sld_armor_h);
-		PrintScreen("Получен 1 предмет.",-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
 		AI_EquipArmor(hero,sld_armor_h);
 		LEE_ARMOR_H_WAS_BOUGHT = 1;
 	}
 	else
 	{
+		b_printtrademsg1("Получен доспех наемника.");
 		CreateInvItem(self,sld_armor_m);
 		b_giveinvitems(self,hero,sld_armor_m,1);
 		AI_EquipArmor(hero,sld_armor_m);
+		LEE_ARMOR_M_WAS_BOUGHT = 1;
 	};
 	Npc_SetTrueGuild(hero,GIL_SLD);
 	hero.guild = GIL_SLD;
@@ -359,7 +365,7 @@ instance SLD_700_LEE_ARMOR(C_INFO)
 
 func int sld_700_lee_armor_condition()
 {
-	if(Npc_GetTrueGuild(hero) == GIL_SLD && LEE_ARMOR_H_WAS_BOUGHT != 1)
+	if(Npc_GetTrueGuild(hero) == GIL_SLD && ((LEE_ARMOR_M_WAS_BOUGHT != 1) || (LEE_ARMOR_H_WAS_BOUGHT != 1)))
 	{
 		return TRUE;
 	};
@@ -373,11 +379,11 @@ func void sld_700_lee_armor_info()
 	Info_AddChoice(sld_700_lee_armor,DIALOG_BACK,sld_700_lee_armor_back);
 	if(LEE_ARMOR_H_WAS_BOUGHT != 1)
 	{
-		Info_AddChoice(sld_700_lee_armor,b_buildbuyarmorstring("Тяжелый доспех наемника: 70/10/35/0",VALUE_SLD_ARMOR_H),sld_700_lee_armor_h);
+		Info_AddChoice(sld_700_lee_armor,b_buildbuyarmorstring("Тяжелый доспех наемника, защита: 70/10/35/0",VALUE_SLD_ARMOR_H),sld_700_lee_armor_h);
 	};
 	if(LEE_ARMOR_M_WAS_BOUGHT != 1)
 	{
-		Info_AddChoice(sld_700_lee_armor,b_buildbuyarmorstring("Средний доспех наемника: 55/10/25/0",VALUE_SLD_ARMOR_M),sld_700_lee_armor_m);
+		Info_AddChoice(sld_700_lee_armor,b_buildbuyarmorstring("Средний доспех наемника, защита: 55/10/25/0",VALUE_SLD_ARMOR_M),sld_700_lee_armor_m);
 	};
 };
 
@@ -399,8 +405,10 @@ func void sld_700_lee_armor_m()
 	}
 	else
 	{
+		b_printtrademsg1("Отдано руды: 1650");
 		AI_Output(self,other,"Sld_700_Lee_ARMOR_M_Info_08_04");	//Это добротно сделанные доспехи. Они надежно защитят тебя.
 		b_giveinvitems(hero,self,itminugget,VALUE_SLD_ARMOR_M);
+		b_printtrademsg2("Получен доспех наемника.");
 		CreateInvItem(self,sld_armor_m);
 		b_giveinvitems(self,hero,sld_armor_m,1);
 		AI_EquipArmor(hero,sld_armor_m);
@@ -421,10 +429,11 @@ func void sld_700_lee_armor_h()
 	}
 	else
 	{
+		b_printtrademsg1("Отдано руды: 2600");
 		AI_Output(self,other,"Sld_700_Lee_ARMOR_H_Info_08_04");	//Это лучшие доспехи, которые можно достать в колонии, поверь мне. Они стоят той руды, которую я за них беру.
+		b_printtrademsg2("Получен тяжелый доспех наемника.");
 		b_giveinvitems(hero,self,itminugget,VALUE_SLD_ARMOR_H);
 		CreateInvItem(hero,sld_armor_h);
-		PrintScreen("Получен 1 предмет.",-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
 		AI_EquipArmor(hero,sld_armor_h);
 		LEE_ARMOR_H_WAS_BOUGHT = 1;
 	};
@@ -525,7 +534,7 @@ instance SLD_700_LEE_ZWEIHAND1(C_INFO)
 
 func int sld_700_lee_zweihand1_condition()
 {
-	if((Npc_GetTalentSkill(hero,NPC_TALENT_2H) < 1) && ((Npc_GetTrueGuild(hero) == GIL_SLD) || ((Npc_GetTrueGuild(hero) == GIL_KDW) && (KAPITEL >= 4))))
+	if((Npc_GetTalentSkill(hero,NPC_TALENT_2H) < 1) && ((Npc_GetTrueGuild(hero) == GIL_SLD) || ((Npc_GetTrueGuild(hero) == GIL_KDW || Npc_GetTrueGuild(hero) == GIL_DMB))))
 	{
 		return TRUE;
 	};
@@ -534,7 +543,12 @@ func int sld_700_lee_zweihand1_condition()
 func void sld_700_lee_zweihand1_info()
 {
 	AI_Output(other,self,"Sld_700_Lee_ZWEIHAND1_Info_15_01");	//Научи меня владеть двуручным мечом.
-	if(b_giveskill(other,NPC_TALENT_2H,1,LPCOST_TALENT_2H_1))
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_1H) < 2)
+	{
+		AI_Output(self,other,"SVM_8_NoLearnYouAlreadyKnow");	//Сначала ты должен изучить основы и только потом переходить к более сложным вещам.
+		PrintScreen("Требуется мастерство одноручного оружия!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else if(b_giveskill(other,NPC_TALENT_2H,1,LPCOST_TALENT_2H_1))
 	{
 		AI_Output(self,other,"Sld_700_Lee_ZWEIHAND1_Info_08_02");	//Хорошо, начнем с самых азов.
 		AI_Output(self,other,"Sld_700_Lee_ZWEIHAND1_Info_08_03");	//Держи клинок горизонтально. Чтобы нанести удар таким тяжелым оружием, необходимо хорошо размахнуться.
@@ -560,7 +574,7 @@ instance SLD_700_LEE_ZWEIHAND2(C_INFO)
 
 func int sld_700_lee_zweihand2_condition()
 {
-	if((Npc_GetTalentSkill(hero,NPC_TALENT_2H) == 1) && ((Npc_GetTrueGuild(hero) == GIL_SLD) || ((Npc_GetTrueGuild(hero) == GIL_KDW) && (KAPITEL >= 4))))
+	if((Npc_GetTalentSkill(hero,NPC_TALENT_2H) == 1) && ((Npc_GetTrueGuild(hero) == GIL_SLD) || ((Npc_GetTrueGuild(hero) == GIL_KDW || Npc_GetTrueGuild(hero) == GIL_DMB))))
 	{
 		return TRUE;
 	};

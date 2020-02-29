@@ -54,24 +54,47 @@ func int b_checkitem(var int category,var int slot)
 	if(count > 0)
 	{
 		printdebugnpc(PD_ZS_CHECK,printtext);
-		if(Hlp_IsItem(item,itminugget))
-		{
-			b_transferitems(count / 2);
-			return TRUE;
-		};
+		//if(Hlp_IsItem(item,itminugget))
+		//{
+		//	//b_transferitems(count / 2);
+		//	return TRUE;
+		//};
 		if(Npc_OwnedByNpc(item,self))
 		{
 			b_transferitems(1);
 			return TRUE;
 		};
 	};
-	return FALSE;
+	if(Npc_HasItems(other,itminugget) > 0)
+	{
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	};
 };
 
 func int b_plunder()
 {
+	var string stolennuggettext;
 	var int amountplundered;
+	var int stolennuggetamount;
 	printdebugnpc(PD_ZS_CHECK,"B_Plunder");
+	if(Npc_HasItems(other,itminugget) > 0)
+	{
+		stolennuggettext = ConcatStrings("Отобрано руды: ",IntToString((Npc_HasItems(other,itminugget) / 2)));
+		if(Npc_HasItems(other,itminugget) > 1)
+		{
+			PrintScreen(stolennuggettext,-1,37,"FONT_OLD_10_WHITE.TGA",3);
+			b_giveinvitems(other,self,itminugget,(Npc_HasItems(other,itminugget) / 2));
+		}
+		else if(Npc_HasItems(other,itminugget) == 1)
+		{
+			PrintScreen("Отобрано руды: 1",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+			b_giveinvitems(other,self,itminugget,1);
+		};
+	};
 	amountplundered = 0;
 	b_checkitem(INV_WEAPON,1);
 	b_checkitem(INV_WEAPON,2);

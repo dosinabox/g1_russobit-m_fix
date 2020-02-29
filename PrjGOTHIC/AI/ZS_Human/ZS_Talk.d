@@ -29,17 +29,6 @@ func void zs_talk()
 		Npc_SetTarget(self,other);
 		b_assessenemy();
 	};
-	if(c_bodystatecontains(self,BS_WALK) || c_bodystatecontains(self,BS_RUN))
-	{
-		b_say(hero,self,"$SC_HEYWAITASECOND");
-	}
-	else if(!Npc_CanSeeNpc(self,hero))
-	{
-		b_say(hero,self,"$SC_HEYTURNAROUND");
-	}
-	else
-	{
-	};
 	if(!c_bodystatecontains(self,BS_SIT) || !Npc_CanSeeNpc(self,hero))
 	{
 		AI_Standup(self);

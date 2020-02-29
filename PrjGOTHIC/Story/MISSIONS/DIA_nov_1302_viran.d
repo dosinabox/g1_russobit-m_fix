@@ -81,7 +81,7 @@ func void dia_viran_fetchweed_info()
 func void dia_viran_fetchweed_really()
 {
 	AI_Output(other,self,"DIA_Viran_FetchWeed_Really_15_00");	//Но меня действительно послал Идол Оран!
-	AI_Output(self,other,"DIA_Viran_FetchWeed_Really_07_01");	//Ну, да, как же.
+	AI_Output(self,other,"DIA_Viran_FetchWeed_Really_07_01");	//Ну да, как же.
 };
 
 func void dia_viran_fetchweed_gotohim()
@@ -159,6 +159,7 @@ func void dia_viran_running_info()
 		AI_Output(self,hero,"DIA_Viran_Running_07_03");	//Ее смог бы сделать либо полный идиот, либо один из нас.
 		AI_Output(self,hero,"DIA_Viran_Running_07_04");	//А идиоту не хватит ума, чтобы обмануть меня, я прав?
 		AI_Output(self,hero,"DIA_Viran_Running_07_05");	//Вот, возьми урожай и отнеси его Кор Галому.
+		b_printtrademsg1("Получен болотник (50).");
 		AI_Output(self,hero,"DIA_Viran_Running_07_06");	//Если он скажет, что этого слишком мало, предложи ему самому попробовать поработать здесь, тогда-то он узнает, как нам достается болотник.
 		b_giveinvitems(self,hero,itmi_plants_swampherb_01,50);
 		if(Npc_KnowsInfo(hero,dia_balor_fetchweed))
@@ -229,6 +230,7 @@ func void dia_viran_ripoff_info()
 	AI_Output(self,other,"DIA_Viran_RipOff_07_01");	//Как, опять?
 	AI_Output(other,self,"DIA_Viran_RipOff_15_02");	//Только не говори мне, что теперь нужно поубивать всех болотожоров в округе, чтобы доказать тебе, что это правда. У меня нет времени.
 	AI_Output(self,other,"DIA_Viran_RipOff_07_03");	//Да, ладно! Забирай уж этот чертов болотник!
+	b_printtrademsg1("Получен болотник (50).");
 	CreateInvItems(self,itmi_plants_swampherb_01,50);
 	b_giveinvitems(self,hero,itmi_plants_swampherb_01,50);
 };

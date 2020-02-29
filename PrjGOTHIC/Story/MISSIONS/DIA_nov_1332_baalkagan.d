@@ -252,6 +252,7 @@ func int dia_baalkagan_gimmekraut_condition()
 func void dia_baalkagan_gimmekraut_info()
 {
 	AI_Output(other,self,"DIA_BaalKagan_GimmeKraut_15_00");	//Хорошо. Давай болотник. Кому его нужно раздать?
+	b_printtrademsg1("Получено 10 'Новичков'.");
 	AI_Output(self,other,"DIA_BaalKagan_GimmeKraut_13_01");	//Думаю, тебе легко удастся найти тех, кто возьмет у тебя болотник. Но каждый из них может получить только одну сигарету, не больше.
 	AI_Output(self,other,"DIA_BaalKagan_GimmeKraut_13_02");	//И еще: если кто-то заберет у тебя этот болотник или ты сам его используешь, то можешь считать, что мы ни о чем не договаривались.
 	AI_Output(other,self,"DIA_BaalKagan_GimmeKraut_15_03");	//Конечно.
@@ -323,6 +324,7 @@ func void dia_baalkagan_success_join()
 	AI_Output(self,other,"DIA_BaalKagan_SUCCESS_Join_13_02");	//Недавно Юберион назначил его своим советником. Но от этого его поведение только ухудшилось.
 	AI_Output(self,other,"DIA_BaalKagan_SUCCESS_Join_13_03");	//Теперь он гордится собой, как никогда, и поэтому не разговаривает ни с кем, кроме своих учеников.
 	AI_Output(self,other,"DIA_BaalKagan_SUCCESS_Join_13_04");	//Если ты передашь ему эту вещь, он сделает для тебя исключение.
+	b_printtrademsg1("Получен улучшенный 'Зов мечты'.");
 	CreateInvItem(self,specialjoint);
 	b_giveinvitems(self,other,specialjoint,1);
 	Log_CreateTopic(CH1_JOINPSI,LOG_MISSION);
@@ -334,6 +336,7 @@ func void dia_baalkagan_success_erz()
 {
 	AI_Output(other,self,"DIA_BaalKagan_SUCCESS_Erz_15_00");	//Дай мне сто кусков руды.
 	AI_Output(self,other,"DIA_BaalKagan_SUCCESS_Erz_13_01");	//Ты сделал выбор. Бери.
+	b_printtrademsg1("Получено руды: 100");
 	CreateInvItems(self,itminugget,100);
 	b_giveinvitems(self,other,itminugget,100);
 	Info_ClearChoices(dia_baalkagan_success);
@@ -356,6 +359,7 @@ var int baalkagan_drei;
 
 func void dia_baalkagan_success_takescrolls_windfaust()
 {
+	b_printtrademsg1("Получен свиток кулака ветра.");
 	CreateInvItem(self,itarscrollwindfist);
 	b_giveinvitems(self,hero,itarscrollwindfist,1);
 	BAALKAGAN_DREI = BAALKAGAN_DREI + 1;
@@ -368,6 +372,7 @@ func void dia_baalkagan_success_takescrolls_windfaust()
 
 func void dia_baalkagan_success_takescrolls_telekinese()
 {
+	b_printtrademsg1("Получен свиток телекинеза.");
 	CreateInvItem(self,itarscrolltelekinesis);
 	b_giveinvitems(self,hero,itarscrolltelekinesis,1);
 	BAALKAGAN_DREI = BAALKAGAN_DREI + 1;
@@ -380,6 +385,7 @@ func void dia_baalkagan_success_takescrolls_telekinese()
 
 func void dia_baalkagan_success_takescrolls_pyrokinese()
 {
+	b_printtrademsg1("Получен свиток пирокинеза.");
 	CreateInvItem(self,itarscrollpyrokinesis);
 	b_giveinvitems(self,hero,itarscrollpyrokinesis,1);
 	BAALKAGAN_DREI = BAALKAGAN_DREI + 1;
@@ -392,6 +398,7 @@ func void dia_baalkagan_success_takescrolls_pyrokinese()
 
 func void dia_baalkagan_success_takescrolls_schlaf()
 {
+	b_printtrademsg1("Получен свиток сна.");
 	CreateInvItem(self,itarscrollsleep);
 	b_giveinvitems(self,hero,itarscrollsleep,1);
 	BAALKAGAN_DREI = BAALKAGAN_DREI + 1;
@@ -404,6 +411,7 @@ func void dia_baalkagan_success_takescrolls_schlaf()
 
 func void dia_baalkagan_success_takescrolls_charme()
 {
+	b_printtrademsg1("Получен свиток чар.");
 	CreateInvItem(self,itarscrollcharm);
 	b_giveinvitems(self,hero,itarscrollcharm,1);
 	BAALKAGAN_DREI = BAALKAGAN_DREI + 1;

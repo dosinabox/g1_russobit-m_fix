@@ -61,7 +61,7 @@ func void zs_observeintruderwaitneutral()
 func int zs_observeintruderwaitneutral_loop()
 {
 	printdebugnpc(PD_ZS_LOOP,"ZS_ObserveIntruderWaitNeutral_Loop");
-	if(Npc_GetDistToNpc(self,other) > HAI_DIST_OBSERVEINTRUDER)
+	if(Npc_GetDistToNpc(self,other) > 150)
 	{
 		return LOOP_END;
 	};
@@ -69,9 +69,23 @@ func int zs_observeintruderwaitneutral_loop()
 	{
 		return LOOP_END;
 	};
-	if(Npc_GetStateTime(self) > 10)
+	if(Npc_GetStateTime(self) > 1)
 	{
-		b_say(self,other,"$WHATDOYOUWANT");
+		if(self.guild == GIL_EBR)
+		{
+			b_say(self,other,"$WHATDIDYOUINTHERE");
+		}
+		else if(self.guild == GIL_GUR)
+		{
+			if(other.guild == GIL_NOV || other.guild == GIL_TPL)
+			{
+				b_say(self,other,"$SECTGREETINGS");
+			};
+		}
+		else
+		{
+			b_say(self,other,"$WHATDOYOUWANT");
+		};
 		AI_StartState(self,zs_observeintruderwaitneutral2,0,"");
 	};
 	b_smartturntonpc(self,other);
@@ -106,7 +120,7 @@ func void zs_observeintruderwaitneutral2()
 func int zs_observeintruderwaitneutral2_loop()
 {
 	printdebugnpc(PD_ZS_LOOP,"ZS_ObserveIntruderWaitNeutral2_Loop");
-	if(Npc_GetDistToNpc(self,other) > HAI_DIST_OBSERVEINTRUDER)
+	if(Npc_GetDistToNpc(self,other) > 150)
 	{
 		return LOOP_END;
 	};
@@ -114,9 +128,16 @@ func int zs_observeintruderwaitneutral2_loop()
 	{
 		return LOOP_END;
 	};
-	if(Npc_GetStateTime(self) > 20)
+	if(Npc_GetStateTime(self) > 3)
 	{
-		b_say(self,other,"$ISAIDWHATDOYOUWANT");
+		if(self.guild == GIL_EBR)
+		{
+			b_say(self,other,"$GETOUTOFHERE");
+		}
+		else if(self.guild != GIL_GUR)
+		{
+			b_say(self,other,"$ISAIDWHATDOYOUWANT");
+		};
 		return LOOP_END;
 	};
 	b_smartturntonpc(self,other);

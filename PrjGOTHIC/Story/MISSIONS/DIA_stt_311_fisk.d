@@ -110,7 +110,7 @@ func void stt_311_fisk_whistlerssword_fault()
 	AI_Output(other,self,"Stt_311_Fisk_WhistlersSword_Fault_15_00");	//А Уистлер говорил, что он стоит сотню...
 	AI_Output(self,other,"Stt_311_Fisk_WhistlersSword_Fault_12_01");	//А! Погоди-ка... Правда, я что-то не то сказал. Он же стоит пять сотен.
 	AI_Output(other,self,"Stt_311_Fisk_WhistlersSword_Fault_15_02");	//Пять сотен?
-	AI_Output(self,other,"Stt_311_Fisk_WhistlersSword_Fault_12_03");	//Что, опять мало? Может, повысить до тысячи? Тоже не плохо. Но, знаешь, я подумал, что я не буду его продавать. Он мне самому пригодится!
+	AI_Output(self,other,"Stt_311_Fisk_WhistlersSword_Fault_12_03");	//Что, опять мало? Может, повысить до тысячи? Тоже неплохо. Но, знаешь, я подумал, что я не буду его продавать. Он мне самому пригодится!
 	FISK_FORGETSWORD = TRUE;
 	Info_ClearChoices(stt_311_fisk_whistlerssword);
 };
@@ -120,7 +120,9 @@ func void stt_311_fisk_whistlerssword_takeit()
 	AI_Output(other,self,"Stt_311_Fisk_WhistlersSword_TakeIt_15_00");	//Хорошо, я покупаю его.
 	if(Npc_HasItems(other,itminugget) >= 110)
 	{
+		b_printtrademsg1("Отдано руды: 110");
 		AI_Output(self,other,"Stt_311_Fisk_WhistlersSword_TakeIt_12_01");	//Договорились!
+		b_printtrademsg2("Получен меч Уистлера.");
 		b_giveinvitems(other,self,itminugget,110);
 		CreateInvItem(self,whistlers_schwert);
 		b_giveinvitems(self,other,whistlers_schwert,1);
@@ -199,12 +201,14 @@ func void stt_311_fisk_mordragko_relax()
 	Log_SetTopicStatus(CH1_FISKNEWDEALER,LOG_RUNNING);
 	b_logentry(CH1_FISKNEWDEALER,"Торговец Фиск из Старого лагеря хочет, чтобы я нашел ему нового поставщика вместо Мордрага.");
 	FISK_GETNEWHEHLER = LOG_RUNNING;
+	//Info_ClearChoices(stt_311_fisk_mordragko);
+	AI_StopProcessInfos(self);
 };
 
 func void stt_311_fisk_mordragko_fuckoff()
 {
 	AI_Output(other,self,"Stt_311_Fisk_MordragKO_FuckOff_15_00");	//А не пошел бы ты?..
-	Info_ClearChoices(stt_311_fisk_mordragko);
+	//Info_ClearChoices(stt_311_fisk_mordragko);
 	AI_StopProcessInfos(self);
 };
 
@@ -279,11 +283,11 @@ func void stt_311_fisk_armor_info()
 	Info_AddChoice(stt_311_fisk_armor,DIALOG_BACK,stt_311_fisk_armor_back);
 	if(FISK_ARMOR_M_WAS_BOUGHT != 1)
 	{
-		Info_AddChoice(stt_311_fisk_armor,b_buildbuyarmorstring("Штаны рудокопа: 15/0/5/0",VALUE_VLK_ARMOR_M),stt_311_fisk_armor_m);
+		Info_AddChoice(stt_311_fisk_armor,b_buildbuyarmorstring("Штаны рудокопа, защита: 15/0/5/0",VALUE_VLK_ARMOR_M),stt_311_fisk_armor_m);
 	};
 	if(FISK_ARMOR_L_WAS_BOUGHT != 1)
 	{
-		Info_AddChoice(stt_311_fisk_armor,b_buildbuyarmorstring("Простые штаны рудокопа: 10/0/5/0",VALUE_VLK_ARMOR_L),stt_311_fisk_armor_l);
+		Info_AddChoice(stt_311_fisk_armor,b_buildbuyarmorstring("Простые штаны рудокопа, защита: 10/0/5/0",VALUE_VLK_ARMOR_L),stt_311_fisk_armor_l);
 	};
 };
 
@@ -301,12 +305,18 @@ func void stt_311_fisk_armor_l()
 	}
 	else
 	{
-		AI_Output(self,other,"Stt_311_Fisk_ARMOR_L_Info_12_03");	//Хороший выбор.
+		b_printtrademsg1("Отдано руды: 250");
 		b_giveinvitems(hero,self,itminugget,VALUE_VLK_ARMOR_L);
+		AI_Output(self,other,"Stt_311_Fisk_ARMOR_L_Info_12_03");	//Хороший выбор.
+		b_printtrademsg2("Получены простые штаны рудокопа.");
 		CreateInvItem(self,vlk_armor_l);
 		b_giveinvitems(self,hero,vlk_armor_l,1);
 		AI_EquipArmor(hero,vlk_armor_l);
 		FISK_ARMOR_L_WAS_BOUGHT = 1;
+		if(FISK_ARMOR_M_WAS_BOUGHT == 1 && FISK_ARMOR_L_WAS_BOUGHT == 1)
+		{
+			Info_ClearChoices(stt_311_fisk_armor);
+		};
 	};
 };
 
@@ -319,12 +329,18 @@ func void stt_311_fisk_armor_m()
 	}
 	else
 	{
-		AI_Output(self,other,"Stt_311_Fisk_ARMOR_M_Info_12_03");	//Хороший выбор.
+		b_printtrademsg1("Отдано руды: 500");
 		b_giveinvitems(hero,self,itminugget,VALUE_VLK_ARMOR_M);
+		AI_Output(self,other,"Stt_311_Fisk_ARMOR_M_Info_12_03");	//Хороший выбор.
+		b_printtrademsg2("Получены штаны рудокопа.");
 		CreateInvItem(self,vlk_armor_m);
 		b_giveinvitems(self,hero,vlk_armor_m,1);
 		AI_EquipArmor(hero,vlk_armor_m);
 		FISK_ARMOR_M_WAS_BOUGHT = 1;
+		if(FISK_ARMOR_M_WAS_BOUGHT == 1 && FISK_ARMOR_L_WAS_BOUGHT == 1)
+		{
+			Info_ClearChoices(stt_311_fisk_armor);
+		};
 	};
 };
 

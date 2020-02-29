@@ -32,8 +32,8 @@ instance NOV_1300_TALAS(NPC_DEFAULT)
 
 func void rtn_start_1300()
 {
-	ta_smoke(5,0,23,55,"PSI_PATH_TEMPLE_4_MOVEMENT");
-	ta_sleep(23,55,5,0,"PSI_29_HUT_IN");
+	ta_smoke(4,20,23,55,"PSI_PATH_TEMPLE_4_MOVEMENT");
+	ta_sleep(23,55,4,20,"PSI_29_HUT_IN");
 };
 
 func void rtn_ritual_1300()

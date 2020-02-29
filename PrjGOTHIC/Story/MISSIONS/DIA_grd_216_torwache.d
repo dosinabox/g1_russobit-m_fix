@@ -125,6 +125,7 @@ func void dia_grd_216_dustyzoll_littlewalk()
 	AI_Output(other,self,"DIA_Grd_216_Dusty_Zoll_LittleWalk_15_00");	//Мы просто хотим прогуляться. А вот тебе от нас небольшой подарок.
 	if(Npc_HasItems(hero,itminugget) >= 100)
 	{
+		b_printtrademsg1("Отдано руды: 100");
 		AI_Output(self,other,"DIA_Grd_216_Dusty_Zoll_LittleWalk_13_00");	//Я ничего не видел.
 		b_giveinvitems(hero,self,itminugget,100);
 		GRD216PASSED = TRUE;

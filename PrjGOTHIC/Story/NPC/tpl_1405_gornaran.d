@@ -46,7 +46,7 @@ instance TPL_1490_GORNARAN(NPC_DEFAULT)
 {
 	name[0] = "Гор На Ран";
 	npctype = NPCTYPE_MAIN;
-	guild = GIL_TPL;
+	guild = GIL_GUR;
 	level = 25;
 	flags = 0;
 	voice = 13;

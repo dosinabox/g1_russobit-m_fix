@@ -102,11 +102,13 @@ func void dia_gilbert_hallo2_info()
 	else
 	{
 		AI_Output(self,other,"SVM_4_LookAway");	//Не вижу, не слышу и никому ничего не скажу...
+		b_printtrademsg1("Получен дубликат ключа.");
 		b_givexp(100);
 		b_giveinvitems(self,hero,itke_gilbert,1);
 		AI_StopProcessInfos(self);
 		AI_StartState(self,zs_flee,1,"");
 		b_logentry(QUENTIN_GANG,"Гилберт вернул мне копию ключа и бросился бежать. Интересно, зачем она так нужна Квентину?");
 	};
+	Npc_ExchangeRoutine(self,"hide");
 };
 

@@ -140,6 +140,7 @@ func void gur_1201_corkalom_bringweed_info()
 	else
 	{
 		AI_Output(self,other,"GUR_1201_CorKalom_BRINGWEED_10_02");	//А, давай сюда. И не мешай мне работать!
+		b_printtrademsg1("Отдан болотник (100).");
 		b_giveinvitems(hero,self,itmi_plants_swampherb_01,100);
 		Npc_RemoveInvItems(self,itmi_plants_swampherb_01,100);
 		BAALORUN_FETCHWEED = LOG_SUCCESS;
@@ -168,7 +169,7 @@ instance GUR_1201_CORKALOM_CRAWLERZANGEN(C_INFO)
 
 func int gur_1201_corkalom_crawlerzangen_condition()
 {
-	if(Npc_HasItems(other,itat_crawler_01) > 0)
+	if(Npc_HasItems(other,itat_crawler_01) > 0 && Npc_KnowsInfo(hero,gur_1201_corkalom_sache))
 	{
 		return 1;
 	};
@@ -177,23 +178,34 @@ func int gur_1201_corkalom_crawlerzangen_condition()
 func void gur_1201_corkalom_crawlerzangen_info()
 {
 	AI_Output(other,self,"GUR_1201_CorKalom_Crawlerzangen_15_00");	//Я принес тебе челюсти ползунов...
-	if(Npc_HasItems(other,itat_crawler_01) > 15)
+	b_printtrademsg1("Отданы все челюсти ползунов.");
+	if(Npc_HasItems(other,itat_crawler_01) > 25)
 	{
 		AI_Output(self,other,"GUR_1201_CorKalom_Crawlerzangen_10_01");	//Очень хорошо. Вот, возьми за это некоторые из моих лучших зелий.
-		CORKALOM_POTIONS = Npc_HasItems(hero,itat_crawler_01) / 3;
-		CreateInvItems(self,itfo_potion_mana_03,CORKALOM_POTIONS);
-		b_giveinvitems(self,hero,itfo_potion_mana_03,CORKALOM_POTIONS);
+		b_printtrademsg2("Получено 10 зелий магической энергии.");
+		CreateInvItems(self,itfo_potion_mana_03,5);
+		b_giveinvitems(self,hero,itfo_potion_mana_03,5);
+	}
+	else if(Npc_HasItems(other,itat_crawler_01) > 15)
+	{
+		AI_Output(self,other,"GUR_1201_CorKalom_Crawlerzangen_10_01");	//Очень хорошо. Вот, возьми за это некоторые из моих лучших зелий.
+		//CORKALOM_POTIONS = Npc_HasItems(hero,itat_crawler_01) / 3;
+		b_printtrademsg2("Получено 5 зелий магической энергии.");
+		CreateInvItems(self,itfo_potion_mana_03,5);
+		b_giveinvitems(self,hero,itfo_potion_mana_03,5);
 	}
 	else if(Npc_HasItems(other,itat_crawler_01) > 5)
 	{
 		AI_Output(self,other,"GUR_1201_CorKalom_Crawlerzangen_10_02");	//Хорошо. Возьми несколько моих зелий в качестве награды.
-		CORKALOM_POTIONS = Npc_HasItems(hero,itat_crawler_01) / 2;
-		CreateInvItems(self,itfo_potion_mana_03,CORKALOM_POTIONS);
-		b_giveinvitems(self,hero,itfo_potion_mana_03,CORKALOM_POTIONS);
+		//CORKALOM_POTIONS = Npc_HasItems(hero,itat_crawler_01) / 2;
+		b_printtrademsg2("Получено 5 экстрактов магической энергии.");
+		CreateInvItems(self,itfo_potion_mana_02,5);
+		b_giveinvitems(self,hero,itfo_potion_mana_02,5);
 	}
 	else
 	{
 		AI_Output(self,other,"GUR_1201_CorKalom_Crawlerzangen_10_03");	//Хм. И это все? Вот, возьми магическое зелье и уходи.
+		b_printtrademsg2("Получена эссенция магической энергии.");
 		CreateInvItems(self,itfo_potion_mana_01,1);
 		b_giveinvitems(self,hero,itfo_potion_mana_01,1);
 		AI_StopProcessInfos(self);
@@ -259,6 +271,7 @@ func void gur_1201_corkalom_joinpsi_info()
 		{
 			AI_Output(self,other,"GUR_1201_CorKalom_JoinPSI_10_08");	//Хорошо. Слов Идолов мне вполне достаточно.
 			AI_Output(self,other,"GUR_1201_CorKalom_JoinPSI_10_09");	//Вот, возьми эту одежду. А теперь иди и постарайся быть полезным.
+			b_printtrademsg1("Получен легкий доспех послушника.");
 			CreateInvItem(self,nov_armor_m);
 			b_giveinvitems(self,hero,nov_armor_m,1);
 			AI_EquipArmor(hero,nov_armor_m);
@@ -352,6 +365,7 @@ func void gur_1201_corkalom_joinpsi2_info()
 	AI_Output(self,other,"GUR_1201_CorKalom_JoinPSI_10_11");	//Добро пожаловать.
 	AI_Output(other,self,"GUR_1201_CorKalom_JoinPSI_15_12");	//Так немного лучше.
 	AI_Output(self,other,"GUR_1201_CorKalom_JoinPSI_10_13");	//Ты почему ничего не делаешь? Вот, возьми эту траву и отнеси ее Гомезу в Старый лагерь.
+	b_printtrademsg1("Получен болотник (30).");
 	AI_Output(self,other,"GUR_1201_CorKalom_JoinPSI_10_14");	//Если его люди откажутся тебя пропускать, скажи им, что тебя прислал Кор Галом.
 	CreateInvItems(self,itmijoint_3,30);
 	b_giveinvitems(self,hero,itmijoint_3,30);
@@ -359,7 +373,7 @@ func void gur_1201_corkalom_joinpsi2_info()
 	Log_CreateTopic(CH1_KRAUTBOTE,LOG_MISSION);
 	Log_SetTopicStatus(CH1_KRAUTBOTE,LOG_RUNNING);
 	b_logentry(CH1_KRAUTBOTE,"В своей обычной неподражаемой манере Кор Галом послал меня к Гомезу в Старый лагерь, чтобы отнести ему болотник.");
-	AI_Output(self,other,"GUR_1201_CorKalom_JoinPSI_10_15");	//Ну почему ты все еще здесь?
+	AI_Output(self,other,"GUR_1201_CorKalom_JoinPSI_10_15");	//Ну, почему ты все еще здесь?
 	AI_StopProcessInfos(self);
 };
 
@@ -473,6 +487,7 @@ func void info_kalom_krautboteback_info()
 	if(Npc_HasItems(hero,itminugget) >= 500)
 	{
 		AI_Output(self,other,"Mis_1_Psi_Kalom_KrautboteBACK_10_01");	//Хорошо. Иди, найди себе какое-нибудь дело.
+		b_printtrademsg1("Отдано руды: 500");
 		KALOM_KRAUTBOTE = LOG_SUCCESS;
 		b_logentry(CH1_KRAUTBOTE,"Кор Галом получил руду за болотник для Баронов из Старого лагеря.");
 		Log_SetTopicStatus(CH1_KRAUTBOTE,LOG_SUCCESS);
@@ -508,12 +523,13 @@ func int info_corkalom_bringfocus_condition()
 func void info_corkalom_bringfocus_info()
 {
 	AI_Output(other,self,"Sit_2_PSI_Yberion_BringFocus_Info3_15_01");	//Меня прислал Юберион. Я принес юнитор.
+	b_printtrademsg1("Отдан юнитор.");
 	AI_Output(self,other,"Sit_2_PSI_Yberion_BringFocus_Info3_10_02");	//А-а, юнитор... Теперь-то я смогу изучить действие этого редкого артефакта.
 	AI_Output(self,other,"Sit_2_PSI_Yberion_BringFocus_Info3_10_03");	//Если бы у меня было достаточно слюны этих мерзких тварей...
 	b_logentry(CH2_FOCUS,"Я принес юнитор Кор Галому!");
 	Log_SetTopicStatus(CH2_FOCUS,LOG_SUCCESS);
-	b_giveinvitems(hero,self,focus_1,1);
-	Npc_RemoveInvItem(self,focus_1);
+	//b_giveinvitems(hero,self,focus_1,1);
+	Npc_RemoveInvItem(hero,focus_1);
 	b_givexp(XP_BRINGFOCUSTOCORKALOM);
 };
 
@@ -541,6 +557,7 @@ func void info_corkalom_bluff_info()
 {
 	AI_Output(other,self,"Sit_2_PSI_Yberion_BLUFF_Info3_15_01");	//Юберион сказал мне, что ты дашь мне награду за юнитор.
 	AI_Output(self,other,"Sit_2_PSI_Yberion_BLUFF_Info3_10_02");	//Да? Он так сказал? Думаю, пятьдесят кусков руды тебя устроит?
+	b_printtrademsg1("Получено руды: 50");
 	CreateInvItems(self,itminugget,50);
 	b_giveinvitems(self,other,itminugget,50);
 };
@@ -588,6 +605,8 @@ func void gur_1201_corkalom_sache_ja()
 {
 	AI_Output(other,self,"GUR_1201_CorKalom_SACHE_JA_15_01");	//Да.
 	AI_Output(self,other,"GUR_1201_CorKalom_SACHE_JA_10_02");	//Отлично!
+	AI_Output(self,other,"GUR_1201_CorKalom_SACHE_NEIN_10_03");	//В их пасти есть железы, выделяющие особую слюну.
+	AI_Output(self,other,"GUR_1201_CorKalom_SACHE_NEIN_10_04");	//Из нее я делаю особые зелья, которые указывают нам духовный путь к Спящему.
 	Info_ClearChoices(gur_1201_corkalom_sache);
 };
 
@@ -688,6 +707,7 @@ func void gur_1201_corkalom_weg_info()
 {
 	AI_Output(other,self,"GUR_1201_CorKalom_WEG_Info_15_01");	//Думаю, в шахте будет не слишком светло.
 	AI_Output(self,other,"GUR_1201_CorKalom_WEG_Info_10_02");	//Возьми свитки с заклинанием света и используй их, чтобы развеять тьму.
+	b_printtrademsg1("Получено 5 свитков света.");
 	AI_Output(self,other,"GUR_1201_CorKalom_WEG_Info_10_03");	//Стражи в шахте помогут тебе.
 	AI_Output(self,other,"GUR_1201_CorKalom_WEG_Info_10_04");	//Да пребудет с тобой сила Спящего, да осветит он твой путь своим светом, просветит твой дух и укрепит твою волю!
 	CreateInvItems(self,itarscrolllight,5);
@@ -720,6 +740,7 @@ func void gur_1201_corkalom_rat_info()
 {
 	AI_Output(other,self,"GUR_1201_CorKalom_RAT_Info_15_01");	//Да, меня ждет очередное кровавое приключение...
 	AI_Output(self,other,"GUR_1201_CorKalom_RAT_Info_10_02");	//Возьми эти целебные зелья.
+	b_printtrademsg1("Получено 5 экстрактов магической энергии.");
 	AI_Output(self,other,"GUR_1201_CorKalom_RAT_Info_10_03");	//Я даю их тебе не потому, что слишком беспокоюсь за твою жизнь, а потому что это задание для меня слишком важно.
 	CreateInvItems(self,itfo_potion_health_02,5);
 	b_giveinvitems(self,other,itfo_potion_health_02,5);
@@ -754,6 +775,7 @@ func void gur_1201_corkalom_run_info()
 	{
 		AI_Output(other,self,"GUR_1201_CorKalom_RUN_Info_15_03");	//Где находится Старая шахта?
 		AI_Output(self,other,"GUR_1201_CorKalom_RUN_Info_10_04");	//Возьми эту карту. На ней отмечены все важные места в колонии.
+		b_printtrademsg1("Получена карта колонии.");
 		CreateInvItem(self,itwrworldmap);
 		b_giveinvitems(self,other,itwrworldmap,1);
 	};
@@ -834,6 +856,7 @@ func int info_corkalom_bringmcqballs_success_condition()
 func void info_corkalom_bringmcqballs_success_info()
 {
 	AI_Output(other,self,"Mis_2_PSI_Kalom_BringMCQEggs_Success_15_01");	//Я нашел яйца королевы ползунов.
+	b_printtrademsg1("Отдано 3 яйца.");
 	AI_Output(self,other,"Mis_2_PSI_Kalom_BringMCQEggs_Success_10_02");	//Я знал это! Мое видение действительно было знаком. Самое сильное вещество для зелья содержится в яйцах.
 	AI_Output(self,other,"Mis_2_PSI_Kalom_BringMCQEggs_Success_10_03");	//Отлично, этого мне хватит, чтобы сделать зелье, которое поможет нам призвать Спящего!
 	AI_Output(other,self,"Mis_2_PSI_Kalom_BringMCQEggs_Success_15_04");	//А где моя награда?
@@ -871,6 +894,7 @@ func void info_corkalom_bringmcqballs_success_rune()
 {
 	AI_Output(other,self,"Mis_2_PSI_Kalom_BringMCQEggs_Success_RUNE_15_01");	//Руну.
 	AI_Output(self,other,"Mis_2_PSI_Kalom_BringMCQEggs_Success_RUNE_10_02");	//Пусть эта руна осветит твой путь!
+	b_printtrademsg1("Получена руна света.");
 	CreateInvItem(self,itarrunelight);
 	b_giveinvitems(self,hero,itarrunelight,1);
 	Info_ClearChoices(info_corkalom_bringmcqballs_success);
@@ -880,6 +904,7 @@ func void info_corkalom_bringmcqballs_success_waffe()
 {
 	AI_Output(other,self,"Mis_2_PSI_Kalom_BringMCQEggs_Success_WAFFE_15_01");	//Оружие.
 	AI_Output(self,other,"Mis_2_PSI_Kalom_BringMCQEggs_Success_WAFFE_10_02");	//Пусть это оружие уничтожит всех твоих врагов!
+	b_printtrademsg1("Получен Камнелом.");
 	CreateInvItem(self,itmw_1h_mace_war_03);
 	b_giveinvitems(self,hero,itmw_1h_mace_war_03,1);
 	Info_ClearChoices(info_corkalom_bringmcqballs_success);
@@ -889,6 +914,7 @@ func void info_corkalom_bringmcqballs_success_heal()
 {
 	AI_Output(other,self,"Mis_2_PSI_Kalom_BringMCQEggs_Success_HEAL_15_01");	//Целебное зелье.
 	AI_Output(self,other,"Mis_2_PSI_Kalom_BringMCQEggs_Success_HEAL_10_02");	//Пусть это зелье продлит твою жизнь!
+	b_printtrademsg1("Получена эссенция жизни.");
 	CreateInvItem(self,itfo_potion_health_perma_01);
 	b_giveinvitems(self,hero,itfo_potion_health_perma_01,1);
 	Info_ClearChoices(info_corkalom_bringmcqballs_success);
@@ -898,6 +924,7 @@ func void info_corkalom_bringmcqballs_success_ore()
 {
 	AI_Output(other,self,"Mis_2_PSI_Kalom_BringMCQEggs_Success_ORE_15_01");	//Руду.
 	AI_Output(self,other,"Mis_2_PSI_Kalom_BringMCQEggs_Success_ORE_10_02");	//Возьми эту руду в знак благодарности всего Братства!
+	b_printtrademsg1("Получено руды: 100");
 	CreateInvItems(self,itminugget,100);
 	b_giveinvitems(self,hero,itminugget,100);
 	Info_ClearChoices(info_corkalom_bringmcqballs_success);
@@ -909,11 +936,13 @@ func void info_corkalom_bringmcqballs_success_mana()
 	AI_Output(self,other,"Mis_2_PSI_Kalom_BringMCQEggs_Success_MANA_10_02");	//Пусть это зелье увеличит твою магическую силу!
 	if(!c_npcbelongstopsicamp(hero))
 	{
+		b_printtrademsg1("Получена эссенция силы духа.");
 		CreateInvItem(self,itfo_potion_mana_perma_01);
 		b_giveinvitems(self,hero,itfo_potion_mana_perma_01,1);
 	}
 	else
 	{
+		b_printtrademsg1("Получено зелье из яиц Королевы ползунов.");
 		CreateInvItem(self,itfo_potion_elixier_egg);
 		b_giveinvitems(self,hero,itfo_potion_elixier_egg,1);
 	};
@@ -1007,12 +1036,13 @@ func int info_corkalom_bringbook_success_condition()
 func void info_corkalom_bringbook_success_info()
 {
 	AI_Output(other,self,"Info_CorKalom_BringBook_Success_15_01");	//Я нашел книгу.
+	b_printtrademsg1("Отдан альманах.");
 	AI_Output(self,other,"Info_CorKalom_BringBook_Success_10_02");	//Хорошая работа. Теперь ты достал все, что нам нужно.
 	AI_Output(self,other,"Info_CorKalom_BringBook_Success_10_03");	//Еще немного, и все будет готово.
 	AI_Output(other,self,"Info_CorKalom_BringBook_Success_15_04");	//Где состоится Церемония?
 	AI_Output(self,other,"Info_CorKalom_BringBook_Success_10_05");	//Приходи ночью на площадь перед Храмом. Мы все соберемся там, чтобы призвать Спящего.
-	b_giveinvitems(hero,self,itwrfokusbuch,1);
-	Npc_RemoveInvItem(self,itwrfokusbuch);
+	//b_giveinvitems(hero,self,itwrfokusbuch,1);
+	Npc_RemoveInvItem(hero,itwrfokusbuch);
 	b_givexp(XP_BRINGBOOK);
 	CORKALOM_BRINGBOOK = LOG_SUCCESS;
 	b_logentry(CH2_BOOK,"После того как я принес альманах Кор Галому, все братья стали готовиться к великой Церемонии. Ее проведут ночью на площади перед Храмом.");
@@ -1055,6 +1085,7 @@ func void info_corkalom_belohnung_scroll()
 {
 	AI_Output(other,self,"Info_CorKalom_Belohnung_SCROLL_15_00");	//Дай мне свитки с заклинаниями.
 	AI_Output(self,other,"Info_CorKalom_Belohnung_SCROLL_10_01");	//Используй эти заклинания с умом!
+	b_printtrademsg1("Получено 3 свитка сна.");
 	CreateInvItems(self,itarscrollsleep,3);
 	b_giveinvitems(self,hero,itarscrollsleep,3);
 	Info_ClearChoices(info_corkalom_belohnung);
@@ -1064,6 +1095,7 @@ func void info_corkalom_belohnung_ore()
 {
 	AI_Output(other,self,"Info_CorKalom_Belohnung_ORE_15_00");	//Я возьму руду.
 	AI_Output(self,other,"Info_CorKalom_Belohnung_ORE_10_01");	//Надеюсь, эта руда утолит твою жадность.
+	b_printtrademsg1("Получено руды: 300");
 	CreateInvItems(self,itminugget,300);
 	b_giveinvitems(self,hero,itminugget,300);
 	Info_ClearChoices(info_corkalom_belohnung);
@@ -1073,6 +1105,7 @@ func void info_corkalom_belohnung_mana()
 {
 	AI_Output(other,self,"Info_CorKalom_Belohnung_MANA_15_00");	//Я возьму зелья.
 	AI_Output(self,other,"Info_CorKalom_Belohnung_MANA_10_01");	//Пусть эти зелья придадут тебе сил!
+	b_printtrademsg1("Получено 5 экстрактов магической энергии.");
 	CreateInvItems(self,itfo_potion_mana_02,5);
 	b_giveinvitems(self,hero,itfo_potion_mana_02,5);
 	Info_ClearChoices(info_corkalom_belohnung);

@@ -22,7 +22,7 @@ instance STT_314_SCHATTEN(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	EquipItem(self,itmw_1h_sword_short_04);
 	EquipItem(self,itrw_bow_small_02);
-	CreateInvItems(self,itamarrow,15);
+	CreateInvItems(self,itamarrow,7);
 	daily_routine = rtn_start_314;
 };
 

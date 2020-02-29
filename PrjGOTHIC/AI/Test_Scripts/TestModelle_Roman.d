@@ -212,6 +212,7 @@ instance ALLROUND_TESTMODELL(NPC_DEFAULT)
 	CreateInvItem(self,itarrunesleep);
 	CreateInvItem(self,itarrunepyrokinesis);
 	CreateInvItem(self,itarrunecontrol);
+	CreateInvItem(self,itarrunearmyofdarkness);
 	CreateInvItem(self,itarscrolllight);
 	CreateInvItem(self,itarscrollfirebolt);
 	CreateInvItem(self,itarscrollfireball);

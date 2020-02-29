@@ -25,7 +25,7 @@ instance ORG_837_ORGANISATOR(NPC_DEFAULT)
 	EquipItem(self,itmw_1h_mace_01);
 	CreateInvItems(self,itkelockpick,1);
 	CreateInvItems(self,itminugget,10);
-	CreateInvItems(self,itforice,9);
+	CreateInvItems(self,itforice,2);
 	CreateInvItems(self,itfo_potion_health_01,2);
 	daily_routine = rtn_start_837;
 };

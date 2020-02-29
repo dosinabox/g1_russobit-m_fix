@@ -11,8 +11,8 @@ instance STT_302_VIPER(NPC_DEFAULT)
 	attribute[ATR_DEXTERITY] = 18;
 	attribute[ATR_MANA_MAX] = 0;
 	attribute[ATR_MANA] = 0;
-	attribute[ATR_HITPOINTS_MAX] = 124;
-	attribute[ATR_HITPOINTS] = 124;
+	attribute[ATR_HITPOINTS_MAX] = 224;
+	attribute[ATR_HITPOINTS] = 224;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Relaxed.mds");
 	Mdl_SetVisualBody(self,"hum_Body_CookSmith",1,1,"Hum_Head_Pony",58,1,-1);

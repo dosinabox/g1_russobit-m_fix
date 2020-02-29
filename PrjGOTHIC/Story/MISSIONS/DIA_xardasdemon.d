@@ -171,6 +171,7 @@ func void b_xardasdemon_giveheart()
 		AI_Output(hero,self,"Info_XardasDemon_GIVEHEART_15_06");	//Если это так, то я хочу поговорить с твоим хозяином!
 		AI_Output(hero,self,"Info_XardasDemon_GIVEHEART_15_07");	//... Опровержение?.. Опровержение чего?.. Руна?.. Ты дашь мне руну?
 		AI_Output(hero,self,"Info_XardasDemon_GIVEHEART_15_08");	//Тогда я возьму эту руну телепортации в знак того, что я прошел испытание!
+		b_printtrademsg1("Получена руна телепортации к некроманту.");
 		b_story_accesstoxardas();
 	};
 };
@@ -198,6 +199,7 @@ func int info_xardasdemon_stoneheart_condition()
 func void info_xardasdemon_stoneheart_info()
 {
 	AI_Output(hero,self,"Info_XardasDemon_STONEHEART_15_01");	//У меня есть сердце каменного голема!
+	b_printtrademsg1("Отдано сердце каменного голема.");
 	b_giveinvitems(hero,self,itat_stonegolem_01,1);
 	Npc_RemoveInvItem(self,itat_stonegolem_01);
 	b_xardasdemon_giveheart();
@@ -226,6 +228,7 @@ func int info_xardasdemon_iceheart_condition()
 func void info_xardasdemon_iceheart_info()
 {
 	AI_Output(hero,self,"Info_XardasDemon_ICEHEART_15_01");	//Вот второе доказательство - сердце ледяного голема!
+	b_printtrademsg1("Отдано сердце ледяного голема.");
 	b_giveinvitems(hero,self,itat_icegolem_01,1);
 	b_xardasdemon_giveheart();
 };
@@ -238,7 +241,7 @@ instance INFO_XARDASDEMON_FIREHEART(C_INFO)
 	information = info_xardasdemon_fireheart_info;
 	permanent = 0;
 	important = 0;
-	description = "Сердце огненного голема убедительное доказательство?";
+	description = "Сердце огненного голема - убедительное доказательство?";
 };
 
 
@@ -252,7 +255,8 @@ func int info_xardasdemon_fireheart_condition()
 
 func void info_xardasdemon_fireheart_info()
 {
-	AI_Output(hero,self,"Info_XardasDemon_FIREHEART_15_01");	//Сердце огненного голема убедительное доказательство?
+	AI_Output(hero,self,"Info_XardasDemon_FIREHEART_15_01");	//Сердце огненного голема - убедительное доказательство?
+	b_printtrademsg1("Отдано сердце огненного голема.");
 	b_giveinvitems(hero,self,itat_firegolem_01,1);
 	b_xardasdemon_giveheart();
 };

@@ -140,10 +140,11 @@ func void org_873_cipher_trade_info()
 	AI_Output(other,self,"Info_Org_6_Krautprobe_15_00");	//У меня есть болотник. Хочешь?
 	if(Npc_HasItems(other,weedpack) >= 1)
 	{
+		b_printtrademsg1("Отдан пакет с травой.");
 		AI_Output(self,other,"Stt_311_Fisk_WhistlersSword_TakeIt_12_01");	//Договорились!
+		b_printtrademsg2("Получено руды: 250");
 		Npc_RemoveInvItems(hero,weedpack,1);
-		PrintScreen("Отдан 1 предмет.",-1,_YPOS_MESSAGE_GIVEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_GIVEN);
-		b_giveinvitems(self,other,itminugget,250);
+		CreateInvItems(hero,itminugget,250);
 		BALOR_CAN_GIVE = TRUE;
 	}
 	else

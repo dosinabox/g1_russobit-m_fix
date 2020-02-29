@@ -28,6 +28,10 @@ func void info_freemineorc_exit_info()
 		AI_Output(hero,self,"Info_FreemineOrc_EXIT_15_03");	//Спасибо. А теперь мне нужно уходить.
 		AI_Output(self,hero,"Info_FreemineOrc_EXIT_17_04");	//Хорошая дорога чужак!
 	};
+	if(Npc_HasItems(self,ulumulu))
+	{
+		Npc_RemoveInvItem(self,ulumulu);
+	};
 	AI_StopProcessInfos(self);
 };
 
@@ -280,6 +284,7 @@ func int info_freemineorc_givepotion_condition()
 func void info_freemineorc_givepotion_info()
 {
 	AI_Output(hero,self,"Info_FreemineOrc_GIVEPOTION_15_01");	//Вот, я нашел тебе зелье!
+	b_printtrademsg1("Отдано зелье орка.");
 	AI_Output(self,hero,"Info_FreemineOrc_GIVEPOTION_17_02");	//Чужак не плохой, как другой солдат! Чужак хороший!
 	b_giveinvitems(hero,self,orcmedicine,1);
 	EquipItem(self,orcmedicine);
@@ -573,13 +578,26 @@ func void info_freemineorc_everyulumulu_info()
 {
 	AI_Output(hero,self,"Info_FreemineOrc_EVERYULUMULU_15_01");	//Теперь у меня есть все, что нужно для Улу-Мулу!
 	AI_Output(self,hero,"Info_FreemineOrc_EVERYULUMULU_17_02");	//Чужак сильный солдат! Дать мне вещи! Таррок делать Улу-Мулу!
+	b_printtrademsg1("Отдано 4 трофея.");
+	if(c_bodystatecontains(self,BS_SIT))
+	{
+		AI_PlayAniBS(self,"T_GUARDSIT_2_STAND",BS_STAND);
+	};
+	AI_TurnAway(self,hero);
+	AI_PlayAni(self,"T_DIALOGGESTURE_05");
+	CreateInvItem(self,ulumulu);
+	AI_EquipBestMeleeWeapon(self);
+	AI_ReadyMeleeWeapon(self);
+	AI_PlayAni(self,"T_DIALOGGESTURE_07");
+	AI_RemoveWeapon(self);
+	AI_UnequipWeapons(self);
+	AI_WhirlAround(self,hero);
 	AI_Output(self,hero,"Info_FreemineOrc_EVERYULUMULU_17_03");	//Вот! Чужак нести Улу-Мулу и быть гордый! Таррок теперь спать!
-	CreateInvItems(hero,itat_waran_01,3);
-	b_giveinvitems(hero,self,itat_waran_01,4);
+	b_printtrademsg2("Получено Улу-Мулу.");
 	Npc_RemoveInvItem(hero,itat_shadow_02);
 	Npc_RemoveInvItem(hero,itat_swampshark_02);
 	Npc_RemoveInvItem(hero,itat_troll_02);
-	Npc_RemoveInvItems(self,itat_waran_01,4);
+	Npc_RemoveInvItem(hero,itat_waran_01);
 	b_story_gotulumulu();
 	AI_StopProcessInfos(self);
 };

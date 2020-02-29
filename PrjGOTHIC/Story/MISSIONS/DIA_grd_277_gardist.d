@@ -39,7 +39,7 @@ instance GRD_277_GARDIST_WORKINGORK(C_INFO)
 
 func int grd_277_gardist_workingork_condition()
 {
-	if(IAN_GEARWHEEL == LOG_SUCCESS)
+	if(IAN_GEARWHEEL == LOG_SUCCESS && Npc_KnowsInfo(hero,grd_263_asghan_open_now))
 	{
 		return TRUE;
 	};

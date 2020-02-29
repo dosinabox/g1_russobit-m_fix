@@ -23,15 +23,6 @@ instance SLD_708_SOELDNER(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	CreateInvItems(self,itkelockpick,3);
 	CreateInvItems(self,itminugget,15);
-	CreateInvItems(self,itforice,9);
-	CreateInvItems(self,itfobooze,7);
-	CreateInvItems(self,itlstorch,3);
-	CreateInvItems(self,itfo_potion_health_01,3);
-	CreateInvItem(self,itmi_stuff_plate_01);
-	CreateInvItem(self,itmi_stuff_cup_01);
-	CreateInvItem(self,itfomutton);
-	CreateInvItem(self,itfoloaf);
-	CreateInvItem(self,itat_teeth_01);
 	EquipItem(self,itmw_1h_mace_03);
 	EquipItem(self,itrw_bow_long_01);
 	CreateInvItems(self,itamarrow,20);
@@ -41,7 +32,8 @@ instance SLD_708_SOELDNER(NPC_DEFAULT)
 
 func void rtn_start_708()
 {
-	ta_sleep(0,0,8,0,"NC_HUT07_IN");
+	ta_sleep(0,0,7,30,"NC_HUT07_IN");
+	ta_washself(7,30,8,0,"NC_WASH_03");
 	ta_sitaround(8,0,0,0,"NC_PLACE03");
 };
 

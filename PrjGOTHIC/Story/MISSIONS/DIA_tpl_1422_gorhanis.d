@@ -265,7 +265,7 @@ instance INFO_GORHANIS_INARENA(C_INFO)
 
 func int info_gorhanis_inarena_condition()
 {
-	if((HANIS_CHARGED == TRUE) && (Npc_GetDistToWP(hero,"OCR_ARENABATTLE_TRAIN") < 400))
+	if((HANIS_CHARGED == TRUE) && (Npc_GetDistToWP(hero,"OCR_ARENABATTLE_TRAIN") < 600))
 	{
 		return 1;
 	};

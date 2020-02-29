@@ -32,6 +32,9 @@ func void b_stoppsidefense()
 	if(!Npc_IsDead(self) && !Npc_IsInState(self,zs_unconscious))
 	{
 		b_fullstop(self);
+		AI_PlayAni(self,"T_PSI_VICTIM");
+		AI_Wait(self,3.5);
+		b_say(self,NULL,"$WHATSTHAT");
 		AI_StartState(self,zs_assessenemy,1,"");
 	};
 };

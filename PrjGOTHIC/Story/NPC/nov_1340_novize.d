@@ -32,3 +32,9 @@ func void rtn_start_1340()
 	ta_listen(7,5,2,0,"PSI_TEACH_CADAR");
 };
 
+func void rtn_remove_1340()
+{
+	ta_stay(23,0,7,45,"WP_INTRO01");
+	ta_stay(7,45,23,0,"WP_INTRO01");
+};
+

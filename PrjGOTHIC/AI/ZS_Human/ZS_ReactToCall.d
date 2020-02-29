@@ -17,6 +17,13 @@ func void zs_reacttocall()
 	Npc_PercEnable(self,PERC_CATCHTHIEF,zs_catchthief);
 	Npc_PercEnable(self,PERC_ASSESSTHEFT,b_assesstheft);
 	Npc_PercEnable(self,PERC_ASSESSTALK,b_assesstalk);
+	//if(!Npc_CanSeeNpc(self,hero))
+	//{
+	//	b_say(hero,self,"$SC_HEYTURNAROUND");
+	//	AI_TurnToNPC(self,other);
+	//	c_lookatnpc(self,other);
+	//	//AI_PlayAni(self,"T_COMEOVERHERE");
+	//}
 	AI_TurnToNPC(self,other);
 	c_lookatnpc(self,other);
 	if(npc_gettempattitude(self,other) == ATT_HOSTILE)
@@ -29,8 +36,16 @@ func void zs_reacttocall()
 	else
 	{
 		printdebugnpc(PD_ZS_CHECK,"...nicht feindlich!");
-		b_say(hero,self,"$SC_HEYWAITASECOND");
-		AI_PlayAni(self,"T_COMEOVERHERE");
+		if(c_bodystatecontains(self,BS_WALK) || c_bodystatecontains(self,BS_RUN))
+		{
+			b_say(hero,self,"$SC_HEYWAITASECOND");
+		}
+		else
+		{
+			b_say(hero,self,"$SC_HEYTURNAROUND");
+		};
+		//b_say(hero,self,"$SC_HEYWAITASECOND");
+		//AI_PlayAni(self,"T_COMEOVERHERE");
 		AI_StartState(self,zs_reacttocall_wait,0,"");
 	};
 	AI_ContinueRoutine(self);

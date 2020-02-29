@@ -24,14 +24,7 @@ instance ORG_838_ORGANISATOR(NPC_DEFAULT)
 	EquipItem(self,itmw_1h_mace_01);
 	CreateInvItems(self,itkelockpick,1);
 	CreateInvItems(self,itminugget,13);
-	CreateInvItems(self,itforice,7);
-	CreateInvItems(self,itfobooze,2);
-	CreateInvItems(self,itlstorch,2);
-	CreateInvItems(self,itfo_potion_health_01,2);
-	CreateInvItem(self,itmi_stuff_plate_01);
-	CreateInvItem(self,itmi_stuff_cup_01);
-	CreateInvItem(self,itfomutton);
-	CreateInvItem(self,itat_claws_01);
+	CreateInvItems(self,itforice,3);
 	daily_routine = rtn_start_838;
 };
 

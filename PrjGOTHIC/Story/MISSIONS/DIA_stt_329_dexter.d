@@ -178,11 +178,12 @@ func void dia_dexter_joinoc_forgetit()
 	AI_Output(self,other,"DIA_Dexter_JoinOC_ForgetIt_10_01");	//Погоди! Не так быстро! Я всего лишь прощупывал почву... 50 кусков - это же хорошая сумма для новенького.
 	AI_Output(other,self,"DIA_Dexter_JoinOC_ForgetIt_15_02");	//Звучит гораздо лучше.
 	AI_Output(self,other,"DIA_Dexter_JoinOC_ForgetIt_10_03");	//Да, да, хорошо! У меня найдется лишних 50 кусков для тебя. Только не подведи меня, паренек!
+	b_printtrademsg1("Получено руды: 50");
 	DEXTER_GETKALOMSRECIPE = LOG_RUNNING;
 	Log_CreateTopic(CH1_KALOMSRECIPE,LOG_MISSION);
 	Log_SetTopicStatus(CH1_KALOMSRECIPE,LOG_RUNNING);
 	b_logentry(CH1_KALOMSRECIPE,"Призрак Декстер с рыночной площади заказал мне достать рецепт Гуру Кор Галома из лагеря Сектантов.");
-	b_logentry(CH1_KALOMSRECIPE,"Декстер хочет, чтобы я пошел в Лагерь сектантов и сделал вид, будто хочу присоединиться к ним.");
+	b_logentry(CH1_KALOMSRECIPE,"Декстер посоветовал мне сделать вид, будто я хочу присоединиться к ним.");
 	CreateInvItems(self,itminugget,50);
 	b_giveinvitems(self,other,itminugget,50);
 	DEXTER_ORE_PREPAID = 1;
@@ -250,19 +251,22 @@ func int dia_dexter_kalomsrecipesuccess_condition()
 
 func void dia_dexter_kalomsrecipesuccess_info()
 {
+	
 	AI_Output(other,self,"DIA_Dexter_KalomsRecipeSuccess_15_00");	//У меня есть рецепт, который ты просил!
 	AI_Output(self,other,"DIA_Dexter_KalomsRecipeSuccess_10_01");	//Отлично! Покажи его мне!
+	b_printtrademsg1("Отдан рецепт.");
+	b_giveinvitems(other,self,kalomsrecipe,1);
 	b_usefakescroll();
 	AI_Output(self,other,"DIA_Dexter_KalomsRecipeSuccess_10_02");	//Теперь я сам смогу готовить такой эликсир.
 	AI_Output(self,other,"DIA_Dexter_KalomsRecipeSuccess_10_03");	//Ты парень что надо! Я скажу об этом Диего!
 	if(DEXTER_ORE_PREPAID != 1)
 	{
+		
 		AI_Output(self,other,"DIA_Dexter_KalomsRecipeSuccess_10_04");	//Вот, это тебе... за помощь...
-		CreateInvItems(other,itminugget,50);
-		b_giveinvitems(self,other,itminugget,50);
+		b_printtrademsg2("Получено руды: 40");
+		CreateInvItems(self,itminugget,40);
+		b_giveinvitems(self,other,itminugget,40);
 	};
-	b_giveinvitems(other,self,kalomsrecipe,1);
-	Npc_RemoveInvItem(self,kalomsrecipe);
 	DEXTER_GETKALOMSRECIPE = LOG_SUCCESS;
 	if(Npc_GetTrueGuild(hero) == GIL_NONE)
 	{

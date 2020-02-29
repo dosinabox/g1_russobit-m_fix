@@ -833,12 +833,31 @@ instance ITARSCROLLARMYOFDARKNESS(C_ITEM)
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
 	value = 666;
-	visual = "ItAr_Scroll_29.3DS";
+	visual = "ItAr_Scroll_13_EG.3DS";
 	material = MAT_STONE;
 	spell = SPL_ARMYOFDARKNESS;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_ARMYOFDARKNESS;
 	description = "Армия тьмы";
+	text[1] = NAME_MANAKOSTEN;
+	count[1] = SPL_SENDCAST_ARMYOFDARKNESS;
+	text[5] = NAME_VALUE;
+	count[5] = value;
+};
+
+instance ITARRUNEARMYOFDARKNESS(C_ITEM)
+{
+	name = NAME_RUNE;
+	mainflag = ITEM_KAT_RUNE;
+	flags = 0;
+	value = 6660;
+	visual = "ItAr_Rune_13.3ds";
+	material = MAT_STONE;
+	spell = SPL_ARMYOFDARKNESS;
+	mag_circle = 6;
+	description = "Армия тьмы";
+	text[0] = NAME_MAG_CIRCLE;
+	count[0] = mag_circle;
 	text[1] = NAME_MANAKOSTEN;
 	count[1] = SPL_SENDCAST_ARMYOFDARKNESS;
 	text[5] = NAME_VALUE;
@@ -872,7 +891,7 @@ instance ITARSCROLLDESTROYUNDEAD(C_ITEM)
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
 	value = 110;
-	visual = "ItAr_Scroll_26.3DS";
+	visual = "ItAr_Scroll_15_EG.3DS";
 	material = MAT_STONE;
 	spell = SPL_DESTROYUNDEAD;
 	cond_atr[2] = ATR_MANA_MAX;

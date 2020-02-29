@@ -149,7 +149,7 @@ func void gur_1204_baalnamib_armor_info()
 	AI_Output(self,other,"GUR_1204_BaalNamib_ARMOR_Info_02_04");	//Эти доспехи защитят тело твое, так же как Спящий защищает твою душу!
 	Info_ClearChoices(gur_1204_baalnamib_armor);
 	Info_AddChoice(gur_1204_baalnamib_armor,DIALOG_BACK,gur_1204_baalnamib_armor_back);
-	Info_AddChoice(gur_1204_baalnamib_armor,b_buildbuyarmorstring("Доспех послушника: 40/5/20/0",VALUE_NOV_ARMOR_H),gur_1204_baalnamib_armor_buy);
+	Info_AddChoice(gur_1204_baalnamib_armor,b_buildbuyarmorstring("Доспех послушника, защита: 40/5/20/0",VALUE_NOV_ARMOR_H),gur_1204_baalnamib_armor_buy);
 };
 
 func void gur_1204_baalnamib_armor_back()
@@ -166,7 +166,10 @@ func void gur_1204_baalnamib_armor_buy()
 	}
 	else
 	{
+		AI_Output(other,self,"Stt_311_Fisk_WhistlersSword_TakeIt_15_00");	//Хорошо, я покупаю его.
+		b_printtrademsg1("Отдано руды: 1200");
 		AI_Output(self,other,"SVM_2_OkayKeepIt");	//Хорошо. Это твое.
+		b_printtrademsg2("Получен доспех послушника.");
 		b_giveinvitems(hero,self,itminugget,VALUE_NOV_ARMOR_H);
 		CreateInvItem(self,nov_armor_h);
 		b_giveinvitems(self,hero,nov_armor_h,1);

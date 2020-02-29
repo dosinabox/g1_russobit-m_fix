@@ -133,7 +133,7 @@ instance NOV_1303_NYRAS_LEAVE(C_INFO)
 
 func int nov_1303_nyras_leave_condition()
 {
-	if(Npc_KnowsInfo(hero,nov_1303_nyras_greet))
+	if(Npc_KnowsInfo(hero,nov_1303_nyras_greet) && YBERION_BRINGFOCUS == LOG_RUNNING)
 	{
 		return 1;
 	};

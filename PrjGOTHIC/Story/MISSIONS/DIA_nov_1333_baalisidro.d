@@ -170,6 +170,7 @@ func void dia_baalisidro_drink_info()
 		AI_Output(self,other,"DIA_BaalIsidro_Drink_03_01");	//Спасибо тебе! Я выпью за твое здоровье!
 		if(Npc_HasItems(other,itfobooze))
 		{
+			b_printtrademsg1("Отдан шнапс.");
 			b_giveinvitems(other,self,itfobooze,1);
 			if(c_bodystatecontains(self,BS_SIT))
 			{
@@ -181,6 +182,7 @@ func void dia_baalisidro_drink_info()
 		}
 		else if(Npc_HasItems(other,itfobeer))
 		{
+			b_printtrademsg1("Отдано пиво.");
 			b_giveinvitems(other,self,itfobeer,1);
 			if(c_bodystatecontains(self,BS_SIT))
 			{
@@ -192,6 +194,7 @@ func void dia_baalisidro_drink_info()
 		}
 		else if(Npc_HasItems(other,itfowine))
 		{
+			b_printtrademsg1("Отдано вино.");
 			b_giveinvitems(other,self,itfowine,1);
 			if(c_bodystatecontains(self,BS_SIT))
 			{
@@ -244,6 +247,7 @@ func void dia_baalisidro_thinkagain_info()
 		AI_Output(self,other,"DIA_BaalIsidro_ThinkAgain_03_01");	//О Спящий! Как же я замучился с этим болотником. Ты же не хочешь обвести меня вокруг пальца, да?
 		AI_Output(other,self,"DIA_BaalIsidro_ThinkAgain_15_02");	//Честное слово.
 		AI_Output(self,other,"DIA_BaalIsidro_ThinkAgain_03_03");	//Хорошо, вот тебе весь болотник... Ты должен получить за него не меньше 400 кусков руды. Мы поделим их пополам. Как справишься со всем, приходи ко мне. Я все время буду здесь.
+		b_printtrademsg1("Получено 50 сигарет.");
 		AI_Output(other,self,"DIA_BaalIsidro_ThinkAgain_15_04");	//Не знаешь, кто здесь может купить большую партию болотника?
 		AI_Output(self,other,"DIA_BaalIsidro_ThinkAgain_03_05");	//Если бы я знал, я бы и сам сходил к нему.
 		AI_Output(self,other,"DIA_BaalIsidro_ThinkAgain_03_06");	//Да, без этой проклятой травы я чувствую себя гораздо лучше.
@@ -252,7 +256,7 @@ func void dia_baalisidro_thinkagain_info()
 		//b_giveinvitems(self,other,itmijoint_1,10);
 		//b_giveinvitems(self,other,itmijoint_2,20);
 		//b_giveinvitems(self,other,itmijoint_3,20);
-		PrintScreen("Предметов получено: 50",-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
+		//PrintScreen("Предметов получено: 50",-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
 		Npc_RemoveInvItems(self,itmijoint_1,10);
 		CreateInvItems(other,itmijoint_1,10);
 		Npc_RemoveInvItems(self,itmijoint_2,20);
@@ -294,6 +298,7 @@ func void dia_baalisidro_running_info()
 	if(Npc_HasItems(other,itminugget) >= 200)
 	{
 		AI_Output(other,self,"DIA_BaalIsidro_RUNNING_15_02");	//Вот они.
+		b_printtrademsg1("Отдано руды: 200");
 		AI_Output(self,other,"DIA_BaalIsidro_RUNNING_03_03");	//Хорошо... А этот Идол Каган пусть делает что хочет!
 		AI_Output(self,other,"DIA_BaalIsidro_RUNNING_03_04");	//Приятно иметь с тобой дело, брат.
 		b_giveinvitems(hero,self,itminugget,200);
@@ -359,6 +364,7 @@ func void dia_baalisidro_revenge_info()
 func void dia_baalisidro_revenge_giveore()
 {
 	AI_Output(other,self,"Info_Grd_237_FirstWarn_15_06");	//Ладно, вот тебе руда!
+	b_printtrademsg1("Отдано руды: 200");
 	AI_Output(self,other,"SVM_3_HeDeservedIt");	//Давно надо было это сделать!
 	b_giveinvitems(other,self,itminugget,200);
 	AI_RemoveWeapon(self);

@@ -122,7 +122,7 @@ func void usetroll()
 
 instance FOCUS_2(C_ITEM)
 {
-	name = "Юнитор из ущелья тролля";
+	name = "Юнитор";
 	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MISSION;
 	hp = 1;
@@ -131,7 +131,7 @@ instance FOCUS_2(C_ITEM)
 	value = 1;
 	visual = "ItMi_Focus_01.3ds";
 	material = MAT_STONE;
-	description = name;
+	description = "Юнитор из ущелья тролля";
 	text[1] = "Один из пяти юниторов, которые использовались";
 	text[2] = "для создания магического Барьера.";
 };
@@ -202,7 +202,7 @@ instance FAKESCROLL(C_ITEM)
 
 instance FOCUS_3(C_ITEM)
 {
-	name = "Юнитор из горного форта";
+	name = "Юнитор";
 	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MISSION;
 	hp = 1;
@@ -211,7 +211,7 @@ instance FOCUS_3(C_ITEM)
 	value = 1;
 	visual = "ItMi_Focus_01.3ds";
 	material = MAT_STONE;
-	description = name;
+	description = "Юнитор из горного форта";
 	text[1] = "Один из пяти юниторов, которые использовались";
 	text[2] = "для создания магического Барьера.";
 };
@@ -226,12 +226,12 @@ instance ITKE_FOCUS4(C_ITEM)
 	material = MAT_METAL;
 	description = name;
 	text[0] = "Это ключ из пещеры";
-	text[1] = "в разрушенном монастыре.";
+	text[1] = "под разрушенным монастырем.";
 };
 
 instance FOCUS_4(C_ITEM)
 {
-	name = "Юнитор из развалин монастыря";
+	name = "Юнитор";
 	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MISSION;
 	hp = 1;
@@ -240,7 +240,7 @@ instance FOCUS_4(C_ITEM)
 	value = 1;
 	visual = "ItMi_Focus_01.3ds";
 	material = MAT_STONE;
-	description = name;
+	description = "Юнитор из развалин монастыря";
 	text[1] = "Один из пяти юниторов, которые использовались";
 	text[2] = "для создания магического Барьера.";
 };
@@ -290,7 +290,7 @@ instance ITKE_FOCUS5(C_ITEM)
 
 instance FOCUS_5(C_ITEM)
 {
-	name = "Юнитор из круга камней";
+	name = "Юнитор";
 	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MISSION;
 	hp = 1;
@@ -299,7 +299,7 @@ instance FOCUS_5(C_ITEM)
 	value = 1;
 	visual = "ItMi_Focus_01.3ds";
 	material = MAT_STONE;
-	description = name;
+	description = "Юнитор из круга камней";
 	text[1] = "Один из пяти юниторов, которые использовались";
 	text[2] = "для создания магического Барьера.";
 };

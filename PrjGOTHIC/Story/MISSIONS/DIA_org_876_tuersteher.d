@@ -127,6 +127,7 @@ func void dia_org_876_bribe_100erz()
 	AI_Output(other,self,"DIA_Org_876_Bribe_100Erz_15_00");	//Сотни кусков тебе хватит?
 	if(Npc_HasItems(other,itminugget) >= 100)
 	{
+		b_printtrademsg1("Отдано руды: 100");
 		AI_Output(self,other,"DIA_Org_876_Bribe_100Erz_06_01");	//Вполне хватит. Проходи.
 		self.aivar[AIV_PASSGATE] = TRUE;
 		b_giveinvitems(other,self,itminugget,100);
@@ -249,14 +250,17 @@ func void dia_org_876_gibkraut_info()
 		if(Npc_HasItems(other,itmijoint_1))
 		{
 			b_giveinvitems(other,self,itmijoint_1,1);
+			b_printtrademsg1("Отдан 'Новичок'.");
 		}
 		else if(Npc_HasItems(other,itmijoint_2))
 		{
 			b_giveinvitems(other,self,itmijoint_2,1);
+			b_printtrademsg1("Отдан 'Северный темный'.");
 		}
 		else if(Npc_HasItems(other,itmijoint_3))
 		{
 			b_giveinvitems(other,self,itmijoint_3,1);
+			b_printtrademsg1("Отдан 'Зов мечты'.");
 		};
 		AI_Output(self,other,"DIA_Org_876_GibKraut_06_01");	//Всегда рады видеть тебя здесь.
 		AI_StopProcessInfos(self);

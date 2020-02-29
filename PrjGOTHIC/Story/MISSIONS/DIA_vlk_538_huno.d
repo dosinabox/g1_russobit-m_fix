@@ -129,6 +129,7 @@ func void dia_huno_howsyourbusiness_info()
 	{
 		AI_UnequipWeapons(other);
 		AI_Output(other,self,"Info_Xardas_LOADSWORD_15_01");	//я нашел один очень странный меч.
+		b_printtrademsg1("ќтдан золотой меч.");
 		CreateInvItem(self,goldensword);
 		AI_EquipBestMeleeWeapon(self);
 		AI_ReadyMeleeWeapon(self);
@@ -137,6 +138,7 @@ func void dia_huno_howsyourbusiness_info()
 		AI_UnequipWeapons(self);
 		AI_Output(self,other,"Info_Wolf_MCPLATESENOUGH_09_04");	//Ќе знаю. я же никогда еще не обрабатывал такой материал.
 		AI_Output(self,other,"SVM_9_NotNow");	//Ќет, не сейчас.
+		b_printtrademsg2("ѕолучен золотой меч.");
 		HUNO_GOLDENSWORD = TRUE;
 	}
 	else
@@ -155,7 +157,7 @@ instance DIA_HUNO_LEARNSMITH(C_INFO)
 	nr = 2;
 	condition = dia_huno_learnsmith_condition;
 	information = dia_huno_learnsmith_info;
-	permanent = 1;
+	permanent = 0;
 	important = 0;
 	description = "я хотел бы попробовать поработать у теб€ в кузнице.";
 };

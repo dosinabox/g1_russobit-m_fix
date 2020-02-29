@@ -26,7 +26,7 @@ instance EBR_109_SYRA(NPC_DEFAULT)
 
 func void rtn_start_109()
 {
-	ta_babe_sweep(22,0,6,0,"OCC_BARONS_LEFT_ROOM_FRONT");
+	ta_babe_sweep(22,0,6,0,"OCC_BARONS_LEFT_ROOM");
 	ta_babe_sweep(6,0,16,0,"OCC_BARONS_RIGHT_ROOM_TABLE");
 	ta_babe_dance(16,0,22,0,"OCC_BARONS_DANCE");
 };

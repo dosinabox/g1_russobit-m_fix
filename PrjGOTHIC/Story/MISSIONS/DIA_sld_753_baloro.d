@@ -189,27 +189,27 @@ func void dia_sld_753_baloro_habsdabei_info()
 {
 	AI_Output(other,self,"DIA_SLD_753_Baloro_habsdabei_Info_15_01");	//Вот, я принес тебе все, что ты просил. Показывай, что там у тебя за оружие!
 	AI_Output(self,other,"DIA_SLD_753_Baloro_habsdabei_Info_08_01");	//А ты сначала покажи мне все, что принес!
-	CreateInvItems(other,itfoapple,14);
-	b_giveinvitems(other,self,itfoapple,19);
+	AI_Output(other,self,"DIA_SLD_753_Baloro_habsdabei_Info_15_02");	//Я принес все, что ты просил.
+	b_printtrademsg1("Отдано 19 предметов.");
+	Npc_RemoveInvItems(other,itfoapple,5);
 	Npc_RemoveInvItems(other,itfobooze,2);
 	Npc_RemoveInvItems(other,itfobeer,5);
 	Npc_RemoveInvItems(other,itfoloaf,3);
 	Npc_RemoveInvItems(other,itfocheese,2);
 	Npc_RemoveInvItems(other,itfo_wineberrys_01,2);
-	Npc_RemoveInvItems(self,itfoapple,14);
+	CreateInvItems(self,itfoapple,5);
 	CreateInvItems(self,itfobooze,2);
 	CreateInvItems(self,itfobeer,5);
 	CreateInvItems(self,itfoloaf,3);
 	CreateInvItems(self,itfocheese,2);
 	CreateInvItems(self,itfo_wineberrys_01,2);
-	AI_Output(other,self,"DIA_SLD_753_Baloro_habsdabei_Info_15_02");	//Я принес все, что ты просил.
 	AI_Output(self,other,"DIA_SLD_753_Baloro_habsdabei_Info_08_02");	//Да, отлично!
 	AI_Output(other,self,"DIA_SLD_753_Baloro_habsdabei_Info_15_03");	//Теперь твоя очередь. Давай то, что обещал!
 	AI_Output(self,other,"DIA_SLD_753_Baloro_habsdabei_Info_08_03");	//Да забудь об этом!
 	AI_Output(other,self,"DIA_SLD_753_Baloro_habsdabei_Info_15_04");	//Что?
 	AI_Output(self,other,"DIA_SLD_753_Baloro_habsdabei_Info_08_04");	//Ты действительно думал, что я тебе что-то дам? Ты так легко поверил во всю эту чушь. Грех было тебя не обмануть!
 	AI_Output(self,other,"DIA_SLD_753_Baloro_habsdabei_Info_08_05");	//Удивительно еще, что ты до сих пор жив! Если ты и дальше будешь всем доверять, ты долго не протянешь!
-	AI_Output(self,other,"DIA_SLD_753_Baloro_habsdabei_Info_08_06");	//Но, это уже не важно. Теперь у нас есть так много еды, можно целый праздник устроить! Спасибо! Может быть, мы еще встретимся.
+	AI_Output(self,other,"DIA_SLD_753_Baloro_habsdabei_Info_08_06");	//Но это уже не важно. Теперь у нас есть так много еды, можно целый праздник устроить! Спасибо! Может быть, мы еще встретимся.
 	SLD_753_BALORO_SC_BESORGT_DEN_KRAM = LOG_SUCCESS;
 	b_givexp(300);
 	b_logentry(BALOROS_WAFFE,"Так и думал, что он захотел меня провести. Теперь это неважно! Постараюсь больше так не попадаться.");

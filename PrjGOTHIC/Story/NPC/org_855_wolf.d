@@ -8,7 +8,7 @@ instance ORG_855_WOLF(NPC_DEFAULT)
 	voice = 9;
 	id = 855;
 	flags = NPC_FLAG_IMMORTAL;
-	attribute[ATR_STRENGTH] = 50;
+	attribute[ATR_STRENGTH] = 24;
 	attribute[ATR_DEXTERITY] = 90;
 	attribute[ATR_MANA_MAX] = 0;
 	attribute[ATR_MANA] = 0;

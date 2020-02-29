@@ -32,3 +32,10 @@ func void rtn_start_1203()
 	ta_teaching(7,45,23,0,"PSI_PLATFORM_TEACHER");
 };
 
+func void rtn_ch3_1203()
+{
+	ta_sleep(23,30,8,0,"PSI_28_HUT_IN");
+	ta_stay(8,0,12,0,"PSI_TRAINING_2");
+	ta_smalltalk(12,0,23,30,"PSI_TEACH_CADAR");
+};
+

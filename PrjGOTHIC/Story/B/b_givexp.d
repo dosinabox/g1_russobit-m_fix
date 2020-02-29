@@ -12,9 +12,24 @@ func void b_givexp(var int add_xp)
 	{
 		hero.exp_next = 500;
 	};
-	hero.exp = hero.exp + add_xp;
 	msg = NAME_XPGAINED;
-	msg = ConcatStrings(msg,IntToString(add_xp));
+	if(DIFF_HARD == 1)
+	{
+		hero.exp = hero.exp + (add_xp / 2);
+		msg = ConcatStrings(msg,IntToString(add_xp / 2));
+	}
+	else if(DIFF_VERYHARD == 1)
+	{
+		hero.exp = hero.exp + (add_xp / 3);
+		msg = ConcatStrings(msg,IntToString(add_xp / 3));
+	}
+	else
+	{
+		hero.exp = hero.exp + add_xp;
+		msg = ConcatStrings(msg,IntToString(add_xp));
+	};
+	//msg = NAME_XPGAINED;
+	//msg = ConcatStrings(msg,IntToString(add_xp));
 	PrintScreen(msg,-1,_YPOS_MESSAGE_XPGAINED,"font_old_10_white.tga",_TIME_MESSAGE_XPGAINED);
 	if(hero.exp >= hero.exp_next)
 	{
@@ -42,7 +57,11 @@ func void b_deathxp()
 	else
 	{
 		printdebugnpc(PD_ZS_CHECK,"...Opfer ist entweder nicht bewußtlos oder kein Mensch!");
-		if(self.level > 0)
+		if(c_npcishuman(self) && (self.npctype == NPCTYPE_MINE_AMBIENT || self.npctype == NPCTYPE_AMBIENT || self.id == 899 || self.id == 898))
+		{
+			b_givexp(10);
+		}
+		else if(self.level > 0)
 		{
 			b_givexp(self.level * XP_PER_LEVEL_DEAD);
 		};
@@ -56,7 +75,11 @@ func void b_unconciousxp()
 	if(!c_npcishuman(self) || !self.aivar[AIV_WASDEFEATEDBYSC])
 	{
 		printdebugnpc(PD_ZS_CHECK,"...erster Sieg!");
-		if(self.level > 0)
+		if(c_npcishuman(self) && (self.npctype == NPCTYPE_MINE_AMBIENT || self.npctype == NPCTYPE_AMBIENT || self.id == 899 || self.id == 898))
+		{
+			b_givexp(10);
+		}
+		else if(self.level > 0)
 		{
 			b_givexp(self.level * XP_PER_LEVEL_DEAD);
 		};

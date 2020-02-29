@@ -66,7 +66,7 @@ instance DIA_GOMEZ_HELLO(C_INFO)
 
 func int dia_gomez_hello_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_raven_there) && (GOMEZ_KONTAKTE < 4))
+	if(Npc_KnowsInfo(hero,dia_raven_there) && (GOMEZ_KONTAKTE < 4) && (KAPITEL == 1))
 	{
 		return 1;
 	};
@@ -284,7 +284,7 @@ instance DIA_EBR_100_GOMEZ_WAIT4SC(C_INFO)
 
 func int dia_ebr_100_gomez_wait4sc_condition()
 {
-	if(EXPLORESUNKENTOWER && (Npc_GetDistToNpc(hero,self) < 500))
+	if(EXPLORESUNKENTOWER && (Npc_GetDistToNpc(hero,self) < 800))
 	{
 		return TRUE;
 	};

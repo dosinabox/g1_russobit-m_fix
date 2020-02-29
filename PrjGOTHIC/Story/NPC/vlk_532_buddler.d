@@ -22,7 +22,6 @@ instance VLK_532_BUDDLER(NPC_DEFAULT)
 	EquipItem(self,itmw_1h_nailmace_01);
 	CreateInvItem(self,itmwpickaxe);
 	CreateInvItem(self,itfoloaf);
-	CreateInvItem(self,itfobeer);
 	CreateInvItem(self,itlstorch);
 	daily_routine = rtn_start_532;
 };

@@ -22,15 +22,8 @@ instance ORG_831_ORGANISATOR(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	Npc_SetTalentSkill(self,NPC_TALENT_SNEAK,1);
 	EquipItem(self,itmw_1h_mace_01);
-	CreateInvItems(self,itkelockpick,2);
-	CreateInvItems(self,itminugget,11);
-	CreateInvItems(self,itforice,7);
-	CreateInvItems(self,itfobooze,1);
-	CreateInvItems(self,itlstorch,1);
 	CreateInvItems(self,itfo_potion_health_01,1);
-	CreateInvItem(self,itmi_stuff_barbknife_01);
 	CreateInvItem(self,itfomutton);
-	CreateInvItem(self,itat_claws_01);
 	daily_routine = rtn_start_831;
 };
 

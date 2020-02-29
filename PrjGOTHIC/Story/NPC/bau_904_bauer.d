@@ -2,9 +2,9 @@
 instance BAU_904_BAUER(NPC_DEFAULT)
 {
 	name[0] = NAME_BAUER;
+	npctype = NPCTYPE_AMBIENT;
 	guild = GIL_BAU;
 	level = 2;
-	flags = 0;
 	voice = 9;
 	id = 904;
 	attribute[ATR_STRENGTH] = 20;
@@ -19,7 +19,7 @@ instance BAU_904_BAUER(NPC_DEFAULT)
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_COWARD;
-	CreateInvItems(self,itforice,4);
+	CreateInvItems(self,itforice,3);
 	CreateInvItem(self,itmi_stuff_plate_01);
 	EquipItem(self,itmw_1h_scythe_01);
 	daily_routine = rtn_start_904;

@@ -72,9 +72,6 @@ func void dia_homer_builtdam_info()
 	AI_Output(self,other,"DIA_Homer_BuiltDam_02_02");	// онечно, все помогали, но € был главным строителем.
 };
 
-
-var int homer_damlurker;
-
 instance DIA_HOMER_WANNAHELP(C_INFO)
 {
 	npc = bau_935_homer;

@@ -15,13 +15,24 @@ func void b_corkalomleft()
 	b_exchangeroutine(nov_1336_novize,"remove");
 	b_exchangeroutine(nov_1342_novize,"remove");
 	b_exchangeroutine(nov_1353_novize,"remove");
+	b_exchangeroutine(nov_1340_novize,"remove");
+	b_exchangeroutine(nov_1345_novize,"remove");
+	b_exchangeroutine(nov_1326_novize,"remove");
+	if(GETNEWGUY_DUSTY_JOINED == TRUE && !Npc_IsDead(vlk_524_dusty) && Npc_KnowsInfo(hero,dia_baaltondral_dustysuccess))
+	{
+		b_exchangeroutine(vlk_524_dusty,"PREPARERITUAL2");
+	};
 	b_exchangeroutine(gur_1201_corkalom,"FLEE");
 	b_exchangeroutine(tpl_1406_templer,"FLEE");
 	b_exchangeroutine(nov_1301_caine,"FLEE");
 	b_exchangeroutine(templerguard1,"remove");
 	b_exchangeroutine(templerguard2,"remove");
 	b_exchangeroutine(nov_1357_fortuno,"lab");
+	b_exchangeroutine(nov_1327_novize,"wait");
+	b_exchangeroutine(gur_1203_baaltondral,"ch3");
+	b_exchangeroutine(gur_1208_baalcadar,"ch3");
 	templerguard1.aivar[AIV_PASSGATE] = TRUE;
 	templerguard2.aivar[AIV_PASSGATE] = TRUE;
+	CORKALOMLEFT = TRUE;
 };
 

@@ -74,6 +74,7 @@ func void grd_260_drake_crawler_okay_info()
 	AI_Output(hero,self,"Grd_260_Drake_Crawler_Okay_15_01");	//Вот, выпей это за мое здоровье!
 	if(Npc_HasItems(hero,itfobeer))
 	{
+		b_printtrademsg1("Отдано пиво.");
 		b_giveinvitems(hero,self,itfobeer,1);
 		DRAKE_BEER = TRUE;
 		if(c_bodystatecontains(self,BS_SIT))

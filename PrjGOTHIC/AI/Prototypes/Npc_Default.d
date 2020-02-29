@@ -18,7 +18,7 @@ prototype NPC_DEFAULT(C_NPC)
 	Npc_SetTalentValue(self,NPC_TALENT_2H,0);
 	Npc_SetTalentValue(self,NPC_TALENT_BOW,0);
 	Npc_SetTalentValue(self,NPC_TALENT_CROSSBOW,0);
-	Npc_SetTalentValue(self,NPC_TALENT_PICKLOCK,90);
-	Npc_SetTalentValue(self,NPC_TALENT_PICKPOCKET,90);
+	Npc_SetTalentValue(self,NPC_TALENT_PICKLOCK,100);
+	Npc_SetTalentValue(self,NPC_TALENT_PICKPOCKET,100);
 };
 

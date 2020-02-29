@@ -87,6 +87,8 @@ func void dia_1308_novize_hi_info()
 		AI_Output(self,other,"DIA_Baal1308_03");	//...Идола Исидро? Теперь я вместо него. Он поддался искушению мирской жизни вдали от своих братьев и больше не мог выполнять свои обязанности.
 		AI_Output(self,other,"DIA_Baal1308_04");	//Гуру решили вернуть его к более простой работе.
 	};
+	Log_CreateTopic(GE_TRADERNC,LOG_NOTE);
+	b_logentry(GE_TRADERNC,"В баре на озере появился послушник из Болотного лагеря. Он продает косяки из болотника.");
 };
 
 instance DIA_1308_NOVIZE_TRADE(C_INFO)

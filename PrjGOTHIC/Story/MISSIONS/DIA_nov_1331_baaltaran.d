@@ -288,6 +288,22 @@ func void dia_baaltaran_intocastle_mage()
 	AI_Output(other,self,"DIA_BaalTaran_IntoCastle_Mage_15_00");	//Это один из магов.
 	AI_Output(self,other,"DIA_BaalTaran_IntoCastle_Mage_05_01");	//О! Маги никогда не выходят из замка. Тебе самому придется найти способ попасть к ним.
 	AI_Output(self,other,"DIA_BaalTaran_IntoCastle_Mage_05_02");	//Зачем же он тебе нужен? Неужели, чтобы купить магические руны или зелья?
+	if(LETTER_TOLD == 0)
+	{
+		LETTER_TOLD = 1;
+	}
+	else if(LETTER_TOLD == 1)
+	{
+		LETTER_TOLD = 2;
+		if(!Npc_IsDead(vlk_505_buddler))
+		{
+			b_exchangeroutine(vlk_505_buddler,"letterwait");
+		};
+		if(!Npc_IsDead(vlk_506_buddler))
+		{
+			b_exchangeroutine(vlk_506_buddler,"letterwait");
+		};
+	};
 	Info_ClearChoices(dia_baaltaran_intocastle);
 	Info_AddChoice(dia_baaltaran_intocastle,"Тебе это знать не обязательно.",dia_baaltaran_intocastle_forgetit);
 	Info_AddChoice(dia_baaltaran_intocastle,"Верно, ты угадал.",dia_baaltaran_intocastle_exactly);

@@ -13,7 +13,6 @@ instance NON_1500_GILBERT(NPC_DEFAULT)
 	attribute[ATR_MANA] = 0;
 	attribute[ATR_HITPOINTS_MAX] = 148;
 	attribute[ATR_HITPOINTS] = 148;
-	aivar[43] = TRUE;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Tired.mds");
 	Mdl_SetVisualBody(self,"hum_body_Naked0",2,0,"Hum_Head_Thief",16,1,vlk_armor_l);
@@ -38,5 +37,11 @@ func void rtn_start2_1500()
 {
 	ta_sleep(22,0,8,0,"LOCATION_01_07");
 	ta_sitaround(8,0,22,0,"LOCATION_01_07");
+};
+
+func void rtn_hide_1500()
+{
+	ta_sitaround(22,0,8,0,"FMC_HUT02_IN");
+	ta_sitaround(8,0,22,0,"FMC_HUT02_IN");
 };
 

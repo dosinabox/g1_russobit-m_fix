@@ -83,6 +83,7 @@ func void zs_assessbody_end()
 		AI_PlayAni(self,"T_PLUNDER");
 		if(Npc_HasItems(hero,itwr_fire_letter_01))
 		{
+			PrintScreen("Отобрано запечатанное письмо.",-1,40,"FONT_OLD_10_WHITE.TGA",3);
 			Npc_RemoveInvItem(hero,itwr_fire_letter_01);
 			if(b_plunder())
 			{
@@ -108,6 +109,7 @@ func void zs_assessbody_end()
 		}
 		else if(Npc_HasItems(hero,itwr_fire_letter_02))
 		{
+			PrintScreen("Отобрано письмо.",-1,40,"FONT_OLD_10_WHITE.TGA",3);
 			Npc_RemoveInvItem(hero,itwr_fire_letter_02);
 			if(b_plunder())
 			{
@@ -122,7 +124,7 @@ func void zs_assessbody_end()
 			Npc_SetTrueGuild(self,GIL_VLK);
 			AI_GotoWP(self,"OCC_CENTER_2");
 			LETTER_TOLD = 3;
-			CreateInvItems(self,itminugget,50);
+			CreateInvItems(self,itminugget,30);
 			if(PYROCAR_MESSENGER == LOG_RUNNING)
 			{
 				b_logentry(KDFLETTER,"У меня украли письмо! Не стоило болтать о нем кому попало...");
@@ -138,6 +140,29 @@ func void zs_assessbody_end()
 		else
 		{
 			b_say(self,other,"$NoLetterNoOre");
+		};
+		other.aivar[AIV_PLUNDERED] = TRUE;
+	}
+	else if(Hlp_GetInstanceID(org_888_erpresser) == Hlp_GetInstanceID(self) || Hlp_GetInstanceID(org_889_coerpresser) == Hlp_GetInstanceID(self))
+	{
+		AI_PlayAni(self,"T_PLUNDER");
+		if(Npc_HasItems(hero,itmi_amulet_psi_01))
+		{
+			CreateInvItem(self,itmi_amulet_psi_01);
+			Npc_RemoveInvItem(other,itmi_amulet_psi_01);
+			PrintScreen("Отобран амулет Братства.",-1,40,"FONT_OLD_10_WHITE.TGA",3);
+			if(Npc_KnowsInfo(other,quentin_dia2) && !Npc_KnowsInfo(other,quentin_dia3) && QUENTIN_GANG_QUEST_STARTED == LOG_RUNNING && !Npc_IsDead(other))
+			{
+				b_logentry(QUENTIN_GANG,"Отморозки около Нового лагеря отобрали у меня амулет Братства! Мне нужно вернуть его, если я хочу завершить задание Квентина.");
+			};
+		};
+		if(b_plunder())
+		{
+			b_say(self,other,"$ITookYourOre");
+		}
+		else
+		{
+			b_say(self,other,"$ShitNoOre");
 		};
 		other.aivar[AIV_PLUNDERED] = TRUE;
 	}

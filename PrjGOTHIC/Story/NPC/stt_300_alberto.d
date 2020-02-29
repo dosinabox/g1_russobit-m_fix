@@ -28,8 +28,8 @@ instance STT_300_ALBERTO(NPC_DEFAULT)
 	Npc_SetTalentValue(self,NPC_TALENT_PICKLOCK,60);
 	Npc_SetTalentSkill(self,NPC_TALENT_BOW,1);
 	b_give_albertochapter1crap();
-	CreateInvItem(self,itmw_1h_sword_01);
-	CreateInvItem(self,itrw_bow_small_04);
+	EquipItem(self,itmw_1h_sword_01);
+	EquipItem(self,itrw_bow_small_04);
 	daily_routine = rtn_start_300;
 };
 

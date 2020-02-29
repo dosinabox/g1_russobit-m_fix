@@ -6,9 +6,9 @@ func void b_give_baalcadarchapter1runes()
 	CreateInvItems(npc,itarscrollheal,8);
 	CreateInvItems(npc,itarscrolllight,10);
 	CreateInvItems(npc,itarscrollwindfist,4);
-	CreateInvItems(npc,itfo_potion_mana_01,6);
-	CreateInvItems(npc,itfo_potion_health_01,8);
-	CreateInvItems(npc,itfo_potion_water_01,10);
+	CreateInvItems(npc,itfo_potion_mana_01,4);
+	CreateInvItems(npc,itfo_potion_health_01,6);
+	//CreateInvItems(npc,itfo_potion_water_01,10);
 	CreateInvItem(npc,schutzring_waffen1);
 	CreateInvItem(npc,schutzring_magie1);
 	CreateInvItem(npc,schutzring_geschosse1);
@@ -40,12 +40,12 @@ func void b_give_baalcadarchapter2runes()
 	CreateInvItem(npc,schutzring_geschosse2);
 	CreateInvItem(npc,schutzring_magie2);
 	CreateInvItem(npc,schutzring_waffen1);
-	CreateInvItems(npc,itfo_potion_mana_01,12);
-	CreateInvItems(npc,itfo_potion_mana_02,8);
-	CreateInvItems(npc,itfo_potion_health_01,16);
-	CreateInvItems(npc,itfo_potion_health_02,10);
-	CreateInvItems(npc,itfo_potion_water_01,20);
-	CreateInvItems(npc,itfo_potion_haste_01,6);
+	CreateInvItems(npc,itfo_potion_mana_01,9);
+	CreateInvItems(npc,itfo_potion_mana_02,7);
+	CreateInvItems(npc,itfo_potion_health_01,10);
+	CreateInvItems(npc,itfo_potion_health_02,9);
+	//CreateInvItems(npc,itfo_potion_water_01,20);
+	CreateInvItems(npc,itfo_potion_haste_01,5);
 };
 
 func void b_give_baalcadarchapter3runes()
@@ -75,14 +75,14 @@ func void b_give_baalcadarchapter3runes()
 	CreateInvItem(npc,schutzring_geschosse1_waffen1);
 	CreateInvItem(npc,schutzring_total1);
 	CreateInvItem(npc,schutzring_magie1_fire1);
-	CreateInvItems(npc,itfo_potion_mana_01,24);
-	CreateInvItems(npc,itfo_potion_mana_02,16);
-	CreateInvItems(npc,itfo_potion_mana_03,10);
-	CreateInvItems(npc,itfo_potion_health_01,32);
-	CreateInvItems(npc,itfo_potion_health_02,20);
-	CreateInvItems(npc,itfo_potion_health_03,12);
-	CreateInvItems(npc,itfo_potion_haste_01,12);
-	CreateInvItems(npc,itfo_potion_haste_02,6);
+	CreateInvItems(npc,itfo_potion_mana_01,15);
+	CreateInvItems(npc,itfo_potion_mana_02,10);
+	CreateInvItems(npc,itfo_potion_mana_03,5);
+	CreateInvItems(npc,itfo_potion_health_01,20);
+	CreateInvItems(npc,itfo_potion_health_02,15);
+	CreateInvItems(npc,itfo_potion_health_03,8);
+	CreateInvItems(npc,itfo_potion_haste_01,6);
+	CreateInvItems(npc,itfo_potion_haste_02,3);
 };
 
 func void b_give_baalcadarchapter4runes()
@@ -111,18 +111,19 @@ func void b_give_baalcadarchapter4runes()
 	CreateInvItems(npc,itarscrollcharm,4);
 	CreateInvItems(npc,itarscrolltrfsnapper,3);
 	CreateInvItems(npc,itarscrolltrforcdog,5);
+	CreateInvItems(npc,itarscrollshrink,2);
 	CreateInvItem(npc,schutzring_magie2_fire2);
 	CreateInvItem(npc,schutzring_geschosse2_waffen2);
 	CreateInvItem(npc,schutzring_total2);
-	CreateInvItems(npc,itfo_potion_mana_01,48);
-	CreateInvItems(npc,itfo_potion_mana_02,32);
-	CreateInvItems(npc,itfo_potion_mana_03,20);
-	CreateInvItems(npc,itfo_potion_health_01,64);
-	CreateInvItems(npc,itfo_potion_health_02,40);
-	CreateInvItems(npc,itfo_potion_health_03,24);
-	CreateInvItems(npc,itfo_potion_haste_01,24);
-	CreateInvItems(npc,itfo_potion_haste_02,12);
+	CreateInvItems(npc,itfo_potion_mana_01,30);
+	CreateInvItems(npc,itfo_potion_mana_02,16);
+	CreateInvItems(npc,itfo_potion_mana_03,18);
+	CreateInvItems(npc,itfo_potion_health_01,40);
+	CreateInvItems(npc,itfo_potion_health_02,20);
+	CreateInvItems(npc,itfo_potion_health_03,15);
+	CreateInvItems(npc,itfo_potion_haste_01,10);
 	CreateInvItems(npc,itfo_potion_haste_02,6);
+	CreateInvItems(npc,itfo_potion_haste_03,3);
 };
 
 func void b_give_baalcadarchapter5runes()
@@ -148,14 +149,14 @@ func void b_give_baalcadarchapter5runes()
 	CreateInvItems(npc,itarscrollcontrol,2);
 	CreateInvItems(npc,itarscrollcharm,4);
 	CreateInvItems(npc,itarscrolldestroyundead,16);
-	CreateInvItems(npc,itfo_potion_mana_01,18);
-	CreateInvItems(npc,itfo_potion_mana_02,16);
-	CreateInvItems(npc,itfo_potion_mana_03,10);
-	CreateInvItems(npc,itfo_potion_health_01,32);
-	CreateInvItems(npc,itfo_potion_health_02,20);
-	CreateInvItems(npc,itfo_potion_health_03,48);
-	CreateInvItems(npc,itfo_potion_haste_01,48);
-	CreateInvItems(npc,itfo_potion_haste_02,24);
-	CreateInvItems(npc,itfo_potion_haste_03,12);
+	CreateInvItems(npc,itfo_potion_mana_01,9);
+	CreateInvItems(npc,itfo_potion_mana_02,8);
+	CreateInvItems(npc,itfo_potion_mana_03,5);
+	CreateInvItems(npc,itfo_potion_health_01,16);
+	CreateInvItems(npc,itfo_potion_health_02,10);
+	CreateInvItems(npc,itfo_potion_health_03,24);
+	CreateInvItems(npc,itfo_potion_haste_01,24);
+	CreateInvItems(npc,itfo_potion_haste_02,12);
+	CreateInvItems(npc,itfo_potion_haste_03,6);
 };
 

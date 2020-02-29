@@ -122,7 +122,7 @@ instance DIA_FLETCHER_WONEK(C_INFO)
 
 func int dia_fletcher_wonek_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_stt_315_lostnek) || (FLETCHER_WHYTALK == TRUE))
+	if((Npc_KnowsInfo(hero,dia_stt_315_lostnek) || FLETCHER_WHYTALK == TRUE) && SLY_LOSTNEK != LOG_SUCCESS)
 	{
 		return 1;
 	};
@@ -184,7 +184,7 @@ instance DIA_FLETCHER_WEGENNEK(C_INFO)
 
 func int dia_fletcher_wegennek_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_fletcher_wonek) && (FLETCHER_FOUNDNEK == FALSE))
+	if((Npc_KnowsInfo(hero,dia_fletcher_wonek) || (SLY_LOSTNEK == LOG_SUCCESS && FLETCHER_WHYTALK == TRUE)) && (FLETCHER_FOUNDNEK == FALSE))
 	{
 		return 1;
 	};
@@ -349,8 +349,8 @@ func void info_fletcher_die_info()
 	};
 	if(GETNEWGUY_STARTED == TRUE && OC_BANNED == FALSE)
 	{
-	    b_logentry(CH1_RECRUITDUSTY,"Теперь я не смогу вывести кого-либо из Старого лагеря.");
-	    Log_SetTopicStatus(CH1_RECRUITDUSTY,LOG_FAILED);
+		b_logentry(CH1_RECRUITDUSTY,"Теперь я не смогу вывести кого-либо из Старого лагеря.");
+		Log_SetTopicStatus(CH1_RECRUITDUSTY,LOG_FAILED);
 		GETNEWGUY_STARTED = LOG_FAILED;
 	};
 	b_setpermattitude(grd_255_fletcher,ATT_HOSTILE);

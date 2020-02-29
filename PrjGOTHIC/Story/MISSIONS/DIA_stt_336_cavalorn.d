@@ -140,6 +140,7 @@ func void dia_cavalorn_lehrer_bow()
 		{
 			if(hero.lp >= LPCOST_TALENT_BOW_1)
 			{
+				b_printtrademsg1("Отдано руды: 50");
 				b_giveinvitems(hero,self,itminugget,50);
 			};
 			if(b_giveskill(other,NPC_TALENT_BOW,1,LPCOST_TALENT_BOW_1))
@@ -177,6 +178,7 @@ func void dia_cavalorn_lehrer_bow_2()
 		{
 			if(hero.lp >= LPCOST_TALENT_BOW_2)
 			{
+				b_printtrademsg1("Отдано руды: 100");
 				b_giveinvitems(hero,self,itminugget,100);
 			};
 			if(b_giveskill(other,NPC_TALENT_BOW,2,LPCOST_TALENT_BOW_2))
@@ -214,6 +216,7 @@ func void dia_cavalorn_lehrer_schleichen()
 		{
 			if(hero.lp >= LPCOST_TALENT_SNEAK)
 			{
+				b_printtrademsg1("Отдано руды: 50");
 				b_giveinvitems(hero,self,itminugget,50);
 			};
 			if(b_giveskill(other,NPC_TALENT_SNEAK,1,LPCOST_TALENT_SNEAK))

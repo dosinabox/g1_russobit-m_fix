@@ -71,6 +71,7 @@ func void dia_fortuno_getgeschenk_info()
 {
 	AI_Output(other,self,"DIA_Fortuno_GetGeschenk_15_00");	//Что это за подарок?
 	AI_Output(self,other,"DIA_Fortuno_GetGeschenk_05_01");	//Вот, возьми этот болотник. Это 'Северный темный'. Отличная вещь!
+	b_printtrademsg1("Получено 3 'Северных темных'.");
 	AI_Output(self,other,"DIA_Fortuno_GetGeschenk_05_02");	//Каждый день я буду давать тебе немного болотника, но если тебе нужно больше, чем три сигареты, ты должен будешь заплатить.
 	AI_Output(self,other,"DIA_Fortuno_GetGeschenk_05_03");	//Если найдешь какие-нибудь травы или ягоды, заходи ко мне. Я с удовольствием куплю их у тебя.
 	CreateInvItems(self,itmijoint_2,3);
@@ -106,6 +107,7 @@ func void dia_fortuno_dailyration_info()
 	if(FORTUNO_RATIONDAY != Wld_GetDay())
 	{
 		AI_Output(self,other,"DIA_Fortuno_DailyRation_05_01");	//Вот, возьми. Три 'Северных темных'. Только не стоит курить их все сразу!
+		b_printtrademsg1("Получено 3 'Северных темных'.");
 		CreateInvItems(self,itmijoint_2,3);
 		b_giveinvitems(self,other,itmijoint_2,3);
 		FORTUNO_RATIONDAY = Wld_GetDay();
@@ -192,9 +194,9 @@ func void dia_fortuno_help_info()
 	AI_Output(other,self,"Info_CorAngar_FindHerb_LOOK_15_01");	//Как мне узнать те травы, которые помогут Юбериону?
 	AI_Output(self,other,"DIA_Fortuno_SaveYberion_01");	//Ты ищешь травы для Юбериона? Тебя прислал Кор Ангар?
 	AI_Output(other,self,"GUR_1201_CorKalom_SACHE_JA_15_01");	//Да.
-	AI_Output(self,other,"DIA_Fortuno_SaveYberion_02");	//И он поручил тебе принести ему какие-то целебные травки? О, Спящий, это не поможет! У Юбериона тяжелая магическая травма, а не рана или головная боль!
+	AI_Output(self,other,"DIA_Fortuno_SaveYberion_02");	//И он поручил тебе принести ему какие-то целебные травки? О, Спящий, это не поможет! У Юбериона тяжелая магическая травма!
 	AI_Output(self,other,"DIA_Fortuno_SaveYberion_03");	//Послушай, я изучал записи и рецепты Кор Галома после его ухода... Кажется, Юбериону можно помочь.
-	AI_Output(self,other,"DIA_Fortuno_SaveYberion_04");	//Я нашел рецепт мощного лечебного зелья, которое укрепит его дух. Но чтобы приготовить это зелье, мне не хватает одного очень редкого компонента...
+	AI_Output(self,other,"DIA_Fortuno_SaveYberion_04");	//Я разработал рецепт мощного лечебного зелья, которое укрепит его дух. Но чтобы приготовить это зелье, мне не хватает одного очень редкого компонента...
 	AI_Output(self,other,"DIA_Fortuno_SaveYberion_05");	//Это растение называется Мертвый лист. К счастью, я знаю где его можно найти.
 	AI_Output(self,other,"DIA_Fortuno_SaveYberion_06");	//Выше по течению реки, которая заканчивается водопадом у нашего лагеря, находится озеро с затонувшей башней. Поищи вокруг нее, на острове.
 	AI_Output(other,self,"Info_FreemineOrc_OFFER_15_01");	//Я постараюсь найти его тебе!
@@ -230,29 +232,28 @@ func void dia_fortuno_deadleaffound_info()
 	{
 		AI_Output(other,self,"Info_Milten_SHWAIT_15_03");	//Так, стараюсь...
 		AI_Output(self,other,"DIA_Fortuno_SaveYberion_09");	//Пока тебя не было, я приготовил основу из того, что было. Держи рецепт и закончи зелье, а потом скорее отнеси его Кор Ангару!
-		if(!Npc_HasItems(other,itmiflask))
+		b_printtrademsg1("Получен рецепт и основа зелья.");
+		if(!Npc_HasItems(hero,itmiflask))
 		{
-			CreateInvItem(other,itmiflask);
+			CreateInvItem(hero,itmiflask);
 		};
-		CreateInvItem(self,specialwater);
-		CreateInvItem(self,alchemy_fortuno);
-		b_giveinvitems(self,other,specialwater,1);
-		b_giveinvitems(self,other,alchemy_fortuno,1);
+		CreateInvItem(hero,specialwater);
+		CreateInvItem(hero,alchemy_fortuno);
 		b_logentry(CH3_FINDHERBS,"Фортуно дал мне рецепт и основу зелья, нужно быстро приготовить его и отнести в храм Кор Ангару.");
 	}
 	else
 	{
 		AI_Output(other,self,"DIA_Orry_GuardGate_No_15_00");	//Еще нет.
 		AI_Output(self,other,"DIA_Fortuno_SaveYberion_10");	//Хм, тогда я сам приготовлю зелье... Подожди...
-		b_giveinvitems(other,self,itfo_plants_deadleaf,1);
-		Npc_RemoveInvItems(self,itfo_plants_deadleaf,1);
+		b_printtrademsg1("Отдан Мертвый лист.");
+		Npc_RemoveInvItems(hero,itfo_plants_deadleaf,1);
 		AI_UseMob(self,"LAB",1);
 		AI_Wait(self,13);
 		AI_UseMob(self,"LAB",-1);
 		AI_GotoNpc(self,other);
 		AI_Output(self,other,"DIA_Fortuno_SaveYberion_11");	//Вот, быстрее отнеси его Кор Ангару! Торопись!
-		CreateInvItem(self,healthwater);
-		b_giveinvitems(self,other,healthwater,1);
+		b_printtrademsg2("Получено лечебное зелье Фортуно.");
+		CreateInvItem(hero,healthwater);
 		b_logentry(CH3_FINDHERBS,"Лечебное зелье готово! Теперь нужно быстрее отнести его в храм и отдать Кор Ангару.");
 	};
 	AI_StopProcessInfos(self);

@@ -3,7 +3,7 @@ func void b_give_cipherchapter1crap()
 {
 	var C_NPC npc;
 	npc = Hlp_GetNpc(org_873_cipher);
-	CreateInvItems(npc,itkelockpick,5);
+	CreateInvItems(npc,itkelockpick,6);
 	CreateInvItems(npc,itminugget,500);
 	CreateInvItems(npc,itforice,8);
 	CreateInvItems(npc,itfobooze,3);

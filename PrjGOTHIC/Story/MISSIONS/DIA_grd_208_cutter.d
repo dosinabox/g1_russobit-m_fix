@@ -210,8 +210,8 @@ func void info_cutter_die_info()
 	b_exchangeroutine(grd_217_torwache,"FMTaken2");
 	if(GETNEWGUY_STARTED == TRUE && OC_BANNED == FALSE)
 	{
-	    b_logentry(CH1_RECRUITDUSTY,"Теперь я не смогу вывести кого-либо из Старого лагеря.");
-	    Log_SetTopicStatus(CH1_RECRUITDUSTY,LOG_FAILED);
+		b_logentry(CH1_RECRUITDUSTY,"Теперь я не смогу вывести кого-либо из Старого лагеря.");
+		Log_SetTopicStatus(CH1_RECRUITDUSTY,LOG_FAILED);
 		GETNEWGUY_STARTED = LOG_FAILED;
 	};
 	b_setpermattitude(grd_208_cutter,ATT_HOSTILE);

@@ -113,8 +113,8 @@ func void info_grd238_die_info()
 	};
 	if(GETNEWGUY_STARTED == TRUE)
 	{
-	    b_logentry(CH1_RECRUITDUSTY,"Теперь я не смогу вывести кого-либо из Старого лагеря.");
-	    Log_SetTopicStatus(CH1_RECRUITDUSTY,LOG_FAILED);
+		b_logentry(CH1_RECRUITDUSTY,"Теперь я не смогу вывести кого-либо из Старого лагеря.");
+		Log_SetTopicStatus(CH1_RECRUITDUSTY,LOG_FAILED);
 		GETNEWGUY_STARTED = LOG_FAILED;
 	};
 	Wld_ExchangeGuildAttitudes("GIL_ATTITUDES_FMTAKEN");

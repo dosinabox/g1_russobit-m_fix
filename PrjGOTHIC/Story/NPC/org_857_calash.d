@@ -89,6 +89,7 @@ func int info_calash_dia1_condition()
 func void info_calash_dia1_info()
 {
 	AI_Output(hero,self,"Calash_DIA1_00");	//У меня есть для тебя письмо.
+	b_printtrademsg1("Отдано письмо.");
 	if(Npc_HasItems(hero,calashnote))
 	{
 		b_giveinvitems(hero,self,calashnote,1);

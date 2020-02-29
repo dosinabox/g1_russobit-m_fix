@@ -4,7 +4,7 @@ instance VLK_506_BUDDLER(NPC_DEFAULT)
 	name[0] = "Грант";
 	npctype = NPCTYPE_MAIN;
 	guild = GIL_VLK;
-	level = 2;
+	level = 5;
 	voice = 19;
 	id = 506;
 	attribute[ATR_STRENGTH] = 13;
@@ -115,6 +115,7 @@ func void dia_vlk506_hi_no()
 	Npc_SetTarget(self,other);
 	AI_StartState(self,zs_attack,1,"");
 	Npc_ExchangeRoutine(self,"start");
+	GOPSTOPPED = TRUE;
 };
 
 instance DIA_VLK506_HI2(C_INFO)
@@ -145,6 +146,7 @@ func void dia_vlk506_hi2_info()
 	Npc_SetTarget(self,other);
 	AI_StartState(self,zs_attack,1,"");
 	Npc_ExchangeRoutine(self,"start");
+	GOPSTOPPED = TRUE;
 };
 
 instance VLK506_GETLOST(C_INFO)
@@ -159,7 +161,7 @@ instance VLK506_GETLOST(C_INFO)
 
 func int vlk506_getlost_condition()
 {
-	if((self.aivar[AIV_WASDEFEATEDBYSC] == TRUE) && (LETTER_TOLD > 1) && Npc_IsInState(self,zs_talk))
+	if((GOPSTOPPED == TRUE) && Npc_IsInState(self,zs_talk))
 	{
 		return TRUE;
 	};

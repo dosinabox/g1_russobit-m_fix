@@ -125,25 +125,28 @@ func void org_826_mordrag_courier_info()
 func void org_826_mordrag_courier_letter()
 {
 	AI_Output(other,self,"Info_Thorus_LetterForMages_15_00");	//Мне нужно попасть в замок. У меня есть письмо для Верховного Мага Круга Огня.
-	AI_Output(self,hero,"Info_Diego_OCWARN_11_01");	//Эй... Тихо!
-	AI_PlayAni(self,"T_SEARCH");
-	AI_Output(self,other,"Org_826_Mordrag_Courier_11_03");	//Посланники магов носят печать, которая служит пропуском. Ты сможешь получить ее, если станешь одним из нас.
-	if(LETTER_TOLD == 0)
+	if(Npc_GetDistToWP(hero,"OCR_OUTSIDE_HUT_44") < 1500 || Npc_GetDistToWP(hero,"OCR_OUTSIDE_MCAMP_01") < 1500)
 	{
-		LETTER_TOLD = 1;
-	}
-	else if(LETTER_TOLD == 1)
-	{
-		LETTER_TOLD = 2;
-		if(!Npc_IsDead(vlk_505_buddler))
+		AI_Output(self,hero,"Info_Diego_OCWARN_11_01");	//Эй... Тихо!
+		AI_PlayAni(self,"T_SEARCH");
+		if(LETTER_TOLD == 0)
 		{
-			b_exchangeroutine(vlk_505_buddler,"letterwait");
-		};
-		if(!Npc_IsDead(vlk_506_buddler))
+			LETTER_TOLD = 1;
+		}
+		else if(LETTER_TOLD == 1)
 		{
-			b_exchangeroutine(vlk_506_buddler,"letterwait");
+			LETTER_TOLD = 2;
+			if(!Npc_IsDead(vlk_505_buddler))
+			{
+				b_exchangeroutine(vlk_505_buddler,"letterwait");
+			};
+			if(!Npc_IsDead(vlk_506_buddler))
+			{
+				b_exchangeroutine(vlk_506_buddler,"letterwait");
+			};
 		};
 	};
+	AI_Output(self,other,"Org_826_Mordrag_Courier_11_03");	//Посланники магов носят печать, которая служит пропуском. Ты сможешь получить ее, если станешь одним из нас.
 	Info_ClearChoices(org_826_mordrag_courier);
 };
 
@@ -315,6 +318,7 @@ func void org_826_mordrag_atnewcamp_info()
 		AI_Output(self,other,"Org_826_Mordrag_AtNewcamp_LATE_11_00");	//Я думал, что ты уже никогда не придешь. Это уже неважно, мы пришли.
 	};
 	AI_Output(self,other,"Org_826_Mordrag_AtNewcamp_11_01");	//Если пройдешь через эти ворота, то попадешь прямо в Новый лагерь. Поговори с Ларсом. Он поможет тебе. Вот тебе кольцо.
+	b_printtrademsg1("Получено кольцо Мордрага.");
 	AI_Output(self,other,"Org_826_Mordrag_AtNewcamp_11_02");	//Оно будет твоим пропуском к нему. Ларс не станет говорить с первым встречным.
 	AI_Output(self,other,"Org_826_Mordrag_AtNewcamp_11_03");	//Я все обдумал и решил остаться здесь ненадолго. Я достаточно заработал. К тому же, обстановка в Старом лагере понемногу накаляется.
 	AI_Output(self,other,"Org_826_Mordrag_AtNewcamp_11_04");	//Если захочешь меня найти, зайди в бар. Он находится на озере. Увидимся. До встречи!

@@ -22,7 +22,7 @@ instance STT_304_SCHATTEN(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	EquipItem(self,itmw_1h_sword_short_02);
 	EquipItem(self,itrw_bow_small_01);
-	CreateInvItems(self,itamarrow,14);
+	CreateInvItems(self,itamarrow,4);
 	CreateInvItem(self,itfo_potion_water_01);
 	CreateInvItem(self,itfoapple);
 	CreateInvItems(self,itkelockpick,2);

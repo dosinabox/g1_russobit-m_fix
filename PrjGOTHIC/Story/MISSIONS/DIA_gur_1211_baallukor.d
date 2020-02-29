@@ -232,6 +232,7 @@ func void info_baallukor_firstscroll_info()
 {
 	AI_Output(other,self,"Info_BaalLukor_FIRSTSCROLL_15_01");	//Я нашел обрывок свитка!
 	b_giveinvitems(hero,self,orkparchmentone,1);
+	b_printtrademsg1("Отдан обрывок свитка.");
 	if(BAALLUKOR_BRINGPARCHMENT == 2)
 	{
 		AI_Output(self,other,"Info_BaalLukor_FIRSTSCROLL_13_02");	//Отлично! Это и есть половина свитка с заклинанием орков.
@@ -299,6 +300,7 @@ func void info_baallukor_secondscroll_info()
 	b_fullstop(hero);
 	AI_GotoNpc(self,hero);
 	AI_Output(other,self,"Info_BaalLukor_SECONDSCROLL_15_01");	//Вот обрывок свитка!
+	b_printtrademsg1("Отдан обрывок свитка.");
 	b_giveinvitems(hero,self,orkparchmenttwo,1);
 	if(BAALLUKOR_BRINGPARCHMENT == 1)
 	{
@@ -419,7 +421,7 @@ instance INFO_BAALLUKOR_HALLWITHOUT(C_INFO)
 
 func int info_baallukor_hallwithout_condition()
 {
-	if(!Npc_KnowsInfo(hero,info_baallukor_runes) && (Npc_GetDistToWP(hero,"GRYD_055") < 500) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
+	if(!Npc_KnowsInfo(hero,info_baallukor_runes) && (Npc_GetDistToWP(hero,"GRYD_055") < 600) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -449,7 +451,7 @@ instance INFO_BAALLUKOR_HALLWITH(C_INFO)
 
 func int info_baallukor_hallwith_condition()
 {
-	if(Npc_KnowsInfo(hero,info_baallukor_runes) && (Npc_GetDistToWP(hero,"GRYD_055") < 500) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
+	if(Npc_KnowsInfo(hero,info_baallukor_runes) && (Npc_GetDistToWP(hero,"GRYD_055") < 600) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -481,7 +483,7 @@ instance INFO_BAALLUKOR_DOOR(C_INFO)
 
 func int info_baallukor_door_condition()
 {
-	if(Npc_KnowsInfo(hero,info_baallukor_hallwith) && (Npc_GetDistToWP(hero,"GRYD_060") < 500) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
+	if(Npc_KnowsInfo(hero,info_baallukor_hallwith) && (Npc_GetDistToWP(hero,"GRYD_060") < 700) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -495,6 +497,7 @@ func void info_baallukor_door_info()
 	AI_Output(self,other,"Info_BaalLukor_DOOR_13_01");	//За этой стеной... должно быть, это здесь!
 	AI_Output(self,other,"Info_BaalLukor_DOOR_13_02");	//Мне не хватит силы прочитать заклинание.
 	AI_Output(self,other,"Info_BaalLukor_DOOR_13_03");	//Прочти его сам. Встань перед этой стеной.
+	b_printtrademsg1("Получен свиток орочьего заклинания.");
 	CreateInvItem(self,itarscrollteleport4);
 	b_giveinvitems(self,hero,itarscrollteleport4,1);
 	AI_StopProcessInfos(self);

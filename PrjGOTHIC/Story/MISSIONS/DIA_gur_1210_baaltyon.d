@@ -85,7 +85,9 @@ func void dia_baaltyon_notalk_ende()
 
 func void dia_baaltyon_specialjoint()
 {
+	b_printtrademsg1("Отдан улучшенный 'Зов мечты'.");
 	AI_Output(other,self,"DIA_BaalTyon_SpecialJoint_15_00");	//Вот, Учитель! Скромный подарок от верного ученика...
+	//AI_Output(self,other,"DIA_BaalTyon_SpecialJoint_11_01");	//
 	AI_StopProcessInfos(self);
 	b_giveinvitems(hero,self,specialjoint,1);
 	if(c_bodystatecontains(self,BS_SIT))

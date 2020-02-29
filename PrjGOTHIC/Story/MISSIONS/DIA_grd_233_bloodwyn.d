@@ -96,6 +96,7 @@ func void info_bloodwyn_hello_howmuch()
 func void info_bloodwyn_hello_oktakeit()
 {
 	AI_Output(other,self,"Info_Bloodwyn_Hello_OkTakeIt_15_00");	//Вот тебе руда. Друг всегда может пригодиться.
+	b_printtrademsg1("Отдано руды: 10");
 	AI_Output(self,other,"Info_Bloodwyn_Hello_OkTakeIt_08_01");	//А ты умный парень. Теперь ты можешь на меня положиться. Я буду защищать тебя.
 	AI_Output(self,other,"Info_Bloodwyn_Hello_OkTakeIt_08_02");	//Но это еще не значит, что тебе здесь будет все позволено, это понятно?
 	b_giveinvitems(other,self,itminugget,10);
@@ -119,11 +120,13 @@ func void info_bloodwyn_hello_notnow()
 		{
 			AI_Output(self,other,"Info_Bloodwyn_Hello_NotNow_TenOreMore_08_00");	//Что у нас тут есть? Здесь кто-то не умеет считать до десяти, да?
 			AI_Output(self,other,"Info_Bloodwyn_Hello_NotNow_TenOreMore_08_01");	//Я просто возьму все, что у тебя есть. Тогда я забуду, что ты пытался меня обмануть.
+			b_printtrademsg1("Отобрана вся руда.");
 			b_giveinvitems(other,self,itminugget,Npc_HasItems(other,itminugget));
 		}
 		else
 		{
 			AI_Output(self,other,"Info_Bloodwyn_Hello_NotNow_LessThanTen_08_00");	//Ну, у тебя мало руды, но мне хватит и этого. Главное, ты согласился платить. Спасибо.
+			b_printtrademsg1("Отобрана вся руда.");
 			AI_Output(self,other,"Info_Bloodwyn_Hello_NotNow_LessThanTen_08_01");	//Теперь я буду приглядывать за тобой, пока ты будешь в лагере.
 			b_giveinvitems(other,self,itminugget,Npc_HasItems(other,itminugget));
 		};
@@ -183,6 +186,7 @@ func void info_bloodwyn_payday_info()
 func void info_bloodwyn_payday_payagain()
 {
 	AI_Output(other,self,"Info_Bloodwyn_PayDay_PayAgain_15_00");	//Вот, возьми десять кусков. Для друга не жалко.
+	b_printtrademsg1("Отдано руды: 10");
 	AI_Output(self,other,"Info_Bloodwyn_PayDay_PayAgain_08_01");	//Я тоже так думаю.
 	b_giveinvitems(other,self,itminugget,10);
 	BLOODWYN_PROTECTIONPAID = TRUE;
@@ -230,6 +234,7 @@ func void info_bloodwyn_doch_info()
 	AI_Output(other,self,"Info_Bloodwyn_Doch_15_00");	//Я передумал. Я заплачу тебе десять кусков руды.
 	if(Npc_HasItems(other,itminugget) >= 10)
 	{
+		b_printtrademsg1("Отдано руды: 10");
 		AI_Output(self,other,"Info_Bloodwyn_Doch_08_01");	//Вот видишь! Ты все-таки можешь принимать правильные решения.
 		AI_Output(self,other,"Info_Bloodwyn_Doch_08_02");	//И теперь ты будешь платить мне за защиту каждый день, да?
 		b_giveinvitems(other,self,itminugget,10);
@@ -276,6 +281,7 @@ func void info_bloodwyn_payforjesse_info()
 	AI_Output(self,other,"Info_Bloodwyn_PayForJesse_08_02");	//Забудь об этом Джессе. Он же конченый человек, неудачник.
 	if(Npc_HasItems(other,itminugget) >= 10)
 	{
+		b_printtrademsg1("Отдано руды: 10");
 		AI_Output(other,self,"Info_Bloodwyn_PayForJesse_15_03");	//Нет, я все же заплачу за него. Вот тебе десять кусков и оставь его в покое.
 		AI_Output(self,other,"Info_Bloodwyn_PayForJesse_08_04");	//Как хочешь, дело твое.
 		b_giveinvitems(other,self,itminugget,10);

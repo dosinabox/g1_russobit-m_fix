@@ -1,7 +1,41 @@
 
 func void zs_unconscious()
 {
-	if(self.aivar[43] == TRUE)
+	var string beatmsg;
+	if(self.id == 219 || self.id == 251 || self.id == 1312 || self.id == 1316 || self.id == 1351 || self.id == 705 || self.id == 729 || self.id == 511 || self.id == 576)
+	{
+		if(Npc_HasItems(self,itmw_1h_sword_01))
+		{
+			Npc_RemoveInvItems(self,itmw_1h_sword_01,Npc_HasItems(self,itmw_1h_sword_01));
+		};
+		if(Npc_HasItems(self,itmiswordblade))
+		{
+			Npc_RemoveInvItems(self,itmiswordblade,Npc_HasItems(self,itmiswordblade));
+		};
+	};
+	if(c_npcishuman(self) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE) && (self.npctype == NPCTYPE_MINE_AMBIENT || self.npctype == NPCTYPE_AMBIENT))
+	{
+		if(self.guild == GIL_NOV)
+		{
+			PSIAMBIENTNPCSBEATEN = PSIAMBIENTNPCSBEATEN + 1;
+			//beatmsg = ConcatStrings("Избито PSI: ",IntToString(PSIAMBIENTNPCSBEATEN));
+			//PrintScreen(beatmsg,-1,40,"font_old_10_white.tga",1);
+		}
+		else if(self.guild == GIL_VLK || self.guild == GIL_STT)
+		{
+			OCAMBIENTNPCSBEATEN = OCAMBIENTNPCSBEATEN + 1;
+			//beatmsg = ConcatStrings("Избито OC: ",IntToString(OCAMBIENTNPCSBEATEN));
+			//PrintScreen(beatmsg,-1,40,"font_old_10_white.tga",1);
+		}
+		else if(self.guild == GIL_ORG || self.guild == GIL_SFB || self.guild == GIL_BAU)
+		{
+			NCAMBIENTNPCSBEATEN = NCAMBIENTNPCSBEATEN + 1;
+			//beatmsg = ConcatStrings("Избито NC: ",IntToString(NCAMBIENTNPCSBEATEN));
+			//PrintScreen(beatmsg,-1,40,"font_old_10_white.tga",1);
+		};	
+		
+	};
+	if(((self.guild == GIL_GRD || self.guild == GIL_STT || self.guild == GIL_GUR || self.guild == GIL_EBR) && KAPITEL > 3) || (self.aivar[43] == TRUE))
 	{
 		Npc_ChangeAttribute(self,ATR_HITPOINTS,-1);
 		AI_PlayAni(self,"S_DEADB");

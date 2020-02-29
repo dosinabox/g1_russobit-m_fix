@@ -23,14 +23,8 @@ instance ORG_842_SHRIKE(NPC_DEFAULT)
 	CreateInvItems(self,itkelockpick,2);
 	CreateInvItems(self,itminugget,15);
 	CreateInvItems(self,itforice,7);
-	CreateInvItems(self,itfobooze,3);
-	CreateInvItems(self,itlstorch,2);
 	CreateInvItems(self,itfo_potion_health_01,2);
-	CreateInvItem(self,itmi_stuff_barbknife_01);
-	CreateInvItem(self,itmi_stuff_cup_01);
-	CreateInvItem(self,itfomutton);
 	CreateInvItem(self,itfoloaf);
-	CreateInvItem(self,itat_teeth_01);
 	EquipItem(self,itmw_1h_mace_02);
 	EquipItem(self,itrw_bow_small_02);
 	CreateInvItems(self,itamarrow,20);

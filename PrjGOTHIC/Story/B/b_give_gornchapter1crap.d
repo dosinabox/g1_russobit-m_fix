@@ -12,6 +12,7 @@ func void b_give_gornchapter1crap()
 	CreateInvItems(npc,itfobeer,16);
 	CreateInvItems(npc,itfo_potion_health_01,10);
 	CreateInvItems(npc,itfo_potion_mana_01,5);
+	CreateInvItems(npc,itkelockpick,5);
 	CreateInvItem(npc,alchemy_hp3_priced);
 };
 

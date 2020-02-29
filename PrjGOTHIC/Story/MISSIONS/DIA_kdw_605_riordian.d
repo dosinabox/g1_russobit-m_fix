@@ -50,10 +50,9 @@ func void info_riordian_news_info()
 	AI_Output(other,self,"Info_Riordian_NEWS_15_01");	//Меня прислал Сатурас.
 	AI_Output(self,other,"Info_Riordian_NEWS_14_02");	//Заходи. Мне уже доложили о тебе.
 	AI_Output(self,other,"Info_Riordian_NEWS_14_03");	//Вот, возьми эти эликсиры. Здесь все, что тебе может пригодиться.
+	b_printtrademsg1("Получено 20 различных эликсиров.");
 	AI_Output(self,other,"Info_Riordian_NEWS_14_04");	//Теперь можешь идти. Эти камни наша последняя надежда - отыщи их!
-	CreateInvItems(self,itfo_potion_health_01,20);
-	b_giveinvitems(self,hero,itfo_potion_health_01,20);
-	Npc_RemoveInvItems(hero,itfo_potion_health_01,15);
+	CreateInvItems(hero,itfo_potion_health_01,5);
 	CreateInvItems(hero,itfo_potion_mana_01,5);
 	CreateInvItems(hero,itfo_potion_health_02,2);
 	CreateInvItems(hero,itfo_potion_mana_02,2);
@@ -64,7 +63,6 @@ func void info_riordian_news_info()
 	CreateInvItems(hero,itfo_potion_dex_01,1);
 };
 
-
 instance INFO_RIORDIAN_REWARD(C_INFO)
 {
 	npc = kdw_605_riordian;
@@ -74,7 +72,6 @@ instance INFO_RIORDIAN_REWARD(C_INFO)
 	important = 0;
 	description = "Сатурас сказал, что у тебя есть для меня награда.";
 };
-
 
 func int info_riordian_reward_condition()
 {
@@ -91,9 +88,8 @@ func void info_riordian_reward_info()
 	AI_Output(self,other,"Info_Riordian_REWARD_14_03");	//Наш духовный наставник рассказал о твоих геройских поступках.
 	AI_Output(self,other,"Info_Riordian_REWARD_14_04");	//Все жители лагеря - да что там, всей колонии - в глубоком долгу перед тобой.
 	AI_Output(self,other,"Info_Riordian_REWARD_14_05");	//Прими от нас эту скромную награду в знак нашей благодарности.
-	CreateInvItems(self,itfo_potion_health_02,20);
-	b_giveinvitems(self,hero,itfo_potion_health_02,20);
-	Npc_RemoveInvItems(hero,itfo_potion_health_02,15);
+	b_printtrademsg1("Получено 20 различных эликсиров.");
+	CreateInvItems(hero,itfo_potion_health_02,5);
 	CreateInvItems(hero,itfo_potion_mana_02,5);
 	CreateInvItems(hero,itfo_potion_health_03,2);
 	CreateInvItems(hero,itfo_potion_mana_03,2);
@@ -101,7 +97,7 @@ func void info_riordian_reward_info()
 	CreateInvItems(hero,itfo_potion_master_01,1);
 	CreateInvItems(hero,itfo_potion_health_perma_02,1);
 	CreateInvItems(hero,itfo_potion_mana_perma_02,1);
-	b_logentry(CH3_BRINGFOCI,"Риоридан дал мне несколько зелий, которые мне могут пригодиться в ближайшее время.");
+	b_logentry(CH3_BRINGFOCI,"Риордан дал мне несколько зелий, которые мне могут пригодиться в ближайшее время.");
 	if(Npc_KnowsInfo(hero,info_cronos_reward))
 	{
 		Log_SetTopicStatus(CH3_BRINGFOCI,LOG_SUCCESS);

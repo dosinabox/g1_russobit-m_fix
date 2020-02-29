@@ -77,6 +77,7 @@ func int org_819_drax_scavenger_condition()
 func void org_819_drax_scavenger_info()
 {
 	b_giveinvitems(other,self,itfobeer,1);
+	b_printtrademsg1("Отдано пиво.");
 	AI_Output(other,self,"Org_819_Drax_Scavenger_15_00");	//Вот твое пиво. Так ты расскажешь мне об охоте?
 	if(c_bodystatecontains(self,BS_SIT))
 	{
@@ -168,6 +169,7 @@ func void org_819_drax_creatures_zahn()
 	{
 		if(other.lp >= 1)
 		{
+			b_printtrademsg1("Отдано руды: 50");
 			other.lp = other.lp - 1;
 			b_giveinvitems(other,self,itminugget,50);
 			PrintScreen("Навык: добыча клыков",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
@@ -196,6 +198,7 @@ func void org_819_drax_creatures_fell()
 	{
 		if(other.lp >= 1)
 		{
+			b_printtrademsg1("Отдано руды: 100");
 			other.lp = other.lp - 1;
 			b_giveinvitems(other,self,itminugget,100);
 			PrintScreen("Навык: добыча шкур",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
@@ -223,6 +226,7 @@ func void org_819_drax_creatures_kralle()
 	{
 		if(other.lp >= 1)
 		{
+			b_printtrademsg1("Отдано руды: 50");
 			other.lp = other.lp - 1;
 			b_giveinvitems(other,self,itminugget,50);
 			PrintScreen("Навык: добыча когтей",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
@@ -251,6 +255,7 @@ func void org_819_drax_creatures_haut()
 	{
 		if(other.lp >= 1)
 		{
+			b_printtrademsg1("Отдано руды: 100");
 			other.lp = other.lp - 1;
 			b_giveinvitems(other,self,itminugget,100);
 			PrintScreen("Навык: добыча шкур рептилий",-1,-1,"FONT_OLD_20_WHITE.TGA",2);

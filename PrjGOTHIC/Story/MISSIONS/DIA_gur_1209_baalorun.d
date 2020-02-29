@@ -197,6 +197,7 @@ func void dia_baalorun_weedatkaloms_info()
 {
 	AI_Output(other,self,"DIA_BaalOrun_WeedAtKaloms_15_00");	//Я доставил болотник Кор Галому.
 	AI_Output(self,other,"DIA_BaalOrun_WeedAtKaloms_12_01");	//Неплохо поработал. Вот тебе за это небольшая награда.
+	b_printtrademsg1("Получен свиток сна.");
 	AI_Output(self,other,"DIA_BaalOrun_WeedAtKaloms_12_02");	//Это магическое заклинание Сна. Ты сможешь воспользоваться им только один раз, но я надеюсь, что оно сослужит тебе хорошую службу.
 	BAALORUN_ANSPRECHBAR = TRUE;
 	b_givexp(XP_REPORTTOBAALORUN);

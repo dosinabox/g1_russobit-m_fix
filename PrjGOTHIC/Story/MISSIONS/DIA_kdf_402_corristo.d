@@ -314,6 +314,7 @@ func void kdf_402_corristo_robe_info()
 	Snd_Play("MFX_Heal_Cast");
 	AI_Output(self,other,"KDF_402_Corristo_ROBE_Info_14_01");	//Этой клятвой ты связал свою жизнь с неугасимым Огнем.
 	AI_Output(self,other,"KDF_402_Corristo_ROBE_Info_14_02");	//Возьми это одеяние и носи его в знак вечного союза.
+	b_printtrademsg1("Получена мантия мага Огня.");
 	AI_StopProcessInfos(self);
 	CreateInvItem(self,kdf_armor_l);
 	b_giveinvitems(self,hero,kdf_armor_l,1);
@@ -591,7 +592,7 @@ instance KDF_402_CORRISTO_HEAVYARMOR(C_INFO)
 	information = kdf_402_corristo_heavyarmor_info;
 	important = 0;
 	permanent = 1;
-	description = b_buildbuyarmorstring("Одеяние верховного мага: 50/5/0/10",VALUE_KDF_ARMOR_H);
+	description = b_buildbuyarmorstring("Одеяние верховного мага, защита: 50/5/0/10",VALUE_KDF_ARMOR_H);
 };
 
 
@@ -608,11 +609,12 @@ func void kdf_402_corristo_heavyarmor_info()
 	AI_Output(other,self,"KDF_402_Corristo_HEAVYARMOR_Info_15_01");	//Учитель, я хочу носить одеяние верховных магов Круга Огня.
 	if(KAPITEL < 3)
 	{
-		AI_Output(self,other,"KDF_402_Corristo_WANNBEKDF_Info_14_04");	//Ты знаешь еще слишком мало. Приходи ко мне, когда будешь знать больше.
+		AI_Output(self,other,"KDW_600_Saturas_HEAVYARMOR_Info_14_02");	//Ты еще не можешь носить такое облачение. Время еще не пришло.
 	}
 	else if(Npc_GetTalentSkill(hero,NPC_TALENT_MAGE) < 3)
 	{
 		AI_Output(self,other,"KDF_402_Corristo_WANNBEKDF_Info_14_04");	//Ты знаешь еще слишком мало. Приходи ко мне, когда будешь знать больше.
+		PrintScreen("Условие: 3 Круг магии.",-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",_TIME_MESSAGE_JOINCAMP);
 	}
 	else if(Npc_HasItems(hero,itminugget) < VALUE_KDF_ARMOR_H)
 	{
@@ -620,12 +622,11 @@ func void kdf_402_corristo_heavyarmor_info()
 	}
 	else
 	{
-		//AI_EquipArmor(self,kdf_armor_h);
+		b_printtrademsg1("Отдано руды: 1500");
 		AI_Output(self,other,"KDF_402_Corristo_HEAVYARMOR_Info_14_04");	//Я вижу, что ты уже достоин носить облачение верховного мага Круга Огня.
-		b_giveinvitems(hero,self,itminugget,VALUE_KDF_ARMOR_H);
+		b_printtrademsg2("Получена великая мантия мага Огня.");
+		Npc_RemoveInvItems(hero,itminugget,VALUE_KDF_ARMOR_H);
 		CreateInvItem(hero,kdf_armor_h);
-		//b_giveinvitems(self,hero,kdf_armor_h,1);
-		PrintScreen("Получен 1 предмет.",-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
 		AI_EquipArmor(hero,kdf_armor_h);
 		KDF_ARMOR_H_WAS_BOUGHT = 1;
 	};

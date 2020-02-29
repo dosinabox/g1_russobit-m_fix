@@ -86,6 +86,7 @@ func void b_gravo_helpattitude(var C_NPC prob)
 		AI_Output(self,other,"B_Gravo_HelpAttitude_ANGRY_04_01");	//Ладно, я позабочусь о том, чтобы с ним кое-кто переговорил. 100 кусков руды, и я улажу эту проблему.
 		if(Npc_HasItems(other,itminugget) >= 100)
 		{
+			b_printtrademsg1("Отдано руды: 100");
 			AI_Output(self,other,"B_Gravo_HelpAttitude_ANGRY_04_02");	//Посмотрим, сколько у тебя есть... А! Этого вполне хватит. Считай, что дело сделано.
 			AI_Output(self,other,"B_Gravo_HelpAttitude_ANGRY_04_03");	//И постарайся не проговориться. Веди себя так, будто ничего не случилось.
 			b_giveinvitems(hero,self,itminugget,100);
@@ -103,6 +104,7 @@ func void b_gravo_helpattitude(var C_NPC prob)
 		AI_Output(self,other,"B_Gravo_HelpAttitude_HOSTILE_04_01");	//Я должен буду поговорить с некоторыми людьми, которых он послушает. Но его будет нелегко успокоить. Я возьмусь за это дело за 500 кусков руды.
 		if(Npc_HasItems(other,itminugget) >= 500)
 		{
+			b_printtrademsg1("Отдано руды: 500");
 			AI_Output(self,other,"B_Gravo_HelpAttitude_HOSTILE_04_02");	//Посмотрим, сколько у тебя есть... Да ты богат! Я возьму 500 кусков и улажу для тебя эту проблему.
 			AI_Output(self,other,"B_Gravo_HelpAttitude_HOSTILE_04_03");	//И еще кое-что: он ни в коем случае не должен узнать, что этим занимался я. Никому об этом не рассказывай!
 			b_giveinvitems(hero,self,itminugget,500);

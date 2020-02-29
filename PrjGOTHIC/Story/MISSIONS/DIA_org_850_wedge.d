@@ -221,6 +221,7 @@ func void dia_wedge_lehrer_schleichen()
 		{
 			if(hero.lp >= LPCOST_TALENT_SNEAK)
 			{
+				b_printtrademsg1("Отдано руды: 100");
 				b_giveinvitems(other,self,itminugget,100);
 			};
 			if(b_giveskill(other,NPC_TALENT_SNEAK,1,LPCOST_TALENT_SNEAK))
@@ -243,7 +244,7 @@ func void dia_wedge_lehrer_lockpick()
 	AI_Output(other,self,"DIA_Wedge_Lehrer_Lockpick_15_00");	//Я хочу научиться виртуозно вскрывать замки.
 	if(hero.guild == GIL_ORG)
 	{
-		if(b_giveskill(other,NPC_TALENT_PICKLOCK,1,5))
+		if(b_giveskill(other,NPC_TALENT_PICKLOCK,1,LPCOST_TALENT_PICKLOCK_1))
 		{
 			AI_Output(self,other,"DIA_Wedge_Lehrer_Lockpick_05_01");	//Ты ведь хотел бы это узнать, да? Научиться этому не очень сложно.
 			AI_Output(self,other,"DIA_Wedge_Lehrer_Lockpick_05_02");	//Очень важно следить за тем, чтобы у тебя не сломалась отмычка.
@@ -256,6 +257,7 @@ func void dia_wedge_lehrer_lockpick()
 		{
 			if(hero.lp >= LPCOST_TALENT_PICKLOCK_1)
 			{
+				b_printtrademsg1("Отдано руды: 100");
 				b_giveinvitems(other,self,itminugget,100);
 			};
 			if(b_giveskill(other,NPC_TALENT_PICKLOCK,1,LPCOST_TALENT_PICKLOCK_1))
@@ -279,7 +281,7 @@ func void dia_wedge_lehrer_lockpick2()
 	AI_Output(other,self,"DIA_Wedge_Lehrer_Lockpick2_15_00");	//Я хочу стать мастером взлома замков.
 	if(hero.guild == GIL_ORG)
 	{
-		if(b_giveskill(other,NPC_TALENT_PICKLOCK,2,10))
+		if(b_giveskill(other,NPC_TALENT_PICKLOCK,2,LPCOST_TALENT_PICKLOCK_2))
 		{
 			AI_Output(self,other,"DIA_Wedge_Lehrer_Lockpick2_05_01");	//Стоит немного потренироваться, и ты уже с легкостью будешь распознавать момент, когда отмычка готова вот-вот сломаться. При этом ты услышишь особый звук.
 			AI_Output(self,other,"DIA_Wedge_Lehrer_Lockpick2_05_02");	//С опытом к тебе придет умение различать щелчки в замке при повороте отмычки. При этом ты будешь ломать их гораздо реже.
@@ -294,6 +296,7 @@ func void dia_wedge_lehrer_lockpick2()
 			{
 				if(hero.lp >= LPCOST_TALENT_PICKLOCK_2)
 				{
+					b_printtrademsg1("Отдано руды: 200");
 					b_giveinvitems(other,self,itminugget,200);
 				};
 				AI_Output(self,other,"DIA_Wedge_Lehrer_Lockpick2_05_01");	//Стоит немного потренироваться, и ты уже с легкостью будешь распознавать момент, когда отмычка готова вот-вот сломаться. При этом ты услышишь особый звук.
@@ -317,7 +320,7 @@ func void dia_wedge_lehrer_pickpocket()
 	{
 		if(hero.guild == GIL_ORG)
 		{
-			if(b_giveskill(other,NPC_TALENT_PICKPOCKET,1,5))
+			if(b_giveskill(other,NPC_TALENT_PICKPOCKET,1,LPCOST_TALENT_PICKPOCKET_1))
 			{
 				AI_Output(self,other,"DIA_Wedge_Lehrer_PICKPOCKET_05_01");	//Так ты хочешь облегчать кошельки местных богачей, да? Что ж.
 				AI_Output(self,other,"DIA_Wedge_Lehrer_PICKPOCKET_05_02");	//Я научу тебя этому, но у вора всегда есть небольшой шанс быть застигнутым на месте преступления.
@@ -331,6 +334,7 @@ func void dia_wedge_lehrer_pickpocket()
 			{
 				if(hero.lp >= LPCOST_TALENT_PICKPOCKET_1)
 				{
+					b_printtrademsg1("Отдано руды: 100");
 					b_giveinvitems(other,self,itminugget,100);
 				};
 				if(b_giveskill(other,NPC_TALENT_PICKPOCKET,1,LPCOST_TALENT_PICKPOCKET_1))
@@ -360,7 +364,7 @@ func void dia_wedge_lehrer_pickpocket2()
 	AI_Output(other,self,"DIA_Wedge_Lehrer_Pickpocket2_15_00");	//Я хочу стать мастером-карманником.
 	if(hero.guild == GIL_ORG)
 	{
-		if(b_giveskill(other,NPC_TALENT_PICKPOCKET,2,10))
+		if(b_giveskill(other,NPC_TALENT_PICKPOCKET,2,LPCOST_TALENT_PICKPOCKET_2))
 		{
 			AI_Output(self,other,"DIA_Wedge_Lehrer_Pickpocket2_05_01");	//Думаю, ты уже готов к тому, чтобы я посвятил тебя в секреты настоящего мастерства.
 			AI_Output(self,other,"DIA_Wedge_Lehrer_Pickpocket2_05_02");	//Но знай, что даже самого лучше вора могут застать на месте преступления.
@@ -373,6 +377,7 @@ func void dia_wedge_lehrer_pickpocket2()
 		{
 			if(hero.lp >= LPCOST_TALENT_PICKPOCKET_2)
 			{
+				b_printtrademsg1("Отдано руды: 200");
 				b_giveinvitems(other,self,itminugget,200);
 			};
 			if(b_giveskill(other,NPC_TALENT_PICKPOCKET,2,LPCOST_TALENT_PICKPOCKET_2))

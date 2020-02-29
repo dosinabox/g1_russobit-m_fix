@@ -89,6 +89,7 @@ func void dia_whistler_favour_ok()
 	var C_NPC fisk;
 	AI_Output(other,self,"DIA_Whistler_Favour_Ok_15_00");	//Хорошо, давай сто кусков. Я достану тебе меч.
 	AI_Output(self,other,"DIA_Whistler_Favour_Ok_11_01");	//Вот руда. Как только достанешь меч, приходи ко мне.
+	b_printtrademsg1("Получено руды: 100");
 	WHISTLER_BUYMYSWORD = LOG_RUNNING;
 	if(Npc_GetTrueGuild(hero) == GIL_NONE)
 	{
@@ -143,6 +144,7 @@ func void dia_whistler_running110_info()
 	AI_Output(self,other,"DIA_Whistler_Running110_11_01");	//И теперь ты хочешь, чтобы я добавил тебе еще десять кусков?
 	AI_Output(other,self,"DIA_Whistler_Running110_15_02");	//А я-то думал, тебе этот меч действительно нужен.
 	AI_Output(self,other,"DIA_Whistler_Running110_11_03");	//Вот, забери и поторопись!
+	b_printtrademsg1("Получено руды: 10");
 	CreateInvItems(self,itminugget,10);
 	b_giveinvitems(self,hero,itminugget,10);
 };
@@ -172,6 +174,7 @@ func void dia_whistler_runningpayback_info()
 	AI_Output(other,self,"DIA_Whistler_RunningPayBack_15_00");	//Я не смог купить меч. Вот тебе твоя сотня кусков.
 	if(Npc_HasItems(other,itminugget) >= 100)
 	{
+		b_printtrademsg1("Отдано руды: 100");
 		AI_Output(self,other,"DIA_Whistler_RunningPayBack_11_01");	//Идиот! Таких у нас и без тебя хватает! Убирайся!
 		b_giveinvitems(hero,self,itminugget,100);
 		WHISTLER_BUYMYSWORD = LOG_OBSOLETE;
@@ -210,6 +213,7 @@ func void dia_whistler_runningpayback_110_info()
 	AI_Output(other,self,"DIA_Whistler_RunningPayBack_15_00");	//Я не смог купить меч. Вот тебе твоя сотня кусков.
 	if(Npc_HasItems(other,itminugget) >= 110)
 	{
+		b_printtrademsg1("Отдано руды: 110");
 		AI_Output(self,other,"DIA_Whistler_RunningPayBack_11_01");	//Идиот! Таких у нас и без тебя хватает! Убирайся!
 		b_giveinvitems(hero,self,itminugget,110);
 		WHISTLER_BUYMYSWORD = LOG_OBSOLETE;
@@ -277,6 +281,7 @@ func int dia_whistler_mysword_success_condition()
 func void dia_whistler_mysword_success_info()
 {
 	AI_Output(other,self,"DIA_Whistler_MySword_Success_15_00");	//Я достал твой меч...
+	b_printtrademsg1("Отдан меч Уистлера.");
 	b_giveinvitems(other,self,whistlers_schwert,1);
 	AI_Output(self,other,"DIA_Whistler_MySword_Success_11_01");	//Ну, ведь это было совсем несложно, да? Ладно, как я и говорил, я помогу тебе.
 	if(Npc_GetTrueGuild(hero) == GIL_NONE)

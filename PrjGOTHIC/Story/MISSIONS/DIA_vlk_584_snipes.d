@@ -75,6 +75,7 @@ func void vlk_584_snipes_deal_run_info()
 {
 	AI_Output(other,self,"VLK_584_Snipes_DEAL_RUN_Info_15_01");	//Ну, где мои десять кусков?
 	AI_Output(self,other,"VLK_584_Snipes_DEAL_RUN_Info_07_02");	//Возьми, ты заслужил их.
+	b_printtrademsg1("Получено руды: 10");
 	AI_Output(self,other,"VLK_584_Snipes_DEAL_RUN_Info_07_03");	//Да, знаешь, что еще: у меня есть ключ от этого сундука. Только для тебя - всего за тридцать кусков!
 	CreateInvItems(self,itminugget,10);
 	b_giveinvitems(self,other,itminugget,10);
@@ -108,7 +109,9 @@ func void vlk_584_snipes_deal_2_info()
 	if(Npc_HasItems(hero,itminugget) >= 30)
 	{
 		AI_Output(other,self,"VLK_584_Snipes_DEAL_2_Info_15_01");	//По рукам, я его покупаю!
+		b_printtrademsg1("Отдано руды: 30");
 		AI_Output(self,other,"VLK_584_Snipes_DEAL_2_Info_07_02");	//Думаю, дело того стоит.
+		b_printtrademsg2("Получен ключ от сундука.");
 		AI_Output(other,self,"VLK_584_Snipes_DEAL_2_Info_15_03");	//А что с этого получишь ты?
 		AI_Output(self,other,"VLK_584_Snipes_DEAL_2_Info_07_04");	//Да, знаешь, мне просто приятно, что я смогу обвести кого-то из стражников вокруг пальца. А если что-то из этого сундука окажется у меня, мне не жить.
 		b_giveinvitems(hero,self,itminugget,30);

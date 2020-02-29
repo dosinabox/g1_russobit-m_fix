@@ -9,9 +9,7 @@ func void b_story_bringfoci()
 	var C_NPC diegomonster;
 	var C_NPC sld723;
 	var C_NPC sld732;
-	CreateInvItems(self,itwrfocimap,2);
-	b_giveinvitems(self,hero,itwrfocimap,2);
-	Npc_RemoveInvItem(hero,itwrfocimap);
+	CreateInvItem(hero,itwrfocimap);
 	CreateInvItem(hero,itarscrollteleport2);
 	gorn = Hlp_GetNpc(pc_fighter);
 	Npc_ExchangeRoutine(gorn,"RuinWait");

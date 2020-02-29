@@ -22,7 +22,7 @@ instance VLK_573_GRAHAM(NPC_DEFAULT)
 	fight_tactic = FAI_HUMAN_COWARD;
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	EquipItem(self,itmw_1h_mace_light_01);
-	CreateInvItem(self,itfo_potion_water_01);
+	//CreateInvItem(self,itfo_potion_water_01);
 	CreateInvItem(self,itwrommap);
 	CreateInvItems(self,itwrworldmap,2);
 	CreateInvItem(self,itwrocmap);

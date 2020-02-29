@@ -71,7 +71,7 @@ instance ITWROMMAP(C_ITEM)
 	name = "Карта";
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
-	value = 30;
+	value = 50;
 	visual = "ItWrOMMap.3DS";
 	material = MAT_LEATHER;
 	scemename = "MAP";
@@ -446,7 +446,7 @@ instance HEILTRANK(C_ITEM)
 	mainflag = ITEM_KAT_POTIONS;
 	flags = ITEM_MULTI;
 	value = 15;
-	visual = "ItFo_Potion_Health_01.3ds";
+	visual = "ItFo_Potion_Health_04.3ds";
 	material = MAT_GLAS;
 	on_state[0] = useheiltrank;
 	scemename = "POTIONFAST";
@@ -482,7 +482,7 @@ instance KALOMSRECIPE(C_ITEM)
 	name = "Рецепт Галома";
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
-	value = 100;
+	value = 60;
 	visual = "HP0RECIPE.3DS";
 	material = MAT_LEATHER;
 	scemename = "MAP";
@@ -547,7 +547,7 @@ func void use_kalomsrecipe()
 
 instance ITWRWORLDMAP(C_ITEM)
 {
-	name = "Карта колонии";
+	name = "Карта";
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION | ITEM_MULTI;
 	value = 50;
@@ -555,7 +555,7 @@ instance ITWRWORLDMAP(C_ITEM)
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	on_state[0] = useworldmap;
-	description = name;
+	description = "Карта колонии";
 	text[0] = "К сожалению, здесь не хватает";
 	text[1] = "области на юго-западе.";
 	text[5] = NAME_VALUE;
@@ -981,9 +981,10 @@ func void usetheriddle1()
 		Log_CreateTopic(THERIDDLE_LOG,LOG_MISSION);
 		Log_SetTopicStatus(THERIDDLE_LOG,LOG_RUNNING);
 		b_logentry(THERIDDLE_LOG,"Я взял у скелета-мага в туманной башне одну очень странную книгу. 'Хроманин'! Она содержит непонятные вещи. В ней написано, что таинственный Некто создал этот мир: ...Мудрый пересматривает свои прошлые дела свысока, прежде чем начать что-то новое... Да... Я еще ничего не понимаю, но, может быть, скоро что-нибудь прояснится.");
-		Wld_InsertItem(theriddle2,"FP_RIDD_2");
+		//Wld_InsertItem(theriddle2,"FP_RIDD_2");
 		Snd_Play("AMBIENTTONE_03_DARK");
 		RIDDLE1 = TRUE;
+		RIDDLE1INSERT = TRUE;
 	};
 };
 
@@ -1036,8 +1037,9 @@ func void usetheriddle2()
 		b_givexp(300);
 		b_logentry(THERIDDLE_LOG,"Я нашел вторую книгу, на которой стоит слово 'Хроманин'. Она оказалась не менее загадочной... Что было разделено, снова станет единым, если разделение длится недолго...");
 		Snd_Play("FoundRiddlersBook");
-		Wld_InsertItem(theriddle3,"FP_SLEEP_OW_BLOODFLY_01_02");
+		//Wld_InsertItem(theriddle3,"FP_SLEEP_OW_BLOODFLY_01_02");
 		RIDDLE2 = TRUE;
+		RIDDLE2INSERT = TRUE;
 	};
 };
 
@@ -1090,8 +1092,9 @@ func void usetheriddle3()
 		b_givexp(500);
 		b_logentry(THERIDDLE_LOG,"Я нашел третью книгу. Кажется, я начинаю понимать, что хотел сказать ее автор... Умный рыбак попробует найти удачу и на другом берегу моря...");
 		Snd_Play("FoundRiddlersBook");
-		Wld_InsertItem(theriddle4,"FP_SLEEP_OW_LURKER_NC_LAKE_02");
+		//Wld_InsertItem(theriddle4,"FP_SLEEP_OW_LURKER_NC_LAKE_02");
 		RIDDLE3 = TRUE;
+		RIDDLE3INSERT = TRUE;
 	};
 };
 
@@ -1144,8 +1147,9 @@ func void usetheriddle4()
 		b_givexp(700);
 		b_logentry(THERIDDLE_LOG,"Книга четвертая. И зачем только я позволяю этим книжкам морочить мне голову... Забыты дела тех, кто был когда-то на борту...");
 		Snd_Play("FoundRiddlersBook");
-		Wld_InsertItem(theriddle5,"FP_RIDD_4");
+		//Wld_InsertItem(theriddle5,"FP_RIDD_4");
 		RIDDLE4 = TRUE;
+		RIDDLE4INSERT = TRUE;
 	};
 };
 
@@ -1202,7 +1206,8 @@ func void usetheriddle5()
 		Wld_InsertNpc(bau_940_riddler,"");
 		riddler = Hlp_GetNpc(bau_940_riddler);
 		Npc_ChangeAttribute(riddler,ATR_HITPOINTS,-riddler.attribute[ATR_HITPOINTS_MAX]);
-		RIDDLE5 = TRUE;
+		//RIDDLE5 = TRUE;
+		//RIDDLE5INSERT = TRUE;
 	};
 };
 
@@ -1263,9 +1268,9 @@ func void usetheriddle6()
 		Wld_InsertNpc(skeleton,"OW_FOGDUNGEON_36_MOVEMENT2");
 		Wld_InsertNpc(skeletonscout,"OW_FOGDUNGEON_36_MOVEMENT2");
 		if(Npc_GetDistToWP(hero,"OW_FOGDUNGEON_36_MOVEMENT2") < 8000)
-	    {
-	    	Wld_SpawnNpcRange(hero,skeletonwarrior,2,30);
-	    };
+		{
+			Wld_SpawnNpcRange(hero,skeletonwarrior,2,30);
+		};
 		RIDDLE6 = TRUE;
 	};
 };

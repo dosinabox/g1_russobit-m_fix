@@ -54,14 +54,17 @@ instance DIA_STT_315_LOSTNEK(C_INFO)
 	nr = 1;
 	condition = dia_stt_315_lostnek_condition;
 	information = dia_stt_315_lostnek_info;
-	permanent = 0;
+	permanent = 1;
 	description = "Ты можешь предложить мне работу? Какую?";
 };
 
 
 func int dia_stt_315_lostnek_condition()
 {
-	return 1;
+	if(SLY_LOSTNEK != LOG_RUNNING && SLY_LOSTNEK != LOG_SUCCESS && SLY_LOSTNEK != LOG_FAILED)
+	{
+		return 1;
+	};
 };
 
 func void dia_stt_315_lostnek_info()
@@ -74,11 +77,18 @@ func void dia_stt_315_lostnek_info()
 		AI_Output(self,other,"DIA_STT_315_LostNek_10_03");	//А найдешь его, так я замолвлю словечко за тебя в лагере.
 	};
 	Info_ClearChoices(dia_stt_315_lostnek);
+	Info_AddChoice(dia_stt_315_lostnek,"Может, позже.",dia_stt_315_lostnek_later);
 	Info_AddChoice(dia_stt_315_lostnek,"Я попробую найти Нека.",dia_stt_315_lostnek_doit);
 	if(Npc_GetTrueGuild(hero) == GIL_NONE)
 	{
 		Info_AddChoice(dia_stt_315_lostnek,"А что это мне даст какое-то там словечко?",dia_stt_315_lostnek_why);
 	};
+};
+
+func void dia_stt_315_lostnek_later()
+{
+	AI_Output(other,self,"DIA_Lefty_First_Later_15_00");	//Может, позже...
+	AI_StopProcessInfos(self);
 };
 
 func void dia_stt_315_lostnek_why()
@@ -143,6 +153,7 @@ func void dia_stt_315_lostneksuccess_info()
 func void dia_stt_315_lostneksuccess_proof()
 {
 	AI_Output(other,self,"DIA_STT_315_LostNekSuccess_Proof_15_00");	//Да, на нем был амулет. Вот он.
+	b_printtrademsg1("Отдан амулет убитого стражника.");
 	AI_Output(self,other,"DIA_STT_315_LostNekSuccess_Proof_10_01");	//Амулет. Из-за него-то все и началось. А ты смышленый парень.
 	AI_Output(self,other,"DIA_STT_315_LostNekSuccess_Proof_10_02");	//Уверен, ты хотел оставить амулет себе, но ты правильно сделал, что отдал его.
 	if((Npc_GetTrueGuild(hero) == GIL_NONE) && (hero.guild == GIL_NONE))

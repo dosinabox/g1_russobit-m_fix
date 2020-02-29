@@ -162,17 +162,21 @@ func void info_sld_8_krautprobe_info()
 		if(Npc_HasItems(other,itmijoint_1))
 		{
 			b_giveinvitems(other,self,itmijoint_1,1);
+			b_printtrademsg1("Отдан 'Новичок'.");
 		}
 		else if(Npc_HasItems(other,itmijoint_2))
 		{
 			b_giveinvitems(other,self,itmijoint_2,1);
+			b_printtrademsg1("Отдан 'Северный темный'.");
 		}
 		else if(Npc_HasItems(other,itmijoint_3))
 		{
 			b_giveinvitems(other,self,itmijoint_3,1);
+			b_printtrademsg1("Отдан 'Зов мечты'.");
 		};
 		AI_Output(self,other,"Info_Sld_8_Krautprobe_08_01");	//А, давай. Вот тебе за него десять кусков руды.
 		AI_Output(self,other,"Info_Sld_8_Krautprobe_08_02");	//Спроси моих друзей. Они тоже не откажутся.
+		b_printtrademsg2("Получено руды: 10");
 		CreateInvItems(self,itminugget,10);
 		b_giveinvitems(self,other,itminugget,10);
 		NC_JOINTS_VERTEILT = NC_JOINTS_VERTEILT + 1;

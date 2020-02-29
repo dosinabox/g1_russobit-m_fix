@@ -51,7 +51,7 @@ func void dia_grim_falle_info()
 	Info_ClearChoices(dia_grim_falle);
 	Info_AddChoice(dia_grim_falle,"Мне это не нужно. Пусть этим займется кто-нибудь еще.",dia_grim_falle_deny);
 	Info_AddChoice(dia_grim_falle,"А что будет, когда мы заберем у них амулет?",dia_grim_falle_howshare);
-	Info_AddChoice(dia_grim_falle,"Что ж, пойдем вместе. Идем!",dia_grim_falle_accepr);
+	Info_AddChoice(dia_grim_falle,"Ладно. Пойдем.",dia_grim_falle_accepr);
 };
 
 func void dia_grim_falle_deny()
@@ -80,7 +80,8 @@ func void dia_grim_falle_halfhalf()
 func void dia_grim_falle_accepr()
 {
 	//AI_Output(other,self,"DIA_Grim_Falle_Accepr_15_00");	//Я готов.
-	AI_Output(other,self,"DIA_Shrat_ComeWithMe_15_00");	//Что ж, пойдем вместе. Идем!
+	//AI_Output(other,self,"DIA_Shrat_ComeWithMe_15_00");	//Что ж, пойдем вместе. Идем!
+	AI_Output(other,self,"DIA_Dusty_LetsGo_15_03");	//Ладно. Пойдем.
 	AI_Output(self,other,"DIA_Grim_Falle_Accepr_06_01");	//Хорошо.
 	Info_ClearChoices(dia_grim_falle);
 };

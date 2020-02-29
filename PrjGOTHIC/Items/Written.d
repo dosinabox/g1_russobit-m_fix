@@ -52,6 +52,12 @@ func void useitwr_book_circle_01()
 	Doc_PrintLines(ndocid,1,"Выстрел магического огня.");
 	Doc_PrintLine(ndocid,1,text_2);
 	Doc_Show(ndocid);
+	if(MANABOOK1 == FALSE)
+	{
+		b_raiseattribute(ATR_MANA_MAX,1);
+		Npc_ChangeAttribute(self,ATR_MANA,1);
+		MANABOOK1 = TRUE;
+	};
 };
 
 
@@ -103,6 +109,12 @@ func void useitwr_book_circle_02()
 	Doc_PrintLine(ndocid,1,"");
 	Doc_PrintLine(ndocid,1,"");
 	Doc_Show(ndocid);
+	if(MANABOOK2 == FALSE)
+	{
+		b_raiseattribute(ATR_MANA_MAX,1);
+		Npc_ChangeAttribute(self,ATR_MANA,1);
+		MANABOOK2 = TRUE;
+	};
 };
 
 
@@ -163,6 +175,12 @@ func void useitwr_book_circle_03()
 	Doc_PrintLines(ndocid,1,"Шар, созданный из магической энергии.");
 	Doc_PrintLine(ndocid,1,text_2);
 	Doc_Show(ndocid);
+	if(MANABOOK3 == FALSE)
+	{
+		b_raiseattribute(ATR_MANA_MAX,1);
+		Npc_ChangeAttribute(self,ATR_MANA,1);
+		MANABOOK3 = TRUE;
+	};
 };
 
 
@@ -222,6 +240,12 @@ func void useitwr_book_circle_04()
 	Doc_PrintLines(ndocid,1,"Это заклинание уничтожает существа, порожденные тьмой.");
 	Doc_PrintLine(ndocid,1,text_2);
 	Doc_Show(ndocid);
+	if(MANABOOK4 == FALSE)
+	{
+		b_raiseattribute(ATR_MANA_MAX,1);
+		Npc_ChangeAttribute(self,ATR_MANA,1);
+		MANABOOK4 = TRUE;
+	};
 };
 
 
@@ -271,6 +295,12 @@ func void useitwr_book_circle_05()
 	Doc_PrintLines(ndocid,1,"Заклинание Круга Воды.");
 	Doc_PrintLine(ndocid,1,text_2);
 	Doc_Show(ndocid);
+	if(MANABOOK5 == FALSE)
+	{
+		b_raiseattribute(ATR_MANA_MAX,1);
+		Npc_ChangeAttribute(self,ATR_MANA,1);
+		MANABOOK5 = TRUE;
+	};
 };
 
 
@@ -320,6 +350,12 @@ func void useitwr_book_circle_06()
 	Doc_PrintLines(ndocid,1,"Сохранилась память лишь о том, что она скрывает силы Белиара.");
 	Doc_PrintLine(ndocid,1,"");
 	Doc_Show(ndocid);
+	if(MANABOOK6 == FALSE)
+	{
+		b_raiseattribute(ATR_MANA_MAX,1);
+		Npc_ChangeAttribute(self,ATR_MANA,1);
+		MANABOOK6 = TRUE;
+	};
 };
 
 
@@ -436,7 +472,7 @@ func void usemachtvolle_kunst()
 	Doc_SetFont(ndocid,-1,"font_15_book.tga");
 	Doc_SetMargins(ndocid,0,275,20,30,20,1);
 	Doc_PrintLine(ndocid,0,"");
-	Doc_PrintLine(ndocid,0,"Могущественное искусство");
+	Doc_PrintLines(ndocid,0,"Могущественное искусство");
 	Doc_PrintLine(ndocid,0,"");
 	Doc_SetFont(ndocid,-1,"font_10_book.tga");
 	Doc_PrintLine(ndocid,0,"");
@@ -1254,7 +1290,6 @@ instance CALASHNOTE(C_ITEM)
 	scemename = "MAPSEALED";
 	description = "Письмо для Калеша";
 	text[1] = "Лучше его не читать.";
-	text[2] = "Но хочется.";
 	on_state[0] = usecalashnote;
 };
 
@@ -1317,7 +1352,7 @@ instance ALCHEMYBOOK(C_ITEM)
 	name = "Основы алхимии";
 	mainflag = ITEM_KAT_DOCS;
 	flags = 0;
-	value = 800;
+	value = 600;
 	visual = "ITWR_BOOK_ALCHEMY.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";

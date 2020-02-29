@@ -156,17 +156,21 @@ func void info_org_6_krautprobe_info()
 		if(Npc_HasItems(other,itmijoint_1))
 		{
 			b_giveinvitems(other,self,itmijoint_1,1);
+			b_printtrademsg1("Отдан 'Новичок'.");
 		}
 		else if(Npc_HasItems(other,itmijoint_2))
 		{
 			b_giveinvitems(other,self,itmijoint_2,1);
+			b_printtrademsg1("Отдан 'Северный темный'.");
 		}
 		else if(Npc_HasItems(other,itmijoint_3))
 		{
 			b_giveinvitems(other,self,itmijoint_3,1);
+			b_printtrademsg1("Отдан 'Зов мечты'.");
 		};
 		AI_Output(self,other,"Info_Org_6_Krautprobe_06_01");	//Еще бы. Вот 10 кусков руды.
 		AI_Output(self,other,"Info_Org_6_Krautprobe_06_02");	//Если у тебя найдется еще, с удовольствием куплю.
+		b_printtrademsg2("Получено руды: 10");
 		CreateInvItems(self,itminugget,10);
 		b_giveinvitems(self,other,itminugget,10);
 		self.aivar[AIV_DEALDAY] = Wld_GetDay() + 1;

@@ -20,6 +20,7 @@ func int kdf_403_drago_rune_condition()
 func void kdf_403_drago_rune_info()
 {
 	AI_Output(self,other,"KDF_403_Drago_RUNE_Info_13_01");	//Прими эту руну как дар Инноса. Она защитит тебя на твоем пути!
+	b_printtrademsg1("Получена руна огненной стрелы.");
 	CreateInvItem(self,itarrunefirebolt);
 	b_giveinvitems(self,other,itarrunefirebolt,1);
 	AI_StopProcessInfos(self);

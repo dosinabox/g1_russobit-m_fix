@@ -23,9 +23,15 @@ instance STT_328_SCHATTEN(NPC_DEFAULT)
 	EquipItem(self,itmw_1h_sword_short_02);
 	EquipItem(self,itrw_bow_small_01);
 	CreateInvItems(self,itamarrow,20);
-	daily_routine = rtn_start_328;
+	daily_routine = rtn_prestart_328;
 };
 
+func void rtn_prestart_328()
+{
+	ta_sleep(23,55,6,0,"OCR_HUT_22");
+	ta_standaround(6,0,15,30,"OCR_ARENA_TO_SMITH");
+	ta_boss(15,30,23,55,"OCR_ARENA_01");
+};
 
 func void rtn_start_328()
 {
@@ -119,7 +125,8 @@ func void dia_scatty_arenabet_kirgo()
 	AI_Output(other,self,"Info_Grd_237_FirstWarn_15_06");	//Ладно, вот тебе руда!
 	if(Npc_HasItems(other,itminugget) >= 50)
 	{
-		b_giveinvitems(other,self,itminugget,50);
+		b_printtrademsg1("Отдано руды: 50");
+		Npc_RemoveInvItems(hero,itminugget,50);
 		AI_Output(self,other,"DIA_Sam_10");	//Так, а теперь посмотрим, кто кого!
 		AI_TurnToNPC(self,grd_251_kirgo);
 		b_clearimmortal(grd_251_kirgo);
@@ -131,12 +138,12 @@ func void dia_scatty_arenabet_kirgo()
 		kirgo = Hlp_GetNpc(grd_251_kirgo);
 		kharim = Hlp_GetNpc(sld_729_kharim);
 		gorhanis = Hlp_GetNpc(tpl_1422_gorhanis);
-		kirgo.attribute[ATR_HITPOINTS] = 1800;
-		kirgo.attribute[ATR_HITPOINTS_MAX] = 1800;
+		kirgo.attribute[ATR_HITPOINTS] = 2000;
+		kirgo.attribute[ATR_HITPOINTS_MAX] = 2000;
 		kharim.attribute[ATR_HITPOINTS] = 1500;
 		kharim.attribute[ATR_HITPOINTS_MAX] = 1500;
-		gorhanis.attribute[ATR_HITPOINTS] = 1100;
-		gorhanis.attribute[ATR_HITPOINTS_MAX] = 1100;
+		gorhanis.attribute[ATR_HITPOINTS] = 1000;
+		gorhanis.attribute[ATR_HITPOINTS_MAX] = 1000;
 		ARENA_BET_DAY = Wld_GetDay();
 		ARENA_BET_KIRGO = TRUE;
 		AI_StopProcessInfos(self);
@@ -153,7 +160,8 @@ func void dia_scatty_arenabet_kharim()
 	AI_Output(other,self,"VLK_585_Aleph_SCHUPPEN_30_15_01");	//Предлагаю 30 кусков.
 	if(Npc_HasItems(other,itminugget) >= 30)
 	{
-		b_giveinvitems(other,self,itminugget,30);
+		b_printtrademsg1("Отдано руды: 30");
+		Npc_RemoveInvItems(hero,itminugget,30);
 		AI_Output(self,other,"DIA_Sam_10");	//Так, а теперь посмотрим, кто кого!
 		AI_TurnToNPC(self,sld_729_kharim);
 		b_clearimmortal(grd_251_kirgo);
@@ -165,12 +173,12 @@ func void dia_scatty_arenabet_kharim()
 		kirgo = Hlp_GetNpc(grd_251_kirgo);
 		kharim = Hlp_GetNpc(sld_729_kharim);
 		gorhanis = Hlp_GetNpc(tpl_1422_gorhanis);
-		kirgo.attribute[ATR_HITPOINTS] = 1800;
-		kirgo.attribute[ATR_HITPOINTS_MAX] = 1800;
+		kirgo.attribute[ATR_HITPOINTS] = 2000;
+		kirgo.attribute[ATR_HITPOINTS_MAX] = 2000;
 		kharim.attribute[ATR_HITPOINTS] = 1500;
 		kharim.attribute[ATR_HITPOINTS_MAX] = 1500;
-		gorhanis.attribute[ATR_HITPOINTS] = 1100;
-		gorhanis.attribute[ATR_HITPOINTS_MAX] = 1100;
+		gorhanis.attribute[ATR_HITPOINTS] = 1000;
+		gorhanis.attribute[ATR_HITPOINTS_MAX] = 1000;
 		ARENA_BET_DAY = Wld_GetDay();
 		ARENA_BET_KHARIM = TRUE;
 		AI_StopProcessInfos(self);
@@ -187,7 +195,8 @@ func void dia_scatty_arenabet_gorhanis()
 	AI_Output(other,self,"Info_Grd_237_FirstWarn_15_06");	//Ладно, вот тебе руда!
 	if(Npc_HasItems(other,itminugget) >= 15)
 	{
-		b_giveinvitems(other,self,itminugget,15);
+		b_printtrademsg1("Отдано руды: 15");
+		Npc_RemoveInvItems(hero,itminugget,15);
 		AI_Output(self,other,"DIA_Sam_10");	//Так, а теперь посмотрим, кто кого!
 		AI_TurnToNPC(self,tpl_1422_gorhanis);
 		b_clearimmortal(grd_251_kirgo);
@@ -199,12 +208,12 @@ func void dia_scatty_arenabet_gorhanis()
 		kirgo = Hlp_GetNpc(grd_251_kirgo);
 		kharim = Hlp_GetNpc(sld_729_kharim);
 		gorhanis = Hlp_GetNpc(tpl_1422_gorhanis);
-		kirgo.attribute[ATR_HITPOINTS] = 1800;
-		kirgo.attribute[ATR_HITPOINTS_MAX] = 1800;
+		kirgo.attribute[ATR_HITPOINTS] = 2000;
+		kirgo.attribute[ATR_HITPOINTS_MAX] = 2000;
 		kharim.attribute[ATR_HITPOINTS] = 1500;
 		kharim.attribute[ATR_HITPOINTS_MAX] = 1500;
-		gorhanis.attribute[ATR_HITPOINTS] = 1100;
-		gorhanis.attribute[ATR_HITPOINTS_MAX] = 1100;
+		gorhanis.attribute[ATR_HITPOINTS] = 1000;
+		gorhanis.attribute[ATR_HITPOINTS_MAX] = 1000;
 		ARENA_BET_DAY = Wld_GetDay();
 		ARENA_BET_GORHANIS = TRUE;
 		AI_StopProcessInfos(self);
@@ -241,8 +250,9 @@ func void dia_scatty_betresult_info()
 	{
 		if(ARENA_BET_KIRGO_WON == TRUE)
 		{
-			b_giveinvitems(self,other,itminugget,150);
 			AI_Output(self,other,"DIA_Sam_08");	//Хороший бой. Поздравляю, держи свой выигрыш.
+			b_printtrademsg1("Получено руды: 150");
+			CreateInvItems(hero,itminugget,150);
 		}
 		else
 		{
@@ -253,8 +263,9 @@ func void dia_scatty_betresult_info()
 	{
 		if(ARENA_BET_KHARIM_WON == TRUE)
 		{
-			b_giveinvitems(self,other,itminugget,60);
 			AI_Output(self,other,"DIA_Sam_08");	//Хороший бой. Поздравляю, держи свой выигрыш.
+			b_printtrademsg1("Получено руды: 60");
+			CreateInvItems(hero,itminugget,60);
 		}
 		else
 		{
@@ -265,8 +276,9 @@ func void dia_scatty_betresult_info()
 	{
 		if(ARENA_BET_GORHANIS_WON == TRUE)
 		{
-			b_giveinvitems(self,other,itminugget,25);
 			AI_Output(self,other,"DIA_Sam_08");	//Хороший бой. Поздравляю, держи свой выигрыш.
+			b_printtrademsg1("Получено руды: 25");
+			CreateInvItems(hero,itminugget,25);
 		}
 		else
 		{
@@ -288,14 +300,14 @@ func void dia_scatty_betresult_info()
 	b_exchangeroutine(kirgo,"START");
 	b_exchangeroutine(kharim,"START");
 	b_exchangeroutine(gorhanis,"START");
-	kirgo.attribute[ATR_HITPOINTS] = 1800;
-	kirgo.attribute[ATR_HITPOINTS_MAX] = 1800;
+	kirgo.attribute[ATR_HITPOINTS] = 2000;
+	kirgo.attribute[ATR_HITPOINTS_MAX] = 2000;
 	kirgo.flags = NPC_FLAG_IMMORTAL;
 	kharim.attribute[ATR_HITPOINTS] = 1500;
 	kharim.attribute[ATR_HITPOINTS_MAX] = 1500;
 	kharim.flags = NPC_FLAG_IMMORTAL;
-	gorhanis.attribute[ATR_HITPOINTS] = 1100;
-	gorhanis.attribute[ATR_HITPOINTS_MAX] = 1100;
+	gorhanis.attribute[ATR_HITPOINTS] = 1000;
+	gorhanis.attribute[ATR_HITPOINTS_MAX] = 1000;
 	gorhanis.flags = NPC_FLAG_IMMORTAL;
 	if(!Npc_HasItems(kirgo,itmw_kirgo) && !Npc_HasItems(kirgo,itmw_1h_sword_01))
 	{
@@ -349,8 +361,73 @@ func void dia_sam_hi_info()
 	AI_Output(self,other,"DIA_Sam_12");	//Приходи вечером, когда все соберутся. Дождешься выхода своего бойца и обратишься ко мне.
 	AI_Output(self,other,"DIA_Sam_13");	//Я возьму твою руду и выплачу выигрыш, если твой боец останется стоять на ногах, хехе.
 	AI_Output(self,other,"DIA_Sam_14");	//Но не более одной ставки за вечер! А то были тут у нас случаи...
+	Npc_ExchangeRoutine(self,"START");
 	ARENA_BET_DAY = Wld_GetDay() - 1;
 };
+
+instance DIA_SAM_WTF(C_INFO)
+{
+	npc = stt_328_schatten;
+	nr = 1;
+	condition = dia_sam_wtf_condition;
+	information = dia_sam_wtf_info;
+	permanent = 1;
+	important = 1;
+};
+
+func int dia_sam_wtf_condition()
+{
+	if(KAPITEL < 4 && (ARENA_BET_DAY < Wld_GetDay()) && (ARENA_BET_KIRGO == TRUE || ARENA_BET_KHARIM == TRUE || ARENA_BET_GORHANIS == TRUE))
+	{
+		return 1;
+	};
+};
+
+func void dia_sam_wtf_info()
+{
+	AI_Output(self,other,"DIA_Sam_16");	//Что же ты не дождался конца боя? Даже не думай, что я верну твою ставку!
+	ARENA_BET_KIRGO = FALSE;
+	ARENA_BET_KHARIM = FALSE;
+	ARENA_BET_GORHANIS = FALSE;
+	ARENA_BET_KIRGO_WON = FALSE;
+	ARENA_BET_KHARIM_WON = FALSE;
+	ARENA_BET_GORHANIS_WON = FALSE;
+	var C_NPC kirgo;
+	var C_NPC kharim;
+	var C_NPC gorhanis;
+	kirgo = Hlp_GetNpc(grd_251_kirgo);
+	kharim = Hlp_GetNpc(sld_729_kharim);
+	gorhanis = Hlp_GetNpc(tpl_1422_gorhanis);
+	b_exchangeroutine(kirgo,"START");
+	b_exchangeroutine(kharim,"START");
+	b_exchangeroutine(gorhanis,"START");
+	kirgo.attribute[ATR_HITPOINTS] = 2000;
+	kirgo.attribute[ATR_HITPOINTS_MAX] = 2000;
+	kirgo.flags = NPC_FLAG_IMMORTAL;
+	kharim.attribute[ATR_HITPOINTS] = 1500;
+	kharim.attribute[ATR_HITPOINTS_MAX] = 1500;
+	kharim.flags = NPC_FLAG_IMMORTAL;
+	gorhanis.attribute[ATR_HITPOINTS] = 1000;
+	gorhanis.attribute[ATR_HITPOINTS_MAX] = 1000;
+	gorhanis.flags = NPC_FLAG_IMMORTAL;
+	if(!Npc_HasItems(kirgo,itmw_kirgo) && !Npc_HasItems(kirgo,itmw_1h_sword_01))
+	{
+		CreateInvItem(kirgo,itmw_1h_sword_01);
+		AI_EquipBestMeleeWeapon(kirgo);
+	};
+	if(!Npc_HasItems(kharim,itmw_kharim) && !Npc_HasItems(kharim,itmw_1h_sword_01))
+	{
+		CreateInvItem(kharim,itmw_1h_sword_01);
+		AI_EquipBestMeleeWeapon(kharim);
+	};
+	if(!Npc_HasItems(gorhanis,itmw_gorhanis) && !Npc_HasItems(gorhanis,itmw_1h_sword_01))
+	{
+		CreateInvItem(gorhanis,itmw_1h_sword_01);
+		AI_EquipBestMeleeWeapon(gorhanis);
+	};
+	AI_StopProcessInfos(self);
+};
+
 
 instance INFO_SAM_EXIT(C_INFO)
 {

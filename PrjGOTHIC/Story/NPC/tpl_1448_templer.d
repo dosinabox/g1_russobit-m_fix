@@ -19,7 +19,6 @@ instance TPL_1448_TEMPLER(NPC_DEFAULT)
 	protection[PROT_FIRE] = 50;
 	protection[PROT_FLY] = 80;
 	protection[PROT_MAGIC] = 75;
-	aivar[43] = TRUE;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Mage.mds");
 	Mdl_SetVisualBody(self,"hum_body_Naked0",1,1,"Hum_Head_Bald",117,2,tpl_armor_m);

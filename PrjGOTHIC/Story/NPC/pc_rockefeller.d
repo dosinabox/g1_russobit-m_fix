@@ -103,6 +103,7 @@ instance PC_ROCKEFELLER(NPC_DEFAULT)
 	CreateInvItem(self,itarrunepyrokinesis);
 	CreateInvItem(self,itarrunecontrol);
 	CreateInvItem(self,itarrunebreathofdeath);
+	CreateInvItem(self,itarrunearmyofdarkness);
 	CreateInvItems(self,itarscrollfear,10);
 	CreateInvItems(self,itarscrollberzerk,10);
 	CreateInvItems(self,itarscrollshrink,10);

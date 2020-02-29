@@ -13,7 +13,6 @@ instance NON_1501_WEGELAGERER(NPC_DEFAULT)
 	attribute[ATR_MANA] = 0;
 	attribute[ATR_HITPOINTS_MAX] = 175;
 	attribute[ATR_HITPOINTS] = 175;
-	aivar[43] = TRUE;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_SetVisualBody(self,"hum_body_Naked0",3,0,"Hum_Head_Thief",11,3,-1);
 	b_scale(self);

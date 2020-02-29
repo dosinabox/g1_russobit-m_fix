@@ -254,8 +254,20 @@ instance D36TESTBOOK(C_ITEM)
 func void use_d36testbook()
 {
 	PrintScreen("тестим...",-1,30,"font_old_20_white.tga",4);
-	OC_BANNED = TRUE;
-	Wld_ExchangeGuildAttitudes("GIL_ATTITUDES_FMTAKEN");
+	//OC_BANNED = TRUE;
+	//Wld_ExchangeGuildAttitudes("GIL_ATTITUDES_FMTAKEN");
+	//CORKALOM_BRINGMCQBALLS = LOG_SUCCESS;
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) < 1)
+	{
+		Npc_SetTalentSkill(hero,NPC_TALENT_PICKLOCK,1);
+	}
+	else if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) < 2)
+	{
+		Npc_SetTalentSkill(hero,NPC_TALENT_PICKLOCK,2);
+	};
+	//FREEMINEORC_LOOKINGULUMULU = LOG_RUNNING;
+	//CORANGAR_GOTOOGY = TRUE;
+	b_corkalomleft();
 };
 
 instance ALCHEMYKIT(C_ITEM)

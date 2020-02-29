@@ -145,7 +145,7 @@ func int zs_attack_loop()
 			printdebugnpc(PD_ZS_CHECK,"...coward flees!");
 			AI_StartState(self,zs_flee,0,"");
 		};
-		if((self.fight_tactic == FAI_HUMAN_STRONG) && (self.attribute[ATR_HITPOINTS] < ((self.attribute[ATR_HITPOINTS_MAX] / 4) * 3)))
+		if((self.fight_tactic == FAI_HUMAN_STRONG) && (self.attribute[ATR_HITPOINTS] < (self.attribute[ATR_HITPOINTS_MAX] / 4)))
 		{
 			printdebugnpc(PD_ZS_CHECK,"...strong flees!");
 			AI_StartState(self,zs_flee,0,"");

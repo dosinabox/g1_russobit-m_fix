@@ -69,6 +69,7 @@ func void info_erpresser_choice_zahlen()
 	var C_NPC coerpresser;
 	coerpresser = Hlp_GetNpc(org_889_coerpresser);
 	AI_Output(other,self,"Info_Erpresser_Choice_Zahlen_15_01");	//Вот десять кусков.
+	b_printtrademsg1("Отдано руды: 10");
 	AI_Output(self,other,"Info_Erpresser_Choice_AufsMaul_13_02");	//Спасибо. Ты меня выручил.
 	self.aivar[AIV_HAS_ERPRESSED] = 1;
 	b_giveinvitems(other,self,itminugget,10);

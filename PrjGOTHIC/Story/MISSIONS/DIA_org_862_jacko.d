@@ -114,6 +114,7 @@ func void org_862_jacko_guard_infowert()
 {
 	AI_Output(other,self,"ORG_862_Jacko_GUARD_InfoWert_Info_15_00");	//Интересно, насколько ценным может быть то, что я скажу.
 	AI_Output(self,other,"ORG_862_Jacko_GUARD_InfoWert_Info_06_01");	//Ах, вот в чем дело... Ладно. Ты помог мне. У меня есть немного руды. Забирай ее.
+	b_printtrademsg1("Получено руды: 95");
 	AI_Output(self,other,"ORG_862_Jacko_GUARD_InfoWert_Info_06_02");	//А нам пора уходить. Думаю, тебе тоже не стоит здесь задерживаться.
 	b_giveinvitems(self,other,itminugget,95);
 	Npc_ExchangeRoutine(self,"ARBEITSLOS");

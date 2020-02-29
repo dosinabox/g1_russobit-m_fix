@@ -50,6 +50,8 @@ func void info_bartholo_hallo_info()
 	AI_Output(self,other,"Info_Bartholo_HAllo_12_02");	//Еда, болотник, продовольствие для женщин...
 	AI_Output(self,other,"Info_Bartholo_HAllo_12_03");	//Также приходится следить за этими идиотами поварами.
 	AI_Output(self,other,"Info_Bartholo_HAllo_12_04");	//Гомез не любит оплошностей. Последних двух поваров он скормил речным шныгам.
+	Log_CreateTopic(GE_TRADEROC,LOG_NOTE);
+	b_logentry(GE_TRADEROC,"У Бартоло можно купить еду, болотник и прочие припасы. Я могу найти его в замке Баронов.");
 };
 
 
@@ -112,10 +114,12 @@ func void info_bartholo_krautbote_info()
 	AI_Output(self,other,"Info_Bartholo_Krautbote_12_01");	//Покажи!
 	if(Npc_HasItems(other,itmijoint_3) >= 30)
 	{
+		b_printtrademsg1("Отдан болотник (30).");
 		AI_Output(self,other,"Info_Bartholo_Krautbote_12_02");	//М-ммммммммм...
 		AI_Output(self,other,"Info_Bartholo_Krautbote_12_03");	//Это хорошо. А то Гомез уже начал терять терпение. Это просто удача, что ты объявился сегодня.
 		AI_Output(other,self,"Info_Bartholo_Krautbote_15_04");	//Как насчет платы?
 		AI_Output(self,other,"Info_Bartholo_Krautbote_12_05");	//Не так быстро... Вот, держи. Как договаривались - пять сотен.
+		b_printtrademsg2("Получено руды: 500");
 		b_giveinvitems(other,self,itmijoint_3,30);
 		CreateInvItems(self,itminugget,500);
 		b_giveinvitems(self,other,itminugget,500);
@@ -134,7 +138,7 @@ func void info_bartholo_krautbote_info()
 
 instance DIA_EBR_106_BARTHOLO_WAIT4SC(C_INFO)
 {
-	npc = ebr_106_bartholo;
+	npc = ebr_598_bartholo;
 	condition = dia_ebr_106_bartholo_wait4sc_condition;
 	information = dia_ebr_106_bartholo_wait4sc_info;
 	important = 1;
@@ -178,7 +182,7 @@ func void dia_ebr_106_bartholo_wait4sc_info()
 
 instance DIA_EBR_106_BARTHOLO_WAIT4SC2(C_INFO)
 {
-	npc = ebr_106_bartholo;
+	npc = ebr_598_bartholo;
 	condition = dia_ebr_106_bartholo_wait4sc2_condition;
 	information = dia_ebr_106_bartholo_wait4sc2_info;
 	important = 1;

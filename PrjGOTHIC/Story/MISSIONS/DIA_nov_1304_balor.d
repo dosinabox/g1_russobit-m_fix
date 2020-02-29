@@ -47,6 +47,7 @@ func void dia_balor_fetchweed_info()
 {
 	AI_Output(other,self,"DIA_Balor_FetchWeed_15_00");	//Меня прислал Идол Оран за урожаем болотника.
 	AI_Output(self,other,"DIA_Balor_FetchWeed_01_01");	//Хорошо. Мне не придется относить его самому. Вот, возьми его.
+	b_printtrademsg1("Получен болотник (50).");
 	AI_Output(self,other,"DIA_Balor_FetchWeed_01_02");	//Не забудь заглянуть к Вайрану, на другую сторону болота, если ты у него еще не был.
 	AI_Output(self,other,"DIA_Balor_FetchWeed_01_03");	//Иначе наш дневной урожай кое-кому покажется слишком маленьким. Могут подумать, что ты половину присвоил.
 	b_giveinvitems(self,other,itmi_plants_swampherb_01,50);
@@ -149,11 +150,13 @@ func void dia_balor_telldealer_pay()
 	AI_Output(other,self,"DIA_Balor_TellDealer_Pay_15_00");	//Пятьдесят кусков? Хорошо, держи.
 	if(Npc_HasItems(other,itminugget) >= 50)
 	{
+		b_printtrademsg1("Отдано руды: 50");
 		AI_Output(self,other,"DIA_Balor_TellDealer_Pay_01_01");	//Что ж... Слушай. Его зовут Сайфер. Он почти все время сидит в баре на озере.
 		AI_Output(self,other,"DIA_Balor_TellDealer_Pay_01_02");	//Но будь с ним осторожен. Смотри, чтобы он тебя не обманул.
+		b_printtrademsg2("Получен пакет с травой.");
 		Info_ClearChoices(dia_balor_telldealer);
-		b_giveinvitems(other,self,itminugget,50);
-		b_giveinvitems(self,other,weedpack,1);
+		Npc_RemoveInvItems(other,itminugget,50);
+		CreateInvItems(other,weedpack,1);
 		BALOR_TELLSNCDEALER = TRUE;
 		b_logentry(CH1_DELIVERWEED,"Бэлор назвал мне человека из Нового лагеря. Его зовут Сайфер. Я смогу найти его в баре на озере. Гуру будут очень недовольны, если я продам болотник на сторону.");
 		b_givexp(XP_BALORNAMEDCIPHER);
@@ -213,6 +216,7 @@ func void dia_balor_ripoff_info()
 		else
 		{
 			AI_Output(self,other,"DIA_Balor_RipOff_01_03");	//А, это снова ты? Ладно, бери, но только не вздумай нас обмануть!
+			b_printtrademsg1("Получен болотник (50).");
 			AI_Output(other,self,"DIA_Balor_RipOff_15_04");	//Да что ты, я и не собирался.
 			CreateInvItems(self,itmi_plants_swampherb_01,50);
 			b_giveinvitems(self,hero,itmi_plants_swampherb_01,50);
@@ -236,9 +240,11 @@ func void dia_balor_telldealer_pay2()
 	AI_Output(other,self,"Info_Grd_237_FirstWarn_15_06");	//Ладно, вот тебе руда!
 	if(Npc_HasItems(other,itminugget) >= 50)
 	{
+		b_printtrademsg1("Отдано руды: 50");
+		b_printtrademsg2("Получен пакет с травой.");
 		Info_ClearChoices(dia_balor_ripoff);
-		b_giveinvitems(other,self,itminugget,50);
-		b_giveinvitems(self,other,weedpack,1);
+		Npc_RemoveInvItems(other,itminugget,50);
+		CreateInvItems(other,weedpack,1);
 		BALOR_BOTENDAY = Wld_GetDay();
 		BALOR_CAN_GIVE = FALSE;
 	}

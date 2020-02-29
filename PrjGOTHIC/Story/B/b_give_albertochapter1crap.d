@@ -7,8 +7,8 @@ func void b_give_albertochapter1crap()
 	CreateInvItems(npc,itfobeer,5);
 	CreateInvItems(npc,itfo_potion_health_01,5);
 	CreateInvItems(npc,itfo_potion_health_02,5);
-	CreateInvItems(npc,itminugget,193);
-	CreateInvItems(npc,itamarrow,180);
+	CreateInvItems(npc,itminugget,93);
+	CreateInvItems(npc,itamarrow,80);
 	CreateInvItem(npc,alchemy_hp2_priced);
 };
 

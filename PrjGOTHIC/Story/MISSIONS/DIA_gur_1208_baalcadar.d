@@ -183,6 +183,7 @@ func void gur_1208_baalcadar_teach_man_1()
 	{
 		if(hero.lp >= 1 && hero.attribute[ATR_MANA_MAX] < 100)
 		{
+			b_printtrademsg1("Отдано руды: 10");
 			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
 		};
 		b_buyattributepoints(other,ATR_MANA_MAX,LPCOST_ATTRIBUTE_MANA);
@@ -204,6 +205,7 @@ func void gur_1208_baalcadar_teach_man_5()
 	{
 		if(hero.lp >= 5 && hero.attribute[ATR_MANA_MAX] < 96)
 		{
+			b_printtrademsg1("Отдано руды: 50");
 			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
 		};
 		b_buyattributepoints(other,ATR_MANA_MAX,5 * LPCOST_ATTRIBUTE_MANA);

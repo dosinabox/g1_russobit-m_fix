@@ -116,15 +116,15 @@ func void dia_milten_gotocorristo_info()
 		b_usefakescroll();
 		if(Npc_HasItems(other,itwr_fire_letter_01))
 		{
+			b_printtrademsg1("Отдано запечатанное письмо.");
 			b_givexp(XP_XARDASLETTER);
-			b_giveinvitems(other,self,itwr_fire_letter_01,1);
-			Npc_RemoveInvItem(self,itwr_fire_letter_01);
+			Npc_RemoveInvItem(other,itwr_fire_letter_01);
 		}
 		else if(Npc_HasItems(other,itwr_fire_letter_02))
 		{
+			b_printtrademsg1("Отдано вскрытое письмо.");
 			b_givexp(XP_XARDASLETTEROPEN);
-			b_giveinvitems(other,self,itwr_fire_letter_02,1);
-			Npc_RemoveInvItem(self,itwr_fire_letter_02);
+			Npc_RemoveInvItem(other,itwr_fire_letter_02);
 		};
 		corristo = Hlp_GetNpc(kdf_402_corristo);
 		CreateInvItem(corristo,itwr_fire_letter_02);
@@ -188,15 +188,15 @@ func void dia_milten_letter_give()
 	AI_GotoWP(self,"OCC_CHAPEL_ENTRANCE");
 	if(Npc_HasItems(other,itwr_fire_letter_01))
 	{
+		b_printtrademsg1("Отдано запечатанное письмо.");
 		b_givexp(XP_XARDASLETTER);
-		b_giveinvitems(other,self,itwr_fire_letter_01,1);
-		Npc_RemoveInvItem(self,itwr_fire_letter_01);
+		Npc_RemoveInvItem(other,itwr_fire_letter_01);
 	}
 	else if(Npc_HasItems(other,itwr_fire_letter_02))
 	{
+		b_printtrademsg1("Отдано вскрытое письмо.");
 		b_givexp(XP_XARDASLETTEROPEN);
-		b_giveinvitems(other,self,itwr_fire_letter_02,1);
-		Npc_RemoveInvItem(self,itwr_fire_letter_02);
+		Npc_RemoveInvItem(other,itwr_fire_letter_02);
 	};
 	corristo = Hlp_GetNpc(kdf_402_corristo);
 	CreateInvItem(corristo,itwr_fire_letter_02);
@@ -310,7 +310,7 @@ instance DIA_MILTEN_NOCHEINBRIEF(C_INFO)
 
 func int dia_milten_nocheinbrief_condition()
 {
-	if((CRONOS_MESSENGER == LOG_RUNNING) && (KAPITEL <= 3))
+	if((CRONOS_MESSENGER == LOG_RUNNING) && (KAPITEL <= 3) && (Npc_HasItems(hero,cronos_brief) >= 1))
 	{
 		return 1;
 	};
@@ -320,11 +320,11 @@ func void dia_milten_nocheinbrief_info()
 {
 	var C_NPC corristo;
 	AI_Output(other,self,"DIA_Milten_NochEinBrief_15_00");	//У меня есть письмо от магов Воды.
+	b_printtrademsg1("Отдано письмо Кроноса.");
 	AI_Output(self,other,"DIA_Milten_NochEinBrief_02_01");	//А! Очень хорошо! Я передам его Корристо.
 	AI_Output(self,other,"DIA_Milten_NochEinBrief_02_02");	//Когда вернешься в Новый лагерь, маги Воды вознаградят тебя за труды.
 	b_logentry(KDWLETTER,"Мильтен получил письмо магов Воды, нужно сообщить об успехе Кроносу.");
-	b_giveinvitems(other,self,cronos_brief,1);
-	Npc_RemoveInvItem(self,cronos_brief);
+	Npc_RemoveInvItem(other,cronos_brief);
 	corristo = Hlp_GetNpc(kdf_402_corristo);
 	CreateInvItem(corristo,cronos_brief);
 };
@@ -372,7 +372,7 @@ instance DIA_MILTEN_WANNAMAGE(C_INFO)
 
 func int dia_milten_wannamage_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_milten_perm) && (CORKALOM_BRINGMCQBALLS != LOG_SUCCESS))
+	if(Npc_KnowsInfo(hero,dia_milten_perm) && (CORKALOM_BRINGMCQBALLS != LOG_SUCCESS) && Npc_GetTrueGuild(hero) != GIL_KDF)
 	{
 		return 1;
 	};
@@ -383,7 +383,10 @@ func void dia_milten_wannamage_info()
 	AI_Output(other,self,"DIA_Milten_WannaMage_15_00");	//Я тоже хочу стать учеником мага. Таким, как ты.
 	AI_Output(self,other,"DIA_Milten_WannaMage_02_01");	//Корристо выбрал меня, потому что я помогал Баронам.
 	AI_Output(self,other,"DIA_Milten_WannaMage_02_02");	//До тех пор, пока ты не сделаешь что-нибудь исключительное, он и разговаривать не захочет о твоем обучении.
-	AI_Output(self,other,"DIA_Milten_WannaMage_02_03");	//Помимо этого, ты должен принадлежать к Старому лагерю. Сомневаюсь, что Корристо возьмет себе в ученики человека из другой части колонии.
+	if(Npc_GetTrueGuild(hero) != GIL_STT && Npc_GetTrueGuild(hero) != GIL_GRD)
+	{
+		AI_Output(self,other,"DIA_Milten_WannaMage_02_03");	//Помимо этого, ты должен принадлежать к Старому лагерю. Сомневаюсь, что Корристо возьмет себе в ученики человека из другой части колонии.
+	};
 };
 
 
@@ -728,6 +731,7 @@ func void info_milten_shaccept_info()
 	AI_Output(hero,self,"Info_Milten_SHACCEPT_15_01");	//Дай мне этот свиток, и мы пойдем туда вместе!
 	AI_Output(self,hero,"Info_Milten_SHACCEPT_02_02");	//Хорошо! Я надеялся, что ты это скажешь!
 	AI_Output(self,hero,"Info_Milten_SHACCEPT_02_03");	//Но у нас всего один свиток. Необходимо приберечь его для стража.
+	b_printtrademsg1("Получен свиток уничтожения нежити.");
 	AI_Output(self,hero,"Info_Milten_SHACCEPT_02_04");	//С остальной нежитью придется сражаться обычным оружием.
 	AI_Output(hero,self,"Info_Milten_SHACCEPT_15_05");	//Понятно. Как пройти к кругу камней?
 	AI_Output(self,hero,"Info_Milten_SHACCEPT_02_06");	//Иди за мной.
@@ -785,7 +789,7 @@ instance INFO_MILTEN_SHHEAL(C_INFO)
 
 func int info_milten_shheal_condition()
 {
-	if(Npc_KnowsInfo(hero,info_milten_shaccept) && !Npc_KnowsInfo(hero,info_milten_shsuccess) && (hero.attribute[ATR_HITPOINTS] < hero.attribute[ATR_HITPOINTS_MAX]))
+	if(Npc_KnowsInfo(hero,info_milten_shaccept) && !Npc_KnowsInfo(hero,info_milten_shsuccess) && (hero.attribute[ATR_HITPOINTS] < hero.attribute[ATR_HITPOINTS_MAX]) && (MILTEN_HEAL < 4))
 	{
 		return TRUE;
 	};
@@ -797,24 +801,28 @@ func void info_milten_shheal_info()
 	if(MILTEN_HEAL == 0)
 	{
 		AI_Output(self,hero,"Info_Milten_SHHEAL_02_02");	//Возьми целебный эликсир.
+		b_printtrademsg1("Получен экстракт исцеления.");
 		b_giveinvitems(self,hero,itfo_potion_health_02,1);
 		MILTEN_HEAL = 1;
 	}
 	else if(MILTEN_HEAL == 1)
 	{
 		AI_Output(self,hero,"Info_Milten_SHHEAL_02_02");	//Возьми целебный эликсир.
+		b_printtrademsg1("Получен экстракт исцеления.");
 		b_giveinvitems(self,hero,itfo_potion_health_02,1);
 		MILTEN_HEAL = 2;
 	}
 	else if(MILTEN_HEAL == 2)
 	{
 		AI_Output(self,hero,"Info_Milten_SHHEAL_02_02");	//Возьми целебный эликсир.
+		b_printtrademsg1("Получен экстракт исцеления.");
 		b_giveinvitems(self,hero,itfo_potion_health_02,1);
 		MILTEN_HEAL = 3;
 	}
 	else
 	{
 		AI_Output(self,hero,"Info_Milten_SHHEAL_02_03");	//У меня больше нет целебных эликсиров.
+		MILTEN_HEAL = 4;
 	};
 	AI_StopProcessInfos(self);
 };
@@ -1016,6 +1024,7 @@ func void info_milten_shsuccess_info()
 	AI_GotoNpc(self,hero);
 	AI_Output(self,hero,"Info_Milten_SHSUCCESS_02_01");	//Хорошо. Теперь у тебя есть талисман.
 	AI_Output(hero,self,"Info_Milten_SHSUCCESS_15_02");	//Вот, возьми его. Как ты и просил.
+	b_printtrademsg1("Отдан талисман орков.");
 	AI_Output(self,hero,"Info_Milten_SHSUCCESS_02_03");	//Спасибо, друг. Я никогда не забываю тех, кто помог мне.
 	AI_Output(self,hero,"Info_Milten_SHSUCCESS_02_04");	//Я возвращаюсь в Старый лагерь. Может быть, мы там еще встретимся.
 	b_giveinvitems(hero,self,itmi_orctalisman,1);
@@ -1068,58 +1077,7 @@ func void info_milten_ocwarn_info()
 		AI_Output(hero,self,"Info_Milten_OCWARN_15_11");	//Старая шахта обрушилась?
 		AI_Output(self,hero,"Info_Milten_OCWARN_02_12");	//Да. Все произошло очень быстро. Никто не уцелел.
 		AI_Output(self,hero,"Info_Milten_OCWARN_02_13");	//Вход в шахту блокировали стражники.
-		if(GETNEWGUY_STARTED == TRUE)
-	    {
-	    	b_logentry(CH1_RECRUITDUSTY,"Теперь я не смогу вывести кого-либо из Старого лагеря.");
-	    	Log_SetTopicStatus(CH1_RECRUITDUSTY,LOG_FAILED);
-			GETNEWGUY_STARTED = LOG_FAILED;
-	    };
-		if(Npc_KnowsInfo(hero,grd_271_ulbert_trick) && !Npc_KnowsInfo(hero,grd_271_ulbert_angry))
-	    {
-	    	b_logentry(CH2_STORAGESHED,"В Старой шахте произошел обвал, теперь туда не попасть!");
-	    	Log_SetTopicStatus(CH2_STORAGESHED,LOG_FAILED);
-	    };
-		if(Npc_KnowsInfo(hero,vlk_584_snipes_deal) && !Npc_KnowsInfo(hero,grd_262_aaron_sellnow))
-	    {
-	    	b_logentry(CH2_SNIPESDEAL,"Старая шахта обрушилась! Я не смогу выполнить просьбу Снайпса...");
-	    	Log_SetTopicStatus(CH2_SNIPESDEAL,LOG_FAILED);
-	    };
-		if(Npc_KnowsInfo(hero,org_801_lares_newlist) && !Npc_KnowsInfo(hero,org_801_lares_bringlistback))
-	    {
-	    	b_logentry(THELISTFORNC,"Список припасов для Старой шахты и план Ларса больше не имеют никакого смысла.");
-	    	Log_SetTopicStatus(THELISTFORNC,LOG_FAILED);
-			LARES_BRINGLISTBACK = LOG_FAILED;
-			DIEGO_BRINGLIST = LOG_FAILED;
-	    };
-		if(Npc_KnowsInfo(hero,info_diego_bringlist_offer) && !Npc_KnowsInfo(hero,info_diego_bringlist_success))
-	    {
-	    	b_logentry(CH1_BRINGLIST,"Список припасов для Старой шахты больше не имеет никакого смысла.");
-	    	Log_SetTopicStatus(CH1_BRINGLIST,LOG_FAILED);
-			LARES_BRINGLISTBACK = LOG_FAILED;
-			DIEGO_BRINGLIST = LOG_FAILED;
-	    };
-		if(CRONOS_MESSENGER == LOG_RUNNING && !Npc_KnowsInfo(hero,dia_milten_nocheinbrief))
-	    {
-	    	b_logentry(KDWLETTER,"Все маги Огня мертвы, я не успел передать им письмо...");
-	    	Log_SetTopicStatus(KDWLETTER,LOG_FAILED);
-			CRONOS_MESSENGER = LOG_FAILED;
-	    };
-		if(PYROCAR_MESSENGER == LOG_RUNNING)
-	    {
-	    	b_logentry(KDFLETTER,"Все маги Огня мертвы, я не успел передать им письмо...");
-	    	Log_SetTopicStatus(KDFLETTER,LOG_FAILED);
-			PYROCAR_MESSENGER = LOG_FAILED;
-	    };
-		if(DEXTER_GETKALOMSRECIPE == LOG_RUNNING)
-		{
-			DEXTER_GETKALOMSRECIPE = LOG_FAILED;
-			Log_SetTopicStatus(CH1_KALOMSRECIPE,LOG_FAILED);
-		};
-		if(FISK_GETNEWHEHLER == LOG_RUNNING)
-		{
-			FISK_GETNEWHEHLER = LOG_FAILED;
-			Log_SetTopicStatus(CH1_FISKNEWDEALER,LOG_FAILED);
-		};
+		b_failch4quests();
 	};
 };
 
@@ -1401,12 +1359,22 @@ func void info_milten_loadsword4_info()
 		AI_EquipBestMeleeWeapon(hero);
 	};
 	AI_Output(hero,self,"Info_Milten_LOADSWORD4_15_01");	//Ксардас дал мне заклинание, которое передаст мечу силу руды.
+	if(Npc_HasItems(hero,scroll4milten))
+	{
+		b_printtrademsg1("Отдано заклинание переноса энергии.");
+	};
 	AI_Output(hero,self,"Info_Milten_LOADSWORD4_15_02");	//Тебе нужно будет прочитать его, когда я поднесу меч к горе.
-	b_usefakescroll();
-	AI_Output(self,hero,"Info_Milten_LOADSWORD4_02_03");	//Ну, если мне нужно только прочесть заклинание...
+	AI_Output(self,hero,"Info_Milten_LOADSWORD4_02_03");	//Ну, хм, если мне нужно только прочесть заклинание...
+	if(Npc_HasItems(hero,scroll4milten))
+	{
+		b_usefakescroll();
+	};
 	AI_Output(self,hero,"Info_Milten_LOADSWORD4_02_04");	//Но у нас возникнут проблемы с Сатурасом и другими магами!
+	if(Npc_HasItems(hero,scroll4milten))
+	{
+		b_printtrademsg2("Получено заклинание переноса энергии.");
+	};
 };
-
 
 instance INFO_MILTEN_LSRISK(C_INFO)
 {
@@ -1516,11 +1484,11 @@ func int info_milten_lsnow_condition()
 func void info_milten_lsnow_info()
 {
 	AI_Output(hero,self,"Info_Milten_LSNOW_15_01");	//Вот заклинание!
+	b_printtrademsg1("Отдано заклинание переноса энергии.");
 	AI_Output(hero,self,"Info_Milten_LSNOW_15_02");	//Ты готов?
 	AI_Output(self,hero,"Info_Milten_LSNOW_02_03");	//Если только кто-нибудь может быть готов к этому...
 	AI_Output(hero,self,"Info_Milten_LSNOW_15_04");	//Тогда давай начнем!
 	b_giveinvitems(hero,self,scroll4milten,1);
-	b_giveinvitems(hero,self,mythrilklinge01,1);
 	STARTCHAPTERSSIX = TRUE;
 	AI_StopProcessInfos(self);
 };
@@ -1584,19 +1552,18 @@ func void info_milten_lsdone_info()
 	AI_Output(self,hero,"Info_Milten_LSDONE_02_03");	//Похоже, у нас получилось! Магическая сила всей этой руды теперь заключена в одном старом мече.
 	AI_Output(self,hero,"Info_Milten_LSDONE_02_04");	//Но, кажется, мы привлекли к себе слишком много внимания.
 	AI_Output(self,hero,"Info_Milten_LSDONE_02_05");	//Тебе придется воспользоваться заклинанием Портал, для того чтобы выбраться отсюда!
-	AI_Output(hero,self,"Info_Milten_LSDONE_15_06");	//А что будет с тобой?
-	AI_Output(self,hero,"Info_Milten_LSDONE_02_07");	//Обо мне не волнуйся, я что-нибудь придумаю. Уходи!
 	if(!Npc_HasItems(hero,itarruneteleport3) && !Npc_HasItems(hero,itarruneteleport5))
 	{
-		CreateInvItem(self,itarscrollteleport5);
-		b_giveinvitems(self,hero,itarscrollteleport5,1);
+		b_printtrademsg1("Получен свиток телепортации в Болотный лагерь.");
+		CreateInvItem(hero,itarscrollteleport5);
 	};
+	AI_Output(hero,self,"Info_Milten_LSDONE_15_06");	//А что будет с тобой?
+	AI_Output(self,hero,"Info_Milten_LSDONE_02_07");	//Обо мне не волнуйся, я что-нибудь придумаю. Уходи!
 	if(hero.attribute[ATR_MANA] < 5 && !Npc_HasItems(hero,itfo_potion_mana_01) && !Npc_HasItems(hero,itfo_potion_mana_02) && !Npc_HasItems(hero,itfo_potion_mana_03))
 	{
-		CreateInvItem(self,itfo_potion_mana_01);
-		b_giveinvitems(self,hero,itfo_potion_mana_01,1);
+		b_printtrademsg2("Получена эссенция магической энергии.");
+		CreateInvItem(hero,itfo_potion_mana_01);
 	};
-	Npc_RemoveInvItem(self,mythrilklinge01);
 	b_story_urizielloaded();
 	AI_StopProcessInfos(self);
 	b_exchangeroutine(pc_thief,"Reunion");

@@ -206,6 +206,7 @@ func void dia_raven_bindabei_info()
 	AI_Output(other,self,"DIA_Raven_BinDabei_15_00");	//Гомез сказал, что теперь я работаю на вас.
 	AI_Output(self,other,"DIA_Raven_BinDabei_10_01");	//Хорошо. У меня как раз есть для тебя одно задание.
 	AI_Output(self,other,"DIA_Raven_BinDabei_10_02");	//Если у тебя действительно хорошие связи, у тебя с ним не возникнет никаких проблем.
+	b_printtrademsg1("Получена одежда Призрака.");
 	CreateInvItem(self,stt_armor_m);
 	b_giveinvitems(self,hero,stt_armor_m,1);
 	AI_EquipArmor(hero,stt_armor_m);
@@ -401,10 +402,14 @@ func void dia_raven_quentin_done_info()
 	{
 		AI_Output(self,other,"DIA_Quentin_Raven_08");	//А что с нашими рудокопами?
 		AI_Output(other,self,"DIA_Quentin_Raven_09");	//Вернулись в лагерь.
+		b_clearimmortal(vlk_595_buddler);
+		b_clearimmortal(vlk_596_buddler);
+		b_clearimmortal(vlk_597_buddler);
 	};
 	AI_Output(self,other,"DIA_Quentin_Raven_10");	//Гомез будет в полном восторге!
 	AI_Output(self,other,"DIA_Quentin_Raven_11");	//Ну все, ступай, ступай... Я передам ему эту новость сам.
 	AI_Output(self,other,"DIA_Quentin_Raven_12");	//А ты теперь сможешь купить тяжелый доспех у Стоуна. Считай, что заслужил.
+	b_printtrademsg1("Получено руды: 500");
 	CAN_BUY_GRD_ARMOR_H = TRUE;
 	b_givexp(1000);
 	b_giveinvitems(self,other,itminugget,500);

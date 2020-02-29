@@ -103,14 +103,17 @@ func void tpl_1433_gornavid_health_suc_info()
 	AI_Output(other,self,"Tpl_1433_GorNaVid_HEALTH_SUC_Info_15_03");	//Я подойду к вам.
 	if(Npc_HasItems(hero,itfo_potion_health_01))
 	{
+		b_printtrademsg1("Отдана эссенция исцеления.");
 		b_giveinvitems(hero,self,itfo_potion_health_01,1);
 	}
 	else if(Npc_HasItems(hero,itfo_potion_health_02))
 	{
+		b_printtrademsg1("Отдан экстракт исцеления.");
 		b_giveinvitems(hero,self,itfo_potion_health_02,1);
 	}
 	else if(Npc_HasItems(hero,itfo_potion_health_03))
 	{
+		b_printtrademsg1("Отдано зелье исцеления.");
 		b_giveinvitems(hero,self,itfo_potion_health_03,1);
 	}
 	else

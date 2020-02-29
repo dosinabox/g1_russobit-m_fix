@@ -259,9 +259,9 @@ func void org_818_ratford_quest1_info()
 {
 	AI_Output(other,self,"Info_Jackal_Hello_WhatDoIGet_15_00");	//И что будет, после того как я отдам ее тебе?
 	AI_Output(self,other,"Info_Jackal_PermPaid_07_01");	//Ты можешь рассчитывать на мою помощь!
-	Log_CreateTopic("Карта для охотника",LOG_MISSION);
-	Log_SetTopicStatus("Карта для охотника",LOG_RUNNING);
-	b_logentry("Карта для охотника","Ретфорду нужна карта колонии. Если у меня будет достаточно руды, то я смогу купить ее в Старом лагере. А если не будет, то я что-нибудь придумаю...");
+	Log_CreateTopic(RATFORDMAPS,LOG_MISSION);
+	Log_SetTopicStatus(RATFORDMAPS,LOG_RUNNING);
+	b_logentry(RATFORDMAPS,"Ретфорду нужна карта колонии. Если у меня будет достаточно руды, то я смогу купить ее в Старом лагере. А если не будет, то я что-нибудь придумаю...");
 };
 
 instance ORG_818_RATFORD_QUEST2(C_INFO)
@@ -315,16 +315,18 @@ func void org_818_ratford_back()
 func void org_818_ratford_itwrworldmap()
 {
 	AI_Output(other,self,"Mis_1_Psi_Kalom_Success_15_04");	//Я справился с твоим заданием.
+	b_printtrademsg1("Отдана карта колонии.");
 	CreateInvItem(self,itwrworldmap);
 	AI_UseItemToState(self,itwrworldmap,1);
 	AI_Wait(self,2);
 	AI_UseItemToState(self,itwrworldmap,-1);
 	AI_Output(self,other,"VLK_584_Snipes_DEAL_RUN_Info_07_02");	//Возьми, ты заслужил их.
+	b_printtrademsg2("Получено 4 волчьих шкуры.");
 	b_giveinvitems(other,self,itwrworldmap,1);
-	CreateInvItems(self,itat_wolf_01,3);
+	CreateInvItems(self,itat_wolf_01,4);
 	b_giveinvitems(self,other,itat_wolf_01,4);
-	b_logentry("Карта для охотника","Я отдал Ретфорду карту колонии, а взамен получил несколько волчьих шкур.");
-	Log_SetTopicStatus("Карта для охотника",LOG_SUCCESS);
+	b_logentry(RATFORDMAPS,"Я отдал Ретфорду карту колонии, а взамен получил несколько волчьих шкур.");
+	Log_SetTopicStatus(RATFORDMAPS,LOG_SUCCESS);
 	RATFORD_ITWRWORLDMAP = TRUE;
 	b_givexp(200);
 };
@@ -332,12 +334,14 @@ func void org_818_ratford_itwrworldmap()
 func void org_818_ratford_itwrommap()
 {
 	AI_Output(other,self,"Mis_1_Psi_Kalom_Success_15_04");	//Я справился с твоим заданием.
+	b_printtrademsg1("Отдана карта дороги к Старой шахте.");
 	CreateInvItem(self,itwrommap);
 	AI_UseItemToState(self,itwrommap,1);
 	AI_Wait(self,1);
 	AI_UseItemToState(self,itwrommap,-1);
 	AI_Output(self,other,"SVM_7_OkayKeepIt");	//Хорошо, хорошо! Оставь себе!
-	b_logentry("Карта для охотника","Карта дороги к Старой шахте слишком мала.");
+	b_printtrademsg2("Получена карта дороги к Старой шахте.");
+	b_logentry(RATFORDMAPS,"Карта дороги к Старой шахте слишком мала.");
 	RATFORD_ITWROMMAP = TRUE;
 	b_givexp(40);
 };
@@ -345,12 +349,14 @@ func void org_818_ratford_itwrommap()
 func void org_818_ratford_itwrfocusmappsi()
 {
 	AI_Output(other,self,"Mis_1_Psi_Kalom_Success_15_04");	//Я справился с твоим заданием.
+	b_printtrademsg1("Отдана карта Юбериона.");
 	CreateInvItem(self,itwrfocusmappsi);
 	AI_UseItemToState(self,itwrfocusmappsi,1);
 	AI_Wait(self,1);
 	AI_UseItemToState(self,itwrfocusmappsi,-1);
 	AI_Output(self,other,"SVM_7_YouCanKeeptheCrap");	//Ну, ладно, оставь себе! А я найду себе что-то другое.
-	b_logentry("Карта для охотника","Карта Юбериона не подходит для охоты.");
+	b_printtrademsg2("Получена карта Юбериона.");
+	b_logentry(RATFORDMAPS,"Карта Юбериона не подходит для охоты.");
 	RATFORD_ITWRFOCUSMAPPSI = TRUE;
 	b_givexp(40);
 };
@@ -358,16 +364,18 @@ func void org_818_ratford_itwrfocusmappsi()
 func void org_818_ratford_itwrfocimap()
 {
 	AI_Output(other,self,"Mis_1_Psi_Kalom_Success_15_04");	//Я справился с твоим заданием.
+	b_printtrademsg1("Отдана карта Сатураса.");
 	CreateInvItem(self,itwrfocimap);
 	AI_UseItemToState(self,itwrfocimap,1);
 	AI_Wait(self,2);
 	AI_UseItemToState(self,itwrfocimap,-1);
 	AI_Output(self,other,"VLK_584_Snipes_DEAL_RUN_Info_07_02");	//Возьми, ты заслужил их.
+	b_printtrademsg2("Получено 4 волчьих шкуры.");
 	b_giveinvitems(other,self,itwrfocimap,1);
-	CreateInvItems(self,itat_wolf_01,3);
+	CreateInvItems(self,itat_wolf_01,4);
 	b_giveinvitems(self,other,itat_wolf_01,4);
-	b_logentry("Карта для охотника","Хоть карта Сатураса и довольно старая, но Ретфорду она будет очень полезна.");
-	Log_SetTopicStatus("Карта для охотника",LOG_SUCCESS);
+	b_logentry(RATFORDMAPS,"Хоть карта Сатураса и довольно старая, но Ретфорду она будет очень полезна.");
+	Log_SetTopicStatus(RATFORDMAPS,LOG_SUCCESS);
 	b_givexp(200);
 };
 

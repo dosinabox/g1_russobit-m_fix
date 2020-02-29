@@ -31,7 +31,7 @@ func void b_give_skipchapter3weapons()
 {
 	var C_NPC npc;
 	npc = Hlp_GetNpc(grd_211_skip);
-	CreateInvItems(npc,itkelockpick,30);
+	CreateInvItems(npc,itkelockpick,20);
 	CreateInvItem(npc,itmw_1h_sword_long_01);
 	CreateInvItem(npc,itmw_1h_sword_long_02);
 	CreateInvItem(npc,itmw_1h_sword_long_03);

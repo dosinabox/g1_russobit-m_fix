@@ -98,7 +98,8 @@ func void b_standup(var C_NPC slf)
 func void b_callcomrades()
 {
 	printdebugnpc(PD_ZS_DETAIL,"B_CallComrades");
-	b_sayoverlay(self,NULL,"$COMRADESHELP");
+	//b_sayoverlay(self,NULL,"$COMRADESHELP");
+	b_sayoverlay(self,NULL,"$GETTHINGSRIGHT");
 	Npc_SendPassivePerc(self,PERC_ASSESSWARN,self,other);
 };
 
@@ -306,48 +307,28 @@ func void b_setnpctype(var int npcinstance,var int newnpctype)
 	npc.npctype = newnpctype;
 };
 
+var string screenmessage;
+var string screenmessage2;
+
+func void b_printtrademsg1(var string trademsg1)
+{
+	CreateInvItem(hero,fakeitem);
+	SCREENMESSAGE = trademsg1;
+	AI_UseItem(hero,fakeitem);
+};
+
+func void b_printtrademsg2(var string trademsg2)
+{
+	CreateInvItem(hero,fakeitem2);
+	SCREENMESSAGE2 = trademsg2;
+	AI_UseItem(hero,fakeitem2);
+};
+
 func void b_giveinvitems(var C_NPC giver,var C_NPC taker,var int iteminstance,var int amount)
 {
-	var string msg;
 	printdebugnpc(PD_ZS_DETAIL,"B_GiveInvItems");
 	Npc_RemoveInvItems(giver,iteminstance,amount);
 	CreateInvItems(taker,iteminstance,amount);
-	if(Npc_IsPlayer(giver))
-	{
-		if(iteminstance == itminugget)
-		{
-			msg = ConcatStrings(_STR_MESSAGE_ORE_GIVEN,IntToString(amount));
-			PrintScreen(msg,-1,_YPOS_MESSAGE_GIVEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_GIVEN);
-		}
-		else if(amount == 1)
-		{
-			msg = _STR_MESSAGE_ITEM_GIVEN;
-			PrintScreen(msg,-1,_YPOS_MESSAGE_GIVEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_GIVEN);
-		}
-		else
-		{
-			msg = ConcatStrings(_STR_MESSAGE_ITEMS_GIVEN,IntToString(amount));
-			PrintScreen(msg,-1,_YPOS_MESSAGE_GIVEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_GIVEN);
-		};
-	}
-	else if(Npc_IsPlayer(taker))
-	{
-		if(iteminstance == itminugget)
-		{
-			msg = ConcatStrings(_STR_MESSAGE_ORE_TAKEN,IntToString(amount));
-			PrintScreen(msg,-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
-		}
-		else if(amount == 1)
-		{
-			msg = _STR_MESSAGE_ITEM_TAKEN;
-			PrintScreen(msg,-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
-		}
-		else
-		{
-			msg = ConcatStrings(_STR_MESSAGE_ITEMS_TAKEN,IntToString(amount));
-			PrintScreen(msg,-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
-		};
-	};
 };
 
 func int b_checkforimportantinfo(var C_NPC slf,var C_NPC oth)

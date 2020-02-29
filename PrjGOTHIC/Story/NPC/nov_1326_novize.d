@@ -31,3 +31,9 @@ func void rtn_start_1326()
 	ta_listen(7,30,23,5,"PSI_PLATFORM_1");
 };
 
+func void rtn_remove_1326()
+{
+	ta_stay(23,0,7,45,"WP_INTRO01");
+	ta_stay(7,45,23,0,"WP_INTRO01");
+};
+

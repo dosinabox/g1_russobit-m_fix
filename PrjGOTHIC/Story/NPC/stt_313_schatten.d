@@ -23,8 +23,6 @@ instance STT_313_SCHATTEN(NPC_DEFAULT)
 	EquipItem(self,itmw_1h_sword_short_03);
 	EquipItem(self,itrw_bow_small_03);
 	CreateInvItems(self,itamarrow,12);
-	CreateInvItem(self,itfo_potion_water_01);
-	CreateInvItem(self,itfoapple);
 	CreateInvItem(self,itkelockpick);
 	daily_routine = rtn_start_313;
 };

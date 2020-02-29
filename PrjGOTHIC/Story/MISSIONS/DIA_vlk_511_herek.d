@@ -47,11 +47,18 @@ func void dia_herek_bully_info()
 	AI_Output(self,other,"DIA_Herek_Bully_01_02");	//» как только у теб€ смелости хватило отказатьс€ платить ему деньги за защиту!
 	AI_Output(self,other,"DIA_Herek_Bully_01_03");	//ќбычно за таких, как ты, должны расплачиватьс€ простые рудокопы.
 	AI_Output(self,other,"DIA_Herek_Bully_01_04");	//я постараюсь напомнить тебе об этом, когда ты встретишь его в следующий раз.
-	npc_setpermattitude(self,ATT_ANGRY);
-	self.guild = GIL_NONE;
-	AI_StopProcessInfos(self);
-	Npc_SetTarget(self,other);
-	AI_StartState(self,zs_attack,1,"");
+	if(self.aivar[AIV_WASDEFEATEDBYSC] == FALSE)
+	{
+		npc_setpermattitude(self,ATT_ANGRY);
+		self.guild = GIL_NONE;
+		AI_StopProcessInfos(self);
+		Npc_SetTarget(self,other);
+		AI_StartState(self,zs_attack,1,"");
+	}
+	else
+	{
+		AI_StopProcessInfos(self);
+	};
 };
 
 
@@ -91,7 +98,7 @@ instance DIA_HEREK_ANLEGEN(C_INFO)
 	nr = 2;
 	condition = dia_herek_anlegen_condition;
 	information = dia_herek_anlegen_info;
-	permanent = 1;
+	permanent = 0;
 	description = "“ак ты считаешь себ€ сильнее всех? ћожет, сравним наши силы?";
 };
 
@@ -107,11 +114,19 @@ func int dia_herek_anlegen_condition()
 func void dia_herek_anlegen_info()
 {
 	AI_Output(other,self,"DIA_Herek_Anlegen_15_00");	//“ак ты считаешь себ€ сильнее всех? ћожет, сравним наши силы?
-	AI_Output(self,other,"DIA_Herek_Anlegen_01_01");	//’очешь покормить червей? —ейчас устрою!
-	npc_setpermattitude(self,ATT_ANGRY);
-	self.guild = GIL_NONE;
-	AI_StopProcessInfos(self);
-	Npc_SetTarget(self,other);
-	AI_StartState(self,zs_attack,1,"");
+	if(self.aivar[AIV_WASDEFEATEDBYSC] == FALSE)
+	{
+		AI_Output(self,other,"DIA_Herek_Anlegen_01_01");	//’очешь покормить червей? —ейчас устрою!
+		npc_setpermattitude(self,ATT_ANGRY);
+		self.guild = GIL_NONE;
+		AI_StopProcessInfos(self);
+		Npc_SetTarget(self,other);
+		AI_StartState(self,zs_attack,1,"");
+	}
+	else
+	{
+		AI_Output(self,other,"SVM_1_LetsForgetOurLittleFight");	//ƒавай забудем об этой ссоре, ладно?
+		AI_StopProcessInfos(self);
+	};
 };
 

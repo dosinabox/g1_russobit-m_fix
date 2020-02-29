@@ -63,6 +63,7 @@ func void b_story_fmtaken()
 	};
 	Wld_InsertNpc(grd_283_gardist,"FMC_ENTRANCE");
 	Wld_InsertNpc(grd_285_gardist,"FMC_ENTRANCE");
+	b_clearimmortal(grd_201_jackal);
 	b_exchangeroutine(grd_201_jackal,"FMTaken");
 	b_exchangeroutine(org_857_calash,"FMTaken");
 	b_exchangeroutine(org_834_organisator,"FMTaken");

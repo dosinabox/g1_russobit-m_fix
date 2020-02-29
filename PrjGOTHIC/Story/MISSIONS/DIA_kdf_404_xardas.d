@@ -18,15 +18,11 @@ func int info_xardas_exit_condition()
 
 func void info_xardas_exit_info()
 {
-	AI_StopProcessInfos(self);
-	if(Npc_HasItems(self,itarscrollsummondemon) < 1)
-	{
-		CreateInvItems(self,itarscrollsummondemon,2);
-	};
 	if(Npc_HasItems(self,demourizel))
 	{
 		Npc_RemoveInvItem(self,demourizel);
 	};
+	AI_StopProcessInfos(self);
 };
 
 
@@ -525,6 +521,7 @@ func void info_xardas_loadsword_info()
 {
 	AI_Output(other,self,"Info_Xardas_LOADSWORD_15_01");	//Я нашел один очень странный меч.
 	AI_Output(self,other,"Info_Xardas_LOADSWORD_14_02");	//Покажи-ка его мне.
+	b_printtrademsg1("Отдан необычный меч.");
 	CreateInvItem(self,demourizel);
 	AI_EquipBestMeleeWeapon(self);
 	AI_ReadyMeleeWeapon(self);
@@ -535,6 +532,7 @@ func void info_xardas_loadsword_info()
 	AI_Output(self,other,"Info_Xardas_LOADSWORD_14_04");	//Я уже слышал легенды об этом мече. Это древнее оружие, которое появилось тысячи лет назад.
 	AI_Output(self,other,"Info_Xardas_LOADSWORD_14_05");	//Меч выкован из неизвестного нам металла. Никто не знает, кто был его создателем.
 	AI_Output(self,other,"Info_Xardas_LOADSWORD_14_06");	//Думаю, он обладает огромной силой, но сейчас я не чувствую в нем магической энергии.
+	b_printtrademsg2("Получен УРИЗЕЛЬ.");
 	Npc_RemoveInvItem(hero,mythrilklinge);
 	CreateInvItem(hero,mythrilklinge01);
 };
@@ -648,8 +646,8 @@ func void info_xardas_betterarmor_info()
 	AI_Output(other,self,"Info_Xardas_BETTERARMOR_15_09");	//Как туда попасть?
 	AI_Output(self,other,"Info_Xardas_BETTERARMOR_14_10");	//После землетрясения я там ни разу не был, тебе придется выяснить это самому.
 	AI_Output(self,other,"Info_Xardas_BETTERARMOR_14_11");	//Вот этот ключ должен тебе пригодиться. Он открывает один из сундуков, в котором я хранил самые ценные вещи.
-	CreateInvItems(self,itke_sunkentower,1);
-	b_giveinvitems(self,hero,itke_sunkentower,1);
+	b_printtrademsg1("Получен ключ Ксардаса.");
+	CreateInvItems(hero,itke_sunkentower,1);
 	b_story_exploresunkentower();
 };
 
@@ -680,11 +678,11 @@ func void info_xardas_orearmor_info()
 	armorinstance = Hlp_GetInstanceID(armor);
 	if((armorinstance == ore_armor_m) || (armorinstance == ore_armor_h))
 	{
-		AI_Output(self,other,"Info_Xardas_OREARMOR_14_01");	//А, ты нашел железные доспехи.
+		AI_Output(self,other,"Info_Xardas_OREARMOR_14_02");	//Вижу, тебе удалось найти железные доспехи.
 	}
 	else
 	{
-		AI_Output(self,other,"Info_Xardas_OREARMOR_14_02");	//Вижу, тебе удалось найти железные доспехи.
+		AI_Output(self,other,"Info_Xardas_OREARMOR_14_01");	//А, ты нашел железные доспехи.
 	};
 	AI_Output(other,self,"Info_Xardas_OREARMOR_15_03");	//Да, я нашел их в одном из сундуков в затонувшей башне.
 	AI_Output(self,other,"Info_Xardas_OREARMOR_14_04");	//Он принадлежал тому герою, который сражался с УРИЗЕЛЕМ против орков.
@@ -719,8 +717,8 @@ func void info_xardas_formula_info()
 	AI_Output(self,other,"Info_Xardas_FORMULA_14_04");	//Его должен прочитать сильный маг, в то время как ты будешь держать меч над источником энергии.
 	AI_Output(other,self,"Info_Xardas_FORMULA_15_05");	//Что ж, мне придется найти того, кто сможет мне помочь.
 	AI_Output(self,other,"Info_Xardas_FORMULA_14_06");	//Возьми заклинание и верни мечу всю его былую силу. Она тебе понадобится!
-	CreateInvItem(self,scroll4milten);
-	b_giveinvitems(self,hero,scroll4milten,1);
+	b_printtrademsg1("Получено заклинание переноса энергии.");
+	CreateInvItem(hero,scroll4milten);
 	b_story_loadsword();
 };
 
@@ -738,7 +736,7 @@ instance INFO_XARDAS_ALTRUNE(C_INFO)
 
 func int info_xardas_altrune_condition()
 {
-	if(Npc_KnowsInfo(hero,info_xardas_formula) && ((Npc_GetTrueGuild(hero) == GIL_KDW) || (Npc_GetTrueGuild(hero) == GIL_DMB) || (Npc_GetTrueGuild(hero) == GIL_KDF) || Npc_GetTalentSkill(hero,NPC_TALENT_MAGE) > 1))
+	if(Npc_KnowsInfo(hero,info_xardas_formula) && ((Npc_GetTrueGuild(hero) == GIL_KDW) || (Npc_GetTrueGuild(hero) == GIL_DMB) || (Npc_GetTrueGuild(hero) == GIL_KDF) || (Npc_GetTalentSkill(hero,NPC_TALENT_MAGE) >= 1) || Npc_KnowsInfo(hero,kdf_402_corristo_aufnahme)))
 	{
 		return TRUE;
 	};
@@ -848,6 +846,7 @@ func void info_xardas_makerune_yes()
 {
 	Info_ClearChoices(info_xardas_makerunedoit);
 	AI_Output(other,self,"Info_Xardas_MAKERUNEDOIT_15_04");	//Да, я хочу этого!
+	b_printtrademsg1("Отдан заряженный УРИЗЕЛЬ.");
 	AI_Output(self,other,"Info_Xardas_MAKERUNEDOIT_14_05_01");	//Я сделаю, как ты просишь.
 	CreateInvItem(self,demourizel);
 	AI_EquipBestMeleeWeapon(self);
@@ -856,12 +855,10 @@ func void info_xardas_makerune_yes()
 	AI_RemoveWeapon(self);
 	AI_UnequipWeapons(self);
 	AI_Output(self,other,"Info_Xardas_MAKERUNEDOIT_14_05_02");	//Вот, возьми меч и руну!
-	b_giveinvitems(hero,self,mythrilklinge02,1);
-	Npc_RemoveInvItem(self,mythrilklinge02);
-	CreateInvItems(self,itarruneurizielrune,1);
-	CreateInvItems(self,mythrilklinge03,1);
-	b_giveinvitems(self,hero,itarruneurizielrune,1);
-	b_giveinvitems(self,hero,mythrilklinge03,1);
+	b_printtrademsg2("Получен УРИЗЕЛЬ и руна Волны смерти.");
+	Npc_RemoveInvItem(hero,mythrilklinge02);
+	CreateInvItems(hero,itarruneurizielrune,1);
+	CreateInvItems(hero,mythrilklinge03,1);
 	b_logentry(GE_URIZELRUNE,"Ксардас отделил магический камень от меча УРИЗЕЛЯ. Теперь вся сила меча перейдет в руну, сделанную из этого камня.");
 };
 
@@ -884,7 +881,7 @@ instance INFO_XARDAS_LOADSWORD09_0(C_INFO)
 
 func int info_xardas_loadsword09_0_condition()
 {
-	if(ENTEREDTEMPLE && (Npc_GetTrueGuild(hero) == GIL_KDW || (Npc_GetTrueGuild(hero) == GIL_KDF)))
+	if(ENTEREDTEMPLE && (Npc_GetTrueGuild(hero) == GIL_KDW || (Npc_GetTrueGuild(hero) == GIL_KDF) || Npc_KnowsInfo(hero,kdf_402_corristo_aufnahme)))
 	{
 		return TRUE;
 	};
@@ -924,14 +921,13 @@ func void info_xardas_loadsword09_info()
 	{
 		if(b_giveskill(other,NPC_TALENT_MAGE,6,LPCOST_TALENT_MAGE_6))
 		{
-			//AI_EquipArmor(self,dmb_armor_m);
 			AI_Output(self,other,"Info_Xardas_LOADSWORD09_14_03");	//Знай же, что только сильнейшие маги могут пройти посвящение в Шестой Круг. Это смогут сделать те, чья жизнь подчинена одному знаку.
 			AI_Output(self,other,"Info_Xardas_LOADSWORD09_14_04");	//Твой знак - объединение стихий.
 			AI_Output(self,other,"Info_Xardas_LOADSWORD09_14_05");	//Овладев знаниями Шестого Круга, ты сможешь читать заклинания любой руны.
 			AI_Output(self,other,"Info_Xardas_LOADSWORD09_14_06");	//Но не забывай, что не магия служит тебе, а ты - магии.
+			b_printtrademsg1("Получена мантия темного искусства.");
+			CreateInvItem(self,itarrunearmyofdarkness);
 			CreateInvItem(hero,dmb_armor_m);
-			//b_giveinvitems(self,hero,dmb_armor_m,1);
-			PrintScreen("Получен 1 предмет.",-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
 			AI_EquipArmor(hero,dmb_armor_m);
 			hero.guild = GIL_DMB;
 			Npc_SetTrueGuild(hero,GIL_DMB);

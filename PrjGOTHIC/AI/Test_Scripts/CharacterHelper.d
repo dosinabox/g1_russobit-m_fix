@@ -553,6 +553,59 @@ func void ch_guild_back()
 	Info_ClearChoices(ch_guild);
 };
 
+instance CH_DIFF(C_INFO)
+{
+	npc = ch;
+	condition = ch_diff_condition;
+	information = ch_diff_info;
+	important = 0;
+	permanent = 1;
+	description = "Измени сложность!";
+};
+
+
+func int ch_diff_condition()
+{
+	return TRUE;
+};
+
+func void ch_diff_info()
+{
+	Info_ClearChoices(ch_diff);
+	Info_AddChoice(ch_diff,"НАЗАД",ch_diff_back);
+	Info_AddChoice(ch_diff,"Очень высокая (опыт / 3)",ch_diff_veryhard);
+	Info_AddChoice(ch_diff,"Высокая (опыт / 2)",ch_diff_hard);
+	Info_AddChoice(ch_diff,"Стандартая",ch_diff_standart);
+};
+
+func void ch_diff_back()
+{
+	Info_ClearChoices(ch_diff);
+};
+
+func void ch_diff_veryhard()
+{
+	Info_ClearChoices(ch_diff);
+	DIFF_HARD = 0;
+	DIFF_VERYHARD = 1;
+	PrintScreen("Сложность: очень высокая",-1,-1,"font_old_20_white.tga",5);
+};
+
+func void ch_diff_hard()
+{
+	Info_ClearChoices(ch_diff);
+	DIFF_HARD = 1;
+	DIFF_VERYHARD = 0;
+	PrintScreen("Сложность: высокая",-1,-1,"font_old_20_white.tga",5);
+};
+
+func void ch_diff_standart()
+{
+	Info_ClearChoices(ch_diff);
+	DIFF_HARD = 0;
+	DIFF_VERYHARD = 0;
+	PrintScreen("Сложность: стандартная",-1,-1,"font_old_20_white.tga",5);
+};
 
 instance CH_GUILD(C_INFO)
 {

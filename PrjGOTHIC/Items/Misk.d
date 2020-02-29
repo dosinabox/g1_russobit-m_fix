@@ -727,3 +727,39 @@ instance WEEDPACK(C_ITEM)
 	count[5] = value;
 };
 
+instance FAKEITEM(C_ITEM)
+{
+	name = " ";
+	mainflag = ITEM_KAT_NONE;
+	flags = ITEM_MULTI;
+	value = 0;
+	visual = "fakeitem.3ds";
+	material = MAT_LEATHER;
+	scemename = "USEFAKEITEM";
+	on_state[0] = usefakeitem;
+	description = name;
+};
+
+func void usefakeitem()
+{
+	PrintScreen(SCREENMESSAGE,-1,37,"FONT_OLD_10_WHITE.TGA",3);
+};
+
+instance FAKEITEM2(C_ITEM)
+{
+	name = " ";
+	mainflag = ITEM_KAT_NONE;
+	flags = ITEM_MULTI;
+	value = 0;
+	visual = "fakeitem.3ds";
+	material = MAT_LEATHER;
+	scemename = "USEFAKEITEM";
+	on_state[0] = usefakeitem2;
+	description = name;
+};
+
+func void usefakeitem2()
+{
+	PrintScreen(SCREENMESSAGE2,-1,40,"FONT_OLD_10_WHITE.TGA",3);
+};
+

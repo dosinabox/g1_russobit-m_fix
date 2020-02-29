@@ -55,14 +55,14 @@ instance INFO_ORG_829_OFFERJOINT(C_INFO)
 	nr = 1;
 	condition = info_org_829_offerjoint_condition;
 	information = info_org_829_offerjoint_info;
-	permanent = 0;
+	permanent = 1;
 	description = "У меня есть болотник. Будешь?";
 };
 
 
 func int info_org_829_offerjoint_condition()
 {
-	if(Npc_KnowsInfo(hero,info_org_829_hello))
+	if(Npc_KnowsInfo(hero,info_org_829_hello) && ORG_829_GOTJOINT == FALSE)
 	{
 		return 1;
 	};
@@ -76,17 +76,34 @@ func void info_org_829_offerjoint_info()
 		if(Npc_HasItems(other,itmijoint_1))
 		{
 			b_giveinvitems(other,self,itmijoint_1,1);
+			b_printtrademsg1("Отдан 'Новичок'.");
 		}
 		else if(Npc_HasItems(other,itmijoint_2))
 		{
 			b_giveinvitems(other,self,itmijoint_2,1);
+			b_printtrademsg1("Отдан 'Северный темный'.");
 		}
 		else if(Npc_HasItems(other,itmijoint_3))
 		{
 			b_giveinvitems(other,self,itmijoint_3,1);
+			b_printtrademsg1("Отдан 'Зов мечты'.");
 		};
 		AI_Output(self,other,"Info_ORG_829_OfferJoint_06_01");	//Еще бы! Ты ведь из Лагеря сектантов, да?
-		NC_JOINTS_VERTEILT = NC_JOINTS_VERTEILT + 1;
+		if(other.guild == GIL_NOV || other.guild == GIL_TPL)
+		{
+			AI_Output(other,self,"Info_Swiney_Schuerfer_Ja_15_00");	//Да.
+		}
+		else
+		{
+			AI_Output(other,self,"KDW_600_Saturas_TIMESUP_Info_15_05");	//Нет...
+		};
+		if((BAALKAGAN_VERTEILKRAUT == LOG_RUNNING) || (BAALKAGAN_VERTEILKRAUT == LOG_SUCCESS))
+		{
+			NC_JOINTS_VERTEILT = NC_JOINTS_VERTEILT + 1;
+			b_printtrademsg2("Получено руды: 10");
+			CreateInvItems(self,itminugget,10);
+			b_giveinvitems(self,other,itminugget,10);
+		};
 		ORG_829_GOTJOINT = TRUE;
 	}
 	else
@@ -109,7 +126,7 @@ instance INFO_ORG_829_SPECIALINFO(C_INFO)
 
 func int info_org_829_specialinfo_condition()
 {
-	if(ORG_829_GOTJOINT == TRUE)
+	if(ORG_829_GOTJOINT == TRUE && KAPITEL < 4)
 	{
 		return 1;
 	};
@@ -130,14 +147,14 @@ instance INFO_ORG_829_PERM(C_INFO)
 	nr = 1;
 	condition = info_org_829_perm_condition;
 	information = info_org_829_perm_info;
-	permanent = 1;
+	permanent = 0;
 	description = "А ты можешь рассказать мне, что это за лагерь?";
 };
 
 
 func int info_org_829_perm_condition()
 {
-	if(ORG_829_GOTJOINT == TRUE)
+	if(ORG_829_GOTJOINT == TRUE && KAPITEL < 4)
 	{
 		return 1;
 	};

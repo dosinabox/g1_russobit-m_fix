@@ -151,7 +151,7 @@ instance INFO_SLD_723_PAROLE(C_INFO)
 	information = info_sld_723_parole_info;
 	permanent = 1;
 	important = 0;
-	description = "(Сказать пароль)";
+	description = "(сказать пароль)";
 };
 
 

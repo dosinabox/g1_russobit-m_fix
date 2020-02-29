@@ -81,7 +81,7 @@ const string TXT_GUILDS[42] =
 	"Орк",
 	"Скелет",
 	"Варг",
-	"Крысокрот",
+	"Кротокрыс",
 	"Голем",
 	"Шныг",
 	"",
@@ -277,7 +277,10 @@ const string _STR_CANNOTUSE_LEVELS = "Круга магии ";
 const string _STR_CANNOTUSE_POST = "для использования.";
 const string _STR_CANNOTUSE_PRE_NPC = " (";
 const string _STR_CANNOTUSE_POST_NPC = ") отсутствует.";
-const string _STR_MESSAGE_INTERACT_NO_KEY = "Нет отмычки или подходящего ключа.";
+const string _STR_CANNOTUSE_LOCKS_NO_SKILL = "Я не умею взламывать замки.";
+const string _STR_CANNOTUSE_LOCKS_LOW_SKILL = "Моего навыка взлома недостаточно.";
+const string _STR_MESSAGE_INTERACT_NO_KEY_NO_LOCKPICK = "Нет отмычки или подходящего ключа.";
+const string _STR_MESSAGE_INTERACT_NO_KEY = "Нет подходящего ключа.";
 const string _STR_MESSAGE_PICKLOCK_SUCCESS = "Слышу щелчок. Все идет как надо.";
 const string _STR_MESSAGE_PICKLOCK_UNLOCK = "Замок взломан.";
 const string _STR_MESSAGE_PICKLOCK_FAILURE = "Черт... Ничего на вышло.";

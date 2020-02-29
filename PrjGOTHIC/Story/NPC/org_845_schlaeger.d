@@ -26,19 +26,15 @@ instance ORG_845_SCHLAEGER(NPC_DEFAULT)
 	CreateInvItems(self,itkelockpick,1);
 	CreateInvItems(self,itminugget,12);
 	CreateInvItems(self,itforice,10);
-	CreateInvItems(self,itfobooze,3);
-	CreateInvItems(self,itlstorch,1);
 	CreateInvItems(self,itfo_potion_health_01,1);
 	CreateInvItem(self,itmi_stuff_plate_01);
-	CreateInvItem(self,itmi_stuff_cup_01);
-	CreateInvItem(self,itat_claws_01);
 	daily_routine = rtn_start_845;
 };
 
 
 func void rtn_start_845()
 {
-	ta_stand(8,10,20,20,"NC_PATH69");
+	ta_smalltalk(8,10,20,20,"NC_PATH53");
 	ta_sitcampfire(20,20,8,10,"NC_PATH53");
 };
 

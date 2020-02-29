@@ -98,6 +98,7 @@ func void quentin_dia1_info()
 	AI_Output(self,hero,"Quentin_DIA1_06");	//Сбегай в лагерь рудокопов Свободной шахты и найди там вора по имени Калеш. Он работает на меня.
 	b_usefakescroll();
 	AI_Output(self,hero,"Quentin_DIA1_07");	//Передай ему это письмо - и не смей читать, понял?
+	b_printtrademsg1("Получено письмо.");
 	AI_Output(hero,self,"DIA_Fletcher_Hello_ISee_15_00");	//Все понятно.
 	CreateInvItem(hero,calashnote);
 	b_logentry(QUENTIN_GANG,"Квентин отправил меня в лагерь рудокопов Свободной шахты, где я должен буду передать письмо вору по имени Калеш.");
@@ -188,6 +189,7 @@ func int quentin_dia3_condition()
 func void quentin_dia3_info()
 {
 	AI_Output(hero,self,"Info_Milten_SHSUCCESS_15_02");	//Вот, возьми его. Как ты и просил.
+	b_printtrademsg1("Отдан амулет.");
 	b_giveinvitems(hero,self,itmi_amulet_psi_01,1);
 	b_givexp(300);
 	AI_Output(self,hero,"Quentin_DIA3_01");	//Не может быть! Ты сделал то, что не удавалось моим парням несколько месяцев! Кажется, я недооценивал тебя...
@@ -228,6 +230,8 @@ func void quentin_dia33_info()
 	AI_Output(self,hero,"Quentin_DIA3_09");	//Найди его и принеси мне то, что принадлежит нам! А судьба этого бедолаги меня не волнует, если понадобится - убей.
 	AI_Output(hero,self,"Info_Thorus_MordragKo_OFFER_BACK_15_00");	//Я займусь им.
 	AI_Output(self,hero,"Quentin_DIA3_10");	//Еще раз спасибо за амулет. Возьми руду и наш доспех, ты заслужил это. Добро пожаловать в шайку!
+	b_printtrademsg1("Получено руды: 400");
+	b_printtrademsg2("Получен доспех грабителя.");
 	CreateInvItems(self,itminugget,400);
 	b_giveinvitems(self,hero,itminugget,400);
 	if(KAPITEL == 1)
@@ -299,6 +303,7 @@ func void quentin_dia4_info()
 			AI_Output(self,hero,"Quentin_DIA4_07");	//Ты уже принадлежишь к Старому лагерю, у тебя не должно возникнуть проблем.
 		};
 		AI_Output(self,hero,"Quentin_DIA4_08");	//Возьми эту одежду стражника и меч, передай все это Алексу.
+		b_printtrademsg1("Получена маскировка.");
 		AI_Output(self,hero,"Quentin_DIA4_09");	//Также ему понадобится карта Старого лагеря, потому что вы не сможете выйти оттуда вдвоем.
 		AI_Output(self,hero,"Quentin_DIA4_10");	//Но тебе придется поискать ее самостоятельно, тут я не смогу тебе помочь.
 		AI_Output(self,hero,"Quentin_DIA4_11");	//Пробирайся в тюрьму ночью, когда большинство стражников и надзиратель будут спать.
@@ -369,6 +374,7 @@ func void quentin_dia5_info()
 {
 	AI_Output(self,hero,"Quentin_DIA5_01");	//Отличная работа! Все целы и невредимы, благодаря тебе! Ты не перестаешь меня удивлять.
 	AI_Output(self,hero,"Quentin_DIA5_02");	//Надеюсь, эта руда поможет.
+	b_printtrademsg1("Получено руды: 500");
 	AI_Output(self,hero,"Quentin_DIA5_03");	//Теперь Алекс в долгу перед тобой. Можешь брать его с собой на охоту или какие-нибудь дела, он поможет тебе.
 	AI_Output(self,hero,"Quentin_DIA5_04");	//Только держитесь подальше от лагерей, не хочется, чтобы его опять поймали. Да и в шахты он не полезет.
 	b_givexp(400);
@@ -402,6 +408,7 @@ func void quentin_dia51_info()
 {
 	AI_Output(self,hero,"Quentin_DIA5_01");	//Отличная работа! Все целы и невредимы, благодаря тебе! Ты не перестаешь меня удивлять.
 	AI_Output(self,hero,"Quentin_DIA5_02");	//Надеюсь, эта руда поможет.
+	b_printtrademsg1("Получено руды: 500");
 	AI_Output(self,hero,"Quentin_DIA5_03");	//Теперь Алекс в долгу перед тобой. Можешь брать его с собой на охоту или какие-нибудь дела, он поможет тебе.
 	AI_Output(self,hero,"Quentin_DIA5_04");	//Только держитесь подальше от лагерей, не хочется, чтобы его опять поймали. Да и в шахты он не полезет.
 	b_givexp(400);

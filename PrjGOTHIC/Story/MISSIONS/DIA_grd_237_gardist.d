@@ -15,7 +15,7 @@ func int info_grd_237_firstwarn_condition()
 {
 	var C_ITEM eqarmor1;
 	eqarmor1 = Npc_GetEquippedArmor(hero);
-	if(!Hlp_IsItem(eqarmor1,grd_armor_h) && (KAPITEL < 4) && (hero.aivar[AIV_GUARDPASSAGE_STATUS] == AIV_GPS_BEGIN) && (self.aivar[AIV_PASSGATE] == FALSE) && (Npc_GetAttitude(self,hero) != ATT_FRIENDLY) && Hlp_StrCmp(Npc_GetNearestWP(self),self.wp))
+	if(!Hlp_IsItem(eqarmor1,grd_armor_h) && !Hlp_IsItem(eqarmor1,kdf_armor_h) && !Hlp_IsItem(eqarmor1,kdf_armor_l) && (KAPITEL < 4) && (hero.aivar[AIV_GUARDPASSAGE_STATUS] == AIV_GPS_BEGIN) && (self.aivar[AIV_PASSGATE] == FALSE) && (Npc_GetAttitude(self,hero) != ATT_FRIENDLY) && Hlp_StrCmp(Npc_GetNearestWP(self),self.wp))
 	{
 		return TRUE;
 	};
@@ -55,10 +55,12 @@ func void info_grd_237_firstwarn_info_yes()
 	var int ore;
 	Info_ClearChoices(info_grd_237_firstwarn);
 	AI_Output(hero,self,"Info_Grd_237_FirstWarn_15_06");	//Ладно, вот тебе руда!
+	b_printtrademsg1("Отдана вся руда.");
 	AI_Output(self,hero,"Info_Grd_237_FirstWarn_07_07");	//О, как щедро с твоей стороны!
 	ore = Npc_HasItems(hero,itminugget);
 	b_giveinvitems(hero,self,itminugget,ore);
 	self.aivar[AIV_PASSGATE] = TRUE;
+	AI_StopProcessInfos(self);
 };
 
 func void info_grd_237_firstwarn_info_noore()
@@ -97,7 +99,7 @@ func int info_grd_237_lastwarn_condition()
 {
 	var C_ITEM eqarmor1;
 	eqarmor1 = Npc_GetEquippedArmor(hero);
-	if(!Hlp_IsItem(eqarmor1,grd_armor_h) && (KAPITEL < 4) && (hero.aivar[AIV_GUARDPASSAGE_STATUS] == AIV_GPS_FIRSTWARN) && (self.aivar[AIV_PASSGATE] == FALSE) && (Npc_GetDistToWP(hero,GRD_237_CHECKPOINT) < (hero.aivar[AIV_LASTDISTTOWP] - 100)) && Hlp_StrCmp(Npc_GetNearestWP(self),self.wp))
+	if(!Hlp_IsItem(eqarmor1,grd_armor_h) && !Hlp_IsItem(eqarmor1,kdf_armor_h) && !Hlp_IsItem(eqarmor1,kdf_armor_l) && (KAPITEL < 4) && (hero.aivar[AIV_GUARDPASSAGE_STATUS] == AIV_GPS_FIRSTWARN) && (self.aivar[AIV_PASSGATE] == FALSE) && (Npc_GetDistToWP(hero,GRD_237_CHECKPOINT) < (hero.aivar[AIV_LASTDISTTOWP] - 100)) && Hlp_StrCmp(Npc_GetNearestWP(self),self.wp))
 	{
 		return TRUE;
 	};
@@ -127,7 +129,7 @@ func int info_grd_237_attack_condition()
 {
 	var C_ITEM eqarmor1;
 	eqarmor1 = Npc_GetEquippedArmor(hero);
-	if(!Hlp_IsItem(eqarmor1,grd_armor_h) && (KAPITEL < 4) && (hero.aivar[AIV_GUARDPASSAGE_STATUS] == AIV_GPS_LASTWARN) && (self.aivar[AIV_PASSGATE] == FALSE) && (Npc_GetDistToWP(hero,GRD_237_CHECKPOINT) < (hero.aivar[AIV_LASTDISTTOWP] - 100)) && Hlp_StrCmp(Npc_GetNearestWP(self),self.wp))
+	if(!Hlp_IsItem(eqarmor1,grd_armor_h) && !Hlp_IsItem(eqarmor1,kdf_armor_h) && !Hlp_IsItem(eqarmor1,kdf_armor_l) && (KAPITEL < 4) && (hero.aivar[AIV_GUARDPASSAGE_STATUS] == AIV_GPS_LASTWARN) && (self.aivar[AIV_PASSGATE] == FALSE) && (Npc_GetDistToWP(hero,GRD_237_CHECKPOINT) < (hero.aivar[AIV_LASTDISTTOWP] - 100)) && Hlp_StrCmp(Npc_GetNearestWP(self),self.wp))
 	{
 		return TRUE;
 	};

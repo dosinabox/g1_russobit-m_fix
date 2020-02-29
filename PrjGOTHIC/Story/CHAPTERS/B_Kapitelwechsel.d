@@ -6,60 +6,12 @@ func void b_kapitelwechsel(var int neues_kapitel)
 	var C_NPC templer_1;
 	var C_NPC novize;
 	var C_NPC novize_1;
-	var C_NPC grim;
-	var C_NPC jackal;
 	var C_NPC corkalom;
 	var C_NPC corangar;
 	var C_NPC chani;
 	var C_NPC natalia;
 	var C_NPC guard;
 	var C_NPC bloodwyn;
-	var C_NPC gardist_204;
-	var C_NPC gardist_206;
-	var C_NPC gardist_208;
-	var C_NPC gardist_209;
-	var C_NPC gardist_211;
-	var C_NPC gardist_212;
-	var C_NPC gardist_213;
-	var C_NPC gardist_214;
-	var C_NPC gardist_215;
-	var C_NPC gardist_216;
-	var C_NPC gardist_217;
-	var C_NPC gardist_218;
-	var C_NPC gardist_220;
-	var C_NPC gardist_221;
-	var C_NPC gardist_222;
-	var C_NPC gardist_223;
-	var C_NPC gardist_224;
-	var C_NPC gardist_225;
-	var C_NPC gardist_226;
-	var C_NPC gardist_227;
-	var C_NPC gardist_228;
-	var C_NPC gardist_229;
-	var C_NPC gardist_230;
-	var C_NPC gardist_231;
-	var C_NPC gardist_232;
-	var C_NPC gardist_237;
-	var C_NPC gardist_238;
-	var C_NPC gardist_239;
-	var C_NPC gardist_240;
-	var C_NPC gardist_241;
-	var C_NPC gardist_242;
-	var C_NPC gardist_243;
-	var C_NPC gardist_244;
-	var C_NPC gardist_245;
-	var C_NPC gardist_250;
-	var C_NPC gardist_251;
-	var C_NPC gardist_252;
-	var C_NPC gardist_253;
-	var C_NPC gardist_254;
-	var C_NPC gardist_265;
-	var C_NPC gardist_275;
-	var C_NPC gardist_276;
-	var C_NPC gardist_279;
-	var C_NPC gardist_280;
-	var C_NPC gardist_281;
-	var C_NPC fletcher;
 	KAPITEL = neues_kapitel;
 	if(neues_kapitel == 1)
 	{
@@ -104,7 +56,7 @@ func void b_kapitelwechsel(var int neues_kapitel)
 		yberion = Hlp_GetNpc(gur_1200_yberion);
 		AI_Teleport(yberion,"PSI_TEST");
 		Npc_ExchangeRoutine(yberion,"DEAD");
-	    AI_ContinueRoutine(yberion);
+		AI_ContinueRoutine(yberion);
 		yberion.flags = 0;
 		Npc_ChangeAttribute(yberion,ATR_HITPOINTS,-yberion.attribute[ATR_HITPOINTS_MAX]+201);
 		yberion.flags = NPC_FLAG_IMMORTAL;
@@ -151,10 +103,10 @@ func void b_kapitelwechsel(var int neues_kapitel)
 		HANIS_CHARGED = FALSE;
 		b_exchangeroutine(tpl_1422_gorhanis,"START");
 		if(!Npc_IsDead(vlk_580_grim))
-	    {
-	        Wld_InsertNpc(stt_594_grim,"OCR_HUT_2");
+		{
+			Wld_InsertNpc(stt_594_grim,"OCR_HUT_2");
 			b_exchangeroutine(vlk_580_grim,"REMOVE");
-	    };
+		};
 		PlayVideo("GREATPRAYER.BIK");
 		//PlayVideo("GREATPRAYER_RUSSOBIT.BIK");
 		corkalom = Hlp_GetNpc(gur_1201_corkalom);
@@ -174,7 +126,7 @@ func void b_kapitelwechsel(var int neues_kapitel)
 		Npc_ExchangeRoutine(corangar,"CARE");
 		Npc_ExchangeRoutine(chani,"DEAD");
 		Npc_ExchangeRoutine(natalia,"DEAD");
-        AI_ContinueRoutine(corkalom);
+		AI_ContinueRoutine(corkalom);
 		AI_ContinueRoutine(corangar);
 		AI_ContinueRoutine(chani);
 		AI_ContinueRoutine(natalia);
@@ -212,7 +164,7 @@ func void b_kapitelwechsel(var int neues_kapitel)
 		b_give_wolfchapter4weapons();
 		b_give_fortunochapter4herbs();
 		if(!Npc_IsDead(org_826_mordrag))
-	    {
+		{
 			b_give_mordragchapter4crap();
 		};
 		b_give_silaschapter4food();
@@ -243,101 +195,7 @@ func void b_kapitelwechsel(var int neues_kapitel)
 		b_clearimmortal(grd_230_gardist);
 		b_clearimmortal(grd_280_gardist);
 		b_clearimmortal(grd_998_gardist);
-		jackal = Hlp_GetNpc(grd_201_jackal);
-		jackal.aivar[43] = TRUE;
-		bloodwyn = Hlp_GetNpc(grd_233_bloodwyn);
-		gardist_204 = Hlp_GetNpc(grd_204_gardist);
-		gardist_206 = Hlp_GetNpc(grd_206_gardist);
-		gardist_208 = Hlp_GetNpc(grd_208_cutter);
-		gardist_209 = Hlp_GetNpc(grd_209_gardist);
-		gardist_211 = Hlp_GetNpc(grd_211_skip);
-		gardist_212 = Hlp_GetNpc(grd_212_torwache);
-		gardist_213 = Hlp_GetNpc(grd_213_torwache);
-		gardist_214 = Hlp_GetNpc(grd_214_torwache);
-		gardist_215 = Hlp_GetNpc(grd_215_torwache);
-		gardist_216 = Hlp_GetNpc(grd_216_torwache);
-		gardist_217 = Hlp_GetNpc(grd_217_torwache);
-		gardist_218 = Hlp_GetNpc(grd_218_gardist);
-		gardist_220 = Hlp_GetNpc(grd_220_gardist);
-		gardist_221 = Hlp_GetNpc(grd_221_gardist);
-		gardist_222 = Hlp_GetNpc(grd_222_gardist);
-		gardist_223 = Hlp_GetNpc(grd_223_gardist);
-		gardist_224 = Hlp_GetNpc(grd_224_pacho);
-		gardist_225 = Hlp_GetNpc(grd_225_gardist);
-		gardist_226 = Hlp_GetNpc(grd_226_gardist);
-		gardist_227 = Hlp_GetNpc(grd_227_gardist);
-		gardist_228 = Hlp_GetNpc(grd_228_gardist);
-		gardist_229 = Hlp_GetNpc(grd_229_gardist);
-		gardist_230 = Hlp_GetNpc(grd_230_gardist);
-		gardist_231 = Hlp_GetNpc(grd_231_gardist);
-		gardist_232 = Hlp_GetNpc(grd_232_gardist);
-		gardist_237 = Hlp_GetNpc(grd_237_gardist);
-		gardist_238 = Hlp_GetNpc(grd_238_gardist);
-		gardist_239 = Hlp_GetNpc(grd_239_gardist);
-		gardist_240 = Hlp_GetNpc(grd_240_gardist);
-		gardist_241 = Hlp_GetNpc(grd_241_gardist);
-		gardist_242 = Hlp_GetNpc(grd_242_gardist);
-		gardist_243 = Hlp_GetNpc(grd_243_gardist);
-		gardist_244 = Hlp_GetNpc(grd_244_gardist);
-		gardist_245 = Hlp_GetNpc(grd_245_gardist);
-		gardist_250 = Hlp_GetNpc(grd_250_gardist);
-		gardist_251 = Hlp_GetNpc(grd_251_kirgo);
-		gardist_252 = Hlp_GetNpc(grd_252_gardist);
-		gardist_253 = Hlp_GetNpc(grd_253_gardist);
-		gardist_254 = Hlp_GetNpc(grd_254_orry);
-		gardist_265 = Hlp_GetNpc(grd_265_gardist);
-		gardist_275 = Hlp_GetNpc(grd_275_brueckenwache);
-		gardist_276 = Hlp_GetNpc(grd_276_brueckenwache);
-		gardist_279 = Hlp_GetNpc(grd_279_gardist);
-		gardist_280 = Hlp_GetNpc(grd_280_gardist);
-		gardist_281 = Hlp_GetNpc(grd_281_gardist);
-		fletcher = Hlp_GetNpc(grd_255_fletcher);
-		gardist_204.aivar[43] = TRUE;
-		gardist_206.aivar[43] = TRUE;
-		gardist_208.aivar[43] = TRUE;
-		gardist_209.aivar[43] = TRUE;
-		gardist_211.aivar[43] = TRUE;
-		gardist_212.aivar[43] = TRUE;
-		gardist_213.aivar[43] = TRUE;
-		gardist_214.aivar[43] = TRUE;
-		gardist_215.aivar[43] = TRUE;
-		gardist_216.aivar[43] = TRUE;
-		gardist_217.aivar[43] = TRUE;
-		gardist_218.aivar[43] = TRUE;
-		gardist_220.aivar[43] = TRUE;
-		gardist_221.aivar[43] = TRUE;
-		gardist_222.aivar[43] = TRUE;
-		gardist_223.aivar[43] = TRUE;
-		gardist_224.aivar[43] = TRUE;
-		gardist_225.aivar[43] = TRUE;
-		gardist_226.aivar[43] = TRUE;
-		gardist_227.aivar[43] = TRUE;
-		gardist_228.aivar[43] = TRUE;
-		gardist_229.aivar[43] = TRUE;
-		gardist_230.aivar[43] = TRUE;
-		gardist_231.aivar[43] = TRUE;
-		gardist_232.aivar[43] = TRUE;
-		gardist_237.aivar[43] = TRUE;
-		gardist_238.aivar[43] = TRUE;
-		gardist_239.aivar[43] = TRUE;
-		gardist_240.aivar[43] = TRUE;
-		gardist_241.aivar[43] = TRUE;
-		gardist_242.aivar[43] = TRUE;
-		gardist_243.aivar[43] = TRUE;
-		gardist_244.aivar[43] = TRUE;
-		gardist_245.aivar[43] = TRUE;
-		gardist_250.aivar[43] = TRUE;
-		gardist_251.aivar[43] = TRUE;
-		gardist_252.aivar[43] = TRUE;
-		gardist_253.aivar[43] = TRUE;
-		gardist_254.aivar[43] = TRUE;
-		gardist_265.aivar[43] = TRUE;
-		gardist_275.aivar[43] = TRUE;
-		gardist_276.aivar[43] = TRUE;
-		gardist_279.aivar[43] = TRUE;
-		gardist_280.aivar[43] = TRUE;
-		gardist_281.aivar[43] = TRUE;
-		fletcher.aivar[43] = TRUE;
+		b_clearimmortal(grd_251_kirgo);
 		b_killnpc(kdf_400_rodriguez);
 		b_killnpc(kdf_401_damarok);
 		b_killnpc(kdf_402_corristo);
@@ -411,7 +269,7 @@ func void b_kapitelwechsel(var int neues_kapitel)
 		b_exchangeroutine(pc_mage,"OCWait");
 		b_exchangeroutine(org_826_mordrag,"START");
 		b_exchangeroutine(ebr_105_raven,"FLEE");
-	    b_exchangeroutine(grd_200_thorus,"FLEE");
+		b_exchangeroutine(grd_200_thorus,"FLEE");
 		b_exchangeroutine(ebr_108_velaya,"FLEE");
 		b_exchangeroutine(ebr_109_syra,"FLEE");
 		b_exchangeroutine(ebr_110_seraphia,"FLEE");
@@ -470,15 +328,15 @@ func void b_kapitelwechsel(var int neues_kapitel)
 			GATE_07_STATE = 1;
 		};
 		if(!Npc_IsDead(vlk_582_melvin))
-	    {
-	        Wld_InsertNpc(nov_1373_melvin,"PSI_12_HUT_EX_TEACH");
+		{
+			Wld_InsertNpc(nov_1373_melvin,"PSI_12_HUT_EX_TEACH");
 			b_exchangeroutine(vlk_582_melvin,"REMOVE");
-	    };
+		};
 		if(GETNEWGUY_DUSTY_JOINED == TRUE && !Npc_IsDead(vlk_524_dusty))
-	    {
-		    Wld_InsertNpc(nov_1372_dusty,"PSI_25_HUT_IN");
+		{
+			Wld_InsertNpc(nov_1372_dusty,"PSI_25_HUT_IN");
 			b_exchangeroutine(vlk_524_dusty,"REMOVE");
-	    }
+		}
 		else
 		{
 			b_killnpc(vlk_524_dusty);
@@ -501,7 +359,7 @@ func void b_kapitelwechsel(var int neues_kapitel)
 		b_give_cronoschapter5runes();
 		b_give_fortunochapter5herbs();
 		if(!Npc_IsDead(org_826_mordrag))
-	    {
+		{
 			b_give_mordragchapter5crap();
 		};
 		b_give_silaschapter5food();
@@ -521,8 +379,8 @@ func void b_kapitelwechsel(var int neues_kapitel)
 		b_give_sharkychapter6weapons();
 		b_give_cavalornchapter6weapons();
 		b_give_wolfchapter6weapons();
-		b_give_xardaschapter6runes();
 		PlayVideo("OREHEAP.BIK");
+		Npc_RemoveInvItem(hero,mythrilklinge01);
 		CreateInvItem(hero,mythrilklinge02);
 		Npc_RemoveInvItems(kdw_604_cronos,itfo_potion_haste_01,Npc_HasItems(kdw_604_cronos,itfo_potion_haste_01));
 		Npc_RemoveInvItems(kdw_604_cronos,itfo_potion_haste_02,Npc_HasItems(kdw_604_cronos,itfo_potion_haste_02));

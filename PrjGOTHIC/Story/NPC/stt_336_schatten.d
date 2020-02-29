@@ -13,7 +13,6 @@ instance STT_336_SCHATTEN(NPC_DEFAULT)
 	attribute[ATR_MANA] = 0;
 	attribute[ATR_HITPOINTS_MAX] = 100;
 	attribute[ATR_HITPOINTS] = 100;
-	aivar[43] = TRUE;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Relaxed.mds");
 	Mdl_SetVisualBody(self,"hum_body_Naked0",0,1,"Hum_Head_Pony",56,1,stt_armor_m);
@@ -25,7 +24,7 @@ instance STT_336_SCHATTEN(NPC_DEFAULT)
 	EquipItem(self,itrw_bow_small_05);
 	CreateInvItems(self,itamarrow,15);
 	CreateInvItem(self,itfo_potion_water_01);
-	CreateInvItems(self,itfobeer,2);
+	CreateInvItem(self,itfobeer);
 	daily_routine = rtn_fmstart_336;
 };
 

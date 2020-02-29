@@ -82,21 +82,58 @@ func int b_giveskill(var C_NPC typ,var int tal,var int new_wert,var int lp_cost)
 			else if(tal == NPC_TALENT_PICKLOCK)
 			{
 				Npc_SetTalentSkill(typ,NPC_TALENT_PICKLOCK,new_wert);
-				Npc_SetTalentValue(typ,NPC_TALENT_PICKLOCK,Npc_GetTalentValue(typ,NPC_TALENT_PICKLOCK) - 40);
+				if(Npc_GetTalentSkill(typ,NPC_TALENT_PICKLOCK) == 1)
+				{
+					Npc_SetTalentValue(typ,NPC_TALENT_PICKLOCK,Npc_GetTalentValue(typ,NPC_TALENT_PICKLOCK) - 20);
+				}
+				else if(Npc_GetTalentSkill(typ,NPC_TALENT_PICKLOCK) == 2)
+				{
+					Npc_SetTalentValue(typ,NPC_TALENT_PICKLOCK,Npc_GetTalentValue(typ,NPC_TALENT_PICKLOCK) - 70);
+				};
 				PrintScreen("Навык: взлом замков",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
 				return 1;
 			}
 			else if(tal == NPC_TALENT_PICKPOCKET)
 			{
 				Npc_SetTalentSkill(typ,NPC_TALENT_PICKPOCKET,new_wert);
-				Npc_SetTalentValue(typ,NPC_TALENT_PICKPOCKET,Npc_GetTalentValue(typ,NPC_TALENT_PICKPOCKET) - 40);
+				if(Npc_GetTalentSkill(typ,NPC_TALENT_PICKPOCKET) == 1)
+				{
+					Npc_SetTalentValue(typ,NPC_TALENT_PICKPOCKET,Npc_GetTalentValue(typ,NPC_TALENT_PICKPOCKET) - 50);
+				}
+				else if(Npc_GetTalentSkill(typ,NPC_TALENT_PICKPOCKET) == 2)
+				{
+					Npc_SetTalentValue(typ,NPC_TALENT_PICKPOCKET,Npc_GetTalentValue(typ,NPC_TALENT_PICKPOCKET) - 40);
+				};
 				PrintScreen("Навык: воровство",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
 				return 1;
 			}
 			else if(tal == NPC_TALENT_MAGE)
 			{
 				Npc_SetTalentSkill(typ,NPC_TALENT_MAGE,new_wert);
-				PrintScreen("Навык: следующий Круг магии",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+				if(Npc_GetTalentSkill(typ,NPC_TALENT_MAGE) == 1)
+				{
+					PrintScreen("Навык: первый Круг магии",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+				}
+				else if(Npc_GetTalentSkill(typ,NPC_TALENT_MAGE) == 2)
+				{
+					PrintScreen("Навык: второй Круг магии",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+				}
+				else if(Npc_GetTalentSkill(typ,NPC_TALENT_MAGE) == 3)
+				{
+					PrintScreen("Навык: третий Круг магии",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+				}
+				else if(Npc_GetTalentSkill(typ,NPC_TALENT_MAGE) == 4)
+				{
+					PrintScreen("Навык: четвертый Круг магии",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+				}
+				else if(Npc_GetTalentSkill(typ,NPC_TALENT_MAGE) == 5)
+				{
+					PrintScreen("Навык: пятый Круг магии",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+				}
+				else
+				{
+					PrintScreen("Навык: шестой Круг магии",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+				};
 				return 1;
 			}
 			else if(tal == NPC_TALENT_SNEAK)

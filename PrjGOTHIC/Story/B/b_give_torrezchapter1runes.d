@@ -10,7 +10,7 @@ func void b_give_torrezchapter1runes()
 	CreateInvItems(npc,itarscrollfirebolt,18);
 	CreateInvItems(npc,itfo_potion_mana_01,6);
 	CreateInvItems(npc,itfo_potion_health_01,8);
-	CreateInvItems(npc,itfo_potion_water_01,10);
+	//CreateInvItems(npc,itfo_potion_water_01,10);
 	CreateInvItem(npc,itwr_book_circle_01);
 	CreateInvItem(npc,itwr_book_circle_02);
 	CreateInvItem(npc,lehren_der_goetter1);
@@ -43,7 +43,7 @@ func void b_give_torrezchapter2runes()
 	CreateInvItems(npc,itfo_potion_mana_02,8);
 	CreateInvItems(npc,itfo_potion_health_01,16);
 	CreateInvItems(npc,itfo_potion_health_02,10);
-	CreateInvItems(npc,itfo_potion_water_01,20);
+	//CreateInvItems(npc,itfo_potion_water_01,20);
 	CreateInvItems(npc,itfo_potion_haste_01,6);
 	CreateInvItems(npc,itmiflask,6);
 };
@@ -70,11 +70,11 @@ func void b_give_torrezchapter3runes()
 	CreateInvItems(npc,itfo_potion_mana_01,24);
 	CreateInvItems(npc,itfo_potion_mana_02,16);
 	CreateInvItems(npc,itfo_potion_mana_03,10);
-	CreateInvItems(npc,itfo_potion_health_01,32);
-	CreateInvItems(npc,itfo_potion_health_02,20);
-	CreateInvItems(npc,itfo_potion_health_03,12);
-	CreateInvItems(npc,itfo_potion_haste_01,12);
-	CreateInvItems(npc,itfo_potion_haste_02,6);
+	CreateInvItems(npc,itfo_potion_health_01,20);
+	CreateInvItems(npc,itfo_potion_health_02,10);
+	CreateInvItems(npc,itfo_potion_health_03,6);
+	CreateInvItems(npc,itfo_potion_haste_01,6);
+	CreateInvItems(npc,itfo_potion_haste_02,3);
 	CreateInvItems(npc,itmiflask,8);
 };
 

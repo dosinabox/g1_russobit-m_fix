@@ -42,6 +42,7 @@ func void dia_jeremiah_hallo_info()
 	AI_Output(other,self,"DIA_Jeremiah_Hallo_15_00");	//Что ты делаешь?
 	AI_Output(self,other,"DIA_Jeremiah_Hallo_04_01");	//Я готовлю шнапс из риса.
 	AI_Output(self,other,"DIA_Jeremiah_Hallo_04_02");	//Вот, возьми бутылку. Только не говори об этом Силасу.
+	b_printtrademsg1("Получен шнапс.");
 	CreateInvItems(self,itfobooze,1);
 	b_giveinvitems(self,other,itfobooze,1);
 };

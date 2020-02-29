@@ -77,7 +77,7 @@ func void dia_yberion_kennen_info()
 	AI_Output(other,self,"DIA_YBerion_Kennen_15_00");	//Приветствую тебя, Учитель Юберион!
 	AI_Output(self,other,"DIA_YBerion_Kennen_12_01");	//А! Я тебя знаю!
 	AI_Output(other,self,"DIA_YBerion_Kennen_15_02");	//Это невозможно. Мы еще ни разу не встречались.
-	AI_Output(self,other,"DIA_YBerion_Kennen_12_03");	//Я думал ты...Хорошо. Что тебе нужно?
+	AI_Output(self,other,"DIA_YBerion_Kennen_12_03");	//Я думал ты... Хорошо. Что тебе нужно?
 };
 
 
@@ -121,6 +121,7 @@ func void info_yberion_bringfocus_ok()
 {
 	AI_Output(other,self,"Sit_2_PSI_Yberion_BringFocus_OK_15_01");	//Я верну вам юнитор!
 	AI_Output(self,other,"Sit_2_PSI_Yberion_BringFocus_OK_12_02");	//Вот карта. На ней отмечено, где должен быть юнитор.
+	b_printtrademsg1("Получена карта Юбериона.");
 	b_story_bringfirstfocus();
 	b_logentry(CH2_FOCUS,"Юберион послал послушника Нираса за юнитором. Но он до сих пор не вернулся. Гуру дал мне карту, на которой отмечен путь к юнитору.");
 };
@@ -229,7 +230,7 @@ instance INFO_YBERION_NYRAS(C_INFO)
 
 func int info_yberion_nyras_condition()
 {
-	if(Npc_HasItems(hero,focus_1) || YBERION_BRINGFOCUS == LOG_SUCCESS)
+	if(Npc_KnowsInfo(hero,nov_1303_nyras_leave))
 	{
 		return 1;
 	};
@@ -269,6 +270,7 @@ func void gur_1200_yberion_earn_info()
 	AI_Output(other,self,"GUR_1200_Yberion_EARN_Info_15_01");	//А я не заслужил награды?
 	AI_Output(self,other,"GUR_1200_Yberion_EARN_Info_12_02");	//Так и быть, ты не из нашего Братства, но я награжу тебя.
 	AI_Output(self,other,"GUR_1200_Yberion_EARN_Info_12_03");	//Возьми этот амулет в благодарность за твою помощь.
+	b_printtrademsg1("Получен амулет пламени.");
 	CreateInvItem(self,schutzamulett_feuer);
 	b_giveinvitems(self,hero,schutzamulett_feuer,1);
 };

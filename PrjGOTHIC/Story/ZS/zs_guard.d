@@ -7,15 +7,23 @@ func void zs_guard()
 	AI_Standup(self);
 	AI_SetWalkMode(self,NPC_WALK);
 	AI_RemoveWeapon(self);
-	AI_GotoWP(self,self.wp);
+	if(Npc_GetDistToWP(self,self.wp) > 400)
+	{
+		AI_GotoWP(self,self.wp);
+	};
+	//AI_GotoWP(self,self.wp);
 	b_initarmor();
 };
 
 func void zs_guard_loop()
 {
 	printdebugnpc(PD_TA_LOOP,"ZS_Guard_Loop");
-	b_gotofp(self,"GUARD");
-	if(Npc_GetDistToNpc(self,hero) < 800)
+	//b_gotofp(self,"GUARD");
+	if(!Npc_IsOnFP(self,"GUARD"))
+	{
+		AI_GotoFP(self,"GUARD");
+	};
+	if(Npc_GetDistToNpc(self,hero) < 800 && !c_bodystatecontains(hero,BS_SNEAK))
 	{
 		b_smartturntonpc(self,hero);
 	}

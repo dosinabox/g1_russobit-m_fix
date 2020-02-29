@@ -47,6 +47,7 @@ func void info_rufus_wasser_info()
 	AI_Output(other,self,"Info_Rufus_Wasser_15_00");	//Меня послал Лефти. Я принес воды.
 	if(Npc_HasItems(other,itfo_potion_water_01) >= 1)
 	{
+		b_printtrademsg1("Отдана бутылка воды.");
 		AI_Output(self,other,"Info_Rufus_Wasser_02_01");	//Спасибо, приятель. Меня мучит жажда.
 		b_giveinvitems(other,self,itfo_potion_water_01,1);
 		if(c_bodystatecontains(self,BS_SIT))
@@ -143,7 +144,7 @@ instance DIA_RUFUS_RICELORD(C_INFO)
 	condition = dia_rufus_ricelord_condition;
 	information = dia_rufus_ricelord_info;
 	permanent = 1;
-	description = "Кто он такой этот Лорд?";
+	description = "Кто он такой, этот Лорд?";
 };
 
 
@@ -188,6 +189,7 @@ func int info_rufus_wasser_nolefty_condition()
 func void info_rufus_wasser_nolefty_info()
 {
 	AI_Output(other,self,"Info_Wasser_NoLefty");	//Я принес тебе воды.
+	b_printtrademsg1("Отдана бутылка воды.");
 	AI_Output(self,other,"Info_Rufus_Wasser_02_01");	//Спасибо, приятель. Меня мучит жажда.
 	self.aivar[AIV_DEALDAY] = Wld_GetDay() + 1;
 	b_giveinvitems(other,self,itfo_potion_water_01,1);

@@ -20,9 +20,8 @@ instance ORG_806_ORGANISATOR(NPC_DEFAULT)
 	fight_tactic = FAI_HUMAN_STRONG;
 	Npc_SetTalentSkill(self,NPC_TALENT_BOW,1);
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
-	CreateInvItems(self,itkelockpick,1);
+	CreateInvItem(self,itkelockpick);
 	CreateInvItems(self,itminugget,14);
-	CreateInvItems(self,itfo_potion_health_01,1);
 	CreateInvItem(self,itat_teeth_01);
 	EquipItem(self,itmw_1h_mace_03);
 	EquipItem(self,itrw_bow_long_01);
@@ -33,7 +32,8 @@ instance ORG_806_ORGANISATOR(NPC_DEFAULT)
 
 func void rtn_start_806()
 {
-	ta_sleep(0,0,7,30,"NC_HUT20_IN");
+	ta_sleep(0,0,7,0,"NC_HUT20_IN");
+	ta_washself(7,0,7,30,"NC_WASH_04");
 	ta_smalltalk(7,30,0,0,"NC_PLACE06");
 };
 

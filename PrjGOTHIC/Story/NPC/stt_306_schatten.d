@@ -22,8 +22,7 @@ instance STT_306_SCHATTEN(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	EquipItem(self,itmw_1h_sword_short_04);
 	EquipItem(self,itrw_bow_small_02);
-	CreateInvItems(self,itamarrow,10);
-	CreateInvItem(self,itfo_potion_water_01);
+	CreateInvItems(self,itamarrow,5);
 	CreateInvItem(self,itfoapple);
 	CreateInvItem(self,itkelockpick);
 	daily_routine = rtn_start_306;

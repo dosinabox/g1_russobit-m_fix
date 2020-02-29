@@ -89,6 +89,7 @@ func void nov_1300_talas_help_bring()
 {
 	AI_Output(other,self,"Nov_1300_Talas_HELP_BRING_15_01");	//Это обойдется тебе в тридцать кусков руды.
 	AI_Output(self,other,"Nov_1300_Talas_HELP_BRING_02_02");	//Ладно. Мы можем отправиться прямо сейчас.
+	b_printtrademsg1("Получено руды: 30");
 	CreateInvItems(self,itminugget,30);
 	b_giveinvitems(self,hero,itminugget,30);
 	Info_ClearChoices(nov_1300_talas_help);
@@ -98,6 +99,7 @@ func void nov_1300_talas_help_more()
 {
 	AI_Output(other,self,"Nov_1300_Talas_HELP_MORE_15_01");	//Я сделаю это, но только за пятьдесят кусков.
 	AI_Output(self,other,"Nov_1300_Talas_HELP_MORE_02_02");	//Что? Да это же грабеж! Ну хорошо... дай мне знать, когда будешь готов.
+	b_printtrademsg1("Получено руды: 50");
 	CreateInvItems(self,itminugget,50);
 	b_giveinvitems(self,hero,itminugget,50);
 	Info_ClearChoices(nov_1300_talas_help);

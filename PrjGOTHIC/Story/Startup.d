@@ -1167,7 +1167,7 @@ func void startup_sub_surface()
 	Wld_InsertNpc(scavenger,"OW_SCAVENGER_COAST_NEWCAMP_SPAWN");
 	Wld_InsertNpc(scavenger,"OW_SCAVENGER_COAST_NEWCAMP_SPAWN");
 	Wld_InsertNpc(bloodfly,"OW_BLOODFLY_NEW_COAST_SPAWN");
-	Wld_InsertNpc(bloodfly,"OW_BLOODFLY_NEW_COAST_SPAWN");
+	//Wld_InsertNpc(bloodfly,"OW_BLOODFLY_NEW_COAST_SPAWN");
 	Wld_InsertNpc(bloodfly,"OW_BLOODFLY_NEW_COAST_SPAWN");
 	Wld_InsertNpc(bloodfly,"OW_BLOODFLY_NEW_COAST_SPAWN");
 	Wld_InsertNpc(bloodfly,"OW_BLOODFLY_NEW_COAST_SPAWN");
@@ -2001,7 +2001,7 @@ func void startup_world()
 	PlayVideo("INTRO.BIK");
 	//PlayVideo("INTRO_RUSSOBIT.BIK");
 	b_cycle_function();
-	RUSSOBITMFIXV11 = TRUE;
+	RUSSOBITMFIXV12 = TRUE;
 };
 
 func void startup_orcgraveyard()

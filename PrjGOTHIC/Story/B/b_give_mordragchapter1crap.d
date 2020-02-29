@@ -38,7 +38,7 @@ func void b_give_mordragchapter3crap()
 	var C_NPC npc;
 	npc = Hlp_GetNpc(org_826_mordrag);
 	CreateInvItems(npc,itminugget,200);
-	CreateInvItems(npc,itkelockpick,10);
+	CreateInvItems(npc,itkelockpick,8);
 	CreateInvItems(npc,itlstorch,5);
 	CreateInvItems(npc,itfo_potion_health_02,7);
 	CreateInvItems(npc,itfo_potion_mana_02,4);
@@ -50,7 +50,7 @@ func void b_give_mordragchapter4crap()
 	var C_NPC npc;
 	npc = Hlp_GetNpc(org_826_mordrag);
 	CreateInvItems(npc,itminugget,250);
-	CreateInvItems(npc,itkelockpick,15);
+	CreateInvItems(npc,itkelockpick,9);
 	CreateInvItems(npc,itlstorch,5);
 	CreateInvItems(npc,itfo_potion_health_03,5);
 	CreateInvItems(npc,itfo_potion_mana_03,3);
@@ -62,7 +62,7 @@ func void b_give_mordragchapter5crap()
 	var C_NPC npc;
 	npc = Hlp_GetNpc(org_826_mordrag);
 	CreateInvItems(npc,itminugget,300);
-	CreateInvItems(npc,itkelockpick,20);
+	CreateInvItems(npc,itkelockpick,10);
 	CreateInvItems(npc,itlstorch,10);
 	CreateInvItems(npc,itfo_potion_health_03,7);
 	CreateInvItems(npc,itfo_potion_mana_03,5);

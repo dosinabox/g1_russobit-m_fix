@@ -79,6 +79,7 @@ func void grd_219_stone_getstuff_info()
 	AI_Output(self,other,"GRD_219_Stone_GETSTUFF_Info_06_02");	//Вижу, Торус взял тебя на службу? Мои поздравления!
 	AI_Output(self,other,"GRD_219_Stone_GETSTUFF_Info_06_03");	//Еще один желающий свернуть себе голову за Гомеза. Впрочем, мне-то какое дело?
 	AI_Output(self,other,"GRD_219_Stone_GETSTUFF_Info_06_04");	//Вот, держи доспехи и меч. Добро пожаловать в Стражники!
+	b_printtrademsg1("Получен легкий доспех и меч стражника.");
 	CreateInvItem(self,grd_armor_l);
 	CreateInvItems(self,itmw_1h_sword_03,1);
 	b_giveinvitems(self,other,grd_armor_l,1);
@@ -120,11 +121,11 @@ func void grd_219_stone_betterarmor_info()
 	Info_AddChoice(grd_219_stone_betterarmor,DIALOG_BACK,grd_219_stone_betterarmor_back);
 	if(STONE_ARMOR_H_WAS_BOUGHT != 1)
 	{
-		Info_AddChoice(grd_219_stone_betterarmor,b_buildbuyarmorstring("Тяжелый доспех стражника: 70/10/25/0",VALUE_GRD_ARMOR_H),grd_219_stone_betterarmor_h);
+		Info_AddChoice(grd_219_stone_betterarmor,b_buildbuyarmorstring("Тяжелый доспех стражника, защита: 70/10/25/0",VALUE_GRD_ARMOR_H),grd_219_stone_betterarmor_h);
 	};
 	if(STONE_ARMOR_M_WAS_BOUGHT != 1)
 	{
-		Info_AddChoice(grd_219_stone_betterarmor,b_buildbuyarmorstring("Доспех стражника: 55/10/35/0",VALUE_GRD_ARMOR_M),grd_219_stone_betterarmor_m);
+		Info_AddChoice(grd_219_stone_betterarmor,b_buildbuyarmorstring("Доспех стражника, защита: 55/10/35/0",VALUE_GRD_ARMOR_M),grd_219_stone_betterarmor_m);
 	};
 };
 
@@ -141,7 +142,9 @@ func void grd_219_stone_betterarmor_m()
 	}
 	else
 	{
+		b_printtrademsg1("Отдано руды: 1650");
 		AI_Output(self,hero,"GRD_219_Stone_BETTERARMOR_Info_M_06_04");	//Хорошо, вот держи. Специально для тебя, новенькие, только не позволяй наемникам их дырявить!
+		b_printtrademsg2("Получен доспех стражника.");
 		b_giveinvitems(hero,self,itminugget,VALUE_GRD_ARMOR_M);
 		b_giveinvitems(self,hero,grd_armor_m,1);
 		AI_EquipArmor(hero,grd_armor_m);
@@ -161,7 +164,9 @@ func void grd_219_stone_betterarmor_h()
 		}
 		else
 		{
+			b_printtrademsg1("Отдано руды: 3000");
 			AI_Output(self,hero,"GRD_219_Stone_BETTERARMOR_Info_M_06_04");	//Хорошо, вот держи. Специально для тебя, новенькие, только не позволяй наемникам их дырявить!
+			b_printtrademsg2("Получен тяжелый доспех стражника.");
 			b_giveinvitems(hero,self,itminugget,VALUE_GRD_ARMOR_H);
 			b_giveinvitems(self,hero,grd_armor_h,1);
 			AI_EquipArmor(hero,grd_armor_h);
@@ -341,6 +346,7 @@ func void dia_grd_219_stone4_info()
 {
 	AI_Output(other,self,"DIA_GRD_219_Stone4_15_01");	//Ты можешь усилить эти железные доспехи?
 	AI_Output(self,other,"DIA_GRD_219_Stone4_06_02");	//Конечно, могу. Давай сюда, минутку и все будет готово.
+	b_printtrademsg1("Отдан железный доспех.");
 	var C_ITEM stonearmor;
 	stonearmor = Npc_GetEquippedArmor(hero);
 	if(Hlp_GetInstanceID(stonearmor) == Hlp_GetInstanceID(ore_armor_m))
@@ -362,6 +368,7 @@ func void dia_grd_219_stone4_info()
 	CreateInvItem(self,ore_armor_h);
 	b_giveinvitems(self,hero,ore_armor_h,1);
 	AI_Output(self,other,"DIA_GRD_219_Stone4_06_03");	//Держи, теперь эти доспехи мощнее и мы в расчете.
+	b_printtrademsg2("Получен улучшенный железный доспех.");
 	AI_EquipArmor(hero,ore_armor_h);
 	KNOWSTONE = 1;
 };
@@ -400,6 +407,7 @@ func void dia_grd_219_stone5_info()
 	AI_Wait(self,1);
 	AI_GotoNpc(self,hero);
 	AI_Output(self,other,"DIA_GRD_219_Stone5_06_03");	//Кольцо здоровья даст тебе дополнительный запас жизненных сил. Думаю, теперь мы в расчете.
+	b_printtrademsg1("Получен перстень здоровья.");
 	CreateInvItem(self,stone_hpring);
 	b_giveinvitems(self,other,stone_hpring,1);
 	KNOWSTONE = 1;
@@ -439,6 +447,7 @@ func void dia_grd_219_stone6_info()
 	AI_Wait(self,1);
 	AI_GotoNpc(self,hero);
 	AI_Output(self,other,"DIA_GRD_219_Stone6_06_03");	//Хотел Кольцо защиты - получил. Так что теперь мы в расчете.
+	b_printtrademsg1("Получен перстень защиты.");
 	CreateInvItem(self,stone_defring);
 	b_giveinvitems(self,other,stone_defring,1);
 	KNOWSTONE = 1;
@@ -478,6 +487,7 @@ func void dia_grd_219_stone7_info()
 	AI_Wait(self,1);
 	AI_GotoNpc(self,hero);
 	AI_Output(self,other,"DIA_GRD_219_Stone7_06_03");	//Вот, амулет готов. Отличная вещь получилась, думаю, ты в обиде не остался.
+	b_printtrademsg1("Получен талисман магии.");
 	CreateInvItem(self,stone_amulet);
 	b_giveinvitems(self,other,stone_amulet,1);
 	KNOWSTONE = 1;

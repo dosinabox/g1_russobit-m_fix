@@ -689,7 +689,7 @@ func void pc_psionic_brotherhood_todo_info()
 	AI_Output(self,other,"PC_Psionic_BROTHERHOOD_TODO_05_04");	//Иди к Храму. Он редко покидает его. Наверное, в этом холодном здании он чувствует себя ближе к Спящему.
 	Log_CreateTopic(CH2_FOCUS,LOG_MISSION);
 	Log_SetTopicStatus(CH2_FOCUS,LOG_RUNNING);
-	b_logentry(CH2_FOCUS,"Послушник Лестер рассказал мне, что Юбериону нужен юнитор. Учителя я смогу найти в храме на холме.");
+	b_logentry(CH2_FOCUS,"Послушник Лестер рассказал мне, что Юбериону нужен юнитор. Учителя я смогу найти в храме в горе.");
 	yberion = Hlp_GetNpc(gur_1200_yberion);
 	yberion.aivar[AIV_FINDABLE] = TRUE;
 };
@@ -776,7 +776,7 @@ func void pc_psionic_story_info()
 {
 	AI_Output(other,self,"PC_Psionic_STORY_Info_15_01");	//Что за документ ты хочешь найти?
 	AI_Output(self,other,"PC_Psionic_STORY_Info_05_02");	//Когда-то давно в этом форте жил правитель этих земель. Ему принадлежала эта земля и все шахты.
-	AI_Output(self,other,"PC_Psionic_STORY_Info_05_03");	//Как у всякого дворянина, у него был документ, подтверждающий право собственности на землю. Он то мне и нужен.
+	AI_Output(self,other,"PC_Psionic_STORY_Info_05_03");	//Как у всякого дворянина, у него был документ, подтверждающий право собственности на землю. Он-то мне и нужен.
 	AI_Output(other,self,"PC_Psionic_STORY_Info_15_04");	//Но пока мы находимся за Барьером, он будет совершенно бесполезен.
 	AI_Output(self,other,"PC_Psionic_STORY_Info_05_05");	//Ты прав. Но если маги Воды смогу разрушить Барьер, этот документ снова вступит в силу.
 };
@@ -795,7 +795,7 @@ instance PC_PSIONIC_COMEWITHME(C_INFO)
 
 func int pc_psionic_comewithme_condition()
 {
-	if(Npc_KnowsInfo(hero,pc_psionic_story) && Npc_KnowsInfo(hero,pc_psionic_golem))
+	if(Npc_KnowsInfo(hero,pc_psionic_story) && Npc_KnowsInfo(hero,pc_psionic_golem) && !LESTER_FOCUS3_FOUND)
 	{
 		return TRUE;
 	};
@@ -826,7 +826,7 @@ instance PC_PSIONIC_FOKUSPLACE(C_INFO)
 
 func int pc_psionic_fokusplace_condition()
 {
-	if(Npc_GetDistToWP(hero,"LOCATION_19_03_PATH_RUIN7") < 400 && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
+	if(Npc_GetDistToWP(hero,"LOCATION_19_03_PATH_RUIN7") < 400 && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400) && !LESTER_FOCUS3_FOUND)
 	{
 		return TRUE;
 	};
@@ -886,7 +886,7 @@ instance PC_PSIONIC_IAMHURT(C_INFO)
 
 func int pc_psionic_iamhurt_condition()
 {
-	if((hero.attribute[ATR_HITPOINTS] < hero.attribute[ATR_HITPOINTS_MAX]) && Npc_KnowsInfo(hero,pc_psionic_followme) && !Npc_KnowsInfo(hero,pc_psionic_finish))
+	if((hero.attribute[ATR_HITPOINTS] < hero.attribute[ATR_HITPOINTS_MAX]) && Npc_KnowsInfo(hero,pc_psionic_followme) && !Npc_KnowsInfo(hero,pc_psionic_finish) && (LESTER_HEAL < 4))
 	{
 		return TRUE;
 	};
@@ -898,24 +898,28 @@ func void pc_psionic_iamhurt_info()
 	if(LESTER_HEAL == 0)
 	{
 		AI_Output(self,other,"PC_Psionic_IAMHURT_Info_05_02");	//Вот, возьми это зелье лечения.
+		b_printtrademsg1("Получен экстракт исцеления.");
 		b_giveinvitems(self,hero,itfo_potion_health_02,1);
 		LESTER_HEAL = 1;
 	}
 	else if(LESTER_HEAL == 1)
 	{
 		AI_Output(self,other,"PC_Psionic_IAMHURT_Info_05_02");	//Вот, возьми это зелье лечения.
+		b_printtrademsg1("Получен экстракт исцеления.");
 		b_giveinvitems(self,hero,itfo_potion_health_02,1);
 		LESTER_HEAL = 2;
 	}
 	else if(LESTER_HEAL == 2)
 	{
 		AI_Output(self,other,"PC_Psionic_IAMHURT_Info_05_02");	//Вот, возьми это зелье лечения.
+		b_printtrademsg1("Получен экстракт исцеления.");
 		b_giveinvitems(self,hero,itfo_potion_health_02,1);
 		LESTER_HEAL = 3;
 	}
 	else
 	{
 		AI_Output(self,other,"SVM_5_Help");	//Черт!
+		LESTER_HEAL = 4;
 	};
 	AI_StopProcessInfos(self);
 };
@@ -943,7 +947,9 @@ func int pc_psionic_urkunde_condition()
 func void pc_psionic_urkunde_info()
 {
 	AI_Output(other,self,"PC_Psionic_URKUNDE_Info_15_01");	//Я нашел документ.
+	b_printtrademsg1("Отдано завещание.");
 	AI_Output(self,other,"PC_Psionic_URKUNDE_Info_05_02");	//Отлично! Возьми эти свитки в качестве награды. Они помогут тебе добраться до юнитора.
+	b_printtrademsg2("Получено 4 свитка телекинеза.");
 	AI_Output(self,other,"PC_Psionic_URKUNDE_Info_05_03");	//Я подожду тебя внизу, у пьедестала.
 	b_logentry(CH3_FORTRESS,"Завещание, которое искал Лестер, находилось в ящике. В обмен на него он дал мне четыре свитка телекинеза. С их помощью я смогу достать юнитор.");
 	CreateInvItems(self,itarscrolltelekinesis,4);
@@ -1059,6 +1065,7 @@ func void pc_psionic_finish_info()
 	AI_Output(other,self,"PC_Psionic_FINISH_Info_15_02");	//Мы еще встретимся.
 	b_logentry(CH3_FORTRESS,"Я достал юнитор. Лестер захотел еще ненадолго остаться в форте, чтобы посмотреть библиотеку. Интересно, встретимся ли мы еще когда-нибудь?");
 	self.aivar[AIV_PARTYMEMBER] = FALSE;
+	LESTER_FOCUS3_FOUND = TRUE;
 	Npc_ExchangeRoutine(self,"BOOK");
 	AI_StopProcessInfos(self);
 };
@@ -1077,7 +1084,7 @@ instance PC_PSIONIC_CHESTCLOSED(C_INFO)
 
 func int pc_psionic_chestclosed_condition()
 {
-	if(!Npc_HasItems(hero,focus_3) && !Npc_HasItems(self,itwr_urkunde_01) && (Npc_GetDistToWP(hero,"LOCATION_19_03_SECOND_ETAGE_BALCON") < 500))
+	if(!Npc_HasItems(hero,focus_3) && !Npc_HasItems(self,itwr_urkunde_01) && (Npc_GetDistToWP(hero,"LOCATION_19_03_SECOND_ETAGE_BALCON") < 500) && !LESTER_FOCUS3_FOUND)
 	{
 		return TRUE;
 	};
@@ -1107,7 +1114,7 @@ instance PC_PSIONIC_COMEAGAIN(C_INFO)
 
 func int pc_psionic_comeagain_condition()
 {
-	if(Npc_KnowsInfo(hero,pc_psionic_leave) && !Npc_HasItems(hero,focus_3))
+	if(Npc_KnowsInfo(hero,pc_psionic_leave) && !Npc_HasItems(hero,focus_3) && !LESTER_FOCUS3_FOUND)
 	{
 		return TRUE;
 	};

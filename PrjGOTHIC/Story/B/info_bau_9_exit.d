@@ -116,6 +116,8 @@ func void info_bau_9_wasser_info()
 	AI_Output(other,self,"Info_Bau_9_Wasser_15_00");	//Меня прислал Лефти, я принес тебе воды.
 	if(Npc_HasItems(other,itfo_potion_water_01) >= 1)
 	{
+		b_printtrademsg1("Отдана бутылка воды.");
+		AI_Output(self,other,"Info_Bau_9_Wasser_09_01");	//Спасибо, парень. А то я уже был готов пить хоть из лужи.
 		b_giveinvitems(other,self,itfo_potion_water_01,1);
 		if(c_bodystatecontains(self,BS_SIT))
 		{
@@ -123,7 +125,6 @@ func void info_bau_9_wasser_info()
 			AI_TurnToNPC(self,hero);
 		};
 		AI_UseItem(self,itfo_potion_water_01);
-		AI_Output(self,other,"Info_Bau_9_Wasser_09_01");	//Спасибо, парень. А то я уже был готов пить хоть из лужи.
 		AN_BAUERN_VERTEILT = AN_BAUERN_VERTEILT + 1;
 		if(AN_BAUERN_VERTEILT >= DURSTIGEBAUERN)
 		{
@@ -159,6 +160,7 @@ func int info_bau_9_wasser_nolefty_condition()
 func void info_bau_9_wasser_nolefty_info()
 {
 	AI_Output(other,self,"Info_Wasser_NoLefty");	//Я принес тебе воды.
+	b_printtrademsg1("Отдана бутылка воды.");
 	AI_Output(self,other,"SVM_9_YeahWellDone");	//Отлично, парень!
 	self.aivar[AIV_DEALDAY] = Wld_GetDay() + 1;
 	b_giveinvitems(other,self,itfo_potion_water_01,1);

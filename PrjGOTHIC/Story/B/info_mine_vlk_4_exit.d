@@ -67,7 +67,7 @@ func int info_mine_vlk_4_wichtigepersonen_condition()
 func void info_mine_vlk_4_wichtigepersonen_info()
 {
 	AI_Output(other,self,"Info_Mine_Vlk_4_WichtigePersonen_15_00");	//Кто здесь всем управляет?
-	AI_Output(self,other,"Info_Mine_Vlk_4_WichtigePersonen_01_01");	//Сантино и Альберто можно сказать. Они меняют руду, которую мы добываем, на товары. Они же раздают нам дневной паек.
+	AI_Output(self,other,"Info_Mine_Vlk_4_WichtigePersonen_01_01");	//Сантино и Альберто, можно сказать. Они меняют руду, которую мы добываем, на товары. Они же раздают нам дневной паек.
 };
 
 

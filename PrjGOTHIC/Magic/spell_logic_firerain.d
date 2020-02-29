@@ -2,7 +2,7 @@
 func int spell_logic_firerain(var int manainvested)
 {
 	printdebugnpc(PD_MAGIC,"Spell_Logic_Firerain");
-	if(manainvested == 0)
+	if(manainvested == 1)
 	{
 		return SPL_NEXTLEVEL;
 	};

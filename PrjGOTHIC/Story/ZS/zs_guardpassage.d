@@ -8,7 +8,10 @@ func void zs_guardpassage()
 	Npc_PercDisable(self,PERC_OBSERVEINTRUDER);
 	AI_Standup(self);
 	AI_SetWalkMode(self,NPC_WALK);
-	AI_GotoWP(self,self.wp);
+	if(Npc_GetDistToWP(self,self.wp) > 200)
+	{
+		AI_GotoWP(self,self.wp);
+	};
 	AI_AlignToWP(self);
 	b_initarmor();
 };

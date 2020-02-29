@@ -138,7 +138,7 @@ instance DIA_MUD_DEFEATED(C_INFO)
 
 func int dia_mud_defeated_condition()
 {
-	if(self.aivar[AIV_WASDEFEATEDBYSC] == TRUE)
+	if((self.aivar[AIV_WASDEFEATEDBYSC] == TRUE) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return 1;
 	};

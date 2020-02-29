@@ -42,15 +42,12 @@ func void dia_snaf_hello_info()
 	AI_Output(other,self,"DIA_Snaf_Hello_15_00");	//Как у тебя дела?
 	AI_Output(self,other,"DIA_Snaf_Hello_01_01");	//Неплохо. Если умеешь хорошо готовить, друзья к тебе сами придут.
 	AI_Output(self,other,"DIA_Snaf_Hello_01_02");	//Хочешь попробовать тушеный рис? Вот возьми, и сам убедись, как это вкусно.
+	b_printtrademsg1("Получен рис.");
 	AI_Output(other,self,"DIA_Snaf_Hello_15_03");	//Спасибо.
 	AI_Output(self,other,"DIA_Snaf_Hello_01_04");	//А ты мог бы мне помочь.
 	CreateInvItem(self,itforice);
 	b_giveinvitems(self,other,itforice,1);
 };
-
-
-var int snaf_zutaten;
-var int snaf_freembragout;
 
 instance DIA_SNAF_ZUTATEN(C_INFO)
 {
@@ -127,20 +124,30 @@ func int dia_snaf_zutatensuccess_condition()
 	};
 };
 
+var int snaf_ragoutday;
+
 func void dia_snaf_zutatensuccess_info()
 {
 	AI_Output(other,self,"DIA_Snaf_ZutatenSuccess_15_00");	//Я достал все ингредиенты, посмотри.
-	AI_Output(self,other,"DIA_Snaf_ZutatenSuccess_01_01");	//Хорошо! Теперь их нужно положить в котел, и рагу будет готово... Вот так...
-	AI_UseMob(self,"CAULDRON",1);
-	AI_Wait(self,0.5);
-	AI_UseMob(self,"CAULDRON",-1);
-	//CreateInvItems(other,itfo_plants_mushroom_01,3);
-	b_giveinvitems(hero,self,itfo_plants_mushroom_01,5);
-	Npc_RemoveInvItems(self,itfo_plants_mushroom_01,5);
-	b_giveinvitems(hero,self,itat_meatbug_01,3);
-	Npc_RemoveInvItems(self,itat_meatbug_01,3);
-	CreateInvItems(self,itfomeatbugragout,3);
-	b_giveinvitems(self,hero,itfomeatbugragout,3);
+	b_printtrademsg1("Отданы адские грибы и мясо жуков.");
+	Npc_RemoveInvItems(hero,itfo_plants_mushroom_01,5);
+	Npc_RemoveInvItems(hero,itat_meatbug_01,3);
+	if(Wld_IsTime(8,0,22,0) && Npc_GetDistToWP(self,"OCR_CAULDRON_2") < 230)
+	{
+		AI_Output(self,other,"DIA_Snaf_ZutatenSuccess_01_01");	//Хорошо! Теперь их нужно положить в котел, и рагу будет готово... Вот так...
+		AI_UseMob(self,"CAULDRON",1);
+		AI_Wait(self,2);
+		AI_UseMob(self,"CAULDRON",-1);
+		AI_Output(self,other,"DIA_Snaf_Hello_01_02_01");	//Вот возьми, и сам убедись, как это вкусно.
+		b_printtrademsg2("Получено рагу из жуков.");
+		CreateInvItems(hero,itfomeatbugragout,1);
+		SNAF_RAGOUTDAY = Wld_GetDay();
+	}
+	else
+	{
+		AI_Output(self,other,"DIA_Snaf_Hello_01_01");	//Неплохо. Если умеешь хорошо готовить, друзья к тебе сами придут.
+		SNAF_RAGOUTDAY = Wld_GetDay();
+	};
 	SNAF_ZUTATEN = LOG_SUCCESS;
 	Log_SetTopicStatus(CH1_SNAFSRECIPE,LOG_SUCCESS);
 	b_logentry(CH1_SNAFSRECIPE,"Снэф остался доволен тем, что я принес ему необходимые ингредиенты.");
@@ -151,9 +158,6 @@ func void dia_snaf_zutatensuccess_info()
 	b_givexp(100);
 	AI_StopProcessInfos(self);
 };
-
-
-var int snaf_ragoutday;
 
 instance DIA_SNAF_AFTERSUCCESS(C_INFO)
 {
@@ -179,7 +183,8 @@ func void dia_snaf_aftersuccess_info()
 	AI_Output(other,self,"DIA_Snaf_AfterSuccess_15_00");	//Ты говорил, что я могу взять столько порций, сколько захочу...
 	if(SNAF_RAGOUTDAY != Wld_GetDay())
 	{
-		AI_Output(self,other,"DIA_Snaf_AfterSuccess_01_01");	//Да, так и есть. Вот возьми три порции.
+		AI_Output(self,other,"DIA_Snaf_AfterSuccess_01_01");	//Да, так и есть. Вот, возьми три порции.
+		b_printtrademsg1("Получено 3 порции рагу из жуков.");
 		CreateInvItems(self,itfomeatbugragout,3);
 		b_giveinvitems(self,other,itfomeatbugragout,3);
 		SNAF_RAGOUTDAY = Wld_GetDay();

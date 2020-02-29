@@ -150,10 +150,10 @@ func void info_saturas_book_info()
 {
 	AI_Output(other,self,"Info_Saturas_BOOK_15_01");	//У меня есть альманах...
 	AI_Output(other,self,"Info_Saturas_BOOK_15_02");	//Юберион использовал его для того, чтобы зарядить юнитор.
+	b_printtrademsg1("Отдан альманах.");
 	AI_Output(self,other,"Info_Saturas_BOOK_14_03");	//Очень хорошо. Нам понадобится эта книга, чтобы зарядить все пять камней-юниторов.
 	AI_Output(self,other,"Info_Saturas_BOOK_14_04");	//Я возьму ее!
-	b_giveinvitems(hero,self,itwrfokusbuch,1);
-	Npc_RemoveInvItem(self,itwrfokusbuch);
+	Npc_RemoveInvItem(hero,itwrfokusbuch);
 	b_givexp(XP_DELIVERBOOKTOSATURAS);
 };
 
@@ -189,8 +189,8 @@ func void info_saturas_focus_info()
 	AI_Output(other,self,"Info_Saturas_FOCUS_15_08");	//Кажется, это будет опасно.
 	AI_Output(self,other,"Info_Saturas_FOCUS_14_09");	//Это будет не обычный взрыв, а магический. Он изменит только то, что имеет магическую природу. Для людей он не представляет никакой угрозы.
 	AI_Output(other,self,"Info_Saturas_FOCUS_15_10");	//Вот, возьми юнитор. Надеюсь, он поможет нам выйти на свободу.
-	b_giveinvitems(hero,self,focus_1,1);
-	Npc_RemoveInvItem(self,focus_1);
+	b_printtrademsg1("Отдан юнитор.");
+	Npc_RemoveInvItem(hero,focus_1);
 	b_givexp(XP_DELIVERFOCUSTOSATURAS);
 };
 
@@ -251,7 +251,9 @@ func void info_saturas_offer_info()
 	AI_Output(other,self,"Info_Saturas_OFFER_15_06");	//Что ж... переживу. Я уже привык делать все сам.
 	AI_Output(self,other,"Info_Saturas_OFFER_14_07");	//Твоя уверенность похвальна, но кое-что тебе все же может пригодиться.
 	AI_Output(self,other,"Info_Saturas_OFFER_14_08");	//Возьми эту карту. Она довольно старая, поэтому на ней можно найти места, в которых располагались юниторы до того, как мы создали этот Барьер.
+	b_printtrademsg1("Получена карта Сатураса.");
 	AI_Output(self,other,"Info_Saturas_OFFER_14_09");	//Тебе понадобится это заклинание, оно поможет быстрее вернуться в лагерь.
+	b_printtrademsg2("Получена руна телепортацит к магам Воды.");
 	AI_Output(self,other,"Info_Saturas_OFFER_14_10");	//И еще: поговори с Риорданом. Он готовит для нас зелья.
 	AI_Output(self,other,"Info_Saturas_OFFER_14_11");	//Его дом ты найдешь на верхнем уровне.
 	b_story_bringfoci();
@@ -298,11 +300,12 @@ func void b_deliverfocus()
 		Log_SetTopicStatus(CH3_FORTRESS,LOG_SUCCESS);
 		Log_SetTopicStatus(CH3_TROLLCANYON,LOG_SUCCESS);
 	};
-	if(!Npc_HasItems(hero,itarscrollteleport2) && (SATURAS_BRINGFOCI < 5))
+	if(!Npc_HasItems(hero,itarscrollteleport2) && (SATURAS_BRINGFOCI < 5) && (KDW_TP_USED == TRUE))
 	{
 		AI_Output(self,other,"Info_Saturas_BRINGFOCUS_14_14");	//Ты прочитал заклинание телепортации, как я вижу. Возьми еще одно, вдруг пригодится.
-		CreateInvItem(self,itarscrollteleport2);
-		b_giveinvitems(self,other,itarscrollteleport2,1);
+		KDW_TP_USED = FALSE;
+		b_printtrademsg2("Получен свиток телепортации к магам Воды.");
+		CreateInvItem(hero,itarscrollteleport2);
 	};
 };
 
@@ -329,10 +332,10 @@ func int info_saturas_bringfocus2_condition()
 func void info_saturas_bringfocus2_info()
 {
 	AI_Output(other,self,"Info_Saturas_BRINGFOCUS2_15_01");	//Я нашел юнитор в ущелье троллей!
+	b_printtrademsg1("Отдан юнитор.");
 	b_logentry(CH3_TROLLCANYON,"Я отдал Сатурасу юнитор из ущелья тролля.");
 	Log_SetTopicStatus(CH3_TROLLCANYON,LOG_SUCCESS);
-	b_giveinvitems(hero,self,focus_2,1);
-	Npc_RemoveInvItem(self,focus_2);
+	Npc_RemoveInvItem(hero,focus_2);
 	b_deliverfocus();
 };
 
@@ -359,9 +362,9 @@ func int info_saturas_bringfocus3_condition()
 func void info_saturas_bringfocus3_info()
 {
 	AI_Output(other,self,"Info_Saturas_BRINGFOCUS3_15_01");	//В горном форте я нашел один из юниторов.
+	b_printtrademsg1("Отдан юнитор.");
 	b_logentry(CH3_FORTRESS,"Теперь у Сатураса есть юнитор из горного форта.");
 	Log_SetTopicStatus(CH3_FORTRESS,LOG_SUCCESS);
-	b_giveinvitems(hero,self,focus_3,1);
 	Npc_RemoveInvItem(hero,focus_3);
 	b_deliverfocus();
 };
@@ -389,10 +392,10 @@ func int info_saturas_bringfocus4_condition()
 func void info_saturas_bringfocus4_info()
 {
 	AI_Output(other,self,"Info_Saturas_BRINGFOCUS4_15_01");	//Я нашел один из юниторов в разрушенном монастыре!
+	b_printtrademsg1("Отдан юнитор.");
 	AI_Output(other,self,"Info_Saturas_BRINGFOCUS4_15_02");	//Там я встретил наемника Горна, и он помог мне в поисках.
 	b_logentry(CH3_MONASTERYRUIN,"Мне удалось принести Сатурасу юнитор из развалин монастыря.");
 	Log_SetTopicStatus(CH3_MONASTERYRUIN,LOG_SUCCESS);
-	b_giveinvitems(hero,self,focus_4,1);
 	Npc_RemoveInvItem(hero,focus_4);
 	b_deliverfocus();
 };
@@ -420,9 +423,9 @@ func int info_saturas_bringfocus5_condition()
 func void info_saturas_bringfocus5_info()
 {
 	AI_Output(other,self,"Info_Saturas_BRINGFOCUS5_15_01");	//Я нашел юнитор в гробнице под каменным кольцом!
+	b_printtrademsg1("Отдан юнитор.");
 	b_logentry(CH3_STONEHENGE,"Я принес Сатурасу юнитор из склепа под кругом камней.");
 	Log_SetTopicStatus(CH3_STONEHENGE,LOG_SUCCESS);
-	b_giveinvitems(hero,self,focus_5,1);
 	Npc_RemoveInvItem(hero,focus_5);
 	b_deliverfocus();
 };
@@ -517,6 +520,7 @@ func void info_saturas_accept_info()
 	AI_Output(other,self,"Info_Saturas_ACCEPT_15_05");	//... одно что?
 	AI_Output(self,other,"Info_Saturas_ACCEPT_14_06");	//Неважно! Ты должен уговорить их.
 	AI_Output(self,other,"Info_Saturas_ACCEPT_14_07");	//Возьми эту руну. Передай ее Корристо, верховному магу Круга Огня. Это знак нашего доверия.
+	b_printtrademsg1("Получена руна телепортации к магам Воды.");
 	AI_Output(self,other,"Info_Saturas_ACCEPT_14_08");	//Руна поможет ему перенестись ко мне, минуя стражу.
 	AI_Output(self,other,"Info_Saturas_ACCEPT_14_09");	//Думаю, это будет хорошим доказательством нашей дружбы.
 	b_kapitelwechsel(4);
@@ -740,8 +744,8 @@ func void kdw_600_saturas_kdwaufnahme_info()
 	AI_Output(self,other,"KDW_600_Saturas_KDWAUFNAHME_Info_14_12");	//Эта клятва соединила в тебе силу Огня и благословение Воды.
 	AI_Output(self,other,"KDW_600_Saturas_KDWAUFNAHME_Info_14_13");	//Соединила то, что до тебя было несоединимым. Отныне твоя жизнь будет знаком объединения стихий.
 	AI_Output(self,other,"KDW_600_Saturas_KDWAUFNAHME_Info_14_14");	//Возьми это одеяние и носи его в знак союза со священной Водой и с Аданосом.
-	CreateInvItem(self,kdw_armor_l);
-	b_giveinvitems(self,other,kdw_armor_l,1);
+	b_printtrademsg1("Получена мантия мага Воды.");
+	CreateInvItem(hero,kdw_armor_l);
 	AI_EquipArmor(hero,kdw_armor_l);
 	Snd_Play("MFX_Heal_Cast");
 	Npc_SetTrueGuild(hero,GIL_KDW);
@@ -984,7 +988,7 @@ instance KDW_600_SATURAS_HEAVYARMOR(C_INFO)
 	information = kdw_600_saturas_heavyarmor_info;
 	important = 0;
 	permanent = 1;
-	description = b_buildbuyarmorstring("Одеяние верховного мага: 70/10/45/20",VALUE_KDW_ARMOR_H);
+	description = b_buildbuyarmorstring("Одеяние верховного мага, защита: 70/10/45/20",VALUE_KDW_ARMOR_H);
 };
 
 
@@ -999,9 +1003,14 @@ func int kdw_600_saturas_heavyarmor_condition()
 func void kdw_600_saturas_heavyarmor_info()
 {
 	AI_Output(other,self,"KDW_600_Saturas_HEAVYARMOR_Info_15_01");	//Я хочу носить одеяние верховных магов Воды.
-	if((Npc_GetTalentSkill(hero,NPC_TALENT_MAGE) < 4) && (KAPITEL < 5))
+	if(KAPITEL < 5)
 	{
 		AI_Output(self,other,"KDW_600_Saturas_HEAVYARMOR_Info_14_02");	//Ты еще не можешь носить такое облачение. Время еще не пришло.
+	}
+	else if(Npc_GetTalentSkill(hero,NPC_TALENT_MAGE) < 5)
+	{
+		AI_Output(self,other,"KDF_402_Corristo_WANNBEKDF_Info_14_04");	//Ты знаешь еще слишком мало. Приходи ко мне, когда будешь знать больше.
+		PrintScreen("Условие: 5 Круг магии.",-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",_TIME_MESSAGE_JOINCAMP);
 	}
 	else if(Npc_HasItems(hero,itminugget) < VALUE_KDW_ARMOR_H)
 	{
@@ -1009,12 +1018,11 @@ func void kdw_600_saturas_heavyarmor_info()
 	}
 	else
 	{
-		//AI_EquipArmor(self,kdw_armor_h);
+		b_printtrademsg1("Отдано руды: 2600");
 		AI_Output(self,other,"KDW_600_Saturas_HEAVYARMOR_Info_14_04");	//Я вижу, что ты уже достоин носить облачение верховного мага Круга Воды.
-		b_giveinvitems(hero,self,itminugget,VALUE_KDW_ARMOR_H);
+		b_printtrademsg2("Получена великая мантия мага Воды.");
+		Npc_RemoveInvItems(hero,itminugget,VALUE_KDW_ARMOR_H);
 		CreateInvItems(hero,kdw_armor_h,1);
-		//b_giveinvitems(self,hero,kdw_armor_h,1);
-		PrintScreen("Получен 1 предмет.",-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
 		AI_EquipArmor(hero,kdw_armor_h);
 		KDW_ARMOR_H_WAS_BOUGHT = 1;
 	};
@@ -1257,7 +1265,7 @@ func void info_saturas_xardasgo_info()
 	AI_Output(self,hero,"Info_Saturas_XARDASGO_14_04");	//Может быть, в старых книгах есть что-то о силе и слабостях существ, порожденных магией.
 	AI_Output(hero,self,"Info_Saturas_XARDASGO_15_05");	//Я просмотрю всю библиотеку. И не волнуйся...
 	AI_Output(hero,self,"Info_Saturas_XARDASGO_15_06");	//Я еще вернусь!
-	b_logentry(CH4_FINDXARDAS,"В библиотеке магов Воды есть пергаменты, в которых описываются магические существа. Мне следует ознакомиться с ними.");
+	b_logentry(CH4_FINDXARDAS,"В библиотеке магов Воды есть книги, в которых описываются магические существа. Мне следует ознакомиться с ними.");
 };
 
 
@@ -1376,9 +1384,9 @@ func void kdw_600_saturas_hogeaufnahmeteil2_info()
 	AI_Output(self,other,"KDW_600_Saturas_KDWAUFNAHME_Info_14_10");	//...до тех пор, пока мое бренное тело не обретет покой в чертогах Белиара и не иссякнет источник моей жизни.
 	AI_Output(other,self,"KDW_600_Saturas_KDWAUFNAHME_Info_15_11");	//...до тех пор, пока мое бренное тело не обретет покой в чертогах Белиара и не иссякнет источник моей жизни.
 	AI_Output(self,other,"KDW_600_Saturas_KDWAUFNAHME_Info_14_14");	//Возьми это одеяние и носи его в знак союза со священной Водой и с Аданосом.
-	CreateInvItem(self,kdw_armor_l);
-	b_giveinvitems(self,other,kdw_armor_l,1);
-	AI_EquipBestArmor(hero);
+	b_printtrademsg1("Получена мантия мага Воды.");
+	CreateInvItem(hero,kdw_armor_l);
+	AI_EquipArmor(hero,kdw_armor_l);
 	Snd_Play("MFX_Heal_Cast");
 	Npc_SetTrueGuild(hero,GIL_KDW);
 	hero.guild = GIL_KDW;

@@ -328,14 +328,14 @@ func void info_orcshaman_map_info()
 	AI_Output(hero,self,"Info_OrcShaman_MAP_15_01");	//А ты можешь показать мне на карте, где этот город находится?
 	AI_Output(self,hero,"Info_OrcShaman_MAP_17_02");	//Дом Ур-Шак там, на пустой белый карта.
 	AI_Output(self,hero,"Info_OrcShaman_MAP_17_03");	//Чужать давать карта, Ур-Шак рисовать дом.
+	b_printtrademsg1("Отдана карта колонии.");
 	AI_TurnAway(self,hero);
 	AI_Output(self,hero,"Info_OrcShaman_MAP_17_04");	//(рисует на карте)
 	AI_WhirlAround(self,hero);
+	b_printtrademsg2("Получена дополненная карта колонии.");
 	AI_Output(hero,self,"Info_OrcShaman_MAP_15_05");	//О! А ты неплохо рисуешь! Спасибо!
-	b_giveinvitems(hero,self,itwrworldmap,1);
-	Npc_RemoveInvItem(self,itwrworldmap);
-	CreateInvItem(self,itwrworldmap_orc);
-	b_giveinvitems(self,hero,itwrworldmap_orc,1);
+	Npc_RemoveInvItem(hero,itwrworldmap);
+	CreateInvItem(hero,itwrworldmap_orc);
 };
 
 
@@ -474,6 +474,7 @@ func void info_orcshaman_byebye_info()
 	AI_Output(hero,self,"Info_OrcShaman_BYEBYE_15_01");	//Спасибо за помощь.
 	AI_Output(self,hero,"Info_OrcShaman_BYEBYE_17_02");	//Ур-Шак говорить чужак спасибо. Чужак спасать Ур-Шак. Теперь чужак друг!
 	AI_Output(self,hero,"Info_OrcShaman_BYEBYE_17_03");	//Друг получать подарок. Знак Ур-Шак. Знак зищищать от огонь ящерица огня.
+	b_printtrademsg1("Получен талисман орков.");
 	AI_Output(self,hero,"Info_OrcShaman_BYEBYE_17_04");	//Ур-Шак не может домой. Ур-Шак теперь жить здесь. Друг приходить когда нужен помощь.
 	AI_Output(hero,self,"Info_OrcShaman_BYEBYE_15_05");	//Возможно, я этим когда-нибудь воспользуюсь.
 	b_story_friendofurshak();

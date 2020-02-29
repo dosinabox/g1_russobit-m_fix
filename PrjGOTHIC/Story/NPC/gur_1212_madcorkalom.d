@@ -8,7 +8,6 @@ instance GUR_1212_MADCORKALOM(NPC_DEFAULT)
 	voice = 10;
 	id = 1212;
 	flags = 0;
-	aivar[43] = TRUE;
 	attribute[ATR_STRENGTH] = 70;
 	attribute[ATR_DEXTERITY] = 100;
 	attribute[ATR_MANA_MAX] = 500;

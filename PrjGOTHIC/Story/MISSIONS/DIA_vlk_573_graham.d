@@ -89,7 +89,9 @@ func void dia_graham_sellmap_pay()
 	AI_Output(other,self,"DIA_Graham_SellMap_Pay_15_00");	//Я куплю у тебя карту. Вот руда.
 	if(Npc_HasItems(other,itminugget) >= 20)
 	{
+		b_printtrademsg1("Отдано руды: 20");
 		AI_Output(self,other,"DIA_Graham_SellMap_Pay_02_01");	//Ладно. Поверь мне, парень, ты бы нигде не достал такую карту за эти деньги.
+		b_printtrademsg2("Получена карта дороги к Старой шахте.");
 		b_giveinvitems(other,self,itminugget,20);
 		b_giveinvitems(self,other,itwrommap,1);
 		GRAHAM_OMKARTEVERKAUFT = TRUE;
@@ -105,6 +107,7 @@ func void dia_graham_sellmap_aufsmaul()
 {
 	AI_Output(other,self,"DIA_Graham_SellMap_AufsMaul_15_00");	//Отдай карту, или я заберу ее сам!
 	AI_Output(self,other,"DIA_Graham_SellMap_AufsMaul_02_01");	//Эй, расслабься, дружище! Мне не нужны неприятности. Вот, возьми свою карту и оставь меня в покое.
+	b_printtrademsg2("Получена карта дороги к Старой шахте.");
 	b_giveinvitems(self,other,itwrommap,1);
 	Info_ClearChoices(dia_graham_sellmap);
 	npc_setpermattitude(self,ATT_ANGRY);

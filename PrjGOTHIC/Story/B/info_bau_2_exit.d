@@ -125,6 +125,7 @@ func void info_bau_2_wasser_info()
 	AI_Output(other,self,"Info_Bau_2_Wasser_15_00");	//Меня Лефти послал. Я принес воды.
 	if(Npc_HasItems(other,itfo_potion_water_01) >= 1)
 	{
+		b_printtrademsg1("Отдана бутылка воды.");
 		AI_Output(self,other,"Info_Bau_2_Wasser_02_01");	//Спасибо, парень. Я умираю от жажды.
 		b_giveinvitems(other,self,itfo_potion_water_01,1);
 		if(c_bodystatecontains(self,BS_SIT))
@@ -168,6 +169,7 @@ func int info_bau_2_wasser_nolefty_condition()
 func void info_bau_2_wasser_nolefty_info()
 {
 	AI_Output(other,self,"Info_Wasser_NoLefty");	//Я принес тебе воды.
+	b_printtrademsg1("Отдана бутылка воды.");
 	AI_Output(self,other,"Info_Bau_2_Wasser_02_01");	//Спасибо, парень. Я умираю от жажды.
 	self.aivar[AIV_DEALDAY] = Wld_GetDay() + 1;
 	b_giveinvitems(other,self,itfo_potion_water_01,1);

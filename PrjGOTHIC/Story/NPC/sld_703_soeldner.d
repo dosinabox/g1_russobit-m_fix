@@ -36,8 +36,9 @@ instance SLD_703_SOELDNER(NPC_DEFAULT)
 
 func void rtn_start_703()
 {
-	ta_sitaround(7,45,23,45,"NC_PLACE01");
-	ta_sleep(23,45,7,45,"NC_HUT02_IN");
+	ta_sitaround(7,55,23,45,"NC_PLACE01");
+	ta_sleep(23,45,7,30,"NC_HUT02_IN");
+	ta_washself(7,30,7,55,"NC_WASH_04");
 };
 
 func void rtn_fmtaken_703()

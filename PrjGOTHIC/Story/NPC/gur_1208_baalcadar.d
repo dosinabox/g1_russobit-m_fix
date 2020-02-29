@@ -33,3 +33,10 @@ func void rtn_start_1208()
 	ta_teaching(8,0,2,0,"PSI_TEACH_CADAR");
 };
 
+func void rtn_ch3_1208()
+{
+	ta_sleep(23,30,8,0,"PSI_23_HUT_IN");
+	ta_stay(8,0,12,0,"PSI_TEACH_CADAR");
+	ta_smalltalk(12,0,23,30,"PSI_TEACH_CADAR");
+};
+

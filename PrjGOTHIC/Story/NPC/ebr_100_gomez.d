@@ -20,7 +20,6 @@ instance EBR_100_GOMEZ(NPC_DEFAULT)
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	aivar[AIV_IMPORTANT] = TRUE;
-	aivar[43] = TRUE;
 	Npc_SetTalentSkill(self,NPC_TALENT_2H,2);
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,2);
 	Npc_SetTalentSkill(self,NPC_TALENT_BOW,2);
@@ -47,7 +46,7 @@ func void rtn_start_100()
 
 func void rtn_ot_100()
 {
-	ta_ebr_hangaround(7,0,20,0,"OCC_BARONS_GREATHALL_THRONE");
-	ta_ebr_hangaround(20,0,7,0,"OCC_BARONS_GREATHALL_THRONE");
+	ta_stay(7,0,20,0,"OCC_BARONS_DANCE");
+	ta_stay(20,0,7,0,"OCC_BARONS_DANCE");
 };
 

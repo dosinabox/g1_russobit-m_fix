@@ -13,7 +13,6 @@ instance STT_338_SCHATTEN(NPC_DEFAULT)
 	attribute[ATR_MANA] = 0;
 	attribute[ATR_HITPOINTS_MAX] = 124;
 	attribute[ATR_HITPOINTS] = 124;
-	aivar[43] = TRUE;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Relaxed.mds");
 	Mdl_SetVisualBody(self,"hum_body_Naked0",1,1,"Hum_Head_Psionic",94,1,stt_armor_m);
@@ -23,9 +22,8 @@ instance STT_338_SCHATTEN(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	EquipItem(self,itmw_1h_sword_short_04);
 	EquipItem(self,itrw_bow_small_01);
-	CreateInvItems(self,itamarrow,20);
+	CreateInvItems(self,itamarrow,10);
 	CreateInvItem(self,itkelockpick);
-	CreateInvItem(self,itfo_potion_water_01);
 	daily_routine = rtn_fmstart_338;
 };
 

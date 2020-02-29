@@ -80,9 +80,8 @@ instance STT_302_VIPER_BUY(C_INFO)
 	condition = stt_302_viper_buy_condition;
 	information = stt_302_viper_buy_info;
 	important = 0;
-	permanent = 1;
+	permanent = 0;
 	description = "Ты можешь дать мне руду?";
-	trade = 1;
 };
 
 
@@ -97,6 +96,41 @@ func int stt_302_viper_buy_condition()
 func void stt_302_viper_buy_info()
 {
 	AI_Output(other,self,"Stt_302_Viper_BUY_Info_15_01");	//Ты можешь дать мне руду?
-	AI_Output(self,other,"Stt_302_Viper_BUY_Info_11_02");	//Если у тебя есть что-нибудь взамен.
+	if(hero.guild == GIL_ORG)
+	{
+		AI_Output(self,other,"SVM_11_YouStoleFromMe");	//И ты еще смеешь появляться мне на глаза, грязный вор?
+		AI_StopProcessInfos(self);
+	}
+	else
+	{
+		AI_Output(self,other,"Stt_302_Viper_BUY_Info_11_02");	//Если у тебя есть что-нибудь взамен.
+		Log_CreateTopic(GE_TRADEROM,LOG_NOTE);
+		b_logentry(GE_TRADEROM,"Вайпер занимается переплавкой руды и может обменять ее на мои товары.");
+	};
+};
+
+instance STT_302_VIPER_BUY2(C_INFO)
+{
+	npc = stt_302_viper;
+	condition = stt_302_viper_buy2_condition;
+	information = stt_302_viper_buy2_info;
+	important = 0;
+	permanent = 1;
+	description = DIALOG_TRADE;
+	trade = 1;
+};
+
+
+func int stt_302_viper_buy2_condition()
+{
+	if(Npc_KnowsInfo(hero,stt_302_viper_buy) && hero.guild != GIL_ORG)
+	{
+		return 1;
+	};
+};
+
+func void stt_302_viper_buy2_info()
+{
+	AI_Output(other,self,"DIA_Fortuno_BuyJoints_15_00");	//Давай меняться.
 };
 

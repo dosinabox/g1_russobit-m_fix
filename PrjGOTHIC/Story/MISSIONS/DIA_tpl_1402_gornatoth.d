@@ -61,7 +61,7 @@ instance DIA_GORNATOTH_ANGARTALKED(C_INFO)
 
 func int dia_gornatoth_angartalked_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_corangar_latertrainer))
+	if(Npc_KnowsInfo(hero,dia_corangar_latertrainer) && KAPITEL < 2)
 	{
 		return 1;
 	};
@@ -127,6 +127,7 @@ func void tpl_1402_gornatoth_getstuff_info()
 	AI_Output(other,self,"TPL_1402_GorNaToth_GETSTUFF_Info_15_01");	//Я пришел, чтобы взять доспехи Стража.
 	AI_Output(self,other,"TPL_1402_GorNaToth_GETSTUFF_Info_11_02");	//Я очень рад, что могу передать тебе один из наших доспехов. Ты заслужил их, ведь это ты обнаружил яйца ползунов.
 	AI_Output(self,other,"TPL_1402_GorNaToth_GETSTUFF_Info_11_03");	//Пусть этот доспех хранит тебя, как Спящий хранит наше Братство!
+	b_printtrademsg1("Получен легкий доспех Стража.");
 	b_logentry(GE_BECOMETEMPLAR,"Гор На Тоф вручил мне мой первый доспех Стража. Теперь я стал частью этого общества воинов!");
 	Log_CreateTopic(GE_TRADERPSI,LOG_NOTE);
 	b_logentry(GE_TRADERPSI,"У Гор На Тофа есть хорошие доспехи Стражей, но получить их может только тот, кто внес значительное пожертвование на нужды Братства. Я могу найти его на тренировочной площадке лагеря Братства.");
@@ -166,11 +167,11 @@ func void tpl_1402_gornatoth_armor_info()
 	Info_AddChoice(tpl_1402_gornatoth_armor,DIALOG_BACK,tpl_1402_gornatoth_armor_back);
 	if(GORNATOTH_ARMOR_H_WAS_BOUGHT != 1)
 	{
-		Info_AddChoice(tpl_1402_gornatoth_armor,b_buildbuyarmorstring("Тяжелый доспех стража: 70/10/35/0",VALUE_TPL_ARMOR_H),tpl_1402_gornatoth_armor_h);
+		Info_AddChoice(tpl_1402_gornatoth_armor,b_buildbuyarmorstring("Тяжелый доспех стража, защита: 70/10/35/0",VALUE_TPL_ARMOR_H),tpl_1402_gornatoth_armor_h);
 	};
 	if(GORNATOTH_ARMOR_M_WAS_BOUGHT != 1)
 	{
-		Info_AddChoice(tpl_1402_gornatoth_armor,b_buildbuyarmorstring("Средний доспех стража: 55/10/25/0",VALUE_TPL_ARMOR_M),tpl_1402_gornatoth_armor_m);
+		Info_AddChoice(tpl_1402_gornatoth_armor,b_buildbuyarmorstring("Средний доспех стража, защита: 55/10/25/0",VALUE_TPL_ARMOR_M),tpl_1402_gornatoth_armor_m);
 	};
 };
 
@@ -187,7 +188,9 @@ func void tpl_1402_gornatoth_armor_m()
 	}
 	else
 	{
+		b_printtrademsg1("Отдано руды: 1650");
 		AI_Output(self,hero,"Info_GorNaToth_ARMOR_M_11_04");	//Ты можешь внести пожертвование, поэтому я дам тебе такой доспех. Он станет твоей надежной защитой.
+		b_printtrademsg2("Получен доспех Стража.");
 		b_giveinvitems(hero,self,itminugget,VALUE_TPL_ARMOR_M);
 		CreateInvItem(self,tpl_armor_m);
 		b_giveinvitems(self,hero,tpl_armor_m,1);
@@ -210,12 +213,11 @@ func void tpl_1402_gornatoth_armor_h()
 	}
 	else
 	{
-		//AI_EquipArmor(self,tpl_armor_h);
+		b_printtrademsg1("Отдано руды: 2100");
 		AI_Output(self,hero,"Info_GorNaToth_ARMOR_H_11_04");	//Носи этот доспех в знак высочайшей чести, оказанной тебе Братством.
+		b_printtrademsg2("Получен тяжелый доспех Стража.");
 		b_giveinvitems(hero,self,itminugget,VALUE_TPL_ARMOR_H);
 		CreateInvItem(hero,tpl_armor_h);
-		//b_giveinvitems(self,hero,tpl_armor_h,1);
-		PrintScreen("Получен 1 предмет.",-1,_YPOS_MESSAGE_TAKEN,"FONT_OLD_10_WHITE.TGA",_TIME_MESSAGE_TAKEN);
 		AI_EquipArmor(hero,tpl_armor_h);
 		GORNATOTH_ARMOR_H_WAS_BOUGHT = 1;
 	};
@@ -264,7 +266,7 @@ func void tpl_1402_gornatoth_teach_info()
 	if(LOG_GORNATOTHTRAIN == FALSE)
 	{
 		Log_CreateTopic(GE_TEACHERPSI,LOG_NOTE);
-		b_logentry(GE_TEACHERPSI,"Страж Гор На Тоф может помочь мне повысить силу, ловкость и увеличить магическую силу.");
+		b_logentry(GE_TEACHERPSI,"Страж Гор На Тоф может помочь мне повысить силу, ловкость и магическую силу, а также улучшить мое владение одноручным оружием.");
 		LOG_GORNATOTHTRAIN = TRUE;
 	};
 };
@@ -366,7 +368,7 @@ instance TPL_1402_GORNATOTH_TRAIN(C_INFO)
 
 func int tpl_1402_gornatoth_train_condition()
 {
-	if((Npc_GetTalentSkill(hero,NPC_TALENT_1H) < 1) && c_npcbelongstopsicamp(hero))
+	if((Npc_GetTalentSkill(hero,NPC_TALENT_1H) < 1) && c_npcbelongstopsicamp(hero) && LOG_GORNATOTHTRAIN == TRUE)
 	{
 		return TRUE;
 	};

@@ -99,11 +99,12 @@ func int vlk_585_aleph_info_condition()
 func void vlk_585_aleph_info_info()
 {
 	AI_Output(other,self,"VLK_585_Aleph_INFO_Info_15_01");	//Хорошо, возьми десять кусков.
+	b_printtrademsg1("Отдано руды: 10");
+	b_giveinvitems(other,self,itminugget,10);
 	AI_Output(self,other,"VLK_585_Aleph_INFO_Info_05_02");	//Спасибо. Если ты вернешься в главный ствол шахты и спустишься вниз, ты увидишь две пещеры.
 	AI_Output(self,other,"VLK_585_Aleph_INFO_Info_05_03");	//В одной из них будет стоять стражник. Там же стоит старый пресс.
 	AI_Output(self,other,"VLK_585_Aleph_INFO_Info_05_04");	//Если тебе повезет, ты найдешь зелье лечения, но будь осторожен, там повсюду ползуны.
 	AI_Output(self,other,"VLK_585_Aleph_INFO_Info_05_05");	//Если захочешь узнать что-нибудь еще, приходи ко мне, уж я смогу тебе помочь...
-	b_giveinvitems(other,self,itminugget,10);
 };
 
 
@@ -181,8 +182,11 @@ func int vlk_585_aleph_glen_condition()
 func void vlk_585_aleph_glen_info()
 {
 	AI_Output(other,self,"VLK_585_Aleph_GLEN_Info_15_01");	//Надеюсь, за эти десять кусков ты расскажешь мне что-нибудь стоящее.
-	AI_Output(self,other,"VLK_585_Aleph_GLEN_Info_05_02");	//Здесь очень много запертых сундуков. Отмычки можно купить у рудокопа по имени Глен. Ты найдешь его наверху.
+	b_printtrademsg1("Отдано руды: 10");
 	b_giveinvitems(other,self,itminugget,10);
+	AI_Output(self,other,"VLK_585_Aleph_GLEN_Info_05_02");	//Здесь очень много запертых сундуков. Отмычки можно купить у рудокопа по имени Глен. Ты найдешь его наверху.
+	Log_CreateTopic(GE_TRADEROM,LOG_NOTE);
+	b_logentry(GE_TRADEROM,"За небольшую плату Алеф рассказал мне, что рудокоп по имени Глен продает отмычки.");
 };
 
 func void b_aleph_storageshedkey()
@@ -228,13 +232,12 @@ func void vlk_585_aleph_schuppen_50()
 	if(Npc_HasItems(hero,itminugget) >= 50)
 	{
 		AI_Output(other,self,"VLK_585_Aleph_SCHUPPEN_50_15_01");	//50 кусков тебе хватит?
-		AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_50_05_02");	//Твоя щедрость безгранична! Возьми ключ. А еще возьми это кольцо. Оно было моим талисманом на счастье.
-		CreateInvItems(self,itke_om_03,1);
-		b_giveinvitems(self,other,itke_om_03,2);
-		Npc_RemoveInvItem(other,itke_om_03);
-		Npc_RemoveInvItem(self,staerkering);
-		CreateInvItem(other,staerkering);
+		b_printtrademsg1("Отдано руды: 50");
 		b_giveinvitems(other,self,itminugget,50);
+		AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_50_05_02");	//Твоя щедрость безгранична! Возьми ключ. А еще возьми это кольцо. Оно было моим талисманом на счастье.
+		b_printtrademsg2("Получен ключ от сундука и кольцо силы.");
+		CreateInvItems(other,itke_om_03,1);
+		CreateInvItems(other,staerkering,1);
 		Info_ClearChoices(vlk_585_aleph_schuppen);
 		ALEPH_KEY = TRUE;
 		b_aleph_storageshedkey();
@@ -249,12 +252,14 @@ func void vlk_585_aleph_schuppen_30()
 {
 	if(Npc_HasItems(hero,itminugget) >= 30)
 	{
-		CreateInvItem(self,itke_om_03);
-		b_giveinvitems(self,other,itke_om_03,1);
-		b_giveinvitems(other,self,itminugget,30);
 		Info_ClearChoices(vlk_585_aleph_schuppen);
 		AI_Output(other,self,"VLK_585_Aleph_SCHUPPEN_30_15_01");	//Предлагаю 30 кусков.
+		b_printtrademsg1("Отдано руды: 30");
+		b_giveinvitems(other,self,itminugget,30);
 		AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_30_05_02");	//Хорошо. У меня как раз есть ключ. Совершенно случайно, кстати.
+		b_printtrademsg2("Получен ключ от сундука.");
+		CreateInvItem(self,itke_om_03);
+		b_giveinvitems(self,other,itke_om_03,1);
 		ALEPH_KEY = TRUE;
 		b_aleph_storageshedkey();
 	}
@@ -310,9 +315,11 @@ func void vlk_585_aleph_dirty_100()
 {
 	if(Npc_HasItems(hero,itminugget) >= 100)
 	{
+		b_printtrademsg1("Отдано руды: 100");
+		b_giveinvitems(hero,self,itminugget,100);
 		AI_Output(other,self,"VLK_585_Aleph_DIRTY_100_Info_15_01");	//Ты меня совсем разоришь. Держи уж свои 100 кусков.
 		AI_Output(self,other,"VLK_585_Aleph_DIRTY_100_Info_05_02");	//Хорошее предложение! Не могу отказать. Держи свой ключ.
-		b_giveinvitems(hero,self,itminugget,100);
+		b_printtrademsg2("Получен ключ от сундука.");
 		CreateInvItem(self,itke_om_03);
 		b_giveinvitems(self,other,itke_om_03,1);
 		Info_ClearChoices(vlk_585_aleph_dirty);

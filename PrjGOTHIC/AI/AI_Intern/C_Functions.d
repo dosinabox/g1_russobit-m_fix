@@ -442,7 +442,7 @@ func int c_npcbelongstopsicamp(var C_NPC slf)
 func int c_chargewasattacked(var C_NPC guard,var C_NPC charge,var C_NPC attacker)
 {
 	printdebugnpc(PD_ZS_DETAIL,"C_ChargeWasAttacked");
-	if(c_npcisguard(guard) || c_npcisguardarcher(guard) || (guard.npctype == NPCTYPE_GUARD) || (guard.npctype == NPCTYPE_MINE_GUARD))
+	if(c_npcisguard(guard) || c_npcisguardarcher(guard) || (guard.npctype == NPCTYPE_GUARD) || (guard.npctype == NPCTYPE_MINE_GUARD) || (guard.guild == GIL_EBR))
 	{
 		printdebugnpc(PD_ZS_DETAIL,"...NSC ist Wache oder FK-Wache!");
 		if((Npc_GetAttitude(guard,charge) == ATT_FRIENDLY) && (Npc_GetAttitude(guard,attacker) != ATT_FRIENDLY))
@@ -772,6 +772,26 @@ func int c_npcisguarding(var C_NPC slf)
 	if(slf.id == 726)
 	{
 		//наемник у руды
+		return TRUE;
+	};
+	if(slf.id == 404 || slf.id == 406)
+	{
+		//ксардасы
+		return TRUE;
+	};
+	if(slf.id == 100 && KAPITEL >= 4)
+	{
+		//гомез
+		return TRUE;
+	};
+	if((slf.id == 1433 || slf.id == 1401 || slf.id == 1400) && Npc_KnowsInfo(hero,grd_263_asghan_open_now))
+	{
+		//гор на вид, гор на кош, гор на бар
+		return TRUE;
+	};
+	if(slf.id == 263 && Npc_KnowsInfo(hero,grd_263_asghan_open_now))
+	{
+		//асгхан
 		return TRUE;
 	};
 	return FALSE;

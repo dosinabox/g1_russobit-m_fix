@@ -21,12 +21,12 @@ func void b_assessusemob()
 			if((Npc_GetPermAttitude(self,other) == ATT_FRIENDLY) || (self.guild == other.guild))
 			{
 				printdebugnpc(PD_ZS_CHECK,"...Manipulator ist FRIENDLY oder in gleicher Gilde!");
-				if((self.flags != NPC_FLAG_IMMORTAL))
+				if((self.flags != NPC_FLAG_IMMORTAL) && self.id != 834 && self.id != 830)
 				{
 					b_say(self,other,"$HandsOff");
 				};
 			}
-			else
+			else if(self.id != 834)
 			{
 				printglobals(PD_ZS_CHECK);
 				Npc_SetTempAttitude(self,ATT_HOSTILE);

@@ -99,6 +99,7 @@ func void grd_271_ulbert_drink_info()
 	AI_Output(self,other,"GRD_271_ULBERT_DRINK_Info_07_02");	//Спасибо.
 	if(Npc_HasItems(hero,itfobeer))
 	{
+		b_printtrademsg1("Отдано пиво.");
 		b_giveinvitems(hero,self,itfobeer,1);
 		if(c_bodystatecontains(self,BS_SIT))
 		{
@@ -109,6 +110,7 @@ func void grd_271_ulbert_drink_info()
 	}
 	else if(Npc_HasItems(hero,itfowine))
 	{
+		b_printtrademsg1("Отдано вино.");
 		b_giveinvitems(hero,self,itfowine,1);
 		if(c_bodystatecontains(self,BS_SIT))
 		{
@@ -119,6 +121,7 @@ func void grd_271_ulbert_drink_info()
 	}
 	else if(Npc_HasItems(hero,itfobooze))
 	{
+		b_printtrademsg1("Отдан шнапс.");
 		b_giveinvitems(hero,self,itfobooze,1);
 		if(c_bodystatecontains(self,BS_SIT))
 		{
@@ -182,6 +185,7 @@ func void grd_271_ulbert_lock_info()
 {
 	AI_Output(other,self,"GRD_271_ULBERT_LOCK_Info_15_01");	//Слушай, Ян и стражники сидят внизу и едят жареное мясо.
 	AI_Output(self,other,"GRD_271_ULBERT_LOCK_Info_07_02");	//Что? Без меня? Ну, так я пойду и заберу свою долю.
+	self.aivar[AIV_ITEMSCHWEIN] = FALSE;
 	b_logentry(CH2_STORAGESHED,"Я смог легко отвлечь Ульберта. Он ушел со склада!");
 	Npc_ExchangeRoutine(self,"away");
 	AI_StopProcessInfos(self);
@@ -210,6 +214,7 @@ func void grd_271_ulbert_angry_info()
 {
 	AI_Output(self,other,"GRD_271_ULBERT_ANGRY_Info_07_01");	//Эй, ты, не было там никакого мяса!
 	AI_Output(other,self,"GRD_271_ULBERT_ANGRY_Info_15_02");	//А... э... Наверное, я ошибся! Желаю хорошего дня!
+	self.aivar[AIV_ITEMSCHWEIN] = TRUE;
 	b_givexp(XP_LUREULBERTAWAY);
 	b_logentry(CH2_STORAGESHED,"Я снова встретил Ульберта. Он до сих пор не понял, что я обманул его. Какой наивный солдат!");
 	Log_SetTopicStatus(CH2_STORAGESHED,LOG_SUCCESS);

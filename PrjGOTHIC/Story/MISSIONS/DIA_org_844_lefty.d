@@ -77,7 +77,7 @@ func void dia_lefty_first_info()
 	Log_SetTopicStatus(CH1_CARRYWATER,LOG_RUNNING);
 	b_logentry(CH1_CARRYWATER,"Лефти из Нового лагеря попросил меня разнести воду крестьянам, работающим на рисовых полях.");
 	Info_ClearChoices(dia_lefty_first);
-	Info_AddChoice(dia_lefty_first,"Может, позже.",dia_lefty_first_later);
+	Info_AddChoice(dia_lefty_first,"Может, позже...",dia_lefty_first_later);
 	Info_AddChoice(dia_lefty_first,"Сам носи свою воду!",dia_lefty_first_never);
 	Info_AddChoice(dia_lefty_first,"Хорошо, я помогу тебе.",dia_lefty_first_yes);
 };
@@ -137,7 +137,8 @@ instance DIA_LEFTY_WORKDAY(C_INFO)
 
 func int dia_lefty_workday_condition()
 {
-	if((((LEFTY_MISSION == LOG_RUNNING)) && Wld_IsTime(8,0,19,0) || (LEFTY_MISSION == LOG_SUCCESS)) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE) &&  ((LEFTY_WORKDAY <= (Wld_GetDay() - 1)) || (LEFTY_MISSION == LOG_SUCCESS)))
+	//if((((LEFTY_MISSION == LOG_RUNNING)) && Wld_IsTime(8,0,19,0) || (LEFTY_MISSION == LOG_SUCCESS)) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE) && ((LEFTY_WORKDAY <= (Wld_GetDay() - 1)) || (LEFTY_MISSION == LOG_SUCCESS)))
+	if(Wld_IsTime(8,0,19,0) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE) && (LEFTY_WORKDAY <= (Wld_GetDay() - 1)))
 	{
 		return 1;
 	};

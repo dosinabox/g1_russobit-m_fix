@@ -83,6 +83,7 @@ func void sld_709_cord_train_info()
 	{
 		if(b_giveskill(hero,NPC_TALENT_1H,1,LPCOST_TALENT_1H_1))
 		{
+			b_printtrademsg1("Отдано руды: 30");
 			AI_Output(self,other,"SLD_709_Cord_TRAIN_14_01");	//Правильное решение! Но прежде, чем освоить технику боя, тебе нужно научиться правильно держать меч.
 			AI_Output(self,other,"SLD_709_Cord_TRAIN_14_02");	//Почти все новички привыкли держать оружие двумя руками. Это неправильно.
 			AI_Output(self,other,"SLD_709_Cord_TRAIN_14_03");	//Всегда держи меч одной рукой, острием вверх.
@@ -128,6 +129,7 @@ func void sld_709_cord_trainagain_info()
 	{
 		if(b_giveskill(hero,NPC_TALENT_1H,2,LPCOST_TALENT_1H_2))
 		{
+			b_printtrademsg1("Отдано руды: 50");
 			AI_Output(self,other,"SLD_709_Cord_TRAINAGAIN_Info_14_02");	//Хорошо. Основное ты уже знаешь. Вот еще: если держать меч немного ниже, то первый удар будет более сильным.
 			AI_Output(self,other,"SLD_709_Cord_TRAINAGAIN_Info_14_03");	//Ну, рубящий удар, ты помнишь?! Тогда давай расскажу, как правильно двигаться. Наносишь два удара и резко разворачиваешься. Враг, скорее всего, растеряется, а для тебя это отличный момент:
 			AI_Output(self,other,"SLD_709_Cord_TRAINAGAIN_Info_14_04");	//делаешь еще один удар справа налево...

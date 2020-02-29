@@ -31,7 +31,7 @@ func void zs_movenpcwait_loop()
 			return;
 		};
 	};
-	AI_Wait(self,1);
+	//AI_Wait(self,1);
 };
 
 func void zs_movenpcwait_end()
@@ -72,7 +72,7 @@ func void zs_movenpcwait1_loop()
 			return;
 		};
 	};
-	AI_Wait(self,1);
+	//AI_Wait(self,1);
 };
 
 func void zs_movenpcwait1_end()
@@ -104,7 +104,7 @@ func void zs_movenpcfriendlywait_loop()
 		AI_ContinueRoutine(self);
 		return;
 	};
-	AI_Wait(self,1);
+	//AI_Wait(self,1);
 };
 
 func void zs_movenpcfriendlywait_end()
