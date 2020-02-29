@@ -1,0 +1,56 @@
+
+func void startup_ai_testlevel_monsterparse()
+{
+	Wld_InsertNpc(bloodfly,"WP_Scorpion");
+	Wld_InsertNpc(demon,"WP_DEMON");
+	Wld_InsertNpc(demonlord,"WP_DEMON");
+	Wld_InsertNpc(harpie,"WP_DEMON");
+	Wld_InsertNpc(greengobboclub,"WP_GOBBO");
+	Wld_InsertNpc(blackgobbomace,"WP_GOBBO");
+	Wld_InsertNpc(stonegolem,"WP_GOLEM");
+	Wld_InsertNpc(icegolem,"WP_GOLEM");
+	Wld_InsertNpc(firegolem,"WP_GOLEM");
+	Wld_InsertNpc(lurker,"WP_LURKER");
+	Wld_InsertNpc(meatbug,"WP_MEATBUG");
+	Wld_InsertNpc(minecrawler,"WP_CRAWLER");
+	Wld_InsertNpc(minecrawlerwarrior,"WP_CRAWLER");
+	Wld_InsertNpc(minecrawlerqueen,"WP_CRWQUEEN");
+	Wld_InsertNpc(molerat,"WP_MOLERAT");
+	Wld_InsertNpc(scavenger,"WP_CAVE_9");
+	Wld_InsertNpc(orcbiter,"WP_CAVE_9");
+	Wld_InsertNpc(shadowbeast,"WP_SHADOW");
+	Wld_InsertNpc(bloodhound,"WP_SHADOW");
+	Wld_InsertNpc(skeleton,"WP_SKELETON");
+	Wld_InsertNpc(skeletonwarrior,"WP_SKELETON");
+	Wld_InsertNpc(skeletonscout,"WP_SKELETON");
+	Wld_InsertNpc(skeletonmage,"WP_SKELETON");
+	Wld_InsertNpc(sleeper,"WORLD_PLAIN_61");
+	Wld_InsertNpc(snapper,"WP_SNAPPER");
+	Wld_InsertNpc(razor,"WP_SNAPPER");
+	Wld_InsertNpc(swampshark,"WP_SWAMPSHARK");
+	Wld_InsertNpc(troll,"WP_TROLL");
+	Wld_InsertNpc(waran,"WP_WARAN");
+	Wld_InsertNpc(firewaran,"WP_WARAN");
+	Wld_InsertNpc(wolf,"WP_WOLF");
+	Wld_InsertNpc(orcdog,"WP_ORCDOG");
+	Wld_InsertNpc(zombie,"WP_ZOMBIE");
+	Wld_InsertNpc(zombie2,"WP_ZOMBIE");
+	Wld_InsertNpc(zombie3,"WP_ZOMBIE");
+	Wld_InsertNpc(zombie4,"WP_ZOMBIE");
+	Wld_InsertNpc(orcscout,"WP_ORC");
+	Wld_InsertNpc(orcshaman,"WP_ORC");
+	Wld_InsertNpc(orcslave,"WP_ORC");
+	Wld_InsertNpc(orcwarrior2,"WP_ORC");
+	Wld_InsertNpc(undeadorcshaman,"WP_ORC");
+	Wld_InsertNpc(undeadorcwarrior,"WP_ORC");
+	Wld_InsertNpc(babe,"WP_GUARD_1");
+	Wld_InsertNpc(babe2,"WP_GUARD_1");
+	Wld_InsertNpc(babe3,"WP_GUARD_1");
+	Wld_InsertNpc(babe4,"WP_GUARD_1");
+	Wld_InsertNpc(babe5,"WP_GUARD_1");
+	Wld_InsertNpc(babe6,"WP_GUARD_1");
+	Wld_InsertNpc(babe7,"WP_GUARD_1");
+	Wld_InsertNpc(overlayhuman,"WP_CAVE_4");
+	Wld_InsertNpc(bathbabe,"OB_MOBSI");
+};
+

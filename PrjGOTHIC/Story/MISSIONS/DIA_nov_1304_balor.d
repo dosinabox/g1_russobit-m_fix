@@ -1,0 +1,239 @@
+
+instance DIA_BALOR_EXIT(C_INFO)
+{
+	npc = nov_1304_balor;
+	nr = 999;
+	condition = dia_viran_exit_condition;
+	information = dia_viran_exit_info;
+	important = 0;
+	permanent = 1;
+	description = DIALOG_ENDE;
+};
+
+
+func int dia_balor_exit_condition()
+{
+	return 1;
+};
+
+func void dia_balor_exit_info()
+{
+	AI_StopProcessInfos(self);
+};
+
+
+var int balor_botenday;
+
+instance DIA_BALOR_FETCHWEED(C_INFO)
+{
+	npc = nov_1304_balor;
+	nr = 1;
+	condition = dia_balor_fetchweed_condition;
+	information = dia_balor_fetchweed_info;
+	permanent = 0;
+	description = "Меня прислал Идол Оран за урожаем болотника.";
+};
+
+
+func int dia_balor_fetchweed_condition()
+{
+	if(BAALORUN_FETCHWEED == LOG_RUNNING)
+	{
+		return 1;
+	};
+};
+
+func void dia_balor_fetchweed_info()
+{
+	AI_Output(other,self,"DIA_Balor_FetchWeed_15_00");	//Меня прислал Идол Оран за урожаем болотника.
+	AI_Output(self,other,"DIA_Balor_FetchWeed_01_01");	//Хорошо. Мне не придется относить его самому. Вот, возьми его.
+	AI_Output(self,other,"DIA_Balor_FetchWeed_01_02");	//Не забудь заглянуть к Вайрану, на другую сторону болота, если ты у него еще не был.
+	AI_Output(self,other,"DIA_Balor_FetchWeed_01_03");	//Иначе наш дневной урожай кое-кому покажется слишком маленьким. Могут подумать, что ты половину присвоил.
+	b_giveinvitems(self,other,itmi_plants_swampherb_01,50);
+	b_logentry(CH1_DELIVERWEED,"Балор передал мне дневной урожай болотника для Кор Галома.");
+	b_givexp(XP_WEEDFROMBALOR);
+	if(!Npc_KnowsInfo(hero,dia_viran_what) && !Npc_KnowsInfo(hero,dia_viran_fetchweed))
+	{
+		b_logentry(CH1_DELIVERWEED,"По словам Балора на другой стороне болота есть еще одна группа сборщиков болотника. Я не расспросил как следует Идола Орана. Теперь мне придется разыскивать эту группу и постараться не попасться на глаза болотожорам.");
+	};
+	BALOR_BOTENDAY = Wld_GetDay();
+};
+
+
+var int balor_playercheating;
+
+instance DIA_BALOR_SELLUNDER(C_INFO)
+{
+	npc = nov_1304_balor;
+	nr = 1;
+	condition = dia_balor_sellunder_condition;
+	information = dia_balor_sellunder_info;
+	permanent = 0;
+	description = "Да как я могу? И потом... куда мне его девать? Продать кому-то?";
+};
+
+
+func int dia_balor_sellunder_condition()
+{
+	if(Npc_KnowsInfo(hero,dia_balor_fetchweed))
+	{
+		return 1;
+	};
+};
+
+func void dia_balor_sellunder_info()
+{
+	AI_Output(other,self,"DIA_Balor_SellUnder_15_00");	//Да как я могу? И потом: куда мне его девать? Продать кому-то?
+	AI_Output(self,other,"DIA_Balor_SellUnder_01_01");	//А, я подсказал тебе хорошую идею, да?
+	Info_ClearChoices(dia_balor_sellunder);
+	Info_AddChoice(dia_balor_sellunder,"Забудь, это была просто шутка.",dia_balor_sellunder_forgetit);
+	Info_AddChoice(dia_balor_sellunder,"Если бы ты знал того, кто мог его купить, мы поделили бы прибыль.",dia_balor_sellunder_halfhalf);
+	Info_AddChoice(dia_balor_sellunder,"Нет, просто скажи, кто он.",dia_balor_sellunder_comeon);
+};
+
+func void dia_balor_sellunder_forgetit()
+{
+	AI_Output(other,self,"DIA_Balor_SellUnder_ForgetIt_15_00");	//Забудь, это была просто шутка.
+	Info_ClearChoices(dia_balor_sellunder);
+};
+
+func void dia_balor_sellunder_halfhalf()
+{
+	AI_Output(other,self,"DIA_Balor_SellUnder_HalfHalf_15_00");	//Если бы ты знал того, кто мог бы его купить, мы могли бы поделить прибыль пополам.
+	AI_Output(self,other,"DIA_Balor_SellUnder_HalfHalf_01_01");	//Ну, есть в Новом лагере человек, которого мог бы заинтересовать груз болотника...
+	AI_Output(self,other,"DIA_Balor_SellUnder_HalfHalf_01_02");	//Но если Гуру узнают об этом, они скормят тебя болотожорам! Так что я ничего не знаю, ясно?!
+	BALOR_PLAYERCHEATING = TRUE;
+	Info_ClearChoices(dia_balor_sellunder);
+};
+
+func void dia_balor_sellunder_comeon()
+{
+	AI_Output(other,self,"DIA_Balor_SellUnder_ComeOn_15_00");	//Нет, просто скажи, кто он.
+	AI_Output(self,other,"DIA_Balor_SellUnder_ComeOn_01_01");	//Ишь, чего захотел! Ну, вот что я тебе скажу: если Кор Галом не получит траву, достанется нам обоим! С ним лучше не шутить.
+};
+
+
+var int balor_tellsncdealer;
+
+instance DIA_BALOR_TELLDEALER(C_INFO)
+{
+	npc = nov_1304_balor;
+	nr = 1;
+	condition = dia_balor_telldealer_condition;
+	information = dia_balor_telldealer_info;
+	permanent = 1;
+	description = "Я учту. Так кому в Новом лагере можно продать болотник?";
+};
+
+
+func int dia_balor_telldealer_condition()
+{
+	if((BALOR_PLAYERCHEATING == TRUE) && (BALOR_TELLSNCDEALER == FALSE))
+	{
+		return 1;
+	};
+};
+
+func void dia_balor_telldealer_info()
+{
+	AI_Output(other,self,"DIA_Balor_TellDealer_15_00");	//Я учту. Так кому в Новом лагере можно продать болотник?
+	AI_Output(self,other,"DIA_Balor_TellDealer_01_01");	//Конечно, я назову тебе этого человека, а ты сбежишь с нашей травой. Даже не надейся!
+	AI_Output(self,other,"DIA_Balor_TellDealer_01_02");	//Мне нужен задаток пятьдесят кусков руды. Тогда и поговорим.
+	Info_ClearChoices(dia_balor_telldealer);
+	Info_AddChoice(dia_balor_telldealer,"Забудь об этом.",dia_balor_telldealer_forgetit);
+	Info_AddChoice(dia_balor_telldealer,"Пятьдесят кусков? Хорошо, держи.",dia_balor_telldealer_pay);
+};
+
+func void dia_balor_telldealer_pay()
+{
+	AI_Output(other,self,"DIA_Balor_TellDealer_Pay_15_00");	//Пятьдесят кусков? Хорошо, держи.
+	if(Npc_HasItems(other,itminugget) >= 50)
+	{
+		AI_Output(self,other,"DIA_Balor_TellDealer_Pay_01_01");	//Что ж... Слушай. Его зовут Сайфер. Он почти все время сидит в баре на озере.
+		AI_Output(self,other,"DIA_Balor_TellDealer_Pay_01_02");	//Но будь с ним осторожен. Смотри, чтобы он тебя не обманул.
+		Info_ClearChoices(dia_balor_telldealer);
+		b_giveinvitems(other,self,itminugget,50);
+		BALOR_TELLSNCDEALER = TRUE;
+		b_logentry(CH1_DELIVERWEED,"Балор назвал мне человека из Нового лагеря. Его зовут Сайфер. Я смогу найти его в баре на озере. Гуру будут очень недовольны, если я продам болотник на сторону.");
+		b_givexp(XP_BALORNAMEDCIPHER);
+		Log_CreateTopic(GE_TRADERNC,LOG_NOTE);
+		b_logentry(GE_TRADERNC,"Сайфер продает и покупает разные товары. Он интересуется крупными партиями болотника. Его можно найти в баре на озере.");
+	}
+	else
+	{
+		AI_Output(self,other,"DIA_Balor_TellDealer_Pay_NoOre_01_00");	//Я не вижу руду. Пятьдесят кусков и ни куском меньше, понял?
+		Info_ClearChoices(dia_balor_telldealer);
+	};
+};
+
+func void dia_balor_telldealer_forgetit()
+{
+	AI_Output(other,self,"DIA_Balor_TellDealer_ForgetIt_15_00");	//Забудь об этом.
+	AI_Output(self,other,"DIA_Balor_TellDealer_ForgetIt_01_01");	//Не думай, что можно вот так просто заявиться в Новый лагерь и продать весь болотник первому встречному! Если не знаешь нужного человека, у тебя ничего не выйдет.
+	AI_Output(self,other,"DIA_Balor_TellDealer_ForgetIt_01_02");	//Ты можешь рассказать все не тому человеку, и у тебя все отберут.
+	Info_ClearChoices(dia_balor_telldealer);
+};
+
+
+instance DIA_BALOR_RIPOFF(C_INFO)
+{
+	npc = nov_1304_balor;
+	nr = 5;
+	condition = dia_balor_ripoff_condition;
+	information = dia_balor_ripoff_info;
+	permanent = 0;
+	description = "Это снова я. Мне нужно забрать следующую партию.";
+};
+
+
+func int dia_balor_ripoff_condition()
+{
+	if((BALOR_BOTENDAY <= (Wld_GetDay() - 2)) && Npc_KnowsInfo(hero,dia_balor_fetchweed))
+	{
+		return 1;
+	};
+};
+
+func void dia_balor_ripoff_info()
+{
+	AI_Output(other,self,"DIA_Balor_RipOff_15_00");	//Это снова я. Мне нужно забрать следующую партию.
+	if(BALOR_PLAYERCHEATING == TRUE)
+	{
+		AI_Output(self,other,"DIA_Balor_RipOff_01_01");	//Еще бы! Чтобы снова отнести его в Новый лагерь.
+		AI_Output(self,other,"DIA_Balor_RipOff_01_02");	//Дай мне задаток пятьдесят кусков руды.
+	}
+	else
+	{
+		AI_Output(self,other,"DIA_Balor_RipOff_01_03");	//А, это снова ты? Ладно, бери, но только не вздумай нас обмануть!
+		AI_Output(other,self,"DIA_Balor_RipOff_15_04");	//Да что ты, я и не собирался.
+		CreateInvItems(self,itmi_plants_swampherb_01,50);
+		b_giveinvitems(self,hero,itmi_plants_swampherb_01,50);
+	};
+};
+
+
+instance DIA_BALOR_PERM(C_INFO)
+{
+	npc = nov_1304_balor;
+	nr = 1;
+	condition = dia_balor_perm_condition;
+	information = dia_balor_perm_info;
+	permanent = 1;
+	description = "Что ж, работай хорошо.";
+};
+
+
+func int dia_balor_perm_condition()
+{
+	if(Npc_KnowsInfo(hero,dia_balor_fetchweed))
+	{
+		return 1;
+	};
+};
+
+func void dia_balor_perm_info()
+{
+	AI_Output(other,self,"DIA_Balor_Perm_15_00");	//Что ж, работай хорошо.
+	AI_Output(self,other,"DIA_Balor_Perm_01_01");	//Конечно, а что еще, по-твоему, здесь делаю? Валяюсь в болоте?
+};
+

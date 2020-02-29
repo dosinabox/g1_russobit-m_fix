@@ -1,0 +1,208 @@
+
+instance INFO_GORHANIS_EXIT(C_INFO)
+{
+	npc = tpl_1422_gorhanis;
+	nr = 999;
+	condition = info_gorhanis_exit_condition;
+	information = info_gorhanis_exit_info;
+	permanent = 1;
+	description = DIALOG_ENDE;
+};
+
+
+func int info_gorhanis_exit_condition()
+{
+	return 1;
+};
+
+func void info_gorhanis_exit_info()
+{
+	AI_StopProcessInfos(self);
+};
+
+
+instance INFO_GORHANIS_WHAT(C_INFO)
+{
+	npc = tpl_1422_gorhanis;
+	nr = 1;
+	condition = info_gorhanis_what_condition;
+	information = info_gorhanis_what_info;
+	permanent = 0;
+	description = "Что ты здесь делаешь?";
+};
+
+
+func int info_gorhanis_what_condition()
+{
+	return 1;
+};
+
+func void info_gorhanis_what_info()
+{
+	AI_Output(other,self,"Info_GorHanis_What_15_00");	//Что ты здесь делаешь?
+	AI_Output(self,other,"Info_GorHanis_What_08_01");	//Я? Я сражаюсь во славу Спящего!
+};
+
+
+instance INFO_GORHANIS_ARENA(C_INFO)
+{
+	npc = tpl_1422_gorhanis;
+	nr = 1;
+	condition = info_gorhanis_arena_condition;
+	information = info_gorhanis_arena_info;
+	permanent = 1;
+	description = "Ты сражаешься на арене?";
+};
+
+
+func int info_gorhanis_arena_condition()
+{
+	if(Npc_KnowsInfo(self,info_gorhanis_what))
+	{
+		return 1;
+	};
+};
+
+func void info_gorhanis_arena_info()
+{
+	AI_Output(other,self,"Info_GorHanis_Arena_15_00");	//Ты сражаешься на арене?
+	AI_Output(self,other,"Info_GorHanis_Arena_08_01");	//Мои учителя из Братства прислали меня сюда сражаться во славу Спящего.
+	AI_Output(self,other,"Info_GorHanis_Arena_08_02");	//Я удостоился этой чести, чтобы показать неверным, какой силой меня наделил Спящий!
+};
+
+
+instance INFO_GORHANIS_SLEEPER(C_INFO)
+{
+	npc = tpl_1422_gorhanis;
+	nr = 2;
+	condition = info_gorhanis_sleeper_condition;
+	information = info_gorhanis_sleeper_info;
+	permanent = 0;
+	description = "Кто он, этот Спящий?";
+};
+
+
+func int info_gorhanis_sleeper_condition()
+{
+	if(Npc_KnowsInfo(self,info_gorhanis_what))
+	{
+		return 1;
+	};
+};
+
+func void info_gorhanis_sleeper_info()
+{
+	AI_Output(other,self,"Info_GorHanis_Sleeper_15_00");	//Кто он, этот Спящий?
+	AI_Output(self,other,"Info_GorHanis_Sleeper_08_01");	//В нашем лагере ты найдешь жрецов, которые смогут рассказать тебе больше, чем я.
+	AI_Output(self,other,"Info_GorHanis_Sleeper_08_02");	//Могу сказать тебе только, что Спящий станет нашим спасителем. Он привел нас сюда и он же выведет нас отсюда.
+	AI_Output(other,self,"Info_GorHanis_Sleeper_15_03");	//Ты хочешь сказать, что этот бог освободит вас отсюда?
+	AI_Output(self,other,"Info_GorHanis_Sleeper_08_04");	//Да! И скоро наше ожидание закончится. Уже идут приготовления к великой Церемонии.
+};
+
+
+instance INFO_GORHANIS_SUMMONING(C_INFO)
+{
+	npc = tpl_1422_gorhanis;
+	nr = 2;
+	condition = info_gorhanis_summoning_condition;
+	information = info_gorhanis_summoning_info;
+	permanent = 0;
+	description = "Ты можешь рассказать о Церемонии?";
+};
+
+
+func int info_gorhanis_summoning_condition()
+{
+	if(Npc_KnowsInfo(self,info_gorhanis_sleeper))
+	{
+		return 1;
+	};
+};
+
+func void info_gorhanis_summoning_info()
+{
+	AI_Output(other,self,"Info_GorHanis_Summoning_15_00");	//Ты можешь рассказать о Церемонии?
+	AI_Output(self,other,"Info_GorHanis_Summoning_08_01");	//Наши пророки говорят, что на великой Церемонии мы сможем разбудить Спящего, и он нам даст ключ к свободе!
+	AI_Output(self,other,"Info_GorHanis_Summoning_08_02");	//Если ты хочешь узнать больше, иди в наш лагерь.
+};
+
+
+instance INFO_GORHANIS_WAYTOST(C_INFO)
+{
+	npc = tpl_1422_gorhanis;
+	nr = 0;
+	condition = info_gorhanis_waytost_condition;
+	information = info_gorhanis_waytost_info;
+	permanent = 1;
+	description = "Как я найду дорогу к вашему лагерю?";
+};
+
+
+func int info_gorhanis_waytost_condition()
+{
+	if(Npc_KnowsInfo(hero,info_gorhanis_sleeper) || Npc_KnowsInfo(hero,info_gorhanis_summoning))
+	{
+		return 1;
+	};
+};
+
+func void info_gorhanis_waytost_info()
+{
+	AI_Output(other,self,"Info_GorHanis_WayToST_15_00");	//Как я найду дорогу к вашему лагерю?
+	AI_Output(self,other,"Info_GorHanis_WayToST_08_01");	//В Старом лагере всегда можно найти несколько наших послушников, которые провожают новообращенных в наш лагерь. Найди кого-нибудь из них!
+};
+
+
+instance INFO_GORHANIS_CHARGE(C_INFO)
+{
+	npc = tpl_1422_gorhanis;
+	nr = 3;
+	condition = info_gorhanis_charge_condition;
+	information = info_gorhanis_charge_info;
+	permanent = 0;
+	description = "Я хочу сразиться с тобой на арене!";
+};
+
+
+func int info_gorhanis_charge_condition()
+{
+	if(Npc_KnowsInfo(hero,info_gorhanis_arena))
+	{
+		return 1;
+	};
+};
+
+func void info_gorhanis_charge_info()
+{
+	AI_Output(other,self,"Info_GorHanis_Charge_15_00");	//Я хочу сразиться с тобой на арене!
+	AI_Output(self,other,"Info_GorHanis_Charge_08_01");	//Убийство таких новичков перед толпой зрителей не прибавит славы Спящего.
+	AI_Output(self,other,"Info_GorHanis_Charge_08_02");	//Я смогу сразиться с тобой только тогда, когда ты будешь достойным противником.
+	AI_Output(self,other,"Info_GorHanis_Charge_08_03");	//Но я уверен, что бойцы из Старого или Нового лагерей не откажутся от твоего предложения. Они не отличаются высокими моральными принципами.
+};
+
+
+instance INFO_GORHANIS_CHARGEGOOD(C_INFO)
+{
+	npc = tpl_1422_gorhanis;
+	nr = 3;
+	condition = info_gorhanis_chargegood_condition;
+	information = info_gorhanis_chargegood_info;
+	permanent = 1;
+	description = "А теперь моей силы достаточно, чтобы сразиться с тобой?";
+};
+
+
+func int info_gorhanis_chargegood_condition()
+{
+	if(Npc_KnowsInfo(hero,info_gorhanis_charge))
+	{
+		return 1;
+	};
+};
+
+func void info_gorhanis_chargegood_info()
+{
+	AI_Output(other,self,"Info_GorHanis_ChargeGood_15_00");	//А теперь моей силы достаточно, чтобы сразиться с тобой?
+	AI_Output(self,other,"Info_GorHanis_ChargeGood_08_01");	//Нет! Ты еще недостаточно силен. Ты не можешь быть моим противником!
+};
+

@@ -1,0 +1,103 @@
+
+func void zs_ieflail()
+{
+	printdebugnpc(PD_TA_FRAME,"ZS_IEFLAIL");
+	AI_SetWalkMode(self,NPC_WALK);
+	AI_GotoWP(self,self.wp);
+	AI_AlignToWP(self);
+};
+
+func int zs_ieflail_loop()
+{
+	printdebugnpc(PD_TA_LOOP,"ZS_IEFLAIL_Loop");
+	if(INEXTREMOPLAYING)
+	{
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",0);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",0);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",0);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",0);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",0);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",0);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",0);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",0);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",2);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",2);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",2);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",2);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",0);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",0);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",0);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",0);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",0);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",2);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",2);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",2);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",2);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",0);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",0);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",0);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",0);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",0);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",0);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",2);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",2);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",2);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",2);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",2);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",2);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",2);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",2);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",2);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",2);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",2);
+		AI_UseMob(self,"PAUKE",1);
+		AI_UseMob(self,"PAUKE",2);
+		AI_UseMob(self,"PAUKE",-1);
+	};
+	return LOOP_CONTINUE;
+};
+
+func void zs_ieflail_end()
+{
+	printdebugnpc(PD_TA_FRAME,"ZS_IEFLAIL_End");
+	AI_UseMob(self,"PAUKE",-1);
+};
+

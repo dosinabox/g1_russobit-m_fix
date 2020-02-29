@@ -1,0 +1,198 @@
+
+instance INFO_KIRGO_EXIT(C_INFO)
+{
+	npc = grd_251_kirgo;
+	nr = 999;
+	condition = info_kirgo_exit_condition;
+	information = info_kirgo_exit_info;
+	permanent = 1;
+	description = DIALOG_ENDE;
+};
+
+
+func int info_kirgo_exit_condition()
+{
+	return 1;
+};
+
+func void info_kirgo_exit_info()
+{
+	AI_StopProcessInfos(self);
+};
+
+
+instance INFO_KIRGO_WHAT(C_INFO)
+{
+	npc = grd_251_kirgo;
+	nr = 1;
+	condition = info_kirgo_what_condition;
+	information = info_kirgo_what_info;
+	permanent = 0;
+	description = "Привет! Я новенький.";
+};
+
+
+func int info_kirgo_what_condition()
+{
+	if(KAPITEL <= 2)
+	{
+		return 1;
+	};
+};
+
+func void info_kirgo_what_info()
+{
+	AI_Output(other,self,"Info_Kirgo_What_15_00");	//Привет! Я новенький.
+	AI_Output(self,other,"Info_Kirgo_What_05_01");	//Новичок! Расскажи мне что-нибудь о внешнем мире. Я уже целый месяц не получал оттуда никаких новостей.
+	AI_Output(self,other,"Info_Kirgo_What_05_02");	//Я Кирго. Я участвую в боях на арене.
+};
+
+
+instance INFO_KIRGO_GOOD(C_INFO)
+{
+	npc = grd_251_kirgo;
+	nr = 1;
+	condition = info_kirgo_good_condition;
+	information = info_kirgo_good_info;
+	permanent = 0;
+	description = "И как проходят твои бои?";
+};
+
+
+func int info_kirgo_good_condition()
+{
+	if(Npc_KnowsInfo(hero,info_kirgo_what))
+	{
+		return 1;
+	};
+};
+
+func void info_kirgo_good_info()
+{
+	AI_Output(other,self,"Info_Kirgo_Good_15_00");	//И как проходят твои бои?
+	AI_Output(self,other,"Info_Kirgo_Good_05_01");	//Бои на арене? Я совсем недавно начал этим заниматься, но за мной уже есть одна победа!
+};
+
+
+instance INFO_KIRGO_CHARGE(C_INFO)
+{
+	npc = grd_251_kirgo;
+	nr = 1;
+	condition = info_kirgo_charge_condition;
+	information = info_kirgo_charge_info;
+	permanent = 0;
+	description = "Я вызываю тебя на бой! Пойдем, сразимся на арене!";
+};
+
+
+func int info_kirgo_charge_condition()
+{
+	if(Npc_KnowsInfo(hero,dia_scatty_joinoc) && Npc_KnowsInfo(hero,info_kirgo_what) && (KAPITEL <= 1))
+	{
+		return 1;
+	};
+};
+
+func void info_kirgo_charge_info()
+{
+	AI_Output(other,self,"Info_Kirgo_Charge_15_00");	//Я вызываю тебя на бой! Сразимся на арене!
+	AI_Output(self,other,"Info_Kirgo_Charge_05_01");	//Что? Но сейчас мне не хочется драться. Пойдем лучше выпьем пива, а ты расскажешь мне, что делается в Мертане.
+	Info_ClearChoices(info_kirgo_charge);
+	Info_AddChoice(info_kirgo_charge,"Нет! Я хочу драться. Сейчас!",info_kirgo_charge_now);
+	Info_AddChoice(info_kirgo_charge,"Ладно, давай выпьем пиво! ",info_kirgo_charge_beer);
+};
+
+func void info_kirgo_charge_now()
+{
+	AI_Output(other,self,"Info_Kirgo_Charge_NOW_15_00");	//Нет! Я хочу драться. Сейчас!
+	AI_Output(self,other,"Info_Kirgo_Charge_NOW_05_01");	//Как пожелаешь... я готов, скажи, когда начинать.
+	Info_ClearChoices(info_kirgo_charge);
+};
+
+func void info_kirgo_charge_beer()
+{
+	AI_Output(other,self,"Info_Kirgo_Charge_Beer_15_00");	//Ладно, давай выпьем пиво! 
+	AI_Output(self,other,"Info_Kirgo_Charge_Beer_05_01");	//Это тебе!
+	AI_Output(other,self,"Info_Kirgo_Charge_Beer_15_02");	//Спасибо! Боюсь, я не слишком много смогу рассказать о внешнем мире. Меня два месяца держали в яме, перед тем как забросить сюда.
+	AI_Output(self,other,"Info_Kirgo_Charge_Beer_05_03");	//Жаль... Ну, что ж... для человека, который два месяца отсидел в яме, ты выглядишь очень неплохо.
+	AI_Output(other,self,"Info_Kirgo_Charge_Beer_15_04");	//Постараюсь остаться таким и в дальнейшем.
+	AI_Output(self,other,"Info_Kirgo_Charge_Beer_05_05");	//Зачем тебе драться с одним из нас?
+	AI_Output(other,self,"Info_Kirgo_Charge_Beer_15_06");	//Я хочу, чтобы обо мне узнали в лагере.
+	AI_Output(self,other,"Info_Kirgo_Charge_Beer_05_07");	//От Скатти, наверное? Хм, он один из самых влиятельных людей Внешнего Кольца...
+	AI_Output(self,other,"Info_Kirgo_Charge_Beer_05_08");	//Но если ты действительно хочешь заручиться его поддержкой, ты должен победить Карима. Боюсь только, тебе с ним не справиться!
+	AI_Output(self,other,"Info_Kirgo_Charge_Beer_05_09");	//Если ты все еще хочешь сразиться со мной, скажи мне. Но мне не очень хочется избивать тебя.
+	CreateInvItem(other,itfobeer);
+	b_giveinvitems(other,self,itfobeer,1);
+	self.npctype = NPCTYPE_FRIEND;
+	Info_ClearChoices(info_kirgo_charge);
+};
+
+
+var int kirgo_charged;
+
+instance INFO_KIRGO_CHARGEREAL(C_INFO)
+{
+	npc = grd_251_kirgo;
+	nr = 1;
+	condition = info_kirgo_chargereal_condition;
+	information = info_kirgo_chargereal_info;
+	permanent = 0;
+	description = "Мы будем сражаться, ты готов?";
+};
+
+
+func int info_kirgo_chargereal_condition()
+{
+	if(Npc_KnowsInfo(hero,info_kirgo_charge) && (KAPITEL <= 1))
+	{
+		return 1;
+	};
+};
+
+func void info_kirgo_chargereal_info()
+{
+	AI_Output(other,self,"Info_Kirgo_ChargeREAL_15_00");	//Мы будем сражаться, ты готов?
+	AI_Output(self,other,"Info_Kirgo_ChargeREAL_05_01");	//Следуй за мной!
+	AI_StopProcessInfos(self);
+	KIRGO_CHARGED = TRUE;
+	Npc_ExchangeRoutine(self,"GUIDE");
+};
+
+
+instance INFO_KIRGO_INARENA(C_INFO)
+{
+	npc = grd_251_kirgo;
+	nr = 1;
+	condition = info_kirgo_inarena_condition;
+	information = info_kirgo_inarena_info;
+	permanent = 0;
+	important = 1;
+};
+
+
+func int info_kirgo_inarena_condition()
+{
+	if((KIRGO_CHARGED == TRUE) && (Npc_GetDistToWP(hero,"OCR_ARENABATTLE_TRAIN") < 500))
+	{
+		return 1;
+	};
+};
+
+func void info_kirgo_inarena_info()
+{
+	if(KAPITEL <= 1)
+	{
+		AI_Output(self,other,"Info_Kirgo_InArena_05_00");	//Итак, начнем. Пусть победит сильнейший!
+		AI_StopProcessInfos(self);
+		Npc_ExchangeRoutine(self,"START");
+		Npc_SetTarget(self,other);
+		AI_StartState(self,zs_attack,1,"");
+	}
+	else
+	{
+		AI_Output(self,other,"SVM_5_LetsForgetOurLittleFight");	//Давай забудем об этой ссоре, ладно?
+		AI_StopProcessInfos(self);
+		Npc_ExchangeRoutine(self,"START");
+	};
+};
+
