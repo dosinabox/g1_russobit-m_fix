@@ -7,7 +7,7 @@ instance TPL_1448_TEMPLER(NPC_DEFAULT)
 	level = 50;
 	voice = 7;
 	id = 1448;
-	attribute[ATR_STRENGTH] = 70;
+	attribute[ATR_STRENGTH] = 75;
 	attribute[ATR_DEXTERITY] = 65;
 	attribute[ATR_MANA_MAX] = 0;
 	attribute[ATR_MANA] = 0;

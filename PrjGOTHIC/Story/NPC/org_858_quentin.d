@@ -24,7 +24,7 @@ instance ORG_858_QUENTIN(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_2H,1);
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	CreateInvItems(self,itkelockpick,1);
-	CreateInvItems(self,itminugget,50);
+	CreateInvItems(self,itminugget,20);
 	CreateInvItem(self,itke_quentin);
 	CreateInvItems(self,itfo_potion_health_01,2);
 	EquipItem(self,itmw_1h_mace_war_04);

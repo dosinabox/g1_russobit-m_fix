@@ -157,7 +157,7 @@ func void b_kapitelwechsel(var int neues_kapitel)
 		b_give_darrionchapter4weapons();
 		b_give_sharkychapter4weapons();
 		b_give_baalcadarchapter4runes();
-		b_give_xardaschapter4runes();
+		//b_give_xardaschapter4runes();
 		b_give_cronoschapter4runes();
 		b_giveriordianchapter4potions();
 		b_give_cavalornchapter4weapons();

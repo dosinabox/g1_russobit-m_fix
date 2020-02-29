@@ -35,16 +35,16 @@ instance SPECIALJOINT(C_ITEM)
 	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MULTI;
 	value = VALUE_JOINT3 * 10;
-	visual = "ItMi_Joint_01.3ds";
-	material = MAT_WOOD;
+	visual = "SPECIALJOINT.3ds";
+	material = MAT_LEATHER;
 	scemename = "JOINT";
 	on_state[0] = usespecialjoint;
 	description = name;
-	text[0] = "Этот болотник действует";
-	text[1] = "гораздо сильнее, чем обычный 'Зов мечты'.";
+	text[0] = "Этот болотник действует гораздо";
+	text[1] = "сильнее, чем обычный 'Зов мечты'.";
 	text[3] = "Он приготовлен для Гуру Идола Тиона!";
 	text[5] = NAME_VALUE;
-	count[5] = VALUE_JOINT3 * 10;
+	count[5] = value;
 };
 
 
@@ -105,7 +105,7 @@ instance ALTESSCHWERTVM(C_ITEM)
 	cond_value[2] = 10;
 	damagetotal = 12;
 	damagetype = DAM_EDGE;
-	visual = "ItMw_1H_Sword_Old_01.3DS";
+	visual = "ItMw_1H_Sword_Old_02.3DS";
 	description = name;
 	text[2] = NAME_DAMAGE;
 	count[2] = damagetotal;
@@ -127,7 +127,7 @@ instance ALTESSCHWERT(C_ITEM)
 	cond_value[2] = 10;
 	damagetotal = 12;
 	damagetype = DAM_EDGE;
-	visual = "ItMw_1H_Sword_Old_01.3DS";
+	visual = "ItMw_1H_Sword_Old_02.3DS";
 	text[2] = NAME_DAMAGE;
 	count[2] = damagetotal;
 	text[3] = NAME_STR_NEEDED;

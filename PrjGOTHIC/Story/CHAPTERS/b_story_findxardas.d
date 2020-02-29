@@ -7,6 +7,7 @@ func void b_story_findxardas()
 	b_logentry(CH4_FINDXARDAS,"Тринадцатого мага звали Ксардас. Сейчас он живет в землях орков, в своей башне. Я вызвался найти его и попросить о помощи.");
 	Wld_InsertNpc(xardasdemon,"DT_E1_06");
 	Wld_InsertNpc(kdf_404_xardas,"DT_E3_07");
+	b_give_xardaschapter4runes();
 	FINDXARDAS = TRUE;
 };
 

@@ -23,7 +23,7 @@ instance ORG_838_ORGANISATOR(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_SNEAK,1);
 	EquipItem(self,itmw_1h_mace_01);
 	CreateInvItems(self,itkelockpick,1);
-	CreateInvItems(self,itminugget,13);
+	CreateInvItems(self,itminugget,3);
 	CreateInvItems(self,itforice,3);
 	daily_routine = rtn_start_838;
 };

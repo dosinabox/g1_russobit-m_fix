@@ -8,12 +8,12 @@ instance EBR_100_GOMEZ(NPC_DEFAULT)
 	voice = 11;
 	id = 100;
 	flags = NPC_FLAG_IMMORTAL;
-	attribute[ATR_STRENGTH] = 95;
+	attribute[ATR_STRENGTH] = 110;
 	attribute[ATR_DEXTERITY] = 80;
 	attribute[ATR_MANA_MAX] = 0;
 	attribute[ATR_MANA] = 0;
-	attribute[ATR_HITPOINTS_MAX] = 400;
-	attribute[ATR_HITPOINTS] = 400;
+	attribute[ATR_HITPOINTS_MAX] = 440;
+	attribute[ATR_HITPOINTS] = 440;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Arrogance.mds");
 	Mdl_SetVisualBody(self,"hum_body_Naked0",0,1,"Hum_Head_Bald",85,4,ebr_armor_h);

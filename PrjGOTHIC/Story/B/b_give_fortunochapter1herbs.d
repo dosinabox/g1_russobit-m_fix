@@ -11,6 +11,7 @@ func void b_give_fortunochapter1herbs()
 	CreateInvItems(npc,itfo_plants_flameberry_01,4);
 	CreateInvItems(npc,itfo_plants_seraphis_01,5);
 	CreateInvItems(npc,itfo_plants_herb_03,6);
+	CreateInvItems(npc,itmi_plants_swampherb_01,5);
 	CreateInvItems(npc,itmiflask,15);
 	CreateInvItem(npc,alchemy_mp2_priced);
 };
@@ -25,8 +26,10 @@ func void b_give_fortunochapter2herbs()
 	CreateInvItems(npc,itminugget,200);
 	CreateInvItems(npc,itfo_plants_herb_03,4);
 	CreateInvItems(npc,itfo_plants_mountainmoos_01,1);
+	CreateInvItems(npc,itfo_plants_mushroom_01,10);
 	CreateInvItems(npc,itfo_plants_nightshadow_01,8);
 	CreateInvItems(npc,itfo_plants_velayis_01,4);
+	CreateInvItems(npc,itmi_plants_swampherb_01,4);
 	CreateInvItems(npc,itmiflask,16);
 };
 
@@ -38,7 +41,9 @@ func void b_give_fortunochapter3herbs()
 	CreateInvItems(npc,itfo_plants_herb_01,8);
 	CreateInvItems(npc,itfo_plants_herb_02,5);
 	CreateInvItems(npc,itfo_plants_herb_03,4);
+	CreateInvItems(npc,itfo_plants_mushroom_01,2);
 	CreateInvItems(npc,itfo_plants_ravenherb_01,6);
+	CreateInvItems(npc,itmi_plants_swampherb_01,7);
 	CreateInvItems(npc,itmiflask,15);
 };
 
@@ -52,6 +57,7 @@ func void b_give_fortunochapter4herbs()
 	CreateInvItems(npc,itfo_plants_orcherb_01,2);
 	CreateInvItems(npc,itfo_plants_bloodwood_01,3);
 	CreateInvItems(npc,itfo_plants_stoneroot_01,6);
+	CreateInvItems(npc,itmi_plants_swampherb_01,5);
 	CreateInvItems(npc,itmiflask,11);
 };
 
@@ -63,6 +69,7 @@ func void b_give_fortunochapter5herbs()
 	CreateInvItems(npc,itfo_plants_orcherb_02,1);
 	CreateInvItems(npc,itfo_plants_trollberrys_01,2);
 	CreateInvItems(npc,itfo_plants_stoneroot_02,1);
+	CreateInvItems(npc,itmi_plants_swampherb_01,5);
 	CreateInvItems(npc,itmiflask,10);
 };
 

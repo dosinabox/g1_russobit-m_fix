@@ -195,6 +195,8 @@ instance PC_ROCKEFELLER(NPC_DEFAULT)
 	CreateInvItem(self,alchemy_str);
 	CreateInvItem(self,alchemy_egg);
 	CreateInvItem(self,alchemy_fortuno);
+	CreateInvItem(self,alchemy_joint2);
+	CreateInvItem(self,alchemy_joint3);
 	CreateInvItem(self,itrw_bow_small_01);
 	CreateInvItem(self,itrw_bow_small_02);
 	CreateInvItem(self,itrw_bow_small_03);
@@ -303,6 +305,7 @@ instance PC_ROCKEFELLER(NPC_DEFAULT)
 	CreateInvItem(self,itmw_1h_sword_bastard_02);
 	CreateInvItem(self,itmw_1h_sword_bastard_03);
 	CreateInvItem(self,itmw_1h_sword_bastard_04);
+	CreateInvItem(self,itmw_1h_lightguardssword_03);
 	CreateInvItem(self,itmw_2h_axe_old_01);
 	CreateInvItem(self,itmw_2h_axe_old_02);
 	CreateInvItem(self,itmw_2h_axe_old_03);

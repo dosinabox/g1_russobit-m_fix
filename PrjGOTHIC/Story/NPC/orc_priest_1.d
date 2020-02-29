@@ -4,7 +4,7 @@ instance ORC_PRIEST_1(NPC_DEFAULT)
 	name[0] = "Варраг-Хашор";
 	npctype = NPCTYPE_MAIN;
 	guild = GIL_ORCSHAMAN;
-	level = 800;
+	level = 400;
 	voice = 17;
 	id = 2995;
 	Mdl_SetVisual(self,"Orc.mds");
@@ -47,7 +47,7 @@ instance ORC_PRIEST_2(NPC_DEFAULT)
 	name[0] = "Варраг-Казорг";
 	npctype = NPCTYPE_MAIN;
 	guild = GIL_ORCSHAMAN;
-	level = 800;
+	level = 400;
 	voice = 17;
 	id = 2996;
 	Mdl_SetVisual(self,"Orc.mds");
@@ -90,7 +90,7 @@ instance ORC_PRIEST_3(NPC_DEFAULT)
 	name[0] = "Варраг-Унхилькт";
 	npctype = NPCTYPE_MAIN;
 	guild = GIL_ORCSHAMAN;
-	level = 800;
+	level = 400;
 	voice = 17;
 	id = 2997;
 	Mdl_SetVisual(self,"Orc.mds");
@@ -133,7 +133,7 @@ instance ORC_PRIEST_4(NPC_DEFAULT)
 	name[0] = "Варраг-Руушк";
 	npctype = NPCTYPE_MAIN;
 	guild = GIL_ORCSHAMAN;
-	level = 800;
+	level = 400;
 	voice = 17;
 	id = 2998;
 	Mdl_SetVisual(self,"Orc.mds");
@@ -177,7 +177,7 @@ instance ORC_PRIEST_5(NPC_DEFAULT)
 	name[0] = "Граш-Варраг-Арушат";
 	npctype = NPCTYPE_FRIEND;
 	guild = GIL_ORCSHAMAN;
-	level = 1000;
+	level = 500;
 	voice = 17;
 	id = 2999;
 	Mdl_SetVisual(self,"Orc.mds");

@@ -141,9 +141,12 @@ func int nov_1303_nyras_leave_condition()
 
 func void nov_1303_nyras_leave_info()
 {
-	AI_Output(other,self,"Nov_1303_Nyras_LEAVE_Info_15_01");	//Я ищу камень-юнитор
-	AI_Output(self,other,"Nov_1303_Nyras_LEAVE_Info_03_02");	//Ты пришел слишком поздно. Я уже сам нашел его!
-	AI_Output(self,other,"Nov_1303_Nyras_LEAVE_Info_03_03");	//И я решил оставить его себе!
+	AI_Output(other,self,"Nov_1303_Nyras_LEAVE_Info_15_01");	//Я ищу камень-юнитор.
+	if(Npc_HasItems(self,focus_1))
+	{
+		AI_Output(self,other,"Nov_1303_Nyras_LEAVE_Info_03_02");	//Ты пришел слишком поздно. Я уже сам нашел его!
+		AI_Output(self,other,"Nov_1303_Nyras_LEAVE_Info_03_03");	//И я решил оставить его себе!
+	};
 	AI_Output(self,other,"Nov_1303_Nyras_LEAVE_Info_03_04");	//Ночью я слышал слова Спящего. Он сказал, что теперь я его единственный последователь!
 	AI_Output(self,other,"Nov_1303_Nyras_LEAVE_Info_03_05");	//Теперь только я буду служить Спящему. Он больше не нуждается в Гуру и Стражах!
 	AI_Output(self,other,"Nov_1303_Nyras_LEAVE_Info_03_06");	//Только я один!

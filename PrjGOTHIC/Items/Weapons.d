@@ -173,7 +173,7 @@ instance WHISTLERS_SCHWERT(C_ITEM)
 	flags = ITEM_SWD;
 	material = MAT_METAL;
 	value = 110;
-	damagetotal = 25;
+	damagetotal = 17;
 	damagetype = DAM_EDGE;
 	range = 100;
 	cond_atr[2] = ATR_STRENGTH;

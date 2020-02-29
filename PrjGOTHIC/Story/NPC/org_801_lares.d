@@ -7,6 +7,7 @@ instance ORG_801_LARES(NPC_DEFAULT)
 	level = 15;
 	voice = 11;
 	id = 801;
+	flags = NPC_FLAG_IMMORTAL;
 	attribute[ATR_STRENGTH] = 80;
 	attribute[ATR_DEXTERITY] = 60;
 	attribute[ATR_MANA_MAX] = 0;

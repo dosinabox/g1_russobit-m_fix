@@ -21,7 +21,7 @@ instance GRD_275_BRUECKENWACHE(NPC_DEFAULT)
 	aivar[AIV_IMPORTANT] = TRUE;
 	fight_tactic = FAI_HUMAN_STRONG;
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
-	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
+	Npc_SetTalentSkill(self,NPC_TALENT_2H,1);
 	EquipItem(self,itmw_1h_sword_01);
 	CreateInvItem(self,itfoapple);
 	CreateInvItems(self,itminugget,10);

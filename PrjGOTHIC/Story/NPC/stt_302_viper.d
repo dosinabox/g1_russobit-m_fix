@@ -7,6 +7,7 @@ instance STT_302_VIPER(NPC_DEFAULT)
 	level = 7;
 	voice = 11;
 	id = 302;
+	flags = NPC_FLAG_IMMORTAL;
 	attribute[ATR_STRENGTH] = 40;
 	attribute[ATR_DEXTERITY] = 18;
 	attribute[ATR_MANA_MAX] = 0;

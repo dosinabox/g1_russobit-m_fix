@@ -114,8 +114,15 @@ func int info_nov_5_dielage_condition()
 func void info_nov_5_dielage_info()
 {
 	AI_Output(other,self,"Info_Nov_5_DieLage_15_00");	//Как дела?
-	AI_Output(self,other,"Info_Nov_5_DieLage_05_01");	//Хорошо. Мне не на что жаловаться. А ты здесь новенький?
-	AI_Output(other,self,"Info_Nov_5_DieLage_15_02");	//Да, совсем недавно прибыл.
+	if(Npc_GetTrueGuild(other) == GIL_NONE || Npc_GetTrueGuild(other) == GIL_NOV)
+	{
+		AI_Output(self,other,"Info_Nov_5_DieLage_05_01");	//Хорошо. Мне не на что жаловаться. А ты здесь новенький?
+		AI_Output(other,self,"Info_Nov_5_DieLage_15_02");	//Да, совсем недавно прибыл.
+	}
+	else
+	{
+		AI_Output(self,other,"SVM_5_SectGreetings");	//Пробудись!
+	};
 };
 
 func void b_assignambientinfos_nov_5(var C_NPC slf)

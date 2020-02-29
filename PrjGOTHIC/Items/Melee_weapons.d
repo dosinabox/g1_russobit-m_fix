@@ -174,7 +174,7 @@ instance ITMW_SKELETON_SWORD(C_ITEM)
 	range = 100;
 	cond_atr[2] = ATR_STRENGTH;
 	cond_value[2] = 6;
-	visual = "ItMw_1H_Sword_Old_01.3DS";
+	visual = "ItMw_Skeleton_Sword.3DS";
 	description = name;
 	text[2] = NAME_DAMAGE;
 	count[2] = damagetotal;
@@ -390,7 +390,7 @@ instance ITMW_SKELETON_AXE(C_ITEM)
 
 instance ITMW_1H_SCYTHE_01(C_ITEM)
 {
-	name = "Косарь";
+	name = "Коса";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_AXE;
 	material = MAT_WOOD;
@@ -484,11 +484,11 @@ instance ITMW_2H_STAFF_03(C_ITEM)
 	flags = ITEM_2HD_AXE;
 	material = MAT_WOOD;
 	value = 125;
-	damagetotal = 21;
+	damagetotal = 22;
 	damagetype = DAM_BLUNT;
 	range = 160;
 	cond_atr[2] = ATR_STRENGTH;
-	cond_value[2] = 21;
+	cond_value[2] = 22;
 	visual = "ItMw_2H_Staff_03.3DS";
 	description = name;
 	text[2] = NAME_DAMAGE;
@@ -506,13 +506,13 @@ instance ITMW_1H_LIGHTGUARDSSWORD_03(C_ITEM)
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_SWD;
 	material = MAT_METAL;
-	value = 140;
+	value = 70;
 	damagetotal = 22;
 	damagetype = DAM_EDGE;
 	range = 100;
 	cond_atr[2] = ATR_STRENGTH;
 	cond_value[2] = 20;
-	visual = "ItMw_1H_Sword_01.3DS";
+	visual = "ItMw_1H_LightGuardSword.3DS";
 	description = name;
 	text[2] = NAME_DAMAGE;
 	count[2] = damagetotal;
@@ -1293,7 +1293,7 @@ instance ITMW_2H_AXE_OLD_01(C_ITEM)
 	damagetype = DAM_EDGE;
 	range = 150;
 	cond_atr[2] = ATR_STRENGTH;
-	cond_value[2] = 57;
+	cond_value[2] = 64;
 	visual = "ItMw_2H_Axe_Old_01.3DS";
 	description = name;
 	text[2] = NAME_DAMAGE;
@@ -1587,7 +1587,7 @@ instance ITMW_2H_AXE_LIGHT_03(C_ITEM)
 
 instance ITMW_2H_SWORD_01(C_ITEM)
 {
-	name = "Двуручник";
+	name = "Усиленный двуручник";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_SWD;
 	material = MAT_METAL;

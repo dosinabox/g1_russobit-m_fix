@@ -88,7 +88,7 @@ instance ZOMBIE4(MST_DEFAULT_ZOMBIE)
 
 instance ZOMBIETHEKEEPER(MST_DEFAULT_ZOMBIE)
 {
-	name[0] = "Страж";
+	name[0] = "Страж склепа";
 	level = 150;
 	id = MID_THEKEEPER;
 	set_zombie5_visuals();

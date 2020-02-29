@@ -54,7 +54,7 @@ instance DIA_DARRION_TRADE(C_INFO)
 	nr = 800;
 	condition = dia_darrion_trade_condition;
 	information = dia_darrion_trade_info;
-	permanent = 1;
+	permanent = 0;
 	description = "Покажи мне свои товары.";
 	trade = 1;
 };
@@ -92,5 +92,50 @@ func void dia_darrion_trade_info()
 	};
 	AI_Output(other,self,"DIA_Darrion_Trade_15_00");	//Покажи мне свои товары.
 	AI_Output(self,other,"DIA_Darrion_Trade_11_01");	//С этого надо было начинать. Вот все, что я продаю.
+};
+
+instance DIA_DARRION_TRADE2(C_INFO)
+{
+	npc = nov_1312_darrion;
+	nr = 800;
+	condition = dia_darrion_trade2_condition;
+	information = dia_darrion_trade2_info;
+	permanent = 1;
+	description = DIALOG_TRADE;
+	trade = 1;
+};
+
+
+func int dia_darrion_trade2_condition()
+{
+	if(Npc_KnowsInfo(hero,dia_darrion_trade))
+	{
+		return TRUE;
+	};
+};
+
+func void dia_darrion_trade2_info()
+{
+	if(Npc_HasItems(self,itmiswordraw) < 5)
+	{
+		CreateInvItems(self,itmiswordraw,5);
+	};
+	if(Npc_HasItems(self,itmiswordbladehot) >= 1)
+	{
+		Npc_RemoveInvItems(self,itmiswordbladehot,Npc_HasItems(self,itmiswordbladehot));
+	};
+	if(Npc_HasItems(self,itmiswordrawhot) >= 1)
+	{
+		Npc_RemoveInvItems(self,itmiswordrawhot,Npc_HasItems(self,itmiswordrawhot));
+	};
+	if(Npc_HasItems(self,itmiswordblade) >= 1)
+	{
+		Npc_RemoveInvItems(self,itmiswordblade,Npc_HasItems(self,itmiswordblade));
+	};
+	if(!Npc_HasItems(self,itmw_1h_sledgehammer_01) && !Npc_HasItems(other,itmw_1h_sledgehammer_01))
+	{
+		CreateInvItem(self,itmw_1h_sledgehammer_01);
+	};
+	AI_Output(other,self,"DIA_Darrion_Trade_15_00");	//Покажи мне свои товары.
 };
 

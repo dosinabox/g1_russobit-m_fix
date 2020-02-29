@@ -119,11 +119,11 @@ instance ITKE_FREEMINE(C_ITEM)
 
 instance ORCMEDICINE(C_ITEM)
 {
-	name = "Зелье орка";
+	name = "Снадобье орка";
 	mainflag = ITEM_KAT_POTIONS;
 	flags = ITEM_MISSION;
 	value = 0;
-	visual = "ITFO_POTION_STRENGTH_01.3DS";
+	visual = "itmi_alchemy_stoneoil_02.3DS";
 	material = MAT_GLAS;
 	on_state[0] = useorcmedicine;
 	scemename = "POTION";

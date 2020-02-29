@@ -2122,6 +2122,36 @@ instance ALCHEMY_MPMAX_PRICED(C_ITEM)
 	on_state[0] = usempmaxrecipe_priced;
 };
 
+instance ALCHEMY_JOINT2(C_ITEM)
+{
+	name = "Рецепт";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 40;
+	visual = "JOINTRECIPE.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Рецепт 'Северного темного'";
+	text[5] = NAME_VALUE;
+	count[5] = value;
+	on_state[0] = usejoint2recipe;
+};
+
+instance ALCHEMY_JOINT3(C_ITEM)
+{
+	name = "Рецепт";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 80;
+	visual = "JOINTRECIPE.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Рецепт 'Зова мечты'";
+	text[5] = NAME_VALUE;
+	count[5] = value;
+	on_state[0] = usejoint3recipe;
+};
+
 //////////////////////////////////////////
 
 func void usehp1recipe_priced()
@@ -2346,5 +2376,41 @@ func void usempmaxrecipe_priced()
 			MPMAXRECIPE = TRUE;
 		};
 	};
+};
+
+func void usejoint2recipe()
+{
+	var int ndocid;
+	ndocid = Doc_Create();
+	Doc_SetPages(ndocid,1);
+	Doc_SetPage(ndocid,0,"letters2.TGA",0);
+	Doc_SetFont(ndocid,-1,"font_10_book.tga");
+	Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+	Doc_PrintLines(ndocid,0,"Мой любимый сорт! Для приготовления нужна обычная лесная ягода: ее сок в равной пропорции смешивается в ступе со свежим болотником и измельчается. Полученная субстанция высушивается на солнце.");
+	Doc_PrintLine(ndocid,0," ");
+	Doc_PrintLine(ndocid,0," ");
+	Doc_PrintLine(ndocid,0," ");
+	Doc_PrintLine(ndocid,0,"     - Фортуно");
+	Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+	Doc_Show(ndocid);
+	JOINT2RECIPE = TRUE;
+};
+
+func void usejoint3recipe()
+{
+	var int ndocid;
+	ndocid = Doc_Create();
+	Doc_SetPages(ndocid,1);
+	Doc_SetPage(ndocid,0,"letters2.TGA",0);
+	Doc_SetFont(ndocid,-1,"font_10_book.tga");
+	Doc_SetMargins(ndocid,-1,50,50,50,50,1);
+	Doc_PrintLines(ndocid,0,"Мощная вещь. Для приготовления нужна сушеная шляпка адского гриба. Ее нужно истолочь и смешать с сушеным и измельченным болотником.");
+	Doc_PrintLines(ndocid,0,"Чтобы у косяка не было горького привкуса, до сушки шляпку нужно хорошо промыть от спор.");
+	Doc_PrintLine(ndocid,0," ");
+	Doc_PrintLine(ndocid,0," ");
+	Doc_PrintLine(ndocid,0,"     - Фортуно");
+	Doc_SetMargins(ndocid,-1,200,50,50,50,1);
+	Doc_Show(ndocid);
+	JOINT3RECIPE = TRUE;
 };
 

@@ -23,14 +23,11 @@ instance ORG_850_WEDGE(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_2H,1);
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	CreateInvItems(self,itkelockpick,2);
-	CreateInvItems(self,itminugget,14);
-	CreateInvItems(self,itforice,8);
-	CreateInvItems(self,itfobooze,3);
+	CreateInvItems(self,itminugget,4);
 	CreateInvItems(self,itlstorch,2);
 	CreateInvItems(self,itfo_potion_health_01,2);
 	CreateInvItem(self,itmi_stuff_plate_01);
 	CreateInvItem(self,itfomutton);
-	CreateInvItem(self,itfoloaf);
 	CreateInvItem(self,itat_claws_01);
 	EquipItem(self,itmw_1h_mace_war_01);
 	EquipItem(self,itrw_bow_long_01);

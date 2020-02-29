@@ -22,9 +22,8 @@ instance ORG_825_ORGANISATOR(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_BOW,1);
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	CreateInvItems(self,itkelockpick,1);
-	CreateInvItems(self,itminugget,10);
 	CreateInvItems(self,itlstorch,1);
-	CreateInvItems(self,itfo_potion_health_01,3);
+	CreateInvItems(self,itfo_potion_health_01,1);
 	CreateInvItem(self,itmi_stuff_cup_01);
 	EquipItem(self,itmw_1h_mace_03);
 	EquipItem(self,itrw_bow_long_01);

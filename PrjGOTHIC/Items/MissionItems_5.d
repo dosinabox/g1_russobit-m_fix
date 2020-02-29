@@ -30,7 +30,7 @@ instance ITMIALARMHORN(C_ITEM)
 	name = "Рог";
 	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MISSION;
-	value = 9;
+	value = 6;
 	visual = "ItMi_Alarmhorn_01.3DS";
 	material = MAT_WOOD;
 	scemename = "HORN";
@@ -287,7 +287,7 @@ instance SCROLL4MILTEN(C_ITEM)
 	name = "Перенос энергии";
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
-	value = 15;
+	value = 0;
 	visual = "ItWr_Scroll_02.3DS";
 	material = MAT_LEATHER;
 	description = name;

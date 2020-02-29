@@ -253,7 +253,7 @@ func void info_saturas_offer_info()
 	AI_Output(self,other,"Info_Saturas_OFFER_14_08");	//Возьми эту карту. Она довольно старая, поэтому на ней можно найти места, в которых располагались юниторы до того, как мы создали этот Барьер.
 	b_printtrademsg1("Получена карта Сатураса.");
 	AI_Output(self,other,"Info_Saturas_OFFER_14_09");	//Тебе понадобится это заклинание, оно поможет быстрее вернуться в лагерь.
-	b_printtrademsg2("Получена руна телепортацит к магам Воды.");
+	b_printtrademsg2("Получен свиток телепортации.");
 	AI_Output(self,other,"Info_Saturas_OFFER_14_10");	//И еще: поговори с Риорданом. Он готовит для нас зелья.
 	AI_Output(self,other,"Info_Saturas_OFFER_14_11");	//Его дом ты найдешь на верхнем уровне.
 	b_story_bringfoci();
@@ -304,7 +304,7 @@ func void b_deliverfocus()
 	{
 		AI_Output(self,other,"Info_Saturas_BRINGFOCUS_14_14");	//Ты прочитал заклинание телепортации, как я вижу. Возьми еще одно, вдруг пригодится.
 		KDW_TP_USED = FALSE;
-		b_printtrademsg2("Получен свиток телепортации к магам Воды.");
+		b_printtrademsg2("Получен свиток телепортации.");
 		CreateInvItem(hero,itarscrollteleport2);
 	};
 };

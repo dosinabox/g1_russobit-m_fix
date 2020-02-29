@@ -38,7 +38,7 @@ instance DIA_MUD_FIRSTEXIT(C_INFO)
 
 func int dia_mud_firstexit_condition()
 {
-	if(Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST)
+	if(Npc_GetDistToNpc(self,hero) < 400)
 	{
 		return 1;
 	};
@@ -167,7 +167,7 @@ instance DIA_MUD_NERVE_0(C_INFO)
 
 func int dia_mud_nerve_0_condition()
 {
-	if((MUD_NERVE == 0) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
+	if((MUD_NERVE == 0) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < 400) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -195,7 +195,7 @@ instance DIA_MUD_NERVE_1(C_INFO)
 
 func int dia_mud_nerve_1_condition()
 {
-	if((MUD_NERVE == 1) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
+	if((MUD_NERVE == 1) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < 400) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -224,7 +224,7 @@ instance DIA_MUD_NERVE_2(C_INFO)
 
 func int dia_mud_nerve_2_condition()
 {
-	if((MUD_NERVE == 2) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
+	if((MUD_NERVE == 2) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < 400) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -252,7 +252,7 @@ instance DIA_MUD_NERVE_3(C_INFO)
 
 func int dia_mud_nerve_3_condition()
 {
-	if((MUD_NERVE == 3) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
+	if((MUD_NERVE == 3) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < 400) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -280,7 +280,7 @@ instance DIA_MUD_NERVE_4(C_INFO)
 
 func int dia_mud_nerve_4_condition()
 {
-	if((MUD_NERVE == 4) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
+	if((MUD_NERVE == 4) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < 400) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -308,7 +308,7 @@ instance DIA_MUD_NERVE_5(C_INFO)
 
 func int dia_mud_nerve_5_condition()
 {
-	if((MUD_NERVE == 5) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
+	if((MUD_NERVE == 5) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < 400) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -336,7 +336,7 @@ instance DIA_MUD_NERVE_6(C_INFO)
 
 func int dia_mud_nerve_6_condition()
 {
-	if((MUD_NERVE == 6) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
+	if((MUD_NERVE == 6) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < 400) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -364,7 +364,7 @@ instance DIA_MUD_NERVE_7(C_INFO)
 
 func int dia_mud_nerve_7_condition()
 {
-	if((MUD_NERVE == 7) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
+	if((MUD_NERVE == 7) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < 400) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -392,7 +392,7 @@ instance DIA_MUD_NERVE_8(C_INFO)
 
 func int dia_mud_nerve_8_condition()
 {
-	if((MUD_NERVE == 8) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
+	if((MUD_NERVE == 8) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < 400) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -420,7 +420,7 @@ instance DIA_MUD_NERVE_9(C_INFO)
 
 func int dia_mud_nerve_9_condition()
 {
-	if((MUD_NERVE == 9) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
+	if((MUD_NERVE == 9) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < 400) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -448,7 +448,7 @@ instance DIA_MUD_NERVE_10(C_INFO)
 
 func int dia_mud_nerve_10_condition()
 {
-	if((MUD_NERVE == 10) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
+	if((MUD_NERVE == 10) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < 400) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -456,7 +456,14 @@ func int dia_mud_nerve_10_condition()
 
 func void dia_mud_nerve_10_info()
 {
-	AI_Output(self,other,"DIA_Mud_Nerve_10_07_00");	//«наешь, что? я помогу тебе. я скажу, что тебе можно довер€ть. “огда теб€ примут в лагерь, и мы сможем видетьс€ хоть каждый день.
+	if(hero.guild != GIL_STT && hero.guild != GIL_GRD && hero.guild != GIL_KDF)
+	{
+		AI_Output(self,other,"DIA_Mud_Nerve_10_07_00");	//«наешь, что? я помогу тебе. я скажу, что тебе можно довер€ть. “огда теб€ примут в лагерь, и мы сможем видетьс€ хоть каждый день.
+	}
+	else
+	{
+		AI_Output(self,other,"SVM_7_Strange");	// уда же он ушел? Ќевозможно!  ак такое может быть?!
+	};
 	Npc_SetRefuseTalk(self,NERVESEC);
 	MUD_NERVE = 11;
 	AI_StopProcessInfos(self);
@@ -476,7 +483,7 @@ instance DIA_MUD_NERVE_11(C_INFO)
 
 func int dia_mud_nerve_11_condition()
 {
-	if((MUD_NERVE == 11) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
+	if((MUD_NERVE == 11) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < 400) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -504,7 +511,7 @@ instance DIA_MUD_NERVE_12(C_INFO)
 
 func int dia_mud_nerve_12_condition()
 {
-	if((MUD_NERVE == 12) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
+	if((MUD_NERVE == 12) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < 400) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -532,7 +539,7 @@ instance DIA_MUD_NERVE_13(C_INFO)
 
 func int dia_mud_nerve_13_condition()
 {
-	if((MUD_NERVE == 13) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
+	if((MUD_NERVE == 13) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < 400) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -560,7 +567,7 @@ instance DIA_MUD_NERVE_14(C_INFO)
 
 func int dia_mud_nerve_14_condition()
 {
-	if((MUD_NERVE == 14) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
+	if((MUD_NERVE == 14) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < 400) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -589,7 +596,7 @@ instance DIA_MUD_NERVE_15(C_INFO)
 
 func int dia_mud_nerve_15_condition()
 {
-	if((MUD_NERVE == 15) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
+	if((MUD_NERVE == 15) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < 400) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -617,7 +624,7 @@ instance DIA_MUD_NERVE_16(C_INFO)
 
 func int dia_mud_nerve_16_condition()
 {
-	if((MUD_NERVE == 16) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
+	if((MUD_NERVE == 16) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < 400) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -645,7 +652,7 @@ instance DIA_MUD_NERVE_17(C_INFO)
 
 func int dia_mud_nerve_17_condition()
 {
-	if((MUD_NERVE == 17) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
+	if((MUD_NERVE == 17) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < 400) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -673,7 +680,7 @@ instance DIA_MUD_NERVE_18(C_INFO)
 
 func int dia_mud_nerve_18_condition()
 {
-	if((MUD_NERVE == 18) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
+	if((MUD_NERVE == 18) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < 400) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};
@@ -701,7 +708,7 @@ instance DIA_MUD_NERVE_19(C_INFO)
 
 func int dia_mud_nerve_19_condition()
 {
-	if((MUD_NERVE == 19) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < ZIVILANQUATSCHDIST) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
+	if((MUD_NERVE == 19) && (Npc_RefuseTalk(self) == FALSE) && (Npc_GetDistToNpc(self,hero) < 400) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};

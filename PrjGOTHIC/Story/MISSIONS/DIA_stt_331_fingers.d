@@ -105,28 +105,35 @@ func int dia_fingers_lehrer_condition()
 func void dia_fingers_lehrer_info()
 {
 	AI_Output(other,self,"DIA_Fingers_Lehrer_15_00");	//Ты можешь научить меня чему-нибудь?
-	AI_Output(self,other,"DIA_Fingers_Lehrer_05_02");	//Зависит от того, что ты хочешь узнать.
-	Info_ClearChoices(dia_fingers_lehrer);
-	Info_AddChoice(dia_fingers_lehrer,DIALOG_BACK,dia_fingers_lehrer_back);
-	if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKPOCKET) == 1)
+	if((Npc_GetTalentSkill(hero,NPC_TALENT_PICKPOCKET) == 2) && (Npc_GetTalentSkill(hero,NPC_TALENT_SNEAK) == 1) && (Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) == 2))
 	{
-		Info_AddChoice(dia_fingers_lehrer,b_buildlearnstring(NAME_LEARNPICKPOCKET_2,LPCOST_TALENT_PICKPOCKET_2,0),dia_fingers_lehrer_pickpocket2);
-	};
-	if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKPOCKET) == 0)
+		AI_Output(self,other,"SVM_5_NoLearnOverMax");	//Ты выучил все, что нужно. Тебе стоит поучиться чему-нибудь еще.
+	}
+	else
 	{
-		Info_AddChoice(dia_fingers_lehrer,b_buildlearnstring(NAME_LEARNPICKPOCKET_1,LPCOST_TALENT_PICKPOCKET_1,0),dia_fingers_lehrer_pickpocket);
-	};
-	if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) == 1)
-	{
-		Info_AddChoice(dia_fingers_lehrer,b_buildlearnstring(NAME_LEARNPICKLOCK_2,LPCOST_TALENT_PICKLOCK_2,0),dia_fingers_lehrer_lockpick2);
-	};
-	if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) == 0)
-	{
-		Info_AddChoice(dia_fingers_lehrer,b_buildlearnstring(NAME_LEARNPICKLOCK_1,LPCOST_TALENT_PICKLOCK_1,0),dia_fingers_lehrer_lockpick);
-	};
-	if(Npc_GetTalentSkill(hero,NPC_TALENT_SNEAK) == 0)
-	{
-		Info_AddChoice(dia_fingers_lehrer,"Я хочу научиться подкрадываться.",dia_fingers_lehrer_schleichen);
+		AI_Output(self,other,"DIA_Fingers_Lehrer_05_02");	//Зависит от того, что ты хочешь узнать.
+		Info_ClearChoices(dia_fingers_lehrer);
+		Info_AddChoice(dia_fingers_lehrer,DIALOG_BACK,dia_fingers_lehrer_back);
+		if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKPOCKET) == 1)
+		{
+			Info_AddChoice(dia_fingers_lehrer,b_buildlearnstring(NAME_LEARNPICKPOCKET_2,LPCOST_TALENT_PICKPOCKET_2,0),dia_fingers_lehrer_pickpocket2);
+		};
+		if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKPOCKET) == 0)
+		{
+			Info_AddChoice(dia_fingers_lehrer,b_buildlearnstring(NAME_LEARNPICKPOCKET_1,LPCOST_TALENT_PICKPOCKET_1,0),dia_fingers_lehrer_pickpocket);
+		};
+		if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) == 1)
+		{
+			Info_AddChoice(dia_fingers_lehrer,b_buildlearnstring(NAME_LEARNPICKLOCK_2,LPCOST_TALENT_PICKLOCK_2,0),dia_fingers_lehrer_lockpick2);
+		};
+		if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) == 0)
+		{
+			Info_AddChoice(dia_fingers_lehrer,b_buildlearnstring(NAME_LEARNPICKLOCK_1,LPCOST_TALENT_PICKLOCK_1,0),dia_fingers_lehrer_lockpick);
+		};
+		if(Npc_GetTalentSkill(hero,NPC_TALENT_SNEAK) == 0)
+		{
+			Info_AddChoice(dia_fingers_lehrer,"Я хочу научиться подкрадываться.",dia_fingers_lehrer_schleichen);
+		};
 	};
 };
 

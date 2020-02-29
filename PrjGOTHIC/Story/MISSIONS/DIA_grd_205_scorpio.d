@@ -164,7 +164,7 @@ instance GRD_205_SCORPIO_WELCOME(C_INFO)
 
 func int grd_205_scorpio_welcome_condition()
 {
-	if(Npc_GetTrueGuild(hero) == GIL_GRD)
+	if(Npc_GetTrueGuild(hero) == GIL_GRD && (KAPITEL < 4))
 	{
 		return TRUE;
 	};

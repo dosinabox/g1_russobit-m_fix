@@ -1554,7 +1554,7 @@ func void info_milten_lsdone_info()
 	AI_Output(self,hero,"Info_Milten_LSDONE_02_05");	//Тебе придется воспользоваться заклинанием Портал, для того чтобы выбраться отсюда!
 	if(!Npc_HasItems(hero,itarrune_1_6_teleport3) && !Npc_HasItems(hero,itarrune_1_5_teleport5))
 	{
-		b_printtrademsg1("Получен свиток телепортации в Болотный лагерь.");
+		b_printtrademsg1("Получен свиток телепортации.");
 		CreateInvItem(hero,itarscrollteleport5);
 	};
 	AI_Output(hero,self,"Info_Milten_LSDONE_15_06");	//А что будет с тобой?

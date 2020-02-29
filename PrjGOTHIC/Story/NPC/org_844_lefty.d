@@ -21,8 +21,8 @@ instance ORG_844_LEFTY(NPC_DEFAULT)
 	fight_tactic = FAI_HUMAN_STRONG;
 	Npc_SetTalentSkill(self,NPC_TALENT_BOW,1);
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
-	CreateInvItems(self,itkelockpick,3);
-	CreateInvItems(self,itminugget,20);
+	CreateInvItems(self,itkelockpick,1);
+	CreateInvItems(self,itminugget,10);
 	CreateInvItems(self,itforice,2);
 	CreateInvItems(self,itfo_potion_water_01,5);
 	CreateInvItem(self,itfobooze);

@@ -19,7 +19,7 @@ instance GRD_224_PACHO(NPC_DEFAULT)
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
-	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
+	Npc_SetTalentSkill(self,NPC_TALENT_2H,1);
 	Npc_SetTalentSkill(self,NPC_TALENT_CROSSBOW,1);
 	CreateInvItem(self,itmw_1h_sword_01);
 	CreateInvItem(self,itrw_crossbow_01);

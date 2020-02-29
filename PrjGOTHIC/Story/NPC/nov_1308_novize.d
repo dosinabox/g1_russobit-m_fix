@@ -115,3 +115,28 @@ func void dia_1308_novize_trade_info()
 	AI_Output(other,self,"DIA_BaalIsidro_TRADE_15_00");	//Покажи, что ты там продаешь.
 };
 
+instance DIA_1308_NOVIZE_PRECH2(C_INFO)
+{
+	npc = nov_1308_novize;
+	nr = 2;
+	condition = dia_1308_novize_prech2_condition;
+	information = dia_1308_novize_prech2_info;
+	permanent = 1;
+	description = "Как дела?";
+};
+
+func int dia_1308_novize_prech2_condition()
+{
+	if(KAPITEL < 2 || BAALISIDRO_DEALERJOB == LOG_SUCCESS)
+	{
+		return 1;
+	};
+};
+
+func void dia_1308_novize_prech2_info()
+{
+	AI_Output(other,self,"DIA_Gravo_Hallo_15_00");	//Как дела?
+	AI_Output(self,other,"DIA_BaalParvez_Sleeper_10_01");	//Спящий говорит с нами во снах и видениях.
+	AI_Output(self,other,"DIA_BaalParvez_PSIMagic_10_02");	//Только Гуру посвящены в таинство магии Спящего.
+};
+

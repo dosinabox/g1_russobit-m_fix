@@ -20,7 +20,7 @@ instance GRD_282_NEK(NPC_DEFAULT)
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_STRONG;
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
-	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
+	Npc_SetTalentSkill(self,NPC_TALENT_2H,1);
 	CreateInvItem(self,neks_amulett);
 	CreateInvItems(self,itminugget,10);
 	daily_routine = rtn_start_282;

@@ -739,6 +739,14 @@ func void update_stomp_list()
 	Info_AddChoice(pc_stomp_cat1,DIALOG_BACK,pc_stomp_cat1_back);
 	if(Npc_HasItems(hero,itmi_plants_swampherb_01))
 	{
+		if(JOINT3RECIPE == TRUE)
+		{
+			Info_AddChoice(pc_stomp_cat1,"'Зов мечты'",pc_stomp_cat1_3);
+		};
+		if(JOINT2RECIPE == TRUE)
+		{
+			Info_AddChoice(pc_stomp_cat1,"'Северный темный'",pc_stomp_cat1_2);
+		};
 		Info_AddChoice(pc_stomp_cat1,"'Новичок'",pc_stomp_cat1_1);
 	};
 };
@@ -813,6 +821,40 @@ func void pc_stomp_cat1_1()
 	CreateInvItem(self,itmijoint_1);
 	AI_Wait(self,2);
 	PrintScreen("Получен 'Новичок'.",-1,-1,"font_old_10_white.tga",2);
+	update_stomp_list();
+};
+
+func void pc_stomp_cat1_2()
+{
+	if(!Npc_HasItems(hero,itfo_plants_berrys_01))
+	{
+		PrintScreen("Недостаточно ингредиентов.",-1,45,"font_old_10_white.tga",2);
+	}
+	else
+	{
+		Npc_RemoveInvItems(self,itmi_plants_swampherb_01,1);
+		Npc_RemoveInvItems(self,itfo_plants_berrys_01,1);
+		CreateInvItem(self,itmijoint_2);
+		AI_Wait(self,2);
+		PrintScreen("Получен 'Северный темный'.",-1,-1,"font_old_10_white.tga",2);
+	};
+	update_stomp_list();
+};
+
+func void pc_stomp_cat1_3()
+{
+	if(!Npc_HasItems(hero,itfo_plants_mushroom_01))
+	{
+		PrintScreen("Недостаточно ингредиентов.",-1,45,"font_old_10_white.tga",2);
+	}
+	else
+	{
+		Npc_RemoveInvItems(self,itmi_plants_swampherb_01,1);
+		Npc_RemoveInvItems(self,itfo_plants_mushroom_01,1);
+		CreateInvItem(self,itmijoint_3);
+		AI_Wait(self,2);
+		PrintScreen("Получен 'Зов мечты'.",-1,-1,"font_old_10_white.tga",2);
+	};
 	update_stomp_list();
 };
 

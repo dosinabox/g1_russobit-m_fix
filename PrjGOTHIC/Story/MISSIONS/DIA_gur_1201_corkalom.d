@@ -269,6 +269,8 @@ func void gur_1201_corkalom_joinpsi_info()
 	{
 		if(counter >= 4)
 		{
+			var C_NPC fortuno;
+			fortuno = Hlp_GetNpc(nov_1357_fortuno);
 			AI_Output(self,other,"GUR_1201_CorKalom_JoinPSI_10_08");	//Хорошо. Слов Идолов мне вполне достаточно.
 			AI_Output(self,other,"GUR_1201_CorKalom_JoinPSI_10_09");	//Вот, возьми эту одежду. А теперь иди и постарайся быть полезным.
 			b_printtrademsg1("Получен легкий доспех послушника.");
@@ -277,6 +279,8 @@ func void gur_1201_corkalom_joinpsi_info()
 			AI_EquipArmor(hero,nov_armor_m);
 			Npc_SetTrueGuild(hero,GIL_NOV);
 			hero.guild = GIL_NOV;
+			CreateInvItem(fortuno,alchemy_joint2);
+			CreateInvItem(fortuno,alchemy_joint3);
 			b_logentry(CH1_JOINPSI,"Сегодня Кор Галом зачислил меня в послушники. Он мог бы вести себя и получше, но, как бы то ни было, теперь я принят в Братство.");
 			Log_CreateTopic(GE_TRADERPSI,LOG_NOTE);
 			b_logentry(GE_TRADERPSI,"Доспехи послушников я могу получить у Идола Намиба.");
@@ -744,7 +748,7 @@ func void gur_1201_corkalom_rat_info()
 {
 	AI_Output(other,self,"GUR_1201_CorKalom_RAT_Info_15_01");	//Да, меня ждет очередное кровавое приключение...
 	AI_Output(self,other,"GUR_1201_CorKalom_RAT_Info_10_02");	//Возьми эти целебные зелья.
-	b_printtrademsg1("Получено 5 экстрактов магической энергии.");
+	b_printtrademsg1("Получено 5 экстрактов исцеления.");
 	AI_Output(self,other,"GUR_1201_CorKalom_RAT_Info_10_03");	//Я даю их тебе не потому, что слишком беспокоюсь за твою жизнь, а потому что это задание для меня слишком важно.
 	CreateInvItems(self,itfo_potion_health_02,5);
 	b_giveinvitems(self,other,itfo_potion_health_02,5);

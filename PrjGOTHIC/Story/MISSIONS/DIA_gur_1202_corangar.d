@@ -757,7 +757,7 @@ func void info_corangar_teleport_info()
 	AI_Output(self,hero,"Info_CorAngar_TELEPORT_08_01");	//Подожди!
 	AI_Output(hero,self,"Info_CorAngar_TELEPORT_15_02");	//В чем дело?
 	AI_Output(self,hero,"Info_CorAngar_TELEPORT_08_03");	//Возьми эту руну в знак нашей благодарности за твою помощь.
-	b_printtrademsg1("Получена руна телепортацит в Болотный лагерь.");
+	b_printtrademsg1("Получена руна телепортации.");
 	AI_Output(self,hero,"Info_CorAngar_TELEPORT_08_04");	//Она даст тебе возможность быстро перенестись на площадь перед нашим Храмом.
 	AI_Output(hero,self,"Info_CorAngar_TELEPORT_15_05");	//Спасибо тебе!
 	if(YBERION_DIED == TRUE)

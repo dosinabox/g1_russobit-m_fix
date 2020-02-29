@@ -8,8 +8,8 @@ instance PC_FIGHTER(NPC_DEFAULT)
 	voice = 9;
 	id = 3;
 	flags = NPC_FLAG_IMMORTAL;
-	attribute[ATR_STRENGTH] = 80;
-	attribute[ATR_DEXTERITY] = 40;
+	attribute[ATR_STRENGTH] = 85;
+	attribute[ATR_DEXTERITY] = 1;
 	attribute[ATR_MANA_MAX] = 20;
 	attribute[ATR_MANA] = 20;
 	attribute[ATR_HITPOINTS_MAX] = 22;
@@ -136,8 +136,8 @@ instance PC_FIGHTERFM(NPC_DEFAULT)
 	voice = 9;
 	id = 5;
 	flags = NPC_FLAG_IMMORTAL;
-	attribute[ATR_STRENGTH] = 80;
-	attribute[ATR_DEXTERITY] = 40;
+	attribute[ATR_STRENGTH] = 85;
+	attribute[ATR_DEXTERITY] = 1;
 	attribute[ATR_MANA_MAX] = 20;
 	attribute[ATR_MANA] = 20;
 	attribute[ATR_HITPOINTS_MAX] = 22;

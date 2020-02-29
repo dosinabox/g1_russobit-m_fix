@@ -1,34 +1,34 @@
 
-const int VALUE_MOBSIITEM = 3;
-const int VALUE_SWORDBLADE = 80;
-const int VALUE_SWORDBLADEHOT = 64;
-const int VALUE_SWORDRAWHOT = 51;
+const int VALUE_MOBSIITEM = 2;
+const int VALUE_SWORDBLADE = 70;
+const int VALUE_SWORDBLADEHOT = 60;
+const int VALUE_SWORDRAWHOT = 50;
 const int VALUE_SWORDRAW = 40;
 const int VALUE_DIETRICH = 10;
-const int VALUE_SCHLüSSEL = 3;
+const int VALUE_SCHLüSSEL = 2;
 const int VALUE_JOINT1 = 8;
-const int VALUE_JOINT2 = 15;
-const int VALUE_JOINT3 = 20;
+const int VALUE_JOINT2 = 10;
+const int VALUE_JOINT3 = 16;
 const int VALUE_LAUTE = 10;
 const int VALUE_ERZBROCKEN = 1;
 const int VALUE_FACKEL = 2;
-const int VALUE_SUMPFKRAUT = 8;
-const int VALUE_PFEIFE = 10;
-const int VALUE_RASIERMESSER = 5;
+const int VALUE_SUMPFKRAUT = 4;
+const int VALUE_PFEIFE = 4;
+const int VALUE_RASIERMESSER = 2;
 const int VALUE_MüNZE = 0;
-const int VALUE_SCHüSSEL = 4;
-const int VALUE_KERZENSTåNDER = 10;
-const int VALUE_BECHER = 4;
-const int VALUE_POKAL = 50;
-const int VALUE_BESTECK = 15;
-const int VALUE_PFANNE = 10;
-const int VALUE_KRUG = 10;
-const int VALUE_AMPHORE = 15;
-const int VALUE_STATUE = 15;
-const int VALUE_SCHWEFEL = 20;
-const int VALUE_QUECKSILBER = 25;
+const int VALUE_SCHüSSEL = 2;
+const int VALUE_KERZENSTåNDER = 2;
+const int VALUE_BECHER = 2;
+const int VALUE_POKAL = 10;
+const int VALUE_BESTECK = 6;
+const int VALUE_PFANNE = 2;
+const int VALUE_KRUG = 2;
+const int VALUE_AMPHORE = 2;
+const int VALUE_STATUE = 4;
+const int VALUE_SCHWEFEL = 6;
+const int VALUE_QUECKSILBER = 8;
 const int VALUE_SALZ = 10;
-const int VALUE_ÖL = 15;
+const int VALUE_ÖL = 8;
 const int VALUE_MOLERATFETT = 5;
 const int VALUE_ALCOHOL = 18;
 
@@ -279,7 +279,7 @@ instance ITMIJOINT_1(C_ITEM)
 	flags = ITEM_MULTI;
 	value = VALUE_JOINT1;
 	visual = "ItMi_Joint_01.3ds";
-	material = MAT_WOOD;
+	material = MAT_LEATHER;
 	scemename = "JOINT";
 	on_state[0] = useitmijoint_1;
 	description = name;
@@ -305,7 +305,7 @@ instance ITMIJOINT_2(C_ITEM)
 	flags = ITEM_MULTI;
 	value = VALUE_JOINT2;
 	visual = "ItMi_Joint_01.3ds";
-	material = MAT_WOOD;
+	material = MAT_LEATHER;
 	scemename = "JOINT";
 	on_state[0] = useitmijoint_2;
 	description = name;
@@ -331,7 +331,7 @@ instance ITMIJOINT_3(C_ITEM)
 	flags = ITEM_MULTI;
 	value = VALUE_JOINT3;
 	visual = "ItMi_Joint_01.3ds";
-	material = MAT_WOOD;
+	material = MAT_LEATHER;
 	scemename = "JOINT";
 	on_state[0] = useitmijoint_3;
 	description = name;
@@ -440,7 +440,7 @@ instance ITMI_STUFF_BARBKNIFE_01(C_ITEM)
 
 instance ITMI_STUFF_OLDCOIN_01(C_ITEM)
 {
-	name = "Çîëîòàÿ ìîíåòà";
+	name = "Ñòàðàÿ ìîíåòà";
 	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MULTI | ITEM_MISSION;
 	value = VALUE_MüNZE;

@@ -38,6 +38,7 @@ const string MOBNAME_BASKET_RICE = "";
 const string MOBNAME_DRUM = "";
 const string MOBNAME_GROUND_SLOT = "";
 const string MOBNAME_HERB_PSI = "Ступа";
+const string MOBNAME_HERBSTOMPER = "Ступа";
 const string MOBNAME_IDOL = "Статуя";
 const string MOBNAME_LEAN_WALL = "";
 const string MOBNAME_ORCDRUM = "";

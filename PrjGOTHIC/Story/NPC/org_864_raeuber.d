@@ -21,8 +21,7 @@ instance ORG_864_RAEUBER(NPC_DEFAULT)
 	fight_tactic = FAI_HUMAN_STRONG;
 	Npc_SetTalentSkill(self,NPC_TALENT_BOW,1);
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
-	CreateInvItems(self,itkelockpick,1);
-	CreateInvItems(self,itminugget,9);
+	CreateInvItems(self,itminugget,2);
 	CreateInvItems(self,itlstorch,2);
 	CreateInvItems(self,itfo_potion_health_01,1);
 	CreateInvItem(self,itfoloaf);

@@ -24,8 +24,6 @@ instance ORG_861_KILLIAN(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	CreateInvItems(self,itkelockpick,1);
 	CreateInvItems(self,itminugget,5);
-	CreateInvItems(self,itforice,5);
-	CreateInvItems(self,itfobooze,4);
 	CreateInvItems(self,itlstorch,2);
 	CreateInvItems(self,itmijoint_1,15);
 	CreateInvItem(self,itmistomper);

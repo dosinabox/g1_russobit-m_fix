@@ -21,7 +21,7 @@ instance ORG_800_ORGANISATOR(NPC_DEFAULT)
 	fight_tactic = FAI_HUMAN_STRONG;
 	Npc_SetTalentSkill(self,NPC_TALENT_BOW,1);
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,2);
-	CreateInvItems(self,itkelockpick,3);
+	CreateInvItems(self,itkelockpick,1);
 	CreateInvItems(self,itminugget,18);
 	CreateInvItems(self,itfo_potion_health_01,2);
 	CreateInvItem(self,itmi_stuff_cup_01);

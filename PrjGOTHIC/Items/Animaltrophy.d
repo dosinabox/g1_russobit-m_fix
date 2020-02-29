@@ -1,24 +1,24 @@
 
 const int VALUE_ZеHNE = 10;
-const int VALUE_KRALLEN = 15;
+const int VALUE_KRALLEN = 8;
 const int VALUE_WOLFSFELL = 10;
-const int VALUE_ORKHUNDFELL = 15;
-const int VALUE_PANZERPLATTE = 50;
+const int VALUE_ORKHUNDFELL = 20;
+const int VALUE_PANZERPLATTE = 20;
 const int VALUE_CRAWLERZANGEN = 10;
-const int VALUE_SHADOWBEASTFELL = 100;
-const int VALUE_LURKERKLAUE = 15;
-const int VALUE_LURKERHAUT = 25;
+const int VALUE_SHADOWBEASTFELL = 400;
+const int VALUE_LURKERKLAUE = 10;
+const int VALUE_LURKERHAUT = 20;
 const int VALUE_SUMPFHAIHAUT = 200;
 const int VALUE_TROLLFELL = 300;
 const int VALUE_FLьGEL = 8;
-const int VALUE_STACHEL = 25;
-const int VALUE_FEUERZUNGE = 500;
-const int VALUE_SUMPFHAIZеHNE = 500;
-const int VALUE_SHADOWBEASTHORN = 500;
-const int VALUE_TROLLHAUER = 500;
-const int VALUE_STEINHERZ = 1000;
-const int VALUE_FEUERHERZ = 1000;
-const int VALUE_EISHERZ = 1000;
+const int VALUE_STACHEL = 10;
+const int VALUE_FEUERZUNGE = 100;
+const int VALUE_SUMPFHAIZеHNE = 100;
+const int VALUE_SHADOWBEASTHORN = 100;
+const int VALUE_TROLLHAUER = 100;
+const int VALUE_STEINHERZ = 300;
+const int VALUE_FEUERHERZ = 300;
+const int VALUE_EISHERZ = 300;
 const int VALUE_EISTUECK = 100;
 
 instance ITAT_TEETH_01(C_ITEM)
@@ -88,13 +88,13 @@ instance ITAT_CLAWS_01(C_ITEM)
 
 instance ITAT_CRAWLER_02(C_ITEM)
 {
-	name = "Панцирная пластина";
+	name = "Панцирная пластина ползуна-воина";
 	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MULTI | ITEM_MISSION;
 	value = VALUE_PANZERPLATTE;
 	visual = "ItAt_Crawler_02.3DS";
 	material = MAT_WOOD;
-	description = "Панцирная пластина ползуна-воина";
+	description = name;
 	text[5] = NAME_VALUE;
 	count[5] = VALUE_PANZERPLATTE;
 };
@@ -114,26 +114,26 @@ instance ITAT_CRAWLER_01(C_ITEM)
 
 instance ITAT_SHADOW_01(C_ITEM)
 {
-	name = "Шкура";
+	name = "Шкура мракориса";
 	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MULTI;
 	value = VALUE_SHADOWBEASTFELL;
 	visual = "ItAt_Shadowbeast_01.3DS";
 	material = MAT_LEATHER;
-	description = "Шкура мракориса";
+	description = name;
 	text[5] = NAME_VALUE;
 	count[5] = VALUE_SHADOWBEASTFELL;
 };
 
 instance ITAT_SHADOW_02(C_ITEM)
 {
-	name = "Рог";
+	name = "Рог мракориса";
 	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MULTI;
 	value = VALUE_SHADOWBEASTHORN;
 	visual = "ItAt_Shadowbeast_02.3DS";
 	material = MAT_LEATHER;
-	description = "Рог мракориса";
+	description = name;
 	text[5] = NAME_VALUE;
 	count[5] = VALUE_SHADOWBEASTHORN;
 };
@@ -205,7 +205,7 @@ instance ITAT_SWAMPSHARK_01(C_ITEM)
 
 instance ITAT_SWAMPSHARK_02(C_ITEM)
 {
-	name = "Клыки болотожора";
+	name = "Клык болотожора";
 	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MULTI;
 	value = VALUE_SUMPFHAIZеHNE;

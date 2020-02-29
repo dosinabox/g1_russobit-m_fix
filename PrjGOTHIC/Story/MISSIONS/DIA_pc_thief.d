@@ -57,23 +57,25 @@ func void info_diego_gamestart_info()
 	Npc_ExchangeRoutine(cs_eskorte2,"flee");
 	//уровень сложности меняется тут
 	//
+	//повышенная:
 	/*DIFF_HARD = TRUE;
 	hero.attribute[ATR_STRENGTH] = 5;
 	hero.attribute[ATR_DEXTERITY] = 5;
 	STR_ESSENZ_VAL = 1;
-	STR_EXTRAKT_VAL = 3;
-	STR_ELIXIER_VAL = 5;
+	STR_EXTRAKT_VAL = 2;
+	STR_ELIXIER_VAL = 3;
 	DEX_ESSENZ_VAL = 1;
-	DEX_EXTRAKT_VAL = 3;
-	DEX_ELIXIER_VAL = 5;
-	*/
+	DEX_EXTRAKT_VAL = 2;
+	DEX_ELIXIER_VAL = 3;*/
 	//
+	//стандартная:
 	STR_ESSENZ_VAL = 3;
 	STR_EXTRAKT_VAL = 5;
 	STR_ELIXIER_VAL = 8;
 	DEX_ESSENZ_VAL = 3;
 	DEX_EXTRAKT_VAL = 5;
 	DEX_ELIXIER_VAL = 8;
+	//
 	b_kapitelwechsel(1);
 };
 

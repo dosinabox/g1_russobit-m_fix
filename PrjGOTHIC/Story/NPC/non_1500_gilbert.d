@@ -23,7 +23,7 @@ instance NON_1500_GILBERT(NPC_DEFAULT)
 	fight_tactic = FAI_HUMAN_COWARD;
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	EquipItem(self,itmw_1h_axe_old_01);
-	CreateInvItems(self,itkelockpick,5);
+	CreateInvItems(self,itkelockpick,2);
 	CreateInvItem(self,itke_gilbert);
 	daily_routine = rtn_start_1500;
 };

@@ -10,6 +10,7 @@ func void b_give_darrionchapter1weapons()
 	CreateInvItem(npc,itmw_1h_nailmace_01);
 	CreateInvItem(npc,itmw_2h_staff_01);
 	CreateInvItem(npc,itmihammer);
+	CreateInvItem(npc,itmistomper);
 	CreateInvItems(npc,itamarrow,100);
 	CreateInvItems(npc,itambolt,100);
 	CreateInvItems(npc,itminugget,200);

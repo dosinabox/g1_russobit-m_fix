@@ -493,3 +493,25 @@ func void rtn_off_402()
 	ta_stay(20,0,8,0,"NOWHERE");
 };
 
+instance CHARLOTTE_EXIT(C_INFO)
+{
+	npc = charlotte;
+	nr = 999;
+	condition = charlotte_exit_condition;
+	information = charlotte_exit_info;
+	important = 0;
+	permanent = 1;
+	description = DIALOG_ENDE;
+};
+
+
+func int charlotte_exit_condition()
+{
+	return 1;
+};
+
+func void charlotte_exit_info()
+{
+	AI_StopProcessInfos(self);
+};
+

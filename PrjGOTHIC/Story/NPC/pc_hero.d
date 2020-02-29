@@ -259,7 +259,10 @@ instance D36TESTBOOK(C_ITEM)
 
 func void use_d36testbook()
 {
-	PrintScreen("тестим...",-1,30,"font_old_20_white.tga",4);
+	var C_NPC fortuno;
+	fortuno = Hlp_GetNpc(nov_1357_fortuno);
+	CreateInvItem(fortuno,alchemy_joint2);
+	CreateInvItem(fortuno,alchemy_joint3);
 	//OC_BANNED = TRUE;
 	//Wld_ExchangeGuildAttitudes("GIL_ATTITUDES_FMTAKEN");
 	//CORKALOM_BRINGMCQBALLS = LOG_SUCCESS;
@@ -268,6 +271,7 @@ func void use_d36testbook()
 	//Wld_SendTrigger("EVT_ORCGRAVYARD_MOVER_01");
 	//b_corkalomleft();
 	//FREELEARN_NC = TRUE;
+	PrintScreen("тестим...",-1,30,"font_old_20_white.tga",4);
 };
 
 instance ALCHEMYKIT(C_ITEM)
@@ -299,6 +303,8 @@ func void use_alchemykit()
 	CreateInvItem(self,alchemy_egg);
 	CreateInvItem(self,alchemy_fortuno);
 	CreateInvItem(self,alchemy_master);
+	CreateInvItem(self,alchemy_joint2);
+	CreateInvItem(self,alchemy_joint3);
 	CreateInvItem(self,kalomsrecipe);
 	CreateInvItems(self,itmiflask,20);
 	CreateInvItems(self,itfo_plants_nightshadow_01,5);
