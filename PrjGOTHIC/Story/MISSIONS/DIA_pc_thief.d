@@ -3,7 +3,14 @@ func void b_diegolearn()
 {
 	Info_ClearChoices(info_diego_teach);
 	Info_AddChoice(info_diego_teach,DIALOG_BACK,info_diego_teach_back);
-	if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF || KAPITEL > 3)
+	if(DIFF_HARD == TRUE)
+	{
+		Info_AddChoice(info_diego_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,OTHERCAMPLEARNPAY * 5),info_diego_teach_str_5);
+		Info_AddChoice(info_diego_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,OTHERCAMPLEARNPAY),info_diego_teach_str_1);
+		Info_AddChoice(info_diego_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,OTHERCAMPLEARNPAY * 5),info_diego_teach_dex_5);
+		Info_AddChoice(info_diego_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,OTHERCAMPLEARNPAY),info_diego_teach_dex_1);
+	}
+	else if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF || KAPITEL > 3)
 	{
 		Info_AddChoice(info_diego_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),info_diego_teach_str_5);
 		Info_AddChoice(info_diego_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),info_diego_teach_str_1);
@@ -48,6 +55,25 @@ func void info_diego_gamestart_info()
 	AI_Output(self,hero,"Info_Diego_Gamestart_11_03");	//Если ты хочешь остаться в живых в этом гиблом месте, тебе придется поговорить со мной. Впрочем, умереть ты можешь в любое время, и кто я такой, чтобы помешать тебе? Ну, так что ты думаешь?
 	Npc_ExchangeRoutine(cs_eskorte1,"flee");
 	Npc_ExchangeRoutine(cs_eskorte2,"flee");
+	//уровень сложности меняется тут
+	//
+	/*DIFF_HARD = TRUE;
+	hero.attribute[ATR_STRENGTH] = 5;
+	hero.attribute[ATR_DEXTERITY] = 5;
+	STR_ESSENZ_VAL = 1;
+	STR_EXTRAKT_VAL = 3;
+	STR_ELIXIER_VAL = 5;
+	DEX_ESSENZ_VAL = 1;
+	DEX_EXTRAKT_VAL = 3;
+	DEX_ELIXIER_VAL = 5;
+	*/
+	//
+	STR_ESSENZ_VAL = 3;
+	STR_EXTRAKT_VAL = 5;
+	STR_ELIXIER_VAL = 8;
+	DEX_ESSENZ_VAL = 3;
+	DEX_EXTRAKT_VAL = 5;
+	DEX_ELIXIER_VAL = 8;
 	b_kapitelwechsel(1);
 };
 
@@ -113,11 +139,11 @@ func void info_diego_exit_later_info()
 	{
 		AI_Output(self,hero,"Info_Diego_EXIT_11_01");	//Пойдем.
 	}
-	else if(Npc_KnowsInfo(hero,org_801_lares_bringlistback) && SATURAS_BRINGFOCI == 0)
+	/*else if(Npc_KnowsInfo(hero,org_801_lares_bringlistback) && SATURAS_BRINGFOCI == 0)
 	{
 		AI_Output(self,hero,"SVM_11_YouKilledOCfolk");	//В Старом лагере кто-то убит. Говорят, что ты в этом замешан...
 		AI_Output(self,hero,"SVM_11_RunCoward");	//Больше здесь не появляйся!
-	}
+	}*/
 	else
 	{
 		AI_Output(hero,self,"Info_Diego_EXIT_15_00");	//До встречи!
@@ -589,7 +615,7 @@ func void info_diego_teachers_info()
 	AI_Output(self,hero,"Info_Diego_Teachers_11_04");	//Его хижину не сразу заметишь. Она прямо под стеной замка по дороге отсюда к арене.
 	AI_Output(self,hero,"Info_Diego_Teachers_11_05");	//У ворот замка поверни налево и спускайся вниз в сторону арены.
 	Log_CreateTopic(GE_TEACHEROC,LOG_NOTE);
-	b_logentry(GE_TEACHEROC,"Фингерс может научить меня воровать и вскрывать замки. Он живет недалеко от арены. Его дом встроен в стену замка.");
+	b_logentry(GE_TEACHEROC,"Фингерс может научить меня воровать и вскрывать замки. Он живет недалеко от арены, у стен замка.");
 };
 
 
@@ -996,22 +1022,19 @@ func void info_diego_joinanalyze_info()
 		AI_Output(self,hero,"Info_Diego_JoinAnalyze_Thorus_11_02");	//Торус говорит, что нам нужны ребята вроде тебя - это хороший знак.
 		POINTS_OC = POINTS_OC + 5;
 	}
-	else
+	else if(THORUS_MORDRAGKO == LOG_FAILED)
 	{
-		if(THORUS_MORDRAGKO == LOG_FAILED)
-		{
-			AI_Output(self,hero,"Info_Diego_JoinAnalyze_Thorus_11_03");	//Торус был очень недоволен, вспоминая твою неудачу. Как ты умудрился провалить такое дело?!
-			POINTS_OC = POINTS_OC - 5;
-		};
-		if(FISK_GETNEWHEHLER == LOG_SUCCESS)
-		{
-			AI_Output(self,hero,"Info_Diego_JoinAnalyze_Fisk_11_01");	//Фиск сказал мне, что ты его удивил. В любом случае он на твоей стороне.
-			POINTS_OC = POINTS_OC + 5;
-		}
-		else if((MORDRAGKO_HAUAB == TRUE) || (MORDRAGKO_STAYATNC == TRUE))
-		{
-			AI_Output(self,hero,"Info_Diego_JoinAnalyze_Fisk_11_02");	//Фиск теперь тебя недолюбливает, парень. На твоем месте я бы быстренько подыскал замену Мордрагу.
-		};
+		AI_Output(self,hero,"Info_Diego_JoinAnalyze_Thorus_11_03");	//Торус был очень недоволен, вспоминая твою неудачу. Как ты умудрился провалить такое дело?!
+		POINTS_OC = POINTS_OC - 5;
+	};
+	if(FISK_GETNEWHEHLER == LOG_SUCCESS)
+	{
+		AI_Output(self,hero,"Info_Diego_JoinAnalyze_Fisk_11_01");	//Фиск сказал мне, что ты его удивил. В любом случае он на твоей стороне.
+		POINTS_OC = POINTS_OC + 5;
+	}
+	else if(Npc_IsDead(org_826_mordrag) || (MORDRAGKO_HAUAB == TRUE) || (MORDRAGKO_STAYATNC == TRUE))
+	{
+		AI_Output(self,hero,"Info_Diego_JoinAnalyze_Fisk_11_02");	//Фиск теперь тебя недолюбливает, парень. На твоем месте я бы быстренько подыскал замену Мордрагу.
 	};
 	if(POINTS_OC > 15)
 	{
@@ -1033,6 +1056,7 @@ func void info_diego_joinanalyze_info()
 		}
 		else
 		{
+			AI_Output(self,other,"ORG_801_Lares_Reicht_11_04");	//Но ты еще не готов. Иди, выполняй другие поручения.
 			b_printguildcondition(5);
 		};
 	}

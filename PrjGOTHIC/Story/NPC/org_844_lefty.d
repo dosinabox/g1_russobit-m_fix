@@ -23,15 +23,14 @@ instance ORG_844_LEFTY(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	CreateInvItems(self,itkelockpick,3);
 	CreateInvItems(self,itminugget,20);
-	CreateInvItems(self,itforice,6);
+	CreateInvItems(self,itforice,2);
 	CreateInvItems(self,itfo_potion_water_01,5);
-	CreateInvItems(self,itfobooze,3);
+	CreateInvItem(self,itfobooze);
 	CreateInvItems(self,itfo_potion_health_01,3);
-	CreateInvItem(self,itfoloaf);
 	EquipItem(self,itmw_1h_mace_03);
 	EquipItem(self,itrw_bow_long_01);
 	CreateInvItems(self,itamarrow,20);
-	daily_routine = rtn_start_844;
+	daily_routine = rtn_wait_844;
 	senses = SENSE_SEE | SENSE_HEAR | SENSE_SMELL;
 };
 
@@ -40,5 +39,11 @@ func void rtn_start_844()
 {
 	ta_sitcampfire(19,0,8,0,"NC_PATH86_MOVEMENT");
 	ta_smalltalk(8,0,19,0,"NC_PATH53");
+};
+
+func void rtn_wait_844()
+{
+	ta_sitcampfire(19,0,8,0,"NC_PATH86_MOVEMENT");
+	ta_boss(8,0,19,0,"NC_PATH86");
 };
 

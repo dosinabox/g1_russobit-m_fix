@@ -35,7 +35,7 @@ func void b_give_skipchapter3weapons()
 	CreateInvItem(npc,itmw_1h_sword_long_01);
 	CreateInvItem(npc,itmw_1h_sword_long_02);
 	CreateInvItem(npc,itmw_1h_sword_long_03);
-	CreateInvItem(npc,itmw_1h_sword_long_04);
+	//CreateInvItem(npc,itmw_1h_sword_long_04);
 	CreateInvItems(npc,itamarrow,100);
 	CreateInvItems(npc,itambolt,100);
 	CreateInvItems(npc,itminugget,600);

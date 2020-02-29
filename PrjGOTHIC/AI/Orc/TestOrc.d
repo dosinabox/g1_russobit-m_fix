@@ -273,11 +273,11 @@ instance ORC12(ORC_TESTTYPE)
 	b_scale(self);
 	CreateInvItem(self,itmw2horcaxe04);
 	EquipItem(self,itmw2horcaxe04);
-	CreateInvItem(self,itarrunelight);
-	CreateInvItem(self,itarruneheal);
-	CreateInvItem(self,itarrunechainlightning);
-	CreateInvItem(self,itarruneicewave);
-	CreateInvItem(self,itarrunethunderball);
+	CreateInvItem(self,itarrune_1_1_light);
+	CreateInvItem(self,itarrune_1_2_heal);
+	CreateInvItem(self,itarrune_3_5_chainlightning);
+	CreateInvItem(self,itarrune_3_4_icewave);
+	CreateInvItem(self,itarrune_3_2_thunderball);
 	fight_tactic = FAI_ORC;
 	start_aistate = zs_orc_guard;
 };

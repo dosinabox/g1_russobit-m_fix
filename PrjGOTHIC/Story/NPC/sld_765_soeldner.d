@@ -24,9 +24,6 @@ instance SLD_765_SOELDNER(NPC_DEFAULT)
 	EquipItem(self,itmw_1h_mace_war_03);
 	EquipItem(self,itrw_bow_long_01);
 	CreateInvItems(self,itamarrow,20);
-	CreateInvItems(self,itfoloaf,5);
-	CreateInvItems(self,itlstorch,5);
-	CreateInvItems(self,itfo_potion_health_02,8);
 	daily_routine = rtn_fmcstart_765;
 };
 

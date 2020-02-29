@@ -136,7 +136,7 @@ instance DIA_RICELORD_GETWATER(C_INFO)
 
 func int dia_ricelord_getwater_condition()
 {
-	if(RICELORD_ASKEDFORWATER == TRUE)
+	if(RICELORD_ASKEDFORWATER == TRUE && (LEFTYDEAD == FALSE) && (LEFTY_MISSION == LOG_RUNNING))
 	{
 		return 1;
 	};

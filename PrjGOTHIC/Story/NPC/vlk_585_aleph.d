@@ -32,8 +32,8 @@ instance VLK_585_ALEPH(NPC_DEFAULT)
 
 func void rtn_start_585()
 {
-	ta_sitaround(4,0,16,0,"OM_PICKORE_05");
-	ta_sitaround(16,0,4,0,"OM_PICKORE_05");
+	ta_sit(4,0,16,0,"OM_PICKORE_05");
+	ta_sit(16,0,4,0,"OM_PICKORE_05");
 };
 
 func void rtn_busy_585()

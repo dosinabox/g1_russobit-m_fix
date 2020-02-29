@@ -3,7 +3,12 @@ func void b_torrezlearn()
 {
 	Info_ClearChoices(kdf_405_torrez_mana);
 	Info_AddChoice(kdf_405_torrez_mana,DIALOG_BACK,kdf_405_torrez_mana_back);
-	if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF)
+	if(DIFF_HARD == TRUE)
+	{
+		Info_AddChoice(kdf_405_torrez_mana,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,OTHERCAMPLEARNPAY * 5),kdf_405_torrez_mana_man_5);
+		Info_AddChoice(kdf_405_torrez_mana,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,OTHERCAMPLEARNPAY),kdf_405_torrez_mana_man_1);
+	}
+	else if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF)
 	{
 		Info_AddChoice(kdf_405_torrez_mana,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),kdf_405_torrez_mana_man_5);
 		Info_AddChoice(kdf_405_torrez_mana,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),kdf_405_torrez_mana_man_1);
@@ -33,6 +38,11 @@ func int dia_torrez_exit_condition()
 
 func void dia_torrez_exit_info()
 {
+	if(Npc_HasItems(other,alchemybook))
+	{
+		Npc_RemoveInvItem(other,alchemybook);
+		CreateInvItem(other,alch200);
+	};
 	AI_StopProcessInfos(self);
 };
 
@@ -60,6 +70,11 @@ func void dia_torrez_hello_info()
 {
 	AI_Output(other,self,"DIA_Torrez_Hello_15_00");	//Я ищу Верховного Мага Круга Огня.
 	AI_Output(self,other,"DIA_Torrez_Hello_04_01");	//Поговори об этом с Мильтеном! И не мешай мне!
+	if(Npc_HasItems(other,alchemybook))
+	{
+		Npc_RemoveInvItem(other,alchemybook);
+		CreateInvItem(other,alch200);
+	};
 	AI_StopProcessInfos(self);
 };
 
@@ -195,6 +210,11 @@ func void dia_torrez_brieftausch_info()
 	    Log_SetTopicStatus(KDFLETTER,LOG_SUCCESS);
 		PYROCAR_MESSENGER = LOG_SUCCESS;
 	};
+	if(Npc_HasItems(other,alchemybook))
+	{
+		Npc_RemoveInvItem(other,alchemybook);
+		CreateInvItem(other,alch200);
+	};
 	AI_StopProcessInfos(self);
 };
 
@@ -250,6 +270,11 @@ func void kdf_405_torrez_book_info()
 	AI_Output(self,other,"KDF_405_Torrez_BOOK_Info_04_02");	//Вот, возьми книгу Первого Круга. Она научит тебя понимать Огонь.
 	b_printtrademsg1("Получена книга 'Первый круг магии'.");
 	b_giveinvitems(self,hero,itwr_book_circle_01,1);
+	if(Npc_HasItems(other,alchemybook))
+	{
+		Npc_RemoveInvItem(other,alchemybook);
+		CreateInvItem(other,alch200);
+	};
 	AI_StopProcessInfos(self);
 };
 
@@ -340,7 +365,7 @@ func void kdf_405_torrez_mana_back()
 
 func void kdf_405_torrez_mana_man_1()
 {
-	if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF)
+	if((hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF) && (DIFF_HARD == FALSE))
 	{
 		b_buyattributepoints(other,ATR_MANA_MAX,1);
 	}
@@ -363,7 +388,7 @@ func void kdf_405_torrez_mana_man_1()
 
 func void kdf_405_torrez_mana_man_5()
 {
-	if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF)
+	if((hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF) && (DIFF_HARD == FALSE))
 	{
 		b_buyattributepoints(other,ATR_MANA_MAX,5);
 	}

@@ -21,8 +21,8 @@ instance KDW_604_CRONOS(NPC_DEFAULT)
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_MAGE;
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,5);
-	EquipItem(self,itarruneicecube);
-	EquipItem(self,itarrunechainlightning);
+	EquipItem(self,itarrune_3_3_icecube);
+	EquipItem(self,itarrune_3_5_chainlightning);
 	CreateInvItem(self,alchemybook);
 	b_give_cronoschapter1runes();
 	daily_routine = rtn_start_604;

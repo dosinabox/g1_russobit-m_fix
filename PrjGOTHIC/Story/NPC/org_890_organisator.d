@@ -21,8 +21,6 @@ instance ORG_890_ORGANISATOR(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_BOW,1);
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	CreateInvItems(self,itkelockpick,2);
-	CreateInvItems(self,itfobooze,2);
-	CreateInvItems(self,itfo_potion_health_02,2);
 	EquipItem(self,itmw_1h_mace_03);
 	daily_routine = rtn_fmcstart_890;
 };

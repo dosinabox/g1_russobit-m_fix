@@ -2,6 +2,16 @@
 func void b_assessfighter()
 {
 	printdebugnpc(PD_ZS_FRAME,"B_AssessFighter");
+	if(self.id == 888 && (GOPSTOPPED_BRIDGE == TRUE))
+	{
+		Npc_SetTempAttitude(self,ATT_HOSTILE);
+		Npc_SetAttitude(self,ATT_HOSTILE);
+	};
+	if(self.id == 889 && (GOPSTOPPED_BRIDGE == TRUE))
+	{
+		Npc_SetTempAttitude(self,ATT_HOSTILE);
+		Npc_SetAttitude(self,ATT_HOSTILE);
+	};
 	if(self.npctype == NPCTYPE_ROGUE)
 	{
 		b_setroguestohostile();

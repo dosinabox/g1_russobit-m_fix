@@ -177,6 +177,23 @@ func void update_special_cat_list()
 	};
 };
 
+func void update_alco_cat_list()
+{
+	Info_ClearChoices(pc_alchemy_cat_alco);
+	Info_AddChoice(pc_alchemy_cat_alco,DIALOG_BACK,pc_alchemy_cat_alco_back);
+	if(Npc_HasItems(hero,itfo_potion_water_01))
+	{
+		if(Npc_HasItems(hero,itfo_wineberrys_01))
+		{
+			Info_AddChoice(pc_alchemy_cat_alco,"Вино",pc_potionalchemy_wine_info);
+		};
+		if(Npc_HasItems(hero,itforice))
+		{
+			Info_AddChoice(pc_alchemy_cat_alco,"Рисовый шнапс",pc_potionalchemy_booze_info);
+		};
+	};	
+};
+
 func void potionalchemy_s1()
 {
 	if(Npc_IsPlayer(self))
@@ -351,6 +368,35 @@ func void pc_potionalchemy_nocomp_special()
 {
 	PrintScreen("Недостаточно ингредиентов.",-1,45,"font_old_10_white.tga",2);
 	update_special_cat_list();
+};
+
+instance PC_ALCHEMY_CAT_ALCO(C_INFO)
+{
+	npc = pc_hero;
+	nr = 5;
+	condition = pc_alchemy_cat_alco_condition;
+	information = pc_alchemy_cat_alco_info;
+	important = 0;
+	permanent = 1;
+	description = "Перегнать алкоголь";
+};
+
+func int pc_alchemy_cat_alco_condition()
+{
+	if(PLAYER_MOBSI_PRODUCTION == MOBSI_POTIONALCHEMY && (Npc_HasItems(hero,itfo_potion_water_01) && (Npc_HasItems(hero,itfo_wineberrys_01) || Npc_HasItems(hero,itforice))))
+	{
+		return TRUE;
+	};
+};
+
+func void pc_alchemy_cat_alco_info()
+{
+	update_alco_cat_list();
+};
+
+func void pc_alchemy_cat_alco_back()
+{
+	Info_ClearChoices(pc_alchemy_cat_alco);
 };
 
 func void pc_potionalchemy_hp0_info()
@@ -617,6 +663,46 @@ func void pc_potionalchemy_egg_info()
 	update_special_cat_list();
 };
 
+func void pc_potionalchemy_wine_info()
+{
+	if(Npc_HasItems(hero,itmiflask))
+	{
+		Npc_RemoveInvItems(self,itmiflask,1);
+	}
+	else
+	{
+		PrintScreen("Закончились чистые флаконы.",-1,45,"font_old_10_white.tga",5);
+		AI_StopProcessInfos(self);
+	};
+	Npc_RemoveInvItems(self,itfo_potion_water_01,1);
+	Npc_RemoveInvItems(self,itfo_wineberrys_01,1);
+	CreateInvItem(self,itfowine);
+	AI_Wait(self,2);
+	PrintScreen("Получено вино.",-1,-1,"font_old_10_white.tga",2);
+	Snd_Play("PSILAB_GETRESULT");
+	update_alco_cat_list();
+};
+
+func void pc_potionalchemy_booze_info()
+{
+	if(Npc_HasItems(hero,itmiflask))
+	{
+		Npc_RemoveInvItems(self,itmiflask,1);
+	}
+	else
+	{
+		PrintScreen("Закончились чистые флаконы.",-1,45,"font_old_10_white.tga",5);
+		AI_StopProcessInfos(self);
+	};
+	Npc_RemoveInvItems(self,itfo_potion_water_01,1);
+	Npc_RemoveInvItems(self,itforice,1);
+	CreateInvItem(self,itfobooze);
+	AI_Wait(self,2);
+	PrintScreen("Получен рисовый шнапс.",-1,-1,"font_old_10_white.tga",2);
+	Snd_Play("PSILAB_GETRESULT");
+	update_alco_cat_list();
+};
+
 func void pc_potionalchemy_yberion_info()
 {
 	Npc_RemoveInvItems(self,itfo_plants_deadleaf,1);
@@ -643,5 +729,90 @@ func void pc_potionalchemy_yberion_info()
 	PrintScreen("Получено лечебное зелье Фортуно.",-1,-1,"font_old_10_white.tga",2);
 	Snd_Play("PSILAB_GETRESULT");
 	update_special_cat_list();
+};
+
+//////////////////////////////////////////
+
+func void update_stomp_list()
+{
+	Info_ClearChoices(pc_stomp_cat1);
+	Info_AddChoice(pc_stomp_cat1,DIALOG_BACK,pc_stomp_cat1_back);
+	if(Npc_HasItems(hero,itmi_plants_swampherb_01))
+	{
+		Info_AddChoice(pc_stomp_cat1,"'Новичок'",pc_stomp_cat1_1);
+	};
+};
+
+func void stomp_s1()
+{
+	if(Npc_IsPlayer(self))
+	{
+		self.aivar[AIV_INVINCIBLE] = TRUE;
+		PLAYER_MOBSI_PRODUCTION = MOBSI_STOMP;
+		AI_ProcessInfos(hero);
+	};
+};
+
+instance PC_STOMP_CANCEL(C_INFO)
+{
+	npc = pc_hero;
+	nr = 999;
+	condition = pc_stomp_cancel_condition;
+	information = pc_stomp_cancel_info;
+	important = 0;
+	permanent = 1;
+	description = "ОТМЕНА";
+};
+
+func int pc_stomp_cancel_condition()
+{
+	if(PLAYER_MOBSI_PRODUCTION == MOBSI_STOMP)
+	{
+		return TRUE;
+	};
+};
+
+func void pc_stomp_cancel_info()
+{
+	AI_StopProcessInfos(self);
+	self.aivar[AIV_INVINCIBLE] = FALSE;
+};
+
+instance PC_STOMP_CAT1(C_INFO)
+{
+	npc = pc_hero;
+	nr = 1;
+	condition = pc_stomp_cat1_condition;
+	information = pc_stomp_cat1_info;
+	important = 0;
+	permanent = 1;
+	description = "Обработать болотник";
+};
+
+func int pc_stomp_cat1_condition()
+{
+	if(PLAYER_MOBSI_PRODUCTION == MOBSI_STOMP)
+	{
+		return TRUE;
+	};
+};
+
+func void pc_stomp_cat1_info()
+{
+	update_stomp_list();
+};
+
+func void pc_stomp_cat1_back()
+{
+	Info_ClearChoices(pc_stomp_cat1);
+};
+
+func void pc_stomp_cat1_1()
+{
+	Npc_RemoveInvItems(self,itmi_plants_swampherb_01,1);
+	CreateInvItem(self,itmijoint_1);
+	AI_Wait(self,2);
+	PrintScreen("Получен 'Новичок'.",-1,-1,"font_old_10_white.tga",2);
+	update_stomp_list();
 };
 

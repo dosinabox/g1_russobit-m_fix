@@ -86,12 +86,18 @@ func int b_plunder()
 		stolennuggettext = ConcatStrings("Отобрано руды: ",IntToString((Npc_HasItems(other,itminugget) / 2)));
 		if(Npc_HasItems(other,itminugget) > 1)
 		{
-			PrintScreen(stolennuggettext,-1,37,"FONT_OLD_10_WHITE.TGA",3);
+			if(Npc_IsPlayer(other))
+			{
+				PrintScreen(stolennuggettext,-1,37,"FONT_OLD_10_WHITE.TGA",3);
+			};
 			b_giveinvitems(other,self,itminugget,(Npc_HasItems(other,itminugget) / 2));
 		}
 		else if(Npc_HasItems(other,itminugget) == 1)
 		{
-			PrintScreen("Отобрано руды: 1",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+			if(Npc_IsPlayer(other))
+			{
+				PrintScreen("Отобрано руды: 1",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+			};
 			b_giveinvitems(other,self,itminugget,1);
 		};
 	};

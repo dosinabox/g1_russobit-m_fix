@@ -8,7 +8,7 @@ instance EBR_101_SCAR(NPC_DEFAULT)
 	voice = 8;
 	id = 101;
 	attribute[ATR_STRENGTH] = 75;
-	attribute[ATR_DEXTERITY] = 55;
+	attribute[ATR_DEXTERITY] = 60;
 	attribute[ATR_MANA_MAX] = 0;
 	attribute[ATR_MANA] = 0;
 	attribute[ATR_HITPOINTS_MAX] = 400;

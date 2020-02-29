@@ -22,7 +22,7 @@ instance KDF_404_XARDAS(NPC_DEFAULT)
 	aivar[AIV_IMPORTANT] = TRUE;
 	fight_tactic = FAI_HUMAN_MAGE;
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,6);
-	EquipItem(self,itarrunefireball);
+	EquipItem(self,itarrune_2_2_fireball);
 	//CreateInvItems(self,itarscrollsummondemon,2);
 	daily_routine = rtn_start_404;
 	senses = SENSE_SEE | SENSE_HEAR | SENSE_SMELL;

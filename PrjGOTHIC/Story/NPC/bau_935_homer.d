@@ -41,8 +41,9 @@ func void rtn_prestart_935()
 
 func void rtn_start_935()
 {
-	ta_sitaround(7,30,21,30,"NC_HUT13_OUT");
-	ta_sleep(21,30,7,30,"NC_HUT13_IN");
+	ta_sitaround(7,30,15,30,"NC_HUT13_OUT");
+	ta_boss(15,30,20,0,"NC_DAM");
+	ta_sleep(20,0,7,30,"NC_HUT13_IN");
 };
 
 func void rtn_damnpast_935()

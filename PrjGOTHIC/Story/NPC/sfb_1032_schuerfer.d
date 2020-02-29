@@ -20,7 +20,6 @@ instance SFB_1032_SCHUERFER(NPC_DEFAULT)
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_COWARD;
 	EquipItem(self,itmwpickaxe);
-	CreateInvItem(self,itfobooze);
 	daily_routine = rtn_fmcstart_1032;
 };
 

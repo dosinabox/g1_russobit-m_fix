@@ -31,6 +31,6 @@ instance VLK_584_SNIPES(NPC_DEFAULT)
 func void rtn_start_584()
 {
 	ta_standaround(0,0,12,0,"OM_CAVE1_37");
-	ta_sitaround(12,0,24,0,"OM_CAVE1_37");
+	ta_sit(12,0,24,0,"OM_CAVE1_37");
 };
 

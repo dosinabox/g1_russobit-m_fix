@@ -23,7 +23,7 @@ instance KDF_406_OTXARDAS(NPC_DEFAULT)
 	fight_tactic = FAI_HUMAN_MAGE;
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,6);
 	CreateInvItems(self,itarscrollsummondemon,20);
-	EquipItem(self,itarrunefireball);
+	EquipItem(self,itarrune_2_2_fireball);
 	CreateInvItems(self,itfo_potion_health_03,3);
 	CreateInvItems(self,itfo_potion_mana_03,3);
 	EquipItem(self,amulett_der_erleuchtung);

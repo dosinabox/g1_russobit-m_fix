@@ -48,7 +48,7 @@ instance MOLERAT(MST_DEFAULT_MOLERAT)
 {
 	set_molerat_visuals();
 	Npc_SetToFistMode(self);
-	CreateInvItems(self,itfomuttonraw,2);
+	CreateInvItem(self,itfomuttonraw);
 };
 
 instance YMOLERAT(MST_DEFAULT_MOLERAT)

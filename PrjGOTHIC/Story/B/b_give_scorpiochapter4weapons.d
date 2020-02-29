@@ -12,8 +12,9 @@ func void b_give_scorpiochapter4weapons()
 	CreateInvItem(npc,itmw_1h_sword_bastard_03);
 	CreateInvItem(npc,itmw_1h_sword_bastard_04);
 	//CreateInvItem(npc,itmw_2h_sword_old_01);
-	CreateInvItem(npc,itmw_2h_sword_light_01_priced);
-	CreateInvItem(npc,itmw_2h_sword_light_02_priced);
+	//CreateInvItem(npc,itmw_2h_sword_light_01_priced);
+	//CreateInvItem(npc,itmw_2h_sword_light_02_priced);
+	CreateInvItem(npc,itmw_2h_sword_light_01);
 	CreateInvItem(npc,itmw_2h_sword_light_03);
 	CreateInvItems(npc,itminugget,800);
 	CreateInvItem(npc,gewandtheitsamulett2);
@@ -31,11 +32,11 @@ func void b_give_scorpiochapter5weapons()
 	CreateInvItem(npc,itmw_2h_sword_light_05);
 	CreateInvItem(npc,itmw_2h_sword_01);
 	CreateInvItem(npc,itmw_2h_sword_02);
-	CreateInvItem(npc,itmw_2h_sword_03);
+	//CreateInvItem(npc,itmw_2h_sword_03);
 	CreateInvItem(npc,itmw_2h_sword_heavy_01);
 	CreateInvItem(npc,itmw_2h_sword_heavy_02);
 	CreateInvItem(npc,itmw_2h_sword_heavy_03);
-	CreateInvItem(npc,itmw_2h_sword_heavy_04);
+	//CreateInvItem(npc,itmw_2h_sword_heavy_04);
 	CreateInvItems(npc,itminugget,800);
 	CreateInvItem(npc,itrw_crossbow_04);
 };

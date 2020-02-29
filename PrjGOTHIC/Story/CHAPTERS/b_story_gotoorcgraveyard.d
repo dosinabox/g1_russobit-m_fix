@@ -26,6 +26,7 @@ func void b_story_gotoorcgraveyard()
 	Wld_InsertNpc(orcscout,"OW_PATH_198_ORCGRAVEYARD8");
 	Wld_InsertNpc(tpl_1463_templer,"OW_PATH_198_ORCGRAVEYARD8");
 	CORANGAR_GOTOOGY = TRUE;
+	Wld_SendTrigger("EVT_ORCGRAVYARD_MOVER_01");
 	novize = Hlp_GetNpc(nov_1319_novize);
 	Npc_ExchangeRoutine(novize,"START");
 	AI_ContinueRoutine(novize);

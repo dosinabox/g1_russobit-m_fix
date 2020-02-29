@@ -13,7 +13,7 @@ func int info_erpresser_condition()
 {
 	var C_NPC mordrag;
 	mordrag = Hlp_GetNpc(org_826_mordrag);
-	if((Npc_GetAttitude(self,other) != ATT_FRIENDLY) && (self.aivar[AIV_HAS_ERPRESSED] == FALSE) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE) && mordrag.aivar[AIV_PARTYMEMBER] == FALSE)
+	if((Npc_GetAttitude(self,other) != ATT_FRIENDLY) && (self.aivar[AIV_HAS_ERPRESSED] == FALSE) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE) && mordrag.aivar[AIV_PARTYMEMBER] == FALSE && GOPSTOPPED_BRIDGE == FALSE)
 	{
 		return 1;
 	};
@@ -51,6 +51,7 @@ func void info_erpresser_choice_aufsmaul()
 	coerpresser = Hlp_GetNpc(org_889_coerpresser);
 	AI_Output(other,self,"DIA_SLD_753_Baloro_SC_wills_wissen_Info_15_01");	//Кажется, настало время проучить тебя!
 	AI_Output(self,other,"Info_Erpresser_Choice_Zahlen_13_02");	//Вот не везет.
+	GOPSTOPPED_BRIDGE = TRUE;
 	self.aivar[AIV_HAS_ERPRESSED] = 2;
 	AI_StopProcessInfos(self);
 	Npc_SetTarget(self,other);
@@ -58,7 +59,7 @@ func void info_erpresser_choice_aufsmaul()
 	npc_setpermattitude(self,ATT_HOSTILE);
 	Npc_SetTempAttitude(self,ATT_HOSTILE);
 	Npc_SetTarget(coerpresser,hero);
-	AI_StartState(coerpresser,zs_attack,0,"");
+	AI_StartState(coerpresser,zs_attack,1,"");
 	npc_setpermattitude(coerpresser,ATT_HOSTILE);
 	Npc_SetTempAttitude(coerpresser,ATT_HOSTILE);
 	AI_StopProcessInfos(coerpresser);
@@ -82,6 +83,7 @@ func void info_erpresser_choice_noore()
 	coerpresser = Hlp_GetNpc(org_889_coerpresser);
 	AI_Output(other,self,"Info_Erpresser_Choice_Zahlen_15_03");	//Э... у меня сейчас нет десяти кусков...
 	AI_Output(self,other,"Info_Erpresser_Choice_Zahlen_13_04");	//Какая жалость...
+	GOPSTOPPED_BRIDGE = TRUE;
 	self.aivar[AIV_HAS_ERPRESSED] = 2;
 	AI_StopProcessInfos(self);
 	Npc_SetTarget(self,other);
@@ -89,7 +91,7 @@ func void info_erpresser_choice_noore()
 	npc_setpermattitude(self,ATT_HOSTILE);
 	Npc_SetTempAttitude(self,ATT_HOSTILE);
 	Npc_SetTarget(coerpresser,hero);
-	AI_StartState(coerpresser,zs_attack,0,"");
+	AI_StartState(coerpresser,zs_attack,1,"");
 	npc_setpermattitude(coerpresser,ATT_HOSTILE);
 	Npc_SetTempAttitude(coerpresser,ATT_HOSTILE);
 	AI_StopProcessInfos(coerpresser);
@@ -134,7 +136,7 @@ instance INFO_BEREITSAUFSMAUL(C_INFO)
 
 func int info_bereitsaufsmaul_condition()
 {
-	if((self.aivar[AIV_HAS_ERPRESSED] == 2) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE) && Npc_IsInState(self,zs_talk))
+	if((self.aivar[AIV_HAS_ERPRESSED] == 2) && (self.aivar[AIV_WASDEFEATEDBYSC] == TRUE) && Npc_IsInState(self,zs_talk))
 	{
 		return 1;
 	};

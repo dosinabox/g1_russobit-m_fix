@@ -38,7 +38,8 @@ instance STT_336_CAVALORN(NPC_DEFAULT)
 
 func void rtn_start_336()
 {
-	ta_sleep(23,0,6,30,"OW_CAVALORN_01");
-	ta_standaround(6,30,23,0,"OW_SAWHUT_SLEEP_01");
+	ta_sleep(23,0,6,30,"OW_SAWHUT_SLEEP_01");
+	ta_standaround(6,30,21,0,"OW_SAWHUT_SLEEP_01");
+	ta_sitcampfire(21,0,23,0,"OW_CAVALORN_01");
 };
 

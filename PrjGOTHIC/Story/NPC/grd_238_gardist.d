@@ -124,6 +124,7 @@ func void info_grd238_die_info()
 	};
 	AI_StopProcessInfos(self);
 	OC_BANNED = TRUE;
+	FREELEARN_OC = FALSE;
 	if(c_npcbelongstooldcamp(hero))
 	{
 		Npc_SetTrueGuild(hero,GIL_NONE);

@@ -170,7 +170,7 @@ instance PC_HERO_L13(NPC_DEFAULT)
 
 instance HEROSWORD13(C_ITEM)
 {
-	name = "worn out sword";
+	name = "Изношенный меч";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_SWD;
 	material = MAT_METAL;
@@ -183,7 +183,7 @@ instance HEROSWORD13(C_ITEM)
 
 instance HEROSWORD20(C_ITEM)
 {
-	name = "sword";
+	name = "Меч";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_SWD;
 	material = MAT_METAL;
@@ -196,7 +196,7 @@ instance HEROSWORD20(C_ITEM)
 
 instance HEROSWORD25(C_ITEM)
 {
-	name = "sword";
+	name = "Меч";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_SWD;
 	material = MAT_METAL;
@@ -209,7 +209,7 @@ instance HEROSWORD25(C_ITEM)
 
 instance HEROBOW13(C_ITEM)
 {
-	name = "Longbow";
+	name = "Длинный лук";
 	mainflag = ITEM_KAT_FF;
 	flags = ITEM_BOW;
 	material = MAT_WOOD;
@@ -222,13 +222,19 @@ instance HEROBOW13(C_ITEM)
 
 instance XP_MAP(C_ITEM)
 {
-	name = "XP Map";
+	name = "Карта опыта";
 	mainflag = ITEM_KAT_DOCS;
 	flags = 0;
 	value = 1000;
 	visual = "ItWr_Map_01.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
+	text[1] = "Бонус к руде:";
+	count[1] = 1000;
+	text[2] = "Бонус к очкам обучения:";
+	count[2] = 10;
+	text[5] = NAME_VALUE;
+	count[5] = value;
 	on_state[0] = use_xp_map;
 };
 
@@ -236,7 +242,7 @@ func void use_xp_map()
 {
 	CreateInvItems(self,itminugget,1000);
 	hero.lp = hero.lp + 10;
-	PrintScreen("+1000 кусков руды, +10 очков обучения",-1,-1,"font_old_20_white.tga",5);
+	PrintScreen("+1000 кусков руды, +10 очков обучения",-1,-1,"font_old_20_white.tga",3);
 };
 
 instance D36TESTBOOK(C_ITEM)
@@ -257,17 +263,11 @@ func void use_d36testbook()
 	//OC_BANNED = TRUE;
 	//Wld_ExchangeGuildAttitudes("GIL_ATTITUDES_FMTAKEN");
 	//CORKALOM_BRINGMCQBALLS = LOG_SUCCESS;
-	if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) < 1)
-	{
-		Npc_SetTalentSkill(hero,NPC_TALENT_PICKLOCK,1);
-	}
-	else if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) < 2)
-	{
-		Npc_SetTalentSkill(hero,NPC_TALENT_PICKLOCK,2);
-	};
 	//FREEMINEORC_LOOKINGULUMULU = LOG_RUNNING;
 	//CORANGAR_GOTOOGY = TRUE;
-	b_corkalomleft();
+	//Wld_SendTrigger("EVT_ORCGRAVYARD_MOVER_01");
+	//b_corkalomleft();
+	//FREELEARN_NC = TRUE;
 };
 
 instance ALCHEMYKIT(C_ITEM)
@@ -323,19 +323,19 @@ func void use_alchemykit()
 	CreateInvItems(self,itfo_plants_deadleaf,5);
 };
 
-instance ALCHEMYFIX(C_ITEM)
+instance FIX(C_ITEM)
 {
 	name = "Лекарство от бага";
-	mainflag = ITEM_KAT_DOCS;
+	mainflag = ITEM_KAT_POTIONS;
 	flags = 0;
 	value = 36;
-	visual = "ITWR_BOOK_ALCHEMY.3ds";
-	material = MAT_LEATHER;
-	scemename = "MAP";
-	on_state[0] = use_alchemyfix;
+	visual = "ItMiFlask.3ds";
+	material = MAT_GLAS;
+	scemename = "POTIONFAST";
+	on_state[0] = use_fix;
 };
 
-func void use_alchemyfix()
+func void use_fix()
 {
 	Npc_SetTalentSkill(hero,NPC_TALENT_REGENERATE,0);
 };

@@ -64,11 +64,11 @@ func void b_give_darrionchapter5weapons()
 	CreateInvItem(npc,itmw_2h_sword_light_05);
 	CreateInvItem(npc,itmw_2h_sword_01);
 	CreateInvItem(npc,itmw_2h_sword_02);
-	CreateInvItem(npc,itmw_2h_sword_03);
+	//CreateInvItem(npc,itmw_2h_sword_03);
 	CreateInvItem(npc,itmw_2h_sword_heavy_01);
 	CreateInvItem(npc,itmw_2h_sword_heavy_02);
 	CreateInvItem(npc,itmw_2h_sword_heavy_03);
-	CreateInvItem(npc,itmw_2h_sword_heavy_04);
+	//CreateInvItem(npc,itmw_2h_sword_heavy_04);
 	CreateInvItems(npc,itamarrow,120);
 	CreateInvItems(npc,itambolt,120);
 	CreateInvItems(npc,itminugget,700);

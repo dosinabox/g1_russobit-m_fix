@@ -144,13 +144,13 @@ instance DIA_SLD_753_BALORO_HABSNICHTDABEI(C_INFO)
 	information = dia_sld_753_baloro_habsnichtdabei_info;
 	important = 0;
 	permanent = 1;
-	description = "Я еще не все достал! Повтори, что ты хотел.";
+	description = "Я еще не все достал! Повтори, что ты там хотел.";
 };
 
 
 func int dia_sld_753_baloro_habsnichtdabei_condition()
 {
-	if(SLD_753_BALORO_SC_BESORGT_DEN_KRAM == LOG_RUNNING)
+	if(SLD_753_BALORO_SC_BESORGT_DEN_KRAM == LOG_RUNNING && ((Npc_HasItems(other,itfoapple) < 5) || (Npc_HasItems(other,itfobooze) < 2) || (Npc_HasItems(other,itfobeer) < 5) || (Npc_HasItems(other,itfoloaf) < 3) || (Npc_HasItems(other,itfocheese) < 2) || (Npc_HasItems(other,itfo_wineberrys_01) < 2)))
 	{
 		return 1;
 	};
@@ -173,7 +173,7 @@ instance DIA_SLD_753_BALORO_HABSDABEI(C_INFO)
 	information = dia_sld_753_baloro_habsdabei_info;
 	important = 0;
 	permanent = 0;
-	description = "Я принес тебе все, что ты просил. Показывай оружие!";
+	description = "Вот, я принес тебе все, что ты просил.";
 };
 
 
@@ -209,7 +209,7 @@ func void dia_sld_753_baloro_habsdabei_info()
 	AI_Output(other,self,"DIA_SLD_753_Baloro_habsdabei_Info_15_04");	//Что?
 	AI_Output(self,other,"DIA_SLD_753_Baloro_habsdabei_Info_08_04");	//Ты действительно думал, что я тебе что-то дам? Ты так легко поверил во всю эту чушь. Грех было тебя не обмануть!
 	AI_Output(self,other,"DIA_SLD_753_Baloro_habsdabei_Info_08_05");	//Удивительно еще, что ты до сих пор жив! Если ты и дальше будешь всем доверять, ты долго не протянешь!
-	AI_Output(self,other,"DIA_SLD_753_Baloro_habsdabei_Info_08_06");	//Но это уже не важно. Теперь у нас есть так много еды, можно целый праздник устроить! Спасибо! Может быть, мы еще встретимся.
+	AI_Output(self,other,"DIA_SLD_753_Baloro_habsdabei_Info_08_06");	//Но это уже не важно. Теперь у нас есть так много еды, можно целый праздник устроить! Спасибо! Может быть, мы еще встретимся, хаха.
 	SLD_753_BALORO_SC_BESORGT_DEN_KRAM = LOG_SUCCESS;
 	b_givexp(300);
 	b_logentry(BALOROS_WAFFE,"Так и думал, что он захотел меня провести. Теперь это неважно! Постараюсь больше так не попадаться.");

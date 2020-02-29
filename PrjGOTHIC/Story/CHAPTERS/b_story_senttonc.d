@@ -6,7 +6,7 @@ func void b_story_senttonc()
 	printdebugnpc(PD_MISSION,gorn.name);
 	Npc_ExchangeRoutine(gorn,"NCWAIT");
 	AI_ContinueRoutine(gorn);
-	CreateInvItem(self,itarruneteleport5);
-	b_giveinvitems(self,hero,itarruneteleport5,1);
+	CreateInvItem(self,itarrune_1_5_teleport5);
+	b_giveinvitems(self,hero,itarrune_1_5_teleport5,1);
 };
 

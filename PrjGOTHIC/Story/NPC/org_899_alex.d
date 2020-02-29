@@ -29,8 +29,8 @@ instance ORG_899_ALEX(NPC_DEFAULT)
 
 func void rtn_start_899()
 {
-	ta_sitaround(7,0,20,0,"OCC_CELLAR_FRONT_LEFT_CELL");
-	ta_sitaround(20,0,7,0,"OCC_CELLAR_FRONT_LEFT_CELL");
+	ta_sit(7,0,20,0,"OCC_CELLAR_FRONT_LEFT_CELL");
+	ta_sit(20,0,7,0,"OCC_CELLAR_FRONT_LEFT_CELL");
 };
 
 func void rtn_follow_899()

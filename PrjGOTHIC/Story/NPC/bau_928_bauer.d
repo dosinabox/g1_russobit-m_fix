@@ -28,7 +28,12 @@ instance BAU_928_BAUER(NPC_DEFAULT)
 
 func void rtn_start_928()
 {
-	ta_sitcampfire(20,25,7,25,"NC_PATH_PEASANT_OUTSIDE6");
+	ta_sitcampfire(20,25,8,25,"NC_PATH_PEASANT_OUTSIDE6");
 	ta_pickrice(8,25,20,25,"NC_PATH81");
 };
 
+func void rtn_repair_928()
+{
+	ta_sitcampfire(20,25,8,25,"NC_PATH_PEASANT_OUTSIDE6");
+	ta_repairhut(8,25,20,25,"NC_DAM2");
+};

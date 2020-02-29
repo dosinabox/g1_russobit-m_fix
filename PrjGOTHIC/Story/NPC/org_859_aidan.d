@@ -36,13 +36,15 @@ instance ORG_859_AIDAN(NPC_DEFAULT)
 	EquipItem(self,itrw_bow_long_01);
 	CreateInvItems(self,itamarrow,20);
 	daily_routine = rtn_start_859;
+	aivar[AIV_ITEMSCHWEIN] = TRUE;
 };
 
 
 func void rtn_start_859()
 {
-	ta_standaround(7,0,18,0,"OW_WOODRUIN_WOLF_SPAWN");
-	ta_practicebow(18,0,22,0,"OW_WOODRUIN_WOLF_SPAWN");
-	ta_sitcampfire(22,0,7,0,"OW_WOODRUIN_WOLF_SPAWN");
+	ta_standaround(7,0,16,0,"OW_WOODRUIN_WOLF_SPAWN");
+	ta_practicebow(16,0,21,0,"OW_WOODRUIN_WOLF_SPAWN");
+	ta_sitcampfire(21,0,23,0,"OW_WOODRUIN_WOLF_SPAWN");
+	ta_sleep(23,0,7,0,"OW_WOODRUIN_WOLF_SPAWN");
 };
 

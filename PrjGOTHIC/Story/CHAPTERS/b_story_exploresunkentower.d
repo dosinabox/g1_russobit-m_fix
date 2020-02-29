@@ -64,6 +64,7 @@ func void b_story_exploresunkentower()
 		Wld_ExchangeGuildAttitudes("GIL_ATTITUDES_FMTAKEN");
 	};
 	OC_BANNED = TRUE;
+	FREELEARN_OC = FALSE;
 	if(c_npcbelongstooldcamp(hero))
 	{
 		Npc_SetTrueGuild(hero,GIL_NONE);

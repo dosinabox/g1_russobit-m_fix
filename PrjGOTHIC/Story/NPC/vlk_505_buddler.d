@@ -173,3 +173,71 @@ func void vlk505_getlost_info()
 	AI_StopProcessInfos(self);
 };
 
+instance DIA_VLK505_HI_01(C_INFO)
+{
+	npc = vlk_505_buddler;
+	nr = 2;
+	condition = dia_vlk505_hi_01_condition;
+	information = dia_vlk505_hi_01_info;
+	permanent = 1;
+	important = 0;
+	description = "Привет!";
+};
+
+
+func int dia_vlk505_hi_01_condition()
+{
+	return TRUE;
+};
+
+func void dia_vlk505_hi_01_info()
+{
+	/*if(Npc_HasItems(self,t300))
+	{
+		Npc_RemoveInvItem(self,t300);
+		CreateInvItem(self,t600);
+	};
+	if(Npc_HasItems(hero,t600))
+	{
+		Npc_RemoveInvItem(hero,t600);
+		CreateInvItem(hero,t300);
+	};*/
+	AI_Output(other,self,"Info_Stt_10_DieLage_15_00");	//Привет!
+	AI_Output(self,other,"SVM_2_WhatsThisSupposedToBe");	//Что ты здесь шатаешься?
+	AI_StopProcessInfos(self);
+};
+
+instance DIA_VLK505_HI_02(C_INFO)
+{
+	npc = vlk_505_buddler;
+	nr = 3;
+	condition = dia_vlk505_hi_02_condition;
+	information = dia_vlk505_hi_02_info;
+	permanent = 1;
+	important = 0;
+	description = "Как дела?";
+};
+
+
+func int dia_vlk505_hi_02_condition()
+{
+	return TRUE;
+};
+
+func void dia_vlk505_hi_02_info()
+{
+	/*if(Npc_HasItems(self,t300))
+	{
+		Npc_RemoveInvItem(self,t300);
+		CreateInvItem(self,t600);
+	};
+	if(Npc_HasItems(hero,t600))
+	{
+		Npc_RemoveInvItem(hero,t600);
+		CreateInvItem(hero,t300);
+	};*/
+	AI_Output(other,self,"DIA_Jesse_Hallo_15_00");	//Как дела?
+	AI_Output(self,other,"SVM_2_YouDeafOrWhat");	//Убирайся. Иначе тебе не поздоровится.
+	AI_StopProcessInfos(self);
+};
+

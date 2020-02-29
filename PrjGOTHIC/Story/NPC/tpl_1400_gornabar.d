@@ -8,6 +8,7 @@ instance TPL_1400_GORNABAR(NPC_DEFAULT)
 	flags = 0;
 	voice = 9;
 	id = 1400;
+	flags = NPC_FLAG_IMMORTAL;
 	attribute[ATR_STRENGTH] = 85;
 	attribute[ATR_DEXTERITY] = 65;
 	attribute[ATR_MANA_MAX] = 0;

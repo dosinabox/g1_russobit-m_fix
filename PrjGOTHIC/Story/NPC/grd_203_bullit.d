@@ -7,7 +7,7 @@ instance GRD_203_BULLIT(NPC_DEFAULT)
 	level = 10;
 	voice = 6;
 	id = 203;
-	attribute[ATR_STRENGTH] = 35;
+	attribute[ATR_STRENGTH] = 42;
 	attribute[ATR_DEXTERITY] = 35;
 	attribute[ATR_MANA_MAX] = 0;
 	attribute[ATR_MANA] = 0;

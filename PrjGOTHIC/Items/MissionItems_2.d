@@ -34,10 +34,10 @@ instance FOCUS_1(C_ITEM)
 	name = "Юнитор";
 	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MISSION;
-	hp = 1;
-	hp_max = 1;
-	weight = 1;
-	value = 1;
+	//hp = 1;
+	//hp_max = 1;
+	//weight = 1;
+	value = 0;
 	visual = "ItMi_Focus_01.3ds";
 	material = MAT_STONE;
 	description = "Юнитор со скалы";

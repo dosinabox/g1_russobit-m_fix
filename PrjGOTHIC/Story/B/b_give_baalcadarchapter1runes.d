@@ -21,9 +21,9 @@ func void b_give_baalcadarchapter2runes()
 {
 	var C_NPC npc;
 	npc = Hlp_GetNpc(gur_1208_baalcadar);
-	CreateInvItem(npc,itarrunelight);
-	CreateInvItem(npc,itarrunewindfist);
-	CreateInvItem(npc,itarruneheal);
+	CreateInvItem(npc,itarrune_1_1_light);
+	CreateInvItem(npc,itarrune_5_5_windfist);
+	CreateInvItem(npc,itarrune_1_2_heal);
 	CreateInvItems(npc,itarscrollheal,8);
 	CreateInvItems(npc,itarscrolllight,10);
 	CreateInvItems(npc,itarscrollwindfist,6);
@@ -52,9 +52,9 @@ func void b_give_baalcadarchapter3runes()
 {
 	var C_NPC npc;
 	npc = Hlp_GetNpc(gur_1208_baalcadar);
-	CreateInvItem(npc,itarrunesleep);
-	CreateInvItem(npc,itarrunetelekinesis);
-	CreateInvItem(npc,itarrunecharm);
+	CreateInvItem(npc,itarrune_5_2_sleep);
+	CreateInvItem(npc,itarrune_5_0_telekinesis);
+	CreateInvItem(npc,itarrune_5_1_charm);
 	CreateInvItems(npc,itarscrollheal,8);
 	CreateInvItems(npc,itarscrolllight,10);
 	CreateInvItems(npc,itarscrollwindfist,6);
@@ -89,9 +89,9 @@ func void b_give_baalcadarchapter4runes()
 {
 	var C_NPC npc;
 	npc = Hlp_GetNpc(gur_1208_baalcadar);
-	CreateInvItem(npc,itarrunecontrol);
-	CreateInvItem(npc,itarrunepyrokinesis);
-	CreateInvItem(npc,itarrunestormfist);
+	CreateInvItem(npc,itarrune_5_3_control);
+	CreateInvItem(npc,itarrune_5_7_pyrokinesis);
+	CreateInvItem(npc,itarrune_5_6_stormfist);
 	CreateInvItems(npc,itarscrollheal,8);
 	CreateInvItems(npc,itarscrolllight,10);
 	CreateInvItems(npc,itarscrollwindfist,6);

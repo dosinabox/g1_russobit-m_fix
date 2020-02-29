@@ -17,16 +17,22 @@ const int VALUE_ELIXIEREGG = 1000;
 const int MANAMAX_ELIXIEREGG = 10;
 const int VALUE_STRESSENZ = 300;
 const int STR_ESSENZ = 3;
+//const int STR_ESSENZ = 1;
 const int VALUE_STREXTRAKT = 500;
 const int STR_EXTRAKT = 5;
+//const int STR_EXTRAKT = 3;
 const int VALUE_STRELIXIER = 800;
 const int STR_ELIXIER = 8;
+//const int STR_ELIXIER = 5;
 const int VALUE_DEXESSENZ = 300;
 const int DEX_ESSENZ = 3;
+//const int DEX_ESSENZ = 1;
 const int VALUE_DEXEXTRAKT = 500;
 const int DEX_EXTRAKT = 5;
+//const int DEX_EXTRAKT = 3;
 const int VALUE_DEXELIXIER = 800;
 const int DEX_ELIXIER = 8;
+//const int DEX_ELIXIER = 5;
 const int VALUE_STRDEX_MACHT = 800;
 const int STRDEX_MACHT = 4;
 const int VALUE_STRDEX_HERRSCHAFT = 1200;
@@ -271,7 +277,7 @@ instance ITFO_POTION_STRENGTH_01(C_ITEM)
 
 func void usestrengthpotion()
 {
-	b_raiseattribute(ATR_STRENGTH,STR_ESSENZ);
+	b_raiseattribute(ATR_STRENGTH,STR_ESSENZ_VAL);
 };
 
 
@@ -295,7 +301,7 @@ instance ITFO_POTION_STRENGTH_02(C_ITEM)
 
 func void usestrength2potion()
 {
-	b_raiseattribute(ATR_STRENGTH,STR_EXTRAKT);
+	b_raiseattribute(ATR_STRENGTH,STR_EXTRAKT_VAL);
 };
 
 
@@ -319,7 +325,7 @@ instance ITFO_POTION_STRENGTH_03(C_ITEM)
 
 func void usestrength3potion()
 {
-	b_raiseattribute(ATR_STRENGTH,STR_ELIXIER);
+	b_raiseattribute(ATR_STRENGTH,STR_ELIXIER_VAL);
 };
 
 
@@ -343,7 +349,7 @@ instance ITFO_POTION_DEX_01(C_ITEM)
 
 func void usedexpotion()
 {
-	b_raiseattribute(ATR_DEXTERITY,DEX_ESSENZ);
+	b_raiseattribute(ATR_DEXTERITY,DEX_ESSENZ_VAL);
 };
 
 
@@ -367,7 +373,7 @@ instance ITFO_POTION_DEX_02(C_ITEM)
 
 func void usedex2potion()
 {
-	b_raiseattribute(ATR_DEXTERITY,DEX_EXTRAKT);
+	b_raiseattribute(ATR_DEXTERITY,DEX_EXTRAKT_VAL);
 };
 
 
@@ -391,7 +397,7 @@ instance ITFO_POTION_DEX_03(C_ITEM)
 
 func void usedex3potion()
 {
-	b_raiseattribute(ATR_DEXTERITY,DEX_ELIXIER);
+	b_raiseattribute(ATR_DEXTERITY,DEX_ELIXIER_VAL);
 };
 
 

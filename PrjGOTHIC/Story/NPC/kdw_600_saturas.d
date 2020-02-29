@@ -20,8 +20,8 @@ instance KDW_600_SATURAS(NPC_DEFAULT)
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,5);
-	EquipItem(self,itarrunechainlightning);
-	EquipItem(self,itarruneicecube);
+	EquipItem(self,itarrune_3_5_chainlightning);
+	EquipItem(self,itarrune_3_3_icecube);
 	CreateInvItem(self,itfo_potion_health_01);
 	CreateInvItem(self,itfo_potion_mana_01);
 	EquipItem(self,schutzamulett_feuer);

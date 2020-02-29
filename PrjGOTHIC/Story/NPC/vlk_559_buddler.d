@@ -8,7 +8,7 @@ instance VLK_559_BUDDLER(NPC_DEFAULT)
 	voice = 3;
 	id = 559;
 	attribute[ATR_STRENGTH] = 15;
-	attribute[ATR_STRENGTH] = 10;
+	attribute[ATR_DEXTERITY] = 10;
 	attribute[ATR_MANA_MAX] = 0;
 	attribute[ATR_MANA] = 0;
 	attribute[ATR_HITPOINTS_MAX] = 76;
@@ -20,6 +20,7 @@ instance VLK_559_BUDDLER(NPC_DEFAULT)
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_COWARD;
 	EquipItem(self,itmw_1h_club_01);
+	CreateInvItem(self,itmwpickaxe);
 	CreateInvItem(self,itfoapple);
 	daily_routine = rtn_start_559;
 };

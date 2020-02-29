@@ -28,7 +28,7 @@ instance ORC_2200_SHAMAN(MST_DEFAULT_ORCSHAMAN)
 	fight_tactic = FAI_HUMAN_MAGE;
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,8);
 	EquipItem(self,itrworcstaff);
-	CreateInvItem(self,itarrunefireball);
+	CreateInvItem(self,itarrune_2_2_fireball);
 	daily_routine = rtn_fmtaken_2200;
 	senses = SENSE_SEE | SENSE_HEAR | SENSE_SMELL;
 };

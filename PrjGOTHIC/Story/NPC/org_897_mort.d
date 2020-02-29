@@ -34,8 +34,8 @@ instance ORG_897_MORT(NPC_DEFAULT)
 
 func void rtn_start_897()
 {
-	ta_sitaround(7,0,20,0,"OCC_CELLAR_LAST_ROOM");
-	ta_sitaround(20,0,7,0,"OCC_CELLAR_LAST_ROOM");
+	ta_sit(7,0,20,0,"OCC_CELLAR_LAST_ROOM");
+	ta_sit(20,0,7,0,"OCC_CELLAR_LAST_ROOM");
 };
 
 func void rtn_follow_897()
@@ -46,8 +46,8 @@ func void rtn_follow_897()
 
 func void rtn_camp_897()
 {
-	ta_sitaround(7,0,20,0,"LOCATION_11_12_07");
-	ta_sitaround(20,0,7,0,"LOCATION_11_12_07");
+	ta_sit(7,0,20,0,"LOCATION_11_12_07");
+	ta_sit(20,0,7,0,"LOCATION_11_12_07");
 };
 
 instance INFO_MORT_EXIT(C_INFO)

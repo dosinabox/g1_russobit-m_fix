@@ -8,7 +8,7 @@ instance CS_ESKORTE2(NPC_DEFAULT)
 	flags = 0;
 	voice = 11;
 	id = 3023;
-	attribute[ATR_STRENGTH] = 15;
+	attribute[ATR_STRENGTH] = 30;
 	attribute[ATR_DEXTERITY] = 30;
 	attribute[ATR_MANA_MAX] = 0;
 	attribute[ATR_MANA] = 0;

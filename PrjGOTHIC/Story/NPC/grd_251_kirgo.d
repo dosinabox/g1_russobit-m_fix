@@ -14,6 +14,10 @@ instance GRD_251_KIRGO(NPC_DEFAULT)
 	attribute[ATR_MANA] = 0;
 	attribute[ATR_HITPOINTS_MAX] = 160;
 	attribute[ATR_HITPOINTS] = 160;
+	protection[PROT_POINT] = 50;
+	protection[PROT_FIRE] = 50;
+	protection[PROT_FLY] = 50;
+	protection[PROT_MAGIC] = 50;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Militia.mds");
 	Mdl_SetVisualBody(self,"hum_body_Naked0",0,3,"Hum_Head_FatBald",2,1,grd_armor_l);

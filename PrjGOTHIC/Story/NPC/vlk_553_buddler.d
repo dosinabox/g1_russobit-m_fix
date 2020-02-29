@@ -5,7 +5,7 @@ instance VLK_553_BUDDLER(NPC_DEFAULT)
 	npctype = NPCTYPE_AMBIENT;
 	guild = GIL_VLK;
 	level = 3;
-	voice = 1;
+	voice = 3;
 	id = 553;
 	attribute[ATR_STRENGTH] = 15;
 	attribute[ATR_DEXTERITY] = 10;

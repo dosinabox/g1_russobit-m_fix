@@ -43,7 +43,7 @@ instance UNDEADORCSHAMAN(MST_DEFAULT_UNDEADORCSHAMAN)
 {
 	set_undeadorcshaman_visuals();
 	EquipItem(self,itrwudorcstaff);
-	CreateInvItem(self,itarrunebreathofdeath);
+	CreateInvItem(self,itarrune_6_3_breathofdeath);
 	CreateInvItems(self,itarscrollsummongolem,20);
 };
 

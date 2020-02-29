@@ -40,7 +40,7 @@ func void initplayerbody(var int equipment)
 	}
 	else if(equipment == 3)
 	{
-		if(RUSSOBITMFIXV12 == FALSE && Npc_KnowsInfo(hero,info_diego_gamestart)) 
+		if(RUSSOBITMFIXV13 == FALSE && Npc_KnowsInfo(hero,info_diego_gamestart)) 
 		{
 			PrintScreen("Загруженное сохранение не поддерживается!",-1,43,"font_old_10_white.tga",5);
 			PrintScreen("Пожалуйста, начните новую игру.",-1,40,"font_old_10_white.tga",5);

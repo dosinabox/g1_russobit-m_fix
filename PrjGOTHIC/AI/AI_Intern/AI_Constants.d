@@ -133,6 +133,8 @@ var int player_mobsi_production;
 const int MOBSI_SLEEPABIT = 1;
 const int MOBSI_PAN = 3;
 const int MOBSI_POTIONALCHEMY = 5;
+const int MOBSI_STOMP = 7;
 const int MOBSI_SLEEPABITEND = 101;
 const int MOBSI_PANEND = 103;
 const int MOBSI_POTIONALCHEMYEND = 105;
+const int MOBSI_STOMPEND = 107;

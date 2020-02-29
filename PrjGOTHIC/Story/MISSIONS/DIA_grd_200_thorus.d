@@ -3,7 +3,14 @@ func void b_thoruslearn()
 {
 	Info_ClearChoices(grd_200_thorus_teach);
 	Info_AddChoice(grd_200_thorus_teach,DIALOG_BACK,grd_200_thorus_teach_back);
-	if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF)
+	if(DIFF_HARD == TRUE)
+	{
+		Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,OTHERCAMPLEARNPAY * 5),grd_200_thorus_teach_str_5);
+		Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,OTHERCAMPLEARNPAY),grd_200_thorus_teach_str_1);
+		Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,OTHERCAMPLEARNPAY * 5),grd_200_thorus_teach_dex_5);
+		Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,OTHERCAMPLEARNPAY),grd_200_thorus_teach_dex_1);
+	}
+	else if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF)
 	{
 		Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),grd_200_thorus_teach_str_5);
 		Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),grd_200_thorus_teach_str_1);
@@ -848,6 +855,31 @@ func void grd_200_thorus_wannabemage_info()
 	AI_ContinueRoutine(corristo);
 };
 
+instance GRD_200_THORUS_TEACH_PRE(C_INFO)
+{
+	npc = grd_200_thorus;
+	nr = 10;
+	condition = grd_200_thorus_teach_pre_condition;
+	information = grd_200_thorus_teach_pre_info;
+	permanent = 0;
+	description = "“ы можешь научить мен€ чему-нибудь?";
+};
+
+func int grd_200_thorus_teach_pre_condition()
+{
+	if(Npc_GetTrueGuild(hero) == GIL_GRD)
+	{
+		return TRUE;
+	};
+};
+
+func void grd_200_thorus_teach_pre_info()
+{
+	AI_Output(other,self,"GRD_200_Thorus_Teach_15_00");	//“ы можешь научить мен€ чему-нибудь?
+	AI_Output(self,other,"GRD_200_Thorus_Teach_09_01");	//я могу помочь тебе улучшить свои умени€ и стать сильнее.
+	Log_CreateTopic(GE_TEACHEROC,LOG_NOTE);
+	b_logentry(GE_TEACHEROC,"“орус может помочь мне увеличить силу и ловкость.");
+};
 
 instance GRD_200_THORUS_TEACH(C_INFO)
 {
@@ -856,13 +888,13 @@ instance GRD_200_THORUS_TEACH(C_INFO)
 	condition = grd_200_thorus_teach_condition;
 	information = grd_200_thorus_teach_info;
 	permanent = 1;
-	description = "“ы можешь научить мен€ чему-нибудь?";
+	description = DIALOG_LEARN;
 };
 
 
 func int grd_200_thorus_teach_condition()
 {
-	if(Npc_GetTrueGuild(hero) == GIL_GRD)
+	if(Npc_KnowsInfo(hero,grd_200_thorus_teach_pre))
 	{
 		return TRUE;
 	};
@@ -870,14 +902,7 @@ func int grd_200_thorus_teach_condition()
 
 func void grd_200_thorus_teach_info()
 {
-	AI_Output(other,self,"GRD_200_Thorus_Teach_15_00");	//“ы можешь научить мен€ чему-нибудь?
-	AI_Output(self,other,"GRD_200_Thorus_Teach_09_01");	//я могу помочь тебе улучшить свои умени€ и стать сильнее.
-	if(LOG_THORUSTRAIN == FALSE)
-	{
-		Log_CreateTopic(GE_TEACHEROC,LOG_NOTE);
-		b_logentry(GE_TEACHEROC,"“орус может помочь мне увеличить силу и ловкость.");
-		LOG_THORUSTRAIN = TRUE;
-	};
+	AI_Output(other,self,"ORG_801_Lares_Teach_15_00");	//я хочу улучшить свои навыки.
 	b_thoruslearn();
 };
 

@@ -31,8 +31,11 @@ func void zs_assessenemy()
 	}
 	else if((Npc_IsPlayer(other) && self.aivar[AIV_WASDEFEATEDBYSC]) || c_amiweaker(self,other))
 	{
-		b_callguards();
-		AI_StartState(self,zs_flee,0,"");
+		if(self.id != 574)
+		{
+			b_callguards();
+			AI_StartState(self,zs_flee,0,"");
+		};
 		return;
 	}
 	else if(Npc_IsPlayer(other))

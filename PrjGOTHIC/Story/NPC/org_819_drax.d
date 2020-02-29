@@ -40,13 +40,14 @@ instance ORG_819_DRAX(NPC_DEFAULT)
 
 func void rtn_start_819()
 {
-	ta_smalltalk(0,0,23,0,"OW_PATH_1_5_B");
-	ta_smalltalk(23,0,0,0,"OW_PATH_1_5_B");
+	ta_smalltalk(5,0,23,0,"OW_PATH_1_5_B");
+	ta_boss(23,0,1,0,"OW_PATH_1_5_C");
+	ta_sitcampfire(1,0,5,0,"OW_PATH_1_5_C");
 };
 
 func void rtn_fmtaken_819()
 {
-	ta_guard(7,0,23,0,"PATH_OC_NC_21");
-	ta_guard(23,0,7,0,"PATH_OC_NC_21");
+	ta_guard(7,0,18,0,"RND_CH4_02");
+	ta_sitcampfire(18,0,7,0,"RND_CH4_01");
 };
 

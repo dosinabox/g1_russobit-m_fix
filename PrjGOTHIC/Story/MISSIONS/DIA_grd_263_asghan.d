@@ -109,6 +109,9 @@ func void grd_263_asghan_open_now_info()
 	var C_NPC sklave;
 	AI_Output(other,self,"Grd_263_Asghan_OPEN_NOW_Info_15_01");	//Теперь все готово. Можно открыть ворота!
 	AI_Output(self,other,"Grd_263_Asghan_OPEN_NOW_Info_06_02");	//Давай, открывай. Представление начинается!
+	b_clearimmortal(tpl_1401_gornakosh);
+	b_clearimmortal(tpl_1400_gornabar);
+	b_clearimmortal(tpl_1433_gornavid);
 	npc_setpermattitude(self,ATT_FRIENDLY);
 	Npc_ExchangeRoutine(self,"opengate");
 	b_givexp(XP_OPENASGHANSGATE);

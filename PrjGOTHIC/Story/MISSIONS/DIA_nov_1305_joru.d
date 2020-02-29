@@ -195,23 +195,20 @@ func void dia_joru_jointsrunning_info()
 	b_givexp(XP_WEEDFORJORU);
 };
 
-
-var int joru_tips;
-
 instance DIA_JORU_IMPRESSGURUS(C_INFO)
 {
 	npc = nov_1305_joru;
 	nr = 5;
 	condition = dia_joru_impressgurus_condition;
 	information = dia_joru_impressgurus_info;
-	permanent = 1;
+	permanent = 0;
 	description = "Как мне произвести впечатление на Гуру?";
 };
 
 
 func int dia_joru_impressgurus_condition()
 {
-	if(JORU_BRINGJOINTS == LOG_SUCCESS && KAPITEL < 2)
+	if(JORU_BRINGJOINTS == LOG_SUCCESS && (Npc_GetTrueGuild(hero) == GIL_NONE) && (KAPITEL < 2))
 	{
 		return 1;
 	};
@@ -227,13 +224,8 @@ func void dia_joru_impressgurus_info()
 	AI_Output(self,other,"DIA_Joru_ImpressGurus_07_05");	//С другими Гуру будет легче поговорить. Просто постарайся показать себя с лучшей стороны.
 	AI_Output(other,self,"DIA_Joru_ImpressGurus_15_06");	//Спасибо за твои советы.
 	AI_Output(self,other,"DIA_Joru_ImpressGurus_07_07");	//Ну, сделка есть сделка.
-	if(JORU_JOINPSI == FALSE)
-	{
-		b_logentry(CH1_JOINPSI,"Чтобы произвести впечатление на Идола Кадара, я должен нагнать сон на одного из его учеников.");
-		b_logentry(CH1_JOINPSI,"Лестер может рассказать мне, как добиться расположения Идола Намиба, стоящего у главных ворот. Только не стоит расспрашивать его вблизи от Гуру!");
-		JORU_JOINPSI = TRUE;
-	};
-	JORU_TIPS = TRUE;
+	b_logentry(CH1_JOINPSI,"Чтобы произвести впечатление на Идола Кадара, я должен нагнать сон на одного из его учеников.");
+	b_logentry(CH1_JOINPSI,"Лестер может рассказать мне, как добиться расположения Идола Намиба, стоящего у главных ворот. Только не стоит расспрашивать его вблизи от Гуру!");
 };
 
 
@@ -243,14 +235,14 @@ instance DIA_JORU_GETMAGIC(C_INFO)
 	nr = 5;
 	condition = dia_joru_getmagic_condition;
 	information = dia_joru_getmagic_info;
-	permanent = 1;
+	permanent = 0;
 	description = "Где я могу найти магию Спящего?";
 };
 
 
 func int dia_joru_getmagic_condition()
 {
-	if(JORU_TIPS == TRUE && KAPITEL < 2)
+	if(Npc_KnowsInfo(hero,dia_joru_impressgurus) && (Npc_GetTrueGuild(hero) == GIL_NONE) && (KAPITEL < 2))
 	{
 		return 1;
 	};
@@ -261,11 +253,7 @@ func void dia_joru_getmagic_info()
 	AI_Output(other,self,"DIA_Joru_GetMagic_15_00");	//Где я могу найти магию Спящего?
 	AI_Output(self,other,"DIA_Joru_GetMagic_07_01");	//Идол Кадар продает руны и свитки. Но у тебя все равно не получиться их купить, если он не захочет с тобой разговаривать, верно?
 	AI_Output(self,other,"DIA_Joru_GetMagic_07_02");	//Может быть, тебе с этим поможет какой-нибудь другой Гуру.
-	if(JORU_TIPS_MAGE == FALSE)
-	{
-		Log_CreateTopic(GE_TRADERPSI,LOG_NOTE);
-		b_logentry(GE_TRADERPSI,"Идол Кадар продает руны и магические свитки.");
-		JORU_TIPS_MAGE = TRUE;
-	};
+	Log_CreateTopic(GE_TRADERPSI,LOG_NOTE);
+	b_logentry(GE_TRADERPSI,"Идол Кадар продает руны и магические свитки членам Братства.");
 };
 

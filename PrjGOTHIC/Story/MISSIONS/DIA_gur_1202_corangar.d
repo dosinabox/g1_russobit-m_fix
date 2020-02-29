@@ -1,4 +1,24 @@
 
+func void b_corangarlearn()
+{
+	Info_ClearChoices(gur_1202_corangar_teach);
+	Info_AddChoice(gur_1202_corangar_teach,DIALOG_BACK,gur_1202_corangar_teach_back);
+	if(DIFF_HARD == TRUE)
+	{
+		Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,OTHERCAMPLEARNPAY * 5),gur_1202_corangar_teach_str_5);
+		Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,OTHERCAMPLEARNPAY),gur_1202_corangar_teach_str_1);
+		Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,OTHERCAMPLEARNPAY * 5),gur_1202_corangar_teach_dex_5);
+		Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,OTHERCAMPLEARNPAY),gur_1202_corangar_teach_dex_1);
+	}
+	else
+	{
+		Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),gur_1202_corangar_teach_str_5);
+		Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),gur_1202_corangar_teach_str_1);
+		Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),gur_1202_corangar_teach_dex_5);
+		Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),gur_1202_corangar_teach_dex_1);
+	};
+};
+
 instance DIA_GUR_1202_CORANGAR_EXIT(C_INFO)
 {
 	npc = gur_1202_corangar;
@@ -72,6 +92,7 @@ func void dia_corangar_latertrainer2_info()
 	AI_Output(other,self,"GUR_1202_CorAngar_LaterTrainer_15_00");	//Ты можешь научить меня чему-нибудь?
 	AI_Output(self,other,"GUR_1202_CorAngar_LaterTrainer_08_01");	//Хочешь стать хорошим воином? Да, тебе действительно нужно найти опытного учителя.
 	AI_Output(self,other,"Sld_700_Lee_Teach_08_01");	//Я могу помочь тебе стать более ловким и сильным.
+	AI_Output(self,other,"GUR_1202_CorAngar_Teach_08_01");	//Ловкость и сила - очень важные характеристики воина.
 	Log_CreateTopic(GE_TEACHERPSI,LOG_NOTE);
 	b_logentry(GE_TEACHERPSI,"Кор Ангар может помочь мне увеличить силу и ловкость. Я смогу найти его на тренировочной площадке Стражей, на втором уровне.");
 	b_logentry(GE_TEACHERPSI,"Кор Ангар может научить меня обращаться с двуручным мечом. Но это произойдет после того, как я освою бой с одноручным оружием.");
@@ -112,7 +133,7 @@ instance GUR_1202_CORANGAR_TEACH(C_INFO)
 	condition = gur_1202_corangar_teach_condition;
 	information = gur_1202_corangar_teach_info;
 	permanent = 1;
-	description = "Как я могу увеличить силу и ловкость?";
+	description = DIALOG_LEARN;
 };
 
 
@@ -126,14 +147,9 @@ func int gur_1202_corangar_teach_condition()
 
 func void gur_1202_corangar_teach_info()
 {
-	AI_Output(other,self,"GUR_1202_CorAngar_Teach_15_00");	//Как я могу увеличить силу и ловкость?
-	AI_Output(self,other,"GUR_1202_CorAngar_Teach_08_01");	//Ловкость и сила - очень важные характеристики воина.
-	Info_ClearChoices(gur_1202_corangar_teach);
-	Info_AddChoice(gur_1202_corangar_teach,DIALOG_BACK,gur_1202_corangar_teach_back);
-	Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),gur_1202_corangar_teach_str_5);
-	Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),gur_1202_corangar_teach_str_1);
-	Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),gur_1202_corangar_teach_dex_5);
-	Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),gur_1202_corangar_teach_dex_1);
+	//AI_Output(other,self,"GUR_1202_CorAngar_Teach_15_00");	//Как я могу увеличить силу и ловкость?
+	AI_Output(other,self,"ORG_801_Lares_Teach_15_00");	//Я хочу улучшить свои навыки.
+	b_corangarlearn();
 };
 
 func void gur_1202_corangar_teach_back()
@@ -143,48 +159,95 @@ func void gur_1202_corangar_teach_back()
 
 func void gur_1202_corangar_teach_str_1()
 {
-	b_buyattributepoints(other,ATR_STRENGTH,LPCOST_ATTRIBUTE_STRENGTH);
-	Info_ClearChoices(gur_1202_corangar_teach);
-	Info_AddChoice(gur_1202_corangar_teach,DIALOG_BACK,gur_1202_corangar_teach_back);
-	Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),gur_1202_corangar_teach_str_5);
-	Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),gur_1202_corangar_teach_str_1);
-	Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),gur_1202_corangar_teach_dex_5);
-	Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),gur_1202_corangar_teach_dex_1);
+	if(DIFF_HARD == FALSE)
+	{
+		b_buyattributepoints(other,ATR_STRENGTH,LPCOST_ATTRIBUTE_STRENGTH);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY)
+	{
+		if(hero.lp >= 1 && hero.attribute[ATR_STRENGTH] < 100)
+		{
+			b_printtrademsg1("Отдано руды: 10");
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
+		};
+		b_buyattributepoints(other,ATR_STRENGTH,LPCOST_ATTRIBUTE_STRENGTH);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"SVM_8_WeWillMeetAgain");	//Мы еще встретимся!
+	};
+	b_corangarlearn();
 };
 
 func void gur_1202_corangar_teach_str_5()
 {
-	b_buyattributepoints(other,ATR_STRENGTH,5 * LPCOST_ATTRIBUTE_STRENGTH);
-	Info_ClearChoices(gur_1202_corangar_teach);
-	Info_AddChoice(gur_1202_corangar_teach,DIALOG_BACK,gur_1202_corangar_teach_back);
-	Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),gur_1202_corangar_teach_str_5);
-	Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),gur_1202_corangar_teach_str_1);
-	Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),gur_1202_corangar_teach_dex_5);
-	Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),gur_1202_corangar_teach_dex_1);
+	if(DIFF_HARD == FALSE)
+	{
+		b_buyattributepoints(other,ATR_STRENGTH,5 * LPCOST_ATTRIBUTE_STRENGTH);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY * 5)
+	{
+		if(hero.lp >= 5 && hero.attribute[ATR_STRENGTH] < 96)
+		{
+			b_printtrademsg1("Отдано руды: 50");
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
+		};
+		b_buyattributepoints(other,ATR_STRENGTH,5 * LPCOST_ATTRIBUTE_STRENGTH);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"SVM_8_WeWillMeetAgain");	//Мы еще встретимся!
+	};
+	b_corangarlearn();
 };
 
 func void gur_1202_corangar_teach_dex_1()
 {
-	b_buyattributepoints(other,ATR_DEXTERITY,LPCOST_ATTRIBUTE_DEXTERITY);
-	Info_ClearChoices(gur_1202_corangar_teach);
-	Info_AddChoice(gur_1202_corangar_teach,DIALOG_BACK,gur_1202_corangar_teach_back);
-	Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),gur_1202_corangar_teach_str_5);
-	Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),gur_1202_corangar_teach_str_1);
-	Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),gur_1202_corangar_teach_dex_5);
-	Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),gur_1202_corangar_teach_dex_1);
+	if(DIFF_HARD == FALSE)
+	{
+		b_buyattributepoints(other,ATR_DEXTERITY,LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY)
+	{
+		if(hero.lp >= 1 && hero.attribute[ATR_DEXTERITY] < 100)
+		{
+			b_printtrademsg1("Отдано руды: 10");
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
+		};
+		b_buyattributepoints(other,ATR_DEXTERITY,LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"SVM_8_WeWillMeetAgain");	//Мы еще встретимся!
+	};
+	b_corangarlearn();
 };
 
 func void gur_1202_corangar_teach_dex_5()
 {
-	b_buyattributepoints(other,ATR_DEXTERITY,5 * LPCOST_ATTRIBUTE_DEXTERITY);
-	Info_ClearChoices(gur_1202_corangar_teach);
-	Info_AddChoice(gur_1202_corangar_teach,DIALOG_BACK,gur_1202_corangar_teach_back);
-	Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),gur_1202_corangar_teach_str_5);
-	Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),gur_1202_corangar_teach_str_1);
-	Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),gur_1202_corangar_teach_dex_5);
-	Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),gur_1202_corangar_teach_dex_1);
+	if(DIFF_HARD == FALSE)
+	{
+		b_buyattributepoints(other,ATR_DEXTERITY,5 * LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY * 5)
+	{
+		if(hero.lp >= 5 && hero.attribute[ATR_DEXTERITY] < 96)
+		{
+			b_printtrademsg1("Отдано руды: 50");
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
+		};
+		b_buyattributepoints(other,ATR_DEXTERITY,5 * LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"SVM_8_WeWillMeetAgain");	//Мы еще встретимся!
+	};
+	b_corangarlearn();
 };
-
 
 instance GUR_1202_CORANGAR_WANNABETPL(C_INFO)
 {
@@ -631,7 +694,7 @@ func void info_corangar_findherb_success_info()
 	AI_Output(other,self,"GUR_1202_CorAngar_DEATH_Info_15_08");	//Как же мы теперь сможем забрать юнитор?
 	AI_Output(self,other,"GUR_1202_CorAngar_DEATH_Info_08_09");	//Я думаю, он оставил юнитор и книгу в своей лаборатории. Вот тебе ключ от его сундука.
 	b_printtrademsg2("Получен ключ из лаборатории.");
-	CreateInvItem(self,itarrunepyrokinesis);
+	CreateInvItem(self,itarrune_5_7_pyrokinesis);
 	CreateInvItem(self,stab_des_lichts);
 	if(YBERION_KEY_STOLEN == FALSE)
 	{
@@ -769,7 +832,7 @@ func void info_corangar_yberion_died_info()
 	yberion = Hlp_GetNpc(gur_1200_yberion);
 	yberion.flags = 0;
 	Npc_ChangeAttribute(yberion,ATR_HITPOINTS,-yberion.attribute[ATR_HITPOINTS_MAX]);
-	CreateInvItem(self,itarrunepyrokinesis);
+	CreateInvItem(self,itarrune_5_7_pyrokinesis);
 	CreateInvItem(self,stab_des_lichts);
 	CreateInvItem(self,itke_yberion);
 	CreateInvItem(self,itke_psi_kalom_01);
@@ -844,7 +907,7 @@ func void info_corangar_healthwater_info()
 {
 	var C_NPC yberion;
 	yberion = Hlp_GetNpc(gur_1200_yberion);
-	CreateInvItem(self,itarrunepyrokinesis);
+	CreateInvItem(self,itarrune_5_7_pyrokinesis);
 	CreateInvItem(self,stab_des_lichts);
 	CreateInvItem(self,itke_yberion);
 	CreateInvItem(self,itke_psi_kalom_01);

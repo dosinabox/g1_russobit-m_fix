@@ -173,3 +173,50 @@ func void vlk506_getlost_info()
 	AI_StopProcessInfos(self);
 };
 
+instance DIA_VLK506_HI_01(C_INFO)
+{
+	npc = vlk_506_buddler;
+	nr = 2;
+	condition = dia_vlk506_hi_01_condition;
+	information = dia_vlk506_hi_01_info;
+	permanent = 1;
+	important = 0;
+	description = "Что ты можешь рассказать об этом лагере?";
+};
+
+
+func int dia_vlk506_hi_01_condition()
+{
+	return TRUE;
+};
+
+func void dia_vlk506_hi_01_info()
+{
+	AI_Output(other,self,"Info_Stt_10_DasLager_15_00");	//Что ты можешь рассказать об этом лагере?
+	AI_Output(self,other,"SVM_2_NotNow");	//Не сейчас.
+	AI_StopProcessInfos(self);
+};
+
+instance DIA_VLK506_HI_02(C_INFO)
+{
+	npc = vlk_506_buddler;
+	nr = 3;
+	condition = dia_vlk506_hi_02_condition;
+	information = dia_vlk506_hi_02_info;
+	permanent = 1;
+	important = 0;
+	description = "Как здесь живется?";
+};
+
+
+func int dia_vlk506_hi_02_condition()
+{
+	return TRUE;
+};
+
+func void dia_vlk506_hi_02_info()
+{
+	AI_Output(other,self,"Info_Vlk_3_DieLage_15_00");	//Как здесь живется?
+	AI_Output(self,other,"SVM_2_GetOutOfHere");	//Пошел прочь!
+	AI_StopProcessInfos(self);
+};

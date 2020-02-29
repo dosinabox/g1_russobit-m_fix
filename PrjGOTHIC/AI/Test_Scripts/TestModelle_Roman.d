@@ -1,7 +1,7 @@
 
 instance ITWRLEVELMAP(C_ITEM)
 {
-	name = "Map of Test Level";
+	name = "Карта тестового уровня";
 	mainflag = ITEM_KAT_DOCS;
 	flags = 0;
 	value = 15;
@@ -20,14 +20,14 @@ func void uselevelmap()
 	Doc_SetPage(ndocid,0,"Map_X.TGA",1);
 	Doc_SetFont(ndocid,-1,"FONT_OLD_20_WHITE.TGA");
 	Doc_SetMargins(ndocid,-1,10,10,10,10,1);
-	Doc_PrintLine(ndocid,-1,"Level Map");
+	Doc_PrintLine(ndocid,-1,"Карта уровня");
 	Doc_Show(ndocid);
 };
 
 
 instance ITWRBOOKOFTALES(C_ITEM)
 {
-	name = "Book of Tales";
+	name = "Книга сказаний";
 	mainflag = ITEM_KAT_DOCS;
 	flags = 0;
 	value = 15;
@@ -47,10 +47,10 @@ func void usebookoftales()
 	Doc_SetPage(ndocid,1,"BOOK_RIGHT.TGA",0);
 	Doc_SetFont(ndocid,-1,"FONT_OLD_10_WHITE.TGA");
 	Doc_SetMargins(ndocid,-1,10,10,10,10,1);
-	Doc_PrintLine(ndocid,-1,"HEADER");
+	Doc_PrintLine(ndocid,-1,"ЗАГОЛОВОК");
 	Doc_PrintLine(ndocid,-1,"");
-	Doc_PrintLines(ndocid,0,"One line on the left");
-	Doc_PrintLines(ndocid,1,"One line on the right");
+	Doc_PrintLines(ndocid,0,"Одна строка слева");
+	Doc_PrintLines(ndocid,1,"Одна строка справа");
 	Doc_Show(ndocid);
 };
 
@@ -71,7 +71,7 @@ instance ITMW1HSWORDBURNING(C_ITEM)
 	description = "Легендарный короткий меч прижигания";
 	text[1] = "Это отличный меч, убивающий всех,";
 	text[2] = "кто пытается убить тебя.";
-	text[5] = "Урон";
+	text[5] = NAME_DAMAGE;
 	count[5] = damagetotal;
 };
 
@@ -89,7 +89,7 @@ instance ITMW2HSWORDBURNING(C_ITEM)
 	text[1] = "Ничто не может устоять перед";
 	text[2] = "его огненным прикосновением.";
 	text[3] = "Этот меч считался давно утерянным.";
-	text[5] = "Урон";
+	text[5] = NAME_DAMAGE;
 	count[5] = damagetotal;
 };
 
@@ -111,7 +111,7 @@ instance ITRWWARBOWBURNING(C_ITEM)
 	text[1] = "Лук, сделанный в давние времена,";
 	text[2] = "является самым лучшим оружием,";
 	text[3] = "которое когда-либо появлялось в мире.";
-	text[5] = "Урон";
+	text[5] = NAME_DAMAGE;
 	count[5] = damagetotal;
 };
 
@@ -189,30 +189,31 @@ instance ALLROUND_TESTMODELL(NPC_DEFAULT)
 	CreateInvItem(self,itarrobemithril);
 	EquipItem(self,itmw_2h_sword_heavy_01);
 	CreateInvItems(self,itamarrow,50);
-	CreateInvItem(self,itarrunelight);
-	CreateInvItem(self,itarrunefirebolt);
-	CreateInvItem(self,itarrunefireball);
-	CreateInvItem(self,itarrunefirestorm);
-	CreateInvItem(self,itarrunefirerain);
-	CreateInvItem(self,itarruneteleport1);
-	CreateInvItem(self,itarruneteleport2);
-	CreateInvItem(self,itarruneteleport3);
-	CreateInvItem(self,itarruneteleport5);
-	CreateInvItem(self,itarruneheal);
-	CreateInvItem(self,itarrunechainlightning);
-	CreateInvItem(self,itarrunethunderbolt);
-	CreateInvItem(self,itarrunethunderball);
-	CreateInvItem(self,itarruneicecube);
-	CreateInvItem(self,itarruneicewave);
-	CreateInvItem(self,itarrunedestroyundead);
-	CreateInvItem(self,itarrunewindfist);
-	CreateInvItem(self,itarrunestormfist);
-	CreateInvItem(self,itarrunetelekinesis);
-	CreateInvItem(self,itarrunecharm);
-	CreateInvItem(self,itarrunesleep);
-	CreateInvItem(self,itarrunepyrokinesis);
-	CreateInvItem(self,itarrunecontrol);
-	CreateInvItem(self,itarrunearmyofdarkness);
+	CreateInvItem(self,itarrune_1_1_light);
+	CreateInvItem(self,itarrune_2_1_firebolt);
+	CreateInvItem(self,itarrune_2_2_fireball);
+	CreateInvItem(self,itarrune_2_3_firestorm);
+	CreateInvItem(self,itarrune_2_4_firerain);
+	CreateInvItem(self,itarrune_1_3_teleport1);
+	CreateInvItem(self,itarrune_1_4_teleport2);
+	CreateInvItem(self,itarrune_1_6_teleport3);
+	CreateInvItem(self,itarrune_1_5_teleport5);
+	CreateInvItem(self,itarrune_1_2_heal);
+	CreateInvItem(self,itarrune_3_5_chainlightning);
+	CreateInvItem(self,itarrune_3_1_thunderbolt);
+	CreateInvItem(self,itarrune_3_2_thunderball);
+	CreateInvItem(self,itarrune_3_3_icecube);
+	CreateInvItem(self,itarrune_3_4_icewave);
+	CreateInvItem(self,itarrune_6_1_destroyundead);
+	CreateInvItem(self,itarrune_5_5_windfist);
+	CreateInvItem(self,itarrune_5_6_stormfist);
+	CreateInvItem(self,itarrune_5_0_telekinesis);
+	CreateInvItem(self,itarrune_5_1_charm);
+	CreateInvItem(self,itarrune_5_2_sleep);
+	CreateInvItem(self,itarrune_5_7_pyrokinesis);
+	CreateInvItem(self,itarrune_5_3_control);
+	CreateInvItem(self,itarrune_6_2_armyofdarkness);
+	CreateInvItem(self,itarrune_6_6_urizielrune);
 	CreateInvItem(self,itarscrolllight);
 	CreateInvItem(self,itarscrollfirebolt);
 	CreateInvItem(self,itarscrollfireball);

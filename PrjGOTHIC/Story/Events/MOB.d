@@ -1,12 +1,13 @@
 
-var int _str_message_wheel_stucks_again;
+//var int _str_message_wheel_stucks_again;
 
 func int mc_oldmine_asghan()
 {
 	printdebugnpc(PD_ITEM_MOBSI,"MC_OLDMINE_ASGHAN");
-	if(Npc_KnowsInfo(hero,grd_263_asghan_open_now) && (_STR_MESSAGE_WHEEL_STUCKS_AGAIN >= 0))
+	//if(OLDMINE_GATE_OPEN == FALSE)
+	if(Npc_KnowsInfo(hero,grd_263_asghan_open_now) && (OLDMINE_GATE_OPEN == FALSE))
 	{
-		_STR_MESSAGE_WHEEL_STUCKS_AGAIN = 1;
+		OLDMINE_GATE_OPEN = TRUE;
 		return TRUE;
 	}
 	else
@@ -24,7 +25,7 @@ func int mc_oldmine_entrance()
 	{
 		printdebugnpc(PD_ITEM_MOBSI,"...заблокировано.");
 		g_printscreen(_STR_MESSAGE_WHEEL_STUCKS);
-		AI_OutputSVM_Overlay(hero,NULL,"SVM_15_PickBroke");
+		AI_OutputSVM_Overlay(hero,NULL,"$PICKBROKE");
 		return FALSE;
 	}
 	else
@@ -346,7 +347,7 @@ func void evt_wheel_07_s0()
 		AI_PlayAni(self,"T_VWHEEL_S0_2_STAND");
 		AI_Wait(self,0.5);
 		AI_PlayAni(self,"T_DONTKNOW");
-		AI_OutputSVM(self,self,"$DoesntWork");
+		AI_OutputSVM(self,self,"$DOESNTWORK");
 	};
 };
 
@@ -357,7 +358,7 @@ func void evt_wheel_07_s1()
 		AI_PlayAni(self,"T_VWHEEL_S1_2_STAND");
 		AI_Wait(self,0.5);
 		AI_PlayAni(self,"T_DONTKNOW");
-		AI_OutputSVM(self,self,"$DoesntWork");
+		AI_OutputSVM(self,self,"$DOESNTWORK");
 	}
 	else if(GATE_07_STATE == 1)
 	{
@@ -510,6 +511,30 @@ func void evt_wheel_d06_s1()
 	};
 };
 
+//fort
+
+func int evt_wheel_d07_conditionfunc()
+{
+	if(GATE_D07_STATE == 0)
+	{
+		return TRUE;
+	}
+	else
+	{
+		g_printscreen(_STR_MESSAGE_OCLEVER_STUCKS);
+		return FALSE;
+	};
+};
+
+func void evt_wheel_d07_s1()
+{
+	Wld_SendTrigger("EVT_OW_MOUNTAINRUIN_01");
+	Wld_InsertNpc(skeletonsh,"LOCATION_19_03_ROOM6_BARRELCHAMBER2");
+	Wld_InsertNpc(skeletonsh,"LOCATION_19_03_ROOM6_BARRELCHAMBER2");
+	Wld_InsertNpc(skeletonsh,"LOCATION_19_03_ROOM6_BARRELCHAMBER2");
+	GATE_D07_STATE = 1;
+};
+
 func int evt_wheel_08_conditionfunc()
 {
 	return TRUE;
@@ -522,7 +547,7 @@ func void evt_wheel_08_s0()
 		AI_PlayAni(self,"T_VWHEEL_S1_2_STAND");
 		AI_Wait(self,0.5);
 		AI_PlayAni(self,"T_DONTKNOW");
-		AI_OutputSVM(self,self,"$DoesntWork");
+		AI_OutputSVM(self,self,"$DOESNTWORK");
 	};
 };
 
@@ -545,7 +570,7 @@ func int evt_wheel_09_conditionfunc()
 	}
 	else if(ORCCITY_SANCTUM_OUTERGATEOPEN == FALSE && (KAPITEL >= 5) && !Npc_HasItems(hero,itmi_stuff_idol_sleeper_01))
 	{
-		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 	};
 };
 
@@ -562,7 +587,7 @@ func void evt_wheel_09_s0()
 	{
 		AI_Wait(self,0.5);
 		AI_PlayAni(self,"T_DONTKNOW");
-		AI_OutputSVM(self,self,"$DoesntWork");
+		AI_OutputSVM(self,self,"$DOESNTWORK");
 	};
 };
 
@@ -579,7 +604,7 @@ func void evt_wheel_09_s1()
 	{
 		AI_Wait(self,0.5);
 		AI_PlayAni(self,"T_DONTKNOW");
-		AI_OutputSVM(self,self,"$DoesntWork");
+		AI_OutputSVM(self,self,"$DOESNTWORK");
 	};
 };
 
@@ -602,7 +627,7 @@ func void evt_wheel_10_s0()
 		AI_PlayAni(self,"T_VWHEEL_S0_2_STAND");
 		AI_Wait(self,0.5);
 		AI_PlayAni(self,"T_DONTKNOW");
-		AI_OutputSVM(self,self,"$DoesntWork");
+		AI_OutputSVM(self,self,"$DOESNTWORK");
 	};
 };
 
@@ -613,7 +638,7 @@ func void evt_wheel_10_s1()
 		AI_PlayAni(self,"T_VWHEEL_S1_2_STAND");
 		AI_Wait(self,0.5);
 		AI_PlayAni(self,"T_DONTKNOW");
-		AI_OutputSVM(self,self,"$DoesntWork");
+		AI_OutputSVM(self,self,"$DOESNTWORK");
 	}
 	else if(GATE_10_STATE == 1)
 	{
@@ -714,7 +739,7 @@ func int evt_wheel_d04_conditionfunc()
 func void evt_wheel_d04_s0()
 {
 	AI_PlayAni(self,"T_LEVER_S1_2_STAND");
-	AI_OutputSVM_Overlay(hero,NULL,"SVM_15_PickBroke");
+	AI_OutputSVM_Overlay(hero,NULL,"$PICKBROKE");
 };
 
 func void evt_wheel_d04_s1()
@@ -722,7 +747,7 @@ func void evt_wheel_d04_s1()
 	if(GATE_D04_STATE == 1)
 	{
 		AI_PlayAni(self,"T_LEVER_S1_2_STAND");
-		AI_OutputSVM_Overlay(hero,NULL,"SVM_15_PickBroke");
+		AI_OutputSVM_Overlay(hero,NULL,"$PICKBROKE");
 	};
 	if(GATE_D04_STATE == 0)
 	{
@@ -738,6 +763,21 @@ func void evt_teleportstation_func()
 	Npc_ClearAIQueue(hero);
 	AI_Teleport(hero,"DT_E1_05");
 };
+
+func void evt_ogy_calom_func()
+{
+	if(CORANGAR_GOTOOGY == TRUE)
+	{
+		if(CORKALOMLEFT == FALSE)
+		{
+			b_corkalomleft();
+		};
+	};
+};
+
+/////////////////////
+///ключи
+/////////////////////
 
 func int ll1_cf()
 {
@@ -779,6 +819,9 @@ func int ll2_itke_gomez_01_cf()
 {
 	if(Npc_HasItems(hero,itke_gomez_01))
 	{
+		AI_Wait(self,0.7);
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ Гомеза.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
 		return TRUE;
 	}
 	else if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) < 1)
@@ -801,190 +844,556 @@ func int ll2_itke_gomez_01_cf()
 
 func int itke_gomez_01_cf()
 {
-	if(Npc_HasItems(hero,itke_gomez_01))
+	if(ITKE_GOMEZ_01_USED == TRUE)
 	{
 		return TRUE;
 	}
-	else
+	else if(Npc_HasItems(hero,itke_gomez_01))
 	{
-		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		AI_Wait(self,0.7);
+		AI_PlayAni(self,"T_CHESTBIG_S0_PICKRIGHT");
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ Гомеза.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		ITKE_GOMEZ_01_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itke_gomez_02_cf()
+{
+	if(ITKE_GOMEZ_02_USED == TRUE)
+	{
+		return TRUE;
+	}
+	else if(Npc_HasItems(hero,itke_gomez_01))
+	{
+		AI_Wait(self,0.7);
+		AI_PlayAni(self,"T_CHESTBIG_S0_PICKRIGHT");
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ Гомеза.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		ITKE_GOMEZ_02_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itke_gomez_03_cf()
+{
+	if(ITKE_GOMEZ_03_USED == TRUE)
+	{
+		return TRUE;
+	}
+	else if(Npc_HasItems(hero,itke_gomez_01))
+	{
+		AI_Wait(self,0.7);
+		AI_PlayAni(self,"T_CHESTBIG_S0_PICKRIGHT");
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ Гомеза.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		ITKE_GOMEZ_03_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
 };
 
 func int itke_quentin_cf()
 {
-	if(Npc_HasItems(hero,itke_quentin))
+	if(ITKE_QUENTIN_USED == TRUE)
 	{
 		return TRUE;
 	}
-	else
+	else if(Npc_HasItems(hero,itke_quentin))
 	{
-		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		AI_Wait(self,0.7);
+		AI_PlayAni(self,"T_CHESTBIG_S0_PICKRIGHT");
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ Квентина.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		ITKE_QUENTIN_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itke_weaponry_01_cf()
+{
+	if(ITKE_WEAPONRY_01_USED == TRUE)
+	{
+		return TRUE;
+	}
+	else if(Npc_HasItems(hero,itke_weaponry))
+	{
+		AI_Wait(self,0.7);
+		AI_PlayAni(self,"T_CHESTBIG_S0_PICKRIGHT");
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ от оружейной.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		ITKE_WEAPONRY_01_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itke_weaponry_02_cf()
+{
+	if(ITKE_WEAPONRY_02_USED == TRUE)
+	{
+		return TRUE;
+	}
+	else if(Npc_HasItems(hero,itke_weaponry))
+	{
+		AI_Wait(self,0.7);
+		AI_PlayAni(self,"T_CHESTBIG_S0_PICKRIGHT");
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ от оружейной.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		ITKE_WEAPONRY_02_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itke_weaponry_03_cf()
+{
+	if(ITKE_WEAPONRY_03_USED == TRUE)
+	{
+		return TRUE;
+	}
+	else if(Npc_HasItems(hero,itke_weaponry))
+	{
+		AI_Wait(self,0.7);
+		AI_PlayAni(self,"T_CHESTBIG_S0_PICKRIGHT");
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ от оружейной.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		ITKE_WEAPONRY_03_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itke_weaponry_04_cf()
+{
+	if(ITKE_WEAPONRY_04_USED == TRUE)
+	{
+		return TRUE;
+	}
+	else if(Npc_HasItems(hero,itke_weaponry))
+	{
+		AI_Wait(self,0.7);
+		AI_PlayAni(self,"T_CHESTBIG_S0_PICKRIGHT");
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ от оружейной.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		ITKE_WEAPONRY_04_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
 };
 
 func int itke_berg_01_cf()
 {
-	if(Npc_HasItems(hero,itke_berg_01))
+	if(ITKE_BERG_USED == TRUE)
 	{
 		return TRUE;
 	}
-	else
+	else if(Npc_HasItems(hero,itke_berg_01))
 	{
-		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		AI_Wait(self,0.7);
+		AI_PlayAni(self,"T_CHESTBIG_S0_PICKRIGHT");
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ржавый ключ.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		ITKE_BERG_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
 };
 
 func int itke_focus5_cf()
 {
-	if(Npc_HasItems(hero,itke_focus5))
+	if(ITKE_FOCUS5_USED == TRUE)
 	{
 		return TRUE;
 	}
-	else
+	else if(Npc_HasItems(hero,itke_focus5))
 	{
-		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		AI_Wait(self,0.7);
+		AI_PlayAni(self,"T_CHESTBIG_S0_PICKRIGHT");
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ из склепа.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		ITKE_FOCUS5_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
 };
 
-func int itke_sunkentower_cf()
+func int itke_sunkentower_01_cf()
 {
-	if(Npc_HasItems(hero,itke_sunkentower))
+	if(ITKE_SUNKENTOWER_01_USED == TRUE)
 	{
 		return TRUE;
 	}
-	else
+	else if(Npc_HasItems(hero,itke_sunkentower))
 	{
-		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		AI_Wait(self,0.7);
+		AI_PlayAni(self,"T_CHESTSMALL_S0_PICKRIGHT");
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ Ксардаса.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		ITKE_SUNKENTOWER_01_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itke_sunkentower_02_cf()
+{
+	if(ITKE_SUNKENTOWER_02_USED == TRUE)
+	{
+		return TRUE;
+	}
+	else if(Npc_HasItems(hero,itke_sunkentower))
+	{
+		AI_Wait(self,0.7);
+		AI_PlayAni(self,"T_CHESTSMALL_S0_PICKRIGHT");
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ Ксардаса.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		ITKE_SUNKENTOWER_02_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
 };
 
 func int itke_focus4_cf()
 {
-	if(Npc_HasItems(hero,itke_focus4))
+	if(ITKE_FOCUS4_USED == TRUE)
 	{
 		return TRUE;
 	}
-	else
+	else if(Npc_HasItems(hero,itke_focus4))
 	{
-		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		AI_Wait(self,0.7);
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ из пещеры.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		ITKE_FOCUS4_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
 };
 
 func int itkecavalorn01_cf()
 {
-	if(Npc_HasItems(hero,itkecavalorn01))
+	if(CAVALORN_KEY_USED == TRUE)
 	{
 		return TRUE;
 	}
-	else
+	else if(Npc_HasItems(hero,itkecavalorn01))
 	{
-		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		AI_Wait(self,0.7);
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ Кавалорна.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		CAVALORN_KEY_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
 };
 
 func int itke_freemine_cf()
 {
-	if(Npc_HasItems(hero,itke_freemine))
+	if(FREEMINE_KEY_USED == TRUE)
 	{
 		return TRUE;
 	}
-	else
+	if(Npc_HasItems(hero,itke_freemine))
 	{
-		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		AI_Wait(self,0.7);
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ от Свободной шахты.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		FREEMINE_KEY_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
 };
 
 func int itke_yberion_cf()
 {
-	if(Npc_HasItems(hero,itke_yberion))
+	if(ITKE_YBERION_USED == TRUE)
 	{
 		return TRUE;
 	}
-	else
+	else if(Npc_HasItems(hero,itke_yberion))
 	{
-		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		AI_Wait(self,0.7);
+		AI_PlayAni(self,"T_CHESTBIG_S0_PICKRIGHT");
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ Юбериона.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		ITKE_YBERION_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
 };
 
 func int itke_psi_kalom_01_cf()
 {
-	if(Npc_HasItems(hero,itke_psi_kalom_01))
+	if(PSILABKEY_USED == TRUE)
 	{
 		return TRUE;
 	}
-	else
+	else if(Npc_HasItems(hero,itke_psi_kalom_01))
 	{
-		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		AI_Wait(self,0.7);
+		AI_PlayAni(self,"T_CHESTBIG_S0_PICKRIGHT");
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ из лаборатории.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		PSILABKEY_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
 };
 
-func int dungeonkey_cf()
+func int dungeonkey_01_cf()
 {
-	if(Npc_HasItems(hero,dungeonkey))
+	if(DUNGEONKEY_01_USED == TRUE)
 	{
 		return TRUE;
 	}
-	else
+	else if(Npc_HasItems(hero,dungeonkey))
 	{
-		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		AI_Wait(self,0.7);
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ от подземелья.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		DUNGEONKEY_01_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int dungeonkey_02_cf()
+{
+	if(DUNGEONKEY_02_USED == TRUE)
+	{
+		return TRUE;
+	}
+	else if(Npc_HasItems(hero,dungeonkey))
+	{
+		AI_Wait(self,0.7);
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ от подземелья.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		DUNGEONKEY_02_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int dungeonkey_03_cf()
+{
+	if(DUNGEONKEY_03_USED == TRUE)
+	{
+		return TRUE;
+	}
+	else if(Npc_HasItems(hero,dungeonkey))
+	{
+		AI_Wait(self,0.7);
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ от подземелья.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		DUNGEONKEY_03_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
 };
 
 func int itke_gilbert_cf()
 {
-	if(Npc_HasItems(hero,itke_gilbert))
+	if(GILBERT_KEY_USED == TRUE)
 	{
 		return TRUE;
 	}
-	else
+	else if(Npc_HasItems(hero,itke_gilbert))
 	{
-		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		AI_Wait(self,0.7);
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован дубликат ключа.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		GILBERT_KEY_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
 };
 
 func int itkey_ob_smith_01_cf()
 {
-	if(Npc_HasItems(hero,itkey_ob_smith_01))
+	if(OB_SMITH_KEY_USED == TRUE)
 	{
 		return TRUE;
 	}
-	else
+	else if(Npc_HasItems(hero,itkey_ob_smith_01))
 	{
-		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		AI_Wait(self,0.7);
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован железный ключ.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		OB_SMITH_KEY_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
 };
 
 func int itke_storage_01_cf()
 {
-	if(Npc_HasItems(hero,itke_storage_01))
+	if(ITKE_STORAGE_01_USED == TRUE)
 	{
 		return TRUE;
 	}
-	else
+	else if(Npc_HasItems(hero,itke_storage_01))
 	{
-		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		AI_Wait(self,0.7);
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ от склада.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		ITKE_STORAGE_01_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itke_storage_02_cf()
+{
+	if(ITKE_STORAGE_02_USED == TRUE)
+	{
+		return TRUE;
+	}
+	else if(Npc_HasItems(hero,itke_storage_01))
+	{
+		AI_Wait(self,0.7);
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ от склада.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		ITKE_STORAGE_02_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itke_storage_03_cf()
+{
+	if(ITKE_STORAGE_03_USED == TRUE)
+	{
+		return TRUE;
+	}
+	else if(Npc_HasItems(hero,itke_storage_01))
+	{
+		AI_Wait(self,0.7);
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ от склада.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		ITKE_STORAGE_03_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
 };
 
 func int ll2_itkey_rb_01_cf()
 {
+	if(LORD_KEY_USED == TRUE)
+	{
+		return TRUE;
+	}
 	if(Npc_HasItems(hero,itkey_rb_01))
 	{
+		AI_Wait(self,0.7);
+		AI_PlayAni(self,"T_CHESTBIG_S0_PICKRIGHT");
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ Лорда.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		LORD_KEY_USED = TRUE;
 		return TRUE;
 	}
 	else if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) < 1)
@@ -1007,8 +1416,17 @@ func int ll2_itkey_rb_01_cf()
 
 func int ll2_orik_key_cf()
 {
-	if(Npc_HasItems(hero,orik_key))
+	if(ORIK_KEY_USED == TRUE)
 	{
+		return TRUE;
+	}
+	else if(Npc_HasItems(hero,orik_key))
+	{
+		AI_Wait(self,0.7);
+		AI_PlayAni(self,"T_CHESTBIG_S0_PICKRIGHT");
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ Орика.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		ORIK_KEY_USED = TRUE;
 		return TRUE;
 	}
 	else if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) < 1)
@@ -1031,8 +1449,48 @@ func int ll2_orik_key_cf()
 
 func int ll2_itke_tower_01_cf()
 {
-	if(Npc_HasItems(hero,itke_tower_01))
+	if(ITKE_TOWER_01_USED == TRUE)
 	{
+		return TRUE;
+	}
+	else if(Npc_HasItems(hero,itke_tower_01))
+	{
+		AI_Wait(self,0.7);
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ от башни.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		ITKE_TOWER_01_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) < 1)
+	{
+		PrintScreen(_STR_CANNOTUSE_LOCKS_NO_SKILL,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	}
+	else if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) < 2)
+	{
+		PrintScreen(_STR_CANNOTUSE_LOCKS_LOW_SKILL,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	}
+	else if(Npc_HasItems(hero,itkelockpick))
+	{
+		return TRUE;
+	}
+	else
+	{
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY_NO_LOCKPICK,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int ll2_itke_tower_02_cf()
+{
+	if(ITKE_TOWER_02_USED == TRUE)
+	{
+		return TRUE;
+	}
+	else if(Npc_HasItems(hero,itke_tower_01))
+	{
+		AI_Wait(self,0.7);
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ от башни.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		ITKE_TOWER_02_USED = TRUE;
 		return TRUE;
 	}
 	else if(Npc_GetTalentSkill(hero,NPC_TALENT_PICKLOCK) < 1)
@@ -1055,26 +1513,66 @@ func int ll2_itke_tower_01_cf()
 
 func int itke_om_02_cf()
 {
-	if(Npc_HasItems(hero,itke_om_02))
+	if(ITKE_OM_02_USED == TRUE)
 	{
 		return TRUE;
 	}
-	else
+	else if(Npc_HasItems(hero,itke_om_02))
 	{
-		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		AI_Wait(self,0.7);
+		AI_PlayAni(self,"T_CHESTBIG_S0_PICKRIGHT");
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ Аарона.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		ITKE_OM_02_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
 };
 
-func int itke_om_03_cf()
+func int itke_om_03_01_cf()
 {
-	if(Npc_HasItems(hero,itke_om_03))
+	if(ITKE_OM_03_01_USED == TRUE)
 	{
 		return TRUE;
 	}
-	else
+	else if(Npc_HasItems(hero,itke_om_03))
 	{
-		AI_OutputSVM_Overlay(self,self,"$NeedKey");
+		AI_Wait(self,0.7);
+		AI_PlayAni(self,"T_CHESTBIG_S0_PICKRIGHT");
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ от склада.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		ITKE_OM_03_01_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
+		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
+	};
+};
+
+func int itke_om_03_02_cf()
+{
+	if(ITKE_OM_03_02_USED == TRUE)
+	{
+		return TRUE;
+	}
+	else if(Npc_HasItems(hero,itke_om_03))
+	{
+		AI_Wait(self,0.7);
+		AI_PlayAni(self,"T_CHESTBIG_S0_PICKRIGHT");
+		Snd_Play3d(self,"DOOR_LOCK");
+		PrintScreen("Использован ключ от склада.",-1,37,"FONT_OLD_10_WHITE.TGA",3);
+		ITKE_OM_03_02_USED = TRUE;
+		return TRUE;
+	}
+	else if(Npc_IsPlayer(self))
+	{
+		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
 };

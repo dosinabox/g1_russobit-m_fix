@@ -24,21 +24,27 @@ func int zs_attack_loop()
 	printdebugnpc(PD_ZS_LOOP,"ZS_Attack_Loop");
 	Npc_GetTarget(self);
 	printglobals(PD_ZS_DETAIL);
-	if(self.id == 251 && (Wld_IsTime(20,18,20,20) || Wld_IsTime(21,40,19,10)) && PLAYERINARENA == FALSE)
-	{
-		AI_Dodge(self);
-		return LOOP_END;
-	};
-	if(self.id == 729 && (Wld_IsTime(20,18,21,40) || Wld_IsTime(22,58,19,10)) && PLAYERINARENA == FALSE)
-	{
-		AI_Dodge(self);
-		return LOOP_END;
-	};
-	if(self.id == 1422 && (Wld_IsTime(21,38,21,40) || Wld_IsTime(22,58,20,18)) && PLAYERINARENA == FALSE)
-	{
-		AI_Dodge(self);
-		return LOOP_END;
-	};
+	//if(self.id == 251 && (Wld_IsTime(20,18,20,20) || Wld_IsTime(21,40,19,10)) && PLAYERINARENA == FALSE)
+	//{
+	//	AI_Dodge(self);
+	//	b_say(self,other,"$HEDEFEATEDHIM");
+	//	AI_StartState(self,zs_healself,1,"");
+	//	return LOOP_END;
+	//};
+	//if(self.id == 729 && (Wld_IsTime(20,18,21,40) || Wld_IsTime(22,58,19,10)) && PLAYERINARENA == FALSE)
+	//{
+	//	AI_Dodge(self);
+	//	b_say(self,other,"$ITWASAGOODFIGHT");
+	//	AI_StartState(self,zs_healself,1,"");
+	//	return LOOP_END;
+	//};
+	//if(self.id == 1422 && (Wld_IsTime(21,38,21,40) || Wld_IsTime(22,58,20,18)) && PLAYERINARENA == FALSE)
+	//{
+	//	AI_Dodge(self);
+	//	b_say(self,other,"$LOOKAWAY");
+	//	AI_StartState(self,zs_healself,1,"");
+	//	return LOOP_END;
+	//};
 	if(((self.id == 3) || (self.id == 5)) && Npc_IsPlayer(other) && (KAPITEL >= 4))
 	{
 		return LOOP_END;
@@ -166,6 +172,10 @@ func int zs_attack_loop()
 
 func void zs_attack_end()
 {
+	if((self.id == 1422 || self.id == 251 || self.id == 729))
+	{
+		AI_StartState(self,zs_healself,1,"");
+	};
 	printdebugnpc(PD_ZS_FRAME,"ZS_Attack_End");
 	OTHER = Hlp_GetNpc(self.aivar[AIV_LASTTARGET]);
 	printglobals(PD_ZS_CHECK);

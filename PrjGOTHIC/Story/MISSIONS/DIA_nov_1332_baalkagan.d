@@ -287,7 +287,7 @@ func int dia_baalkagan_success_condition()
 func void dia_baalkagan_success_info()
 {
 	AI_Output(other,self,"DIA_BaalKagan_SUCCESS_15_00");	//я раздал весь болотник.
-	if(NC_JOINTS_VERTEILT >= 8)
+	if(NC_JOINTS_VERTEILT >= 10)
 	{
 		AI_Output(self,other,"DIA_BaalKagan_SUCCESS_13_01");	//” мен€ уже побывали новые покупатели, ты хорошо справилс€ со своей задачей.
 		AI_Output(self,other,"DIA_BaalKagan_SUCCESS_13_02");	// ак € могу отблагодарить теб€?

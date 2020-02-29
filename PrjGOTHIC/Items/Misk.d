@@ -102,7 +102,7 @@ instance ITKECAVALORN01(C_ITEM)
 
 instance ITMISTOMPER(C_ITEM)
 {
-	name = "Пресс";
+	name = "Пест";
 	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MULTI;
 	value = VALUE_MOBSIITEM;

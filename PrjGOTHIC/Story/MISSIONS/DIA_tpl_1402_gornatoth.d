@@ -1,4 +1,28 @@
 
+func void b_gornatothlearn()
+{
+	Info_ClearChoices(tpl_1402_gornatoth_teach);
+	Info_AddChoice(tpl_1402_gornatoth_teach,DIALOG_BACK,tpl_1402_gornatoth_teach_back);
+	if(DIFF_HARD == TRUE)
+	{
+		Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,OTHERCAMPLEARNPAY * 5),tpl_1402_gornatoth_teach_str_5);
+		Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,OTHERCAMPLEARNPAY),tpl_1402_gornatoth_teach_str_1);
+		Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,OTHERCAMPLEARNPAY * 5),tpl_1402_gornatoth_teach_dex_5);
+		Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,OTHERCAMPLEARNPAY),tpl_1402_gornatoth_teach_dex_1);
+		Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,OTHERCAMPLEARNPAY * 5),tpl_1402_gornatoth_teach_man_5);
+		Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,OTHERCAMPLEARNPAY),tpl_1402_gornatoth_teach_man_1);
+	}
+	else
+	{
+		Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),tpl_1402_gornatoth_teach_str_5);
+		Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),tpl_1402_gornatoth_teach_str_1);
+		Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),tpl_1402_gornatoth_teach_dex_5);
+		Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),tpl_1402_gornatoth_teach_dex_1);
+		Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),tpl_1402_gornatoth_teach_man_5);
+		Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),tpl_1402_gornatoth_teach_man_1);
+	};
+};
+	
 instance DIA_TPL_1402_GORNATOTH_EXIT(C_INFO)
 {
 	npc = tpl_1402_gornatoth;
@@ -255,20 +279,13 @@ func void tpl_1402_gornatoth_teach_info()
 {
 	AI_Output(other,self,"TPL_1402_GorNaToth_Teach_15_00");	//Ты можешь научить меня чему-нибудь?
 	AI_Output(self,other,"TPL_1402_GorNaToth_Teach_11_01");	//Настоящему воину необходима не только сила духа, но также сила мышц и ловкость движений.
-	Info_ClearChoices(tpl_1402_gornatoth_teach);
-	Info_AddChoice(tpl_1402_gornatoth_teach,DIALOG_BACK,tpl_1402_gornatoth_teach_back);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),tpl_1402_gornatoth_teach_str_5);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),tpl_1402_gornatoth_teach_str_1);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),tpl_1402_gornatoth_teach_dex_5);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),tpl_1402_gornatoth_teach_dex_1);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),tpl_1402_gornatoth_teach_man_5);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),tpl_1402_gornatoth_teach_man_1);
 	if(LOG_GORNATOTHTRAIN == FALSE)
 	{
 		Log_CreateTopic(GE_TEACHERPSI,LOG_NOTE);
 		b_logentry(GE_TEACHERPSI,"Страж Гор На Тоф может помочь мне повысить силу, ловкость и магическую силу, а также улучшить мое владение одноручным оружием.");
 		LOG_GORNATOTHTRAIN = TRUE;
 	};
+	b_gornatothlearn();
 };
 
 func void tpl_1402_gornatoth_teach_back()
@@ -278,82 +295,141 @@ func void tpl_1402_gornatoth_teach_back()
 
 func void tpl_1402_gornatoth_teach_str_1()
 {
-	b_buyattributepoints(other,ATR_STRENGTH,LPCOST_ATTRIBUTE_STRENGTH);
-	Info_ClearChoices(tpl_1402_gornatoth_teach);
-	Info_AddChoice(tpl_1402_gornatoth_teach,DIALOG_BACK,tpl_1402_gornatoth_teach_back);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),tpl_1402_gornatoth_teach_str_5);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),tpl_1402_gornatoth_teach_str_1);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),tpl_1402_gornatoth_teach_dex_5);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),tpl_1402_gornatoth_teach_dex_1);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),tpl_1402_gornatoth_teach_man_5);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),tpl_1402_gornatoth_teach_man_1);
+	if(DIFF_HARD == FALSE)
+	{
+		b_buyattributepoints(other,ATR_STRENGTH,LPCOST_ATTRIBUTE_STRENGTH);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY)
+	{
+		if(hero.lp >= 1 && hero.attribute[ATR_STRENGTH] < 100)
+		{
+			b_printtrademsg1("Отдано руды: 10");
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
+		};
+		b_buyattributepoints(other,ATR_STRENGTH,LPCOST_ATTRIBUTE_STRENGTH);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"SVM_11_YouWannaFoolMe");	//Не шути со мной!
+	};
+	b_gornatothlearn();
 };
 
 func void tpl_1402_gornatoth_teach_str_5()
 {
-	b_buyattributepoints(other,ATR_STRENGTH,5 * LPCOST_ATTRIBUTE_STRENGTH);
-	Info_ClearChoices(tpl_1402_gornatoth_teach);
-	Info_AddChoice(tpl_1402_gornatoth_teach,DIALOG_BACK,tpl_1402_gornatoth_teach_back);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),tpl_1402_gornatoth_teach_str_5);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),tpl_1402_gornatoth_teach_str_1);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),tpl_1402_gornatoth_teach_dex_5);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),tpl_1402_gornatoth_teach_dex_1);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),tpl_1402_gornatoth_teach_man_5);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),tpl_1402_gornatoth_teach_man_1);
+	if(DIFF_HARD == FALSE)
+	{
+		b_buyattributepoints(other,ATR_STRENGTH,5 * LPCOST_ATTRIBUTE_STRENGTH);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY * 5)
+	{
+		if(hero.lp >= 5 && hero.attribute[ATR_STRENGTH] < 96)
+		{
+			b_printtrademsg1("Отдано руды: 50");
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
+		};
+		b_buyattributepoints(other,ATR_STRENGTH,5 * LPCOST_ATTRIBUTE_STRENGTH);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"SVM_11_YouWannaFoolMe");	//Не шути со мной!
+	};
+	b_gornatothlearn();
 };
 
 func void tpl_1402_gornatoth_teach_dex_1()
 {
-	b_buyattributepoints(other,ATR_DEXTERITY,LPCOST_ATTRIBUTE_DEXTERITY);
-	Info_ClearChoices(tpl_1402_gornatoth_teach);
-	Info_AddChoice(tpl_1402_gornatoth_teach,DIALOG_BACK,tpl_1402_gornatoth_teach_back);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),tpl_1402_gornatoth_teach_str_5);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),tpl_1402_gornatoth_teach_str_1);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),tpl_1402_gornatoth_teach_dex_5);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),tpl_1402_gornatoth_teach_dex_1);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),tpl_1402_gornatoth_teach_man_5);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),tpl_1402_gornatoth_teach_man_1);
+	if(DIFF_HARD == FALSE)
+	{
+		b_buyattributepoints(other,ATR_DEXTERITY,LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY)
+	{
+		if(hero.lp >= 1 && hero.attribute[ATR_DEXTERITY] < 100)
+		{
+			b_printtrademsg1("Отдано руды: 10");
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
+		};
+		b_buyattributepoints(other,ATR_DEXTERITY,LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"SVM_11_YouWannaFoolMe");	//Не шути со мной!
+	};
+	b_gornatothlearn();
 };
 
 func void tpl_1402_gornatoth_teach_dex_5()
 {
-	b_buyattributepoints(other,ATR_DEXTERITY,5 * LPCOST_ATTRIBUTE_DEXTERITY);
-	Info_ClearChoices(tpl_1402_gornatoth_teach);
-	Info_AddChoice(tpl_1402_gornatoth_teach,DIALOG_BACK,tpl_1402_gornatoth_teach_back);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),tpl_1402_gornatoth_teach_str_5);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),tpl_1402_gornatoth_teach_str_1);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),tpl_1402_gornatoth_teach_dex_5);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),tpl_1402_gornatoth_teach_dex_1);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),tpl_1402_gornatoth_teach_man_5);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),tpl_1402_gornatoth_teach_man_1);
+	if(DIFF_HARD == FALSE)
+	{
+		b_buyattributepoints(other,ATR_DEXTERITY,5 * LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY * 5)
+	{
+		if(hero.lp >= 5 && hero.attribute[ATR_DEXTERITY] < 96)
+		{
+			b_printtrademsg1("Отдано руды: 50");
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
+		};
+		b_buyattributepoints(other,ATR_DEXTERITY,5 * LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"SVM_11_YouWannaFoolMe");	//Не шути со мной!
+	};
+	b_gornatothlearn();
 };
 
 func void tpl_1402_gornatoth_teach_man_1()
 {
-	b_buyattributepoints(other,ATR_MANA_MAX,LPCOST_ATTRIBUTE_MANA);
-	Info_ClearChoices(tpl_1402_gornatoth_teach);
-	Info_AddChoice(tpl_1402_gornatoth_teach,DIALOG_BACK,tpl_1402_gornatoth_teach_back);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),tpl_1402_gornatoth_teach_str_5);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),tpl_1402_gornatoth_teach_str_1);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),tpl_1402_gornatoth_teach_dex_5);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),tpl_1402_gornatoth_teach_dex_1);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),tpl_1402_gornatoth_teach_man_5);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),tpl_1402_gornatoth_teach_man_1);
+	if(DIFF_HARD == FALSE)
+	{
+		b_buyattributepoints(other,ATR_MANA_MAX,LPCOST_ATTRIBUTE_MANA);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY)
+	{
+		if(hero.lp >= 1 && hero.attribute[ATR_MANA_MAX] < 100)
+		{
+			b_printtrademsg1("Отдано руды: 10");
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
+		};
+		b_buyattributepoints(other,ATR_MANA_MAX,LPCOST_ATTRIBUTE_MANA);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"SVM_11_YouWannaFoolMe");	//Не шути со мной!
+	};
+	b_gornatothlearn();
 };
 
 func void tpl_1402_gornatoth_teach_man_5()
 {
-	b_buyattributepoints(other,ATR_MANA_MAX,5 * LPCOST_ATTRIBUTE_MANA);
-	Info_ClearChoices(tpl_1402_gornatoth_teach);
-	Info_AddChoice(tpl_1402_gornatoth_teach,DIALOG_BACK,tpl_1402_gornatoth_teach_back);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),tpl_1402_gornatoth_teach_str_5);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),tpl_1402_gornatoth_teach_str_1);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),tpl_1402_gornatoth_teach_dex_5);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),tpl_1402_gornatoth_teach_dex_1);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),tpl_1402_gornatoth_teach_man_5);
-	Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),tpl_1402_gornatoth_teach_man_1);
+	if(DIFF_HARD == FALSE)
+	{
+		b_buyattributepoints(other,ATR_MANA_MAX,5 * LPCOST_ATTRIBUTE_MANA);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY * 5)
+	{
+		if(hero.lp >= 5 && hero.attribute[ATR_MANA_MAX] < 96)
+		{
+			b_printtrademsg1("Отдано руды: 50");
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
+		};
+		b_buyattributepoints(other,ATR_MANA_MAX,5 * LPCOST_ATTRIBUTE_MANA);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"SVM_11_YouWannaFoolMe");	//Не шути со мной!
+	};
+	b_gornatothlearn();
 };
-
 
 instance TPL_1402_GORNATOTH_TRAIN(C_INFO)
 {

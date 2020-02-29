@@ -199,7 +199,7 @@ instance DIA_GRAVO_INFLUENCE(C_INFO)
 
 func int dia_gravo_influence_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_gravo_hallo))
+	if(Npc_KnowsInfo(hero,dia_gravo_hallo) && (Npc_GetTrueGuild(hero) == GIL_NONE) && (KAPITEL < 2))
 	{
 		return 1;
 	};
@@ -213,11 +213,22 @@ func void dia_gravo_influence_info()
 	AI_Output(self,other,"DIA_Gravo_Influence_04_02");	//Самый влиятельный из Призраков - Диего. Он доверяет Фингерсу, Уистлеру и Слаю.
 	AI_Output(self,other,"DIA_Gravo_Influence_04_03");	//Декстер и Фиск продают товары на рыночной площади. У них много покупателей среди стражников, поэтому они тоже могут повлиять на некоторых людей.
 	AI_Output(self,other,"DIA_Gravo_Influence_04_04");	//Еще здесь есть Скатти. Он организует сражения на арене. В лагере многие должны ему руду, так что я и его причисляю к влиятельным людям.
-	if(log == FALSE)
+	if(GRAVO_LOG == FALSE)
 	{
 		Log_CreateTopic(GE_TRADEROC,LOG_NOTE);
-		b_logentry(GE_TRADEROC,"Декстер и Фиск торгуют различными товарами на рыночной площади.");
-		log = TRUE;
+		if(!Npc_KnowsInfo(hero,stt_311_fisk_first) && !Npc_KnowsInfo(hero,dia_dexter_first))
+		{
+			b_logentry(GE_TRADEROC,"Декстер и Фиск торгуют различными товарами на рыночной площади.");
+		};
+		if(Npc_KnowsInfo(hero,stt_311_fisk_first) && !Npc_KnowsInfo(hero,dia_dexter_first))
+		{
+			b_logentry(GE_TRADEROC,"Декстер торгует различными товарами на рыночной площади.");
+		};
+		if(Npc_KnowsInfo(hero,dia_dexter_first) && !Npc_KnowsInfo(hero,stt_311_fisk_first))
+		{
+			b_logentry(GE_TRADEROC,"Фиск торгует различными товарами на рыночной площади.");
+		};
+		GRAVO_LOG = TRUE;
 	};
 };
 

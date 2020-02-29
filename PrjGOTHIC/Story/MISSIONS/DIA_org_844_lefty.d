@@ -73,6 +73,7 @@ func void dia_lefty_first_info()
 {
 	AI_Output(self,other,"DIA_Lefty_First_07_00");	//Ёй, ты недавно здесь, да? Ќам здесь нужен человек, который сможет разнести воду дл€ кресть€н, что работают на пол€х.
 	AI_Output(self,other,"DIA_Lefty_First_07_01");	//“ебе сейчас как раз не помешают новые знакомства. „то скажешь?
+	Npc_ExchangeRoutine(self,"start");
 	Log_CreateTopic(CH1_CARRYWATER,LOG_MISSION);
 	Log_SetTopicStatus(CH1_CARRYWATER,LOG_RUNNING);
 	b_logentry(CH1_CARRYWATER,"Ћефти из Ќового лагер€ попросил мен€ разнести воду кресть€нам, работающим на рисовых пол€х.");

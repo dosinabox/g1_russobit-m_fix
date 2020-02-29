@@ -41,13 +41,14 @@ instance ORG_818_RATFORD(NPC_DEFAULT)
 
 func void rtn_start_818()
 {
-	ta_smalltalk(0,0,23,0,"OW_PATH_1_5_A");
-	ta_smalltalk(23,0,0,0,"OW_PATH_1_5_A");
+	ta_smalltalk(5,0,23,0,"OW_PATH_1_5_A");
+	ta_sitcampfire(23,0,1,0,"OW_PATH_1_5_C");
+	ta_boss(1,0,5,0,"OW_PATH_1_5_C");
 };
 
 func void rtn_fmtaken_818()
 {
-	ta_sitcampfire(7,0,18,0,"OW_WOODRUIN_WOLF_SPAWN");
-	ta_standaround(18,0,7,0,"OW_PATH_02");
+	ta_sitcampfire(7,0,18,0,"RND_CH4_01");
+	ta_guard(18,0,7,0,"RND_CH4_02");
 };
 

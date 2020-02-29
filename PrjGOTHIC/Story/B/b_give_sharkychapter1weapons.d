@@ -49,7 +49,7 @@ func void b_give_sharkychapter4weapons()
 	var C_NPC npc;
 	npc = Hlp_GetNpc(org_843_sharky);
 	CreateInvItem(npc,itmw_2h_axe_old_02);
-	CreateInvItem(npc,itmw_2h_axe_old_01);
+	//CreateInvItem(npc,itmw_2h_axe_old_01);
 	CreateInvItem(npc,itmw_2h_axe_light_01);
 	CreateInvItem(npc,itmw_2h_axe_light_02);
 	CreateInvItems(npc,itminugget,500);
@@ -63,7 +63,7 @@ func void b_give_sharkychapter5weapons()
 	CreateInvItem(npc,itmw_2h_axe_light_03);
 	CreateInvItem(npc,itmw_2h_axe_heavy_01);
 	CreateInvItem(npc,itmw_2h_axe_heavy_02);
-	CreateInvItem(npc,itmw_2h_axe_heavy_03);
+	//CreateInvItem(npc,itmw_2h_axe_heavy_03);
 	CreateInvItem(npc,itmw_2h_axe_heavy_04);
 	CreateInvItems(npc,itminugget,700);
 	CreateInvItems(npc,itkelockpick,10);

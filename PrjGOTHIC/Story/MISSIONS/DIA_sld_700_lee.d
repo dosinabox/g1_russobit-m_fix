@@ -1,4 +1,24 @@
 
+func void b_leelearn()
+{
+	Info_ClearChoices(sld_700_lee_teach);
+	Info_AddChoice(sld_700_lee_teach,DIALOG_BACK,sld_700_lee_teach_back);
+	if(DIFF_HARD == TRUE)
+	{
+		Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,OTHERCAMPLEARNPAY * 5),sld_700_lee_teach_str_5);
+		Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,OTHERCAMPLEARNPAY),sld_700_lee_teach_str_1);
+		Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,OTHERCAMPLEARNPAY * 5),sld_700_lee_teach_dex_5);
+		Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,OTHERCAMPLEARNPAY),sld_700_lee_teach_dex_1);
+	}
+	else
+	{
+		Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),sld_700_lee_teach_str_5);
+		Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),sld_700_lee_teach_str_1);
+		Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),sld_700_lee_teach_dex_5);
+		Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),sld_700_lee_teach_dex_1);
+	};
+};
+
 instance SLD_700_LEE_EXIT(C_INFO)
 {
 	npc = sld_700_lee;
@@ -237,7 +257,6 @@ func int sld_700_lee_damnpast_condition()
 
 func void sld_700_lee_damnpast_info()
 {
-	var C_NPC homer;
 	AI_Output(self,other,"Sld_700_Lee_DAMNPAST_Info_08_01");	//А ведь когда-то я вел совсем другую жизнь.
 	AI_Output(self,other,"Sld_700_Lee_DAMNPAST_Info_08_02");	//Я был одним из лучших генералов королевства.
 	AI_Output(self,other,"Sld_700_Lee_DAMNPAST_Info_08_03");	//Всю свою жизнь я боролся за его свободу.
@@ -249,9 +268,14 @@ func void sld_700_lee_damnpast_info()
 	AI_AlignToWP(self);
 	AI_Output(self,other,"Sld_700_Lee_DAMNPAST_Info_08_09");	//Я должен им отомстить.
 	Npc_ExchangeRoutine(self,"START");
-	homer = Hlp_GetNpc(bau_935_homer);
-	Npc_ExchangeRoutine(homer,"START");
-	AI_ContinueRoutine(homer);
+	if(HOMER_DAMLURKER == LOG_SUCCESS)
+	{
+		b_exchangeroutine(bau_935_homer,"START");
+	}
+	else
+	{
+		b_exchangeroutine(bau_935_homer,"PRESTART");
+	};
 };
 
 
@@ -292,7 +316,7 @@ func void sld_700_lee_fmtaken_info()
 		AI_Output(hero,self,"Info_CorAngar_TELEPORT_15_05");	//Спасибо тебе!
 		AI_Output(hero,self,"Info_Exit_Info_15_01");	//До встречи!
 		b_logentry(CH4_BANNEDFROMOC,"Я рассказал Ли о том, что мы с Горном очистили Свободную шахту. Он был очень доволен.");
-		b_giveinvitems(self,other,itarrunefirestorm,1);
+		b_giveinvitems(self,other,itarrune_2_3_firestorm,1);
 		b_givexp(500);
 		LEE_FREEMINEREPORT = 0;
 	};
@@ -349,6 +373,10 @@ func void sld_700_lee_changeside_info()
 	b_logentry(CH4_BANNEDFROMOC,"Я перешел в другой лагерь. После того как меня изгнали из Старого лагеря, Ли принял меня в наемники. Мне нужно попасть к Сатурасу!");
 	Log_CreateTopic(GE_TEACHERNC,LOG_NOTE);
 	b_logentry(GE_TEACHERNC,"Ли может научить меня вести бой двуручным мечом. Еще он может помочь мне увеличить силу и ловкость.");
+	if(DIFF_HARD == FALSE)
+	{
+		FREELEARN_NC = TRUE;
+	};
 };
 
 
@@ -440,18 +468,18 @@ func void sld_700_lee_armor_h()
 };
 
 
-instance SLD_700_LEE_TEACH(C_INFO)
+instance SLD_700_LEE_TEACH_PRE(C_INFO)
 {
 	npc = sld_700_lee;
 	nr = 10;
-	condition = sld_700_lee_teach_condition;
-	information = sld_700_lee_teach_info;
-	permanent = 1;
+	condition = sld_700_lee_teach_pre_condition;
+	information = sld_700_lee_teach_pre_info;
+	permanent = 0;
 	description = "Ты можешь научить меня чему-нибудь?";
 };
 
 
-func int sld_700_lee_teach_condition()
+func int sld_700_lee_teach_pre_condition()
 {
 	if(Npc_GetTrueGuild(hero) == GIL_SLD || (Npc_GetTrueGuild(hero) == GIL_KDW))
 	{
@@ -459,16 +487,35 @@ func int sld_700_lee_teach_condition()
 	};
 };
 
-func void sld_700_lee_teach_info()
+func void sld_700_lee_teach_pre_info()
 {
 	AI_Output(other,self,"Sld_700_Lee_Teach_15_00");	//Ты можешь научить меня чему-нибудь?
 	AI_Output(self,other,"Sld_700_Lee_Teach_08_01");	//Я могу помочь тебе стать более ловким и сильным.
-	Info_ClearChoices(sld_700_lee_teach);
-	Info_AddChoice(sld_700_lee_teach,DIALOG_BACK,sld_700_lee_teach_back);
-	Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),sld_700_lee_teach_str_5);
-	Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),sld_700_lee_teach_str_1);
-	Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),sld_700_lee_teach_dex_5);
-	Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),sld_700_lee_teach_dex_1);
+};
+
+instance SLD_700_LEE_TEACH(C_INFO)
+{
+	npc = sld_700_lee;
+	nr = 10;
+	condition = sld_700_lee_teach_condition;
+	information = sld_700_lee_teach_info;
+	permanent = 1;
+	description = DIALOG_LEARN;
+};
+
+
+func int sld_700_lee_teach_condition()
+{
+	if(Npc_KnowsInfo(hero,sld_700_lee_teach_pre))
+	{
+		return TRUE;
+	};
+};
+
+func void sld_700_lee_teach_info()
+{
+	AI_Output(other,self,"ORG_801_Lares_Teach_15_00");	//Я хочу улучшить свои навыки.
+	b_leelearn();
 };
 
 func void sld_700_lee_teach_back()
@@ -478,46 +525,94 @@ func void sld_700_lee_teach_back()
 
 func void sld_700_lee_teach_str_1()
 {
-	b_buyattributepoints(other,ATR_STRENGTH,LPCOST_ATTRIBUTE_STRENGTH);
-	Info_ClearChoices(sld_700_lee_teach);
-	Info_AddChoice(sld_700_lee_teach,DIALOG_BACK,sld_700_lee_teach_back);
-	Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),sld_700_lee_teach_str_5);
-	Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),sld_700_lee_teach_str_1);
-	Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),sld_700_lee_teach_dex_5);
-	Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),sld_700_lee_teach_dex_1);
+	if(DIFF_HARD == FALSE)
+	{
+		b_buyattributepoints(other,ATR_STRENGTH,LPCOST_ATTRIBUTE_STRENGTH);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY)
+	{
+		if(hero.lp >= 1 && hero.attribute[ATR_STRENGTH] < 100)
+		{
+			b_printtrademsg1("Отдано руды: 10");
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
+		};
+		b_buyattributepoints(other,ATR_STRENGTH,LPCOST_ATTRIBUTE_STRENGTH);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"SVM_8_WeWillMeetAgain");	//Мы еще встретимся!
+	};
+	b_leelearn();
 };
 
 func void sld_700_lee_teach_str_5()
 {
-	b_buyattributepoints(other,ATR_STRENGTH,5 * LPCOST_ATTRIBUTE_STRENGTH);
-	Info_ClearChoices(sld_700_lee_teach);
-	Info_AddChoice(sld_700_lee_teach,DIALOG_BACK,sld_700_lee_teach_back);
-	Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),sld_700_lee_teach_str_5);
-	Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),sld_700_lee_teach_str_1);
-	Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),sld_700_lee_teach_dex_5);
-	Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),sld_700_lee_teach_dex_1);
+	if(DIFF_HARD == FALSE)
+	{
+		b_buyattributepoints(other,ATR_STRENGTH,5 * LPCOST_ATTRIBUTE_STRENGTH);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY * 5)
+	{
+		if(hero.lp >= 5 && hero.attribute[ATR_STRENGTH] < 96)
+		{
+			b_printtrademsg1("Отдано руды: 50");
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
+		};
+		b_buyattributepoints(other,ATR_STRENGTH,5 * LPCOST_ATTRIBUTE_STRENGTH);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"SVM_8_WeWillMeetAgain");	//Мы еще встретимся!
+	};
+	b_leelearn();
 };
 
 func void sld_700_lee_teach_dex_1()
 {
-	b_buyattributepoints(other,ATR_DEXTERITY,LPCOST_ATTRIBUTE_DEXTERITY);
-	Info_ClearChoices(sld_700_lee_teach);
-	Info_AddChoice(sld_700_lee_teach,DIALOG_BACK,sld_700_lee_teach_back);
-	Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),sld_700_lee_teach_str_5);
-	Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),sld_700_lee_teach_str_1);
-	Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),sld_700_lee_teach_dex_5);
-	Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),sld_700_lee_teach_dex_1);
+	if(DIFF_HARD == FALSE)
+	{
+		b_buyattributepoints(other,ATR_DEXTERITY,LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY)
+	{
+		if(hero.lp >= 1 && hero.attribute[ATR_DEXTERITY] < 100)
+		{
+			b_printtrademsg1("Отдано руды: 10");
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
+		};
+		b_buyattributepoints(other,ATR_DEXTERITY,LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"SVM_8_WeWillMeetAgain");	//Мы еще встретимся!
+	};
+	b_leelearn();
 };
 
 func void sld_700_lee_teach_dex_5()
 {
-	b_buyattributepoints(other,ATR_DEXTERITY,5 * LPCOST_ATTRIBUTE_DEXTERITY);
-	Info_ClearChoices(sld_700_lee_teach);
-	Info_AddChoice(sld_700_lee_teach,DIALOG_BACK,sld_700_lee_teach_back);
-	Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),sld_700_lee_teach_str_5);
-	Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),sld_700_lee_teach_str_1);
-	Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),sld_700_lee_teach_dex_5);
-	Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),sld_700_lee_teach_dex_1);
+	if(DIFF_HARD == FALSE)
+	{
+		b_buyattributepoints(other,ATR_DEXTERITY,5 * LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY * 5)
+	{
+		if(hero.lp >= 5 && hero.attribute[ATR_DEXTERITY] < 96)
+		{
+			b_printtrademsg1("Отдано руды: 50");
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
+		};
+		b_buyattributepoints(other,ATR_DEXTERITY,5 * LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"SVM_8_WeWillMeetAgain");	//Мы еще встретимся!
+	};
+	b_leelearn();
 };
 
 

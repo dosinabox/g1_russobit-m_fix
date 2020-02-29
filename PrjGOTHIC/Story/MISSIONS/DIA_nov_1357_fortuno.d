@@ -17,6 +17,11 @@ func int dia_fortuno_exit_condition()
 
 func void dia_fortuno_exit_info()
 {
+	if(Npc_HasItems(other,alchemybook))
+	{
+		Npc_RemoveInvItem(other,alchemybook);
+		CreateInvItem(other,alch200);
+	};
 	AI_StopProcessInfos(self);
 };
 
@@ -152,7 +157,7 @@ instance DIA_FORTUNO_BUYJOINTS2(C_INFO)
 	condition = dia_fortuno_buyjoints2_condition;
 	information = dia_fortuno_buyjoints2_info;
 	permanent = 1;
-	description = "Давай меняться.";
+	description = DIALOG_TRADE;
 	trade = 1;
 };
 
@@ -202,6 +207,11 @@ func void dia_fortuno_help_info()
 	AI_Output(other,self,"Info_FreemineOrc_OFFER_15_01");	//Я постараюсь найти его тебе!
 	AI_Output(self,other,"DIA_Fortuno_SaveYberion_07");	//Пару месяцев назад я был там, но меня чуть не загрыз шныг. Поторопись, у нас очень мало времени!
 	b_logentry(CH3_FINDHERBS,"Фортуно предложил другой план: найти редкое растение у затонувшей башни на озере и сделать из него лечебное зелье.");
+	if(Npc_HasItems(other,alchemybook))
+	{
+		Npc_RemoveInvItem(other,alchemybook);
+		CreateInvItem(other,alch200);
+	};
 	AI_StopProcessInfos(self);
 };
 
@@ -255,6 +265,11 @@ func void dia_fortuno_deadleaffound_info()
 		b_printtrademsg2("Получено лечебное зелье Фортуно.");
 		CreateInvItem(hero,healthwater);
 		b_logentry(CH3_FINDHERBS,"Лечебное зелье готово! Теперь нужно быстрее отнести его в храм и отдать Кор Ангару.");
+	};
+	if(Npc_HasItems(other,alchemybook))
+	{
+		Npc_RemoveInvItem(other,alchemybook);
+		CreateInvItem(other,alch200);
 	};
 	AI_StopProcessInfos(self);
 };

@@ -13,7 +13,7 @@ instance ORG_888_ERPRESSER(NPC_DEFAULT)
 	attribute[ATR_MANA] = 0;
 	attribute[ATR_HITPOINTS_MAX] = 220;
 	attribute[ATR_HITPOINTS] = 220;
-	aivar[43] = TRUE;
+	//aivar[43] = TRUE;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Relaxed.mds");
 	Mdl_SetVisualBody(self,"hum_body_Naked0",0,1,"Hum_Head_Fatbald",35,2,org_armor_h);

@@ -49,24 +49,20 @@ func void dia_whistler_iamnew_info()
 	AI_Output(self,other,"DIA_Whistler_IAmNew_11_04");	//Если ты хочешь, чтобы я порекомендовал тебя Диего, ты должен будешь оказать мне одну услугу.
 };
 
-
-var int whistler_buymysword;
-var int whistler_buymysword_day;
-
 instance DIA_WHISTLER_FAVOUR(C_INFO)
 {
 	npc = stt_309_whistler;
 	nr = 1;
 	condition = dia_whistler_favour_condition;
 	information = dia_whistler_favour_info;
-	permanent = 0;
+	permanent = 1;
 	description = "Чем я могу тебе помочь?";
 };
 
 
 func int dia_whistler_favour_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_whistler_iamnew) && (Npc_GetTrueGuild(hero) == GIL_NONE))
+	if(Npc_KnowsInfo(hero,dia_whistler_iamnew) && (Npc_GetTrueGuild(hero) == GIL_NONE) && (WHISTLER_BUYMYSWORD != LOG_OBSOLETE) && (WHISTLER_BUYMYSWORD != LOG_RUNNING) && (WHISTLER_BUYMYSWORD != LOG_SUCCESS) && (WHISTLER_BUYMYSWORD != LOG_FAILED))
 	{
 		return 1;
 	};
@@ -79,6 +75,7 @@ func void dia_whistler_favour_info()
 	AI_Output(self,other,"DIA_Whistler_Favour_11_02");	//Это отличный палаш, украшенный резьбой и гравировкой. Только он мне его не продает.
 	AI_Output(self,other,"DIA_Whistler_Favour_11_03");	//Я тебе дам сто кусков руды, а ты купишь его для меня. Только не говори ему, что ты пришел от меня.
 	Info_ClearChoices(dia_whistler_favour);
+	Info_AddChoice(dia_whistler_favour,"Может, позже...",dia_whistler_favour_later);
 	Info_AddChoice(dia_whistler_favour,"Хорошо, давай сто кусков. Я достану тебе меч.",dia_whistler_favour_ok);
 	Info_AddChoice(dia_whistler_favour,"И ты мне веришь? А может, я возьму эту руду и сбегу?",dia_whistler_favour_oreaway);
 	Info_AddChoice(dia_whistler_favour,"Почему же он не хочет продать тебе этот меч?",dia_whistler_favour_whynotsell);
@@ -108,6 +105,12 @@ func void dia_whistler_favour_oreaway()
 {
 	AI_Output(other,self,"DIA_Whistler_Favour_OreAway_15_00");	//И ты мне веришь? А может, я возьму эту руду и сбегу?
 	AI_Output(self,other,"DIA_Whistler_Favour_OreAway_11_01");	//Не забывай: колония маленькая. Не вздумай уйти с моей рудой, все равно найду!
+};
+
+func void dia_whistler_favour_later()
+{
+	AI_Output(other,self,"DIA_Lefty_First_Later_15_00");	//Может, позже...
+	AI_StopProcessInfos(self);
 };
 
 func void dia_whistler_favour_whynotsell()
@@ -281,21 +284,33 @@ func int dia_whistler_mysword_success_condition()
 func void dia_whistler_mysword_success_info()
 {
 	AI_Output(other,self,"DIA_Whistler_MySword_Success_15_00");	//Я достал твой меч...
+	AI_Output(self,other,"Info_Diego_Brief_11_01");	//Да ну?!
 	b_printtrademsg1("Отдан меч Уистлера.");
 	b_giveinvitems(other,self,whistlers_schwert,1);
-	AI_Output(self,other,"DIA_Whistler_MySword_Success_11_01");	//Ну, ведь это было совсем несложно, да? Ладно, как я и говорил, я помогу тебе.
+	if(c_bodystatecontains(self,BS_SIT))
+	{
+		AI_UseMob(self,"BENCH",-1);
+	};
+	AI_TurnToNPC(self,other);
+	c_stoplookat(self);
+	AI_EquipBestMeleeWeapon(self);
+	AI_ReadyMeleeWeapon(self);
+	AI_PlayAni(self,"T_URISELINSPECT");
+	AI_RemoveWeapon(self);
+	//AI_Output(self,other,"DIA_Whistler_MySword_Success_11_01");	//Ну, ведь это было совсем несложно, да? Ладно, как я и говорил, я помогу тебе.
 	if(Npc_GetTrueGuild(hero) == GIL_NONE)
 	{
+		AI_Output(self,other,"DIA_Whistler_MySword_Success_11_01");	//Ну, ведь это было совсем несложно, да? Ладно, как я и говорил, я помогу тебе.
 		AI_Output(self,other,"DIA_Whistler_MySword_Success_11_02");	//Если Диего спросит меня о тебе, я скажу, что тебе можно доверять. До встречи!
 		b_logentry(CH1_JOINOC,"Я достал меч для Уистлера. Он остался доволен. Теперь он поддержит меня, если я захочу вступить в лагерь.");
 	}
 	else
 	{
+		AI_Output(self,hero,"Info_Diego_OCFAVOR_11_05");	//Благодарю, друг мой. Ты оказался отличным парнем! Теперь иди, еще увидимся.
 		b_logentry(CH1_JOINOC,"Уистлер был доволен тем, что я достал ему меч. Жаль, но мне его помощь не пригодится. Я больше не могу стать Призраком.");
 	};
 	WHISTLER_BUYMYSWORD = LOG_SUCCESS;
 	b_givexp(XP_WHISTLERSSWORD);
-	AI_EquipBestMeleeWeapon(self);
 	AI_StopProcessInfos(self);
 };
 

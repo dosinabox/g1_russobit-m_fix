@@ -1,4 +1,22 @@
 
+func void b_corristolearn()
+{
+	if(DIFF_HARD == TRUE)
+	{
+		Info_ClearChoices(kdf_402_corristo_mana);
+		Info_AddChoice(kdf_402_corristo_mana,DIALOG_BACK,kdf_402_corristo_mana_back);
+		Info_AddChoice(kdf_402_corristo_mana,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,OTHERCAMPLEARNPAY * 5),kdf_402_corristo_mana_man_5);
+		Info_AddChoice(kdf_402_corristo_mana,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,OTHERCAMPLEARNPAY),kdf_402_corristo_mana_man_1);
+	}
+	else
+	{
+		Info_ClearChoices(kdf_402_corristo_mana);
+		Info_AddChoice(kdf_402_corristo_mana,DIALOG_BACK,kdf_402_corristo_mana_back);
+		Info_AddChoice(kdf_402_corristo_mana,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),kdf_402_corristo_mana_man_5);
+		Info_AddChoice(kdf_402_corristo_mana,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),kdf_402_corristo_mana_man_1);
+	};
+};
+
 instance KDF_402_CORRISTO_EXIT(C_INFO)
 {
 	npc = kdf_402_corristo;
@@ -379,10 +397,7 @@ func void kdf_402_corristo_mana_info()
 {
 	AI_Output(other,self,"KDF_402_Corristo_MANA_Info_15_01");	//Я хочу увеличить свою магическую силу.
 	AI_Output(self,other,"KDF_402_Corristo_MANA_Info_14_02");	//Я могу помочь тебе в этом. Как ты будешь использовать ее, зависит только от тебя.
-	Info_ClearChoices(kdf_402_corristo_mana);
-	Info_AddChoice(kdf_402_corristo_mana,DIALOG_BACK,kdf_402_corristo_mana_back);
-	Info_AddChoice(kdf_402_corristo_mana,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),kdf_402_corristo_mana_man_5);
-	Info_AddChoice(kdf_402_corristo_mana,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),kdf_402_corristo_mana_man_1);
+	b_corristolearn();
 };
 
 func void kdf_402_corristo_mana_back()
@@ -392,20 +407,48 @@ func void kdf_402_corristo_mana_back()
 
 func void kdf_402_corristo_mana_man_1()
 {
-	b_buyattributepoints(other,ATR_MANA_MAX,LPCOST_ATTRIBUTE_MANA);
-	Info_ClearChoices(kdf_402_corristo_mana);
-	Info_AddChoice(kdf_402_corristo_mana,DIALOG_BACK,kdf_402_corristo_mana_back);
-	Info_AddChoice(kdf_402_corristo_mana,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),kdf_402_corristo_mana_man_5);
-	Info_AddChoice(kdf_402_corristo_mana,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),kdf_402_corristo_mana_man_1);
+	if(DIFF_HARD == FALSE)
+	{
+		b_buyattributepoints(other,ATR_MANA_MAX,LPCOST_ATTRIBUTE_MANA);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY)
+	{
+		if(hero.lp >= 1 && hero.attribute[ATR_MANA_MAX] < 100)
+		{
+			b_printtrademsg1("Отдано руды: 10");
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
+		};
+		b_buyattributepoints(other,ATR_MANA_MAX,LPCOST_ATTRIBUTE_MANA);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"SVM_14_HeyHeyHey");	//Хм.
+	};
+	b_corristolearn();
 };
 
 func void kdf_402_corristo_mana_man_5()
 {
-	b_buyattributepoints(other,ATR_MANA_MAX,5 * LPCOST_ATTRIBUTE_MANA);
-	Info_ClearChoices(kdf_402_corristo_mana);
-	Info_AddChoice(kdf_402_corristo_mana,DIALOG_BACK,kdf_402_corristo_mana_back);
-	Info_AddChoice(kdf_402_corristo_mana,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),kdf_402_corristo_mana_man_5);
-	Info_AddChoice(kdf_402_corristo_mana,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),kdf_402_corristo_mana_man_1);
+	if(DIFF_HARD == FALSE)
+	{
+		b_buyattributepoints(other,ATR_MANA_MAX,5 * LPCOST_ATTRIBUTE_MANA);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY * 5)
+	{
+		if(hero.lp >= 5 && hero.attribute[ATR_MANA_MAX] < 96)
+		{
+			b_printtrademsg1("Отдано руды: 50");
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
+		};
+		b_buyattributepoints(other,ATR_MANA_MAX,5 * LPCOST_ATTRIBUTE_MANA);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"SVM_14_HeyHeyHey");	//Хм.
+	};
+	b_corristolearn();
 };
 
 

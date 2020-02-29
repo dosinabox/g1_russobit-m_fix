@@ -31,8 +31,9 @@ instance STT_330_SCHATTEN(NPC_DEFAULT)
 
 func void rtn_prestart_330()
 {
-	ta_smalltalk(8,0,20,0,"OCR_OUTSIDE_HUT_44");
-	ta_smalltalk(20,0,8,0,"OCR_OUTSIDE_HUT_44");
+	ta_smalltalk(10,0,23,0,"OCR_OUTSIDE_HUT_44");
+	ta_sleep(23,0,7,30,"OCR_HUT_44");
+	ta_sitaround(7,30,10,0,"OCR_OUTSIDE_HUT_44");
 };
 
 func void rtn_start_330()

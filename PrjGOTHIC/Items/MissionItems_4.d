@@ -108,7 +108,7 @@ func void useworldmap_orc()
 
 instance ITKE_FREEMINE(C_ITEM)
 {
-	name = "Ключ от Свободной шахты";
+	name = "Ключ";
 	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MISSION;
 	value = 0;
@@ -160,13 +160,13 @@ instance ULUMULU(C_ITEM)
 	visual_skin = 0;
 	material = MAT_WOOD;
 	description = name;
-	text[0] = "Улу-Мулу является великим знаком силы";
-	text[1] = "и достоинства. Его хозяин может";
-	text[2] = "не бояться орков!";
-	text[3] = NAME_DAMAGE;
-	count[3] = damagetotal;
-	text[4] = NAME_STR_NEEDED;
-	count[4] = cond_value[2];
+	text[0] = "Великий знак силы и достоинства.";
+	text[1] = "Его хозяин может не бояться орков!";
+	text[2] = NAME_DAMAGE;
+	count[2] = damagetotal;
+	text[3] = NAME_STR_NEEDED;
+	count[3] = cond_value[2];
+	text[4] = NAME_TWOHANDED;
 	text[5] = NAME_VALUE;
 	count[5] = value;
 };

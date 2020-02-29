@@ -272,16 +272,20 @@ func void gur_1201_corkalom_joinpsi_info()
 			AI_Output(self,other,"GUR_1201_CorKalom_JoinPSI_10_08");	//Хорошо. Слов Идолов мне вполне достаточно.
 			AI_Output(self,other,"GUR_1201_CorKalom_JoinPSI_10_09");	//Вот, возьми эту одежду. А теперь иди и постарайся быть полезным.
 			b_printtrademsg1("Получен легкий доспех послушника.");
-			CreateInvItem(self,nov_armor_m);
-			b_giveinvitems(self,hero,nov_armor_m,1);
+			CreateInvItem(hero,nov_armor_m);
+			//b_giveinvitems(self,hero,nov_armor_m,1);
 			AI_EquipArmor(hero,nov_armor_m);
 			Npc_SetTrueGuild(hero,GIL_NOV);
 			hero.guild = GIL_NOV;
 			b_logentry(CH1_JOINPSI,"Сегодня Кор Галом зачислил меня в послушники. Он мог бы вести себя и получше, но, как бы то ни было, теперь я принят в Братство.");
 			Log_CreateTopic(GE_TRADERPSI,LOG_NOTE);
 			b_logentry(GE_TRADERPSI,"Доспехи послушников я могу получить у Идола Намиба.");
-			Log_CreateTopic(GE_TEACHERPSI,LOG_NOTE);
-			b_logentry(GE_TEACHERPSI,"Я вступил в Болотный лагерь и теперь некоторые учителя будут согласны учить меня бесплатно.");
+			if(DIFF_HARD == FALSE)
+			{
+				Log_CreateTopic(GE_TEACHERPSI,LOG_NOTE);
+				b_logentry(GE_TEACHERPSI,"Я вступил в Болотный лагерь и теперь некоторые учителя будут согласны учить меня бесплатно.");
+				FREELEARN_PSI = TRUE;
+			};
 			Log_SetTopicStatus(CH1_JOINPSI,LOG_SUCCESS);
 			b_givexp(XP_BECOMENOVICE);
 			Log_CreateTopic(CH1_JOINOC,LOG_MISSION);
@@ -895,8 +899,8 @@ func void info_corkalom_bringmcqballs_success_rune()
 	AI_Output(other,self,"Mis_2_PSI_Kalom_BringMCQEggs_Success_RUNE_15_01");	//Руну.
 	AI_Output(self,other,"Mis_2_PSI_Kalom_BringMCQEggs_Success_RUNE_10_02");	//Пусть эта руна осветит твой путь!
 	b_printtrademsg1("Получена руна света.");
-	CreateInvItem(self,itarrunelight);
-	b_giveinvitems(self,hero,itarrunelight,1);
+	CreateInvItem(self,itarrune_1_1_light);
+	b_giveinvitems(self,hero,itarrune_1_1_light,1);
 	Info_ClearChoices(info_corkalom_bringmcqballs_success);
 };
 

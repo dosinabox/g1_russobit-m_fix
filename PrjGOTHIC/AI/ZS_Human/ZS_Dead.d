@@ -42,6 +42,10 @@ func void zs_dead()
 	{
 		b_givedeathinv();
 	};
+	if(self.guild == GIL_ORCSHAMAN)
+	{
+		Npc_RemoveInvItem(self,itarrune_2_2_fireball);
+	};
 	b_checkdeadmissionnpcs();
 	b_respawn(self);
 };

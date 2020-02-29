@@ -1,4 +1,24 @@
 
+func void b_lareslearn()
+{
+	Info_ClearChoices(org_801_lares_teach);
+	Info_AddChoice(org_801_lares_teach,DIALOG_BACK,org_801_lares_teach_back);
+	if(DIFF_HARD == TRUE)
+	{
+		Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,OTHERCAMPLEARNPAY * 5),org_801_lares_teach_str_5);
+		Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,OTHERCAMPLEARNPAY),org_801_lares_teach_str_1);
+		Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,OTHERCAMPLEARNPAY * 5),org_801_lares_teach_dex_5);
+		Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,OTHERCAMPLEARNPAY),org_801_lares_teach_dex_1);
+	}
+	else
+	{
+		Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),org_801_lares_teach_str_5);
+		Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),org_801_lares_teach_str_1);
+		Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),org_801_lares_teach_dex_5);
+		Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),org_801_lares_teach_dex_1);
+	};
+};
+
 instance ORG_801_LARES_EXIT(C_INFO)
 {
 	npc = org_801_lares;
@@ -209,7 +229,7 @@ func void org_801_lares_bringlistback_info()
 		Npc_RemoveInvItem(grd_894_gardist,itfomutton);
 		Npc_RemoveInvItem(grd_893_gardist,itfomutton);
 		Npc_RemoveInvItem(grd_872_gardist,itfomutton);
-		Npc_RemoveInvItem(grd_896_gardist,itmw_1h_sword_03);
+		Npc_RemoveInvItem(grd_896_gardist,itmw_1h_lightguardssword_03);
 		Npc_RemoveInvItem(grd_895_gardist,itmw_1h_sword_03);
 		Npc_RemoveInvItem(grd_894_gardist,itmw_1h_sword_03);
 		Npc_RemoveInvItem(grd_893_gardist,itmw_1h_sword_03);
@@ -403,7 +423,14 @@ func void org_801_lares_400ore_info()
 		LARES_GET400ORE = LOG_SUCCESS;
 		POINTS_NC = POINTS_NC + 10;
 		b_giveinvitems(other,self,itminugget,400);
-		b_logentry(CH1_JOINNC,"Ларс был очень доволен тем, что я принес ему 400 кусков руды, вырученные за болотник Идола Исидро.");
+		if(BAALISIDRO_DEALERJOB == LOG_RUNNING)
+		{
+			b_logentry(CH1_JOINNC,"Ларс был очень доволен тем, что я принес ему 400 кусков руды, вырученные за болотник Идола Исидро.");
+		}
+		else
+		{
+			b_logentry(CH1_JOINNC,"Ларс был очень доволен тем, что я принес ему 400 кусков руды.");
+		};
 		b_givexp(XP_BAALISIDROPAYLARES);
 	}
 	else
@@ -454,8 +481,12 @@ func void org_801_lares_reicht_info()
 		Log_CreateTopic(CH1_JOINPSI,LOG_MISSION);
 		Log_SetTopicStatus(CH1_JOINPSI,LOG_FAILED);
 		b_logentry(CH1_JOINPSI,"Братство не примет меня, так как я уже стал членом Нового лагеря.");
-		Log_CreateTopic(GE_TEACHERNC,LOG_NOTE);
-		b_logentry(GE_TEACHERNC,"Я вступил в Новый лагерь и теперь некоторые учителя будут согласны учить меня бесплатно.");
+		if(DIFF_HARD == FALSE)
+		{
+			Log_CreateTopic(GE_TEACHERNC,LOG_NOTE);
+			b_logentry(GE_TEACHERNC,"Я вступил в Новый лагерь и теперь некоторые учителя будут согласны учить меня бесплатно.");
+			FREELEARN_NC = TRUE;
+		};
 		if(BAALORUN_FETCHWEED == LOG_RUNNING)
 		{
 			b_logentry(CH1_DELIVERWEED,"Члену шайки Ларса не пристало быть на побегушках у сектантов. Думаю, у них и без меня найдется, кому таскать тюки с травой.");
@@ -529,7 +560,7 @@ func void org_801_lares_gotokalom_info()
 	AI_Output(self,other,"ORG_801_Lares_GotoKalom_11_01");	//Теперь ты один из нас. При этом мы не посягаем на твою свободу. Делай все, что захочешь.
 	Log_CreateTopic(CH1_GOTOPSICAMP,LOG_MISSION);
 	Log_SetTopicStatus(CH1_GOTOPSICAMP,LOG_RUNNING);
-	b_logentry(CH1_GOTOPSICAMP,"Братья из Болотного лагеря к чему-то готовятся. Ларс, главарь банды воров, хочет знать, что именно.");
+	b_logentry(CH1_GOTOPSICAMP,"Братья из Болотного лагеря к чему-то готовятся. Ларс, главарь банды воров, хочет знать, к чему именно.");
 	if(LARES_INFORMMORDRAG == LOG_RUNNING)
 	{
 		AI_Output(self,other,"ORG_801_Lares_GotoKalom_11_02");	//Если ты действительно хочешь быть нам полезен, иди к Мордрагу и помоги ему справиться с делом сектантов.
@@ -592,7 +623,7 @@ instance ORG_801_LARES_TEACH(C_INFO)
 	condition = org_801_lares_teach_condition;
 	information = org_801_lares_teach_info;
 	permanent = 1;
-	description = "Я хочу улучшить свои навыки.";
+	description = DIALOG_LEARN;
 };
 
 
@@ -607,12 +638,7 @@ func int org_801_lares_teach_condition()
 func void org_801_lares_teach_info()
 {
 	AI_Output(other,self,"ORG_801_Lares_Teach_15_00");	//Я хочу улучшить свои навыки.
-	Info_ClearChoices(org_801_lares_teach);
-	Info_AddChoice(org_801_lares_teach,DIALOG_BACK,org_801_lares_teach_back);
-	Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),org_801_lares_teach_str_5);
-	Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),org_801_lares_teach_str_1);
-	Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),org_801_lares_teach_dex_5);
-	Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),org_801_lares_teach_dex_1);
+	b_lareslearn();
 };
 
 func void org_801_lares_teach_back()
@@ -622,46 +648,94 @@ func void org_801_lares_teach_back()
 
 func void org_801_lares_teach_str_1()
 {
-	b_buyattributepoints(other,ATR_STRENGTH,LPCOST_ATTRIBUTE_STRENGTH);
-	Info_ClearChoices(org_801_lares_teach);
-	Info_AddChoice(org_801_lares_teach,DIALOG_BACK,org_801_lares_teach_back);
-	Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),org_801_lares_teach_str_5);
-	Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),org_801_lares_teach_str_1);
-	Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),org_801_lares_teach_dex_5);
-	Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),org_801_lares_teach_dex_1);
+	if(DIFF_HARD == FALSE)
+	{
+		b_buyattributepoints(other,ATR_STRENGTH,LPCOST_ATTRIBUTE_STRENGTH);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY)
+	{
+		if(hero.lp >= 1 && hero.attribute[ATR_STRENGTH] < 100)
+		{
+			b_printtrademsg1("Отдано руды: 10");
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
+		};
+		b_buyattributepoints(other,ATR_STRENGTH,LPCOST_ATTRIBUTE_STRENGTH);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"SVM_11_YouWannaFoolMe");	//Не шути со мной!
+	};
+	b_lareslearn();
 };
 
 func void org_801_lares_teach_str_5()
 {
-	b_buyattributepoints(other,ATR_STRENGTH,5 * LPCOST_ATTRIBUTE_STRENGTH);
-	Info_ClearChoices(org_801_lares_teach);
-	Info_AddChoice(org_801_lares_teach,DIALOG_BACK,org_801_lares_teach_back);
-	Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),org_801_lares_teach_str_5);
-	Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),org_801_lares_teach_str_1);
-	Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),org_801_lares_teach_dex_5);
-	Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),org_801_lares_teach_dex_1);
+	if(DIFF_HARD == FALSE)
+	{
+		b_buyattributepoints(other,ATR_STRENGTH,5 * LPCOST_ATTRIBUTE_STRENGTH);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY * 5)
+	{
+		if(hero.lp >= 5 && hero.attribute[ATR_STRENGTH] < 96)
+		{
+			b_printtrademsg1("Отдано руды: 50");
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
+		};
+		b_buyattributepoints(other,ATR_STRENGTH,5 * LPCOST_ATTRIBUTE_STRENGTH);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"SVM_11_YouWannaFoolMe");	//Не шути со мной!
+	};
+	b_lareslearn();
 };
 
 func void org_801_lares_teach_dex_1()
 {
-	b_buyattributepoints(other,ATR_DEXTERITY,LPCOST_ATTRIBUTE_DEXTERITY);
-	Info_ClearChoices(org_801_lares_teach);
-	Info_AddChoice(org_801_lares_teach,DIALOG_BACK,org_801_lares_teach_back);
-	Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),org_801_lares_teach_str_5);
-	Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),org_801_lares_teach_str_1);
-	Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),org_801_lares_teach_dex_5);
-	Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),org_801_lares_teach_dex_1);
+	if(DIFF_HARD == FALSE)
+	{
+		b_buyattributepoints(other,ATR_DEXTERITY,LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY)
+	{
+		if(hero.lp >= 1 && hero.attribute[ATR_DEXTERITY] < 100)
+		{
+			b_printtrademsg1("Отдано руды: 10");
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY);
+		};
+		b_buyattributepoints(other,ATR_DEXTERITY,LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"SVM_11_YouWannaFoolMe");	//Не шути со мной!
+	};
+	b_lareslearn();
 };
 
 func void org_801_lares_teach_dex_5()
 {
-	b_buyattributepoints(other,ATR_DEXTERITY,5 * LPCOST_ATTRIBUTE_DEXTERITY);
-	Info_ClearChoices(org_801_lares_teach);
-	Info_AddChoice(org_801_lares_teach,DIALOG_BACK,org_801_lares_teach_back);
-	Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_5,5 * LPCOST_ATTRIBUTE_STRENGTH,0),org_801_lares_teach_str_5);
-	Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNSTRENGTH_1,LPCOST_ATTRIBUTE_STRENGTH,0),org_801_lares_teach_str_1);
-	Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),org_801_lares_teach_dex_5);
-	Info_AddChoice(org_801_lares_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),org_801_lares_teach_dex_1);
+	if(DIFF_HARD == FALSE)
+	{
+		b_buyattributepoints(other,ATR_DEXTERITY,5 * LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else if(Npc_HasItems(hero,itminugget) >= OTHERCAMPLEARNPAY * 5)
+	{
+		if(hero.lp >= 5 && hero.attribute[ATR_DEXTERITY] < 96)
+		{
+			b_printtrademsg1("Отдано руды: 50");
+			b_giveinvitems(other,self,itminugget,OTHERCAMPLEARNPAY * 5);
+		};
+		b_buyattributepoints(other,ATR_DEXTERITY,5 * LPCOST_ATTRIBUTE_DEXTERITY);
+	}
+	else
+	{
+		AI_Output(other,self,"B_Gravo_HelpAttitude_NoOre_15_01");	//У меня не так много руды.
+		AI_Output(self,other,"SVM_11_YouWannaFoolMe");	//Не шути со мной!
+	};
+	b_lareslearn();
 };
 
 instance ORG_801_LARES_NEWLIST(C_INFO)

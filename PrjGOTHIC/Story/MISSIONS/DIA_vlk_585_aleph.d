@@ -235,7 +235,7 @@ func void vlk_585_aleph_schuppen_50()
 		b_printtrademsg1("Отдано руды: 50");
 		b_giveinvitems(other,self,itminugget,50);
 		AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_50_05_02");	//Твоя щедрость безгранична! Возьми ключ. А еще возьми это кольцо. Оно было моим талисманом на счастье.
-		b_printtrademsg2("Получен ключ от сундука и кольцо силы.");
+		b_printtrademsg2("Получен ключ от склада и кольцо силы.");
 		CreateInvItems(other,itke_om_03,1);
 		CreateInvItems(other,staerkering,1);
 		Info_ClearChoices(vlk_585_aleph_schuppen);
@@ -257,7 +257,7 @@ func void vlk_585_aleph_schuppen_30()
 		b_printtrademsg1("Отдано руды: 30");
 		b_giveinvitems(other,self,itminugget,30);
 		AI_Output(self,other,"VLK_585_Aleph_SCHUPPEN_30_05_02");	//Хорошо. У меня как раз есть ключ. Совершенно случайно, кстати.
-		b_printtrademsg2("Получен ключ от сундука.");
+		b_printtrademsg2("Получен ключ от склада.");
 		CreateInvItem(self,itke_om_03);
 		b_giveinvitems(self,other,itke_om_03,1);
 		ALEPH_KEY = TRUE;
@@ -319,7 +319,7 @@ func void vlk_585_aleph_dirty_100()
 		b_giveinvitems(hero,self,itminugget,100);
 		AI_Output(other,self,"VLK_585_Aleph_DIRTY_100_Info_15_01");	//Ты меня совсем разоришь. Держи уж свои 100 кусков.
 		AI_Output(self,other,"VLK_585_Aleph_DIRTY_100_Info_05_02");	//Хорошее предложение! Не могу отказать. Держи свой ключ.
-		b_printtrademsg2("Получен ключ от сундука.");
+		b_printtrademsg2("Получен ключ от склада.");
 		CreateInvItem(self,itke_om_03);
 		b_giveinvitems(self,other,itke_om_03,1);
 		Info_ClearChoices(vlk_585_aleph_dirty);

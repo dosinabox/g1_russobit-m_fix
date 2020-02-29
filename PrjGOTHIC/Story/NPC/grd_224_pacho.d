@@ -39,8 +39,8 @@ func void rtn_start_224()
 
 func void rtn_start2_224()
 {
-	ta_sitaround(0,0,12,0,"OW_PATH_018");
-	ta_sitaround(12,0,24,0,"OW_PATH_018");
+	ta_sit(0,0,12,0,"OW_PATH_018");
+	ta_sit(12,0,24,0,"OW_PATH_018");
 };
 
 func void rtn_fmtaken_224()

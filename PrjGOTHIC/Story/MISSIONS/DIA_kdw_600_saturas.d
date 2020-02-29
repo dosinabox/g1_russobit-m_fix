@@ -752,6 +752,10 @@ func void kdw_600_saturas_kdwaufnahme_info()
 	hero.guild = GIL_KDW;
 	b_logentry(CH4_BANNEDFROMOC,"Он принял меня в Круг магов Воды. Теперь я принадлежу двум магическим школам одновременно.");
 	Log_SetTopicStatus(CH4_BANNEDFROMOC,LOG_SUCCESS);
+	if(DIFF_HARD == FALSE)
+	{
+		FREELEARN_NC = TRUE;
+	};
 	AI_StopProcessInfos(self);
 };
 

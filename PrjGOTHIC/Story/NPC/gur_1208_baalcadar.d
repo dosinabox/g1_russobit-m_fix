@@ -20,7 +20,7 @@ instance GUR_1208_BAALCADAR(NPC_DEFAULT)
 	b_scale(self);
 	Mdl_SetModelFatness(self,-1);
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,4);
-	EquipItem(self,itarrunewindfist);
+	EquipItem(self,itarrune_5_5_windfist);
 	b_give_baalcadarchapter1runes();
 	fight_tactic = FAI_HUMAN_MAGE;
 	daily_routine = rtn_start_1208;

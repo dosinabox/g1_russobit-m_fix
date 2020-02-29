@@ -21,7 +21,7 @@ instance KDW_601_MYXIR(NPC_DEFAULT)
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_MAGE;
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,5);
-	EquipItem(self,itarrunethunderbolt);
+	EquipItem(self,itarrune_3_1_thunderbolt);
 	CreateInvItem(self,itfo_potion_health_02);
 	CreateInvItem(self,itfo_potion_mana_03);
 	CreateInvItem(self,itfo_plants_flameberry_01);

@@ -44,7 +44,7 @@ func void set_orcshaman_visuals()
 instance ORCSHAMAN(MST_DEFAULT_ORCSHAMAN)
 {
 	set_orcshaman_visuals();
-	CreateInvItem(self,itarrunefireball);
+	CreateInvItem(self,itarrune_2_2_fireball);
 	EquipItem(self,itrworcstaff);
 };
 

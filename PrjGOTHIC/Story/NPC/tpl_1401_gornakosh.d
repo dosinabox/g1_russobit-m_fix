@@ -8,6 +8,7 @@ instance TPL_1401_GORNAKOSH(NPC_DEFAULT)
 	flags = 0;
 	voice = 13;
 	id = 1401;
+	flags = NPC_FLAG_IMMORTAL;
 	attribute[ATR_STRENGTH] = 85;
 	attribute[ATR_DEXTERITY] = 65;
 	attribute[ATR_MANA_MAX] = 0;

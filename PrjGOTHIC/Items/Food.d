@@ -6,7 +6,7 @@ const int HP_APFEL = 8;
 const int VALUE_WEINTRAUBEN = 6;
 const int HP_WEINTRAUBEN = 8;
 const int VALUE_WASSER = 3;
-const int HP_WASSER = 5;
+const int HP_WASSER = 10;
 const int VALUE_BIER = 10;
 const int HP_BIER = 3;
 const int VALUE_WEIN = 13;
@@ -869,37 +869,38 @@ func void usehoneycomb()
 		PrintScreen("Найдено сот: 1/5",-1,40,"FONT_OLD_20_WHITE.TGA",5);
 		Log_CreateTopic("Соты шершней",LOG_NOTE);
 		b_logentry("Соты шершней","Я нашел соты шершня и решил попробовать на вкус их мед. Довольно вкусно!");
-		b_givexp(100);
+		b_givexp(200);
 	}
 	else if(HONEYCOMB == 1)
 	{
 		HONEYCOMB = 2;
 		PrintScreen("Найдено сот: 2/5",-1,40,"FONT_OLD_20_WHITE.TGA",5);
 		b_logentry("Соты шершней","Вторая порция оказалась еще вкуснее!");
-		b_givexp(100);
+		b_givexp(300);
 	}
 	else if(HONEYCOMB == 2)
 	{
 		HONEYCOMB = 3;
 		PrintScreen("Найдено сот: 3/5",-1,40,"FONT_OLD_20_WHITE.TGA",5);
 		b_logentry("Соты шершней","Съел третие соты. Жаль, что их так сложно найти.");
-		b_givexp(100);
+		b_givexp(400);
 	}
 	else if(HONEYCOMB == 3)
 	{
 		HONEYCOMB = 4;
 		PrintScreen("Найдено сот: 4/5",-1,40,"FONT_OLD_20_WHITE.TGA",5);
 		b_logentry("Соты шершней","Четвертая находка. Может, начать выращивать шершней и открыть свое дело?");
-		b_givexp(100);
+		b_givexp(500);
 	}
 	else if(HONEYCOMB == 4)
 	{
 		HONEYCOMB = 5;
 		PrintScreen("Найдено сот: 5/5",-1,40,"FONT_OLD_20_WHITE.TGA",5);
-		PrintScreen("+10 очков обучения",-1,47,"FONT_OLD_20_WHITE.TGA",5);
-		hero.lp = hero.lp + 10;
-		Snd_Play("BLO_WARN_A1");
+		//PrintScreen("+10 очков обучения",-1,47,"FONT_OLD_20_WHITE.TGA",5);
+		//hero.lp = hero.lp + 10;
 		b_logentry("Соты шершней","Думаю, пяти сот будет достаточно. Я и правда чувствую себя сильнее!");
+		b_givexp(600);
+		Snd_Play("BLO_WARN_A1");
 	}
 	else if(HONEYCOMB == 5)
 	{

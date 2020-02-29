@@ -13,10 +13,10 @@ prototype MST_DEFAULT_MINECRAWLERQUEEN(C_NPC)
 	attribute[ATR_MANA] = 0;
 	protection[PROT_BLUNT] = 70;
 	protection[PROT_EDGE] = 70;
-	protection[PROT_POINT] = 60;
-	protection[PROT_FIRE] = 60;
+	protection[PROT_POINT] = 40;
+	protection[PROT_FIRE] = 40;
 	protection[PROT_FLY] = 1000;
-	protection[PROT_MAGIC] = 60;
+	protection[PROT_MAGIC] = 40;
 	damagetype = DAM_EDGE;
 	fight_tactic = FAI_MINECRAWLERQUEEN;
 	senses = SENSE_HEAR | SENSE_SEE | SENSE_SMELL;

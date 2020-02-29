@@ -27,7 +27,7 @@ instance GUR_1212_MADCORKALOM(NPC_DEFAULT)
 	Mdl_SetModelFatness(self,0);
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,6);
 	EquipItem(self,kaloms_schwert);
-	CreateInvItems(self,itarrunepyrokinesis,1);
+	CreateInvItems(self,itarrune_5_7_pyrokinesis,1);
 	senses = SENSE_SEE | SENSE_HEAR | SENSE_SMELL;
 	senses_range = 2000;
 	daily_routine = rtn_ot_1212;

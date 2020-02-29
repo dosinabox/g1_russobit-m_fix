@@ -53,7 +53,7 @@ instance SCAVENGER(MST_DEFAULT_SCAVENGER)
 {
 	set_scavenger_visuals();
 	Npc_SetToFistMode(self);
-	CreateInvItems(self,itfomuttonraw,2);
+	CreateInvItem(self,itfomuttonraw);
 };
 
 instance YSCAVENGER(MST_DEFAULT_SCAVENGER)

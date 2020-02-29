@@ -21,7 +21,7 @@ instance GUR_1201_CORKALOM(NPC_DEFAULT)
 	Mdl_SetModelFatness(self,0);
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,4);
 	EquipItem(self,kaloms_schwert);
-	CreateInvItem(self,itarrunesleep);
+	CreateInvItem(self,itarrune_5_2_sleep);
 	daily_routine = rtn_start_1201;
 	fight_tactic = FAI_HUMAN_MAGE;
 };

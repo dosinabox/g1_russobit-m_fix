@@ -21,7 +21,7 @@ instance KDW_605_RIORDIAN(NPC_DEFAULT)
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_MAGE;
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,5);
-	EquipItem(self,itarrunethunderball);
+	EquipItem(self,itarrune_3_2_thunderball);
 	CreateInvItem(self,alchemybook);
 	b_giveriordianchapter1potions();
 	daily_routine = rtn_start_605;

@@ -9,10 +9,12 @@ instance NON_1500_GILBERT(NPC_DEFAULT)
 	id = 1500;
 	attribute[ATR_STRENGTH] = 15;
 	attribute[ATR_DEXTERITY] = 15;
-	attribute[ATR_MANA_MAX] = 0;
 	attribute[ATR_MANA] = 0;
-	attribute[ATR_HITPOINTS_MAX] = 148;
+	attribute[ATR_MANA_MAX] = 0;
 	attribute[ATR_HITPOINTS] = 148;
+	attribute[ATR_HITPOINTS_MAX] = 148;
+	protection[PROT_FLY] = 9999;
+	protection[PROT_FALL] = 9999;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Tired.mds");
 	Mdl_SetVisualBody(self,"hum_body_Naked0",2,0,"Hum_Head_Thief",16,1,vlk_armor_l);
@@ -36,12 +38,12 @@ func void rtn_start_1500()
 func void rtn_start2_1500()
 {
 	ta_sleep(22,0,8,0,"LOCATION_01_07");
-	ta_sitaround(8,0,22,0,"LOCATION_01_07");
+	ta_sit(8,0,22,0,"LOCATION_01_07");
 };
 
 func void rtn_hide_1500()
 {
-	ta_sitaround(22,0,8,0,"FMC_HUT02_IN");
-	ta_sitaround(8,0,22,0,"FMC_HUT02_IN");
+	ta_sit(22,0,8,0,"FMC_HUT02_IN");
+	ta_sit(8,0,22,0,"FMC_HUT02_IN");
 };
 

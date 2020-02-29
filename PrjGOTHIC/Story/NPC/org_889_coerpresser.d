@@ -13,7 +13,7 @@ instance ORG_889_COERPRESSER(NPC_DEFAULT)
 	attribute[ATR_MANA] = 0;
 	attribute[ATR_HITPOINTS_MAX] = 172;
 	attribute[ATR_HITPOINTS] = 172;
-	aivar[43] = TRUE;
+	//aivar[43] = TRUE;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Relaxed.mds");
 	Mdl_SetVisualBody(self,"hum_body_Naked0",0,2,"Hum_Head_Pony",9,1,org_armor_m);

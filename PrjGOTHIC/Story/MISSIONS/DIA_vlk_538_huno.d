@@ -249,6 +249,10 @@ func void dia_huno_buysmith_info()
 	{
 		Npc_RemoveInvItem(self,goldensword);
 	};
+	if(!Npc_HasItems(self,itmw_1h_sledgehammer_01) && !Npc_HasItems(other,itmw_1h_sledgehammer_01))
+	{
+		CreateInvItem(self,itmw_1h_sledgehammer_01);
+	};
 	AI_Output(other,self,"DIA_Huno_BUYSMITH_15_00");	//Я хочу купить у тебя заготовки.
 };
 

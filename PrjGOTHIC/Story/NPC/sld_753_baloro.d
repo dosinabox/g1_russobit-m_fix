@@ -22,8 +22,6 @@ instance SLD_753_BALORO(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,2);
 	Npc_SetTalentSkill(self,NPC_TALENT_2H,1);
 	EquipItem(self,itmw_1h_mace_war_03);
-	CreateInvItems(self,itfomutton,6);
-	CreateInvItems(self,itfo_potion_health_02,7);
 	daily_routine = rtn_fmcstart_753;
 };
 

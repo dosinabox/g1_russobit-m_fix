@@ -215,9 +215,13 @@ func void dia_gomez_dabei_info()
 	Log_CreateTopic(CH1_JOINPSI,LOG_MISSION);
 	Log_SetTopicStatus(CH1_JOINPSI,LOG_FAILED);
 	b_logentry(CH1_JOINPSI,"“еперь —тарый лагерь стал моим домом. Ѕратство —п€щего сможет обойтись без мен€.");
-	Log_CreateTopic(GE_TEACHEROC,LOG_NOTE);
-	b_logentry(GE_TEACHEROC,"я вступил в —тарый лагерь и теперь некоторые учител€ будут согласны учить мен€ бесплатно.");
-	LOG_THORUSTRAIN = TRUE;
+	if(DIFF_HARD == FALSE)
+	{
+		Log_CreateTopic(GE_TEACHEROC,LOG_NOTE);
+		b_logentry(GE_TEACHEROC,"я вступил в —тарый лагерь и теперь некоторые учител€ будут согласны учить мен€ бесплатно.");
+		FREELEARN_OC = TRUE;
+	};
+	//LOG_THORUSTRAIN = TRUE;
 	if(BAALORUN_FETCHWEED == LOG_RUNNING)
 	{
 		b_logentry(CH1_DELIVERWEED,"я теперь ѕризрак и больше не хочу быть на побегушках у этих болотных придурков. ƒумаю, у них и без мен€ найдетс€, кому таскать тюки с травой.");

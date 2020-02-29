@@ -60,7 +60,7 @@ func void zs_meditate_loop()
 	};
 	if(praytime >= 90)
 	{
-		b_sayoverlay(self,NULL,"$Om");
+		b_sayoverlay(self,NULL,"$OM");
 	};
 	AI_Wait(self,1);
 };

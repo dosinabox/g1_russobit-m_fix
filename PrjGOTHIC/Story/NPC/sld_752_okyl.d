@@ -25,10 +25,6 @@ instance SLD_752_OKYL(NPC_DEFAULT)
 	EquipItem(self,itmw_2h_axe_heavy_02);
 	EquipItem(self,itrw_bow_long_01);
 	CreateInvItems(self,itamarrow,20);
-	CreateInvItems(self,itfoloaf,6);
-	CreateInvItems(self,itfomutton,4);
-	CreateInvItems(self,itlstorch,5);
-	CreateInvItems(self,itfo_potion_health_02,5);
 	daily_routine = rtn_fmcstart_752;
 };
 

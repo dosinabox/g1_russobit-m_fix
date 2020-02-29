@@ -20,11 +20,7 @@ instance SFB_1037_SWINEY(NPC_DEFAULT)
 	b_scale(self);
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_COWARD;
-	CreateInvItems(self,itforice,6);
-	CreateInvItems(self,itfoloaf,4);
-	CreateInvItems(self,itfomutton,2);
 	CreateInvItem(self,itmi_stuff_cup_01);
-	CreateInvItem(self,itfobooze);
 	EquipItem(self,itmw_1h_hatchet_01);
 	daily_routine = rtn_fmcstart_1037;
 };

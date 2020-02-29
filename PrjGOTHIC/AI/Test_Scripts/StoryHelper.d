@@ -559,7 +559,7 @@ func void storyhelper_loaduriziel()
 	b_story_showedurizieltoxardas();
 	b_story_exploresunkentower();
 	CreateInvItem(hero,ore_armor_m);
-	CreateInvItem(hero,itarruneteleport1);
+	CreateInvItem(hero,itarrune_1_3_teleport1);
 	b_story_loadsword();
 	Info_ClearChoices(storyhelper_info5);
 	AI_StopProcessInfos(self);
@@ -599,7 +599,7 @@ func void storyhelper_urizielloaded()
 	b_story_showedurizieltoxardas();
 	b_story_exploresunkentower();
 	CreateInvItem(hero,ore_armor_m);
-	CreateInvItem(hero,itarruneteleport1);
+	CreateInvItem(hero,itarrune_1_3_teleport1);
 	b_story_loadsword();
 	b_kapitelwechsel(6);
 	b_story_urizielloaded();

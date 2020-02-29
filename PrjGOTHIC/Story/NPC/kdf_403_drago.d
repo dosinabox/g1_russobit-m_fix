@@ -22,7 +22,7 @@ instance KDF_403_DRAGO(NPC_DEFAULT)
 	aivar[AIV_IMPORTANT] = TRUE;
 	fight_tactic = FAI_HUMAN_MAGE;
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,4);
-	EquipItem(self,itarrunefireball);
+	EquipItem(self,itarrune_2_2_fireball);
 	CreateInvItems(self,itfo_potion_health_02,3);
 	CreateInvItems(self,itfo_potion_health_01,4);
 	EquipItem(self,schutzring_total2);

@@ -13,15 +13,10 @@ func void b_givexp(var int add_xp)
 		hero.exp_next = 500;
 	};
 	msg = NAME_XPGAINED;
-	if(DIFF_HARD == 1)
+	if(DIFF_HARD == TRUE)
 	{
 		hero.exp = hero.exp + (add_xp / 2);
 		msg = ConcatStrings(msg,IntToString(add_xp / 2));
-	}
-	else if(DIFF_VERYHARD == 1)
-	{
-		hero.exp = hero.exp + (add_xp / 3);
-		msg = ConcatStrings(msg,IntToString(add_xp / 3));
 	}
 	else
 	{
@@ -37,8 +32,16 @@ func void b_givexp(var int add_xp)
 		hero.exp_next = hero.exp_next + ((hero.level + 1) * 500);
 		if(!Npc_IsDead(hero))
 		{
-			hero.attribute[ATR_HITPOINTS_MAX] = hero.attribute[ATR_HITPOINTS_MAX] + HP_PER_LEVEL;
-			hero.attribute[ATR_HITPOINTS] = hero.attribute[ATR_HITPOINTS] + HP_PER_LEVEL;
+			if(DIFF_HARD == TRUE)
+			{
+				hero.attribute[ATR_HITPOINTS_MAX] = hero.attribute[ATR_HITPOINTS_MAX] + 8;
+				hero.attribute[ATR_HITPOINTS] = hero.attribute[ATR_HITPOINTS] + 8;
+			}
+			else
+			{
+				hero.attribute[ATR_HITPOINTS_MAX] = hero.attribute[ATR_HITPOINTS_MAX] + HP_PER_LEVEL;
+				hero.attribute[ATR_HITPOINTS] = hero.attribute[ATR_HITPOINTS] + HP_PER_LEVEL;
+			};
 		};
 		hero.lp = hero.lp + LP_PER_LEVEL;
 		PrintScreen(NAME_LEVELUP,-1,_YPOS_MESSAGE_LEVELUP,"font_old_20_white.tga",_TIME_MESSAGE_LEVELUP);
@@ -59,7 +62,14 @@ func void b_deathxp()
 		printdebugnpc(PD_ZS_CHECK,"...Opfer ist entweder nicht bewußtlos oder kein Mensch!");
 		if(c_npcishuman(self) && (self.npctype == NPCTYPE_MINE_AMBIENT || self.npctype == NPCTYPE_AMBIENT || self.id == 899 || self.id == 898))
 		{
-			b_givexp(10);
+			if(self.npctype == NPCTYPE_AMBIENT && (self.id == 336 || self.id == 337 || self.id == 338 || self.id == 889 || self.id == 239 || self.id == 701 || self.id == 704 || self.id == 828))
+			{
+				b_givexp(self.level * XP_PER_LEVEL_DEAD);
+			}
+			else
+			{
+				b_givexp(10);
+			};
 		}
 		else if(self.level > 0)
 		{
@@ -77,7 +87,14 @@ func void b_unconciousxp()
 		printdebugnpc(PD_ZS_CHECK,"...erster Sieg!");
 		if(c_npcishuman(self) && (self.npctype == NPCTYPE_MINE_AMBIENT || self.npctype == NPCTYPE_AMBIENT || self.id == 899 || self.id == 898))
 		{
-			b_givexp(10);
+			if(self.npctype == NPCTYPE_AMBIENT && (self.id == 336 || self.id == 337 || self.id == 338 || self.id == 889 || self.id == 239 || self.id == 701 || self.id == 704 || self.id == 828))
+			{
+				b_givexp(self.level * XP_PER_LEVEL_DEAD);
+			}
+			else
+			{
+				b_givexp(10);
+			};
 		}
 		else if(self.level > 0)
 		{

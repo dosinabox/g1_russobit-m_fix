@@ -25,6 +25,7 @@ instance GRD_279_GARDIST(NPC_DEFAULT)
 	EquipItem(self,itmw_1h_sword_02);
 	CreateInvItem(self,itfocheese);
 	CreateInvItem(self,itfoapple);
+	CreateInvItem(self,itke_weaponry);
 	CreateInvItems(self,itminugget,10);
 	CreateInvItem(self,itlstorch);
 	daily_routine = rtn_start_279;
@@ -34,7 +35,9 @@ instance GRD_279_GARDIST(NPC_DEFAULT)
 
 func void rtn_start_279()
 {
-	ta_guard(6,0,23,0,"OCC_BARONS_LEFT_ROOM_FRONT");
-	ta_guard(23,0,6,0,"OCC_BARONS_LEFT_ROOM_FRONT");
+	ta_guard(4,0,23,0,"OCC_BARONS_LEFT_ROOM_FRONT");
+	ta_standaround(23,0,0,0,"OCC_BARONS_RIGHT_ROOM_TABLE");
+	ta_guard(0,0,3,0,"OCC_BARONS_LEFT_ROOM_FRONT");
+	ta_standaround(3,0,4,0,"OCC_BARONS_GREATHALL_CENTER_MOVEMENT");
 };
 

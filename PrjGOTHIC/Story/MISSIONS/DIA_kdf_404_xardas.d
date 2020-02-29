@@ -703,7 +703,7 @@ instance INFO_XARDAS_FORMULA(C_INFO)
 
 func int info_xardas_formula_condition()
 {
-	if(Npc_HasItems(hero,ore_armor_m) || Npc_HasItems(hero,ore_armor_h) || Npc_HasItems(hero,itarruneteleport1))
+	if(Npc_HasItems(hero,ore_armor_m) || Npc_HasItems(hero,ore_armor_h) || Npc_HasItems(hero,itarrune_1_3_teleport1))
 	{
 		return TRUE;
 	};
@@ -857,7 +857,7 @@ func void info_xardas_makerune_yes()
 	AI_Output(self,other,"Info_Xardas_MAKERUNEDOIT_14_05_02");	//Вот, возьми меч и руну!
 	b_printtrademsg2("Получен УРИЗЕЛЬ и руна Волны смерти.");
 	Npc_RemoveInvItem(hero,mythrilklinge02);
-	CreateInvItems(hero,itarruneurizielrune,1);
+	CreateInvItems(hero,itarrune_6_6_urizielrune,1);
 	CreateInvItems(hero,mythrilklinge03,1);
 	b_logentry(GE_URIZELRUNE,"Ксардас отделил магический камень от меча УРИЗЕЛЯ. Теперь вся сила меча перейдет в руну, сделанную из этого камня.");
 };
@@ -926,7 +926,7 @@ func void info_xardas_loadsword09_info()
 			AI_Output(self,other,"Info_Xardas_LOADSWORD09_14_05");	//Овладев знаниями Шестого Круга, ты сможешь читать заклинания любой руны.
 			AI_Output(self,other,"Info_Xardas_LOADSWORD09_14_06");	//Но не забывай, что не магия служит тебе, а ты - магии.
 			b_printtrademsg1("Получена мантия темного искусства.");
-			CreateInvItem(self,itarrunearmyofdarkness);
+			CreateInvItem(self,itarrune_6_2_armyofdarkness);
 			CreateInvItem(hero,dmb_armor_m);
 			AI_EquipArmor(hero,dmb_armor_m);
 			hero.guild = GIL_DMB;

@@ -38,8 +38,8 @@ func void rtn_prestart_857()
 
 func void rtn_fmtaken_857()
 {
-	ta_sitaround(1,0,13,0,"FMC_HUT07_IN");
-	ta_sitaround(13,0,1,0,"FMC_HUT07_IN");
+	ta_sit(1,0,13,0,"FMC_HUT07_IN");
+	ta_sit(13,0,1,0,"FMC_HUT07_IN");
 };
 
 func void rtn_fmtakenback_857()

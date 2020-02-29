@@ -21,7 +21,7 @@ instance GUR_1200_YBERION(NPC_DEFAULT)
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_MAGE;
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,4);
-	CreateInvItem(self,itarrunepyrokinesis);
+	CreateInvItem(self,itarrune_5_7_pyrokinesis);
 	CreateInvItem(self,stab_des_lichts);
 	CreateInvItem(self,itmi_amulet_psi_01);
 	CreateInvItem(self,itke_yberion);

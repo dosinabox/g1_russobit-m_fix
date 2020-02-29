@@ -95,7 +95,7 @@ func void grd_262_aaron_bluff_ian()
 	AI_Output(other,self,"GRD_262_Aaron_BLUFF_IAN_15_01");	//Меня прислал Ян. Он сказал, что хочет видеть тебя!
 	AI_Output(self,other,"GRD_262_Aaron_BLUFF_IAN_09_02");	//Чего он хочет?
 	Info_ClearChoices(grd_262_aaron_bluff);
-	Info_AddChoice(grd_262_aaron_bluff,"А, не знаю...",grd_262_aaron_bluff_ugly);
+	Info_AddChoice(grd_262_aaron_bluff,"А, не знаю, чего он там хочет...",grd_262_aaron_bluff_ugly);
 	Info_AddChoice(grd_262_aaron_bluff,"Он хочет наказать тебя. Говорит, что ты бездельник, каких мало.",grd_262_aaron_bluff_bad);
 	Info_AddChoice(grd_262_aaron_bluff,"Он хочет наградить тебя за твою работу.",grd_262_aaron_bluff_good);
 };
@@ -203,7 +203,7 @@ instance GRD_262_AARON_SELLNOW(C_INFO)
 
 func int grd_262_aaron_sellnow_condition()
 {
-	if(Npc_KnowsInfo(hero,grd_262_aaron_sell) && Npc_HasItems(hero,itke_om_02))
+	if(Npc_KnowsInfo(hero,grd_262_aaron_sell) && Npc_HasItems(hero,itke_om_02) && (AARON_KEY_TAKEN == FALSE))
 	{
 		return 1;
 	};

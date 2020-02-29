@@ -1,39 +1,39 @@
 
 func void b_cavalornearn()
 {
-	Info_ClearChoices(dia_cavalorn_lehrer);
-	Info_AddChoice(dia_cavalorn_lehrer,DIALOG_BACK,dia_cavalorn_lehrer_back);
+	Info_ClearChoices(dia_cavalorn_learn);
+	Info_AddChoice(dia_cavalorn_learn,DIALOG_BACK,dia_cavalorn_learn_back);
 	if(Npc_GetTalentSkill(hero,NPC_TALENT_BOW) == 1)
 	{
 		if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF || KAPITEL >= 4)
 		{
-			Info_AddChoice(dia_cavalorn_lehrer,b_buildlearnstring(NAME_LEARNBOW_2,LPCOST_TALENT_BOW_2,0),dia_cavalorn_lehrer_bow_2);
+			Info_AddChoice(dia_cavalorn_learn,b_buildlearnstring(NAME_LEARNBOW_2,LPCOST_TALENT_BOW_2,0),dia_cavalorn_lehrer_bow_2);
 		}
 		else
 		{
-			Info_AddChoice(dia_cavalorn_lehrer,b_buildlearnstring(NAME_LEARNBOW_2,LPCOST_TALENT_BOW_2,100),dia_cavalorn_lehrer_bow_2);
+			Info_AddChoice(dia_cavalorn_learn,b_buildlearnstring(NAME_LEARNBOW_2,LPCOST_TALENT_BOW_2,100),dia_cavalorn_lehrer_bow_2);
 		};
 	};
 	if(Npc_GetTalentSkill(hero,NPC_TALENT_BOW) == 0)
 	{
 		if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF || KAPITEL >= 4)
 		{
-			Info_AddChoice(dia_cavalorn_lehrer,b_buildlearnstring(NAME_LEARNBOW_1,LPCOST_TALENT_BOW_1,0),dia_cavalorn_lehrer_bow);
+			Info_AddChoice(dia_cavalorn_learn,b_buildlearnstring(NAME_LEARNBOW_1,LPCOST_TALENT_BOW_1,0),dia_cavalorn_lehrer_bow);
 		}
 		else
 		{
-			Info_AddChoice(dia_cavalorn_lehrer,b_buildlearnstring(NAME_LEARNBOW_1,LPCOST_TALENT_BOW_1,50),dia_cavalorn_lehrer_bow);
+			Info_AddChoice(dia_cavalorn_learn,b_buildlearnstring(NAME_LEARNBOW_1,LPCOST_TALENT_BOW_1,50),dia_cavalorn_lehrer_bow);
 		};
 	};
 	if(Npc_GetTalentSkill(hero,NPC_TALENT_SNEAK) == 0)
 	{
 		if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF || KAPITEL >= 4)
 		{
-			Info_AddChoice(dia_cavalorn_lehrer,b_buildlearnstring(NAME_LEARNSNEAK,LPCOST_TALENT_SNEAK,0),dia_cavalorn_lehrer_schleichen);
+			Info_AddChoice(dia_cavalorn_learn,b_buildlearnstring(NAME_LEARNSNEAK,LPCOST_TALENT_SNEAK,0),dia_cavalorn_lehrer_schleichen);
 		}
 		else
 		{
-			Info_AddChoice(dia_cavalorn_lehrer,b_buildlearnstring(NAME_LEARNSNEAK,LPCOST_TALENT_SNEAK,50),dia_cavalorn_lehrer_schleichen);
+			Info_AddChoice(dia_cavalorn_learn,b_buildlearnstring(NAME_LEARNSNEAK,LPCOST_TALENT_SNEAK,50),dia_cavalorn_lehrer_schleichen);
 		};
 	};
 };
@@ -85,7 +85,7 @@ instance DIA_CAVALORN_LEHRER(C_INFO)
 	nr = 2;
 	condition = dia_cavalorn_lehrer_condition;
 	information = dia_cavalorn_lehrer_info;
-	permanent = 1;
+	permanent = 0;
 	description = "Ты можешь научить меня чему-нибудь?";
 };
 
@@ -100,25 +100,56 @@ func int dia_cavalorn_lehrer_condition()
 func void dia_cavalorn_lehrer_info()
 {
 	AI_Output(other,self,"DIA_cavalorn_Lehrer_15_00");	//Ты можешь научить меня чему-нибудь?
-	AI_Output(self,other,"DIA_cavalorn_Lehrer_12_01");	//А чему бы ты хотел научиться?
-	if(LOG_CAVALORNTRAIN_BOW == FALSE)
-	{
-		Log_CreateTopic(GE_TEACHEROW,LOG_NOTE);
-		b_logentry(GE_TEACHEROW,"Кавалорн - охотник. Я могу научиться у него стрелять из лука. Он живет в доме между Старым и Новым лагерями.");
-		LOG_CAVALORNTRAIN_BOW = TRUE;
-	};
+	AI_Output(self,other,"DIA_cavalorn_Lehrer_12_01_00");	//Стрельбе из лука и кое-каким воровским трюкам.
+	LOG_CAVALORNTRAIN_BOW = TRUE;
+	Log_CreateTopic(GE_TEACHEROW,LOG_NOTE);
+	b_logentry(GE_TEACHEROW,"Кавалорн - охотник. Я могу научиться у него стрелять из лука. Он живет в доме между Старым и Новым лагерями.");
 	if(LOG_CAVALORNTRAIN_SNEAK == FALSE)
 	{
 		Log_CreateTopic(GE_TEACHEROW,LOG_NOTE);
 		b_logentry(GE_TEACHEROW,"Также Кавалорн может научить меня подкрадываться.");
 		LOG_CAVALORNTRAIN_SNEAK = TRUE;
 	};
-	b_cavalornearn();
 };
 
-func void dia_cavalorn_lehrer_back()
+
+instance DIA_CAVALORN_LEARN(C_INFO)
 {
-	Info_ClearChoices(dia_cavalorn_lehrer);
+	npc = stt_336_cavalorn;
+	nr = 2;
+	condition = dia_cavalorn_learn_condition;
+	information = dia_cavalorn_learn_info;
+	permanent = 1;
+	description = DIALOG_LEARN;
+};
+
+func int dia_cavalorn_learn_condition()
+{
+	if(LOG_CAVALORNTRAIN_BOW == TRUE)
+	{
+		return 1;
+	};
+};
+
+func void dia_cavalorn_learn_info()
+{
+	AI_Output(other,self,"GRD_205_Scorpio_CROSSBOW2_OK_15_01");	//Начнем прямо сейчас.
+	if((Npc_GetTalentSkill(hero,NPC_TALENT_BOW) == 2) && (Npc_GetTalentSkill(hero,NPC_TALENT_SNEAK) == 1))
+	{
+		AI_Output(self,other,"SVM_12_NoLearnYoureBetter");	//Теперь ты намного лучше!
+		LOG_CAVALORNTRAIN_BOW = FALSE;
+	}
+	else
+	{
+		AI_Output(self,other,"DIA_cavalorn_Lehrer_12_01");	//А чему бы ты хотел научиться?
+		b_cavalornearn();
+	};
+};
+
+
+func void dia_cavalorn_learn_back()
+{
+	Info_ClearChoices(dia_cavalorn_learn);
 };
 
 func void dia_cavalorn_lehrer_bow()
@@ -156,7 +187,16 @@ func void dia_cavalorn_lehrer_bow()
 			AI_Output(self,other,"SVM_12_ShitNoOre");	//Да у тебя же совсем нет руды!
 		};
 	};
-	b_cavalornearn();
+	if((Npc_GetTalentSkill(hero,NPC_TALENT_BOW) == 2) && (Npc_GetTalentSkill(hero,NPC_TALENT_SNEAK) == 1))
+	{
+		AI_Output(self,other,"SVM_12_NoLearnYoureBetter");	//Теперь ты намного лучше!
+		LOG_CAVALORNTRAIN_BOW = FALSE;
+		Info_ClearChoices(dia_cavalorn_learn);
+	}
+	else
+	{
+		b_cavalornearn();
+	};
 };
 
 func void dia_cavalorn_lehrer_bow_2()
@@ -194,7 +234,16 @@ func void dia_cavalorn_lehrer_bow_2()
 			AI_Output(self,other,"SVM_12_ShitNoOre");	//Да у тебя же совсем нет руды!
 		};
 	};
-	b_cavalornearn();
+	if((Npc_GetTalentSkill(hero,NPC_TALENT_BOW) == 2) && (Npc_GetTalentSkill(hero,NPC_TALENT_SNEAK) == 1))
+	{
+		AI_Output(self,other,"SVM_12_NoLearnYoureBetter");	//Теперь ты намного лучше!
+		LOG_CAVALORNTRAIN_BOW = FALSE;
+		Info_ClearChoices(dia_cavalorn_learn);
+	}
+	else
+	{
+		b_cavalornearn();
+	};
 };
 
 func void dia_cavalorn_lehrer_schleichen()
@@ -232,7 +281,16 @@ func void dia_cavalorn_lehrer_schleichen()
 			AI_Output(self,other,"SVM_12_ShitNoOre");	//Да у тебя же совсем нет руды!
 		};
 	};
-	b_cavalornearn();
+	if((Npc_GetTalentSkill(hero,NPC_TALENT_BOW) == 2) && (Npc_GetTalentSkill(hero,NPC_TALENT_SNEAK) == 1))
+	{
+		AI_Output(self,other,"SVM_12_NoLearnYoureBetter");	//Теперь ты намного лучше!
+		LOG_CAVALORNTRAIN_BOW = FALSE;
+		Info_ClearChoices(dia_cavalorn_learn);
+	}
+	else
+	{
+		b_cavalornearn();
+	};
 };
 
 instance STT_336_CAVALORN_SELLBOW(C_INFO)
@@ -270,7 +328,7 @@ instance STT_336_CAVALORN_TRADE(C_INFO)
 	information = stt_336_cavalorn_trade_info;
 	important = 0;
 	permanent = 1;
-	description = "Покажи мне свои товары.";
+	description = DIALOG_TRADE;
 	trade = 1;
 };
 

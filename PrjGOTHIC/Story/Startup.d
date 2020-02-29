@@ -711,8 +711,8 @@ func void startup_sub_oldcamp()
 	Wld_InsertNpc(vlk_595_buddler,"LOCATION_11_NEW5");
 	Wld_InsertNpc(vlk_596_buddler,"LOCATION_11_NEW5");
 	Wld_InsertNpc(vlk_597_buddler,"LOCATION_11_NEW5");
-	Wld_InsertNpc(meatbug,"D36_MEATBUGS");
-	Wld_InsertNpc(meatbug,"D36_MEATBUGS");
+	//Wld_InsertNpc(meatbug,"D36_MEATBUGS");
+	Wld_InsertNpc(meatbug,"D36_MEATBUGS2");
 	Wld_InsertNpc(meatbug,"D36_MEATBUGS");
 	Wld_InsertNpc(meatbug,"D36_MEATBUGS");
 };
@@ -975,7 +975,7 @@ func void init_sub_oldcamp()
 
 func void startup_sub_demontower()
 {
-	Wld_InsertNpc(kdf_404_xardas,"LOCATION_03_IN");
+	//Wld_InsertNpc(kdf_404_xardas,"LOCATION_03_IN");
 };
 
 func void init_sub_demontower()
@@ -991,7 +991,6 @@ func void startup_sub_freeminecamp()
 	Wld_InsertNpc(sld_751_soeldner,"FMC_ENTRANCE");
 	Wld_InsertNpc(sld_752_okyl,"FMC_ENTRANCE");
 	Wld_InsertNpc(sld_753_baloro,"FMC_ENTRANCE");
-	Wld_InsertNpc(org_857_calash,"FMC_ENTRANCE");
 	Wld_InsertNpc(sld_755_soeldner,"FMC_ENTRANCE");
 	Wld_InsertNpc(sld_756_soeldner,"FMC_ENTRANCE");
 	Wld_InsertNpc(sld_757_soeldner,"FMC_ENTRANCE");
@@ -1021,24 +1020,11 @@ func void startup_sub_freeminecamp()
 	Wld_InsertNpc(org_890_organisator,"FMC_ENTRANCE");
 	Wld_InsertNpc(org_891_organisator,"FMC_ENTRANCE");
 	Wld_InsertNpc(org_892_organisator,"FMC_ENTRANCE");
+	Wld_InsertNpc(org_857_calash,"FMC_ENTRANCE");
 };
 
 func void init_sub_freeminecamp()
 {
-	//Wld_AssignRoomToGuild("FMC01",GIL_SFB);
-	Wld_AssignRoomToGuild("FMC03",GIL_SFB);
-	Wld_AssignRoomToGuild("FMC04",GIL_SFB);
-	Wld_AssignRoomToGuild("FMC05",GIL_SFB);
-	Wld_AssignRoomToGuild("FMC06",GIL_SFB);
-	Wld_AssignRoomToGuild("FMC07",GIL_SFB);
-	Wld_AssignRoomToGuild("FMC08",GIL_SFB);
-	Wld_AssignRoomToGuild("FMC09",GIL_SFB);
-	Wld_AssignRoomToGuild("FMC10",GIL_SFB);
-	Wld_AssignRoomToGuild("FMC11",GIL_SFB);
-	Wld_AssignRoomToGuild("FMC12",GIL_SFB);
-	Wld_AssignRoomToGuild("FMC13",GIL_SFB);
-	//Wld_AssignRoomToGuild("FMC14",GIL_SFB);
-	Wld_AssignRoomToGuild("FMC15",GIL_SFB);
 	Wld_SetObjectRoutine(0,0,"FMC_FIREPLACE_HIGH2_01",1);
 	Wld_SetObjectRoutine(20,0,"FMC_FIREPLACE_HIGH2_01",1);
 	Wld_SetObjectRoutine(5,0,"FMC_FIREPLACE_HIGH2_01",0);
@@ -1084,7 +1070,20 @@ func void init_sub_freeminecamp()
 	Wld_SetObjectRoutine(0,0,"FMC_FIREPLACE_HIGH2_15",1);
 	Wld_SetObjectRoutine(20,0,"FMC_FIREPLACE_HIGH2_15",1);
 	Wld_SetObjectRoutine(5,0,"FMC_FIREPLACE_HIGH2_15",0);
-	
+	Wld_AssignRoomToGuild("FMC01",GIL_SFB);
+	Wld_AssignRoomToGuild("FMC03",GIL_SFB);
+	Wld_AssignRoomToGuild("FMC04",GIL_SFB);
+	Wld_AssignRoomToGuild("FMC05",GIL_SFB);
+	Wld_AssignRoomToGuild("FMC06",GIL_SFB);
+	Wld_AssignRoomToGuild("FMC07",GIL_SFB);
+	Wld_AssignRoomToGuild("FMC08",GIL_SFB);
+	Wld_AssignRoomToGuild("FMC09",GIL_SFB);
+	Wld_AssignRoomToGuild("FMC10",GIL_SFB);
+	Wld_AssignRoomToGuild("FMC11",GIL_SFB);
+	Wld_AssignRoomToGuild("FMC12",GIL_SFB);
+	Wld_AssignRoomToGuild("FMC13",GIL_SFB);
+	Wld_AssignRoomToGuild("FMC14",GIL_SFB);
+	Wld_AssignRoomToGuild("FMC15",GIL_SFB);
 };
 
 func void startup_sub_surface()
@@ -1152,7 +1151,7 @@ func void startup_sub_surface()
 	Wld_InsertNpc(molerat,"OW_SAWHUT_MOLERAT_SPAWN01");
 	Wld_InsertNpc(molerat,"OW_SAWHUT_MOLERAT_SPAWN01");
 	Wld_InsertNpc(greengobbosword,"PATH_OC_NC_6");
-	Wld_InsertNpc(greengobbosword,"PATH_OC_NC_4");
+	Wld_InsertNpc(greengobbosword,"PATH_OC_NC_5");
 	Wld_InsertNpc(meatbug,"OW_SAWHUT_MEATBUG_SPAWN");
 	Wld_InsertNpc(meatbug,"OW_SAWHUT_MEATBUG_SPAWN");
 	Wld_InsertNpc(wolf,"OW_PATH_02_SPAWN_HOGEWOLF");
@@ -1484,9 +1483,9 @@ func void startup_sub_surface()
 	Wld_InsertNpc(yscavenger,"OW_PATH_1_5_4");
 	Wld_InsertNpc(yscavenger,"SPAWN_OW_BLOODFLY_E_3");
 	Wld_InsertNpc(yscavenger,"SPAWN_OW_BLOODFLY_E_3");
-	Wld_InsertNpc(yscavenger,"SPAWN_GOBBO_OW_PATH_1_6");
-	Wld_InsertNpc(yscavenger,"SPAWN_GOBBO_OW_PATH_1_6");
-	Wld_InsertNpc(yscavenger,"SPAWN_GOBBO_OW_PATH_1_6");
+	Wld_InsertNpc(yscavenger,"SPAWN_GOBBO_OW_PATH_FIX_1_6");
+	Wld_InsertNpc(yscavenger,"SPAWN_GOBBO_OW_PATH_FIX_1_6");
+	Wld_InsertNpc(yscavenger,"SPAWN_GOBBO_OW_PATH_FIX_1_6");
 	Wld_InsertNpc(yscavenger,"SPAWN_OW_STARTSCAVNGERBO_01_02");
 	Wld_InsertNpc(yscavenger,"SPAWN_OW_STARTSCAVENGER_02_01");
 	Wld_InsertNpc(scavenger,"SPAWN_OW_SCAVENGER_06_04");
@@ -1586,9 +1585,9 @@ func void startup_sub_surface()
 	Wld_InsertNpc(harpie,"LOCATION_19_03_PENTAGRAMM");
 	Wld_InsertNpc(harpie,"LOCATION_19_03_ROOM6");
 	Wld_InsertNpc(harpie,"LOCATION_19_03_ROOM6_BARRELCHAMBER");
-	Wld_InsertNpc(skeletonsh,"LOCATION_19_03_ROOM6_BARRELCHAMBER2");
-	Wld_InsertNpc(skeletonsh,"LOCATION_19_03_ROOM6_BARRELCHAMBER2");
-	Wld_InsertNpc(skeletonsh,"LOCATION_19_03_ROOM6_BARRELCHAMBER2");
+	//Wld_InsertNpc(skeletonsh,"LOCATION_19_03_ROOM6_BARRELCHAMBER2");
+	//Wld_InsertNpc(skeletonsh,"LOCATION_19_03_ROOM6_BARRELCHAMBER2");
+	//Wld_InsertNpc(skeletonsh,"LOCATION_19_03_ROOM6_BARRELCHAMBER2");
 	Wld_InsertNpc(harpie,"LOCATION_19_03_ROOM3");
 	Wld_InsertNpc(harpie,"LOCATION_19_03_SECOND_HARPYE1");
 	Wld_InsertNpc(harpie,"LOCATION_19_03_SECOND_HARPYE2");
@@ -2001,7 +2000,7 @@ func void startup_world()
 	PlayVideo("INTRO.BIK");
 	//PlayVideo("INTRO_RUSSOBIT.BIK");
 	b_cycle_function();
-	RUSSOBITMFIXV12 = TRUE;
+	RUSSOBITMFIXV13 = TRUE;
 };
 
 func void startup_orcgraveyard()

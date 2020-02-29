@@ -21,6 +21,7 @@ instance VLK_5002_BUDDLER(NPC_DEFAULT)
 	fight_tactic = FAI_HUMAN_COWARD;
 	EquipItem(self,itmw_1h_club_01);
 	CreateInvItem(self,itfoapple);
+	CreateInvItem(self,itmwpickaxe);
 	daily_routine = rtn_fmstart_5002;
 };
 

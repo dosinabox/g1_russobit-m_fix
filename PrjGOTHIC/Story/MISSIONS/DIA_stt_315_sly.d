@@ -77,7 +77,7 @@ func void dia_stt_315_lostnek_info()
 		AI_Output(self,other,"DIA_STT_315_LostNek_10_03");	//А найдешь его, так я замолвлю словечко за тебя в лагере.
 	};
 	Info_ClearChoices(dia_stt_315_lostnek);
-	Info_AddChoice(dia_stt_315_lostnek,"Может, позже.",dia_stt_315_lostnek_later);
+	Info_AddChoice(dia_stt_315_lostnek,"Может, позже...",dia_stt_315_lostnek_later);
 	Info_AddChoice(dia_stt_315_lostnek,"Я попробую найти Нека.",dia_stt_315_lostnek_doit);
 	if(Npc_GetTrueGuild(hero) == GIL_NONE)
 	{

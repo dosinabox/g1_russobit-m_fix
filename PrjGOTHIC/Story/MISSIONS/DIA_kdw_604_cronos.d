@@ -3,7 +3,12 @@ func void b_cronoslearn()
 {
 	Info_ClearChoices(kdw_604_cronos_mana);
 	Info_AddChoice(kdw_604_cronos_mana,DIALOG_BACK,kdw_604_cronos_mana_back);
-	if(hero.guild == GIL_ORG || hero.guild == GIL_SLD || hero.guild == GIL_KDW)
+	if(DIFF_HARD == TRUE)
+	{
+		Info_AddChoice(kdw_604_cronos_mana,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,OTHERCAMPLEARNPAY * 5),kdw_604_cronos_mana_man_5);
+		Info_AddChoice(kdw_604_cronos_mana,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,OTHERCAMPLEARNPAY),kdw_604_cronos_mana_man_1);
+	}
+	else if(hero.guild == GIL_ORG || hero.guild == GIL_SLD || hero.guild == GIL_KDW)
 	{
 		Info_AddChoice(kdw_604_cronos_mana,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),kdw_604_cronos_mana_man_5);
 		Info_AddChoice(kdw_604_cronos_mana,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),kdw_604_cronos_mana_man_1);
@@ -34,6 +39,11 @@ func int kdw_604_cronos_exit_condition()
 
 func void kdw_604_cronos_exit_info()
 {
+	if(Npc_HasItems(other,alchemybook))
+	{
+		Npc_RemoveInvItem(other,alchemybook);
+		CreateInvItem(other,alch200);
+	};
 	AI_StopProcessInfos(self);
 };
 
@@ -267,6 +277,11 @@ func void info_cronos_kalom_info()
 	AI_Output(self,other,"Info_Cronos_KALOM_08_03");	//Я никогда ему не доверял. Не важно, какое место он занимает, важно то, что его ослепила жажда власти. Он способен на все.
 	AI_Output(self,other,"Info_Cronos_KALOM_08_04");	//Думаю, без него в Братстве будет гораздо лучше!
 	AI_Output(self,other,"Info_Cronos_KALOM_08_05");	//Я сообщу об этом Сатурасу, как только у меня будет возможность. А теперь иди!
+	if(Npc_HasItems(other,alchemybook))
+	{
+		Npc_RemoveInvItem(other,alchemybook);
+		CreateInvItem(other,alch200);
+	};
 	AI_StopProcessInfos(self);
 };
 
@@ -302,6 +317,11 @@ func void info_cronos_yberion_info()
 	AI_Output(self,other,"Info_Cronos_YBERION_08_02");	//Что? Как это могло произойти?
 	AI_Output(self,other,"Info_Cronos_YBERION_08_05");	//Это очень печальная новость. Юберион был одним из наших союзников.
 	AI_Output(self,other,"Info_Cronos_YBERION_08_06");	//Но не стоит из-за этого отвлекать Сатураса от исследований.
+	if(Npc_HasItems(other,alchemybook))
+	{
+		Npc_RemoveInvItem(other,alchemybook);
+		CreateInvItem(other,alch200);
+	};
 	AI_StopProcessInfos(self);
 };
 
@@ -340,6 +360,11 @@ func void info_cronos_sleeper_info()
 	AI_Output(self,other,"Info_Cronos_SLEEPER_08_10");	//Там он проводит свои исследования, пытается вычислить, как лучше всего взорвать гору руды.
 	b_logentry(CH3_ESCAPEPLANNC,"Кронос дал мне разрешение на разговор с Сатурасом. Обычно верховного мага можно найти у пентаграммы. Нужно сказать стражникам пароль... Вот черт, неужели я его забыл?!");
 	b_givexp(XP_GETCRONOSPERMISSION);
+	if(Npc_HasItems(other,alchemybook))
+	{
+		Npc_RemoveInvItem(other,alchemybook);
+		CreateInvItem(other,alch200);
+	};
 	AI_StopProcessInfos(self);
 };
 
@@ -367,7 +392,7 @@ func int info_cronos_parole_condition()
 func void info_cronos_parole_info()
 {
 	AI_Output(other,self,"Info_Cronos_PAROLE_15_01");	//Скажи мне пароль, я не смог его запомнить.
-	AI_Output(self,other,"Info_Cronos_PAROLE_08_02");	//Да, памяти у тебя нет. Запомни, пароль Тетриандох.
+	AI_Output(self,other,"Info_Cronos_PAROLE_08_02");	//Да, памяти у тебя нет. Запомни, пароль - Тетриандох.
 };
 
 
@@ -396,13 +421,22 @@ func void info_cronos_reward_info()
 	AI_Output(other,self,"Info_Cronos_REWARD_15_01");	//Сатурас сказал, что у тебя есть для меня награда.
 	AI_Output(self,other,"Info_Cronos_REWARD_08_02");	//Как хранитель руды я дам тебе небольшую часть наших запасов, как награду за твои труды.
 	AI_Output(self,other,"Info_Cronos_REWARD_08_03");	//Надеюсь, ты сможешь разумно использовать ее.
-	b_printtrademsg1("Получено руды: 1000");
+	if(DIFF_HARD == FALSE)
+	{
+		CreateInvItems(hero,itminugget,1000);
+		b_printtrademsg1("Получено руды: 1000");
+	}
+	else
+	{
+		CreateInvItems(hero,itminugget,500);
+		b_printtrademsg1("Получено руды: 500");
+	};
 	b_logentry(CH3_BRINGFOCI,"Кронос дал мне достаточно много руды, но от этого рудная гора нисколько не уменьшилась.");
 	if(Npc_KnowsInfo(hero,info_riordian_reward))
 	{
 		Log_SetTopicStatus(CH3_BRINGFOCI,LOG_SUCCESS);
 	};
-	CreateInvItems(hero,itminugget,1000);
+	
 };
 
 
@@ -465,7 +499,7 @@ func void kdw_604_cronos_mana_back()
 
 func void kdw_604_cronos_mana_man_1()
 {
-	if(hero.guild == GIL_ORG || hero.guild == GIL_SLD || hero.guild == GIL_KDW)
+	if((hero.guild == GIL_ORG || hero.guild == GIL_SLD || hero.guild == GIL_KDW) && (DIFF_HARD == FALSE))
 	{
 		b_buyattributepoints(other,ATR_MANA_MAX,LPCOST_ATTRIBUTE_MANA);
 	}
@@ -488,7 +522,7 @@ func void kdw_604_cronos_mana_man_1()
 
 func void kdw_604_cronos_mana_man_5()
 {
-	if(hero.guild == GIL_ORG || hero.guild == GIL_SLD || hero.guild == GIL_KDW)
+	if((hero.guild == GIL_ORG || hero.guild == GIL_SLD || hero.guild == GIL_KDW) && (DIFF_HARD == FALSE))
 	{
 		b_buyattributepoints(other,ATR_MANA_MAX,5 * LPCOST_ATTRIBUTE_MANA);
 	}

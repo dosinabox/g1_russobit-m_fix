@@ -17,6 +17,11 @@ func int dia_dexter_exit_condition()
 
 func void dia_dexter_exit_info()
 {
+	if(Npc_HasItems(other,alchemybook))
+	{
+		Npc_RemoveInvItem(other,alchemybook);
+		CreateInvItem(other,alch200);
+	};
 	AI_StopProcessInfos(self);
 };
 
@@ -40,6 +45,11 @@ func int dia_dexter_first_condition()
 func void dia_dexter_first_info()
 {
 	AI_Output(self,other,"DIA_Dexter_IAmNew_10_00");	//Эй, ты! Я продаю болотник и эликсиры из Лагеря сектантов. Что-нибудь хочешь купить?
+	if(GRAVO_LOG == FALSE)
+	{
+		Log_CreateTopic(GE_TRADEROC,LOG_NOTE);
+		b_logentry(GE_TRADEROC,"Призрак Декстер на рыночной площади продает болотник и зелья из лагеря сектантов.");
+	};
 };
 
 
@@ -87,12 +97,6 @@ func void dia_dexter_trade_info()
 {
 	AI_Output(other,self,"DIA_BaalKagan_TRADE_15_00");	//Покажи мне свои товары.
 	AI_Output(self,other,"DIA_Dexter_Trade_10_01");	//У меня все самое лучшее...
-	if(DEXTER_TRADED == FALSE)
-	{
-		Log_CreateTopic(GE_TRADEROC,LOG_NOTE);
-		b_logentry(GE_TRADEROC,"Призрак Декстер на рыночной площади продает болотник и зелья из лагеря Сектантов.");
-		DEXTER_TRADED = TRUE;
-	};
 };
 
 instance DIA_DEXTER_JOINOC(C_INFO)

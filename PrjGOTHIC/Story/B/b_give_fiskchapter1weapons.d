@@ -33,7 +33,7 @@ func void b_give_fiskchapter3weapons()
 	CreateInvItem(npc,itmw_1h_sword_long_01);
 	CreateInvItem(npc,itmw_1h_sword_long_02);
 	CreateInvItem(npc,itmw_1h_sword_long_03);
-	CreateInvItem(npc,itmw_1h_sword_long_04);
+	//CreateInvItem(npc,itmw_1h_sword_long_04);
 	CreateInvItem(npc,itmw_1h_sword_broad_01);
 	CreateInvItems(npc,itminugget,500);
 };

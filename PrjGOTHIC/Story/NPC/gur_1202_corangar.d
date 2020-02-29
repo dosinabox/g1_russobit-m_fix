@@ -23,7 +23,7 @@ instance GUR_1202_CORANGAR(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_BOW,2);
 	Npc_SetTalentSkill(self,NPC_TALENT_CROSSBOW,2);
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,4);
-	CreateInvItem(self,itarrunesleep);
+	CreateInvItem(self,itarrune_5_2_sleep);
 	CreateInvItem(self,roter_wind);
 	CreateInvItem(self,itmi_amulet_psi_01);
 	daily_routine = rtn_start_1202;

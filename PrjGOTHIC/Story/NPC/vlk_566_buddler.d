@@ -20,6 +20,7 @@ instance VLK_566_BUDDLER(NPC_DEFAULT)
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_COWARD;
 	EquipItem(self,itmw_1h_nailmace_01);
+	CreateInvItem(self,itmwpickaxe);
 	CreateInvItem(self,itfobeer);
 	CreateInvItem(self,itlstorch);
 	daily_routine = rtn_start_566;

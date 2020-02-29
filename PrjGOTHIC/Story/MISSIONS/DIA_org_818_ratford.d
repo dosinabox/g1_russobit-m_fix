@@ -34,7 +34,10 @@ instance ORG_818_RATFORD_WRONGWAY(C_INFO)
 
 func int org_818_ratford_wrongway_condition()
 {
-	return 1;
+	if(KAPITEL < 3)
+	{
+		return 1;
+	};
 };
 
 func void org_818_ratford_wrongway_info()
@@ -83,7 +86,7 @@ instance ORG_818_RATFORD_WHYDANGEROUS(C_INFO)
 
 func int org_818_ratford_whydangerous_condition()
 {
-	if(Npc_KnowsInfo(hero,org_818_ratford_whatgame))
+	if(Npc_KnowsInfo(hero,org_818_ratford_whatgame) && (KAPITEL < 3))
 	{
 		return 1;
 	};
@@ -111,7 +114,7 @@ instance ORG_818_RATFORD_WOEQUIPMENT(C_INFO)
 
 func int org_818_ratford_woequipment_condition()
 {
-	if(Npc_KnowsInfo(hero,org_818_ratford_whydangerous))
+	if(Npc_KnowsInfo(hero,org_818_ratford_whydangerous) && (KAPITEL < 3))
 	{
 		return 1;
 	};
@@ -145,7 +148,7 @@ instance ORG_818_RATFORD_MORELOCATIONS(C_INFO)
 
 func int org_818_ratford_morelocations_condition()
 {
-	if(Npc_KnowsInfo(hero,org_818_ratford_woequipment))
+	if(Npc_KnowsInfo(hero,org_818_ratford_woequipment) && (KAPITEL < 3))
 	{
 		return 1;
 	};
@@ -175,7 +178,7 @@ instance ORG_818_RATFORD_WOKARTE(C_INFO)
 
 func int org_818_ratford_wokarte_condition()
 {
-	if(Npc_KnowsInfo(hero,org_818_ratford_morelocations))
+	if(Npc_KnowsInfo(hero,org_818_ratford_morelocations) && (KAPITEL < 4))
 	{
 		return 1;
 	};
@@ -187,7 +190,7 @@ func void org_818_ratford_wokarte_info()
 	AI_Output(self,other,"Org_818_Ratford_WoKarte_07_01");	//Спроси об этом людей из Старого лагеря. По-моему, там жил один картограф.
 	AI_Output(self,other,"Org_818_Ratford_WoKarte_07_02");	//Может, у тебя получиться выудить у него какую-нибудь карту. А может, у него будет карта и для меня?
 	Info_ClearChoices(org_818_ratford_wokarte);
-	Info_AddChoice(org_818_ratford_wokarte,"Если я достану карту бесплатно, я возьму все, что смогу унести.",org_818_ratford_wokarte_stehlen);
+	Info_AddChoice(org_818_ratford_wokarte,"Если у меня получится достать карту бесплатно, то я возьму столько, сколько смогу унести.",org_818_ratford_wokarte_stehlen);
 	Info_AddChoice(org_818_ratford_wokarte,"А зачем это тебе? Разве он не продает их?",org_818_ratford_wokarte_kaufen);
 };
 
@@ -195,9 +198,16 @@ func void org_818_ratford_wokarte_stehlen()
 {
 	var C_NPC lares;
 	AI_Output(other,self,"Org_818_Ratford_WoKarte_Stehlen_15_00");	//Если у меня получится достать карту бесплатно, то я возьму столько, сколько смогу унести.
-	AI_Output(self,other,"Org_818_Ratford_WoKarte_Stehlen_07_01");	//А ты мне нравишься! Быть может, ты захочешь присоединиться к Новому лагерю? Если зайдешь туда, найди Ларса. Он принимает новых людей. Думаю, у него найдется для тебя работа.
-	lares = Hlp_GetNpc(org_801_lares);
-	lares.aivar[AIV_FINDABLE] = TRUE;
+	if(KAPITEL < 2)
+	{
+		AI_Output(self,other,"Org_818_Ratford_WoKarte_Stehlen_07_01");	//А ты мне нравишься! Быть может, ты захочешь присоединиться к Новому лагерю? Если зайдешь туда, найди Ларса. Он принимает новых людей. Думаю, у него найдется для тебя работа.
+		lares = Hlp_GetNpc(org_801_lares);
+		lares.aivar[AIV_FINDABLE] = TRUE;
+	}
+	else
+	{
+		AI_Output(self,other,"DIA_Viran_FetchWeed_Really_07_01");	//Ну да, как же.
+	};
 	Info_ClearChoices(org_818_ratford_wokarte);
 };
 
@@ -222,7 +232,7 @@ instance ORG_818_RATFORD_THANKS(C_INFO)
 
 func int org_818_ratford_thanks_condition()
 {
-	if(Npc_KnowsInfo(hero,org_818_ratford_morelocations))
+	if(Npc_KnowsInfo(hero,org_818_ratford_morelocations) && (KAPITEL < 3))
 	{
 		return 1;
 	};

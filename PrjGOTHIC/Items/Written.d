@@ -1270,7 +1270,7 @@ func void usequentinnote()
 	Doc_PrintLine(ndocid,0,"  - Квентин");
 	Doc_SetMargins(ndocid,-1,200,50,50,50,1);
 	Doc_Show(ndocid);
-	if(QUENTIN_GANG_QUEST_STARTED != LOG_RUNNING && QUENTIN_GANG_QUEST_STARTED != LOG_SUCCESS && QUENTIN_GANG_QUEST_STARTED != LOG_FAILED)
+	if(QUENTIN_GANG_QUEST_STARTED != LOG_RUNNING && QUENTIN_GANG_QUEST_STARTED != LOG_SUCCESS && QUENTIN_GANG_QUEST_STARTED != LOG_FAILED && !Npc_IsDead(org_858_quentin))
 	{
 		QUENTIN_GANG_QUEST_STARTED = LOG_RUNNING;
 		Log_CreateTopic(QUENTIN_GANG,LOG_MISSION);
@@ -1345,6 +1345,23 @@ func void usecalashnote2()
 	Doc_PrintLine(ndocid,0,"  - Квентин");
 	Doc_SetMargins(ndocid,-1,200,50,50,50,1);
 	Doc_Show(ndocid);
+};
+
+instance ALCH200(C_ITEM)
+{
+	name = "Основы алхимии";
+	mainflag = ITEM_KAT_DOCS;
+	flags = 0;
+	value = 200;
+	visual = "ITWR_BOOK_ALCHEMY.3ds";
+	material = MAT_LEATHER;
+	scemename = "MAP";
+	description = "Основы алхимии";
+	text[1] = "Позволяет изучить искусство зельеварения.";
+	text[2] = "(требуется 10 очков обучения)";
+	text[5] = NAME_VALUE;
+	count[5] = value;
+	on_state[0] = usealchemybook;
 };
 
 instance ALCHEMYBOOK(C_ITEM)
@@ -1761,7 +1778,7 @@ instance ALCHEMY_DEX(C_ITEM)
 	scemename = "MAP";
 	description = "Рецепт эссенции ловкости";
 	text[1] = NAME_BONUS_DEX;
-	count[1] = 3;
+	count[1] = DEX_ESSENZ;
 	on_state[0] = usedexrecipe;
 };
 
@@ -1785,7 +1802,14 @@ func void usedexrecipe()
 		if(DEXRECIPE == FALSE)
 		{
 			PrintScreen("Изучен новый рецепт!",-1,12,"FONT_OLD_20_WHITE.TGA",4);
-			b_logentry("Алхимия","Изучен рецепт эссенции ловкости (ловкость +3). Требуется: могильный мох (1), вишня троллей (1) и темный лист (1).");
+			if(DIFF_HARD == TRUE)
+			{
+				b_logentry("Алхимия","Изучен рецепт эссенции ловкости (ловкость +1). Требуется: могильный мох (1), вишня троллей (1) и темный лист (1).");
+			}
+			else
+			{
+				b_logentry("Алхимия","Изучен рецепт эссенции ловкости (ловкость +3). Требуется: могильный мох (1), вишня троллей (1) и темный лист (1).");
+			};
 			DEXRECIPE = TRUE;
 		};
 	};
@@ -1802,7 +1826,7 @@ instance ALCHEMY_STR(C_ITEM)
 	scemename = "MAP";
 	description = "Рецепт эссенции силы";
 	text[1] = NAME_BONUS_STR;
-	count[1] = 3;
+	count[1] = STR_ESSENZ;
 	on_state[0] = usestrrecipe;
 };
 
@@ -1826,7 +1850,14 @@ func void usestrrecipe()
 		if(STRRECIPE == FALSE)
 		{
 			PrintScreen("Изучен новый рецепт!",-1,12,"FONT_OLD_20_WHITE.TGA",4);
-			b_logentry("Алхимия","Изучен рецепт эссенции силы (сила +3). Требуется: могильный мох (1), драконий корень (1) и огненная ягода (1).");
+			if(DIFF_HARD == TRUE)
+			{
+				b_logentry("Алхимия","Изучен рецепт эссенции силы (сила +1). Требуется: могильный мох (1), драконий корень (1) и огненная ягода (1).");
+			}
+			else
+			{
+				b_logentry("Алхимия","Изучен рецепт эссенции силы (сила +3). Требуется: могильный мох (1), драконий корень (1) и огненная ягода (1).");
+			};
 			STRRECIPE = TRUE;
 		};
 	};

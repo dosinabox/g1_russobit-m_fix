@@ -55,6 +55,15 @@ func void g_cannotuse(var int bisplayer,var int nattribute,var int nvalue)
 	strmessage = ConcatStrings(strmessage," ");
 	strmessage = ConcatStrings(strmessage,strattribute);
 	strmessage = ConcatStrings(strmessage,"для использования.");
+	/////////
+	//if((self.id != 311) && (self.id != 211) && (self.id != 855) && (self.id != 843) && (self.id != 1312) && (self.id != 205) && (self.id != 336))
+	//{
+	//	g_printscreen(strmessage);
+	//}
+	//else
+	//{
+	//	PrintScreen("тест",-1,-1,"font_old_20_white.tga",3);
+	//};
 	if(bisplayer)
 	{
 		g_printscreen(strmessage);

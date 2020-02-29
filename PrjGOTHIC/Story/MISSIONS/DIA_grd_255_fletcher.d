@@ -366,5 +366,6 @@ func void info_fletcher_die_info()
 	};
 	AI_StopProcessInfos(self);
 	OC_BANNED = TRUE;
+	FREELEARN_OC = FALSE;
 };
 

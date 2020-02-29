@@ -283,6 +283,7 @@ func void org_826_mordrag_gotonewcamp_info()
 	};
 	self.aivar[AIV_PARTYMEMBER] = TRUE;
 	Npc_ExchangeRoutine(self,"GUIDE");
+	Npc_ExchangeRoutine(stt_330_schatten,"START");
 };
 
 
@@ -333,6 +334,7 @@ func void org_826_mordrag_atnewcamp_info()
 	self.aivar[AIV_PARTYMEMBER] = FALSE;
 	AI_StopProcessInfos(self);
 	Npc_ExchangeRoutine(self,"START");
+	Npc_ExchangeRoutine(stt_330_schatten,"START");
 };
 
 
@@ -422,7 +424,8 @@ func void org_826_mordrag_hauab_info()
 	AI_StopProcessInfos(self);
 	MORDRAGKO_HAUAB = TRUE;
 	b_logentry(CH1_MORDRAGKO,"я избил ћордрага и сказал ему, что он не должен возвращатьс€ в —тарый лагерь.");
-	Npc_ExchangeRoutine(self,"Start");
+	Npc_ExchangeRoutine(self,"START");
+	Npc_ExchangeRoutine(stt_330_schatten,"START");
 };
 
 

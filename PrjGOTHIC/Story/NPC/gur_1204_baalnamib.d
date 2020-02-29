@@ -20,7 +20,7 @@ instance GUR_1204_BAALNAMIB(NPC_DEFAULT)
 	b_scale(self);
 	Mdl_SetModelFatness(self,-1);
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,4);
-	CreateInvItem(self,itarrunesleep);
+	CreateInvItem(self,itarrune_5_2_sleep);
 	EquipItem(self,namibs_keule);
 	daily_routine = rtn_start_1204;
 	fight_tactic = FAI_HUMAN_MAGE;

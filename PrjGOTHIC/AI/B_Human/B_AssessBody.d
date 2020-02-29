@@ -11,6 +11,277 @@ func void b_assessbody()
 	};
 };
 
+func int b_sayplunder()
+{
+	if(b_plunder())
+	{
+		b_say(self,other,"$ITookYourOre");
+	}
+	else
+	{
+		b_say(self,other,"$ShitNoOre");
+	};
+	other.aivar[AIV_PLUNDERED] = TRUE;
+};
+
+func int b_checkitems_orik()
+{
+	if(Npc_HasItems(other,orik_key) || Npc_HasItems(other,oriks_axt))
+	{
+		b_say(self,other,"$YouStoleFromMe");
+		if(Npc_HasItems(other,orik_key))
+		{
+			PrintScreen("Орик забрал свой ключ.",-1,40,"FONT_OLD_10_WHITE.TGA",3);
+			Npc_RemoveInvItem(other,orik_key);
+			CreateInvItem(self,orik_key);
+		};
+		if(Npc_HasItems(other,oriks_axt))
+		{
+			PrintScreen("Орик забрал свой топор.",-1,43,"FONT_OLD_10_WHITE.TGA",3);
+			Npc_RemoveInvItem(other,oriks_axt);
+			CreateInvItem(self,oriks_axt);
+			AI_EquipBestMeleeWeapon(self);
+		};
+		b_plunder();
+	}
+	else
+	{
+		b_sayplunder();
+	};
+};
+
+func int b_checkitems_lord()
+{
+	if(Npc_HasItems(other,itkey_rb_01) || Npc_HasItems(other,heerscherstab))
+	{
+		b_say(self,other,"$YouStoleFromMe");
+		if(Npc_HasItems(other,itkey_rb_01))
+		{
+			PrintScreen("Лорд забрал свой ключ.",-1,40,"FONT_OLD_10_WHITE.TGA",3);
+			Npc_RemoveInvItem(other,itkey_rb_01);
+		};
+		if(Npc_HasItems(other,heerscherstab))
+		{
+			PrintScreen("Лорд забрал свой посох.",-1,43,"FONT_OLD_10_WHITE.TGA",3);
+			Npc_RemoveInvItem(other,heerscherstab);
+			CreateInvItem(self,heerscherstab);
+			AI_EquipBestMeleeWeapon(self);
+		};
+		b_plunder();
+	}
+	else
+	{
+		b_sayplunder();
+	};
+};
+
+func int b_checkitems_cavalorn()
+{
+	if(Npc_HasItems(other,itkecavalorn01))
+	{
+		b_say(self,other,"$YouStoleFromMe");
+		PrintScreen("Кавалорн забрал свой ключ.",-1,40,"FONT_OLD_10_WHITE.TGA",3);
+		Npc_RemoveInvItem(other,itkecavalorn01);
+		b_plunder();
+	}
+	else
+	{
+		b_sayplunder();
+	};
+};
+
+func int b_checkitems_whistler()
+{
+	if(Npc_HasItems(other,whistlers_schwert))
+	{
+		b_say(self,other,"$YouStoleFromMe");
+		PrintScreen("Уистлер забрал свой меч.",-1,40,"FONT_OLD_10_WHITE.TGA",3);
+		Npc_RemoveInvItem(other,whistlers_schwert);
+		CreateInvItem(self,whistlers_schwert);
+		AI_EquipBestMeleeWeapon(self);
+		if((WHISTLER_BUYMYSWORD == LOG_RUNNING) && (KAPITEL == 1))
+		{
+			WHISTLER_BUYMYSWORD = LOG_FAILED;
+			b_logentry(CH1_JOINOC,"Я все испортил. Уистлер рассержен на меня.");
+		};
+		b_plunder();
+	}
+	else
+	{
+		b_sayplunder();
+	};
+};
+
+func int b_checkitems_aaron()
+{
+	if(Npc_HasItems(other,itke_om_02))
+	{
+		b_say(self,other,"$YouStoleFromMe");
+		PrintScreen("Аарон забрал свой ключ.",-1,40,"FONT_OLD_10_WHITE.TGA",3);
+		Npc_RemoveInvItem(other,itke_om_02);
+		CreateInvItem(self,itke_om_02);
+		AARON_KEY_TAKEN = TRUE;
+		b_logentry(CH2_SNIPESDEAL,"Аарон забрал у меня свой ключ...");
+		Log_SetTopicStatus(CH2_SNIPESDEAL,LOG_FAILED);
+		b_plunder();
+	}
+	else
+	{
+		b_sayplunder();
+	};
+};
+
+func int b_checkitems_ulbert()
+{
+	if(Npc_HasItems(other,itke_om_03))
+	{
+		b_say(self,other,"$YouStoleFromMe");
+		PrintScreen("Ульберт забрал ключ от склада.",-1,40,"FONT_OLD_10_WHITE.TGA",3);
+		Npc_RemoveInvItem(other,itke_om_03);
+		CreateInvItem(self,itke_om_03);
+		b_plunder();
+	}
+	else
+	{
+		b_sayplunder();
+	};
+};
+
+func int b_checkitems_bartholo()
+{
+	if(Npc_HasItems(other,itke_storage_01))
+	{
+		b_say(self,other,"$YouStoleFromMe");
+		PrintScreen("Бартоло забрал ключ от склада.",-1,40,"FONT_OLD_10_WHITE.TGA",3);
+		Npc_RemoveInvItem(other,itke_storage_01);
+		if(!Npc_HasItems(self,itke_storage_01))
+		{
+			CreateInvItem(self,itke_storage_01);
+		};
+		b_plunder();
+	}
+	else
+	{
+		b_sayplunder();
+	};
+};
+
+func int b_checkitems_grd279()
+{
+	if(Npc_HasItems(other,itke_weaponry))
+	{
+		b_say(self,other,"$YouStoleFromMe");
+		PrintScreen("Стражник забрал ключ от оружейной.",-1,40,"FONT_OLD_10_WHITE.TGA",3);
+		Npc_RemoveInvItem(other,itke_weaponry);
+		CreateInvItem(self,itke_weaponry);
+		b_plunder();
+	}
+	else
+	{
+		b_sayplunder();
+	};
+};
+
+func int b_checkitems_scar()
+{
+	if(Npc_HasItems(other,scars_schwert))
+	{
+		b_say(self,other,"$YouStoleFromMe");
+		PrintScreen("Шрам забрал свой меч.",-1,40,"FONT_OLD_10_WHITE.TGA",3);
+		Npc_RemoveInvItem(other,scars_schwert);
+		CreateInvItem(self,scars_schwert);
+		AI_EquipBestMeleeWeapon(self);
+		b_plunder();
+	}
+	else
+	{
+		b_sayplunder();
+	};
+};
+
+func int b_checkitems_arto()
+{
+	if(Npc_HasItems(other,artos_schwert))
+	{
+		b_say(self,other,"$YouStoleFromMe");
+		PrintScreen("Арто забрал свой меч.",-1,40,"FONT_OLD_10_WHITE.TGA",3);
+		Npc_RemoveInvItem(other,artos_schwert);
+		CreateInvItem(self,artos_schwert);
+		AI_EquipBestMeleeWeapon(self);
+		b_plunder();
+	}
+	else
+	{
+		b_sayplunder();
+	};
+};
+
+func int b_checkitems_stone()
+{
+	if(Npc_HasItems(other,itkey_ob_smith_01))
+	{
+		b_say(self,other,"$YouStoleFromMe");
+		PrintScreen("Стоун забрал железный ключ.",-1,40,"FONT_OLD_10_WHITE.TGA",3);
+		Npc_RemoveInvItem(other,itkey_ob_smith_01);
+		CreateInvItem(self,itkey_ob_smith_01);
+		b_plunder();
+	}
+	else
+	{
+		b_sayplunder();
+	};
+};
+
+func int b_checkitems_kalom()
+{
+	if(Npc_HasItems(other,kalomsrecipe))
+	{
+		b_say(self,other,"$YouStoleFromMe");
+		PrintScreen("Кор Галом забрал свой рецепт.",-1,40,"FONT_OLD_10_WHITE.TGA",3);
+		Npc_RemoveInvItem(other,kalomsrecipe);
+		CreateInvItem(self,kalomsrecipe);
+		b_plunder();
+	}
+	else
+	{
+		b_sayplunder();
+	};
+};
+
+func int b_checkitems_torlof()
+{
+	if(Npc_HasItems(other,torlofs_axt))
+	{
+		b_say(self,other,"$YouStoleFromMe");
+		PrintScreen("Торлоф забрал свой топор.",-1,40,"FONT_OLD_10_WHITE.TGA",3);
+		Npc_RemoveInvItem(other,torlofs_axt);
+		CreateInvItem(self,torlofs_axt);
+		AI_EquipBestMeleeWeapon(self);
+		b_plunder();
+	}
+	else
+	{
+		b_sayplunder();
+	};
+};
+
+func int b_checkitems_cord()
+{
+	if(Npc_HasItems(other,cords_spalter))
+	{
+		b_say(self,other,"$YouStoleFromMe");
+		PrintScreen("Корд забрал свой меч.",-1,40,"FONT_OLD_10_WHITE.TGA",3);
+		Npc_RemoveInvItem(other,cords_spalter);
+		CreateInvItem(self,cords_spalter);
+		AI_EquipBestMeleeWeapon(self);
+		b_plunder();
+	}
+	else
+	{
+		b_sayplunder();
+	};
+};
+
 func void zs_assessbody()
 {
 	printdebugnpc(PD_ZS_FRAME,"ZS_AssessBody");
@@ -47,40 +318,13 @@ func int zs_assessbody_loop()
 func void zs_assessbody_end()
 {
 	printdebugnpc(PD_ZS_FRAME,"ZS_AssessBody_End");
-	if(self.id == 251 && (ARENA_BET_KIRGO == TRUE || ARENA_BET_KHARIM == TRUE || ARENA_BET_GORHANIS == TRUE))
-	{
-		ARENA_BET_KIRGO_WON = TRUE;
-		//PrintScreen("Победил Кирго!",-1,-1,"font_old_20_white.tga",3);
-		b_removeweapon(self);
-		b_exchangeroutine(tpl_1422_gorhanis,"wait");
-		b_exchangeroutine(sld_729_kharim,"wait");
-		b_exchangeroutine(grd_251_kirgo,"wait");
-	};
-	if(self.id == 729 && (ARENA_BET_KIRGO == TRUE || ARENA_BET_KHARIM == TRUE || ARENA_BET_GORHANIS == TRUE))
-	{
-		ARENA_BET_KHARIM_WON = TRUE;
-		//PrintScreen("Победил Карим!",-1,-1,"font_old_20_white.tga",3);
-		b_removeweapon(self);
-		b_exchangeroutine(tpl_1422_gorhanis,"wait");
-		b_exchangeroutine(sld_729_kharim,"wait");
-		b_exchangeroutine(grd_251_kirgo,"wait");
-	};
-	if(self.id == 1422 && (ARENA_BET_KIRGO == TRUE || ARENA_BET_KHARIM == TRUE || ARENA_BET_GORHANIS == TRUE))
-	{
-		ARENA_BET_GORHANIS_WON = TRUE;
-		//PrintScreen("Победил Гор Ханис!",-1,-1,"font_old_20_white.tga",3);
-		b_removeweapon(self);
-		b_exchangeroutine(tpl_1422_gorhanis,"wait");
-		b_exchangeroutine(sld_729_kharim,"wait");
-		b_exchangeroutine(grd_251_kirgo,"wait");
-	};
 	if(other.aivar[AIV_PLUNDERED] == TRUE)
 	{
 		AI_ContinueRoutine(self);
 	};
+	AI_PlayAni(self,"T_PLUNDER");
 	if((Hlp_GetInstanceID(vlk_505_buddler) == Hlp_GetInstanceID(self) || Hlp_GetInstanceID(vlk_506_buddler) == Hlp_GetInstanceID(self)) && LETTER_TOLD == 2)
 	{
-		AI_PlayAni(self,"T_PLUNDER");
 		if(Npc_HasItems(hero,itwr_fire_letter_01))
 		{
 			PrintScreen("Отобрано запечатанное письмо.",-1,40,"FONT_OLD_10_WHITE.TGA",3);
@@ -145,7 +389,6 @@ func void zs_assessbody_end()
 	}
 	else if(Hlp_GetInstanceID(org_888_erpresser) == Hlp_GetInstanceID(self) || Hlp_GetInstanceID(org_889_coerpresser) == Hlp_GetInstanceID(self))
 	{
-		AI_PlayAni(self,"T_PLUNDER");
 		if(Npc_HasItems(hero,itmi_amulet_psi_01))
 		{
 			CreateInvItem(self,itmi_amulet_psi_01);
@@ -156,34 +399,75 @@ func void zs_assessbody_end()
 				b_logentry(QUENTIN_GANG,"Отморозки около Нового лагеря отобрали у меня амулет Братства! Мне нужно вернуть его, если я хочу завершить задание Квентина.");
 			};
 		};
-		if(b_plunder())
-		{
-			b_say(self,other,"$ITookYourOre");
-		}
-		else
-		{
-			b_say(self,other,"$ShitNoOre");
-		};
-		other.aivar[AIV_PLUNDERED] = TRUE;
+		GOPSTOPPED_BRIDGE = FALSE;
+		b_sayplunder();
+	}
+	else if(Hlp_GetInstanceID(sld_701_orik) == Hlp_GetInstanceID(self))
+	{
+		b_checkitems_orik();
+	}
+	else if(Hlp_GetInstanceID(bau_900_ricelord) == Hlp_GetInstanceID(self))
+	{
+		b_checkitems_lord();
+	}
+	else if(Hlp_GetInstanceID(stt_336_cavalorn) == Hlp_GetInstanceID(self))
+	{
+		b_checkitems_cavalorn();
+	}
+	else if(Hlp_GetInstanceID(stt_309_whistler) == Hlp_GetInstanceID(self))
+	{
+		b_checkitems_whistler();
+	}
+	else if(Hlp_GetInstanceID(grd_262_aaron) == Hlp_GetInstanceID(self))
+	{
+		b_checkitems_aaron();
+	}
+	else if(Hlp_GetInstanceID(grd_271_ulbert) == Hlp_GetInstanceID(self))
+	{
+		b_checkitems_ulbert();
+	}
+	else if(Hlp_GetInstanceID(ebr_598_bartholo) == Hlp_GetInstanceID(self))
+	{
+		b_checkitems_bartholo();
+	}
+	else if(Hlp_GetInstanceID(ebr_106_bartholo) == Hlp_GetInstanceID(self))
+	{
+		b_checkitems_bartholo();
+	}
+	else if(Hlp_GetInstanceID(grd_279_gardist) == Hlp_GetInstanceID(self))
+	{
+		b_checkitems_grd279();
+	}
+	else if(Hlp_GetInstanceID(ebr_101_scar) == Hlp_GetInstanceID(self))
+	{
+		b_checkitems_scar();
+	}
+	else if(Hlp_GetInstanceID(ebr_102_arto) == Hlp_GetInstanceID(self))
+	{
+		b_checkitems_arto();
+	}
+	else if(Hlp_GetInstanceID(grd_219_stone) == Hlp_GetInstanceID(self))
+	{
+		b_checkitems_stone();
+	}
+	else if(Hlp_GetInstanceID(gur_1201_corkalom) == Hlp_GetInstanceID(self))
+	{
+		b_checkitems_kalom();
+	}
+	else if(Hlp_GetInstanceID(sld_737_torlof) == Hlp_GetInstanceID(self))
+	{
+		b_checkitems_torlof();
+	}
+	else if(Hlp_GetInstanceID(sld_709_cord) == Hlp_GetInstanceID(self))
+	{
+		b_checkitems_cord();
 	}
 	else if((self.fight_tactic != FAI_HUMAN_RANGED) && (self.npctype != NPCTYPE_FRIEND) && c_npcishuman(self))
 	{
 		printdebugnpc(PD_ZS_CHECK,"...kein purer Fernkдmpfer und kein NSC-Freund!");
-		AI_PlayAni(self,"T_PLUNDER");
-		if(b_plunder())
-		{
-			b_say(self,other,"$ITookYourOre");
-		}
-		else
-		{
-			b_say(self,other,"$ShitNoOre");
-		};
-		other.aivar[AIV_PLUNDERED] = TRUE;
+		b_sayplunder();
 	};
-	if(self.id != 251 && self.id != 729 && self.id != 1422)
-	{
-		AI_StartState(self,zs_assessbody_recoverweapon,1,"");
-	};
+	AI_StartState(self,zs_assessbody_recoverweapon,1,"");
 };
 
 func void zs_assessbody_recoverweapon()
@@ -198,10 +482,21 @@ func void zs_assessbody_recoverweapon()
 			if(Npc_GetDistToItem(self,item) < 300)
 			{
 				printdebugnpc(PD_ZS_CHECK,"...Nah- oder Fernkampfwaffe gefunden!");
-				AI_TakeItem(self,item);
-				AI_EquipBestMeleeWeapon(self);
-				AI_EquipBestRangedWeapon(self);
-				b_say(self,other,"$ITakeYourWeapon");
+				if((self.id == 1422 || self.id == 251 || self.id == 729))
+				{
+					if(Npc_OwnedByNpc(item,self))
+					{
+						AI_TakeItem(self,item);
+						AI_EquipBestMeleeWeapon(self);
+					};
+				}
+				else
+				{
+					AI_TakeItem(self,item);
+					AI_EquipBestMeleeWeapon(self);
+					AI_EquipBestRangedWeapon(self);
+					b_say(self,other,"$ITakeYourWeapon");
+				};
 			};
 		};
 	};

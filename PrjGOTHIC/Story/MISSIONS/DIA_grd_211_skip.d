@@ -106,7 +106,10 @@ func void dia_skip_first_thorus_askhim()
 {
 	AI_Output(other,self,"DIA_Skip_First_Thorus_AskHim_15_00");	//ј ты сам у него спроси.
 	AI_Output(self,other,"DIA_Skip_First_Thorus_AskHim_12_01");	//»менно это € и сделаю, только попозже. ”верен, что он захочет услышать все, что ты говорил о нем.
-	AI_Output(self,other,"DIA_Skip_First_Thorus_AskHim_12_02");	//Ќе знаю, кто теб€ впустил, но на твоем месте € бы поскорее убралс€ отсюда!
+	if(Npc_GetTrueGuild(other) == GIL_NONE)
+	{
+		AI_Output(self,other,"DIA_Skip_First_Thorus_AskHim_12_02");	//Ќе знаю, кто теб€ впустил, но на твоем месте € бы поскорее убралс€ отсюда!
+	};
 	Info_ClearChoices(dia_skip_first);
 	AI_StopProcessInfos(self);
 };

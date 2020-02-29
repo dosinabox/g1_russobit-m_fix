@@ -68,7 +68,7 @@ func void dia_grim_falle_howshare()
 	Info_ClearChoices(dia_grim_falle);
 	Info_AddChoice(dia_grim_falle,"Мне это не нужно. Пусть этим займется кто-нибудь еще.",dia_grim_falle_deny);
 	Info_AddChoice(dia_grim_falle,"Я не согласен. Ты даешь мне половину награды...",dia_grim_falle_halfhalf);
-	Info_AddChoice(dia_grim_falle,"Что ж, пойдем вместе. Идем!",dia_grim_falle_accepr);
+	Info_AddChoice(dia_grim_falle,"Ладно. Пойдем.",dia_grim_falle_accepr);
 };
 
 func void dia_grim_falle_halfhalf()

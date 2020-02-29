@@ -165,6 +165,10 @@ func void dia_homer_success_info()
 	b_givexp(XP_REPORTDEADDAMLURKER);
 	AI_StopProcessInfos(self);
 	Npc_ExchangeRoutine(self,"START");
+	b_exchangeroutine(bau_924_bauer,"REPAIR");
+	b_exchangeroutine(bau_928_bauer,"REPAIR");
+	b_exchangeroutine(bau_929_bauer,"REPAIR");
+	b_exchangeroutine(bau_930_bauer,"REPAIR");
 };
 
 

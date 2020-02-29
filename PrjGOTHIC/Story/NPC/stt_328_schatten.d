@@ -238,7 +238,7 @@ instance DIA_SCATTY_BETRESULT(C_INFO)
 
 func int dia_scatty_betresult_condition()
 {
-	if(KAPITEL < 4 && (ARENA_BET_KIRGO_WON == TRUE || ARENA_BET_KHARIM_WON == TRUE || ARENA_BET_GORHANIS_WON == TRUE) && !Npc_IsDead(tpl_1422_gorhanis) && !Npc_IsDead(grd_251_kirgo) && !Npc_IsDead(sld_729_kharim))
+	if(KAPITEL < 4 && (ARENA_BET_KIRGO_WON == TRUE || ARENA_BET_KHARIM_WON == TRUE || ARENA_BET_GORHANIS_WON == TRUE) && !Npc_IsDead(tpl_1422_gorhanis) && !Npc_IsDead(grd_251_kirgo) && !Npc_IsDead(sld_729_kharim) && (ARENA_BET_DAY == Wld_GetDay()))
 	{
 		return 1;
 	};
@@ -297,9 +297,9 @@ func void dia_scatty_betresult_info()
 	kirgo = Hlp_GetNpc(grd_251_kirgo);
 	kharim = Hlp_GetNpc(sld_729_kharim);
 	gorhanis = Hlp_GetNpc(tpl_1422_gorhanis);
-	b_exchangeroutine(kirgo,"START");
-	b_exchangeroutine(kharim,"START");
-	b_exchangeroutine(gorhanis,"START");
+	Npc_ExchangeRoutine(kirgo,"START");
+	Npc_ExchangeRoutine(kharim,"START");
+	Npc_ExchangeRoutine(gorhanis,"START");
 	kirgo.attribute[ATR_HITPOINTS] = 2000;
 	kirgo.attribute[ATR_HITPOINTS_MAX] = 2000;
 	kirgo.flags = NPC_FLAG_IMMORTAL;

@@ -20,7 +20,7 @@ instance BAU_940_RIDDLER(NPC_DEFAULT)
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_MAGE;
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,5);
-	CreateInvItem(self,itarrunefirerain);
+	CreateInvItem(self,itarrune_2_4_firerain);
 	CreateInvItems(self,itminugget,302);
 	CreateInvItems(self,itforice,6);
 	CreateInvItem(self,lebensamulett);

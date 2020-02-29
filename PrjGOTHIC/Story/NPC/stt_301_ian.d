@@ -16,7 +16,7 @@ instance STT_301_IAN(NPC_DEFAULT)
 	attribute[ATR_HITPOINTS] = 196;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Relaxed.mds");
-	Mdl_SetVisualBody(self,"hum_body_Naked0",0,2,"Hum_Head_Pony",14,1,stt_armor_m);
+	Mdl_SetVisualBody(self,"hum_body_Naked0",0,2,"Hum_Head_Pony",14,1,stt_armor_h);
 	b_scale(self);
 	Mdl_SetModelFatness(self,-1);
 	aivar[AIV_IMPORTANT] = TRUE;

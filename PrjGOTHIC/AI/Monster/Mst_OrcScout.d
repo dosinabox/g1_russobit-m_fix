@@ -6,8 +6,8 @@ prototype MST_DEFAULT_ORCSCOUT(C_NPC)
 	npctype = NPCTYPE_GUARD;
 	voice = 17;
 	level = 20;
-	attribute[ATR_STRENGTH] = 40;
-	attribute[ATR_DEXTERITY] = 40;
+	attribute[ATR_STRENGTH] = 50;
+	attribute[ATR_DEXTERITY] = 50;
 	attribute[ATR_HITPOINTS_MAX] = 200;
 	attribute[ATR_HITPOINTS] = 200;
 	attribute[ATR_MANA_MAX] = 0;
@@ -58,7 +58,7 @@ instance ORCSCOUTGYD(MST_DEFAULT_ORCSCOUT)
 {
 	name[0] = "Орк-разведчик";
 	level = 18;
-	attribute[ATR_STRENGTH] = 30;
+	attribute[ATR_STRENGTH] = 50;
 	aivar[AIV_PCISSTRONGER] = 1500;
 	aivar[AIV_BEENATTACKED] = 1200;
 	aivar[AIV_HIGHWAYMEN] = 1000;

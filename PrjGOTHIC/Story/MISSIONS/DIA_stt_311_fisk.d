@@ -34,14 +34,20 @@ instance STT_311_FISK_FIRST(C_INFO)
 
 func int stt_311_fisk_first_condition()
 {
-	return 1;
+	if(!Npc_IsDead(org_826_mordrag) && (MORDRAGKO_HAUAB == FALSE) && (MORDRAGKO_STAYATNC == FALSE))
+	{
+		return 1;
+	};
 };
 
 func void stt_311_fisk_first_info()
 {
 	AI_Output(self,other,"Stt_311_Fisk_First_12_00");	//Эй, привет! Я Фиск. Я продаю здесь свои товары. Если тебе что-то понадобится, у меня ты точно сможешь это найти.
-	Log_CreateTopic(GE_TRADEROC,LOG_NOTE);
-	b_logentry(GE_TRADEROC,"Призрак Фиск торгует различными товарами, но главное - он продает оружие. Большую часть времени он проводит на рыночной площади.");
+	if(GRAVO_LOG == FALSE)
+	{
+		Log_CreateTopic(GE_TRADEROC,LOG_NOTE);
+		b_logentry(GE_TRADEROC,"Призрак Фиск торгует различными товарами, но главное - он продает оружие. Большую часть времени он проводит на рыночной площади.");
+	};
 };
 
 
@@ -52,14 +58,17 @@ instance STT_311_FISK_TRADE(C_INFO)
 	condition = stt_311_fisk_trade_condition;
 	information = stt_311_fisk_trade_info;
 	permanent = 1;
-	description = "Покажи, что у тебя есть.";
+	description = DIALOG_TRADE;
 	trade = 1;
 };
 
 
 func int stt_311_fisk_trade_condition()
 {
-	return 1;
+	if(FISK_REFUSETRADE == FALSE)
+	{
+		return 1;
+	};
 };
 
 func void stt_311_fisk_trade_info()
@@ -81,7 +90,7 @@ instance STT_311_FISK_WHISTLERSSWORD(C_INFO)
 
 func int stt_311_fisk_whistlerssword_condition()
 {
-	if((FISK_FORGETSWORD == FALSE) && (WHISTLER_BUYMYSWORD == LOG_RUNNING) && (FISK_SWORDSOLD == FALSE))
+	if((FISK_REFUSETRADE == FALSE) && (FISK_FORGETSWORD == FALSE) && (WHISTLER_BUYMYSWORD == LOG_RUNNING) && (FISK_SWORDSOLD == FALSE))
 	{
 		return 1;
 	};
@@ -149,7 +158,7 @@ instance STT_311_FISK_FORGETSWORD(C_INFO)
 
 func int stt_311_fisk_forgetsword_condition()
 {
-	if(FISK_FORGETSWORD == TRUE)
+	if((FISK_FORGETSWORD == TRUE) && (WHISTLER_BUYMYSWORD != LOG_OBSOLETE) && (WHISTLER_BUYMYSWORD != LOG_FAILED))
 	{
 		return 1;
 	};
@@ -174,7 +183,7 @@ instance STT_311_FISK_MORDRAGKO(C_INFO)
 
 func int stt_311_fisk_mordragko_condition()
 {
-	if((Npc_IsDead(org_826_mordrag) || (MORDRAGKO_HAUAB == TRUE) || (MORDRAGKO_STAYATNC == TRUE)) && (Npc_GetTrueGuild(hero) == GIL_NONE))
+	if(Npc_IsDead(org_826_mordrag) || (MORDRAGKO_HAUAB == TRUE) || (MORDRAGKO_STAYATNC == TRUE))
 	{
 		return 1;
 	};
@@ -184,7 +193,11 @@ func void stt_311_fisk_mordragko_info()
 {
 	AI_Output(self,other,"Stt_311_Fisk_MordragKO_12_00");	//Эй, ты!
 	AI_Output(self,other,"Stt_311_Fisk_MordragKO_12_01");	//Мордраг был одним из моих лучших поставщиков! Ты мне все испортил!
-	AI_Output(self,other,"Stt_311_Fisk_MordragKO_12_02");	//Если вздумаешь присоединиться к нашему лагерю, я буду голосовать против!
+	FISK_REFUSETRADE = TRUE;
+	if(Npc_GetTrueGuild(hero) == GIL_NONE)
+	{
+		AI_Output(self,other,"Stt_311_Fisk_MordragKO_12_02");	//Если вздумаешь присоединиться к нашему лагерю, я буду голосовать против!
+	};
 	Info_ClearChoices(stt_311_fisk_mordragko);
 	Info_AddChoice(stt_311_fisk_mordragko,"Ты продаешь товары, которые были украдены у Баронов...",stt_311_fisk_mordragko_petze);
 	Info_AddChoice(stt_311_fisk_mordragko,"Успокойся! Быть может, я помогу тебе?",stt_311_fisk_mordragko_relax);
@@ -245,7 +258,15 @@ func void stt_311_fisk_hehlersuccess_info()
 	AI_Output(self,other,"Stt_311_Fisk_HehlerSuccess_12_02");	//Так тебе это удалось? И кто же он?
 	AI_Output(other,self,"Stt_311_Fisk_HehlerSuccess_15_03");	//Шарки, один из воров.
 	AI_Output(self,other,"Stt_311_Fisk_HehlerSuccess_12_04");	//Шарки? Да он же еще хуже, чем Мордраг.
-	AI_Output(self,other,"Stt_311_Fisk_HehlerSuccess_12_05");	//Что касается Диего: можешь больше не волноваться.
+	if(Npc_GetTrueGuild(hero) == GIL_NONE)
+	{
+		AI_Output(self,other,"Stt_311_Fisk_HehlerSuccess_12_05");	//Что касается Диего: можешь больше не волноваться.
+	}
+	else
+	{
+		AI_Output(self,other,"Stt_311_Fisk_WhistlersSword_TakeIt_12_01");	//Договорились!
+	};
+	FISK_REFUSETRADE = FALSE;
 	FISK_GETNEWHEHLER = LOG_SUCCESS;
 	b_givexp(XP_FISKDEALER);
 	Log_SetTopicStatus(CH1_FISKNEWDEALER,LOG_SUCCESS);
@@ -269,7 +290,7 @@ instance STT_311_FISK_ARMOR(C_INFO)
 
 func int stt_311_fisk_armor_condition()
 {
-	if((KAPITEL < 2) && Npc_KnowsInfo(hero,stt_311_fisk_first) && ((FISK_ARMOR_L_WAS_BOUGHT != 1) || (FISK_ARMOR_M_WAS_BOUGHT != 1)))
+	if((FISK_REFUSETRADE == FALSE) && (KAPITEL < 2) && ((FISK_ARMOR_L_WAS_BOUGHT != 1) || (FISK_ARMOR_M_WAS_BOUGHT != 1)))
 	{
 		return TRUE;
 	};
@@ -344,3 +365,33 @@ func void stt_311_fisk_armor_m()
 	};
 };
 
+instance STT_311_FISK_LETMEHELP(C_INFO)
+{
+	npc = stt_311_fisk;
+	nr = 10;
+	condition = stt_311_fisk_letmehelp_condition;
+	information = stt_311_fisk_letmehelp_info;
+	permanent = 0;
+	description = "Успокойся! Быть может, я помогу тебе?";
+};
+
+func int stt_311_fisk_letmehelp_condition()
+{
+	if(Npc_KnowsInfo(hero,stt_311_fisk_mordragko) && (FISK_GETNEWHEHLER != LOG_RUNNING) && (FISK_GETNEWHEHLER != LOG_SUCCESS) && (FISK_GETNEWHEHLER != LOG_FAILED) && (Npc_GetTrueGuild(hero) == GIL_NONE))
+	{
+		return 1;
+	};
+};
+
+func void stt_311_fisk_letmehelp_info()
+{
+	AI_Output(other,self,"Stt_311_Fisk_MordragKO_Relax_15_00");	//Успокойся! Быть может, я помогу тебе?
+	AI_Output(self,other,"Stt_311_Fisk_MordragKO_Relax_12_01");	//Каким это образом? Разве только ты найдешь мне другого поставщика из Нового лагеря. Но, думаю, ничего у тебя не выйдет.
+	AI_Output(other,self,"Stt_311_Fisk_MordragKO_Relax_15_02");	//Как же мне найти такого человека?
+	AI_Output(self,other,"Stt_311_Fisk_MordragKO_Relax_12_03");	//Я же сказал тебе, что у тебя ничего не выйдет. Нечего ко мне приставать!
+	Log_CreateTopic(CH1_FISKNEWDEALER,LOG_MISSION);
+	Log_SetTopicStatus(CH1_FISKNEWDEALER,LOG_RUNNING);
+	b_logentry(CH1_FISKNEWDEALER,"Торговец Фиск из Старого лагеря хочет, чтобы я нашел ему нового поставщика вместо Мордрага.");
+	FISK_GETNEWHEHLER = LOG_RUNNING;
+	AI_StopProcessInfos(self);
+};

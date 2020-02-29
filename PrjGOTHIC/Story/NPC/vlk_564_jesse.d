@@ -29,7 +29,7 @@ instance VLK_564_JESSE(NPC_DEFAULT)
 
 func void rtn_start_564()
 {
-	ta_sleep(23,0,6,45,"OCR_HUT_63");
+	ta_sleep(23,0,6,45,"OCR_HUT_63_BED");
 	ta_cookforme(6,45,12,0,"OCR_OUTSIDE_HUT_63_COOK");
 	ta_smalltalk(12,0,17,0,"OCR_OUTSIDE_HUT_63_COOK");
 	ta_sitcampfire(17,0,23,0,"OCR_CAMPFIRE_E_2_MOVEMENT");

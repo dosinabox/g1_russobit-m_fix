@@ -148,7 +148,7 @@ instance DIA_EBR_106_BARTHOLO_WAIT4SC(C_INFO)
 
 func int dia_ebr_106_bartholo_wait4sc_condition()
 {
-	if(EXPLORESUNKENTOWER && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400) && Npc_HasItems(hero,itarruneteleport1))
+	if(EXPLORESUNKENTOWER && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400) && Npc_HasItems(hero,itarrune_1_3_teleport1))
 	{
 		return TRUE;
 	};
@@ -192,7 +192,7 @@ instance DIA_EBR_106_BARTHOLO_WAIT4SC2(C_INFO)
 
 func int dia_ebr_106_bartholo_wait4sc2_condition()
 {
-	if(KAPITEL > 3 && !Npc_HasItems(hero,itarruneteleport1) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
+	if(KAPITEL > 3 && !Npc_HasItems(hero,itarrune_1_3_teleport1) && (Npc_CanSeeNpcFreeLOS(self,hero)) && (Npc_GetDistToNpc(self,hero) < 1400))
 	{
 		return TRUE;
 	};
@@ -212,6 +212,7 @@ func void dia_ebr_106_bartholo_wait4sc2_info()
 		Wld_ExchangeGuildAttitudes("GIL_ATTITUDES_FMTAKEN");
 	};
 	OC_BANNED = TRUE;
+	FREELEARN_OC = FALSE;
 	if(c_npcbelongstooldcamp(hero))
 	{
 		Npc_SetTrueGuild(hero,GIL_NONE);

@@ -152,7 +152,7 @@ func void zs_smalltalk_loop()
 	else if(Npc_GetStateTime(self) >= 5)
 	{
 		printdebugnpc(PD_TA_CHECK,"... kein Gesprächspartner gefunden!");
-		AI_StartState(self,zs_stand,1,"");
+		//AI_StartState(self,zs_stand,1,"");
 	};
 	AI_Wait(self,1);
 };

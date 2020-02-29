@@ -22,7 +22,7 @@ instance KDF_400_RODRIGUEZ(NPC_DEFAULT)
 	aivar[AIV_IMPORTANT] = TRUE;
 	fight_tactic = FAI_HUMAN_MAGE;
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,4);
-	EquipItem(self,itarrunefirebolt);
+	EquipItem(self,itarrune_2_1_firebolt);
 	daily_routine = rtn_start_400;
 };
 

@@ -32,3 +32,9 @@ func void rtn_start_930()
 	ta_pickrice(8,35,20,35,"NC_PATH79");
 };
 
+func void rtn_repair_930()
+{
+	ta_sitcampfire(20,30,8,0,"NC_PATH_PEASANT_OUTSIDE11");
+	ta_repairhut(8,0,20,30,"NC_DAM_BOTTOM_REPAIR");
+};
+

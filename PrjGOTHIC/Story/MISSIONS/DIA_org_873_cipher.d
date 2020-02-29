@@ -54,7 +54,7 @@ instance ORG_873_CIPHER_FISK(C_INFO)
 	nr = 1;
 	condition = org_873_cipher_fisk_condition;
 	information = org_873_cipher_fisk_info;
-	permanent = 1;
+	permanent = 0;
 	description = "Фиск из Старого лагеря ищет того, кто мог бы ему помогать.";
 };
 
@@ -146,6 +146,12 @@ func void org_873_cipher_trade_info()
 		Npc_RemoveInvItems(hero,weedpack,1);
 		CreateInvItems(hero,itminugget,250);
 		BALOR_CAN_GIVE = TRUE;
+		BALOR_TRADE_COUNT = BALOR_TRADE_COUNT + 1;
+		if(BALOR_TRADE_COUNT >= 5)
+		{
+			Npc_ExchangeRoutine(nov_1304_balor,"remove");
+			Wld_InsertNpc(tpl_1480_templer,"PSI_PLACE");
+		};
 	}
 	else
 	{

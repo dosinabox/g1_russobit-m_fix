@@ -19,7 +19,7 @@ instance PC_MAGE(NPC_DEFAULT)
 	Mdl_SetVisualBody(self,"hum_body_Naked0",0,1,"Hum_Head_Bald",76,1,kdf_armor_l);
 	Mdl_ApplyOverlayMds(self,"Humans_Mage.mds");
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,3);
-	CreateInvItem(self,itarrunefireball);
+	CreateInvItem(self,itarrune_2_2_fireball);
 	CreateInvItems(self,itfowine,3);
 	CreateInvItems(self,itfo_potion_health_02,3);
 	CreateInvItems(self,itfo_potion_mana_02,10);

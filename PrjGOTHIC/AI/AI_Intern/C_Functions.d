@@ -23,7 +23,11 @@ func int c_amiweaker(var C_NPC slf,var C_NPC oth)
 		{
 			return FALSE;
 		}
-		if(self.id == 1303)
+		else if(self.id == 863 || self.id == 864 || self.id == 858 || self.id == 865 || self.id == 866 || self.id == 867 || self.id == 868 || self.id == 869 || self.id == 870 || self.id == 871 || self.id == 874)
+		{
+			return FALSE;
+		}
+		else if(self.id == 1303)
 		{
 			return FALSE;
 		}
@@ -352,7 +356,23 @@ func int c_npcisguardarcher(var C_NPC slf)
 func int c_npcisboss(var C_NPC slf)
 {
 	printdebugnpc(PD_ZS_DETAIL,"C_NpcIsBoss");
-	if((slf.guild == GIL_EBR) || (slf.guild == GIL_KDF) || (slf.guild == GIL_KDW) || (slf.guild == GIL_GUR))
+	if(Hlp_GetInstanceID(ebr_101_scar) == Hlp_GetInstanceID(self))
+	{
+		return FALSE;
+	}
+	else if(Hlp_GetInstanceID(ebr_102_arto) == Hlp_GetInstanceID(self))
+	{
+		return FALSE;
+	}
+	else if(Hlp_GetInstanceID(ebr_106_bartholo) == Hlp_GetInstanceID(self))
+	{
+		return FALSE;
+	}
+	else if(Hlp_GetInstanceID(ebr_598_bartholo) == Hlp_GetInstanceID(self))
+	{
+		return FALSE;
+	}
+	else if((slf.guild == GIL_EBR) || (slf.guild == GIL_KDF) || (slf.guild == GIL_KDW) || (slf.guild == GIL_GUR))
 	{
 		printdebugnpc(PD_ZS_DETAIL,"...true");
 		return TRUE;
@@ -784,14 +804,19 @@ func int c_npcisguarding(var C_NPC slf)
 		//гомез
 		return TRUE;
 	};
-	if((slf.id == 1433 || slf.id == 1401 || slf.id == 1400) && Npc_KnowsInfo(hero,grd_263_asghan_open_now))
+	if((slf.id == 1433 || slf.id == 1401 || slf.id == 1400) && Npc_KnowsInfo(hero,grd_263_asghan_open))
 	{
 		//гор на вид, гор на кош, гор на бар
 		return TRUE;
 	};
-	if(slf.id == 263 && Npc_KnowsInfo(hero,grd_263_asghan_open_now))
+	if(slf.id == 263 && Npc_KnowsInfo(hero,grd_263_asghan_open))
 	{
 		//асгхан
+		return TRUE;
+	};
+	if(slf.id == 867)
+	{
+		//охранник грабителей
 		return TRUE;
 	};
 	return FALSE;

@@ -383,7 +383,7 @@ func void dia_milten_wannamage_info()
 	AI_Output(other,self,"DIA_Milten_WannaMage_15_00");	//Я тоже хочу стать учеником мага. Таким, как ты.
 	AI_Output(self,other,"DIA_Milten_WannaMage_02_01");	//Корристо выбрал меня, потому что я помогал Баронам.
 	AI_Output(self,other,"DIA_Milten_WannaMage_02_02");	//До тех пор, пока ты не сделаешь что-нибудь исключительное, он и разговаривать не захочет о твоем обучении.
-	if(Npc_GetTrueGuild(hero) != GIL_STT && Npc_GetTrueGuild(hero) != GIL_GRD)
+	if(Npc_GetTrueGuild(hero) == GIL_NONE && KAPITEL < 2)
 	{
 		AI_Output(self,other,"DIA_Milten_WannaMage_02_03");	//Помимо этого, ты должен принадлежать к Старому лагерю. Сомневаюсь, что Корристо возьмет себе в ученики человека из другой части колонии.
 	};
@@ -873,7 +873,7 @@ func int info_milten_shscroll_condition()
 	var int keeperfound;
 	Npc_PerceiveAll(self);
 	keeperfound = Wld_DetectNpc(self,zombiethekeeper,NOFUNC,-1);
-	if(keeperfound && !Npc_IsDead(other) && Npc_KnowsInfo(hero,info_milten_shaccept) && (Npc_HasItems(hero,itarscrolldestroyundead) == 0) && (Npc_HasItems(hero,itarrunedestroyundead) == 0))
+	if(keeperfound && !Npc_IsDead(other) && Npc_KnowsInfo(hero,info_milten_shaccept) && (Npc_HasItems(hero,itarscrolldestroyundead) == 0) && (Npc_HasItems(hero,itarrune_6_1_destroyundead) == 0))
 	{
 		return TRUE;
 	};
@@ -920,7 +920,7 @@ instance INFO_MILTEN_SHNEWSCROLL(C_INFO)
 
 func int info_milten_shnewscroll_condition()
 {
-	if(Npc_KnowsInfo(hero,info_milten_shscroll) && !Npc_KnowsInfo(hero,info_milten_shsuccess) && ((Npc_HasItems(hero,itarscrolldestroyundead) > 0) || (Npc_HasItems(hero,itarrunedestroyundead) > 0)))
+	if(Npc_KnowsInfo(hero,info_milten_shscroll) && !Npc_KnowsInfo(hero,info_milten_shsuccess) && ((Npc_HasItems(hero,itarscrolldestroyundead) > 0) || (Npc_HasItems(hero,itarrune_6_1_destroyundead) > 0)))
 	{
 		return TRUE;
 	};
@@ -1552,7 +1552,7 @@ func void info_milten_lsdone_info()
 	AI_Output(self,hero,"Info_Milten_LSDONE_02_03");	//Похоже, у нас получилось! Магическая сила всей этой руды теперь заключена в одном старом мече.
 	AI_Output(self,hero,"Info_Milten_LSDONE_02_04");	//Но, кажется, мы привлекли к себе слишком много внимания.
 	AI_Output(self,hero,"Info_Milten_LSDONE_02_05");	//Тебе придется воспользоваться заклинанием Портал, для того чтобы выбраться отсюда!
-	if(!Npc_HasItems(hero,itarruneteleport3) && !Npc_HasItems(hero,itarruneteleport5))
+	if(!Npc_HasItems(hero,itarrune_1_6_teleport3) && !Npc_HasItems(hero,itarrune_1_5_teleport5))
 	{
 		b_printtrademsg1("Получен свиток телепортации в Болотный лагерь.");
 		CreateInvItem(hero,itarscrollteleport5);

@@ -321,8 +321,16 @@ func void dia_horatio_thoughtstr_ricelord()
 
 func void dia_horatio_helpstr_learn_now()
 {
-	Npc_ChangeAttribute(other,ATR_STRENGTH,5);
-	PrintScreen("—ила +5",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	if(DIFF_HARD == TRUE)
+	{
+		Npc_ChangeAttribute(other,ATR_STRENGTH,2);
+		PrintScreen("—ила +2",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else
+	{
+		Npc_ChangeAttribute(other,ATR_STRENGTH,5);
+		PrintScreen("—ила +5",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	};
 	AI_Output(self,other,"DIA_Horatio_HelpSTR_LEARN_NOW_09_00");	//≈сли хочешь иметь сильный удар, ты должен знать основные принципы, как это делаетс€. Ёто первое, что должен знать кузнец.
 	AI_Output(self,other,"DIA_Horatio_HelpSTR_LEARN_NOW_09_01");	//—тарайс€ наносить удар всей рукой, от плеча до зап€сть€.
 	AI_Output(self,other,"DIA_Horatio_HelpSTR_LEARN_NOW_09_02");	//„ем лучше у теб€ это получитс€, тем сильнее удар. я думаю, научитьс€ этому тебе будет не так уж сложно.

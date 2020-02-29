@@ -3,7 +3,12 @@ func void b_baalcadarlearn()
 {
 	Info_ClearChoices(gur_1208_baalcadar_teach);
 	Info_AddChoice(gur_1208_baalcadar_teach,DIALOG_BACK,gur_1208_baalcadar_teach_back);
-	if(hero.guild == GIL_NOV || hero.guild == GIL_TPL || hero.guild == GIL_GUR)
+	if(DIFF_HARD == TRUE)
+	{
+		Info_AddChoice(gur_1208_baalcadar_teach,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,OTHERCAMPLEARNPAY * 5),gur_1208_baalcadar_teach_man_5);
+		Info_AddChoice(gur_1208_baalcadar_teach,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,OTHERCAMPLEARNPAY),gur_1208_baalcadar_teach_man_1);
+	}
+	else if(hero.guild == GIL_NOV || hero.guild == GIL_TPL || hero.guild == GIL_GUR)
 	{
 		Info_AddChoice(gur_1208_baalcadar_teach,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),gur_1208_baalcadar_teach_man_5);
 		Info_AddChoice(gur_1208_baalcadar_teach,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),gur_1208_baalcadar_teach_man_1);
@@ -175,7 +180,7 @@ func void gur_1208_baalcadar_teach_back()
 
 func void gur_1208_baalcadar_teach_man_1()
 {
-	if(hero.guild == GIL_NOV || hero.guild == GIL_TPL || hero.guild == GIL_GUR)
+	if((hero.guild == GIL_NOV || hero.guild == GIL_TPL || hero.guild == GIL_GUR) && (DIFF_HARD == FALSE))
 	{
 		b_buyattributepoints(other,ATR_MANA_MAX,LPCOST_ATTRIBUTE_MANA);
 	}
@@ -197,7 +202,7 @@ func void gur_1208_baalcadar_teach_man_1()
 
 func void gur_1208_baalcadar_teach_man_5()
 {
-	if(hero.guild == GIL_NOV || hero.guild == GIL_TPL || hero.guild == GIL_GUR)
+	if((hero.guild == GIL_NOV || hero.guild == GIL_TPL || hero.guild == GIL_GUR) && (DIFF_HARD == FALSE))
 	{
 		b_buyattributepoints(other,ATR_MANA_MAX,5 * LPCOST_ATTRIBUTE_MANA);
 	}

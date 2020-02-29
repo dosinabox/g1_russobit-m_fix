@@ -5,7 +5,7 @@ instance VLK_531_BUDDLER(NPC_DEFAULT)
 	npctype = NPCTYPE_AMBIENT;
 	guild = GIL_VLK;
 	level = 3;
-	voice = 3;
+	voice = 1;
 	id = 531;
 	attribute[ATR_STRENGTH] = 15;
 	attribute[ATR_DEXTERITY] = 10;
@@ -29,6 +29,6 @@ instance VLK_531_BUDDLER(NPC_DEFAULT)
 func void rtn_start_531()
 {
 	ta_sleep(23,0,8,0,"OCR_HUT_42");
-	ta_smalltalk(8,0,22,0,"OCR_TO_HUT_51_SMALLTALK");
+	ta_smalltalk(8,0,23,0,"OCR_TO_HUT_51_SMALLTALK");
 };
 

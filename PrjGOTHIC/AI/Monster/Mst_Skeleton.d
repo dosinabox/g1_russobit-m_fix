@@ -64,7 +64,7 @@ instance SKELETON(MST_DEFAULT_SKELETON)
 {
 	aivar[AIV_IMPORTANT] = id_skeleton;
 	set_skeleton_visuals();
-	Npc_SetToFightMode(self,itmw_1h_sword_old_01);
+	Npc_SetToFightMode(self,itmw_skeleton_sword);
 	attribute[ATR_STRENGTH] = attribute[ATR_STRENGTH] + 10;
 };
 
@@ -72,7 +72,7 @@ instance SKELETONSH(MST_DEFAULT_SKELETON)
 {
 	aivar[AIV_IMPORTANT] = ID_SKELETON;
 	set_skeleton_visuals();
-	Npc_SetToFightMode(self,itmw_1h_axe_old_01);
+	Npc_SetToFightMode(self,itmw_skeleton_axe);
 	attribute[ATR_STRENGTH] = attribute[ATR_STRENGTH] + 10;
 	protection[PROT_FIRE] = 40;
 	senses_range = 1000;
@@ -90,7 +90,7 @@ instance SKELETONSCOUT(MST_DEFAULT_SKELETON)
 	name[0] = "Скелет-разведчик";
 	aivar[AIV_IMPORTANT] = id_skeletonscout;
 	set_skeletonscout_visuals();
-	Npc_SetToFightMode(self,itmw_1h_scythe_01);
+	Npc_SetToFightMode(self,itmw_skeleton_scythe);
 	attribute[ATR_STRENGTH] = attribute[ATR_STRENGTH] + 10;
 };
 
@@ -101,7 +101,7 @@ instance SKELETONWARRIOR(MST_DEFAULT_SKELETON)
 	level = 30;
 	attribute[ATR_STRENGTH] = 120;
 	aivar[AIV_IMPORTANT] = id_skeletonwarrior;
-	Npc_SetToFightMode(self,itmw_1h_axe_old_01);
+	Npc_SetToFightMode(self,itmw_skeleton_axe);
 	attribute[ATR_STRENGTH] = attribute[ATR_STRENGTH] + 10;
 };
 
@@ -119,7 +119,7 @@ instance SKELETONMAGE(MST_DEFAULT_SKELETON)
 	protection[PROT_FLY] = 0;
 	protection[PROT_MAGIC] = 50;
 	fight_tactic = FAI_HUMAN_MAGE;
-	CreateInvItem(self,itarrunethunderbolt);
+	CreateInvItem(self,itarrune_3_1_thunderbolt);
 	CreateInvItems(self,itarscrollsummonskeletons,5);
 };
 
@@ -137,7 +137,7 @@ instance SKELETONMAGE_FOGTOWER(MST_DEFAULT_SKELETON)
 	protection[PROT_FLY] = 0;
 	protection[PROT_MAGIC] = 50;
 	fight_tactic = FAI_HUMAN_MAGE;
-	CreateInvItem(self,itarrunethunderbolt);
+	CreateInvItem(self,itarrune_3_1_thunderbolt);
 	CreateInvItems(self,itarscrollsummonskeletons,5);
 	CreateInvItem(self,theriddle1);
 };
@@ -148,7 +148,7 @@ instance SUMMONEDBYPC_SKELETON(MST_DEFAULT_SKELETON)
 	aivar[AIV_IMPORTANT] = ID_SKELETON;
 	level = 0;
 	set_skeleton_visuals();
-	Npc_SetToFightMode(self,itmw_1h_sword_old_01);
+	Npc_SetToFightMode(self,itmw_skeleton_sword);
 	attribute[ATR_STRENGTH] = attribute[ATR_STRENGTH] + 10;
 	senses = SENSE_HEAR | SENSE_SEE;
 	start_aistate = zs_mm_summonedbypc;
@@ -161,7 +161,7 @@ instance SUMMONEDBYNPC_SKELETON(MST_DEFAULT_SKELETON)
 {
 	aivar[AIV_IMPORTANT] = ID_SKELETON;
 	set_skeleton_visuals();
-	Npc_SetToFightMode(self,itmw_1h_sword_old_01);
+	Npc_SetToFightMode(self,itmw_skeleton_sword);
 	attribute[ATR_STRENGTH] = attribute[ATR_STRENGTH] + 10;
 	start_aistate = zs_mm_summoned;
 };
@@ -174,7 +174,7 @@ instance SUMMONEDBYPC_SKELETONWARRIOR(MST_DEFAULT_SKELETON)
 	senses = SENSE_HEAR | SENSE_SEE;
 	aivar[AIV_IMPORTANT] = ID_SKELETONWARRIOR;
 	set_skeletonwarrior_visuals();
-	Npc_SetToFightMode(self,itmw_1h_axe_old_01);
+	Npc_SetToFightMode(self,itmw_skeleton_axe);
 	attribute[ATR_STRENGTH] = attribute[ATR_STRENGTH] + 10;
 	start_aistate = zs_mm_summonedbypc;
 	aivar[AIV_HASDEFEATEDSC] = 300;
@@ -189,7 +189,7 @@ instance SUMMONEDBYNPC_SKELETONWARRIOR(MST_DEFAULT_SKELETON)
 	attribute[ATR_STRENGTH] = 120;
 	aivar[AIV_IMPORTANT] = ID_SKELETONWARRIOR;
 	set_skeletonwarrior_visuals();
-	Npc_SetToFightMode(self,itmw_1h_axe_old_01);
+	Npc_SetToFightMode(self,itmw_skeleton_axe);
 	attribute[ATR_STRENGTH] = attribute[ATR_STRENGTH] + 10;
 	start_aistate = zs_mm_summoned;
 };

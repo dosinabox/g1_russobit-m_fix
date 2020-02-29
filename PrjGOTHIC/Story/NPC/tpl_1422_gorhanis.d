@@ -14,13 +14,17 @@ instance TPL_1422_GORHANIS(NPC_DEFAULT)
 	attribute[ATR_MANA] = 0;
 	attribute[ATR_HITPOINTS_MAX] = 280;
 	attribute[ATR_HITPOINTS] = 280;
+	protection[PROT_POINT] = 50;
+	protection[PROT_FIRE] = 50;
+	protection[PROT_FLY] = 50;
+	protection[PROT_MAGIC] = 50;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Militia.mds");
 	Mdl_SetVisualBody(self,"hum_body_Naked0",1,1,"Hum_Head_Bald",66,1,tpl_armor_l);
 	b_scale(self);
 	Mdl_SetModelFatness(self,-1);
 	fight_tactic = FAI_HUMAN_MASTER;
-	Npc_SetTalentSkill(self,NPC_TALENT_2H,2);
+	Npc_SetTalentSkill(self,NPC_TALENT_2H,1);
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,2);
 	//EquipItem(self,itmw_2h_sword_light_01);
 	EquipItem(self,itmw_gorhanis);

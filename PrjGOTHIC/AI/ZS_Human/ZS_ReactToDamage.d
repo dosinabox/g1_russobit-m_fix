@@ -8,6 +8,15 @@ func void zs_reacttodamage()
 	Npc_PercEnable(self,PERC_ASSESSMURDER,b_combatassessmurder);
 	Npc_PercEnable(self,PERC_ASSESSDEFEAT,b_combatassessdefeat);
 	b_whirlaround(self,other);
+	if(self.id == 888 || self.id == 889)
+	{
+		GOPSTOPPED_BRIDGE = TRUE;
+	};
+	if(self.id == 574 && Npc_KnowsInfo(hero,dia_mud_firstexit) && MUD_HIT == FALSE)
+	{
+		MUD_HIT = TRUE;
+		//PrintScreen("mud_hit",-1,-1,"font_old_20_white.tga",1);
+	};
 	if(Hlp_GetInstanceID(org_858_quentin) == Hlp_GetInstanceID(self) || Hlp_GetInstanceID(org_869_raeuber) == Hlp_GetInstanceID(self) || Hlp_GetInstanceID(org_870_raeuber) == Hlp_GetInstanceID(self) || Hlp_GetInstanceID(org_865_raeuber) == Hlp_GetInstanceID(self) || Hlp_GetInstanceID(org_866_raeuber) == Hlp_GetInstanceID(self) || Hlp_GetInstanceID(org_864_raeuber) == Hlp_GetInstanceID(self))
 	{
 		b_setorg2hostile();
@@ -29,6 +38,10 @@ func void zs_reacttodamage()
 	else
 	{
 		self.aivar[AIV_LASTHITBYRANGEDWEAPON] = FALSE;
+	};
+	if(self.id == 574)
+	{
+		return;
 	};
 	if(!c_npcismonster(other))
 	{

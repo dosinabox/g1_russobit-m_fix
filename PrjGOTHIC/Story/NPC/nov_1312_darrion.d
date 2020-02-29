@@ -8,7 +8,7 @@ instance NOV_1312_DARRION(NPC_DEFAULT)
 	voice = 11;
 	id = 1312;
 	flags = NPC_FLAG_IMMORTAL;
-	attribute[ATR_STRENGTH] = 15;
+	attribute[ATR_STRENGTH] = 20;
 	attribute[ATR_DEXTERITY] = 15;
 	attribute[ATR_MANA_MAX] = 0;
 	attribute[ATR_MANA] = 0;

@@ -252,6 +252,7 @@ func void info_jackal_payday_info()
 	b_story_jackalfight();
 	AI_StopProcessInfos(self);
 	OC_BANNED = TRUE;
+	FREELEARN_OC = FALSE;
 	Wld_ExchangeGuildAttitudes("GIL_ATTITUDES_FMTAKEN");
 	if(GETNEWGUY_STARTED == TRUE && OC_BANNED == FALSE)
 	{

@@ -3,6 +3,7 @@ const string MOBNAME_BACKPACK_1 = "";
 const string MOBNAME_CRATE = "Ящик";
 const string MOBNAME_CHEST = "Сундук";
 const string MOBNAME_BED = "Кровать";
+const string MOBNAME_BE2 = "Лежак";
 const string MOBNAME_DOOR = "Дверь";
 const string MOBNAME_CAMP = "";
 const string MOBNAME_TORCH = "";
@@ -36,7 +37,7 @@ const string MOBNAME_PILLAR = "Колонна";
 const string MOBNAME_BASKET_RICE = "";
 const string MOBNAME_DRUM = "";
 const string MOBNAME_GROUND_SLOT = "";
-const string MOBNAME_HERB_PSI = "Пресс";
+const string MOBNAME_HERB_PSI = "Ступа";
 const string MOBNAME_IDOL = "Статуя";
 const string MOBNAME_LEAN_WALL = "";
 const string MOBNAME_ORCDRUM = "";
@@ -188,7 +189,7 @@ const string TXT_TALENTS_SKILLS[12] =
 
 const string TXT_INV_CAT[9] =
 {
-	"             ",
+	"      ",
 	"Оружие",
 	"Доспехи",
 	"Магия",
@@ -220,6 +221,7 @@ const string NAME_MADTEMPLAR2 = "Страж Апокалипсиса";
 const string DIALOG_ENDE = "ЗАКОНЧИТЬ РАЗГОВОР";
 const string DIALOG_BACK = "НАЗАД";
 const string DIALOG_TRADE = "(обмен)";
+const string DIALOG_LEARN = "(обучение)";
 const string NAME_RING = "Кольцо";
 const string NAME_AMULETT = "Амулет";
 const string NAME_TRANK = "Зелье";
@@ -256,6 +258,8 @@ const string NAME_BONUS_DEX = "Бонус к ловкости:";
 const string NAME_BONUS_STR = "Бонус к силе:";
 const string NAME_ONEHANDED = "Одноручное оружие";
 const string NAME_TWOHANDED = "Двуручное оружие";
+const string NAME_ONEHANDED_BONUS = "Одноручное оружие, бонус +3%";
+const string NAME_TWOHANDED_BONUS = "Двуручное оружие, бонус +3%";
 const string NAME_HEALINGPERMANA = "Исцеление (за ед. маг. силы):";
 const string NAME_BUYATTRIBUTESTR = "Сила +";
 const string NAME_BUYATTRIBUTEDEX = "Ловкость +";
@@ -314,7 +318,7 @@ const int _TIME_MESSAGE_TAKEN = 4;
 const int _TIME_MESSAGE_LOGENTRY = 4;
 const int _TIME_MESSAGE_XPGAINED = 3;
 const int _TIME_MESSAGE_LEVELUP = 5;
-const int _TIME_MESSAGE_RAISEATTRIBUTE = 4;
+const int _TIME_MESSAGE_RAISEATTRIBUTE = 3;
 const int _TIME_MESSAGE_JOINCAMP = 5;
 const int _TIME_MESSAGE_PICKLOCK = 3;
 const int _TIME_MESSAGE_CANNOTSTEAL = 2;

@@ -13,6 +13,8 @@ instance NOV_1358_HARLOK(NPC_DEFAULT)
 	attribute[ATR_MANA] = 7;
 	attribute[ATR_HITPOINTS_MAX] = 76;
 	attribute[ATR_HITPOINTS] = 76;
+	protection[PROT_FLY] = 9999;
+	protection[PROT_FALL] = 9999;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Relaxed.mds");
 	Mdl_SetVisualBody(self,"hum_body_Naked0",1,1,"Hum_Head_Bald",28,1,nov_armor_l);

@@ -39,20 +39,20 @@ func int zs_sitaround_loop()
 			AI_UseMob(self,"SMALL THRONE",1);
 			self.aivar[AIV_HANGAROUNDSTATUS] = 4;
 		}
-		else
-		{
-			printdebugnpc(PD_TA_CHECK,"...FP 'SIT' gefunden!");
-			//AI_GotoFP(self,"SIT");
-			AI_AlignToFP(self);
-			AI_PlayAniBS(self,"T_STAND_2_SIT",BS_SIT);
-			self.aivar[AIV_HANGAROUNDSTATUS] = 1;
-		};
 		//else
 		//{
-			//printdebugnpc(PD_TA_CHECK,"...keine Sitzgelegenheit gefunden!");
-			//AI_StartState(self,zs_standaround,1,"");
-			//return LOOP_CONTINUE;
+		//	printdebugnpc(PD_TA_CHECK,"...FP 'SIT' gefunden!");
+		//	//AI_GotoFP(self,"SIT");
+		//	AI_AlignToFP(self);
+		//	AI_PlayAniBS(self,"T_STAND_2_SIT",BS_SIT);
+		//	self.aivar[AIV_HANGAROUNDSTATUS] = 1;
 		//};
+		else
+		{
+			printdebugnpc(PD_TA_CHECK,"...keine Sitzgelegenheit gefunden!");
+			AI_StartState(self,zs_standaround,1,"");
+			return LOOP_CONTINUE;
+		};
 	}
 	else
 	{
@@ -135,6 +135,46 @@ func void zs_sitaround_end()
 	else if(self.aivar[AIV_HANGAROUNDSTATUS] == 3)
 	{
 		AI_UseMob(self,"CHAIR",-1);
+		self.aivar[AIV_HANGAROUNDSTATUS] = 0;
+	};
+};
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+func void zs_sit()
+{
+	b_setperception(self);
+	if((Npc_GetDistToWP(self,self.wp) > PERC_DIST_FLEE) && (!c_bodystatecontains(self,BS_SIT)))
+	{
+		AI_Standup(self);
+		AI_RemoveWeapon(self);
+		AI_SetWalkMode(self,NPC_WALK);
+		AI_GotoWP(self,self.wp);
+	};
+};
+
+func int zs_sit_loop()
+{
+	if(!c_bodystatecontains(self,BS_SIT))
+	{
+		AI_RemoveWeapon(self);
+		AI_AlignToFP(self);
+		AI_PlayAniBS(self,"T_STAND_2_SIT",BS_SIT);
+		self.aivar[AIV_HANGAROUNDSTATUS] = 1;
+	};
+	AI_Wait(self,1);
+	return LOOP_CONTINUE;
+};
+
+func void zs_sit_end()
+{
+	if(self.aivar[AIV_HANGAROUNDSTATUS] == 1)
+	{
+		if(c_bodystatecontains(self,BS_SIT))
+		{
+			AI_PlayAni(self,"T_SIT_2_STAND");
+		};
 		self.aivar[AIV_HANGAROUNDSTATUS] = 0;
 	};
 };

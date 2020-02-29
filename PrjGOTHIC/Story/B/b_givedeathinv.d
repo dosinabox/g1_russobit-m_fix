@@ -5,6 +5,11 @@ func void b_givedeathinv()
 	{
 		return;
 	};
+	if(self.aivar[AIV_IMPORTANT] == ID_SKELETONMAGE)
+	{
+		Npc_RemoveInvItem(self,itarrune_3_1_thunderbolt);
+		Npc_RemoveInvItems(self,itarscrollsummonskeletons,Npc_HasItems(self,itarscrollsummonskeletons));
+	};
 	if(KNOWS_GETTEETH == TRUE)
 	{
 		if(self.aivar[AIV_IMPORTANT] == ID_WOLF)

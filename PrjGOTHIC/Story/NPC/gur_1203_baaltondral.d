@@ -20,7 +20,7 @@ instance GUR_1203_BAALTONDRAL(NPC_DEFAULT)
 	b_scale(self);
 	Mdl_SetModelFatness(self,-1);
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,4);
-	CreateInvItem(self,itarrunewindfist);
+	CreateInvItem(self,itarrune_5_5_windfist);
 	fight_tactic = FAI_HUMAN_MAGE;
 	daily_routine = rtn_start_1203;
 };

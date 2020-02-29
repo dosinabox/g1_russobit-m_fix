@@ -1548,7 +1548,7 @@ instance SVM_11(C_SVM)
 	whatsthissupposedtobe = "SVM_11_WhatsThisSupposedToBe";	//А что это еще может значить?
 	whyareyouinhere = "SVM_11_WhyYouAreInHere";	//Это мой дом. Вон, или я стражу позову!
 	whatdidyouinthere = "SVM_11_WhatDidYouInThere";	//Что это тебе здесь нужно? Убирайся, пока я не убрал тебя сам!
-	wisemove = "SVM_11_WiseMove";	//Хорош! Больше так не делай!
+	wisemove = "SVM_11_WiseMove";	//Хорошо! Больше так не делай!
 	alarm = "SVM_11_Alarm";	//Стража! Сюда!
 	intruderalert = "SVM_11_IntruderAlert";	//Тревога! Чужой!
 	behindyou = "SVM_11_BehindYou";	//Осторожно!
@@ -2058,7 +2058,7 @@ instance SVM_15(C_SVM)
 	aargh_3 = "SVM_15_Aargh_3";	//
 	dead = "SVM_15_Dead";	//
 	awake = "SVM_15_Awake";	//
-	doesntwork = "SVM_15_DoesntWork";	//Не работает.
+	doesntwork = "SVM_15_DoesntWork";	//Хм, не работает.
 	pickbroke = "SVM_15_PickBroke";	//Хм, сломан.
 	needkey = "SVM_15_NeedKey";	//Для этого мне нужен ключ...
 	nomorepicks = "SVM_15_NoMorePicks";	//Костяных ключей больше нет...

@@ -21,7 +21,7 @@ instance KDW_602_MERDARION(NPC_DEFAULT)
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_MAGE;
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,5);
-	EquipItem(self,itarrunechainlightning);
+	EquipItem(self,itarrune_3_5_chainlightning);
 	CreateInvItem(self,itfo_potion_health_03);
 	CreateInvItems(self,itfo_potion_mana_02,2);
 	EquipItem(self,lebensamulett);

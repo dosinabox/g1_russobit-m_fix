@@ -86,6 +86,10 @@ func void dia_darrion_trade_info()
 	{
 		Npc_RemoveInvItems(self,itmiswordblade,Npc_HasItems(self,itmiswordblade));
 	};
+	if(!Npc_HasItems(self,itmw_1h_sledgehammer_01) && !Npc_HasItems(other,itmw_1h_sledgehammer_01))
+	{
+		CreateInvItem(self,itmw_1h_sledgehammer_01);
+	};
 	AI_Output(other,self,"DIA_Darrion_Trade_15_00");	//Покажи мне свои товары.
 	AI_Output(self,other,"DIA_Darrion_Trade_11_01");	//С этого надо было начинать. Вот все, что я продаю.
 };

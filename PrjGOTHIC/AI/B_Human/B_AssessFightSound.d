@@ -78,7 +78,7 @@ func void b_assessfightsound()
 		b_assessfighter();
 		return;
 	}
-	else if(Npc_GetDistToNpc(self,victim) < PERC_DIST_WATCHFIGHT && self.id != 328)
+	else if(Npc_GetDistToNpc(self,victim) < PERC_DIST_WATCHFIGHT && self.id != 328 && self.id != 888 && self.id != 889)
 	{
 		printdebugnpc(PD_ZS_CHECK,"...Opfer in WatchFight-Range!");
 		b_whirlaround(self,victim);

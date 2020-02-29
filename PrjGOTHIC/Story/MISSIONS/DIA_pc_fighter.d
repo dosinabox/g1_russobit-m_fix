@@ -281,6 +281,7 @@ func void info_gorn_ncwait_info()
 	AI_Output(self,other,"Info_Gorn_NCWAIT_09_01");	//А, это ты! Лестер, мой друг из Болотного лагеря, рассказывал мне о том, что ты там сделал.
 	AI_Output(self,other,"Info_Gorn_NCWAIT_09_02");	//Неплохо для человека, который провел здесь так мало времени.
 	AI_Output(other,self,"Info_Gorn_NCWAIT_15_03");	//Да, если бы мне не так везло, я бы уже давно стал кормом для червей.
+	Npc_ExchangeRoutine(self,"start");
 };
 
 
@@ -342,7 +343,6 @@ func void info_gorn_cronos_info()
 	cronos = Hlp_GetNpc(kdw_604_cronos);
 	cronos.aivar[AIV_FINDABLE] = TRUE;
 	b_logentry(CH3_ESCAPEPLANNC,"Горн посоветовал мне обратиться к верховному магу Круга Воды. Его зовут Сатурас. Кронос, хранитель руды, может дать мне разрешение на проход к магам. Я смогу найти его в центре пещеры, возле рудной горы.");
-	Npc_ExchangeRoutine(self,"start");
 };
 
 
@@ -1013,6 +1013,7 @@ func void info_gorn_post_info()
 {
 	AI_GotoNpc(self,hero);
 	OC_BANNED = TRUE;
+	FREELEARN_OC = FALSE;
 	AI_Output(self,hero,"Info_Gorn_POST_09_01");	//Ты пришел вовремя. Мы готовимся нанести ответный удар.
 	AI_Output(self,hero,"Info_Gorn_POST_09_02");	//Сперва мы хотим отвоевать Свободную шахту.
 };

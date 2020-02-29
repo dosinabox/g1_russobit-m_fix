@@ -21,6 +21,7 @@ instance VLK_583_GLEN(NPC_DEFAULT)
 	fight_tactic = FAI_HUMAN_COWARD;
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
 	CreateInvItems(self,itkelockpick,20);
+	CreateInvItem(self,itmwpickaxe);
 	daily_routine = rtn_start_583;
 };
 

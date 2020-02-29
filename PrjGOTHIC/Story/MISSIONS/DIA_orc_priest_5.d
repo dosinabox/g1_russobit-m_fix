@@ -20,7 +20,7 @@ func void info_highpriest5_info()
 {
 	AI_SetWalkMode(self,NPC_WALK);
 	AI_GotoNpc(self,other);
-	if(Npc_HasItems(hero,mythrilklinge02) || Npc_HasItems(hero,itarruneurizielrune))
+	if(Npc_HasItems(hero,mythrilklinge02) || Npc_HasItems(hero,itarrune_6_6_urizielrune))
 	{
 		AI_Output(self,other,"Info_HighPriest5_17_04");	//Ó ÒÅÁß ÅÑÒÜ ÎÐÓÆÈÅ!
 		AI_Output(self,other,"Info_HighPriest5_17_05");	//ß ÎÑÒÀÍÎÂËÞ ÒÅÁß!
@@ -53,7 +53,7 @@ instance INFO_HIGHPRIEST5FAILED(C_INFO)
 
 func int info_highpriest5failed_condition()
 {
-	if(Npc_KnowsInfo(hero,info_highpriest5) && (self.aivar[AIV_MISSION1] >= HIGHPRIEST_MAXHIT) && !Npc_HasItems(hero,mythrilklinge02) && !Npc_HasItems(hero,itarruneurizielrune))
+	if(Npc_KnowsInfo(hero,info_highpriest5) && (self.aivar[AIV_MISSION1] >= HIGHPRIEST_MAXHIT) && !Npc_HasItems(hero,mythrilklinge02) && !Npc_HasItems(hero,itarrune_6_6_urizielrune))
 	{
 		return TRUE;
 	};
@@ -89,7 +89,7 @@ instance INFO_HIGHPRIEST5_2(C_INFO)
 
 func int info_highpriest5_2_condition()
 {
-	if(Npc_KnowsInfo(hero,info_highpriest5) && (ENCOUNTEREDHIGHPRIEST == TRUE) && !Npc_KnowsInfo(hero,info_highpriest5failed) && (Npc_HasItems(hero,mythrilklinge02) || Npc_HasItems(hero,itarruneurizielrune)))
+	if(Npc_KnowsInfo(hero,info_highpriest5) && (ENCOUNTEREDHIGHPRIEST == TRUE) && !Npc_KnowsInfo(hero,info_highpriest5failed) && (Npc_HasItems(hero,mythrilklinge02) || Npc_HasItems(hero,itarrune_6_6_urizielrune)))
 	{
 		return TRUE;
 	};

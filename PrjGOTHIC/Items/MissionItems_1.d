@@ -39,6 +39,7 @@ instance SPECIALJOINT(C_ITEM)
 	material = MAT_WOOD;
 	scemename = "JOINT";
 	on_state[0] = usespecialjoint;
+	description = name;
 	text[0] = "Этот болотник действует";
 	text[1] = "гораздо сильнее, чем обычный 'Зов мечты'.";
 	text[3] = "Он приготовлен для Гуру Идола Тиона!";
@@ -273,9 +274,9 @@ instance RECRUITJOINT(C_ITEM)
 	name = "Болотник для рудокопов";
 	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MULTI;
-	hp = 10;
-	hp_max = 10;
-	weight = 1;
+	//hp = 10;
+	//hp_max = 10;
+	//weight = 1;
 	value = 1;
 	visual = "ItMiJoint.3ds";
 	material = MAT_WOOD;
@@ -318,9 +319,9 @@ instance THELIST(C_ITEM)
 	name = "Список";
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
-	hp = 5;
-	hp_max = 5;
-	weight = 1;
+	//hp = 5;
+	//hp_max = 5;
+	//weight = 1;
 	visual = "ITAR_SCROLL_01_EG.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
@@ -363,9 +364,9 @@ instance THELISTNC(C_ITEM)
 	name = "Список (дополненный)";
 	mainflag = ITEM_KAT_DOCS;
 	flags = ITEM_MISSION;
-	hp = 5;
-	hp_max = 5;
-	weight = 1;
+	//hp = 5;
+	//hp_max = 5;
+	//weight = 1;
 	visual = "ITAR_SCROLL_01_EG.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
@@ -496,7 +497,7 @@ instance KALOMSRECIPE(C_ITEM)
 };
 
 
-func void use_kalomsrecipe_old()
+/*func void use_kalomsrecipe_old()
 {
 	var int ndocid;
 	ndocid = Doc_Create();
@@ -514,7 +515,7 @@ func void use_kalomsrecipe_old()
 	Doc_PrintLines(ndocid,0,"Скорее всего, это лучше прочитать наоборот.");
 	Doc_PrintLine(ndocid,0,"- Галом");
 	Doc_Show(ndocid);
-};
+};*/
 
 func void use_kalomsrecipe()
 {
@@ -779,7 +780,7 @@ instance ITKE_GOMEZ_01(C_ITEM)
 {
 	name = "Ключ Гомеза";
 	mainflag = ITEM_KAT_NONE;
-	flags = 0;
+	flags = ITEM_MISSION;
 	value = 0;
 	visual = "ItKe_Key_04.3ds";
 	material = MAT_METAL;
@@ -840,7 +841,7 @@ instance ITKE_OM_01(C_ITEM)
 
 instance ITKE_OM_02(C_ITEM)
 {
-	name = "Ключ от сундука";
+	name = "Ключ Аарона";
 	mainflag = ITEM_KAT_NONE;
 	flags = 0;
 	value = 0;
@@ -853,7 +854,7 @@ instance ITKE_OM_02(C_ITEM)
 
 instance ITKE_OM_03(C_ITEM)
 {
-	name = "Ключ от сундука";
+	name = "Ключ от склада";
 	mainflag = ITEM_KAT_NONE;
 	flags = 0;
 	value = 0;
@@ -875,6 +876,19 @@ instance ITKE_OM_04(C_ITEM)
 	description = name;
 	text[0] = "Место Альберто";
 	text[1] = "Нижняя площадка обмена";
+};
+
+instance ITKE_WEAPONRY(C_ITEM)
+{
+	name = "Ключ от оружейной";
+	mainflag = ITEM_KAT_NONE;
+	flags = ITEM_MISSION;
+	value = 0;
+	visual = "ItKe_Key_04.3ds";
+	material = MAT_METAL;
+	description = name;
+	text[0] = "Открывает сундуки";
+	text[1] = "в оружейной замка Баронов.";
 };
 
 instance ITFO_OM_BEER_01(C_ITEM)

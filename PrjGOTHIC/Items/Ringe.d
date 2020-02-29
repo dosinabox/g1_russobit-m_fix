@@ -185,7 +185,7 @@ func void unequip_schutzring_waffen2()
 
 instance SCHUTZRING_MAGIE1(C_ITEM)
 {
-	name = "Кольцо";
+	name = NAME_RING;
 	mainflag = ITEM_KAT_MAGIC;
 	flags = ITEM_RING;
 	value = 200;

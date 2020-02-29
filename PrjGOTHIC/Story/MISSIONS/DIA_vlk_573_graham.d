@@ -137,7 +137,7 @@ instance DIA_GRAHAM_BUYMAPS(C_INFO)
 
 func int dia_graham_buymaps_condition()
 {
-	if(Npc_KnowsInfo(hero,dia_graham_hello))
+	if(Npc_KnowsInfo(hero,dia_graham_hello) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE))
 	{
 		return 1;
 	};

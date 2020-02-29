@@ -20,6 +20,7 @@ instance VLK_518_BUDDLER(NPC_DEFAULT)
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_COWARD;
 	CreateInvItem(self,itminugget);
+	EquipItem(self,itmwpickaxe);
 	daily_routine = rtn_start_518;
 };
 

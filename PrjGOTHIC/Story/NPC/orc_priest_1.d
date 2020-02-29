@@ -27,7 +27,7 @@ instance ORC_PRIEST_1(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,8);
 	EquipItem(self,itrwudorcstaff);
 	EquipItem(self,weltenspalter);
-	CreateInvItem(self,itarrunepyrokinesis);
+	CreateInvItem(self,itarrune_5_7_pyrokinesis);
 	daily_routine = rtn_prestart_2995;
 	senses = SENSE_SEE | SENSE_HEAR | SENSE_SMELL;
 	fight_tactic = FAI_HUMAN_MAGE;
@@ -70,7 +70,7 @@ instance ORC_PRIEST_2(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,8);
 	EquipItem(self,itrwudorcstaff);
 	EquipItem(self,lichtbringer);
-	CreateInvItem(self,itarrunethunderball);
+	CreateInvItem(self,itarrune_3_2_thunderball);
 	daily_routine = rtn_prestart_2996;
 	senses = SENSE_SEE | SENSE_HEAR | SENSE_SMELL;
 	fight_tactic = FAI_HUMAN_MAGE;
@@ -113,7 +113,7 @@ instance ORC_PRIEST_3(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,8);
 	EquipItem(self,itrwudorcstaff);
 	EquipItem(self,zeitenklinge);
-	CreateInvItem(self,itarrunechainlightning);
+	CreateInvItem(self,itarrune_3_5_chainlightning);
 	daily_routine = rtn_prestart_2997;
 	senses = SENSE_SEE | SENSE_HEAR | SENSE_SMELL;
 	fight_tactic = FAI_HUMAN_MAGE;
@@ -156,7 +156,7 @@ instance ORC_PRIEST_4(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,8);
 	EquipItem(self,itrwudorcstaff);
 	EquipItem(self,daemonenstreich);
-	CreateInvItem(self,itarrunefirestorm);
+	CreateInvItem(self,itarrune_2_3_firestorm);
 	daily_routine = rtn_prestart_2998;
 	senses = SENSE_SEE | SENSE_HEAR | SENSE_SMELL;
 	senses_range = 1000;
@@ -200,7 +200,7 @@ instance ORC_PRIEST_5(NPC_DEFAULT)
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,8);
 	EquipItem(self,itrwudorcstaff);
 	EquipItem(self,bannklinge);
-	CreateInvItem(self,itarrunebreathofdeath);
+	CreateInvItem(self,itarrune_6_3_breathofdeath);
 	daily_routine = rtn_prestart_2999;
 	senses = SENSE_SEE | SENSE_HEAR | SENSE_SMELL;
 	fight_tactic = FAI_HUMAN_MAGE;

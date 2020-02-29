@@ -16,7 +16,7 @@ instance VLK_538_HUNO(NPC_DEFAULT)
 	attribute[ATR_HITPOINTS] = 184;
 	Mdl_SetVisual(self,"HUMANS.MDS");
 	Mdl_ApplyOverlayMds(self,"Humans_Tired.mds");
-	Mdl_SetVisualBody(self,"hum_body_Naked0",2,1,"Hum_Head_Bald",71,4,vlk_armor_l);
+	Mdl_SetVisualBody(self,"hum_Body_CookSmith",2,1,"Hum_Head_Bald",71,4,-1);
 	b_scale(self);
 	Mdl_SetModelFatness(self,1);
 	aivar[AIV_IMPORTANT] = TRUE;

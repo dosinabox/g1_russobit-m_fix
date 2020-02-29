@@ -67,7 +67,7 @@ func void dia_wolf_hello_info()
 	AI_Output(other,self,"DIA_Wolf_Hello_15_00");	//Кто ты?
 	AI_Output(self,other,"DIA_Wolf_Hello_09_01");	//Меня зовут Волк. Я делаю доспехи.
 	Log_CreateTopic(GE_TRADERNC,LOG_NOTE);
-	b_logentry(GE_TRADERNC,"Волк продает ворам доспехи. Его можно найти возле его дома, в большой пещере Нового лагеря.");
+	b_logentry(GE_TRADERNC,"Волк из Нового лагеря продает ворам доспехи. Его можно найти возле его дома.");
 };
 
 instance DIA_WOLF_GREETORG(C_INFO)

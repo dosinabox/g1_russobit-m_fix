@@ -573,9 +573,16 @@ func void ch_diff_info()
 {
 	Info_ClearChoices(ch_diff);
 	Info_AddChoice(ch_diff,"НАЗАД",ch_diff_back);
-	Info_AddChoice(ch_diff,"Очень высокая (опыт / 3)",ch_diff_veryhard);
-	Info_AddChoice(ch_diff,"Высокая (опыт / 2)",ch_diff_hard);
-	Info_AddChoice(ch_diff,"Стандартая",ch_diff_standart);
+	if(DIFF_HARD == TRUE)
+	{
+		Info_AddChoice(ch_diff,"Повышенная (включено)",ch_diff_hard);
+		Info_AddChoice(ch_diff,"Стандартная",ch_diff_standart);
+	}
+	else
+	{
+		Info_AddChoice(ch_diff,"Повышенная",ch_diff_hard);
+		Info_AddChoice(ch_diff,"Стандартная (включено)",ch_diff_standart);
+	};
 };
 
 func void ch_diff_back()
@@ -583,27 +590,45 @@ func void ch_diff_back()
 	Info_ClearChoices(ch_diff);
 };
 
-func void ch_diff_veryhard()
-{
-	Info_ClearChoices(ch_diff);
-	DIFF_HARD = 0;
-	DIFF_VERYHARD = 1;
-	PrintScreen("Сложность: очень высокая",-1,-1,"font_old_20_white.tga",5);
-};
-
 func void ch_diff_hard()
 {
 	Info_ClearChoices(ch_diff);
-	DIFF_HARD = 1;
-	DIFF_VERYHARD = 0;
-	PrintScreen("Сложность: высокая",-1,-1,"font_old_20_white.tga",5);
+	DIFF_HARD = TRUE;
+	if(hero.attribute[ATR_STRENGTH] == 10)
+	{
+		hero.attribute[ATR_STRENGTH] = 5;
+	};
+	if(hero.attribute[ATR_DEXTERITY] == 10)
+	{
+		hero.attribute[ATR_DEXTERITY] = 5;
+	};
+	STR_ESSENZ_VAL = 1;
+	STR_EXTRAKT_VAL = 3;
+	STR_ELIXIER_VAL = 5;
+	DEX_ESSENZ_VAL = 1;
+	DEX_EXTRAKT_VAL = 3;
+	DEX_ELIXIER_VAL = 5;
+	PrintScreen("Сложность: повышенная",-1,-1,"font_old_20_white.tga",5);
 };
 
 func void ch_diff_standart()
 {
 	Info_ClearChoices(ch_diff);
 	DIFF_HARD = 0;
-	DIFF_VERYHARD = 0;
+	if(hero.attribute[ATR_STRENGTH] == 5)
+	{
+		hero.attribute[ATR_STRENGTH] = 10;
+	};
+	if(hero.attribute[ATR_DEXTERITY] == 5)
+	{
+		hero.attribute[ATR_DEXTERITY] = 10;
+	};
+	STR_ESSENZ_VAL = 3;
+	STR_EXTRAKT_VAL = 5;
+	STR_ELIXIER_VAL = 8;
+	DEX_ESSENZ_VAL = 3;
+	DEX_EXTRAKT_VAL = 5;
+	DEX_ELIXIER_VAL = 8;
 	PrintScreen("Сложность: стандартная",-1,-1,"font_old_20_white.tga",5);
 };
 
@@ -1288,9 +1313,9 @@ func void ch_magic1()
 {
 	Info_ClearChoices(ch_training_magic);
 	b_giveskill(hero,NPC_TALENT_MAGE,1,LPCOST_TALENT_MAGE_1);
-	CreateInvItem(hero,itarrunelight);
-	CreateInvItem(hero,itarrunefirebolt);
-	CreateInvItem(hero,itarrunethunderbolt);
+	CreateInvItem(hero,itarrune_1_1_light);
+	CreateInvItem(hero,itarrune_2_1_firebolt);
+	CreateInvItem(hero,itarrune_3_1_thunderbolt);
 	CreateInvItems(hero,itarscrolltrfscavenger,10);
 	CreateInvItems(hero,itarscrolltrfmolerat,10);
 	CreateInvItems(hero,itarscrolltrfwaran,10);
@@ -1300,9 +1325,9 @@ func void ch_magic2()
 {
 	Info_ClearChoices(ch_training_magic);
 	b_giveskill(hero,NPC_TALENT_MAGE,2,LPCOST_TALENT_MAGE_2);
-	CreateInvItem(hero,itarruneheal);
-	CreateInvItem(hero,itarrunesleep);
-	CreateInvItem(hero,itarrunewindfist);
+	CreateInvItem(hero,itarrune_1_2_heal);
+	CreateInvItem(hero,itarrune_5_2_sleep);
+	CreateInvItem(hero,itarrune_5_5_windfist);
 	CreateInvItems(hero,itarscrolltrfwolf,10);
 	CreateInvItems(hero,itarscrolltrfbloodfly,10);
 	CreateInvItems(hero,itarscrolltrflurker,10);
@@ -1312,12 +1337,12 @@ func void ch_magic3()
 {
 	Info_ClearChoices(ch_training_magic);
 	b_giveskill(hero,NPC_TALENT_MAGE,3,LPCOST_TALENT_MAGE_3);
-	CreateInvItem(hero,itarrunetelekinesis);
-	CreateInvItem(hero,itarrunepyrokinesis);
-	CreateInvItem(hero,itarruneicecube);
-	CreateInvItem(hero,itarrunecharm);
-	CreateInvItem(hero,itarrunefireball);
-	CreateInvItem(hero,itarrunethunderball);
+	CreateInvItem(hero,itarrune_5_0_telekinesis);
+	CreateInvItem(hero,itarrune_5_7_pyrokinesis);
+	CreateInvItem(hero,itarrune_3_3_icecube);
+	CreateInvItem(hero,itarrune_5_1_charm);
+	CreateInvItem(hero,itarrune_2_2_fireball);
+	CreateInvItem(hero,itarrune_3_2_thunderball);
 	CreateInvItems(hero,itarscrolltrfmeatbug,10);
 	CreateInvItems(hero,itarscrolltrfcrawler,10);
 	CreateInvItems(hero,itarscrolltrfsnapper,10);
@@ -1328,11 +1353,11 @@ func void ch_magic4()
 {
 	Info_ClearChoices(ch_training_magic);
 	b_giveskill(hero,NPC_TALENT_MAGE,4,LPCOST_TALENT_MAGE_4);
-	CreateInvItem(hero,itarrunecontrol);
-	CreateInvItem(hero,itarrunechainlightning);
-	CreateInvItem(hero,itarrunestormfist);
-	CreateInvItem(hero,itarrunedestroyundead);
-	CreateInvItem(hero,itarrunefirestorm);
+	CreateInvItem(hero,itarrune_5_3_control);
+	CreateInvItem(hero,itarrune_3_5_chainlightning);
+	CreateInvItem(hero,itarrune_5_6_stormfist);
+	CreateInvItem(hero,itarrune_6_1_destroyundead);
+	CreateInvItem(hero,itarrune_2_3_firestorm);
 	CreateInvItems(hero,itarscrolltrforcdog,10);
 	CreateInvItems(hero,itarscrolltrfshadowbeast,10);
 	CreateInvItems(hero,itarscrollsummongolem,10);
@@ -1345,8 +1370,8 @@ func void ch_magic5()
 {
 	Info_ClearChoices(ch_training_magic);
 	b_giveskill(hero,NPC_TALENT_MAGE,5,LPCOST_TALENT_MAGE_5);
-	CreateInvItem(hero,itarruneicewave);
-	CreateInvItem(hero,itarrunefirerain);
+	CreateInvItem(hero,itarrune_3_4_icewave);
+	CreateInvItem(hero,itarrune_2_4_firerain);
 	CreateInvItems(hero,itarscrollsummondemon,10);
 };
 
@@ -1354,7 +1379,7 @@ func void ch_magic6()
 {
 	Info_ClearChoices(ch_training_magic);
 	b_giveskill(hero,NPC_TALENT_MAGE,6,LPCOST_TALENT_MAGE_6);
-	CreateInvItem(hero,itarrunebreathofdeath);
+	CreateInvItem(hero,itarrune_6_3_breathofdeath);
 	CreateInvItems(hero,itarscrollarmyofdarkness,10);
 };
 

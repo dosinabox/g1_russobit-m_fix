@@ -30,6 +30,7 @@ instance STT_302_VIPER(NPC_DEFAULT)
 	b_give_viperchapter1nugget();
 	EquipItem(self,itmw_1h_sword_short_04);
 	daily_routine = rtn_start_302;
+	aivar[AIV_ITEMSCHWEIN] = TRUE;
 };
 
 

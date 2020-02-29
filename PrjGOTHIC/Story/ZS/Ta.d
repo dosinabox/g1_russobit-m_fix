@@ -364,6 +364,11 @@ func void ta_sitaround(var int start_h,var int start_m,var int stop_h,var int st
 	TA_Min(self,start_h,start_m,stop_h,stop_m,zs_sitaround,waypoint);
 };
 
+func void ta_sit(var int start_h,var int start_m,var int stop_h,var int stop_m,var string waypoint)
+{
+	TA_Min(self,start_h,start_m,stop_h,stop_m,zs_sit,waypoint);
+};
+
 func void ta_stay(var int start_h,var int start_m,var int stop_h,var int stop_m,var string waypoint)
 {
 	TA_Min(self,start_h,start_m,stop_h,stop_m,zs_stay,waypoint);

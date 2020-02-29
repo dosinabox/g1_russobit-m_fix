@@ -321,7 +321,7 @@ instance DUNGEONKEY(C_ITEM)
 	text[1] = "в Старом лагере.";
 };
 
-instance ITARRUNEURIZIELRUNE(C_ITEM)
+instance ITARRUNE_6_6_URIZIELRUNE(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;

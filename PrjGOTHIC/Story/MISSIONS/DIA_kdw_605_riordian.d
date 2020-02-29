@@ -18,11 +18,16 @@ func int info_riordian_exit_condition()
 
 func void info_riordian_exit_info()
 {
-	AI_StopProcessInfos(self);
-	if(!Npc_HasItems(self,itarrunethunderball))
+	if(!Npc_HasItems(self,itarrune_3_2_thunderball))
 	{
-		CreateInvItem(self,itarrunethunderball);
+		CreateInvItem(self,itarrune_3_2_thunderball);
 	};
+	if(Npc_HasItems(other,alchemybook))
+	{
+		Npc_RemoveInvItem(other,alchemybook);
+		CreateInvItem(other,alch200);
+	};
+	AI_StopProcessInfos(self);
 };
 
 
@@ -50,8 +55,6 @@ func void info_riordian_news_info()
 	AI_Output(other,self,"Info_Riordian_NEWS_15_01");	//Меня прислал Сатурас.
 	AI_Output(self,other,"Info_Riordian_NEWS_14_02");	//Заходи. Мне уже доложили о тебе.
 	AI_Output(self,other,"Info_Riordian_NEWS_14_03");	//Вот, возьми эти эликсиры. Здесь все, что тебе может пригодиться.
-	b_printtrademsg1("Получено 20 различных эликсиров.");
-	AI_Output(self,other,"Info_Riordian_NEWS_14_04");	//Теперь можешь идти. Эти камни наша последняя надежда - отыщи их!
 	CreateInvItems(hero,itfo_potion_health_01,5);
 	CreateInvItems(hero,itfo_potion_mana_01,5);
 	CreateInvItems(hero,itfo_potion_health_02,2);
@@ -59,8 +62,18 @@ func void info_riordian_news_info()
 	CreateInvItems(hero,itfo_potion_health_03,1);
 	CreateInvItems(hero,itfo_potion_mana_03,1);
 	CreateInvItems(hero,itfo_potion_haste_02,2);
-	CreateInvItems(hero,itfo_potion_strength_01,1);
-	CreateInvItems(hero,itfo_potion_dex_01,1);
+	if(DIFF_HARD == FALSE)
+	{
+		CreateInvItems(hero,itfo_potion_strength_01,1);
+		CreateInvItems(hero,itfo_potion_dex_01,1);
+		b_printtrademsg1("Получено 20 различных эликсиров.");
+	}
+	else
+	{
+		CreateInvItems(hero,itfo_potion_health_perma_01,1);
+		b_printtrademsg1("Получено 19 различных эликсиров.");
+	};
+	AI_Output(self,other,"Info_Riordian_NEWS_14_04");	//Теперь можешь идти. Эти камни наша последняя надежда - отыщи их!
 };
 
 instance INFO_RIORDIAN_REWARD(C_INFO)
@@ -88,16 +101,23 @@ func void info_riordian_reward_info()
 	AI_Output(self,other,"Info_Riordian_REWARD_14_03");	//Наш духовный наставник рассказал о твоих геройских поступках.
 	AI_Output(self,other,"Info_Riordian_REWARD_14_04");	//Все жители лагеря - да что там, всей колонии - в глубоком долгу перед тобой.
 	AI_Output(self,other,"Info_Riordian_REWARD_14_05");	//Прими от нас эту скромную награду в знак нашей благодарности.
-	b_printtrademsg1("Получено 20 различных эликсиров.");
 	CreateInvItems(hero,itfo_potion_health_02,5);
 	CreateInvItems(hero,itfo_potion_mana_02,5);
 	CreateInvItems(hero,itfo_potion_health_03,2);
 	CreateInvItems(hero,itfo_potion_mana_03,2);
 	CreateInvItems(hero,itfo_potion_haste_02,3);
-	CreateInvItems(hero,itfo_potion_master_01,1);
 	CreateInvItems(hero,itfo_potion_health_perma_02,1);
-	CreateInvItems(hero,itfo_potion_mana_perma_02,1);
-	b_logentry(CH3_BRINGFOCI,"Риордан дал мне несколько зелий, которые мне могут пригодиться в ближайшее время.");
+	if(DIFF_HARD == FALSE)
+	{
+		CreateInvItems(hero,itfo_potion_master_01,1);
+		CreateInvItems(hero,itfo_potion_mana_perma_02,1);
+		b_printtrademsg1("Получено 20 различных эликсиров.");
+	}
+	else
+	{
+		b_printtrademsg1("Получено 18 различных эликсиров.");
+	};
+	b_logentry(CH3_BRINGFOCI,"Риордан дал мне несколько зелий, которые могут мне пригодиться в ближайшее время.");
 	if(Npc_KnowsInfo(hero,info_cronos_reward))
 	{
 		Log_SetTopicStatus(CH3_BRINGFOCI,LOG_SUCCESS);
@@ -284,9 +304,9 @@ func int kdw_605_riordian_trade_condition()
 func void kdw_605_riordian_trade_info()
 {
 	AI_Output(other,self,"KDW_605_Riordian_TRADE_Info_15_01");	//Покажи мне свои товары.
-	if(Npc_HasItems(self,itarrunethunderball) >= 1)
+	if(Npc_HasItems(self,itarrune_3_2_thunderball) >= 1)
 	{
-		Npc_RemoveInvItems(self,itarrunethunderball,Npc_HasItems(self,itarrunethunderball));
+		Npc_RemoveInvItems(self,itarrune_3_2_thunderball,Npc_HasItems(self,itarrune_3_2_thunderball));
 	};
 };
 

@@ -180,7 +180,7 @@ instance INFO_ORG2_JOIN(C_INFO)
 
 func int info_org2_join_condition()
 {
-	if(self.aivar[AIV_PASSGATE] == FALSE)
+	if(self.aivar[AIV_PASSGATE] == FALSE && (QUENTIN_GANG_QUEST_STARTED == LOG_RUNNING))
 	{
 		return 1;
 	};
@@ -193,17 +193,14 @@ func void info_org2_join_info()
 	AI_Output(hero,self,"DIA_Roscoe_BringList_15_06");	//“ак € могу пройти?
 	AI_Output(self,hero,"SVM_12_CheerFight");	//’орошо!
 	AI_Output(self,hero,"SVM_12_YouDefeatedVLK_Guard");	//≈сли ты будешь лезть к моим подопечным, € лично с тобой разберусь!
-	if(QUENTIN_GANG_QUEST_STARTED == LOG_RUNNING)
-	{
-		b_logentry(QUENTIN_GANG,"я нашел лагерь грабителей и решил присоединитьс€ к ним. “еперь мне нужно поговорить с их главарем,  вентином.");
-	}
-	else if(QUENTIN_GANG_QUEST_STARTED != LOG_RUNNING)
-	{
-		QUENTIN_GANG_QUEST_STARTED = LOG_RUNNING;
-		Log_CreateTopic(QUENTIN_GANG,LOG_MISSION);
-		Log_SetTopicStatus(QUENTIN_GANG,LOG_RUNNING);
-		b_logentry(QUENTIN_GANG,"я нашел лагерь грабителей и решил присоединитьс€ к ним. “еперь мне нужно поговорить с их главарем.");
-	};
+	b_logentry(QUENTIN_GANG,"я нашел лагерь грабителей и решил присоединитьс€ к ним. “еперь мне нужно поговорить с их главарем,  вентином.");
+	//else if(QUENTIN_GANG_QUEST_STARTED != LOG_RUNNING)
+	//{
+	//	QUENTIN_GANG_QUEST_STARTED = LOG_RUNNING;
+	//	Log_CreateTopic(QUENTIN_GANG,LOG_MISSION);
+	//	Log_SetTopicStatus(QUENTIN_GANG,LOG_RUNNING);
+	//	b_logentry(QUENTIN_GANG,"я нашел лагерь грабителей и решил присоединитьс€ к ним. “еперь мне нужно поговорить с их главарем.");
+	//};
 	self.aivar[AIV_PASSGATE] = TRUE;
 	AI_StopProcessInfos(self);
 };
@@ -220,7 +217,7 @@ instance INFO_ORG2_KILL(C_INFO)
 
 func int info_org2_kill_condition()
 {
-	if(!Npc_KnowsInfo(hero,info_org2_join))
+	if(!Npc_KnowsInfo(hero,info_org2_join) && !Npc_KnowsInfo(hero,info_raeuber1_exit))
 	{
 		return 1;
 	};

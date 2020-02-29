@@ -164,7 +164,15 @@ func void b_regaindroppedweapon(var C_NPC slf)
 	Npc_PerceiveAll(slf);
 	if(Wld_DetectItem(slf,ITEM_KAT_NF) || Wld_DetectItem(slf,ITEM_KAT_FF))
 	{
-		if(!Npc_IsPlayer(slf) && Npc_CanSeeItem(slf,item))
+		if((slf.id == 1422 || slf.id == 251 || slf.id == 729))
+		{
+			if(Npc_OwnedByNpc(item,slf))
+			{
+				AI_TakeItem(slf,item);
+				AI_EquipBestMeleeWeapon(slf);
+			};
+		}
+		else if(!Npc_IsPlayer(slf) && Npc_CanSeeItem(slf,item))
 		{
 			printdebugnpc(PD_ZS_CHECK,"...NSC hebt seine Waffen wieder auf!");
 			AI_TakeItem(slf,item);
@@ -240,6 +248,40 @@ func void b_killnpc(var int npcinstance)
 		printdebugnpc(PD_ZS_DETAIL,"...Waffe in Slot 2 gefunden!");
 		iteminstance = Hlp_GetInstanceID(item);
 		Npc_RemoveInvItem(npc,iteminstance);
+	};
+	Npc_RemoveInvItem(npc,itarrune_2_1_firebolt);
+	Npc_RemoveInvItem(npc,itarrune_2_2_fireball);
+	Npc_RemoveInvItems(npc,itamarrow,Npc_HasItems(npc,itamarrow));
+	Npc_RemoveInvItems(npc,itambolt,Npc_HasItems(npc,itambolt));
+	if(npc.guild == GIL_KDF)
+	{
+		Npc_RemoveInvItems(npc,itfo_potion_health_01,Npc_HasItems(npc,itfo_potion_health_01));
+		Npc_RemoveInvItems(npc,itfo_potion_health_02,Npc_HasItems(npc,itfo_potion_health_02));
+		Npc_RemoveInvItems(npc,itfo_potion_health_03,Npc_HasItems(npc,itfo_potion_health_03));
+		Npc_RemoveInvItems(npc,itfo_potion_mana_01,Npc_HasItems(npc,itfo_potion_mana_01));
+		Npc_RemoveInvItems(npc,itfo_potion_mana_02,Npc_HasItems(npc,itfo_potion_mana_02));
+		Npc_RemoveInvItems(npc,itfo_potion_mana_03,Npc_HasItems(npc,itfo_potion_mana_03));
+		Npc_RemoveInvItem(npc,schutzring_total2);
+		Npc_RemoveInvItem(npc,schutzring_magie2_fire2);
+	}
+	else if(npc.guild == GIL_SFB)
+	{
+		Npc_RemoveInvItem(npc,itmwpickaxe);
+		Npc_RemoveInvItem(npc,itmw_1h_nailmace_01);
+		Npc_RemoveInvItem(npc,itmw_1h_hatchet_01);
+		Npc_RemoveInvItem(npc,itmw_1h_sword_short_01);
+	}
+	else if(npc.guild == GIL_SLD)
+	{
+		Npc_RemoveInvItem(npc,itrw_bow_long_01);
+		Npc_RemoveInvItem(npc,itmw_1h_mace_war_03);
+		Npc_RemoveInvItem(npc,itmw_2h_axe_heavy_02);
+	}
+	else if(npc.guild == GIL_ORG)
+	{
+		Npc_RemoveInvItem(npc,itmw_1h_mace_03);
+		Npc_RemoveInvItem(npc,itmw_1h_mace_war_01);
+		Npc_RemoveInvItem(npc,itrw_bow_long_01);
 	};
 };
 

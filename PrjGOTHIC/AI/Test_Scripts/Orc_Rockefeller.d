@@ -73,9 +73,9 @@ instance ORC_ROCKEFELLER(MST_DEFAULT_ORCWARRIOR)
 	CreateInvItem(self,itmw2horcmace01);
 	CreateInvItems(self,itamarrow,50);
 	CreateInvItems(self,itambolt,50);
-	CreateInvItem(self,itarrunebreathofdeath);
+	CreateInvItem(self,itarrune_6_3_breathofdeath);
 	CreateInvItems(self,itarscrollsummongolem,20);
-	CreateInvItem(self,itarrunefireball);
+	CreateInvItem(self,itarrune_2_2_fireball);
 };
 
 instance SHAMAN_ROCKEFELLER(MST_DEFAULT_ORCWARRIOR)
@@ -155,9 +155,9 @@ instance SHAMAN_ROCKEFELLER(MST_DEFAULT_ORCWARRIOR)
 	CreateInvItem(self,itmw2horcmace01);
 	CreateInvItems(self,itamarrow,50);
 	CreateInvItems(self,itambolt,50);
-	CreateInvItem(self,itarrunebreathofdeath);
+	CreateInvItem(self,itarrune_6_3_breathofdeath);
 	CreateInvItems(self,itarscrollsummongolem,20);
-	CreateInvItem(self,itarrunefireball);
+	CreateInvItem(self,itarrune_2_2_fireball);
 };
 
 instance UDSHAMAN_ROCKEFELLER(MST_DEFAULT_ORCWARRIOR)
@@ -237,8 +237,8 @@ instance UDSHAMAN_ROCKEFELLER(MST_DEFAULT_ORCWARRIOR)
 	CreateInvItem(self,itmw2horcmace01);
 	CreateInvItems(self,itamarrow,50);
 	CreateInvItems(self,itambolt,50);
-	CreateInvItem(self,itarrunebreathofdeath);
+	CreateInvItem(self,itarrune_6_3_breathofdeath);
 	CreateInvItems(self,itarscrollsummongolem,20);
-	CreateInvItem(self,itarrunefireball);
+	CreateInvItem(self,itarrune_2_2_fireball);
 };
 

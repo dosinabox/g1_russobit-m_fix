@@ -5,7 +5,7 @@ instance SLD_735_SOELDNER(NPC_DEFAULT)
 	npctype = NPCTYPE_GUARD;
 	guild = GIL_SLD;
 	level = 11;
-	voice = 11;
+	voice = 8;
 	id = 735;
 	attribute[ATR_STRENGTH] = 45;
 	attribute[ATR_DEXTERITY] = 35;
@@ -50,3 +50,4 @@ func void rtn_fmtakenback_735()
 	ta_stayneutral(5,0,17,0,"FMC_PATH03");
 	ta_stayneutral(17,0,5,0,"FMC_PATH03");	
 };
+

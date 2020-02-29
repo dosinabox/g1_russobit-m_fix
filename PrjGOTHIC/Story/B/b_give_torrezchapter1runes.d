@@ -3,8 +3,8 @@ func void b_give_torrezchapter1runes()
 {
 	var C_NPC npc;
 	npc = Hlp_GetNpc(kdf_405_torrez);
-	CreateInvItem(npc,itarrunelight);
-	CreateInvItem(npc,itarrunefirebolt);
+	CreateInvItem(npc,itarrune_1_1_light);
+	CreateInvItem(npc,itarrune_2_1_firebolt);
 	CreateInvItems(npc,itarscrollheal,10);
 	CreateInvItems(npc,itarscrolllight,16);
 	CreateInvItems(npc,itarscrollfirebolt,18);
@@ -24,8 +24,8 @@ func void b_give_torrezchapter2runes()
 {
 	var C_NPC npc;
 	npc = Hlp_GetNpc(kdf_405_torrez);
-	CreateInvItem(npc,itarruneheal);
-	CreateInvItem(npc,itarrunefireball);
+	CreateInvItem(npc,itarrune_1_2_heal);
+	CreateInvItem(npc,itarrune_2_2_fireball);
 	CreateInvItems(npc,itarscrollfirebolt,12);
 	CreateInvItems(npc,itarscrolllight,14);
 	CreateInvItems(npc,itarscrollheal,16);
@@ -52,7 +52,7 @@ func void b_give_torrezchapter3runes()
 {
 	var C_NPC npc;
 	npc = Hlp_GetNpc(kdf_405_torrez);
-	CreateInvItem(npc,itarrunefirestorm);
+	CreateInvItem(npc,itarrune_2_3_firestorm);
 	CreateInvItems(npc,itarscrollfirebolt,16);
 	CreateInvItems(npc,itarscrolllight,12);
 	CreateInvItems(npc,itarscrollheal,16);

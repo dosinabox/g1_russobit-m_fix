@@ -49,7 +49,7 @@ func void dia_balor_fetchweed_info()
 	AI_Output(self,other,"DIA_Balor_FetchWeed_01_01");	//Хорошо. Мне не придется относить его самому. Вот, возьми его.
 	b_printtrademsg1("Получен болотник (50).");
 	AI_Output(self,other,"DIA_Balor_FetchWeed_01_02");	//Не забудь заглянуть к Вайрану, на другую сторону болота, если ты у него еще не был.
-	AI_Output(self,other,"DIA_Balor_FetchWeed_01_03");	//Иначе наш дневной урожай кое-кому покажется слишком маленьким. Могут подумать, что ты половину присвоил.
+	AI_Output(self,other,"DIA_Balor_FetchWeed_01_03");	//Иначе наш дневной урожай кое-кому покажется слишком маленьким. Могут подумать, что ты половину присвоил, хехе.
 	b_giveinvitems(self,other,itmi_plants_swampherb_01,50);
 	b_logentry(CH1_DELIVERWEED,"Бэлор передал мне дневной урожай болотника для Кор Галома.");
 	b_givexp(XP_WEEDFROMBALOR);
@@ -299,7 +299,7 @@ instance BALOR_GETLOST(C_INFO)
 
 func int balor_getlost_condition()
 {
-	if((self.aivar[AIV_WASDEFEATEDBYSC] == TRUE) && (Npc_IsInState(self,zs_talk)) && (KAPITEL > 1))
+	if(((BALOR_TRADE_COUNT >= 5) || (self.aivar[AIV_WASDEFEATEDBYSC] == TRUE)) && (Npc_IsInState(self,zs_talk)))
 	{
 		return TRUE;
 	};

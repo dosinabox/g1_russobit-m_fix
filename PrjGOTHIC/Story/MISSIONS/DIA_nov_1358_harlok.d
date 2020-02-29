@@ -45,10 +45,30 @@ func void dia_harlok_fetchharlok_info()
 {
 	AI_Output(other,self,"DIA_Harlok_FetchHarlok_15_00");	//Меня прислал Горим.
 	AI_Output(self,other,"DIA_Harlok_FetchHarlok_01_01");	//Что?
-	Info_ClearChoices(dia_harlok_fetchharlok);
-	Info_AddChoice(dia_harlok_fetchharlok,DIALOG_BACK,dia_harlok_fetchharlok_back);
-	Info_AddChoice(dia_harlok_fetchharlok,"Быстро иди к прессу и начинай работать, иначе тебе будет худо!",dia_harlok_fetchharlok_orelse);
-	Info_AddChoice(dia_harlok_fetchharlok,"Я должен напомнить тебе, что пора работать.",dia_harlok_fetchharlok_please);
+	if(self.aivar[AIV_WASDEFEATEDBYSC] == TRUE)
+	{
+		var C_NPC ghorim;
+		AI_Output(other,self,"DIA_Harlok_FetchHarlok_OrElse_15_00");	//Быстро иди к прессу и начинай работать, иначе тебе будет худо!
+		AI_Output(self,other,"DIA_Harlok_SendHarlok_01_03");	//Ладно уж, иду... Я уже иду...
+		//self.flags = NPC_FLAG_IMMORTAL;
+		self.attribute[ATR_HITPOINTS] = self.attribute[ATR_HITPOINTS_MAX];
+		b_logentry(CH1_GHORIMSRELIEF,"Харлок меня правильно понял. Он согласен сменить Горима.");
+		b_givexp(XP_SENTHARLOK);
+		Npc_ExchangeRoutine(self,"START");
+		ghorim = Hlp_GetNpc(nov_1310_ghorim);
+		Npc_ExchangeRoutine(ghorim,"START");
+		GHORIM_KICKHARLOK = LOG_SUCCESS;
+		npc_setpermattitude(ghorim,ATT_FRIENDLY);
+		npc_setpermattitude(self,ATT_ANGRY);
+		AI_StopProcessInfos(self);
+	}
+	else
+	{
+		Info_ClearChoices(dia_harlok_fetchharlok);
+		Info_AddChoice(dia_harlok_fetchharlok,DIALOG_BACK,dia_harlok_fetchharlok_back);
+		Info_AddChoice(dia_harlok_fetchharlok,"Быстро иди к прессу и начинай работать, иначе тебе будет худо!",dia_harlok_fetchharlok_orelse);
+		Info_AddChoice(dia_harlok_fetchharlok,"Я должен напомнить тебе, что пора работать.",dia_harlok_fetchharlok_please);
+	};
 };
 
 func void dia_harlok_fetchharlok_please()
@@ -111,7 +131,7 @@ instance DIA_HARLOK_SENDHARLOK(C_INFO)
 
 func int dia_harlok_sendharlok_condition()
 {
-	if((self.aivar[AIV_WASDEFEATEDBYSC] == TRUE) && Npc_KnowsInfo(hero,dia_harlok_fetchharlok))
+	if((self.aivar[AIV_WASDEFEATEDBYSC] == TRUE) && Npc_KnowsInfo(hero,dia_harlok_fetchharlok) && (GHORIM_KICKHARLOK != LOG_SUCCESS))
 	{
 		return 1;
 	};
@@ -124,7 +144,8 @@ func void dia_harlok_sendharlok_info()
 	AI_Output(self,other,"DIA_Harlok_SendHarlok_01_01");	//Сколько можно приставать ко мне?! Не суй свой нос в чужие дела!
 	AI_Output(other,self,"DIA_Harlok_SendHarlok_15_02");	//Просто хотел посмотреть, как ты работаешь.
 	AI_Output(self,other,"DIA_Harlok_SendHarlok_01_03");	//Ладно уж, иду... Я уже иду...
-	self.flags = NPC_FLAG_IMMORTAL;
+	//self.flags = NPC_FLAG_IMMORTAL;
+	self.attribute[ATR_HITPOINTS] = self.attribute[ATR_HITPOINTS_MAX];
 	b_logentry(CH1_GHORIMSRELIEF,"Харлок меня правильно понял. Он согласен сменить Горима.");
 	b_givexp(XP_SENTHARLOK);
 	Npc_ExchangeRoutine(self,"START");

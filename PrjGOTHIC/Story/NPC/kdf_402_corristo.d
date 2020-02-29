@@ -22,10 +22,10 @@ instance KDF_402_CORRISTO(NPC_DEFAULT)
 	aivar[AIV_IMPORTANT] = TRUE;
 	fight_tactic = FAI_HUMAN_MAGE;
 	Npc_SetTalentSkill(self,NPC_TALENT_MAGE,4);
-	EquipItem(self,itarrunefireball);
+	EquipItem(self,itarrune_2_2_fireball);
 	CreateInvItems(self,itfo_potion_health_02,2);
 	CreateInvItems(self,itfo_potion_mana_02,2);
-	CreateInvItems(self,itfowine,2);
+	//CreateInvItems(self,itfowine,2);
 	EquipItem(self,schutzring_magie2_fire2);
 	daily_routine = rtn_start_402;
 };

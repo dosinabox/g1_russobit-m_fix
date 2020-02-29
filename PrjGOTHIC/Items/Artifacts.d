@@ -1,5 +1,5 @@
 
-instance ITARRUNELIGHT(C_ITEM)
+instance ITARRUNE_1_1_LIGHT(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -36,7 +36,7 @@ instance ITARSCROLLLIGHT(C_ITEM)
 	count[5] = value;
 };
 
-instance ITARRUNEFIREBOLT(C_ITEM)
+instance ITARRUNE_2_1_FIREBOLT(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -77,7 +77,7 @@ instance ITARSCROLLFIREBOLT(C_ITEM)
 	count[5] = value;
 };
 
-instance ITARRUNEFIREBALL(C_ITEM)
+instance ITARRUNE_2_2_FIREBALL(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -120,7 +120,7 @@ instance ITARSCROLLFIREBALL(C_ITEM)
 	count[5] = value;
 };
 
-instance ITARRUNEFIRESTORM(C_ITEM)
+instance ITARRUNE_2_3_FIRESTORM(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -163,7 +163,7 @@ instance ITARSCROLLFIRESTORM(C_ITEM)
 	count[5] = value;
 };
 
-instance ITARRUNEFIRERAIN(C_ITEM)
+instance ITARRUNE_2_4_FIRERAIN(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -204,7 +204,7 @@ instance ITARSCROLLFIRERAIN(C_ITEM)
 	count[5] = value;
 };
 
-instance ITARRUNETELEPORT1(C_ITEM)
+instance ITARRUNE_1_3_TELEPORT1(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -232,7 +232,7 @@ instance ITARSCROLLTELEPORT1(C_ITEM)
 	count[1] = SPL_SENDCAST_TELEPORT;
 };
 
-instance ITARRUNETELEPORT2(C_ITEM)
+instance ITARRUNE_1_4_TELEPORT2(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -260,7 +260,7 @@ instance ITARSCROLLTELEPORT2(C_ITEM)
 	count[1] = SPL_SENDCAST_TELEPORT;
 };
 
-instance ITARRUNETELEPORT3(C_ITEM)
+instance ITARRUNE_1_6_TELEPORT3(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -303,7 +303,7 @@ instance ITARSCROLLTELEPORT4(C_ITEM)
 	count[1] = SPL_SENDCAST_TELEPORT;
 };
 
-instance ITARRUNETELEPORT5(C_ITEM)
+instance ITARRUNE_1_5_TELEPORT5(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -331,7 +331,7 @@ instance ITARSCROLLTELEPORT5(C_ITEM)
 	count[1] = SPL_SENDCAST_TELEPORT;
 };
 
-instance ITARRUNEHEAL(C_ITEM)
+instance ITARRUNE_1_2_HEAL(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -570,7 +570,7 @@ instance ITARSCROLLTRFWOLF(C_ITEM)
 	count[5] = value;
 };
 
-instance ITARRUNECHAINLIGHTNING(C_ITEM)
+instance ITARRUNE_3_5_CHAINLIGHTNING(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -607,7 +607,7 @@ instance ITARSCROLLCHAINLIGHTNING(C_ITEM)
 	count[5] = value;
 };
 
-instance ITARRUNETHUNDERBOLT(C_ITEM)
+instance ITARRUNE_3_1_THUNDERBOLT(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -648,7 +648,7 @@ instance ITARSCROLLTHUNDERBOLT(C_ITEM)
 	count[5] = value;
 };
 
-instance ITARRUNETHUNDERBALL(C_ITEM)
+instance ITARRUNE_3_2_THUNDERBALL(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -691,7 +691,7 @@ instance ITARSCROLLTHUNDERBALL(C_ITEM)
 	count[5] = value;
 };
 
-instance ITARRUNEICECUBE(C_ITEM)
+instance ITARRUNE_3_3_ICECUBE(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -706,7 +706,7 @@ instance ITARRUNEICECUBE(C_ITEM)
 	count[0] = mag_circle;
 	text[1] = NAME_MANAKOSTEN;
 	count[1] = SPL_SENDCAST_ICECUBE;
-	text[2] = "Урон:";
+	text[2] = NAME_DAMAGE;
 	count[2] = SPL_FREEZE_DAMAGE;
 	text[5] = NAME_VALUE;
 	count[5] = value;
@@ -726,13 +726,13 @@ instance ITARSCROLLICECUBE(C_ITEM)
 	description = "Ледяная глыба";
 	text[1] = NAME_MANAKOSTEN;
 	count[1] = SPL_SENDCAST_ICECUBE;
-	text[2] = "Урон:";
+	text[2] = NAME_DAMAGE;
 	count[2] = SPL_FREEZE_DAMAGE;
 	text[5] = NAME_VALUE;
 	count[5] = value;
 };
 
-instance ITARRUNEICEWAVE(C_ITEM)
+instance ITARRUNE_3_4_ICEWAVE(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -747,7 +747,7 @@ instance ITARRUNEICEWAVE(C_ITEM)
 	count[0] = mag_circle;
 	text[1] = NAME_MANAKOSTEN;
 	count[1] = SPL_SENDCAST_ICEWAVE;
-	text[2] = "Урон:";
+	text[2] = NAME_DAMAGE;
 	count[2] = SPL_FREEZE_DAMAGE;
 	text[5] = NAME_VALUE;
 	count[5] = value;
@@ -767,7 +767,7 @@ instance ITARSCROLLICEWAVE(C_ITEM)
 	description = "Ледяная волна";
 	text[1] = NAME_MANAKOSTEN;
 	count[1] = SPL_SENDCAST_ICEWAVE;
-	text[2] = "Урон:";
+	text[2] = NAME_DAMAGE;
 	count[2] = SPL_FREEZE_DAMAGE;
 	text[5] = NAME_VALUE;
 	count[5] = value;
@@ -845,7 +845,7 @@ instance ITARSCROLLARMYOFDARKNESS(C_ITEM)
 	count[5] = value;
 };
 
-instance ITARRUNEARMYOFDARKNESS(C_ITEM)
+instance ITARRUNE_6_2_ARMYOFDARKNESS(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -864,7 +864,7 @@ instance ITARRUNEARMYOFDARKNESS(C_ITEM)
 	count[5] = value;
 };
 
-instance ITARRUNEDESTROYUNDEAD(C_ITEM)
+instance ITARRUNE_6_1_DESTROYUNDEAD(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -905,7 +905,7 @@ instance ITARSCROLLDESTROYUNDEAD(C_ITEM)
 	count[5] = value;
 };
 
-instance ITARRUNEWINDFIST(C_ITEM)
+instance ITARRUNE_5_5_WINDFIST(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -948,7 +948,7 @@ instance ITARSCROLLWINDFIST(C_ITEM)
 	count[5] = value;
 };
 
-instance ITARRUNESTORMFIST(C_ITEM)
+instance ITARRUNE_5_6_STORMFIST(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -991,7 +991,7 @@ instance ITARSCROLLSTORMFIST(C_ITEM)
 	count[5] = value;
 };
 
-instance ITARRUNETELEKINESIS(C_ITEM)
+instance ITARRUNE_5_0_TELEKINESIS(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -1032,7 +1032,7 @@ instance ITARSCROLLTELEKINESIS(C_ITEM)
 	count[5] = value;
 };
 
-instance ITARRUNECHARM(C_ITEM)
+instance ITARRUNE_5_1_CHARM(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -1069,7 +1069,7 @@ instance ITARSCROLLCHARM(C_ITEM)
 	count[5] = value;
 };
 
-instance ITARRUNESLEEP(C_ITEM)
+instance ITARRUNE_5_2_SLEEP(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -1106,7 +1106,7 @@ instance ITARSCROLLSLEEP(C_ITEM)
 	count[5] = value;
 };
 
-instance ITARRUNEPYROKINESIS(C_ITEM)
+instance ITARRUNE_5_7_PYROKINESIS(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -1145,7 +1145,7 @@ instance ITARSCROLLPYROKINESIS(C_ITEM)
 	count[5] = value;
 };
 
-instance ITARRUNECONTROL(C_ITEM)
+instance ITARRUNE_5_3_CONTROL(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
@@ -1158,6 +1158,8 @@ instance ITARRUNECONTROL(C_ITEM)
 	description = "Контроль";
 	text[0] = NAME_MAG_CIRCLE;
 	count[0] = mag_circle;
+	//text[1] = NAME_MANAKOSTEN;
+	//count[1] = 30;
 	text[5] = NAME_VALUE;
 	count[5] = value;
 };
@@ -1172,8 +1174,10 @@ instance ITARSCROLLCONTROL(C_ITEM)
 	material = MAT_STONE;
 	spell = SPL_CONTROL;
 	cond_atr[2] = ATR_MANA_MAX;
-	cond_value[2] = 30;
+	cond_value[2] = 5;
 	description = "Контроль";
+	text[1] = NAME_MANAKOSTEN;
+	count[1] = 5;
 	text[5] = NAME_VALUE;
 	count[5] = value;
 };
@@ -1214,7 +1218,7 @@ instance ITARSCROLLBERZERK(C_ITEM)
 	count[5] = value;
 };
 
-instance ITARRUNEBREATHOFDEATH(C_ITEM)
+instance ITARRUNE_6_3_BREATHOFDEATH(C_ITEM)
 {
 	name = NAME_RUNE;
 	mainflag = ITEM_KAT_RUNE;
