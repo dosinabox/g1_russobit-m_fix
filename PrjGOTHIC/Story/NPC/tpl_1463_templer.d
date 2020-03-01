@@ -8,8 +8,8 @@ instance TPL_1463_TEMPLER(NPC_DEFAULT)
 	flags = 0;
 	voice = 13;
 	id = 1463;
-	attribute[ATR_STRENGTH] = 55;
-	attribute[ATR_DEXTERITY] = 55;
+	attribute[ATR_STRENGTH] = 71;
+	attribute[ATR_DEXTERITY] = 71;
 	attribute[ATR_MANA_MAX] = 0;
 	attribute[ATR_MANA] = 0;
 	attribute[ATR_HITPOINTS_MAX] = 5;
@@ -21,9 +21,8 @@ instance TPL_1463_TEMPLER(NPC_DEFAULT)
 	Mdl_SetModelFatness(self,-1);
 	fight_tactic = FAI_HUMAN_STRONG;
 	Npc_SetTalentSkill(self,NPC_TALENT_2H,1);
-	EquipItem(self,itmw_1h_sword_02);
+	EquipItem(self,itmw_2h_sword_light_02);
 	CreateInvItem(self,itfosoup);
-	CreateInvItem(self,itmijoint_1);
 	daily_routine = rtn_start_1463;
 };
 

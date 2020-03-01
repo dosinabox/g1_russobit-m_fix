@@ -5,7 +5,7 @@ instance INFO_MINE_ORG_6_EXIT(C_INFO)
 	condition = info_mine_org_6_exit_condition;
 	information = info_mine_org_6_exit_info;
 	permanent = 1;
-	description = "«¿ ŒÕ◊»“‹ –¿«√Œ¬Œ–";
+	description = DIALOG_ENDE;
 };
 
 

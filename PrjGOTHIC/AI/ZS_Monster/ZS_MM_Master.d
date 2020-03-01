@@ -570,7 +570,7 @@ func void zs_mm_rtn_roam_loop()
 		else
 		{
 			AI_GotoWP(self,Npc_GetNearestWP(self));
-			AI_GotoWP(self,Npc_GetNextWP(self));
+//			AI_GotoWP(self,Npc_GetNextWP(self));
 		};
 	}
 	else
@@ -728,7 +728,7 @@ func void zs_mm_rtn_wusel_loop()
 		else
 		{
 			AI_GotoWP(self,Npc_GetNearestWP(self));
-			AI_GotoWP(self,Npc_GetNextWP(self));
+//			AI_GotoWP(self,Npc_GetNextWP(self));
 		};
 	}
 	else
@@ -793,3 +793,17 @@ func void zs_mm_summoned_end()
 	Npc_ChangeAttribute(self,ATR_HITPOINTS,-self.attribute);
 };
 
+func void zs_mm_minecrawler_omgate()
+{
+    Npc_PercEnable(self,PERC_ASSESSDAMAGE,b_mm_reacttodamage);
+	Npc_PercEnable(self,PERC_ASSESSOTHERSDAMAGE,b_mm_reacttoothersdamage);
+	Npc_PercEnable(self,PERC_ASSESSMAGIC,b_assessmagic);
+	Npc_PercEnable(self,PERC_ASSESSENEMY,b_mm_assessenemy);
+	Npc_PercEnable(self,PERC_ASSESSWARN,b_mm_assesswarn);
+	Npc_PercEnable(self,PERC_ASSESSBODY,b_mm_assessbody);
+    self.wp = "OM_CAVE3_19";
+    b_mm_desynchronize();
+    AI_SetWalkMode(self,NPC_RUN);
+    AI_GotoWP(self,self.wp);
+    AI_StartState(self,zs_mm_rtn_wusel,1,"");
+};

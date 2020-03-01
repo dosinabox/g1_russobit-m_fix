@@ -73,4 +73,3 @@ instance OTMINECRAWLER(MST_DEFAULT_MINECRAWLERWARRIOR)
 	protection[PROT_MAGIC] = 30;
 	damagetype = DAM_EDGE;
 };
-

@@ -149,7 +149,7 @@ instance INFO_YBERION_BRINGFOCUS_RUNNING(C_INFO)
 	nr = 1;
 	condition = info_yberion_bringfocus_running_condition;
 	information = info_yberion_bringfocus_running_info;
-	permanent = 0;
+	permanent = 1;
 	description = "Я все еще не нашел юнитор.";
 };
 
@@ -259,7 +259,7 @@ instance GUR_1200_YBERION_EARN(C_INFO)
 
 func int gur_1200_yberion_earn_condition()
 {
-	if((YBERION_BRINGFOCUS == LOG_SUCCESS) && (Npc_GetTrueGuild(hero) != GIL_NOV) && c_ischapter(2))
+	if((YBERION_BRINGFOCUS == LOG_SUCCESS) && (Npc_GetTrueGuild(hero) != GIL_NOV) && (Npc_GetTrueGuild(hero) != GIL_TPL) && c_ischapter(2))
 	{
 		return 1;
 	};
@@ -278,6 +278,7 @@ func void gur_1200_yberion_earn_info()
 instance YBERION_STEALKEY(C_INFO)
 {
 	npc = gur_1200_yberion;
+	nr = 990;
 	condition = yberion_stealkey_condition;
 	information = yberion_stealkey_info;
 	important = 0;

@@ -239,10 +239,14 @@ func void info_gorhanis_chargegood_info()
 	else
 	{
 		AI_Output(self,other,"SVM_8_NoLearnYoureBetter");	//Теперь ты готов!
+		if(self.attribute[ATR_HITPOINTS] < self.attribute[ATR_HITPOINTS_MAX])
+		{
+			self.attribute[ATR_HITPOINTS] = self.attribute[ATR_HITPOINTS_MAX];
+			CreateInvItem(self,itfo_potion_health_03);
+			AI_UseItem(self,itfo_potion_health_03);
+		};
 		AI_StopProcessInfos(self);
 		HANIS_CHARGED = TRUE;
-		self.attribute[ATR_HITPOINTS] = 280;
-		self.attribute[ATR_HITPOINTS_MAX] = 280;
 		Npc_ExchangeRoutine(self,"GUIDE");
 		b_fullstop(grd_251_kirgo);
 		b_fullstop(sld_729_kharim);
@@ -273,6 +277,12 @@ func int info_gorhanis_inarena_condition()
 
 func void info_gorhanis_inarena_info()
 {
+	if(self.attribute[ATR_HITPOINTS] < self.attribute[ATR_HITPOINTS_MAX])
+	{
+		self.attribute[ATR_HITPOINTS] = self.attribute[ATR_HITPOINTS_MAX];
+		CreateInvItem(self,itfo_potion_health_03);
+		AI_UseItem(self,itfo_potion_health_03);
+	};
 	if(!Npc_HasItems(self,itmw_gorhanis) && !Npc_HasItems(self,itmw_1h_sword_01))
 	{
 		CreateInvItem(self,itmw_1h_sword_01);

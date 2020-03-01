@@ -260,13 +260,9 @@ func void org_819_drax_creatures_zahn()
 				other.lp = other.lp - 1;
 			};
 			b_giveinvitems(other,self,itminugget,50);
-			PrintScreen("Навык: добыча клыков",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
 			AI_Output(self,other,"Org_819_Drax_Creatures_Zahn_06_01");	//Ты должен следить за тем, чтобы клыки не сломались. Чтобы этого избежать, используй очень острый нож, как рычаг.
 			AI_Output(self,other,"Org_819_Drax_Creatures_Zahn_06_02");	//Клыки волков, глорхов и мракорисов ценятся выше всего.
-			KNOWS_GETTEETH = TRUE;
-			Log_CreateTopic(GE_ANIMALTROPHIES,LOG_NOTE);
-			b_logentry(GE_ANIMALTROPHIES,"Навык добычи клыков: волк, орочья собака, глорх, жерх, ищейка, мракорис.");
-			
+			b_learn_trophies_teeth();
 		}
 		else
 		{
@@ -307,12 +303,9 @@ func void org_819_drax_creatures_fell()
 				other.lp = other.lp - 1;
 			};
 			b_giveinvitems(other,self,itminugget,100);
-			PrintScreen("Навык: добыча шкур",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
 			AI_Output(self,other,"Org_819_Drax_Creatures_Fell_06_01");	//Важно знать, что начинать разделывать тушу следует с головы. Шкуры здесь высоко ценятся, поэтому главное не повредить их при снятии.
 			AI_Output(self,other,"Org_819_Drax_Creatures_Fell_06_02");	//Из шкур волков и мракорисов шьют хорошую одежду. С практикой к тебе придет умение распознавать, годится та или иная шкура на одежду или нет.
-			KNOWS_GETFUR = TRUE;
-			Log_CreateTopic(GE_ANIMALTROPHIES,LOG_NOTE);
-			b_logentry(GE_ANIMALTROPHIES,"Навык добычи шкур: волк, орочья собака, мракорис, тролль.");
+			b_learn_trophies_fur();
 		}
 		else
 		{
@@ -353,12 +346,9 @@ func void org_819_drax_creatures_kralle()
 				other.lp = other.lp - 1;
 			};
 			b_giveinvitems(other,self,itminugget,50);
-			PrintScreen("Навык: добыча когтей",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
 			AI_Output(self,other,"Org_819_Drax_Creatures_Kralle_06_01");	//Это проще, чем кажется на первый взгляд. Нужно отогнуть коготь вперед, но при этом не пытаться его выдернуть и не отгибать назад.
 			AI_Output(self,other,"Org_819_Drax_Creatures_Kralle_06_02");	//Конечно, пригодные когти можно добыть не у всякого зверя. Обычно в дело идут когти ящериц.
-			KNOWS_GETCLAWS = TRUE;
-			Log_CreateTopic(GE_ANIMALTROPHIES,LOG_NOTE);
-			b_logentry(GE_ANIMALTROPHIES,"Навык добычи когтей: ящерица, глорх, шныг, жерх, штек.");
+			b_learn_trophies_claws();
 		}
 		else
 		{
@@ -399,12 +389,9 @@ func void org_819_drax_creatures_haut()
 				other.lp = other.lp - 1;
 			};
 			b_giveinvitems(other,self,itminugget,100);
-			PrintScreen("Навык: добыча шкур рептилий",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
 			AI_Output(self,other,"Org_819_Drax_Creatures_Haut_06_01");	//Для этого подходят не все рептилии, а лишь шныги и болотожоры.
 			AI_Output(self,other,"Org_819_Drax_Creatures_Haut_06_02");	//Если ты подрежешь шкуру по краям, то ты сможешь легко ее снять. Теперь ты сможешь легко справляться с этой задачей.
-			KNOWS_GETHIDE = TRUE;
-			Log_CreateTopic(GE_ANIMALTROPHIES,LOG_NOTE);
-			b_logentry(GE_ANIMALTROPHIES,"Навык добычи шкур рептилий: шныг, болотожор.");
+			b_learn_trophies_reptilefur();
 		}
 		else
 		{

@@ -15,6 +15,22 @@ func void b_corristolearn()
 		Info_AddChoice(kdf_402_corristo_mana,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),kdf_402_corristo_mana_man_5);
 		Info_AddChoice(kdf_402_corristo_mana,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),kdf_402_corristo_mana_man_1);
 	};
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_MAGE) == 0)
+	{
+		Info_AddChoice(kdf_402_corristo_mana,b_buildlearnstring(NAME_LEARNMAGE_1,LPCOST_TALENT_MAGE_1,0),kdf_402_corristo_kreis1);
+	}
+	else if(Npc_GetTalentSkill(hero,NPC_TALENT_MAGE) == 1)
+	{
+		Info_AddChoice(kdf_402_corristo_mana,b_buildlearnstring(NAME_LEARNMAGE_2,LPCOST_TALENT_MAGE_2,0),kdf_402_corristo_kreis2);
+	}
+	else if(Npc_GetTalentSkill(hero,NPC_TALENT_MAGE) == 2)
+	{
+		Info_AddChoice(kdf_402_corristo_mana,b_buildlearnstring(NAME_LEARNMAGE_3,LPCOST_TALENT_MAGE_3,0),kdf_402_corristo_kreis3);
+	}
+	else if(Npc_GetTalentSkill(hero,NPC_TALENT_MAGE) == 3)
+	{
+		Info_AddChoice(kdf_402_corristo_mana,b_buildlearnstring(NAME_LEARNMAGE_4,LPCOST_TALENT_MAGE_4,0),kdf_402_corristo_kreis4);
+	};
 };
 
 instance KDF_402_CORRISTO_EXIT(C_INFO)
@@ -233,6 +249,7 @@ func void kdf_402_corristo_kdftest_fight()
 	AI_Output(self,other,"KDF_402_Corristo_KDFTEST_FIGHT_Info_14_02");	//Хм...
 	AI_Output(self,other,"KDF_402_Corristo_KDFTEST_FIGHT_Info_14_03");	//Я думаю, тебе стоит обратиться к Торусу. Твоя судьба - стать воином.
 	AI_StopProcessInfos(self);
+	Npc_ExchangeRoutine(self,"START");
 };
 
 func void kdf_402_corristo_kdftest_demut()
@@ -281,7 +298,7 @@ instance KDF_402_CORRISTO_AUFNAHME(C_INFO)
 
 func int kdf_402_corristo_aufnahme_condition()
 {
-	if((Npc_GetDistToWP(hero,"OCC_CHAPEL_UPSTAIRS") < 400) && (CORRISTO_KDFAUFNAHME == 4))
+	if((Npc_GetDistToWP(hero,"OCC_CHAPEL_UPSTAIRS") < 400) && (CORRISTO_KDFAUFNAHME == 4) && (Npc_GetTrueGuild(hero) == GIL_STT))
 	{
 		return TRUE;
 	};
@@ -321,7 +338,7 @@ instance KDF_402_CORRISTO_ROBE(C_INFO)
 
 func int kdf_402_corristo_robe_condition()
 {
-	if(Npc_KnowsInfo(hero,kdf_402_corristo_aufnahme))
+	if(Npc_KnowsInfo(hero,kdf_402_corristo_aufnahme) && (Npc_GetTrueGuild(hero) == GIL_STT))
 	{
 		return TRUE;
 	};
@@ -336,7 +353,7 @@ func void kdf_402_corristo_robe_info()
 	AI_StopProcessInfos(self);
 	CreateInvItem(self,kdf_armor_l);
 	b_giveinvitems(self,hero,kdf_armor_l,1);
-	AI_EquipArmor(hero,kdf_armor_l);
+//	AI_EquipArmor(hero,kdf_armor_l);
 	Npc_SetTrueGuild(hero,GIL_KDF);
 	hero.guild = GIL_KDF;
 	hero.attribute[ATR_HITPOINTS] = hero.attribute[ATR_HITPOINTS_MAX];
@@ -451,6 +468,68 @@ func void kdf_402_corristo_mana_man_5()
 	b_corristolearn();
 };
 
+func void kdf_402_corristo_kreis1()
+{
+	AI_Output(other,self,"KDF_402_Corristo_KREIS1_Info_15_01");	//Я готов приобщиться к Первому Кругу магии.
+	if(b_giveskill(other,NPC_TALENT_MAGE,1,LPCOST_TALENT_MAGE_1))
+	{
+		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_02");	//Вступление в Первый Круг магии даст тебе умение использовать магические руны.
+		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_03");	//Каждая руна содержит в себе одно магическое заклинание.
+		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_04");	//Используя свою магическую силу, ты сможешь прочитать это заклинание.
+		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_05");	//Но в отличие от магических свитков, которые теряют свою силу после первого прочтения, заклинание руны можно читать снова и снова, и оно не иссякнет.
+		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_06");	//Каждая руна является источником магической силы, которая может быть задействована в любое время.
+		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_07");	//Как я уже сказал, при прочтении заклинания руны или свитка будет расходоваться твоя магическая сила.
+		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_08");	//Каждый новый Круг, который ты изучишь, будет давать тебе возможность читать заклинания более сложных рун.
+		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_09");	//Используй силу рун, чтобы познать самого себя.
+	};
+	b_corristolearn();
+};
+
+func void kdf_402_corristo_kreis2()
+{
+	AI_Output(other,self,"KDF_402_Corristo_KREIS2_Info_15_01");	//Я готов обрести знания Второго Круга.
+	if(b_giveskill(other,NPC_TALENT_MAGE,2,LPCOST_TALENT_MAGE_2))
+	{
+		AI_Output(self,other,"KDF_402_Corristo_KREIS2_Info_14_02");	//Ты уже научился читать заклинания рун. Пришло время углубить твои знания.
+		AI_Output(self,other,"KDF_402_Corristo_KREIS2_Info_14_03");	//Второй Круг магии даст тебе возможность читать сильные боевые заклинания, но самое главное, ты сможешь исцелять болезни.
+		AI_Output(self,other,"KDF_402_Corristo_KREIS2_Info_14_04");	//Но тебе предстоит еще многому научиться, чтобы познать истинные тайны магии.
+		AI_Output(self,other,"KDF_402_Corristo_KREIS2_Info_14_05");	//Ты уже знаешь, что можешь использовать любую руну, пока на это хватит твоей личной силы.
+		AI_Output(self,other,"KDF_402_Corristo_KREIS2_Info_14_06");	//Но это крайний случай, и он не всегда оправдан. Тебе дана сила, которая может приносить смерть и разрушение.
+		AI_Output(self,other,"KDF_402_Corristo_KREIS2_Info_14_07");	//Истинный маг использует ее лишь тогда, когда это действительно необходимо.
+		AI_Output(self,other,"KDF_402_Corristo_KREIS2_Info_14_08");	//Внимательно следи за тем, что происходит вокруг, и ты сможешь познать силу рун.
+	};
+	b_corristolearn();
+};
+
+func void kdf_402_corristo_kreis3()
+{
+	AI_Output(other,self,"KDF_402_Corristo_KREIS3_Info_15_01");	//Ты можешь передать мне знания Третьего Круга магии?
+	if(b_giveskill(other,NPC_TALENT_MAGE,3,LPCOST_TALENT_MAGE_3))
+	{
+		AI_Output(self,other,"KDF_402_Corristo_KREIS3_Info_14_02");	//Третий Круг - очень важная часть пути, который проходит каждый маг. Его постижением завершается твой поиск.
+		AI_Output(self,other,"KDF_402_Corristo_KREIS3_Info_14_03");	//Ты уже на середине пути познания магии. Ты уже умеешь читать заклинания рун.
+		AI_Output(self,other,"KDF_402_Corristo_KREIS3_Info_14_04");	//Это знание станет основой для дальнейшего совершенствования. Подумай, прежде чем использовать ту или иную руну.
+		AI_Output(self,other,"KDF_402_Corristo_KREIS3_Info_14_05");	//Ты можешь читать ее или не читать, но твой выбор должен быть осознан.
+		AI_Output(self,other,"KDF_402_Corristo_KREIS3_Info_14_06");	//Если ты сделал выбор, ты должен следовать ему не раздумывая.
+		AI_Output(self,other,"KDF_402_Corristo_KREIS3_Info_14_07");	//Познай свой путь, и ты познаешь силу своих решений.
+	};
+	b_corristolearn();
+};
+
+func void kdf_402_corristo_kreis4()
+{
+	AI_Output(other,self,"KDF_402_Corristo_KREIS4_Info_15_01");	//Я готов вступить в Четвертый Круг.
+	if(b_giveskill(other,NPC_TALENT_MAGE,4,LPCOST_TALENT_MAGE_4))
+	{
+		AI_Output(self,other,"KDF_402_Corristo_KREIS4_Info_14_02");	//Тебе уже открыты знания трех Кругов магии. Пришло время познать ее тайны.
+		AI_Output(self,other,"KDF_402_Corristo_KREIS4_Info_14_03");	//Магия руны сокрыта в камне. Камень этот получают при шлифовке магической руды.
+		AI_Output(self,other,"KDF_402_Corristo_KREIS4_Info_14_04");	//Такой руды, которую добывают в здешних шахтах. Камень наделяется магической энергией в особых храмах. Так он становится орудием нашей силы.
+		AI_Output(self,other,"KDF_402_Corristo_KREIS4_Info_14_05");	//Все руны, которые ты можешь использовать, открывают тебе доступ к знаниям и могуществу наших храмов.
+		AI_Output(self,other,"KDF_402_Corristo_KREIS4_Info_14_06");	//Теперь ты выучил все, что знаю я сам.
+		AI_Output(self,other,"KDF_402_Corristo_KREIS4_Info_14_07");	//Познай магию, и ты познаешь тайну своей силы.
+	};
+	b_corristolearn();
+};
 
 instance KDF_402_CORRISTO_EXPLAINCIRCLES(C_INFO)
 {
@@ -483,148 +562,6 @@ func void kdf_402_corristo_explaincircles_info()
 	AI_Output(self,other,"KDF_402_Corristo_EXPLAINCIRCLES_Info_14_08");	//Если ты поймешь, в чем заключается их сила, ты поймешь, какая сила скрывается в тебе самом.
 };
 
-
-instance KDF_402_CORRISTO_KREIS1(C_INFO)
-{
-	npc = kdf_402_corristo;
-	condition = kdf_402_corristo_kreis1_condition;
-	information = kdf_402_corristo_kreis1_info;
-	important = 0;
-	permanent = 1;
-	description = b_buildlearnstring(NAME_LEARNMAGE_1,LPCOST_TALENT_MAGE_1,0);
-};
-
-
-func int kdf_402_corristo_kreis1_condition()
-{
-	if((Npc_GetTalentSkill(hero,NPC_TALENT_MAGE) == 0) && Npc_KnowsInfo(hero,kdf_402_corristo_explaincircles) && (Npc_GetTrueGuild(hero) == GIL_KDF))
-	{
-		return TRUE;
-	};
-};
-
-func void kdf_402_corristo_kreis1_info()
-{
-	AI_Output(other,self,"KDF_402_Corristo_KREIS1_Info_15_01");	//Я готов приобщиться к Первому Кругу магии.
-	if(b_giveskill(other,NPC_TALENT_MAGE,1,LPCOST_TALENT_MAGE_1))
-	{
-		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_02");	//Вступление в Первый Круг магии даст тебе умение использовать магические руны.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_03");	//Каждая руна содержит в себе одно магическое заклинание.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_04");	//Используя свою магическую силу, ты сможешь прочитать это заклинание.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_05");	//Но в отличие от магических свитков, которые теряют свою силу после первого прочтения, заклинание руны можно читать снова и снова, и оно не иссякнет.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_06");	//Каждая руна является источником магической силы, которая может быть задействована в любое время.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_07");	//Как я уже сказал, при прочтении заклинания руны или свитка будет расходоваться твоя магическая сила.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_08");	//Каждый новый Круг, который ты изучишь, будет давать тебе возможность читать заклинания более сложных рун.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS1_Info_14_09");	//Используй силу рун, чтобы познать самого себя.
-		kdf_402_corristo_kreis1.permanent = 0;
-	};
-};
-
-
-instance KDF_402_CORRISTO_KREIS2(C_INFO)
-{
-	npc = kdf_402_corristo;
-	condition = kdf_402_corristo_kreis2_condition;
-	information = kdf_402_corristo_kreis2_info;
-	important = 0;
-	permanent = 1;
-	description = b_buildlearnstring(NAME_LEARNMAGE_2,LPCOST_TALENT_MAGE_2,0);
-};
-
-
-func int kdf_402_corristo_kreis2_condition()
-{
-	if((Npc_GetTalentSkill(hero,NPC_TALENT_MAGE) == 1) && (Npc_GetTrueGuild(hero) == GIL_KDF))
-	{
-		return TRUE;
-	};
-};
-
-func void kdf_402_corristo_kreis2_info()
-{
-	AI_Output(other,self,"KDF_402_Corristo_KREIS2_Info_15_01");	//Я готов обрести знания Второго Круга.
-	if(b_giveskill(other,NPC_TALENT_MAGE,2,LPCOST_TALENT_MAGE_2))
-	{
-		AI_Output(self,other,"KDF_402_Corristo_KREIS2_Info_14_02");	//Ты уже научился читать заклинания рун. Пришло время углубить твои знания.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS2_Info_14_03");	//Второй Круг магии даст тебе возможность читать сильные боевые заклинания, но самое главное, ты сможешь исцелять болезни.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS2_Info_14_04");	//Но тебе предстоит еще многому научиться, чтобы познать истинные тайны магии.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS2_Info_14_05");	//Ты уже знаешь, что можешь использовать любую руну, пока на это хватит твоей личной силы.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS2_Info_14_06");	//Но это крайний случай, и он не всегда оправдан. Тебе дана сила, которая может приносить смерть и разрушение.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS2_Info_14_07");	//Истинный маг использует ее лишь тогда, когда это действительно необходимо.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS2_Info_14_08");	//Внимательно следи за тем, что происходит вокруг, и ты сможешь познать силу рун.
-		kdf_402_corristo_kreis2.permanent = 0;
-	};
-};
-
-
-instance KDF_402_CORRISTO_KREIS3(C_INFO)
-{
-	npc = kdf_402_corristo;
-	condition = kdf_402_corristo_kreis3_condition;
-	information = kdf_402_corristo_kreis3_info;
-	important = 0;
-	permanent = 1;
-	description = b_buildlearnstring(NAME_LEARNMAGE_3,LPCOST_TALENT_MAGE_3,0);
-};
-
-
-func int kdf_402_corristo_kreis3_condition()
-{
-	if((Npc_GetTalentSkill(hero,NPC_TALENT_MAGE) == 2) && (Npc_GetTrueGuild(hero) == GIL_KDF))
-	{
-		return TRUE;
-	};
-};
-
-func void kdf_402_corristo_kreis3_info()
-{
-	AI_Output(other,self,"KDF_402_Corristo_KREIS3_Info_15_01");	//Ты можешь передать мне знания Третьего Круга магии?
-	if(b_giveskill(other,NPC_TALENT_MAGE,3,LPCOST_TALENT_MAGE_3))
-	{
-		AI_Output(self,other,"KDF_402_Corristo_KREIS3_Info_14_02");	//Третий Круг - очень важная часть пути, который проходит каждый маг. Его постижением завершается твой поиск.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS3_Info_14_03");	//Ты уже на середине пути познания магии. Ты уже умеешь читать заклинания рун.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS3_Info_14_04");	//Это знание станет основой для дальнейшего совершенствования. Подумай, прежде чем использовать ту или иную руну.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS3_Info_14_05");	//Ты можешь читать ее или не читать, но твой выбор должен быть осознан.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS3_Info_14_06");	//Если ты сделал выбор, ты должен следовать ему не раздумывая.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS3_Info_14_07");	//Познай свой путь, и ты познаешь силу своих решений.
-		kdf_402_corristo_kreis3.permanent = 0;
-	};
-};
-
-
-instance KDF_402_CORRISTO_KREIS4(C_INFO)
-{
-	npc = kdf_402_corristo;
-	condition = kdf_402_corristo_kreis4_condition;
-	information = kdf_402_corristo_kreis4_info;
-	important = 0;
-	permanent = 1;
-	description = b_buildlearnstring(NAME_LEARNMAGE_4,LPCOST_TALENT_MAGE_4,0);
-};
-
-
-func int kdf_402_corristo_kreis4_condition()
-{
-	if((Npc_GetTalentSkill(hero,NPC_TALENT_MAGE) == 3) && (Npc_GetTrueGuild(hero) == GIL_KDF))
-	{
-		return TRUE;
-	};
-};
-
-func void kdf_402_corristo_kreis4_info()
-{
-	AI_Output(other,self,"KDF_402_Corristo_KREIS4_Info_15_01");	//Я готов вступить в Четвертый Круг.
-	if(b_giveskill(other,NPC_TALENT_MAGE,4,LPCOST_TALENT_MAGE_4))
-	{
-		AI_Output(self,other,"KDF_402_Corristo_KREIS4_Info_14_02");	//Тебе уже открыты знания трех Кругов магии. Пришло время познать ее тайны.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS4_Info_14_03");	//Магия руны сокрыта в камне. Камень этот получают при шлифовке магической руды.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS4_Info_14_04");	//Такой руды, которую добывают в здешних шахтах. Камень наделяется магической энергией в особых храмах. Так он становится орудием нашей силы.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS4_Info_14_05");	//Все руны, которые ты можешь использовать, открывают тебе доступ к знаниям и могуществу наших храмов.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS4_Info_14_06");	//Теперь ты выучил все, что знаю я сам.
-		AI_Output(self,other,"KDF_402_Corristo_KREIS4_Info_14_07");	//Познай магию, и ты познаешь тайну своей силы.
-		kdf_402_corristo_kreis4.permanent = 0;
-	};
-};
 
 var int kdf_armor_h_was_bought;
 

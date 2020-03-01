@@ -131,7 +131,7 @@ instance CH_EXIT(C_INFO)
 	information = ch_exit_info;
 	important = 0;
 	permanent = 1;
-	description = "ÇÀÊÎÍ×ÈÒÜ ĞÀÇÃÎÂÎĞ";
+	description = DIALOG_ENDE;
 };
 
 

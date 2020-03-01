@@ -5,7 +5,7 @@ instance INFO_MINE_GRD_7_EXIT(C_INFO)
 	condition = info_mine_grd_7_exit_condition;
 	information = info_mine_grd_7_exit_info;
 	permanent = 1;
-	description = "ÇÀÊÎÍ×ÈÒÜ ĞÀÇÃÎÂÎĞ";
+	description = DIALOG_ENDE;
 };
 
 

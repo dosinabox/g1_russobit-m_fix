@@ -20,11 +20,9 @@ instance SFB_1000_SENYAN(NPC_DEFAULT)
 	Mdl_SetModelFatness(self,0);
 	fight_tactic = FAI_HUMAN_COWARD;
 	Npc_SetTalentSkill(self,NPC_TALENT_1H,1);
-	CreateInvItems(self,itforice,4);
-	CreateInvItems(self,itminugget,7);
+	CreateInvItems(self,itminugget,2);
 	CreateInvItem(self,itmi_stuff_plate_01);
 	EquipItem(self,itmwpickaxe);
-	CreateInvItem(self,itmw_1h_nailmace_01);
 	daily_routine = rtn_start_1000;
 };
 

@@ -5,7 +5,7 @@ instance INFO_TPL_13_EXIT(C_INFO)
 	condition = info_tpl_13_exit_condition;
 	information = info_tpl_13_exit_info;
 	permanent = 1;
-	description = "ЗАКОНЧИТЬ РАЗГОВОР";
+	description = DIALOG_ENDE;
 };
 
 
@@ -90,7 +90,7 @@ func int info_tpl_13_daslager_condition()
 
 func void info_tpl_13_daslager_info()
 {
-	AI_Output(other,self,"Info_Tpl_13_DasLager_15_00");	//А можно зайти и посмотреть храм Спящего..
+	AI_Output(other,self,"Info_Tpl_13_DasLager_15_00");	//А можно зайти и посмотреть храм Спящего?
 	AI_Output(self,other,"Info_Tpl_13_DasLager_13_01");	//Это невозможно! Неверным дорога в Храм закрыта. Ты сможешь войти туда только в том случае, если изберешь служение Спящему!
 };
 

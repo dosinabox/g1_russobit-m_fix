@@ -39,6 +39,12 @@ func void rtn_kdfritual_400()
 	ta_position(20,0,8,0,"OCC_CHAPEL_MAGE_01");
 };
 
+func void rtn_miltenleft_400()
+{
+	ta_sleep(22,0,7,0,"OCC_CHAPEL_LEFT_ROOM");
+	ta_readbook(7,0,22,0,"OCC_CHAPEL_RIGHT_ROOM");
+};
+
 func void rtn_dead_400()
 {
 	ta_stay(8,0,20,0,"OCC_CELLAR_BAN_ROOM_MAG1");

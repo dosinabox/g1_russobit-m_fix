@@ -1,8 +1,8 @@
 
 const int VALUE_MOBSIITEM = 2;
-const int VALUE_SWORDBLADE = 70;
-const int VALUE_SWORDBLADEHOT = 60;
-const int VALUE_SWORDRAWHOT = 50;
+const int VALUE_SWORDBLADE = 50;
+const int VALUE_SWORDBLADEHOT = 50;
+const int VALUE_SWORDRAWHOT = 40;
 const int VALUE_SWORDRAW = 40;
 const int VALUE_DIETRICH = 10;
 const int VALUE_SCHLüSSEL = 2;

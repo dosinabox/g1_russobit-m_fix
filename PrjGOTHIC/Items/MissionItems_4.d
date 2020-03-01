@@ -9,6 +9,8 @@ instance ITWR_GOLEMBOOK1(C_ITEM)
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	on_state[0] = usegolembook1;
+	text[5] = NAME_VALUE;
+	count[5] = value;
 };
 
 
@@ -47,6 +49,8 @@ instance ITWR_GOLEMBOOK2(C_ITEM)
 	material = MAT_LEATHER;
 	scemename = "MAP";
 	on_state[0] = usegolembook2;
+	text[5] = NAME_VALUE;
+	count[5] = value;
 };
 
 

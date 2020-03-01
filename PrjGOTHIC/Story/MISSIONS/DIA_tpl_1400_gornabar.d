@@ -108,8 +108,11 @@ func void tpl_1400_gornabar_victory_info()
 	if(Npc_GetTrueGuild(hero) == GIL_NOV)
 	{
 		AI_Output(self,other,"Tpl_1400_GorNaBar_VICTORY_Info_09_02");	//Ты смел и силен духом, и ты сумел доказать это. Нам нужны такие люди, как ты!
-		Log_CreateTopic(GE_BECOMETEMPLAR,LOG_NOTE);
-		b_logentry(GE_BECOMETEMPLAR,"Как только я приду в Болотный лагерь, мне нужно будет поговорить с Кор Ангаром. может быть, он сделает меня одним из Стражем.");
+		if(!Npc_KnowsInfo(hero,tpl_1415_torwache_templeraufnahme))
+		{
+			Log_CreateTopic(GE_BECOMETEMPLAR,LOG_NOTE);
+			b_logentry(GE_BECOMETEMPLAR,"Как только я приду в Болотный лагерь, мне нужно будет поговорить с Кор Ангаром. Может быть, он сделает меня одним из Стражей.");
+		};
 	};
 };
 

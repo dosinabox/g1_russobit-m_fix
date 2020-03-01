@@ -62,3 +62,9 @@ instance YMINECRAWLER(MST_DEFAULT_MINECRAWLER)
 	Npc_SetToFistMode(self);
 };
 
+instance MINECRAWLER_OMGATE(MST_DEFAULT_MINECRAWLER)
+{
+	set_minecrawler_visuals();
+	Npc_SetToFistMode(self);
+	start_aistate = zs_mm_minecrawler_omgate;
+};

@@ -188,10 +188,7 @@ func void tpl_1438_templer_teachzangen_info()
 		AI_Output(other,self,"Tpl_1438_Templer_TEACHZANGEN_Info_15_02");	//Это, наверное, очень опасно.
 		AI_Output(self,other,"Tpl_1438_Templer_TEACHZANGEN_Info_13_03");	//А ты как думал. Ты видел когда-нибудь Коргура Трехпалого, всем известного охотника на ползунов? А, погоди, это же было еще до того, как ты появился здесь. Ладно, тогда продолжим...
 		AI_Output(self,other,"Tpl_1438_Templer_TEACHZANGEN_Info_13_04");	//Нужно сделать надрез вокруг слюнных желез, оставляя довольно большой промежуток. Теперь ты можешь вынимать их вместе с челюстями. Если будешь делать, как я сказал, проблем не будет.
-		KNOWS_GETMCMANDIBLES = TRUE;
-		Log_CreateTopic(GE_ANIMALTROPHIES,LOG_NOTE);
-		b_logentry(GE_ANIMALTROPHIES,"Навык добычи челюстей ползунов.");
-		PrintScreen("Навык: добыча челюстей ползунов",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+		b_learn_trophies_mandibles();
 	}
 	else
 	{

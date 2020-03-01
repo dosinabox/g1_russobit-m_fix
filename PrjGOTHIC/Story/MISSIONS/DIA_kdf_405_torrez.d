@@ -60,7 +60,7 @@ instance DIA_TORREZ_HELLO(C_INFO)
 
 func int dia_torrez_hello_condition()
 {
-	if(Npc_GetTrueGuild(hero) != GIL_KDF && !Npc_KnowsInfo(hero,dia_milten_letter))
+	if(Npc_GetTrueGuild(hero) != GIL_KDF && !Npc_KnowsInfo(hero,dia_milten_letter) && (SATURAS_BRINGFOCI == FALSE))
 	{
 		return 1;
 	};
@@ -104,8 +104,8 @@ func void dia_torrez_belohnung_info()
 	AI_Output(self,other,"DIA_Torrez_Belohnung_04_01");	//Ты оказал нам неоценимую услугу, и, конечно, можешь получить за нее награду. Выбирай.
 	if(PYROCAR_MESSENGER == LOG_RUNNING)
 	{
-	    b_logentry(KDFLETTER,"Я получил награду у Торреза. Мое задание выполнено.");
-	    Log_SetTopicStatus(KDFLETTER,LOG_SUCCESS);
+		b_logentry(KDFLETTER,"Я получил награду у Торреза. Мое задание выполнено.");
+		Log_SetTopicStatus(KDFLETTER,LOG_SUCCESS);
 		PYROCAR_MESSENGER = LOG_SUCCESS;
 	};
 	Info_ClearChoices(dia_torrez_belohnung);
@@ -170,6 +170,10 @@ func int dia_torrez_brieftausch_condition()
 	if(Npc_KnowsInfo(hero,dia_milten_comesback) && (MILTEN_HASLETTER == FALSE))
 	{
 		return 1;
+	}
+	else if((SATURAS_BRINGFOCI != FALSE) && (Npc_HasItems(hero,itwr_fire_letter_01) || Npc_HasItems(hero,itwr_fire_letter_02)))
+	{
+		return 1;
 	};
 };
 
@@ -177,8 +181,11 @@ func void dia_torrez_brieftausch_info()
 {
 	var C_NPC corristo;
 	AI_Output(other,self,"DIA_Torrez_BriefTausch_15_00");	//У меня есть для тебя письмо. Но сначала я хочу получить за него награду!
-	AI_Output(self,other,"DIA_Torrez_BriefTausch_04_01");	//Почему бы тебе не поговорить с Мильтеном?
-	AI_Output(other,self,"DIA_Torrez_BriefTausch_15_02");	//Я уже поговорил с ним.
+	if(SATURAS_BRINGFOCI == FALSE)
+	{
+		AI_Output(self,other,"DIA_Torrez_BriefTausch_04_01");	//Почему бы тебе не поговорить с Мильтеном?
+		AI_Output(other,self,"DIA_Torrez_BriefTausch_15_02");	//Я уже поговорил с ним.
+	};
 	AI_Output(self,other,"DIA_Torrez_BriefTausch_04_03");	//Понятно. У меня есть для тебя награда. А теперь покажи мне письмо!
 	AI_Output(other,self,"DIA_Torrez_BriefTausch_15_04");	//Вот оно.
 	if(Npc_HasItems(other,itwr_fire_letter_01) >= 1)
@@ -206,8 +213,8 @@ func void dia_torrez_brieftausch_info()
 	CreateInvItems(corristo,itwr_fire_letter_02,1);
 	if(PYROCAR_MESSENGER == LOG_RUNNING)
 	{
-	    b_logentry(KDFLETTER,"Я доставил письмо магам и получил награду у Торреза.");
-	    Log_SetTopicStatus(KDFLETTER,LOG_SUCCESS);
+		b_logentry(KDFLETTER,"Я доставил письмо магам и получил награду у Торреза.");
+		Log_SetTopicStatus(KDFLETTER,LOG_SUCCESS);
 		PYROCAR_MESSENGER = LOG_SUCCESS;
 	};
 	if(Npc_HasItems(other,alchemybook))
@@ -232,7 +239,7 @@ instance DIA_TORREZ_PERM(C_INFO)
 
 func int dia_torrez_perm_condition()
 {
-    if(Npc_GetTrueGuild(hero) != GIL_KDF)
+	if(Npc_GetTrueGuild(hero) != GIL_KDF)
 	{
 		return TRUE;
 	};

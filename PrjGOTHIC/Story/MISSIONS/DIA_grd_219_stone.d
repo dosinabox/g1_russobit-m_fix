@@ -84,7 +84,7 @@ func void grd_219_stone_getstuff_info()
 	CreateInvItems(self,itmw_1h_sword_03,1);
 	b_giveinvitems(self,other,grd_armor_l,1);
 	b_giveinvitems(self,other,itmw_1h_sword_03,1);
-	AI_EquipArmor(hero,grd_armor_l);
+	//AI_EquipArmor(hero,grd_armor_l);
 	//AI_EquipBestMeleeWeapon(hero);
 	b_logentry(GE_BECOMEGUARD,"я получил у кузнеца —тоуна мой первый доспех стражника. я могу купить у него и более прочные доспехи, если у мен€ будет достаточно руды.");
 	AI_StopProcessInfos(self);
@@ -125,14 +125,14 @@ func void grd_219_stone_betterarmor_info()
 	};
 	if(STONE_ARMOR_M_WAS_BOUGHT != 1)
 	{
-		Info_AddChoice(grd_219_stone_betterarmor,b_buildbuyarmorstring("ƒоспех стражника, защита: 55/10/35/0",VALUE_GRD_ARMOR_M),grd_219_stone_betterarmor_m);
+		Info_AddChoice(grd_219_stone_betterarmor,b_buildbuyarmorstring("—редний доспех стражника, защита: 55/10/35/0",VALUE_GRD_ARMOR_M),grd_219_stone_betterarmor_m);
 	};
 };
 
 func void grd_219_stone_betterarmor_m()
 {
 	AI_Output(hero,self,"GRD_219_Stone_BETTERARMOR_Info_M_15_01");	//ћне нужны обычные доспехи стражника.
-	if(KAPITEL < 3)
+	if(RAVEN_SPYSECT != LOG_SUCCESS)
 	{
 		AI_Output(self,hero,"GRD_219_Stone_BETTERARMOR_Info_M_06_02");	//“орус сказал, что сперва послужишь немного, а потом уже и получишь новые доспехи!
 	}
@@ -144,10 +144,10 @@ func void grd_219_stone_betterarmor_m()
 	{
 		b_printtrademsg1("ќтдано руды: 1650");
 		AI_Output(self,hero,"GRD_219_Stone_BETTERARMOR_Info_M_06_04");	//’орошо, вот держи. —пециально дл€ теб€, новенькие, только не позвол€й наемникам их дыр€вить!
-		b_printtrademsg2("ѕолучен доспех стражника.");
+		b_printtrademsg2("ѕолучен средний доспех стражника.");
 		b_giveinvitems(hero,self,itminugget,VALUE_GRD_ARMOR_M);
 		b_giveinvitems(self,hero,grd_armor_m,1);
-		AI_EquipArmor(hero,grd_armor_m);
+//		AI_EquipArmor(hero,grd_armor_m);
 		STONE_ARMOR_M_WAS_BOUGHT = 1;
 	};
 	Info_ClearChoices(grd_219_stone_betterarmor);
@@ -169,7 +169,7 @@ func void grd_219_stone_betterarmor_h()
 			b_printtrademsg2("ѕолучен т€желый доспех стражника.");
 			b_giveinvitems(hero,self,itminugget,VALUE_GRD_ARMOR_H);
 			b_giveinvitems(self,hero,grd_armor_h,1);
-			AI_EquipArmor(hero,grd_armor_h);
+//			AI_EquipArmor(hero,grd_armor_h);
 			STONE_ARMOR_H_WAS_BOUGHT = 1;
 		};
 	}

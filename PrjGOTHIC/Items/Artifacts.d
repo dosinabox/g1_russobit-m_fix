@@ -25,7 +25,7 @@ instance ITARSCROLLLIGHT(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 5;
 	visual = "ItAr_Scroll_32_EG.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_LIGHT;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_LIGHT;
@@ -64,7 +64,7 @@ instance ITARSCROLLFIREBOLT(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 30;
 	visual = "ItAr_Scroll_35.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_FIREBOLT;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_FIREBOLT;
@@ -106,7 +106,7 @@ instance ITARSCROLLFIREBALL(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 70;
 	visual = "ItAr_Scroll_27.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_FIREBALL;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_FIREBALL;
@@ -149,7 +149,7 @@ instance ITARSCROLLFIRESTORM(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 110;
 	visual = "ItAr_Scroll_36.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_FIRESTORM;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_FIRESTORM;
@@ -191,7 +191,7 @@ instance ITARSCROLLFIRERAIN(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 130;
 	visual = "ItAr_Scroll_28.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_FIRERAIN;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_FIRERAIN;
@@ -223,7 +223,7 @@ instance ITARSCROLLTELEPORT1(C_ITEM)
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
 	visual = "ItAr_Scroll_38.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_TELEPORT1;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_TELEPORT;
@@ -251,7 +251,7 @@ instance ITARSCROLLTELEPORT2(C_ITEM)
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
 	visual = "ItAr_Scroll_40.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_TELEPORT2;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_TELEPORT;
@@ -279,7 +279,7 @@ instance ITARSCROLLTELEPORT3(C_ITEM)
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
 	visual = "ItAr_Scroll_39.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_TELEPORT3;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_TELEPORT;
@@ -294,7 +294,7 @@ instance ITARSCROLLTELEPORT4(C_ITEM)
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
 	visual = "ItAr_Scroll_43_EG.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_TELEPORT4;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_TELEPORT;
@@ -322,7 +322,7 @@ instance ITARSCROLLTELEPORT5(C_ITEM)
 	mainflag = ITEM_KAT_RUNE;
 	flags = ITEM_MULTI;
 	visual = "ItAr_Scroll_37.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_TELEPORT5;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_TELEPORT;
@@ -344,7 +344,7 @@ instance ITARRUNE_1_2_HEAL(C_ITEM)
 	description = "Лечение";
 	text[0] = NAME_MAG_CIRCLE;
 	count[0] = mag_circle;
-	text[1] = "Лечение за ману:";
+	text[1] = NAME_HEALINGPERMANA;
 	count[1] = SPL_HEALING_HP_PER_MP;
 	text[4] = NAME_SPELL_INVEST;
 	text[5] = NAME_VALUE;
@@ -358,12 +358,12 @@ instance ITARSCROLLHEAL(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 50;
 	visual = "ItAr_Scroll_33_EG.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_HEAL;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_HEALING_HP_PER_MP;
 	description = "Лечение";
-	text[1] = "Лечение за ману:";
+	text[1] = NAME_HEALINGPERMANA;
 	count[1] = SPL_HEALING_HP_PER_MP;
 	text[2] = NAME_MANA_NEEDED;
 	count[2] = SPL_HEALING_HP_PER_MP;
@@ -379,7 +379,7 @@ instance ITARSCROLLTRFBLOODFLY(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 300;
 	visual = "ITAR_SCROLL_02_EG.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_TRF_BLOODFLY;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_TRF_BLOODFLY;
@@ -397,7 +397,7 @@ instance ITARSCROLLTRFCRAWLER(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 300;
 	visual = "ItAr_Scroll_04.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_TRF_CRAWLER;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_TRF_CRAWLER;
@@ -415,7 +415,7 @@ instance ITARSCROLLTRFLURKER(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 300;
 	visual = "ItAr_Scroll_02.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_TRF_LURKER;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_TRF_LURKER;
@@ -433,7 +433,7 @@ instance ITARSCROLLTRFMEATBUG(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 300;
 	visual = "ItAr_Scroll_03.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_TRF_MEATBUG;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_TRF_MEATBUG;
@@ -451,7 +451,7 @@ instance ITARSCROLLTRFMOLERAT(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 300;
 	visual = "ItAr_Scroll_05.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_TRF_MOLERAT;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_TRF_MOLERAT;
@@ -469,7 +469,7 @@ instance ITARSCROLLTRFORCDOG(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 300;
 	visual = "ItAr_Scroll_11.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_TRF_ORCDOG;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_TRF_ORCDOG;
@@ -487,7 +487,7 @@ instance ITARSCROLLTRFSCAVENGER(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 300;
 	visual = "ItAr_Scroll_07.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_TRF_SCAVENGER;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_TRF_SCAVENGER;
@@ -505,7 +505,7 @@ instance ITARSCROLLTRFSHADOWBEAST(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 300;
 	visual = "ItAr_Scroll_06.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_TRF_SHADOWBEAST;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_TRF_SHADOWBEAST;
@@ -523,7 +523,7 @@ instance ITARSCROLLTRFSNAPPER(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 300;
 	visual = "ItAr_Scroll_30_EG.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_TRF_SNAPPER;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_TRF_SNAPPER;
@@ -541,7 +541,7 @@ instance ITARSCROLLTRFWARAN(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 300;
 	visual = "ItAr_Scroll_10.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_TRF_WARAN;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_TRF_WARAN;
@@ -559,7 +559,7 @@ instance ITARSCROLLTRFWOLF(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 300;
 	visual = "ItAr_Scroll_09.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_TRF_WOLF;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_TRF_WOLF;
@@ -597,7 +597,7 @@ instance ITARSCROLLCHAINLIGHTNING(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 70;
 	visual = "ItAr_Scroll_31.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_CHAINLIGHTNING;
 	description = "Молния";
 	text[1] = NAME_DAMAGEPERSEC;
@@ -635,7 +635,7 @@ instance ITARSCROLLTHUNDERBOLT(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 50;
 	visual = "ItAr_Scroll_20.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_THUNDERBOLT;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_THUNDERBOLT;
@@ -677,7 +677,7 @@ instance ITARSCROLLTHUNDERBALL(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 90;
 	visual = "ItAr_Scroll_01.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_THUNDERBALL;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_THUNDERBALL;
@@ -719,7 +719,7 @@ instance ITARSCROLLICECUBE(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 70;
 	visual = "ItAr_Scroll_25.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_ICECUBE;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_ICECUBE;
@@ -760,7 +760,7 @@ instance ITARSCROLLICEWAVE(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 110;
 	visual = "ItAr_Scroll_30.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_ICEWAVE;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_ICEWAVE;
@@ -780,7 +780,7 @@ instance ITARSCROLLSUMMONDEMON(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 550;
 	visual = "ItAr_Scroll_18.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_SUMMONDEMON;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_SUMMONDEMON;
@@ -798,7 +798,7 @@ instance ITARSCROLLSUMMONSKELETONS(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 350;
 	visual = "ItAr_Scroll_23.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_SUMMONSKELETON;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_SUMMONSKELETON;
@@ -816,7 +816,7 @@ instance ITARSCROLLSUMMONGOLEM(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 450;
 	visual = "ITAR_SCROLL_23_EG.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_SUMMONGOLEM;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_SUMMONGOLEM;
@@ -834,7 +834,7 @@ instance ITARSCROLLARMYOFDARKNESS(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 666;
 	visual = "ItAr_Scroll_13_EG.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_ARMYOFDARKNESS;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_ARMYOFDARKNESS;
@@ -892,7 +892,7 @@ instance ITARSCROLLDESTROYUNDEAD(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 110;
 	visual = "ItAr_Scroll_15_EG.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_DESTROYUNDEAD;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_DESTROYUNDEAD;
@@ -934,7 +934,7 @@ instance ITARSCROLLWINDFIST(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 50;
 	visual = "ItAr_Scroll_12.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_WINDFIST;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_WINDFIST;
@@ -977,7 +977,7 @@ instance ITARSCROLLSTORMFIST(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 90;
 	visual = "ItAr_Scroll_17.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_STORMFIST;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_STORMFIST;
@@ -1018,10 +1018,10 @@ instance ITARSCROLLTELEKINESIS(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 70;
 	visual = "ItAr_Scroll_13.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_TELEKINESIS;
 	cond_atr[2] = ATR_MANA_MAX;
-	cond_value[2] = 10;
+	cond_value[2] = 5;
 	description = "Телекинез";
 	text[1] = NAME_MANAPERSEC;
 	count[1] = 1;
@@ -1058,7 +1058,7 @@ instance ITARSCROLLCHARM(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 70;
 	visual = "ItAr_Scroll_10_EG.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_CHARM;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_CHARM;
@@ -1095,7 +1095,7 @@ instance ITARSCROLLSLEEP(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 50;
 	visual = "ItAr_Scroll_09_EG.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_SLEEP;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_SLEEP;
@@ -1133,7 +1133,7 @@ instance ITARSCROLLPYROKINESIS(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 70;
 	visual = "ItAr_Scroll_29_EG.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_PYROKINESIS;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = 10;
@@ -1171,7 +1171,7 @@ instance ITARSCROLLCONTROL(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 90;
 	visual = "ItAr_Scroll_08.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_CONTROL;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = 5;
@@ -1189,7 +1189,7 @@ instance ITARSCROLLFEAR(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 250;
 	visual = "ItAr_Scroll_11_EG.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_FEAR;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_FEAR;
@@ -1207,7 +1207,7 @@ instance ITARSCROLLBERZERK(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 200;
 	visual = "ItAr_Scroll_22.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_BERZERK;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_BERZERK;
@@ -1246,7 +1246,7 @@ instance ITARSCROLLSHRINK(C_ITEM)
 	flags = ITEM_MULTI;
 	value = 1000;
 	visual = "ItAr_Scroll_15.3DS";
-	material = MAT_STONE;
+	material = MAT_LEATHER;
 	spell = SPL_SHRINK;
 	cond_atr[2] = ATR_MANA_MAX;
 	cond_value[2] = SPL_SENDCAST_SHRINK;

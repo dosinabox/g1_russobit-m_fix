@@ -32,7 +32,9 @@ instance STT_304_SCHATTEN(NPC_DEFAULT)
 
 func void rtn_start_304()
 {
-	ta_sleep(0,0,8,0,"OCR_HUT_6");
-	ta_smalltalk(8,0,24,0,"OCR_TO_HUT_6");
+	ta_sleep(0,0,7,0,"OCR_HUT_6");
+	ta_smoke(7,0,9,0,"OCR_HUT_6");
+	ta_guard(9,0,10,0,"OCR_AT_HUT_3");
+	ta_smalltalk(10,0,0,0,"OCR_TO_HUT_6");
 };
 

@@ -41,6 +41,12 @@ func void rtn_kdfritual_405()
 	ta_position(20,0,8,0,"OCC_CHAPEL_MAGE_02");
 };
 
+func void rtn_miltenleft_405()
+{
+	ta_sleep(0,0,8,0,"OCC_CHAPEL_LEFT_ROOM");
+	ta_stand(8,0,0,0,"OCC_CHAPEL_ENTRANCE");
+};
+
 func void rtn_dead_405()
 {
 	ta_stay(8,0,20,0,"WP_INTRO01");

@@ -7,7 +7,7 @@ instance SLD_752_OKYL(NPC_DEFAULT)
 	level = 18;
 	voice = 11;
 	id = 752;
-	attribute[ATR_STRENGTH] = 90;
+	attribute[ATR_STRENGTH] = 100;
 	attribute[ATR_DEXTERITY] = 70;
 	attribute[ATR_MANA_MAX] = 0;
 	attribute[ATR_MANA] = 0;

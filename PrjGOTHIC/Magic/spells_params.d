@@ -425,7 +425,7 @@ instance SPELL_STORMFIST(C_SPELL_PROTO)
 
 instance SPELL_TELEKINESIS(C_SPELL_PROTO)
 {
-	time_per_mana = 5000;
+	time_per_mana = 1500;
 	spelltype = SPELL_NEUTRAL;
 	targetcollectalgo = TARGET_COLLECT_FOCUS;
 	canturnduringinvest = FALSE;

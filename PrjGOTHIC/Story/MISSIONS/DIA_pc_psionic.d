@@ -644,6 +644,7 @@ func int pc_psionic_send_condition()
 
 func void pc_psionic_send_info()
 {
+	var C_NPC yberion;
 	AI_GotoNpc(self,hero);
 	if(Npc_KnowsInfo(hero,dia_lester_hallo))
 	{
@@ -655,8 +656,15 @@ func void pc_psionic_send_info()
 	AI_Output(self,other,"PC_Psionic_SEND_Info_05_04");	//Они хотят призвать Спящего. Но им нужно что-то, что поможет объединить их духовные силы.
 	//AI_Output(other,self,"PC_Psionic_SEND_Info_15_05");	//Да?
 	AI_Output(self,other,"PC_Psionic_SEND_Info_05_06");	//Для этого нужен магический артефакт, который они называют юнитором.
-	Npc_ExchangeRoutine(pc_psionic,"StartCH2");
+	AI_Output(other,self,"PC_Psionic_BROTHERHOOD_TODO_15_01");	//А я что могу сделать?
+	AI_Output(self,other,"PC_Psionic_BROTHERHOOD_TODO_05_02");	//Поговори с Юберионом. Он наш Учитель и самый могущественный из нас. У тебя будет возможность заслужить его доверие.
+	Npc_ExchangeRoutine(self,"StartCH2");
 	Npc_ExchangeRoutine(gur_1204_baalnamib,"StartCH2");
+	yberion = Hlp_GetNpc(gur_1200_yberion);
+	yberion.aivar[AIV_FINDABLE] = TRUE;
+	Log_CreateTopic(CH2_FOCUS,LOG_MISSION);
+	Log_SetTopicStatus(CH2_FOCUS,LOG_RUNNING);
+	b_logentry(CH2_FOCUS,"Послушник Лестер рассказал мне, что Юбериону нужен юнитор. Учителя я смогу найти в храме в горе.");
 	b_kapitelwechsel(2);
 };
 
@@ -668,7 +676,7 @@ instance PC_PSIONIC_BROTHERHOOD_TODO(C_INFO)
 	information = pc_psionic_brotherhood_todo_info;
 	important = 0;
 	permanent = 0;
-	description = "А я что могу сделать?";
+	description = "Где я могу его найти?";
 };
 
 
@@ -682,16 +690,8 @@ func int pc_psionic_brotherhood_todo_condition()
 
 func void pc_psionic_brotherhood_todo_info()
 {
-	var C_NPC yberion;
-	AI_Output(other,self,"PC_Psionic_BROTHERHOOD_TODO_15_01");	//А я что могу сделать?
-	AI_Output(self,other,"PC_Psionic_BROTHERHOOD_TODO_05_02");	//Поговори с Юберионом. Он наш Учитель и самый могущественный из нас. У тебя будет возможность заслужить его доверие.
 	AI_Output(other,self,"PC_Psionic_BROTHERHOOD_TODO_15_03");	//Где я могу его найти?
 	AI_Output(self,other,"PC_Psionic_BROTHERHOOD_TODO_05_04");	//Иди к Храму. Он редко покидает его. Наверное, в этом холодном здании он чувствует себя ближе к Спящему.
-	Log_CreateTopic(CH2_FOCUS,LOG_MISSION);
-	Log_SetTopicStatus(CH2_FOCUS,LOG_RUNNING);
-	b_logentry(CH2_FOCUS,"Послушник Лестер рассказал мне, что Юбериону нужен юнитор. Учителя я смогу найти в храме в горе.");
-	yberion = Hlp_GetNpc(gur_1200_yberion);
-	yberion.aivar[AIV_FINDABLE] = TRUE;
 };
 
 

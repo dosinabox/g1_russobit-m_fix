@@ -17,6 +17,14 @@ func void b_corangarlearn()
 		Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),gur_1202_corangar_teach_dex_5);
 		Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),gur_1202_corangar_teach_dex_1);
 	};
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_2H) < 1)
+	{
+		Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARN2H_1,LPCOST_TALENT_2H_1,0),gur_1202_corangar_zweihand1);
+	}
+	else if(Npc_GetTalentSkill(hero,NPC_TALENT_2H) == 1)
+	{
+		Info_AddChoice(gur_1202_corangar_teach,b_buildlearnstring(NAME_LEARN2H_2,LPCOST_TALENT_2H_2,0),gur_1202_corangar_zweihand2);
+	};
 };
 
 instance DIA_GUR_1202_CORANGAR_EXIT(C_INFO)
@@ -91,7 +99,7 @@ func void dia_corangar_latertrainer2_info()
 {
 	AI_Output(other,self,"GUR_1202_CorAngar_LaterTrainer_15_00");	//Ты можешь научить меня чему-нибудь?
 	AI_Output(self,other,"GUR_1202_CorAngar_LaterTrainer_08_01");	//Хочешь стать хорошим воином? Да, тебе действительно нужно найти опытного учителя.
-	AI_Output(self,other,"Sld_700_Lee_Teach_08_01");	//Я могу помочь тебе стать более ловким и сильным.
+	AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND1_Info_08_02");	//Чтобы овладеть техникой боя с двуручным мечом, нужна определенная сила и ловкость.
 	AI_Output(self,other,"GUR_1202_CorAngar_Teach_08_01");	//Ловкость и сила - очень важные характеристики воина.
 	Log_CreateTopic(GE_TEACHERPSI,LOG_NOTE);
 	b_logentry(GE_TEACHERPSI,"Кор Ангар может помочь мне увеличить силу и ловкость. Я смогу найти его на тренировочной площадке Стражей, на втором уровне.");
@@ -249,6 +257,39 @@ func void gur_1202_corangar_teach_dex_5()
 	b_corangarlearn();
 };
 
+func void gur_1202_corangar_zweihand1()
+{
+	AI_Output(other,self,"GUR_1202_CorAngar_ZWEIHAND1_Info_15_01");	//Научи меня вести бой двуручным мечом.
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_1H) < 2)
+	{
+		AI_Output(self,other,"SVM_8_NoLearnYouAlreadyKnow");	//Сначала ты должен изучить основы и только потом переходить к более сложным вещам.
+		PrintScreen("Требуется мастерство одноручного оружия!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	}
+	else if(b_giveskill(other,NPC_TALENT_2H,1,LPCOST_TALENT_2H_1))
+	{
+		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND1_Info_08_03");	//Ты справишься с таким оружием только тогда, когда сможешь управлять не только своим телом, но и духом.
+		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND1_Info_08_04");	//Пройдя эту ступень подготовки, закалив свое тело и дух, ты сможешь справиться с мечом.
+		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND1_Info_08_05");	//Ключ к этому - умение сосредоточиться. В нем тело и дух становятся единым целым.
+	};
+	b_corangarlearn();
+};
+
+func void gur_1202_corangar_zweihand2()
+{
+	AI_Output(other,self,"GUR_1202_CorAngar_ZWEIHAND2_Info_15_01");	//Я хочу научиться еще лучше обращаться с двуручным мечом.
+	if(b_giveskill(other,NPC_TALENT_2H,2,LPCOST_TALENT_2H_2))
+	{
+		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND2_Info_08_02");	//Ты уже освоил основы владения этим оружием. Теперь я научу тебя приемам, достойным мастера.
+		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND2_Info_08_03");	//Сила твоего духа поможет тебе предугадывать движения противника до того, как он нанесет удар.
+		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND2_Info_08_04");	//Если ты знаешь тактику противника, то победа уже наполовину в твоих руках.
+		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND2_Info_08_05");	//Скорость - твое преимущество. Старайся, чтобы движения были плавными и неожиданными, а удары - точными и сильными.
+		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND2_Info_08_06");	//Учись не обращать внимания на боль. Исход битвы будет зависеть от твоей силы воли.
+		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND2_Info_08_07");	//Сохраняй спокойствие духа. Ты сможешь победить противника, если будешь идти в бой спокойным и сосредоточенным.
+		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND2_Info_08_08");	//Используй свою силу осторожно и помни: тебя легче убить, если ты сам стал причиной поединка.
+	};
+	b_corangarlearn();
+};
+
 instance GUR_1202_CORANGAR_WANNABETPL(C_INFO)
 {
 	npc = gur_1202_corangar;
@@ -263,7 +304,7 @@ instance GUR_1202_CORANGAR_WANNABETPL(C_INFO)
 
 func int gur_1202_corangar_wannabetpl_condition()
 {
-	if((CORKALOM_BRINGMCQBALLS == LOG_SUCCESS) && (Npc_GetTrueGuild(hero) == GIL_NOV))
+	if((Npc_KnowsInfo(hero,tpl_1400_gornabar_victory) || Npc_KnowsInfo(hero,tpl_1415_torwache_templeraufnahme) || (CORKALOM_BRINGMCQBALLS == LOG_SUCCESS)) && (Npc_GetTrueGuild(hero) == GIL_NOV))
 	{
 		return TRUE;
 	};
@@ -272,7 +313,11 @@ func int gur_1202_corangar_wannabetpl_condition()
 func void gur_1202_corangar_wannabetpl_info()
 {
 	AI_Output(other,self,"GUR_1202_CorAngar_WANNABETPL_Info_15_01");	//Я хочу стать Стражем!
-	if(hero.level < 10)
+	if(CORKALOM_BRINGMCQBALLS != LOG_SUCCESS)
+	{
+		AI_Output(self,other,"GUR_1202_CorAngar_WANNABETPL_Info_08_02");	//Ты еще к этому не готов. Я смогу принять только тогда, когда у тебя будет больше опыта.
+	}
+	else if(hero.level < 10)
 	{
 		AI_Output(self,other,"GUR_1202_CorAngar_WANNABETPL_Info_08_02");	//Ты еще к этому не готов. Я смогу принять только тогда, когда у тебя будет больше опыта.
 		b_printguildcondition(10);
@@ -291,87 +336,6 @@ func void gur_1202_corangar_wannabetpl_info()
 		b_logentry(GE_BECOMETEMPLAR,"Сегодня Кор Ангар назначил меня Стражем. Я смогу взять свой новый доспех у Гор На Тофа. Обычно он стоит на тренировочной площадке.");
 	};
 };
-
-
-instance GUR_1202_CORANGAR_ZWEIHAND1(C_INFO)
-{
-	npc = gur_1202_corangar;
-	nr = 800;
-	condition = gur_1202_corangar_zweihand1_condition;
-	information = gur_1202_corangar_zweihand1_info;
-	important = 0;
-	permanent = 1;
-	description = b_buildlearnstring(NAME_LEARN2H_1,LPCOST_TALENT_2H_1,0);
-};
-
-
-func int gur_1202_corangar_zweihand1_condition()
-{
-	if((Npc_GetTalentSkill(hero,NPC_TALENT_2H) < 1) && (Npc_GetTrueGuild(hero) == GIL_TPL) && (Npc_KnowsInfo(hero,dia_corangar_latertrainer2)))
-	{
-		return TRUE;
-	};
-};
-
-func void gur_1202_corangar_zweihand1_info()
-{
-	AI_Output(other,self,"GUR_1202_CorAngar_ZWEIHAND1_Info_15_01");	//Научи меня вести бой двуручным мечом.
-	if(Npc_GetTalentSkill(hero,NPC_TALENT_1H) < 2)
-	{
-		AI_Output(self,other,"SVM_8_NoLearnYouAlreadyKnow");	//Сначала ты должен изучить основы и только потом переходить к более сложным вещам.
-		PrintScreen("Требуется мастерство одноручного оружия!",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
-	}
-	else if(b_giveskill(other,NPC_TALENT_2H,1,LPCOST_TALENT_2H_1))
-	{
-		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND1_Info_08_02");	//Чтобы овладеть техникой боя с двуручным мечом, нужна определенная сила и ловкость.
-		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND1_Info_08_03");	//Ты справишься с таким оружием только тогда, когда сможешь управлять не только своим телом, но и духом.
-		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND1_Info_08_04");	//Пройдя эту ступень подготовки, закалив свое тело и дух, ты сможешь справиться с мечом.
-		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND1_Info_08_05");	//Ключ к этому - умение сосредоточиться. В нем тело и дух становятся единым целым.
-		gur_1202_corangar_zweihand1.permanent = 0;
-		AI_StopProcessInfos(self);
-		b_practicecombat("PSI_PATH_6_7");
-	};
-};
-
-
-instance GUR_1202_CORANGAR_ZWEIHAND2(C_INFO)
-{
-	npc = gur_1202_corangar;
-	nr = 801;
-	condition = gur_1202_corangar_zweihand2_condition;
-	information = gur_1202_corangar_zweihand2_info;
-	important = 0;
-	permanent = 1;
-	description = b_buildlearnstring(NAME_LEARN2H_2,LPCOST_TALENT_2H_2,0);
-};
-
-
-func int gur_1202_corangar_zweihand2_condition()
-{
-	if((Npc_GetTalentSkill(hero,NPC_TALENT_2H) == 1) && (Npc_GetTrueGuild(hero) == GIL_TPL))
-	{
-		return TRUE;
-	};
-};
-
-func void gur_1202_corangar_zweihand2_info()
-{
-	AI_Output(other,self,"GUR_1202_CorAngar_ZWEIHAND2_Info_15_01");	//Я хочу научиться еще лучше обращаться с двуручным мечом.
-	if(b_giveskill(other,NPC_TALENT_2H,2,LPCOST_TALENT_2H_2))
-	{
-		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND2_Info_08_02");	//Ты уже освоил основы владения этим оружием. Теперь я научу тебя приемам, достойным мастера.
-		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND2_Info_08_03");	//Сила твоего духа поможет тебе предугадывать движения противника до того, как он нанесет удар.
-		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND2_Info_08_04");	//Если ты знаешь тактику противника, то победа уже наполовину в твоих руках.
-		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND2_Info_08_05");	//Скорость - твое преимущество. Старайся, чтобы движения были плавными и неожиданными, а удары - точными и сильными.
-		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND2_Info_08_06");	//Учись не обращать внимания на боль. Исход битвы будет зависеть от твоей силы воли.
-		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND2_Info_08_07");	//Сохраняй спокойствие духа. Ты сможешь победить противника, если будешь идти в бой спокойным и сосредоточенным.
-		AI_Output(self,other,"GUR_1202_CorAngar_ZWEIHAND2_Info_08_08");	//Используй свою силу осторожно и помни: тебя легче убить, если ты сам стал причиной поединка.
-		gur_1202_corangar_zweihand2.permanent = 0;
-		AI_StopProcessInfos(self);
-		b_practicecombat("PSI_PATH_6_7");
-	};
-};
-
 
 instance GUR_1202_CORANGAR_SENDS(C_INFO)
 {
@@ -776,6 +740,7 @@ func void info_corangar_teleport_info()
 instance CORANGAR_STEALKEY(C_INFO)
 {
 	npc = gur_1202_corangar;
+	nr = 990;
 	condition = corangar_stealkey_condition;
 	information = corangar_stealkey_info;
 	important = 0;

@@ -29,6 +29,6 @@ instance NOV_1372_DUSTY(NPC_DEFAULT)
 func void rtn_start_1372()
 {
 	ta_sleep(23,0,7,45,"PSI_25_HUT_IN");
-	ta_listen(7,45,23,0,"PSI_PLATFORM_1");
+	ta_listen(7,45,23,0,"PSI_12_HUT_EX_TEACH");
 };
 

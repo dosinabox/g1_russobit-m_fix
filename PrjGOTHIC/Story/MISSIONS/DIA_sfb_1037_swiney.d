@@ -83,7 +83,7 @@ func void info_swiney_schuerfer_ja()
 	AI_Output(self,other,"Info_Swiney_Schuerfer_Ja_09_01");	//Хорошо! Тогда ты сам знаешь, что нужно делать. Вот тебе рабочая одежда. Кирку тебе придется найти самому. Удачи!
 	b_printtrademsg1("Получена одежда рудокопа.");
 	CreateInvItem(hero,sfb_armor_l);
-	AI_EquipArmor(hero,sfb_armor_l);
+//	AI_EquipArmor(hero,sfb_armor_l);
 	Info_ClearChoices(info_swiney_schuerfer);
 };
 
@@ -96,7 +96,7 @@ func void info_swiney_schuerfer_nein()
 	AI_Output(self,other,"Info_Swiney_Schuerfer_Nein_09_03");	//Где-то неподалеку я видел одну старую кирку.
 	AI_Output(self,other,"Info_Swiney_Schuerfer_Nein_09_04");	//Правда ты с ней много не наработаешь, ну, что ж...
 	CreateInvItem(hero,sfb_armor_l);
-	AI_EquipArmor(hero,sfb_armor_l);
+//	AI_EquipArmor(hero,sfb_armor_l);
 	Info_ClearChoices(info_swiney_schuerfer);
 };
 

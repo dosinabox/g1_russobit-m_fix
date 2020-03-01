@@ -75,7 +75,7 @@ instance ITMWPICKAXE(C_ITEM)
 	name = "Кирка";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_AXE;
-	value = 4;
+	value = 2;
 	damagetotal = 7;
 	damagetype = DAM_EDGE;
 	range = 100;
@@ -2020,7 +2020,7 @@ instance GOLDENSWORD(C_ITEM)
 	on_equip = equip_2hbonus;
 	on_unequip = unequip_2hbonus;
 	value = 500;
-	damagetotal = 30;
+	damagetotal = 40;
 	damagetype = DAM_EDGE;
 	range = 100;
 	cond_atr[2] = ATR_STRENGTH;
@@ -2046,7 +2046,7 @@ instance GS1H(C_ITEM)
 	on_equip = equip_1hbonus;
 	on_unequip = unequip_1hbonus;
 	value = 1000;
-	damagetotal = 40;
+	damagetotal = 50;
 	damagetype = DAM_EDGE;
 	range = 130;
 	cond_atr[2] = ATR_STRENGTH;
@@ -2071,7 +2071,7 @@ instance GS2H(C_ITEM)
 	on_equip = equip_2hbonus;
 	on_unequip = unequip_2hbonus;
 	value = 1000;
-	damagetotal = 50;
+	damagetotal = 60;
 	damagetype = DAM_EDGE;
 	range = 150;
 	cond_atr[2] = ATR_STRENGTH;

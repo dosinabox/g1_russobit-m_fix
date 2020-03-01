@@ -7,7 +7,7 @@ instance BAU_900_RICELORD(NPC_DEFAULT)
 	level = 10;
 	voice = 12;
 	id = 900;
-	attribute[ATR_STRENGTH] = 20;
+	attribute[ATR_STRENGTH] = 36;
 	attribute[ATR_DEXTERITY] = 10;
 	attribute[ATR_MANA_MAX] = 0;
 	attribute[ATR_MANA] = 0;

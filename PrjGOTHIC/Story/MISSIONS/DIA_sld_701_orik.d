@@ -7,7 +7,7 @@ instance SLD_701_ORIK_EXIT(C_INFO)
 	information = sld_701_orik_exit_info;
 	important = 0;
 	permanent = 1;
-	description = "«¿ ŒÕ◊»“‹ –¿«√Œ¬Œ–";
+	description = DIALOG_ENDE;
 };
 
 
@@ -161,6 +161,7 @@ func void sld_701_orik_krautprobe_info()
 instance ORIK_STEALKEY(C_INFO)
 {
 	npc = sld_701_orik;
+	nr = 990;
 	condition = orik_stealkey_condition;
 	information = orik_stealkey_info;
 	important = 0;

@@ -102,5 +102,6 @@ func int vlk_586_grimes_first_condition()
 func void vlk_586_grimes_first_info()
 {
 	AI_Output(self,other,"VLK_586_Grimes_FIRST_Info_04_02");	//Новенький! Ты руду добывал когда-нибудь?
+	Npc_ExchangeRoutine(self,"WORK");
 };
 

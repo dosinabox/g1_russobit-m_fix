@@ -134,7 +134,7 @@ func void info_xardas_kdw_info()
 {
 	AI_Output(hero,self,"Info_Xardas_KDW_15_01");	//Все маги Круга Огня мертвы!
 	AI_Output(hero,self,"Info_Xardas_KDW_15_02");	//Убиты по приказу Гомеза.
-	AI_Output(self,hero,"Info_Xardas_KDW_14_03");	//Не удивительно. Я знал с самого начала, что этим невежественным болванам из замка, которыми командует Гомез, нельзя было доверять.
+	AI_Output(self,hero,"Info_Xardas_KDW_14_03");	//Неудивительно. Я знал с самого начала, что этим невежественным болванам из замка, которыми командует Гомез, нельзя было доверять.
 	AI_Output(self,hero,"Info_Xardas_KDW_14_04");	//Корристо и другие маги сами приблизили свою смерть, когда помогали Гомезу захватить власть.
 };
 
@@ -364,7 +364,7 @@ func void info_xardas_accept_info()
 {
 	AI_Output(hero,self,"Info_Xardas_ACCEPT_15_01");	//Я расспрошу шамана и вернусь к тебе!
 	AI_Output(self,hero,"Info_Xardas_ACCEPT_14_02");	//Мой слуга уже передал тебе руну телепортации, которая способна переносить своего обладателя в нижний зал.
-	AI_Output(self,hero,"Info_Xardas_ACCEPT_14_03");	//Примени ее, когда тебе нужно будет вернуться сюда.
+	AI_Output(self,hero,"Info_Xardas_ACCEPT_14_03");	//Примени ее, когда тебе будет нужно вернуться сюда.
 	b_story_cordspost();
 	b_story_findorcshaman();
 	AI_StopProcessInfos(self);
@@ -928,7 +928,7 @@ func void info_xardas_loadsword09_info()
 			b_printtrademsg1("Получена мантия темного искусства.");
 			CreateInvItem(self,itarrune_6_2_armyofdarkness);
 			CreateInvItem(hero,dmb_armor_m);
-			AI_EquipArmor(hero,dmb_armor_m);
+//			AI_EquipArmor(hero,dmb_armor_m);
 			hero.guild = GIL_DMB;
 			Npc_SetTrueGuild(hero,GIL_DMB);
 			AI_StopProcessInfos(self);

@@ -231,18 +231,19 @@ func void quentin_dia33_info()
 	AI_Output(hero,self,"Info_Thorus_MordragKo_OFFER_BACK_15_00");	//Я займусь им.
 	AI_Output(self,hero,"Quentin_DIA3_10");	//Еще раз спасибо за амулет. Возьми руду и наш доспех, ты заслужил это. Добро пожаловать в шайку!
 	b_printtrademsg1("Получено руды: 400");
-	b_printtrademsg2("Получен доспех грабителя.");
 	CreateInvItems(self,itminugget,400);
 	b_giveinvitems(self,hero,itminugget,400);
 	if(KAPITEL == 1)
 	{
+		b_printtrademsg2("Получен легкий доспех грабителя.");
 		CreateInvItems(hero,org2n,1);
-		AI_EquipArmor(hero,org2n);
+//		AI_EquipArmor(hero,org2n);
 	}
 	else
 	{
+		b_printtrademsg2("Получен доспех грабителя.");
 		CreateInvItems(hero,org2l,1);
-		AI_EquipArmor(hero,org2l);
+//		AI_EquipArmor(hero,org2l);
 	};
 	b_logentry(QUENTIN_GANG,"Грабители Квентина упустили человека из Старого лагеря, теперь их план под угрозой. Пока не знаю, что они задумали, но мне нужно найти некого Гилберта, который прячется где-то неподалеку от Старого лагеря.");
 };

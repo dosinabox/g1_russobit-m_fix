@@ -16,23 +16,29 @@ const int MANA_ELIXIER1 = 100;
 const int VALUE_ELIXIEREGG = 1000;
 const int MANAMAX_ELIXIEREGG = 10;
 const int VALUE_STRESSENZ = 300;
-const int STR_ESSENZ = 3;
-//const int STR_ESSENZ = 1;
 const int VALUE_STREXTRAKT = 500;
-const int STR_EXTRAKT = 5;
-//const int STR_EXTRAKT = 3;
 const int VALUE_STRELIXIER = 800;
-const int STR_ELIXIER = 8;
-//const int STR_ELIXIER = 5;
 const int VALUE_DEXESSENZ = 300;
-const int DEX_ESSENZ = 3;
-//const int DEX_ESSENZ = 1;
 const int VALUE_DEXEXTRAKT = 500;
-const int DEX_EXTRAKT = 5;
-//const int DEX_EXTRAKT = 3;
 const int VALUE_DEXELIXIER = 800;
+//уровень сложности меняется тут
+//
+//повышенная:
+/*const int STR_ESSENZ = 1;
+const int STR_EXTRAKT = 2;
+const int STR_ELIXIER = 3;
+const int DEX_ESSENZ = 1;
+const int DEX_EXTRAKT = 2;
+const int DEX_ELIXIER = 3;*/
+//
+//стандартная:
+const int STR_ESSENZ = 3;
+const int STR_EXTRAKT = 5;
+const int STR_ELIXIER = 8;
+const int DEX_ESSENZ = 3;
+const int DEX_EXTRAKT = 5;
 const int DEX_ELIXIER = 8;
-//const int DEX_ELIXIER = 5;
+//
 const int VALUE_STRDEX_MACHT = 800;
 const int STRDEX_MACHT = 4;
 const int VALUE_STRDEX_HERRSCHAFT = 1200;
@@ -341,7 +347,7 @@ instance ITFO_POTION_DEX_01(C_ITEM)
 	scemename = "POTIONFAST";
 	description = "Эссенция ловкости";
 	text[1] = NAME_BONUS_DEX;
-	count[1] = DEX_ESSENZ;
+	count[1] = DEX_ESSENZ_VAL;
 	text[5] = NAME_VALUE;
 	count[5] = VALUE_DEXESSENZ;
 };

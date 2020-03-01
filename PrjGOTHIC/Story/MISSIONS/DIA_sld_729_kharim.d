@@ -113,9 +113,13 @@ func void info_kharim_charge_insult_gomezass()
 	AI_Output(self,other,"Info_Kharim_Charge_Insult_GomezAss_09_01");	//Что?! Ах ты, червяк! Да ты ничего о нас не знаешь! Новый Лагерь не подчиняется этому подонку!
 	AI_Output(self,other,"Info_Kharim_Charge_Insult_GomezAss_09_02");	//И, кроме того, я здесь по одной причине: мне приятно выбивать дурь из таких умников, как ты!
 	AI_Output(self,other,"Info_Kharim_Charge_Insult_GomezAss_09_03");	//С удовольствием окажу тебе эту услугу! Арена ждет нас!
+	if(self.attribute[ATR_HITPOINTS] < self.attribute[ATR_HITPOINTS_MAX])
+	{
+		self.attribute[ATR_HITPOINTS] = self.attribute[ATR_HITPOINTS_MAX];
+		CreateInvItem(self,itfo_potion_health_03);
+		AI_UseItem(self,itfo_potion_health_03);
+	};
 	KHARIM_CHARGED = TRUE;
-	self.attribute[ATR_HITPOINTS] = 172;
-	self.attribute[ATR_HITPOINTS_MAX] = 172;
 	Info_ClearChoices(info_kharim_charge);
 	AI_StopProcessInfos(self);
 	Npc_ExchangeRoutine(self,"GUIDE");
@@ -159,6 +163,12 @@ func int info_kharim_inarena_condition()
 
 func void info_kharim_inarena_info()
 {
+	if(self.attribute[ATR_HITPOINTS] < self.attribute[ATR_HITPOINTS_MAX])
+	{
+		self.attribute[ATR_HITPOINTS] = self.attribute[ATR_HITPOINTS_MAX];
+		CreateInvItem(self,itfo_potion_health_03);
+		AI_UseItem(self,itfo_potion_health_03);
+	};
 	if(!Npc_HasItems(self,itmw_kharim) && !Npc_HasItems(self,itmw_1h_sword_01))
 	{
 		CreateInvItem(self,itmw_1h_sword_01);

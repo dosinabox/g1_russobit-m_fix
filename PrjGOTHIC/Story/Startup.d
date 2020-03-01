@@ -2005,16 +2005,16 @@ func void startup_world()
 
 func void startup_orcgraveyard()
 {
+	Wld_InsertNpc(tpl_1443_templer,"GRYD_025");
+	Wld_InsertNpc(tpl_1444_templer,"GRYD_025");
+	Wld_InsertNpc(tpl_1445_templer,"GRYD_016");
+	Wld_InsertNpc(tpl_1446_templer,"GRYD_020");
+	Wld_InsertNpc(gur_1211_baallukor,"GRYD_025");
 	Wld_InsertNpc(orcscoutgyd,"GRYD_006");
 	Wld_InsertNpc(orcscoutgyd,"GRYD_015");
-	Wld_InsertNpc(tpl_1445_templer,"GRYD_016");
 	Wld_InsertNpc(orcscoutgyd,"GRYD_019B");
 	Wld_InsertNpc(orcscoutgyd,"GRYD_019D");
 	Wld_InsertNpc(orcscoutgyd,"GRYD_020B");
-	Wld_InsertNpc(tpl_1446_templer,"GRYD_020");
-	Wld_InsertNpc(gur_1211_baallukor,"GRYD_025");
-	Wld_InsertNpc(tpl_1443_templer,"GRYD_025");
-	Wld_InsertNpc(tpl_1444_templer,"GRYD_025");
 	Wld_InsertNpc(orcscoutgyd,"GRYD_048");
 	Wld_InsertNpc(orcscoutgyd,"GRYD_048");
 	Wld_InsertNpc(orcscoutgyd,"GRYD_043");
@@ -2096,11 +2096,16 @@ func void startup_orctempel()
 	Wld_InsertNpc(otminecrawler,"TPL_235");
 	Wld_InsertNpc(otminecrawler,"TPL_405");
 	Wld_InsertNpc(otminecrawler,"TPL_407");
-	Wld_InsertNpc(otdemon,"TPL_216");
-	Wld_InsertNpc(otdemon,"TPL_218");
-	Wld_InsertNpc(otdemon,"TPL_186");
-	Wld_InsertNpc(otdemon,"TPL_175");
-	Wld_InsertNpc(otdemon,"TPL_174");
+//	Wld_InsertNpc(otdemon,"TPL_216");
+//	Wld_InsertNpc(otdemon,"TPL_218");
+//	Wld_InsertNpc(otdemon,"TPL_186");
+//	Wld_InsertNpc(otdemon,"TPL_175");
+//	Wld_InsertNpc(otdemon,"TPL_174");
+	Wld_InsertNpc(demon,"TPL_216");
+	Wld_InsertNpc(demon,"TPL_218");
+	Wld_InsertNpc(demon,"TPL_186");
+	Wld_InsertNpc(demon,"TPL_175");
+	Wld_InsertNpc(demon,"TPL_174");
 	Wld_InsertNpc(kdf_406_otxardas,"TPL_408");
 	Wld_InsertNpc(tpl_1455_gorboba,"TPL_408");
 	Wld_InsertNpc(tpl_1447_templer,"TPL_408");

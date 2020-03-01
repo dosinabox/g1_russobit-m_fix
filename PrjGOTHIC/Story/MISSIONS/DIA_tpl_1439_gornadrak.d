@@ -97,10 +97,7 @@ func void dia_gornadrak_teachmandibles_info()
 {
 	AI_Output(other,self,"DIA_GorNaDrak_TeachMandibles_15_00");	//Ты можешь рассказать мне, как добывать слюну?
 	AI_Output(self,other,"DIA_GorNaDrak_TeachMandibles_09_01");	//Конечно. Убив ползуна, ухватись покрепче за клыки и дергай их на себя. Так ты вырвешь челюсти вместе с железами, которые при этом останутся целыми.
-	PrintScreen("Навык: добыча челюстей ползунов",-1,-1,"FONT_OLD_20_WHITE.TGA",3);
-	KNOWS_GETMCMANDIBLES = TRUE;
-	Log_CreateTopic(GE_ANIMALTROPHIES,LOG_NOTE);
-	b_logentry(GE_ANIMALTROPHIES,"Навык добычи челюстей ползунов.");
+	b_learn_trophies_mandibles();
 };
 
 

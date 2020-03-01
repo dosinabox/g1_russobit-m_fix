@@ -253,7 +253,11 @@ func void dia_joru_getmagic_info()
 	AI_Output(other,self,"DIA_Joru_GetMagic_15_00");	//Где я могу найти магию Спящего?
 	AI_Output(self,other,"DIA_Joru_GetMagic_07_01");	//Идол Кадар продает руны и свитки. Но у тебя все равно не получиться их купить, если он не захочет с тобой разговаривать, верно?
 	AI_Output(self,other,"DIA_Joru_GetMagic_07_02");	//Может быть, тебе с этим поможет какой-нибудь другой Гуру.
-	Log_CreateTopic(GE_TRADERPSI,LOG_NOTE);
-	b_logentry(GE_TRADERPSI,"Идол Кадар продает руны и магические свитки членам Братства.");
+	if(LOG_BAALCADARSELL == FALSE)
+	{
+		Log_CreateTopic(GE_TRADERPSI,LOG_NOTE);
+		b_logentry(GE_TRADERPSI,"Идол Кадар продает руны и магические свитки членам Братства.");
+		LOG_BAALCADARSELL = TRUE;
+	};
 };
 

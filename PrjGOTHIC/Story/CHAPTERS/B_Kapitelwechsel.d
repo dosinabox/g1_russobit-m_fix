@@ -231,14 +231,26 @@ func void b_kapitelwechsel(var int neues_kapitel)
 		b_exchangeroutine(sld_729_kharim,"dead");
 		b_exchangeroutine(grd_251_kirgo,"FMTaken");
 		b_exchangeroutine(grd_998_gardist,"aopen");
-		Npc_RemoveInvItems(nov_1330_baalparvez,itminugget,Npc_HasItems(nov_1330_baalparvez,itminugget));
-		Npc_RemoveInvItems(nov_1331_baaltaran,itminugget,Npc_HasItems(nov_1331_baaltaran,itminugget));
-		Npc_RemoveInvItems(tpl_1422_gorhanis,itminugget,Npc_HasItems(tpl_1422_gorhanis,itminugget));
-		Npc_RemoveInvItems(sld_729_kharim,itminugget,Npc_HasItems(sld_729_kharim,itminugget));
-		Npc_RemoveInvItem(nov_1330_baalparvez,itmw_1h_mace_04);
-		Npc_RemoveInvItem(nov_1331_baaltaran,itmw_1h_axe_old_01);
-		Npc_RemoveInvItem(tpl_1422_gorhanis,itmw_gorhanis);
-		Npc_RemoveInvItem(sld_729_kharim,itmw_kharim);
+		if(!Npc_IsDead(nov_1330_baalparvez))
+		{
+			Npc_RemoveInvItems(nov_1330_baalparvez,itminugget,Npc_HasItems(nov_1330_baalparvez,itminugget));
+			Npc_RemoveInvItem(nov_1330_baalparvez,itmw_1h_mace_04);
+		};
+		if(!Npc_IsDead(nov_1331_baaltaran))
+		{
+			Npc_RemoveInvItems(nov_1331_baaltaran,itminugget,Npc_HasItems(nov_1331_baaltaran,itminugget));
+			Npc_RemoveInvItem(nov_1331_baaltaran,itmw_1h_axe_old_01);
+		};
+		if(!Npc_IsDead(tpl_1422_gorhanis))
+		{
+			Npc_RemoveInvItems(tpl_1422_gorhanis,itminugget,Npc_HasItems(tpl_1422_gorhanis,itminugget));
+			Npc_RemoveInvItem(tpl_1422_gorhanis,itmw_gorhanis);
+		};
+		if(!Npc_IsDead(sld_729_kharim))
+		{
+			Npc_RemoveInvItems(sld_729_kharim,itminugget,Npc_HasItems(sld_729_kharim,itminugget));
+			Npc_RemoveInvItem(sld_729_kharim,itmw_kharim);
+		};
 		b_exchangeroutine(pc_thief,"OCWait");
 		b_exchangeroutine(pc_mage,"OCWait");
 		b_exchangeroutine(org_826_mordrag,"START");

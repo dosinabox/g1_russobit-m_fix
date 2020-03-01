@@ -7,7 +7,7 @@ instance ORG_861_KILLIAN_EXIT(C_INFO)
 	information = org_861_killian_exit_info;
 	important = 0;
 	permanent = 1;
-	description = "ÇÀÊÎÍ×ÈÒÜ ĞÀÇÃÎÂÎĞ";
+	description = DIALOG_ENDE;
 };
 
 

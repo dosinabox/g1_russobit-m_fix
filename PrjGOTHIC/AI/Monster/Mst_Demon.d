@@ -80,7 +80,7 @@ instance OTDEMON(MST_DEFAULT_DEMON)
 {
 	name[0] = "Низший демон";
 	guild = GIL_DEMON;
-	level = 60;
+	level = 0;
 	attribute[ATR_STRENGTH] = 130;
 	attribute[ATR_DEXTERITY] = 130;
 	attribute[ATR_HITPOINTS_MAX] = 250;
@@ -95,6 +95,7 @@ instance OTDEMON(MST_DEFAULT_DEMON)
 	protection[PROT_MAGIC] = 35;
 	damagetype = DAM_EDGE;
 	set_demon_visuals();
+	Mdl_SetModelScale(self,0.9,0.9,0.9);
 	Npc_SetToFistMode(self);
 };
 

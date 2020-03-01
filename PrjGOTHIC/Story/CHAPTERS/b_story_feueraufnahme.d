@@ -52,6 +52,7 @@ func void b_story_feueraufnahme()
 		AI_ContinueRoutine(magier_1);
 		magier_2 = Hlp_GetNpc(kdf_402_corristo);
 		Npc_ExchangeRoutine(magier_2,"START");
+		AI_ContinueRoutine(magier_2);
 		magier_3 = Hlp_GetNpc(kdf_403_drago);
 		Npc_ExchangeRoutine(magier_3,"START");
 		AI_ContinueRoutine(magier_3);

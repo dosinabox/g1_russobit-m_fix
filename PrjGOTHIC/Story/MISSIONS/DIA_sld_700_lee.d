@@ -17,6 +17,14 @@ func void b_leelearn()
 		Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,0),sld_700_lee_teach_dex_5);
 		Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,0),sld_700_lee_teach_dex_1);
 	};
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_2H) < 1)
+	{
+		Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARN2H_1,LPCOST_TALENT_2H_1,0),sld_700_lee_zweihand1);
+	}
+	else if(Npc_GetTalentSkill(hero,NPC_TALENT_2H) == 1)
+	{
+		Info_AddChoice(sld_700_lee_teach,b_buildlearnstring(NAME_LEARN2H_2,LPCOST_TALENT_2H_2,0),sld_700_lee_zweihand2);
+	};
 };
 
 instance SLD_700_LEE_EXIT(C_INFO)
@@ -189,8 +197,6 @@ func void sld_700_lee_becomesldnow_info()
 	AI_Output(self,other,"Sld_700_Lee_BECOMESLDNOW_Info_08_03");	//Скажи мне только, почему? Почему ты решил присоединиться к нашему лагерю, а не к Гомезу или к Братству?
 	Log_CreateTopic(GE_BECOMEMERCENARY,LOG_NOTE);
 	b_logentry(GE_BECOMEMERCENARY,"Ли принял меня в ряды наемников.");
-	Log_CreateTopic(GE_TEACHERNC,LOG_NOTE);
-	b_logentry(GE_TEACHERNC,"Ли может научить меня вести бой двуручным мечом. Еще он может помочь мне увеличить силу и ловкость.");
 	Info_ClearChoices(sld_700_lee_becomesldnow);
 	Info_AddChoice(sld_700_lee_becomesldnow,"Другие лагеря того не стоят.",sld_700_lee_becomesldnow_noother);
 	Info_AddChoice(sld_700_lee_becomesldnow,"Я хотел свободы с тех пор как попал сюда.",sld_700_lee_becomesldnow_freedom);
@@ -204,7 +210,7 @@ func void sld_700_lee_becomesldnow_noother()
 	b_printtrademsg1("Получен легкий доспех наемника.");
 	CreateInvItem(self,sld_armor_l);
 	b_giveinvitems(self,hero,sld_armor_l,1);
-	AI_EquipArmor(hero,sld_armor_l);
+//	AI_EquipArmor(hero,sld_armor_l);
 	Npc_SetTrueGuild(hero,GIL_SLD);
 	hero.guild = GIL_SLD;
 	AI_StopProcessInfos(self);
@@ -217,7 +223,7 @@ func void sld_700_lee_becomesldnow_freedom()
 	b_printtrademsg1("Получен легкий доспех наемника.");
 	CreateInvItem(self,sld_armor_l);
 	b_giveinvitems(self,hero,sld_armor_l,1);
-	AI_EquipArmor(hero,sld_armor_l);
+//	AI_EquipArmor(hero,sld_armor_l);
 	Npc_SetTrueGuild(hero,GIL_SLD);
 	hero.guild = GIL_SLD;
 	AI_StopProcessInfos(self);
@@ -230,7 +236,7 @@ func void sld_700_lee_becomesldnow_justbecause()
 	b_printtrademsg1("Получен легкий доспех наемника.");
 	CreateInvItem(self,sld_armor_l);
 	b_giveinvitems(self,hero,sld_armor_l,1);
-	AI_EquipArmor(hero,sld_armor_l);
+//	AI_EquipArmor(hero,sld_armor_l);
 	Npc_SetTrueGuild(hero,GIL_SLD);
 	hero.guild = GIL_SLD;
 	AI_StopProcessInfos(self);
@@ -357,22 +363,19 @@ func void sld_700_lee_changeside_info()
 	{
 		b_printtrademsg1("Получен тяжелый доспех наемника.");
 		CreateInvItem(hero,sld_armor_h);
-		AI_EquipArmor(hero,sld_armor_h);
+//		AI_EquipArmor(hero,sld_armor_h);
 		LEE_ARMOR_H_WAS_BOUGHT = 1;
 	}
 	else
 	{
-		b_printtrademsg1("Получен доспех наемника.");
-		CreateInvItem(self,sld_armor_m);
-		b_giveinvitems(self,hero,sld_armor_m,1);
-		AI_EquipArmor(hero,sld_armor_m);
+		b_printtrademsg1("Получен средний доспех наемника.");
+		CreateInvItem(hero,sld_armor_m);
+//		AI_EquipArmor(hero,sld_armor_m);
 		LEE_ARMOR_M_WAS_BOUGHT = 1;
 	};
 	Npc_SetTrueGuild(hero,GIL_SLD);
 	hero.guild = GIL_SLD;
 	b_logentry(CH4_BANNEDFROMOC,"Я перешел в другой лагерь. После того как меня изгнали из Старого лагеря, Ли принял меня в наемники. Мне нужно попасть к Сатурасу!");
-	Log_CreateTopic(GE_TEACHERNC,LOG_NOTE);
-	b_logentry(GE_TEACHERNC,"Ли может научить меня вести бой двуручным мечом. Еще он может помочь мне увеличить силу и ловкость.");
 	if(DIFF_HARD == FALSE)
 	{
 		FREELEARN_NC = TRUE;
@@ -436,10 +439,10 @@ func void sld_700_lee_armor_m()
 		b_printtrademsg1("Отдано руды: 1650");
 		AI_Output(self,other,"Sld_700_Lee_ARMOR_M_Info_08_04");	//Это добротно сделанные доспехи. Они надежно защитят тебя.
 		b_giveinvitems(hero,self,itminugget,VALUE_SLD_ARMOR_M);
-		b_printtrademsg2("Получен доспех наемника.");
+		b_printtrademsg2("Получен средний доспех наемника.");
 		CreateInvItem(self,sld_armor_m);
 		b_giveinvitems(self,hero,sld_armor_m,1);
-		AI_EquipArmor(hero,sld_armor_m);
+//		AI_EquipArmor(hero,sld_armor_m);
 		LEE_ARMOR_M_WAS_BOUGHT = 1;
 	};
 };
@@ -462,7 +465,7 @@ func void sld_700_lee_armor_h()
 		b_printtrademsg2("Получен тяжелый доспех наемника.");
 		b_giveinvitems(hero,self,itminugget,VALUE_SLD_ARMOR_H);
 		CreateInvItem(hero,sld_armor_h);
-		AI_EquipArmor(hero,sld_armor_h);
+//		AI_EquipArmor(hero,sld_armor_h);
 		LEE_ARMOR_H_WAS_BOUGHT = 1;
 	};
 };
@@ -481,7 +484,7 @@ instance SLD_700_LEE_TEACH_PRE(C_INFO)
 
 func int sld_700_lee_teach_pre_condition()
 {
-	if(Npc_GetTrueGuild(hero) == GIL_SLD || (Npc_GetTrueGuild(hero) == GIL_KDW))
+	if(Npc_GetTrueGuild(hero) == GIL_SLD || (Npc_GetTrueGuild(hero) == GIL_KDW) || (Npc_GetTrueGuild(hero) == GIL_DMB))
 	{
 		return TRUE;
 	};
@@ -491,6 +494,9 @@ func void sld_700_lee_teach_pre_info()
 {
 	AI_Output(other,self,"Sld_700_Lee_Teach_15_00");	//Ты можешь научить меня чему-нибудь?
 	AI_Output(self,other,"Sld_700_Lee_Teach_08_01");	//Я могу помочь тебе стать более ловким и сильным.
+	AI_Output(self,other,"Sld_700_Lee_ZWEIHAND1_Info_08_06");	//Двуручным мечом можно наносить очень сильные боковые удары. При этом противник не сможет к тебе приблизиться.
+	Log_CreateTopic(GE_TEACHERNC,LOG_NOTE);
+	b_logentry(GE_TEACHERNC,"Ли может научить меня вести бой двуручным мечом. Еще он может помочь мне увеличить силу и ловкость.");
 };
 
 instance SLD_700_LEE_TEACH(C_INFO)
@@ -615,27 +621,7 @@ func void sld_700_lee_teach_dex_5()
 	b_leelearn();
 };
 
-
-instance SLD_700_LEE_ZWEIHAND1(C_INFO)
-{
-	npc = sld_700_lee;
-	condition = sld_700_lee_zweihand1_condition;
-	information = sld_700_lee_zweihand1_info;
-	important = 0;
-	permanent = 1;
-	description = b_buildlearnstring(NAME_LEARN2H_1,LPCOST_TALENT_2H_1,0);
-};
-
-
-func int sld_700_lee_zweihand1_condition()
-{
-	if((Npc_GetTalentSkill(hero,NPC_TALENT_2H) < 1) && ((Npc_GetTrueGuild(hero) == GIL_SLD) || ((Npc_GetTrueGuild(hero) == GIL_KDW || Npc_GetTrueGuild(hero) == GIL_DMB))))
-	{
-		return TRUE;
-	};
-};
-
-func void sld_700_lee_zweihand1_info()
+func void sld_700_lee_zweihand1()
 {
 	AI_Output(other,self,"Sld_700_Lee_ZWEIHAND1_Info_15_01");	//Научи меня владеть двуручным мечом.
 	if(Npc_GetTalentSkill(hero,NPC_TALENT_1H) < 2)
@@ -649,33 +635,12 @@ func void sld_700_lee_zweihand1_info()
 		AI_Output(self,other,"Sld_700_Lee_ZWEIHAND1_Info_08_03");	//Держи клинок горизонтально. Чтобы нанести удар таким тяжелым оружием, необходимо хорошо размахнуться.
 		AI_Output(self,other,"Sld_700_Lee_ZWEIHAND1_Info_08_04");	//Подними меч и нанеси удар сверху. Обычно такой удар может повергнуть противника.
 		AI_Output(self,other,"Sld_700_Lee_ZWEIHAND1_Info_08_05");	//Используй инерцию движения, чтобы нанести удар снизу.
-		AI_Output(self,other,"Sld_700_Lee_ZWEIHAND1_Info_08_06");	//Двуручным мечом можно наносить очень сильные боковые удары. При этом противник не сможет к тебе приблизиться.
 		AI_Output(self,other,"Sld_700_Lee_ZWEIHAND1_Info_08_07");	//Что ж, для первого урока достаточно. Иди, тренируйся.
-		sld_700_lee_zweihand1.permanent = 0;
 	};
+	b_leelearn();
 };
 
-
-instance SLD_700_LEE_ZWEIHAND2(C_INFO)
-{
-	npc = sld_700_lee;
-	condition = sld_700_lee_zweihand2_condition;
-	information = sld_700_lee_zweihand2_info;
-	important = 0;
-	permanent = 1;
-	description = b_buildlearnstring(NAME_LEARN2H_2,LPCOST_TALENT_2H_2,0);
-};
-
-
-func int sld_700_lee_zweihand2_condition()
-{
-	if((Npc_GetTalentSkill(hero,NPC_TALENT_2H) == 1) && ((Npc_GetTrueGuild(hero) == GIL_SLD) || ((Npc_GetTrueGuild(hero) == GIL_KDW || Npc_GetTrueGuild(hero) == GIL_DMB))))
-	{
-		return TRUE;
-	};
-};
-
-func void sld_700_lee_zweihand2_info()
+func void sld_700_lee_zweihand2()
 {
 	AI_Output(other,self,"Sld_700_Lee_ZWEIHAND2_Info_15_01");	//Я хочу узнать больше о владении двуручным мечом.
 	if(b_giveskill(other,NPC_TALENT_2H,2,LPCOST_TALENT_2H_2))
@@ -688,7 +653,7 @@ func void sld_700_lee_zweihand2_info()
 		AI_Output(self,other,"Sld_700_Lee_ZWEIHAND2_Info_08_07");	//Если противник смог избежать этого удара, используй инерцию меча, чтобы нанести следующий удар.
 		AI_Output(self,other,"Sld_700_Lee_ZWEIHAND2_Info_08_08");	//После атаки прими оборонительную стойку и жди подходящего момента для следующего удара.
 		AI_Output(self,other,"Sld_700_Lee_ZWEIHAND2_Info_08_09");	//Смена ударов и правильный выбор позиции являются основой успешного ведения боя.
-		sld_700_lee_zweihand2.permanent = 0;
 	};
+	b_leelearn();
 };
 

@@ -113,7 +113,6 @@ func void dia_milten_gotocorristo_info()
 		AI_Output(other,self,"DIA_Milten_Letter_15_00");	//У меня есть письмо для Верховного Мага Круга Огня.
 		AI_Output(self,other,"DIA_Milten_Letter_02_03");	//Покажи мне это письмо.
 		AI_Output(other,self,"DIA_Milten_Letter_Give_15_00");	//Вот оно.
-		b_usefakescroll();
 		if(Npc_HasItems(other,itwr_fire_letter_01))
 		{
 			b_printtrademsg1("Отдано запечатанное письмо.");
@@ -126,6 +125,7 @@ func void dia_milten_gotocorristo_info()
 			b_givexp(XP_XARDASLETTEROPEN);
 			Npc_RemoveInvItem(other,itwr_fire_letter_02);
 		};
+		b_usefakescroll();
 		corristo = Hlp_GetNpc(kdf_402_corristo);
 		CreateInvItem(corristo,itwr_fire_letter_02);
 		AI_Output(other,self,"GUR_1200_Yberion_EARN_Info_15_01");	//А я не заслужил награды?
@@ -176,16 +176,6 @@ func void dia_milten_letter_give()
 {
 	var C_NPC corristo;
 	AI_Output(other,self,"DIA_Milten_Letter_Give_15_00");	//Вот оно.
-	b_usefakescroll();
-	AI_Output(self,other,"DIA_Milten_Letter_Give_02_03");	//Это письмо адресовано Ксардасу!
-	AI_Output(other,self,"DIA_Milten_Letter_Give_15_04");	//И что в этом необычного?
-	AI_Output(self,other,"DIA_Milten_Letter_Give_02_05");	//Ксардас оставил служение Инносу много лет назад. Он ушел отсюда и посвятил свою жизнь черной магии.
-	AI_Output(self,other,"DIA_Milten_Letter_Give_02_06");	//Он живет в башне в центре земель орков и занимается только своими исследованиями.
-	AI_Output(self,other,"DIA_Milten_Letter_Give_02_07");	//Он сказал, что выяснит сам, что пошло не так при возведении Барьера.
-	AI_Output(self,other,"DIA_Milten_Letter_Give_02_08");	//Жди здесь. Я скоро вернусь.
-	AI_StopProcessInfos(self);
-	AI_GotoWP(self,"OCC_CHAPEL_STAIRCASE_TOP");
-	AI_GotoWP(self,"OCC_CHAPEL_ENTRANCE");
 	if(Npc_HasItems(other,itwr_fire_letter_01))
 	{
 		b_printtrademsg1("Отдано запечатанное письмо.");
@@ -198,6 +188,16 @@ func void dia_milten_letter_give()
 		b_givexp(XP_XARDASLETTEROPEN);
 		Npc_RemoveInvItem(other,itwr_fire_letter_02);
 	};
+	b_usefakescroll();
+	AI_Output(self,other,"DIA_Milten_Letter_Give_02_03");	//Это письмо адресовано Ксардасу!
+	AI_Output(other,self,"DIA_Milten_Letter_Give_15_04");	//И что в этом необычного?
+	AI_Output(self,other,"DIA_Milten_Letter_Give_02_05");	//Ксардас оставил служение Инносу много лет назад. Он ушел отсюда и посвятил свою жизнь черной магии.
+	AI_Output(self,other,"DIA_Milten_Letter_Give_02_06");	//Он живет в башне в центре земель орков и занимается только своими исследованиями.
+	AI_Output(self,other,"DIA_Milten_Letter_Give_02_07");	//Он сказал, что выяснит сам, что пошло не так при возведении Барьера.
+	AI_Output(self,other,"DIA_Milten_Letter_Give_02_08");	//Жди здесь. Я скоро вернусь.
+	AI_StopProcessInfos(self);
+	AI_GotoWP(self,"OCC_CHAPEL_STAIRCASE_TOP");
+	AI_GotoWP(self,"OCC_CHAPEL_ENTRANCE");
 	corristo = Hlp_GetNpc(kdf_402_corristo);
 	CreateInvItem(corristo,itwr_fire_letter_02);
 	MILTEN_HASLETTER = TRUE;

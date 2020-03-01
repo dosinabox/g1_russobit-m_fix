@@ -5,7 +5,7 @@ instance INFO_STT_12_EXIT(C_INFO)
 	condition = info_stt_12_exit_condition;
 	information = info_stt_12_exit_info;
 	permanent = 1;
-	description = "ÇÀÊÎÍ×ÈÒÜ ĞÀÇÃÎÂÎĞ";
+	description = DIALOG_ENDE;
 };
 
 

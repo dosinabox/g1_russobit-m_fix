@@ -4,7 +4,7 @@ func void bsfire_s1()
 	if(Npc_IsPlayer(self))
 	{
 		self.aivar[AIV_INVINCIBLE] = TRUE;
-		AI_Wait(self,11.7);
+		AI_Wait(self,6);
 		b_stopusemob(self,"BSFIRE");
 	};
 };
@@ -16,8 +16,6 @@ func void bsfire_s0()
 		self.aivar[AIV_INVINCIBLE] = FALSE;
 	};
 };
-
-
 
 func int bsanvil_cf()
 {
@@ -78,7 +76,7 @@ func void bscool_s1()
 	if(Npc_IsPlayer(self))
 	{
 		self.aivar[AIV_INVINCIBLE] = TRUE;
-		AI_Wait(self,8);
+		AI_Wait(self,4);
 		b_stopusemob(self,"BSCOOL");
 	};
 };

@@ -3,6 +3,10 @@ func void zs_pickore()
 {
 	printdebugnpc(PD_TA_FRAME,"ZS_PickOre");
 	b_setperception(self);
+	if(!Npc_HasItems(self,itmwpickaxe))
+	{
+		CreateInvItem(self,itmwpickaxe);
+	};
 	if(self.aivar[AIV_DONTUSEMOB] == 1)
 	{
 		self.aivar[AIV_DONTUSEMOB] = 0;

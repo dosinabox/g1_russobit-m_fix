@@ -79,7 +79,6 @@ func void info_jackal_hello_noore()
 {
 	AI_Output(other,self,"Info_Bloodwyn_Hello_NotNow_15_00");	//Сейчас у меня нет десяти кусков.
 	AI_Output(self,other,"SVM_7_YouWannaFoolMe");	//Ты пытаешься меня обдурить, да?
-	//AI_Output(self,other,"Info_Jackal_Schutz_07_02");	//Ты еще не заплатил десять кусков. Приходи, когда у тебя будет руда.
 };
 
 func void info_jackal_hello_whatdoiget()
@@ -162,7 +161,7 @@ instance INFO_JACKAL_PERMPAID(C_INFO)
 
 func int info_jackal_permpaid_condition()
 {
-	if(JACKAL_PROTECTIONPAID == TRUE && KAPITEL < 4)
+	if(KAPITEL < 4)
 	{
 		return 1;
 	};
@@ -171,7 +170,14 @@ func int info_jackal_permpaid_condition()
 func void info_jackal_permpaid_info()
 {
 	AI_Output(other,self,"Info_Jackal_PermPaid_15_00");	//Ну, как дела?
-	AI_Output(self,other,"Info_Jackal_PermPaid_07_01");	//Ты можешь рассчитывать на мою помощь!
+	if(JACKAL_PROTECTIONPAID == TRUE)
+	{
+		AI_Output(self,other,"Info_Jackal_PermPaid_07_01");	//Ты можешь рассчитывать на мою помощь!
+	}
+	else
+	{
+		AI_Output(self,other,"Info_Jackal_Schutz_07_02");	//Ты еще не заплатил десять кусков. Приходи, когда у тебя будет руда.
+	};
 };
 
 

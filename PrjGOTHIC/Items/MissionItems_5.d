@@ -187,6 +187,8 @@ instance MYTHRILKLINGE(C_ITEM)
 	text[2] = "Может быть, Ксардас сможет их прочитать!";
 	text[3] = "Лучше я сначала узнаю, что это за оружие,";
 	text[4] = "а пока буду носить его с собой.";
+	text[5] = NAME_VALUE;
+	count[5] = value;
 };
 
 instance MYTHRILKLINGE01(C_ITEM)

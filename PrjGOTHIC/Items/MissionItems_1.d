@@ -31,7 +31,7 @@ func void unequip_mordragsring()
 
 instance SPECIALJOINT(C_ITEM)
 {
-	name = "Улучшенный Зов мечты";
+	name = "Улучшенный 'Зов мечты'";
 	mainflag = ITEM_KAT_NONE;
 	flags = ITEM_MULTI;
 	value = VALUE_JOINT3 * 10;
@@ -311,7 +311,7 @@ func void usehealthwater()
 	Npc_ChangeAttribute(self,ATR_HITPOINTS_MAX,10);
 	Npc_ChangeAttribute(self,ATR_MANA,10);
 	Npc_ChangeAttribute(self,ATR_HITPOINTS,10);
-	PrintScreen("Макс. мана и жизненная сила +10",-1,-1,"FONT_OLD_20_WHITE.TGA",_TIME_MESSAGE_RAISEATTRIBUTE);
+	PrintScreen("Макс. магическая и жизненная сила +10",-1,-1,"FONT_OLD_20_WHITE.TGA",_TIME_MESSAGE_RAISEATTRIBUTE);
 };
 
 instance THELIST(C_ITEM)
@@ -1220,7 +1220,7 @@ func void usetheriddle5()
 		Wld_InsertNpc(bau_940_riddler,"");
 		riddler = Hlp_GetNpc(bau_940_riddler);
 		Npc_ChangeAttribute(riddler,ATR_HITPOINTS,-riddler.attribute[ATR_HITPOINTS_MAX]);
-		//RIDDLE5 = TRUE;
+		RIDDLE5 = TRUE;
 		//RIDDLE5INSERT = TRUE;
 	};
 };

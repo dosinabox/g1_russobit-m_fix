@@ -19,6 +19,31 @@ func void pc_sleep(var int t)
 	Npc_SendPassivePerc(hero,PERC_ASSESSENTERROOM,NULL,hero);
 	b_sayoverlay(hero,NULL,"SVM_15_Awake");
 	PLAYER_MOBSI_PRODUCTION = MOBSI_SLEEPABITEND;
+	if(KIRGO_CHARGED == TRUE && KIRGO_CHARGED_END == FALSE && KAPITEL < 4 && !Npc_IsDead(grd_251_kirgo))
+	{
+		KIRGO_CHARGED = FALSE;
+		b_exchangeroutine(grd_251_kirgo,"START");
+	};
+	if(KHARIM_CHARGED == TRUE && KHARIM_CHARGED_END == FALSE && KAPITEL < 4 && !Npc_IsDead(sld_729_kharim))
+	{
+		KHARIM_CHARGED = FALSE;
+		b_exchangeroutine(sld_729_kharim,"START");
+	};
+	if(HANIS_CHARGED == TRUE && HANIS_CHARGED_END == FALSE && KAPITEL < 4 && !Npc_IsDead(tpl_1422_gorhanis))
+	{
+		HANIS_CHARGED = FALSE;
+		b_exchangeroutine(tpl_1422_gorhanis,"START");
+	};
+	if(Npc_HasItems(hero,itmiswordbladehot) >= 1)
+	{
+		CreateInvItems(hero,itmiswordblade,Npc_HasItems(hero,itmiswordbladehot));
+		Npc_RemoveInvItems(hero,itmiswordbladehot,Npc_HasItems(hero,itmiswordbladehot));
+	};
+	if(Npc_HasItems(hero,itmiswordrawhot) >= 1)
+	{
+		CreateInvItems(hero,itmiswordraw,Npc_HasItems(hero,itmiswordrawhot));
+		Npc_RemoveInvItems(hero,itmiswordrawhot,Npc_HasItems(hero,itmiswordrawhot));
+	};
 };
 
 func void sleepabit_s1()
@@ -31,10 +56,10 @@ func void sleepabit_s1()
 	{
 		self.aivar[AIV_INVINCIBLE] = TRUE;
 		if(Npc_RefuseTalk(self) == TRUE)
-	    {
-	    	PrintScreen("Сейчас здесь нельзя спать...",-1,-1,"font_old_20_white.tga",3);
+		{
+			PrintScreen("Сейчас здесь нельзя спать...",-1,-1,"font_old_20_white.tga",3);
 			self.aivar[AIV_INVINCIBLE] = FALSE;
-	    };
+		};
 		AI_ProcessInfos(her);
 		PLAYER_MOBSI_PRODUCTION = MOBSI_SLEEPABIT;
 	};

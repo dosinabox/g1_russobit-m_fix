@@ -332,7 +332,7 @@ func void stt_311_fisk_armor_l()
 		b_printtrademsg2("Получены простые штаны рудокопа.");
 		CreateInvItem(self,vlk_armor_l);
 		b_giveinvitems(self,hero,vlk_armor_l,1);
-		AI_EquipArmor(hero,vlk_armor_l);
+//		AI_EquipArmor(hero,vlk_armor_l);
 		FISK_ARMOR_L_WAS_BOUGHT = 1;
 		if(FISK_ARMOR_M_WAS_BOUGHT == 1 && FISK_ARMOR_L_WAS_BOUGHT == 1)
 		{
@@ -356,7 +356,7 @@ func void stt_311_fisk_armor_m()
 		b_printtrademsg2("Получены штаны рудокопа.");
 		CreateInvItem(self,vlk_armor_m);
 		b_giveinvitems(self,hero,vlk_armor_m,1);
-		AI_EquipArmor(hero,vlk_armor_m);
+//		AI_EquipArmor(hero,vlk_armor_m);
 		FISK_ARMOR_M_WAS_BOUGHT = 1;
 		if(FISK_ARMOR_M_WAS_BOUGHT == 1 && FISK_ARMOR_L_WAS_BOUGHT == 1)
 		{

@@ -1,7 +1,7 @@
 
 instance TPL_1437_TEMPLER(NPC_DEFAULT)
 {
-	name[0] = "Страж";
+	name[0] = NAME_TEMPLER;
 	npctype = NPCTYPE_MAIN;
 	guild = GIL_TPL;
 	level = 17;

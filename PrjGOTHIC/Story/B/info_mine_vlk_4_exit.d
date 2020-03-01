@@ -5,7 +5,7 @@ instance INFO_MINE_VLK_4_EXIT(C_INFO)
 	condition = info_mine_vlk_4_exit_condition;
 	information = info_mine_vlk_4_exit_info;
 	permanent = 1;
-	description = "ÇÀÊÎÍ×ÈÒÜ ĞÀÇÃÎÂÎĞ";
+	description = DIALOG_ENDE;
 };
 
 

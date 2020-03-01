@@ -80,7 +80,6 @@ func void dia_grim_falle_halfhalf()
 func void dia_grim_falle_accepr()
 {
 	//AI_Output(other,self,"DIA_Grim_Falle_Accepr_15_00");	//Я готов.
-	//AI_Output(other,self,"DIA_Shrat_ComeWithMe_15_00");	//Что ж, пойдем вместе. Идем!
 	AI_Output(other,self,"DIA_Dusty_LetsGo_15_03");	//Ладно. Пойдем.
 	AI_Output(self,other,"DIA_Grim_Falle_Accepr_06_01");	//Хорошо.
 	Info_ClearChoices(dia_grim_falle);

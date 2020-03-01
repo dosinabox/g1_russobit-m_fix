@@ -5,7 +5,7 @@ instance INFO_BAU_4_EXIT(C_INFO)
 	condition = info_bau_4_exit_condition;
 	information = info_bau_4_exit_info;
 	permanent = 1;
-	description = "ÇÀÊÎÍ×ÈÒÜ ĞÀÇÃÎÂÎĞ";
+	description = DIALOG_ENDE;
 };
 
 

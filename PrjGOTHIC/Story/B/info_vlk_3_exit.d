@@ -5,7 +5,7 @@ instance INFO_VLK_3_EXIT(C_INFO)
 	condition = info_vlk_3_exit_condition;
 	information = info_vlk_3_exit_info;
 	permanent = 1;
-	description = "ÇÀÊÎÍ×ÈÒÜ ĞÀÇÃÎÂÎĞ";
+	description = DIALOG_ENDE;
 };
 
 

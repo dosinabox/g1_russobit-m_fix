@@ -2,9 +2,23 @@
 func void zs_unconscious()
 {
 	//var string beatmsg;
-	if(!Npc_IsPlayer(self) && Npc_HasItems(self,itmw_trainsword))
+	if(!Npc_IsPlayer(self))
 	{
-		Npc_RemoveInvItem(self,itmw_trainsword);
+		if(Npc_HasItems(self,itmw_1h_sledgehammer_01))
+		{
+			Npc_RemoveInvItems(self,itmw_1h_sledgehammer_01,Npc_HasItems(self,itmw_1h_sledgehammer_01));
+		};
+		if(Npc_HasItems(self,itmw_trainsword))
+		{
+			Npc_RemoveInvItems(self,itmw_trainsword,Npc_HasItems(self,itmw_trainsword));
+		};
+		if(Npc_HasItems(self,itmwpickaxe))
+		{
+			if(((self.guild == GIL_SFB) && (self.npctype == NPCTYPE_AMBIENT)) || (self.npctype == NPCTYPE_MINE_AMBIENT))
+			{
+				Npc_RemoveInvItems(self,itmwpickaxe,Npc_HasItems(self,itmwpickaxe));
+			};
+		};
 	};
 	if(self.id == 251)
 	{

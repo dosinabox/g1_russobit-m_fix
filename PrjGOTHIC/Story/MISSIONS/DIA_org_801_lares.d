@@ -142,7 +142,7 @@ func void org_801_lares_bringlist_info()
 	b_printtrademsg1("Отдан список.");
 	b_usefakescroll();
 	AI_Output(self,other,"ORG_801_Lares_BringList_11_04");	//Так, так. Знаешь, что мы сейчас сделаем? Мы его немного подправим, а потом ты отнесешь его в Старый лагерь.
-	//AI_Output(self,other,"ORG_801_Lares_BringList_11_05");	//А потом, когда они доставят товар в шахту, мы просто заберем его себе! Ну, вот, сейчас мы все сделаем... Есть! Вот и списочек. Ты знаешь, что делать.
+//	AI_Output(self,other,"ORG_801_Lares_BringList_11_05");	//А потом, когда они доставят товар в шахту, мы просто заберем его себе! Ну, вот, сейчас мы все сделаем... Есть! Вот и списочек. Ты знаешь, что делать.
 	AI_Output(self,other,"ORG_801_Lares_BringList_11_05_01");	//А потом, когда они доставят товар в шахту, мы просто заберем его себе! Ну, вот, сейчас мы все сделаем...
 	b_usefakescroll();
 	AI_Output(self,other,"ORG_801_Lares_BringList_11_05_02");	//Есть! Вот и списочек. Ты знаешь, что делать.
@@ -467,11 +467,10 @@ func void org_801_lares_reicht_info()
 		AI_Output(self,other,"ORG_801_Lares_Reicht_AUFNAHME_11_00");	//Думаю, да.
 		AI_Output(self,other,"ORG_801_Lares_Reicht_AUFNAHME_11_01");	//Я даже приготовил тебе подарок - доспех, если быть точным. Подарок, конечно, небольшой, но заслуженный.
 		b_printtrademsg1("Получен легкий доспех вора.");
-		hero.guild = GIL_ORG;
+		CreateInvItem(hero,org_armor_l);
+//		AI_EquipArmor(hero,org_armor_l);
 		Npc_SetTrueGuild(hero,GIL_ORG);
-		CreateInvItem(self,org_armor_l);
-		b_giveinvitems(self,hero,org_armor_l,1);
-		AI_EquipArmor(hero,org_armor_l);
+		hero.guild = GIL_ORG;
 		b_givexp(XP_BECOMEBANDIT);
 		b_logentry(CH1_JOINNC,"Ларс принял меня в свою шайку. Отныне Новый лагерь будет моим домом!");
 		Log_SetTopicStatus(CH1_JOINNC,LOG_SUCCESS);

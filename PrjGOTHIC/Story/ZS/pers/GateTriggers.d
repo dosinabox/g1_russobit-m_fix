@@ -10,18 +10,24 @@ func void on_occ_gate_trigger()
 	wache2.aivar[AIV_TRIGGER3] = 1;
 	if(wache1.aivar[AIV_PASSGATE] != TRUE && KAPITEL < 4)
 	{
-		b_fullstop(wache1);
-		AI_StopProcessInfos(wache1);
-		b_intruderalert(wache1,other);
-		b_setattackreason(wache1,AIV_AR_INTRUDER);
-		Npc_SetTarget(wache1,hero);
-		AI_StartState(wache1,zs_attack,1,"");
-		b_fullstop(wache2);
-		AI_StopProcessInfos(wache2);
-		b_intruderalert(wache2,other);
-		b_setattackreason(wache2,AIV_AR_INTRUDER);
-		Npc_SetTarget(wache2,hero);
-		AI_StartState(wache2,zs_attack,1,"");
+		if(!Npc_IsDead(wache1))
+		{
+			b_fullstop(wache1);
+			AI_StopProcessInfos(wache1);
+			b_intruderalert(wache1,other);
+			b_setattackreason(wache1,AIV_AR_INTRUDER);
+			Npc_SetTarget(wache1,hero);
+			AI_StartState(wache1,zs_attack,1,"");
+		};
+		if(!Npc_IsDead(wache2))
+		{
+			b_fullstop(wache2);
+			AI_StopProcessInfos(wache2);
+			b_intruderalert(wache2,other);
+			b_setattackreason(wache2,AIV_AR_INTRUDER);
+			Npc_SetTarget(wache2,hero);
+			AI_StartState(wache2,zs_attack,1,"");
+		};
 	};
 };
 
@@ -56,18 +62,24 @@ func void on_occ_baronsdoor_trigger()
 	wache2.aivar[AIV_TRIGGER3] = 1;
 	if(wache1.aivar[AIV_PASSGATE] != TRUE && KAPITEL < 4)
 	{
-		b_fullstop(wache1);
-		AI_StopProcessInfos(wache1);
-		b_intruderalert(wache1,other);
-		b_setattackreason(wache1,AIV_AR_INTRUDER);
-		Npc_SetTarget(wache1,hero);
-		AI_StartState(wache1,zs_attack,1,"");
-		b_fullstop(wache2);
-		AI_StopProcessInfos(wache2);
-		b_intruderalert(wache2,other);
-		b_setattackreason(wache2,AIV_AR_INTRUDER);
-		Npc_SetTarget(wache2,hero);
-		AI_StartState(wache2,zs_attack,1,"");
+		if(!Npc_IsDead(wache1))
+		{
+			b_fullstop(wache1);
+			AI_StopProcessInfos(wache1);
+			b_intruderalert(wache1,other);
+			b_setattackreason(wache1,AIV_AR_INTRUDER);
+			Npc_SetTarget(wache1,hero);
+			AI_StartState(wache1,zs_attack,1,"");
+		};
+		if(!Npc_IsDead(wache2))
+		{
+			b_fullstop(wache2);
+			AI_StopProcessInfos(wache2);
+			b_intruderalert(wache2,other);
+			b_setattackreason(wache2,AIV_AR_INTRUDER);
+			Npc_SetTarget(wache2,hero);
+			AI_StartState(wache2,zs_attack,1,"");
+		};
 	};
 };
 
@@ -97,18 +109,24 @@ func void on_psi_temple_gate_trigger()
 	wache2 = Hlp_GetNpc(tpl_1442_templer);
 	if(KAPITEL == 1)
 	{
-		b_fullstop(wache1);
-		AI_StopProcessInfos(wache1);
-		b_intruderalert(wache1,other);
-		b_setattackreason(wache1,AIV_AR_INTRUDER);
-		Npc_SetTarget(wache1,hero);
-		AI_StartState(wache1,zs_attack,1,"");
-		b_fullstop(wache2);
-		AI_StopProcessInfos(wache2);
-		b_intruderalert(wache2,other);
-		b_setattackreason(wache2,AIV_AR_INTRUDER);
-		Npc_SetTarget(wache2,hero);
-		AI_StartState(wache2,zs_attack,1,"");
+		if(!Npc_IsDead(wache1))
+		{
+			b_fullstop(wache1);
+			AI_StopProcessInfos(wache1);
+			b_intruderalert(wache1,other);
+			b_setattackreason(wache1,AIV_AR_INTRUDER);
+			Npc_SetTarget(wache1,hero);
+			AI_StartState(wache1,zs_attack,1,"");
+		};
+		if(!Npc_IsDead(wache2))
+		{
+			b_fullstop(wache2);
+			AI_StopProcessInfos(wache2);
+			b_intruderalert(wache2,other);
+			b_setattackreason(wache2,AIV_AR_INTRUDER);
+			Npc_SetTarget(wache2,hero);
+			AI_StartState(wache2,zs_attack,1,"");
+		};
 	};
 };
 
@@ -130,18 +148,24 @@ func void on_nc_mages_trigger()
 	wache2 = Hlp_GetNpc(sld_732_soeldner);
 	if(wache1.aivar[AIV_PASSGATE] != TRUE)
 	{
-		b_fullstop(wache1);
-		AI_StopProcessInfos(wache1);
-		b_intruderalert(wache1,other);
-		b_setattackreason(wache1,AIV_AR_INTRUDER);
-		Npc_SetTarget(wache1,hero);
-		AI_StartState(wache1,zs_attack,1,"");
-		b_fullstop(wache2);
-		AI_StopProcessInfos(wache2);
-		b_intruderalert(wache2,other);
-		b_setattackreason(wache2,AIV_AR_INTRUDER);
-		Npc_SetTarget(wache2,hero);
-		AI_StartState(wache2,zs_attack,1,"");
+		if(!Npc_IsDead(wache1))
+		{
+			b_fullstop(wache1);
+			AI_StopProcessInfos(wache1);
+			b_intruderalert(wache1,other);
+			b_setattackreason(wache1,AIV_AR_INTRUDER);
+			Npc_SetTarget(wache1,hero);
+			AI_StartState(wache1,zs_attack,1,"");
+		};
+		if(!Npc_IsDead(wache2))
+		{
+			b_fullstop(wache2);
+			AI_StopProcessInfos(wache2);
+			b_intruderalert(wache2,other);
+			b_setattackreason(wache2,AIV_AR_INTRUDER);
+			Npc_SetTarget(wache2,hero);
+			AI_StartState(wache2,zs_attack,1,"");
+		};
 	};
 };
 
@@ -153,18 +177,24 @@ func void on_nc_bar_trigger()
 	wache2 = Hlp_GetNpc(org_876_tuersteher);
 	if(wache2.aivar[AIV_PASSGATE] != TRUE)
 	{
-		b_fullstop(wache1);
-		AI_StopProcessInfos(wache1);
-		b_intruderalert(wache1,other);
-		b_setattackreason(wache1,AIV_AR_INTRUDER);
-		Npc_SetTarget(wache1,hero);
-		AI_StartState(wache1,zs_attack,1,"");
-		b_fullstop(wache2);
-		AI_StopProcessInfos(wache2);
-		b_intruderalert(wache2,other);
-		b_setattackreason(wache2,AIV_AR_INTRUDER);
-		Npc_SetTarget(wache2,hero);
-		AI_StartState(wache2,zs_attack,1,"");
+		if(!Npc_IsDead(wache1))
+		{
+			b_fullstop(wache1);
+			AI_StopProcessInfos(wache1);
+			b_intruderalert(wache1,other);
+			b_setattackreason(wache1,AIV_AR_INTRUDER);
+			Npc_SetTarget(wache1,hero);
+			AI_StartState(wache1,zs_attack,1,"");
+		};
+		if(!Npc_IsDead(wache2))
+		{
+			b_fullstop(wache2);
+			AI_StopProcessInfos(wache2);
+			b_intruderalert(wache2,other);
+			b_setattackreason(wache2,AIV_AR_INTRUDER);
+			Npc_SetTarget(wache2,hero);
+			AI_StartState(wache2,zs_attack,1,"");
+		};
 	};
 };
 

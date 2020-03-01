@@ -6,7 +6,7 @@ instance DIA_GORNARAN_EXIT(C_INFO)
 	condition = dia_gornaran_exit_condition;
 	information = dia_gornaran_exit_info;
 	permanent = 1;
-	description = "ÇÀÊÎÍ×ÈÒÜ ĞÀÇÃÎÂÎĞ";
+	description = DIALOG_ENDE;
 };
 
 

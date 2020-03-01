@@ -45,8 +45,6 @@ func void butch_getlost_info()
 	{
 		AI_Output(self,other,"DIA_Butch_GS_01");	//Чего уставился?
 	};
-	//AI_Output(other,self,"DIA_Butch_Hello_15_00");	//Привет. Кто ты?
-	//AI_Output(self,other,"DIA_Butch_Hello_13_01");	//Это тебя не касается! Что-то ты мне совсем не нравишься!
 	if(((BAALKAGAN_VERTEILKRAUT == LOG_RUNNING) || (BAALKAGAN_VERTEILKRAUT == LOG_SUCCESS)) && ((Npc_HasItems(other,itmijoint_1) > 0) || (Npc_HasItems(other,itmijoint_2) > 0) || (Npc_HasItems(other,itmijoint_3) > 0)))
 	{
 		AI_Output(other,self,"Info_Org_13_Krautprobe_15_00");	//Просто подумал, может быть, ты захочешь болотника.

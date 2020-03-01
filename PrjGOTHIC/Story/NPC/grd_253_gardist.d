@@ -30,8 +30,12 @@ instance GRD_253_GARDIST(NPC_DEFAULT)
 
 func void rtn_start_253()
 {
-	ta_smalltalk(0,0,8,0,"OCR_AT_HUT_3");
-	ta_smalltalk(8,0,0,0,"OCR_AT_HUT_3");
+	ta_guard(0,0,1,0,"OCR_OUTSIDE_HUT_63");
+	ta_guard(1,0,2,0,"OCR_OUTSIDE_HUT_77_INSERT");
+	ta_guard(2,0,3,0,"OCR_OUTSIDE_HUT_63");
+	ta_guard(3,0,4,0,"OCR_OUTSIDE_HUT_77_INSERT");
+	ta_sleep(4,0,10,0,"OCR_MAINGATE_GUARDROOM");
+	ta_smalltalk(10,0,0,0,"OCR_AT_HUT_3");
 };
 
 func void rtn_fmtaken_253()

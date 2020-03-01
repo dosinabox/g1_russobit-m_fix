@@ -16,7 +16,7 @@ instance PC_PSIONIC(NPC_DEFAULT)
 	attribute[ATR_HITPOINTS] = 220;
 	protection[PROT_FIRE] = 1000;
 	Mdl_SetVisual(self,"HUMANS.MDS");
-	Mdl_SetVisualBody(self,"hum_body_Naked0",1,0,"Hum_Head_Bald",17,2,nov_armor_m);
+	Mdl_SetVisualBody(self,"hum_body_Naked0",1,0,"Hum_Head_Bald",17,2,nov_armor_h);
 	Mdl_ApplyOverlayMds(self,"Humans_Mage.mds");
 	fight_tactic = FAI_HUMAN_STRONG;
 	aivar[AIV_IMPORTANT] = TRUE;

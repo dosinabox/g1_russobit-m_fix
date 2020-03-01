@@ -209,7 +209,7 @@ func void dia_raven_bindabei_info()
 	b_printtrademsg1("Получена одежда Призрака.");
 	CreateInvItem(self,stt_armor_m);
 	b_giveinvitems(self,hero,stt_armor_m,1);
-	AI_EquipArmor(hero,stt_armor_m);
+//	AI_EquipArmor(hero,stt_armor_m);
 };
 
 instance DIA_RAVEN_SPYSECT(C_INFO)
@@ -309,30 +309,18 @@ func void dia_raven_spybericht_info()
 		if(KAPITEL >= 3)
 		{
 			AI_Output(other,self,"Org_826_Mordrag_RUNNING_15_04");	//Они провели Великую Церемонию.
-			AI_Output(self,other,"DIA_Raven_SpyBericht_10_04");	//Ты хорошо поработал.
-			Npc_ExchangeRoutine(self,"START");
-			RAVEN_SPYSECT = LOG_SUCCESS;
-			b_givexp(XP_REPORTTORAVEN);
-			Log_SetTopicStatus(CH1_GOTOPSI,LOG_SUCCESS);
-			b_logentry(CH1_GOTOPSI,"Равен отблагодарил меня на словах! Честно говоря, у меня несколько иные понятия о благодарности. Теперь я буду действовать только по своему усмотрению.");
 		}
 		else
 		{
 			AI_Output(other,self,"DIA_Raven_SpyBericht_15_02");	//Им нужны яйца ползунов, чтобы получить особое зелье. С его помощью они хотят укрепить силу духа и вызвать Спящего. Я добыл яйца у королевы ползунов.
-			if(CORKALOM_BRINGMCQBALLS != LOG_SUCCESS)
-			{
-				AI_Output(self,other,"DIA_Raven_SpyBericht_10_03");	//Интересно. Хотелось бы узнать, сработает ли все это. Отнеси яйца в храм.
-			}
-			else
-			{
-				AI_Output(self,other,"DIA_Raven_SpyBericht_10_04");	//Ты хорошо поработал.
-				Npc_ExchangeRoutine(self,"START");
-				RAVEN_SPYSECT = LOG_SUCCESS;
-				b_givexp(XP_REPORTTORAVEN);
-				Log_SetTopicStatus(CH1_GOTOPSI,LOG_SUCCESS);
-				b_logentry(CH1_GOTOPSI,"Равен отблагодарил меня на словах! Честно говоря, у меня несколько иные понятия о благодарности. Теперь я буду действовать только по своему усмотрению.");
-			};
+			AI_Output(self,other,"DIA_Raven_SpyBericht_10_03");	//Интересно. Хотелось бы узнать, сработает ли все это. Отнеси яйца в храм.
 		};
+		AI_Output(self,other,"DIA_Raven_SpyBericht_10_04");	//Ты хорошо поработал.
+		Npc_ExchangeRoutine(self,"START");
+		RAVEN_SPYSECT = LOG_SUCCESS;
+		b_givexp(XP_REPORTTORAVEN);
+		Log_SetTopicStatus(CH1_GOTOPSI,LOG_SUCCESS);
+		b_logentry(CH1_GOTOPSI,"Равен отблагодарил меня на словах! Честно говоря, у меня несколько иные понятия о благодарности. Теперь я буду действовать только по своему усмотрению.");
 	}
 	else
 	{

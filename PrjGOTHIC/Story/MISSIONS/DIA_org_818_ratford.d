@@ -318,8 +318,10 @@ func void org_818_ratford_quest2_info()
 func void org_818_ratford_back()
 {
 	Info_ClearChoices(org_818_ratford_quest2);
+	Npc_RemoveInvItem(self,itwrworldmap);
 	Npc_RemoveInvItem(self,itwrommap);
 	Npc_RemoveInvItem(self,itwrfocusmappsi);
+	Npc_RemoveInvItem(self,itwrfocimap);
 };
 
 func void org_818_ratford_itwrworldmap()
@@ -339,6 +341,7 @@ func void org_818_ratford_itwrworldmap()
 	Log_SetTopicStatus(RATFORDMAPS,LOG_SUCCESS);
 	RATFORD_ITWRWORLDMAP = TRUE;
 	b_givexp(200);
+	Npc_RemoveInvItem(self,itwrworldmap);
 };
 
 func void org_818_ratford_itwrommap()
@@ -387,5 +390,6 @@ func void org_818_ratford_itwrfocimap()
 	b_logentry(RATFORDMAPS,"Хоть карта Сатураса и довольно старая, но Ретфорду она будет очень полезна.");
 	Log_SetTopicStatus(RATFORDMAPS,LOG_SUCCESS);
 	b_givexp(200);
+	Npc_RemoveInvItem(self,itwrfocimap);
 };
 

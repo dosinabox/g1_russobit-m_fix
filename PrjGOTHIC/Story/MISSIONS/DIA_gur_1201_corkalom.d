@@ -183,8 +183,8 @@ func void gur_1201_corkalom_crawlerzangen_info()
 	{
 		AI_Output(self,other,"GUR_1201_CorKalom_Crawlerzangen_10_01");	//Очень хорошо. Вот, возьми за это некоторые из моих лучших зелий.
 		b_printtrademsg2("Получено 10 зелий магической энергии.");
-		CreateInvItems(self,itfo_potion_mana_03,5);
-		b_giveinvitems(self,hero,itfo_potion_mana_03,5);
+		CreateInvItems(self,itfo_potion_mana_03,10);
+		b_giveinvitems(self,hero,itfo_potion_mana_03,10);
 	}
 	else if(Npc_HasItems(other,itat_crawler_01) > 15)
 	{
@@ -236,7 +236,9 @@ func int gur_1201_corkalom_joinpsi_condition()
 func void gur_1201_corkalom_joinpsi_info()
 {
 	var int counter;
+	var C_NPC fortuno;
 	counter = 0;
+	fortuno = Hlp_GetNpc(nov_1357_fortuno);
 	AI_Output(other,self,"GUR_1201_CorKalom_JoinPSI_15_00");	//По-моему, я смог доказать Идолам свою преданность.
 	if(Npc_KnowsInfo(hero,dia_baalorun_gotweed))
 	{
@@ -269,14 +271,11 @@ func void gur_1201_corkalom_joinpsi_info()
 	{
 		if(counter >= 4)
 		{
-			var C_NPC fortuno;
-			fortuno = Hlp_GetNpc(nov_1357_fortuno);
 			AI_Output(self,other,"GUR_1201_CorKalom_JoinPSI_10_08");	//Хорошо. Слов Идолов мне вполне достаточно.
 			AI_Output(self,other,"GUR_1201_CorKalom_JoinPSI_10_09");	//Вот, возьми эту одежду. А теперь иди и постарайся быть полезным.
-			b_printtrademsg1("Получен легкий доспех послушника.");
+			b_printtrademsg1("Получена одежда послушника.");
 			CreateInvItem(hero,nov_armor_m);
-			//b_giveinvitems(self,hero,nov_armor_m,1);
-			AI_EquipArmor(hero,nov_armor_m);
+//			AI_EquipArmor(hero,nov_armor_m);
 			Npc_SetTrueGuild(hero,GIL_NOV);
 			hero.guild = GIL_NOV;
 			CreateInvItem(fortuno,alchemy_joint2);

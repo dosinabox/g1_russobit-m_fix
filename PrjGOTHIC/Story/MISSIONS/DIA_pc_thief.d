@@ -49,12 +49,6 @@ func int info_diego_gamestart_condition()
 
 func void info_diego_gamestart_info()
 {
-	AI_Output(self,hero,"Info_Diego_Gamestart_11_00");	//Меня зовут Диего.
-	AI_Output(hero,self,"Info_Diego_Gamestart_15_01");	//А меня...
-	AI_Output(self,hero,"Info_Diego_Gamestart_11_02");	//Я не хочу знать, кто ты такой. Ты только что появился здесь, а я присматриваю за новичками. Для начала хватит и этого.
-	AI_Output(self,hero,"Info_Diego_Gamestart_11_03");	//Если ты хочешь остаться в живых в этом гиблом месте, тебе придется поговорить со мной. Впрочем, умереть ты можешь в любое время, и кто я такой, чтобы помешать тебе? Ну, так что ты думаешь?
-	Npc_ExchangeRoutine(cs_eskorte1,"flee");
-	Npc_ExchangeRoutine(cs_eskorte2,"flee");
 	//уровень сложности меняется тут
 	//
 	//повышенная:
@@ -76,6 +70,12 @@ func void info_diego_gamestart_info()
 	DEX_EXTRAKT_VAL = 5;
 	DEX_ELIXIER_VAL = 8;
 	//
+	AI_Output(self,hero,"Info_Diego_Gamestart_11_00");	//Меня зовут Диего.
+	AI_Output(hero,self,"Info_Diego_Gamestart_15_01");	//А меня...
+	AI_Output(self,hero,"Info_Diego_Gamestart_11_02");	//Я не хочу знать, кто ты такой. Ты только что появился здесь, а я присматриваю за новичками. Для начала хватит и этого.
+	AI_Output(self,hero,"Info_Diego_Gamestart_11_03");	//Если ты хочешь остаться в живых в этом гиблом месте, тебе придется поговорить со мной. Впрочем, умереть ты можешь в любое время, и кто я такой, чтобы помешать тебе? Ну, так что ты думаешь?
+	Npc_ExchangeRoutine(cs_eskorte1,"flee");
+	Npc_ExchangeRoutine(cs_eskorte2,"flee");
 	b_kapitelwechsel(1);
 };
 
@@ -624,18 +624,18 @@ func void info_diego_teachers_info()
 var int diego_merke_str;
 var int diego_merke_dex;
 
-instance INFO_DIEGO_TEACH(C_INFO)
+instance INFO_DIEGO_TEACH_PRE(C_INFO)
 {
 	npc = pc_thief;
 	nr = 100;
-	condition = info_diego_teach_condition;
-	information = info_diego_teach_info;
-	permanent = 1;
+	condition = info_diego_teach_pre_condition;
+	information = info_diego_teach_pre_info;
+	permanent = 0;
 	description = "Ты можешь научить меня чему-нибудь?";
 };
 
 
-func int info_diego_teach_condition()
+func int info_diego_teach_pre_condition()
 {
 	if(Npc_KnowsInfo(hero,info_diego_teachers))
 	{
@@ -643,16 +643,37 @@ func int info_diego_teach_condition()
 	};
 };
 
-func void info_diego_teach_info()
+func void info_diego_teach_pre_info()
 {
-	if(LOG_DIEGOTRAIN == FALSE)
-	{
-		Log_CreateTopic(GE_TEACHEROC,LOG_NOTE);
-		b_logentry(GE_TEACHEROC,"Диего может помочь стать более сильным и ловким.");
-		LOG_DIEGOTRAIN = TRUE;
-	};
 	AI_Output(hero,self,"Info_Diego_Teach_15_00");	//Ты можешь научить меня чему-нибудь?
 	AI_Output(self,hero,"Info_Diego_Teach_11_01");	//Да. Я могу научить тебя как повысить силу и ловкость.
+	Log_CreateTopic(GE_TEACHEROC,LOG_NOTE);
+	b_logentry(GE_TEACHEROC,"Диего может помочь стать более сильным и ловким.");
+};
+
+
+instance INFO_DIEGO_TEACH(C_INFO)
+{
+	npc = pc_thief;
+	nr = 100;
+	condition = info_diego_teach_condition;
+	information = info_diego_teach_info;
+	permanent = 1;
+	description = DIALOG_LEARN;
+};
+
+
+func int info_diego_teach_condition()
+{
+	if(Npc_KnowsInfo(hero,info_diego_teach_pre))
+	{
+		return 1;
+	};
+};
+
+func void info_diego_teach_info()
+{
+	AI_Output(other,self,"ORG_801_Lares_Teach_15_00");	//Я хочу улучшить свои навыки.
 	DIEGO_MERKE_STR = hero.attribute[ATR_STRENGTH];
 	DIEGO_MERKE_DEX = hero.attribute[ATR_DEXTERITY];
 	b_diegolearn();
@@ -668,13 +689,16 @@ func void info_diego_teach_back()
 	{
 		AI_Output(self,hero,"Info_Diego_Teach_BACK_11_01");	//Твои навыки стрельбы из лука и арбалета стали лучше.
 	};
-	AI_Output(self,hero,"Info_Diego_Teach_BACK_11_02");	//Заходи еще, тебе многому нужно научиться!
+	if(hero.attribute[ATR_STRENGTH] < 100 || hero.attribute[ATR_DEXTERITY] < 100)
+	{
+		AI_Output(self,hero,"Info_Diego_Teach_BACK_11_02");	//Заходи еще, тебе многому нужно научиться!
+	};
 	Info_ClearChoices(info_diego_teach);
 };
 
 func void info_diego_teach_str_1()
 {
-	if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF)
+	if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF || (KAPITEL > 3 && DIFF_HARD == FALSE))
 	{
 		b_buyattributepoints(other,ATR_STRENGTH,LPCOST_ATTRIBUTE_STRENGTH);
 	}
@@ -697,7 +721,7 @@ func void info_diego_teach_str_1()
 
 func void info_diego_teach_str_5()
 {
-	if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF)
+	if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF || (KAPITEL > 3 && DIFF_HARD == FALSE))
 	{
 		b_buyattributepoints(other,ATR_STRENGTH,5 * LPCOST_ATTRIBUTE_STRENGTH);
 	}
@@ -720,7 +744,7 @@ func void info_diego_teach_str_5()
 
 func void info_diego_teach_dex_1()
 {
-	if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF)
+	if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF || KAPITEL > 3)
 	{
 		b_buyattributepoints(other,ATR_DEXTERITY,LPCOST_ATTRIBUTE_DEXTERITY);
 	}
@@ -743,7 +767,7 @@ func void info_diego_teach_dex_1()
 
 func void info_diego_teach_dex_5()
 {
-	if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF)
+	if(hero.guild == GIL_STT || hero.guild == GIL_GRD || hero.guild == GIL_KDF || KAPITEL > 3)
 	{
 		b_buyattributepoints(other,ATR_DEXTERITY,5 * LPCOST_ATTRIBUTE_DEXTERITY);
 	}
@@ -928,7 +952,7 @@ instance INFO_DIEGO_JOINANALYZE(C_INFO)
 
 func int info_diego_joinanalyze_condition()
 {
-	if(Npc_KnowsInfo(hero,info_diego_rules) && (Npc_GetTrueGuild(hero) == GIL_NONE) && (OLDHEROGUILD == 0)  && (DIEGO_GOMEZAUDIENCE == FALSE))
+	if(Npc_KnowsInfo(hero,info_diego_rules) && (Npc_GetTrueGuild(hero) == GIL_NONE) && (OLDHEROGUILD == 0) && (DIEGO_GOMEZAUDIENCE == FALSE))
 	{
 		return 1;
 	};
@@ -1130,7 +1154,7 @@ func void pc_thief_armor_info()
 		b_giveinvitems(hero,self,itminugget,VALUE_STT_ARMOR_H);
 		b_printtrademsg2("Получен доспех Призрака.");
 		CreateInvItem(hero,stt_armor_h);
-		AI_EquipArmor(hero,stt_armor_h);
+//		AI_EquipArmor(hero,stt_armor_h);
 	}
 	else
 	{

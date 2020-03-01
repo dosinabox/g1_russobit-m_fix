@@ -212,7 +212,7 @@ func void dia_wolf_sellarmor_m()
 		b_giveinvitems(hero,self,itminugget,VALUE_ORG_ARMOR_M);
 		CreateInvItem(self,org_armor_m);
 		b_giveinvitems(self,hero,org_armor_m,1);
-		AI_EquipArmor(hero,org_armor_m);
+//		AI_EquipArmor(hero,org_armor_m);
 		WOLF_ARMOR_M_WAS_BOUGHT = 1;
 	};
 };
@@ -231,7 +231,7 @@ func void dia_wolf_sellarmor_h()
 		b_giveinvitems(hero,self,itminugget,VALUE_ORG_ARMOR_H);
 		CreateInvItem(hero,org_armor_h);
 		b_printtrademsg2("Получен тяжелый доспех вора.");
-		AI_EquipArmor(hero,org_armor_h);
+//		AI_EquipArmor(hero,org_armor_h);
 		WOLF_ARMOR_H_WAS_BOUGHT = 1;
 	};
 };
@@ -465,13 +465,10 @@ func void info_wolf_skin_info()
 	AI_Output(self,hero,"Info_Wolf_SKIN_09_02");	//Довольно просто. Спинные пластины скрепляются с основным панцирем только по краям.
 	AI_Output(self,hero,"Info_Wolf_SKIN_09_03");	//Их можно срезать, использовав очень острый нож.
 	AI_Output(hero,self,"Info_Wolf_SKIN_15_04");	//Я понял! Посмотрим, смогу ли я найти эти пластины.
-	KNOWS_GETMCPLATES = TRUE;
-	PrintScreen("Навык: добыча панцирных пластин",-1,-1,"FONT_OLD_20_WHITE.TGA",3);
+	b_learn_trophies_plates();
 	Log_CreateTopic(CH4_MCPLATEARMOR,LOG_MISSION);
 	Log_SetTopicStatus(CH4_MCPLATEARMOR,LOG_RUNNING);
 	b_logentry(CH4_MCPLATEARMOR,"Вор по имени Волк из Нового лагеря предложил мне добыть панцирные пластины ползунов, из которых он сможет сделать доспех. Он рассказал мне, как добывать эти пластины.");
-	Log_CreateTopic(GE_ANIMALTROPHIES,LOG_NOTE);
-	b_logentry(GE_ANIMALTROPHIES,"Навык добычи панцирных пластин ползунов-воинов.");
 	AI_StopProcessInfos(self);
 };
 
@@ -625,7 +622,7 @@ func void info_wolf_armorfinished_info()
 	b_givexp(XP_GORMCPLATEARMOR);
 	CreateInvItem(self,crw_armor_h);
 	b_giveinvitems(self,hero,crw_armor_h,1);
-	AI_EquipArmor(hero,crw_armor_h);
+//	AI_EquipArmor(hero,crw_armor_h);
 };
 
 

@@ -234,54 +234,57 @@ func void b_killnpc(var int npcinstance)
 	var int iteminstance;
 	printdebugnpc(PD_ZS_DETAIL,"B_KillNpc");
 	npc = Hlp_GetNpc(npcinstance);
-	npc.flags = 0;
-	CreateInvItem(npc,itmi_stuff_oldcoin_01);
-	Npc_ChangeAttribute(npc,ATR_HITPOINTS,-npc.attribute[ATR_HITPOINTS_MAX]);
-	if(Npc_GetInvItemBySlot(npc,INV_WEAPON,1))
+	if(!Npc_IsDead(npc))
 	{
-		printdebugnpc(PD_ZS_DETAIL,"...Waffe in Slot 1 gefunden!");
-		iteminstance = Hlp_GetInstanceID(item);
-		Npc_RemoveInvItem(npc,iteminstance);
-	};
-	if(Npc_GetInvItemBySlot(npc,INV_WEAPON,2))
-	{
-		printdebugnpc(PD_ZS_DETAIL,"...Waffe in Slot 2 gefunden!");
-		iteminstance = Hlp_GetInstanceID(item);
-		Npc_RemoveInvItem(npc,iteminstance);
-	};
-	Npc_RemoveInvItem(npc,itarrune_2_1_firebolt);
-	Npc_RemoveInvItem(npc,itarrune_2_2_fireball);
-	Npc_RemoveInvItems(npc,itamarrow,Npc_HasItems(npc,itamarrow));
-	Npc_RemoveInvItems(npc,itambolt,Npc_HasItems(npc,itambolt));
-	if(npc.guild == GIL_KDF)
-	{
-		Npc_RemoveInvItems(npc,itfo_potion_health_01,Npc_HasItems(npc,itfo_potion_health_01));
-		Npc_RemoveInvItems(npc,itfo_potion_health_02,Npc_HasItems(npc,itfo_potion_health_02));
-		Npc_RemoveInvItems(npc,itfo_potion_health_03,Npc_HasItems(npc,itfo_potion_health_03));
-		Npc_RemoveInvItems(npc,itfo_potion_mana_01,Npc_HasItems(npc,itfo_potion_mana_01));
-		Npc_RemoveInvItems(npc,itfo_potion_mana_02,Npc_HasItems(npc,itfo_potion_mana_02));
-		Npc_RemoveInvItems(npc,itfo_potion_mana_03,Npc_HasItems(npc,itfo_potion_mana_03));
-		Npc_RemoveInvItem(npc,schutzring_total2);
-		Npc_RemoveInvItem(npc,schutzring_magie2_fire2);
-	}
-	else if(npc.guild == GIL_SFB)
-	{
-		Npc_RemoveInvItem(npc,itmwpickaxe);
-		Npc_RemoveInvItem(npc,itmw_1h_nailmace_01);
-		Npc_RemoveInvItem(npc,itmw_1h_hatchet_01);
-		Npc_RemoveInvItem(npc,itmw_1h_sword_short_01);
-	}
-	else if(npc.guild == GIL_SLD)
-	{
-		Npc_RemoveInvItem(npc,itrw_bow_long_01);
-		Npc_RemoveInvItem(npc,itmw_1h_mace_war_03);
-		Npc_RemoveInvItem(npc,itmw_2h_axe_heavy_02);
-	}
-	else if(npc.guild == GIL_ORG)
-	{
-		Npc_RemoveInvItem(npc,itmw_1h_mace_03);
-		Npc_RemoveInvItem(npc,itmw_1h_mace_war_01);
-		Npc_RemoveInvItem(npc,itrw_bow_long_01);
+		npc.flags = 0;
+		CreateInvItem(npc,itmi_stuff_oldcoin_01);
+		Npc_ChangeAttribute(npc,ATR_HITPOINTS,-npc.attribute[ATR_HITPOINTS_MAX]);
+		if(Npc_GetInvItemBySlot(npc,INV_WEAPON,1))
+		{
+			printdebugnpc(PD_ZS_DETAIL,"...Waffe in Slot 1 gefunden!");
+			iteminstance = Hlp_GetInstanceID(item);
+			Npc_RemoveInvItem(npc,iteminstance);
+		};
+		if(Npc_GetInvItemBySlot(npc,INV_WEAPON,2))
+		{
+			printdebugnpc(PD_ZS_DETAIL,"...Waffe in Slot 2 gefunden!");
+			iteminstance = Hlp_GetInstanceID(item);
+			Npc_RemoveInvItem(npc,iteminstance);
+		};
+		Npc_RemoveInvItem(npc,itarrune_2_1_firebolt);
+		Npc_RemoveInvItem(npc,itarrune_2_2_fireball);
+		Npc_RemoveInvItems(npc,itamarrow,Npc_HasItems(npc,itamarrow));
+		Npc_RemoveInvItems(npc,itambolt,Npc_HasItems(npc,itambolt));
+		if(npc.guild == GIL_KDF)
+		{
+			Npc_RemoveInvItems(npc,itfo_potion_health_01,Npc_HasItems(npc,itfo_potion_health_01));
+			Npc_RemoveInvItems(npc,itfo_potion_health_02,Npc_HasItems(npc,itfo_potion_health_02));
+			Npc_RemoveInvItems(npc,itfo_potion_health_03,Npc_HasItems(npc,itfo_potion_health_03));
+			Npc_RemoveInvItems(npc,itfo_potion_mana_01,Npc_HasItems(npc,itfo_potion_mana_01));
+			Npc_RemoveInvItems(npc,itfo_potion_mana_02,Npc_HasItems(npc,itfo_potion_mana_02));
+			Npc_RemoveInvItems(npc,itfo_potion_mana_03,Npc_HasItems(npc,itfo_potion_mana_03));
+			Npc_RemoveInvItem(npc,schutzring_total2);
+			Npc_RemoveInvItem(npc,schutzring_magie2_fire2);
+		}
+		else if(npc.guild == GIL_SFB)
+		{
+			Npc_RemoveInvItem(npc,itmwpickaxe);
+			Npc_RemoveInvItem(npc,itmw_1h_nailmace_01);
+			Npc_RemoveInvItem(npc,itmw_1h_hatchet_01);
+			Npc_RemoveInvItem(npc,itmw_1h_sword_short_01);
+		}
+		else if(npc.guild == GIL_SLD)
+		{
+			Npc_RemoveInvItem(npc,itrw_bow_long_01);
+			Npc_RemoveInvItem(npc,itmw_1h_mace_war_03);
+			Npc_RemoveInvItem(npc,itmw_2h_axe_heavy_02);
+		}
+		else if(npc.guild == GIL_ORG)
+		{
+			Npc_RemoveInvItem(npc,itmw_1h_mace_03);
+			Npc_RemoveInvItem(npc,itmw_1h_mace_war_01);
+			Npc_RemoveInvItem(npc,itrw_bow_long_01);
+		};
 	};
 };
 
@@ -338,7 +341,10 @@ func void b_clearimmortal(var int npcinstance)
 	var C_NPC npc;
 	printdebugnpc(PD_ZS_DETAIL,"B_ClearImmortal");
 	npc = Hlp_GetNpc(npcinstance);
-	npc.flags = 0;
+	if(npc.flags == NPC_FLAG_IMMORTAL)
+	{
+		npc.flags = 0;
+	};
 };
 
 func void b_setnpctype(var int npcinstance,var int newnpctype)
@@ -472,3 +478,83 @@ func void b_printguildcondition(var int level)
 	PrintScreen(msg,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",_TIME_MESSAGE_JOINCAMP);
 };
 
+var int knows_getteeth;
+var int knows_getfur;
+var int knows_getclaws;
+var int knows_gethide;
+var int knows_getbfsting;
+var int knows_getmcplates;
+var int knows_getmcmandibles;
+var int knows_getulumulu;
+
+func void b_learn_trophies_teeth()
+{
+	PrintScreen("Навык: добыча клыков",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	KNOWS_GETTEETH = TRUE;
+	Log_CreateTopic(GE_ANIMALTROPHIES,LOG_NOTE);
+	b_logentry(GE_ANIMALTROPHIES,"Навык добычи клыков: волк, орочья собака, глорх, жерх, ищейка, мракорис.");
+	Npc_SetTalentSkill(hero,NPC_TALENT_FIREMASTER,1);
+};
+
+func void b_learn_trophies_fur()
+{
+	PrintScreen("Навык: добыча шкур",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	KNOWS_GETFUR = TRUE;
+	Log_CreateTopic(GE_ANIMALTROPHIES,LOG_NOTE);
+	b_logentry(GE_ANIMALTROPHIES,"Навык добычи шкур: волк, орочья собака, мракорис, тролль.");
+	Npc_SetTalentSkill(hero,NPC_TALENT_FIREMASTER,1);
+};
+
+func void b_learn_trophies_claws()
+{
+	PrintScreen("Навык: добыча когтей",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	KNOWS_GETCLAWS = TRUE;
+	Log_CreateTopic(GE_ANIMALTROPHIES,LOG_NOTE);
+	b_logentry(GE_ANIMALTROPHIES,"Навык добычи когтей: ящерица, глорх, шныг, жерх, штек.");
+	Npc_SetTalentSkill(hero,NPC_TALENT_FIREMASTER,1);
+};
+
+func void b_learn_trophies_reptilefur()
+{
+	PrintScreen("Навык: добыча шкур рептилий",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	KNOWS_GETHIDE = TRUE;
+	Log_CreateTopic(GE_ANIMALTROPHIES,LOG_NOTE);
+	b_logentry(GE_ANIMALTROPHIES,"Навык добычи шкур рептилий: шныг, болотожор.");
+	Npc_SetTalentSkill(hero,NPC_TALENT_FIREMASTER,1);
+};
+
+func void b_learn_trophies_sting()
+{
+	PrintScreen("Навык: добыча жала шершня",-1,-1,"FONT_OLD_20_WHITE.TGA",10);
+	KNOWS_GETBFSTING = TRUE;
+	Log_CreateTopic(GE_ANIMALTROPHIES,LOG_NOTE);
+	b_logentry(GE_ANIMALTROPHIES,"Навык добычи жала шершня.");
+	Npc_SetTalentSkill(hero,NPC_TALENT_FIREMASTER,1);
+};
+
+func void b_learn_trophies_plates()
+{
+	PrintScreen("Навык: добыча панцирных пластин",-1,-1,"FONT_OLD_20_WHITE.TGA",3);
+	KNOWS_GETMCPLATES = TRUE;
+	Log_CreateTopic(GE_ANIMALTROPHIES,LOG_NOTE);
+	b_logentry(GE_ANIMALTROPHIES,"Навык добычи панцирных пластин ползунов-воинов.");
+	Npc_SetTalentSkill(hero,NPC_TALENT_FIREMASTER,1);
+};
+
+func void b_learn_trophies_mandibles()
+{
+	PrintScreen("Навык: добыча челюстей ползунов",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	KNOWS_GETMCMANDIBLES = TRUE;
+	Log_CreateTopic(GE_ANIMALTROPHIES,LOG_NOTE);
+	b_logentry(GE_ANIMALTROPHIES,"Навык добычи челюстей ползунов.");
+	Npc_SetTalentSkill(hero,NPC_TALENT_FIREMASTER,1);
+};
+
+func void b_learn_trophies_ulumulu()
+{
+	PrintScreen("Навык: добыча особых трофеев",-1,-1,"FONT_OLD_20_WHITE.TGA",2);
+	KNOWS_GETULUMULU = TRUE;
+	Log_CreateTopic(GE_ANIMALTROPHIES,LOG_NOTE);
+	b_logentry(GE_ANIMALTROPHIES,"Навык добычи особых трофеев: язык огненной ящерицы, рог мракориса, клык болотожора и клык тролля.");
+	Npc_SetTalentSkill(hero,NPC_TALENT_FIREMASTER,1);
+};

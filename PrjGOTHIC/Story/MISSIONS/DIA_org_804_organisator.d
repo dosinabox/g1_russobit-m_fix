@@ -21,6 +21,29 @@ func void org_804_organisator_exit_info()
 };
 
 
+instance ORG_804_ORGANISATOR_HELLO(C_INFO)
+{
+	npc = org_804_organisator;
+	nr = 1;
+	condition = org_804_organisator_hello_condition;
+	information = org_804_organisator_hello_info;
+	permanent = 1;
+	description = "Привет. Кто ты?";
+};
+
+
+func int org_804_organisator_hello_condition()
+{
+	return 1;
+};
+
+func void org_804_organisator_hello_info()
+{
+	AI_Output(other,self,"DIA_Butch_Hello_15_00");	//Привет. Кто ты?
+	AI_Output(self,other,"DIA_Butch_Hello_13_01");	//Это тебя не касается! Что-то ты мне совсем не нравишься!
+	AI_StopProcessInfos(self);
+};
+
 instance ORG_804_ORGANISATOR_GREET(C_INFO)
 {
 	npc = org_804_organisator;

@@ -160,6 +160,12 @@ func void info_kirgo_chargereal_info()
 	else
 	{
 		AI_Output(self,other,"Info_Kirgo_ChargeREAL_05_01");	//Следуй за мной!
+		if(self.attribute[ATR_HITPOINTS] < self.attribute[ATR_HITPOINTS_MAX])
+		{
+			self.attribute[ATR_HITPOINTS] = self.attribute[ATR_HITPOINTS_MAX];
+			CreateInvItem(self,itfo_potion_health_03);
+			AI_UseItem(self,itfo_potion_health_03);
+		};
 		AI_StopProcessInfos(self);
 		KIRGO_CHARGED = TRUE;
 		self.attribute[ATR_HITPOINTS] = 160;
@@ -194,6 +200,12 @@ func int info_kirgo_inarena_condition()
 
 func void info_kirgo_inarena_info()
 {
+	if(self.attribute[ATR_HITPOINTS] < self.attribute[ATR_HITPOINTS_MAX])
+	{
+		self.attribute[ATR_HITPOINTS] = self.attribute[ATR_HITPOINTS_MAX];
+		CreateInvItem(self,itfo_potion_health_03);
+		AI_UseItem(self,itfo_potion_health_03);
+	};
 	if(!Npc_HasItems(self,itmw_kirgo) && !Npc_HasItems(self,itmw_1h_sword_01))
 	{
 		CreateInvItem(self,itmw_1h_sword_01);

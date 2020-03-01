@@ -746,7 +746,7 @@ func void kdw_600_saturas_kdwaufnahme_info()
 	AI_Output(self,other,"KDW_600_Saturas_KDWAUFNAHME_Info_14_14");	//Возьми это одеяние и носи его в знак союза со священной Водой и с Аданосом.
 	b_printtrademsg1("Получена мантия мага Воды.");
 	CreateInvItem(hero,kdw_armor_l);
-	AI_EquipArmor(hero,kdw_armor_l);
+//	AI_EquipArmor(hero,kdw_armor_l);
 	Snd_Play("MFX_Heal_Cast");
 	Npc_SetTrueGuild(hero,GIL_KDW);
 	hero.guild = GIL_KDW;
@@ -790,11 +790,6 @@ func void kdw_600_saturas_lesson_info()
 	else if(Npc_GetTalentSkill(hero,NPC_TALENT_MAGE) == 4)
 	{
 		AI_Output(self,other,"KDW_600_Saturas_LESSON_Info_14_03");	//Я могу посвятить тебя в тот Круг магии, который тебе еще неизвестен, но только тогда, когда ты будешь готов.
-	}
-	else
-	{
-		AI_Output(self,other,"KDW_600_Saturas_LESSON_Info_14_04");	//Ты уже посвящен в Пятый Круг магии! Наши знания равны.
-		AI_Output(self,other,"KDW_600_Saturas_LESSON_Info_14_05");	//Я не смогу ничему научить тебя.
 	};
 	Log_CreateTopic(GE_TEACHERNC,LOG_NOTE);
 	b_logentry(GE_TEACHERNC,"Сатурас, глава магов Воды, может посвятить меня в тайны Кругов магии. Я смогу найти его у пентаграммы на втором уровне Нового лагеря.");
@@ -1027,7 +1022,7 @@ func void kdw_600_saturas_heavyarmor_info()
 		b_printtrademsg2("Получена великая мантия мага Воды.");
 		Npc_RemoveInvItems(hero,itminugget,VALUE_KDW_ARMOR_H);
 		CreateInvItems(hero,kdw_armor_h,1);
-		AI_EquipArmor(hero,kdw_armor_h);
+//		AI_EquipArmor(hero,kdw_armor_h);
 		KDW_ARMOR_H_WAS_BOUGHT = 1;
 	};
 };
@@ -1390,12 +1385,39 @@ func void kdw_600_saturas_hogeaufnahmeteil2_info()
 	AI_Output(self,other,"KDW_600_Saturas_KDWAUFNAHME_Info_14_14");	//Возьми это одеяние и носи его в знак союза со священной Водой и с Аданосом.
 	b_printtrademsg1("Получена мантия мага Воды.");
 	CreateInvItem(hero,kdw_armor_l);
-	AI_EquipArmor(hero,kdw_armor_l);
+//	AI_EquipArmor(hero,kdw_armor_l);
 	Snd_Play("MFX_Heal_Cast");
 	Npc_SetTrueGuild(hero,GIL_KDW);
 	hero.guild = GIL_KDW;
 	Log_CreateTopic(CH4_SLDTOKDW,LOG_NOTE);
 	b_logentry(CH4_SLDTOKDW,"Сатурас принял меня в Круг магов Воды.");
 	AI_StopProcessInfos(self);
+};
+
+instance KDW_600_SATURAS_NOLESSON(C_INFO)
+{
+	npc = kdw_600_saturas;
+	nr = 100;
+	condition = kdw_600_saturas_nolesson_condition;
+	information = kdw_600_saturas_nolesson_info;
+	important = 0;
+	permanent = 0;
+	description = "Научи меня использовать магию рун.";
+};
+
+
+func int kdw_600_saturas_nolesson_condition()
+{
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_MAGE) >= 5)
+	{
+		return TRUE;
+	};
+};
+
+func void kdw_600_saturas_nolesson_info()
+{
+	AI_Output(other,self,"Gur_1208_BaalCadar_FIRSTTEST_Info_15_01");	//Научи меня использовать магию рун.
+	AI_Output(self,other,"KDW_600_Saturas_LESSON_Info_14_04");	//Ты уже посвящен в Пятый Круг магии! Наши знания равны.
+	AI_Output(self,other,"KDW_600_Saturas_LESSON_Info_14_05");	//Я не смогу ничему научить тебя.
 };
 

@@ -5,7 +5,7 @@ instance INFO_TPL_8_EXIT(C_INFO)
 	condition = info_tpl_8_exit_condition;
 	information = info_tpl_8_exit_info;
 	permanent = 1;
-	description = "ÇÀÊÎÍ×ÈÒÜ ĞÀÇÃÎÂÎĞ";
+	description = DIALOG_ENDE;
 };
 
 

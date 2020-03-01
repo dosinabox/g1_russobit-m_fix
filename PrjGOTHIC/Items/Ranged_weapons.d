@@ -441,7 +441,7 @@ instance ITRW_CROSSBOW_01(C_ITEM)
 
 instance ITRW_CROSSBOW_02(C_ITEM)
 {
-	name = "Стандартный арбалет";
+	name = "Охотничий арбалет";
 	mainflag = ITEM_KAT_FF;
 	flags = ITEM_CROSSBOW;
 	material = MAT_WOOD;

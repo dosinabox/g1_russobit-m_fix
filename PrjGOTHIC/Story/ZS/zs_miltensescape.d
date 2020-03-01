@@ -12,7 +12,7 @@ func void zs_miltensescape()
 
 func void zs_miltensescape_loop()
 {
-    Snd_Play("MFX_TELEPORT_INVEST");
+	Snd_Play("MFX_TELEPORT_INVEST");
 	AI_PlayAni(self,"T_STAND_2_TELEPORT");
 	AI_Wait(self,2);
 	AI_PlayAni(self,"T_TELEPORT_RANDOM");

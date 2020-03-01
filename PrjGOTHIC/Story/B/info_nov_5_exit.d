@@ -5,7 +5,7 @@ instance INFO_NOV_5_EXIT(C_INFO)
 	condition = info_nov_5_exit_condition;
 	information = info_nov_5_exit_info;
 	permanent = 1;
-	description = "«¿ ŒÕ◊»“‹ –¿«√Œ¬Œ–";
+	description = DIALOG_ENDE;
 };
 
 

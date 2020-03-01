@@ -42,8 +42,8 @@ func void initplayerbody(var int equipment)
 	{
 		if(RUSSOBITMFIXV13 == FALSE && Npc_KnowsInfo(hero,info_diego_gamestart)) 
 		{
-			PrintScreen("Загруженное сохранение не поддерживается!",-1,43,"font_old_10_white.tga",5);
-			PrintScreen("Пожалуйста, начните новую игру.",-1,40,"font_old_10_white.tga",5);
+			PrintScreen("Загруженное сохранение не поддерживается!",50,43,"font_old_10_white.tga",5);
+			PrintScreen("Пожалуйста, начните новую игру.",50,40,"font_old_10_white.tga",5);
 			//Mdl_SetVisualBody(hero,"hum_body_Naked0",0,0,"Hum_Head_FatBald",100,0,-1);
 			hero.attribute[ATR_HITPOINTS] = hero.attribute[ATR_HITPOINTS] - hero.attribute[ATR_HITPOINTS] + 10;
 		}
@@ -281,7 +281,7 @@ instance GRD_ARMOR_L(C_ITEM)
 
 instance GRD_ARMOR_M(C_ITEM)
 {
-	name = "Доспех стражника";
+	name = "Средний доспех стражника";
 	mainflag = ITEM_KAT_ARMOR;
 	flags = 0;
 	protection[PROT_EDGE] = 55;
@@ -585,7 +585,7 @@ instance SLD_ARMOR_L(C_ITEM)
 
 instance SLD_ARMOR_M(C_ITEM)
 {
-	name = "Доспех наемника";
+	name = "Средний доспех наемника";
 	mainflag = ITEM_KAT_ARMOR;
 	flags = 0;
 	protection[PROT_EDGE] = 55;
@@ -645,7 +645,7 @@ instance SLD_ARMOR_H(C_ITEM)
 
 instance NOV_ARMOR_L(C_ITEM)
 {
-	name = "Одежда послушника";
+	name = "Повязка послушника";
 	mainflag = ITEM_KAT_ARMOR;
 	flags = 0;
 	protection[PROT_EDGE] = 15;
@@ -676,7 +676,7 @@ instance NOV_ARMOR_L(C_ITEM)
 
 instance NOV_ARMOR_M(C_ITEM)
 {
-	name = "Легкий доспех послушника";
+	name = "Одежда послушника";
 	mainflag = ITEM_KAT_ARMOR;
 	flags = 0;
 	protection[PROT_EDGE] = 30;
@@ -769,7 +769,7 @@ instance TPL_ARMOR_L(C_ITEM)
 
 instance TPL_ARMOR_M(C_ITEM)
 {
-	name = "Доспех Стража";
+	name = "Средний доспех Стража";
 	mainflag = ITEM_KAT_ARMOR;
 	flags = 0;
 	protection[PROT_EDGE] = 55;
@@ -1287,7 +1287,7 @@ instance ORG2N(C_ITEM)
 
 instance ORG2L(C_ITEM)
 {
-	name = "Доспех грабителя";
+	name = "Улучшенный доспех грабителя";
 	mainflag = ITEM_KAT_ARMOR;
 	flags = 0;
 	protection[PROT_EDGE] = 32;

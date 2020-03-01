@@ -30,7 +30,7 @@ instance VLK_567_BUDDLER(NPC_DEFAULT)
 
 func void rtn_start_567()
 {
-	ta_pickore(0,0,23,0,"OM_CAVE3_04A");
-	ta_pickore(23,0,24,0,"OM_CAVE3_04A");
+	ta_pickore(23,0,6,0,"OM_CAVE3_04A");
+	ta_pickore(6,0,23,0,"OM_CAVE3_04A");
 };
 

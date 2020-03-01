@@ -259,19 +259,8 @@ instance D36TESTBOOK(C_ITEM)
 
 func void use_d36testbook()
 {
-	var C_NPC fortuno;
-	fortuno = Hlp_GetNpc(nov_1357_fortuno);
-	CreateInvItem(fortuno,alchemy_joint2);
-	CreateInvItem(fortuno,alchemy_joint3);
-	//OC_BANNED = TRUE;
-	//Wld_ExchangeGuildAttitudes("GIL_ATTITUDES_FMTAKEN");
-	//CORKALOM_BRINGMCQBALLS = LOG_SUCCESS;
-	//FREEMINEORC_LOOKINGULUMULU = LOG_RUNNING;
-	//CORANGAR_GOTOOGY = TRUE;
-	//Wld_SendTrigger("EVT_ORCGRAVYARD_MOVER_01");
-	//b_corkalomleft();
-	//FREELEARN_NC = TRUE;
 	PrintScreen("тестим...",-1,30,"font_old_20_white.tga",4);
+	Npc_SetTalentSkill(hero,NPC_TALENT_FIREMASTER,1);
 };
 
 instance ALCHEMYKIT(C_ITEM)
@@ -307,6 +296,7 @@ func void use_alchemykit()
 	CreateInvItem(self,alchemy_joint3);
 	CreateInvItem(self,kalomsrecipe);
 	CreateInvItems(self,itmiflask,20);
+	CreateInvItems(self,itfo_plants_berrys_01,5);
 	CreateInvItems(self,itfo_plants_nightshadow_01,5);
 	CreateInvItems(self,itfo_plants_herb_01,5);
 	CreateInvItems(self,itfo_plants_herb_02,5);
@@ -315,6 +305,7 @@ func void use_alchemykit()
 	CreateInvItems(self,itfo_plants_ravenherb_01,5);
 	CreateInvItems(self,itfo_plants_stoneroot_01,5);
 	CreateInvItems(self,itfo_plants_mountainmoos_01,5);
+	CreateInvItems(self,itfo_plants_mushroom_01,5);
 	CreateInvItems(self,itfo_plants_nightshadow_02,5);
 	CreateInvItems(self,itfo_plants_orcherb_02,5);
 	CreateInvItems(self,itfo_plants_mountainmoos_02,5);
@@ -344,5 +335,6 @@ instance FIX(C_ITEM)
 func void use_fix()
 {
 	Npc_SetTalentSkill(hero,NPC_TALENT_REGENERATE,0);
+	Npc_SetTalentSkill(hero,NPC_TALENT_FIREMASTER,0);
 };
 

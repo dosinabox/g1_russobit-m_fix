@@ -416,6 +416,7 @@ func void stt_301_ian_notenough_info()
 instance STT_301_IAN_STEALLIST(C_INFO)
 {
 	npc = stt_301_ian;
+	nr = 990;
 	condition = stt_301_ian_steallist_condition;
 	information = stt_301_ian_steallist_info;
 	important = 0;

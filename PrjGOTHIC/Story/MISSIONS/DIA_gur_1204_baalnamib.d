@@ -173,7 +173,7 @@ func void gur_1204_baalnamib_armor_buy()
 		b_giveinvitems(hero,self,itminugget,VALUE_NOV_ARMOR_H);
 		CreateInvItem(self,nov_armor_h);
 		b_giveinvitems(self,hero,nov_armor_h,1);
-		AI_EquipArmor(hero,nov_armor_h);
+//		AI_EquipArmor(hero,nov_armor_h);
 		BAALNAMIB_ARMOR_H_WAS_BOUGHT = 1;
 		Info_ClearChoices(gur_1204_baalnamib_armor);
 	};

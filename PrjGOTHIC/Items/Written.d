@@ -1197,10 +1197,7 @@ func void useitwr_bloodfly_01()
 	};
 	if(KNOWS_GETBFSTING == FALSE)
 	{
-		KNOWS_GETBFSTING = TRUE;
-		Log_CreateTopic(GE_ANIMALTROPHIES,LOG_NOTE);
-		b_logentry(GE_ANIMALTROPHIES,"Навык добычи жала шершня.");
-		PrintScreen("Навык: добыча жала шершня",-1,-1,"FONT_OLD_20_WHITE.TGA",10);
+		b_learn_trophies_sting();
 	};
 };
 
@@ -1450,7 +1447,7 @@ instance ALCHEMY_HP1(C_ITEM)
 	scemename = "MAP";
 	description = "Рецепт эссенции исцеления";
 	text[1] = NAME_BONUS_HP;
-	count[1] = 50;
+	count[1] = HP_ESSENZ;
 	on_state[0] = usehp1recipe;
 };
 
@@ -1491,7 +1488,7 @@ instance ALCHEMY_HP2(C_ITEM)
 	scemename = "MAP";
 	description = "Рецепт экстракта исцеления";
 	text[1] = NAME_BONUS_HP;
-	count[1] = 70;
+	count[1] = HP_EXTRAKT;
 	on_state[0] = usehp2recipe;
 };
 
@@ -1532,7 +1529,7 @@ instance ALCHEMY_HP3(C_ITEM)
 	scemename = "MAP";
 	description = "Рецепт зелья исцеления";
 	text[1] = NAME_BONUS_HP;
-	count[1] = 100;
+	count[1] = HP_ELIXIER;
 	on_state[0] = usehp3recipe;
 };
 
@@ -1573,7 +1570,7 @@ instance ALCHEMY_MP1(C_ITEM)
 	scemename = "MAP";
 	description = "Рецепт эссенции магической энергии";
 	text[1] = NAME_BONUS_MANA;
-	count[1] = 30;
+	count[1] = MANA_ESSENZ;
 	on_state[0] = usemp1recipe;
 };
 
@@ -1614,7 +1611,7 @@ instance ALCHEMY_MP2(C_ITEM)
 	scemename = "MAP";
 	description = "Рецепт экстракта магической энергии";
 	text[1] = NAME_BONUS_MANA;
-	count[1] = 50;
+	count[1] = MANA_EXTRAKT;
 	on_state[0] = usemp2recipe;
 };
 
@@ -1655,7 +1652,7 @@ instance ALCHEMY_MP3(C_ITEM)
 	scemename = "MAP";
 	description = "Рецепт зелья магической энергии";
 	text[1] = NAME_BONUS_MANA;
-	count[1] = 70;
+	count[1] = MANA_ELIXIER;
 	on_state[0] = usemp3recipe;
 };
 
@@ -1696,7 +1693,7 @@ instance ALCHEMY_MPMAX(C_ITEM)
 	scemename = "MAP";
 	description = "Рецепт эссенции силы духа";
 	text[1] = NAME_BONUS_MANAMAX;
-	count[1] = 5;
+	count[1] = MANAMAX_ESSENZ;
 	on_state[0] = usempmaxrecipe;
 };
 
@@ -1737,7 +1734,7 @@ instance ALCHEMY_HPMAX(C_ITEM)
 	scemename = "MAP";
 	description = "Рецепт эссенции жизни";
 	text[1] = NAME_BONUS_HPMAX;
-	count[1] = 5;
+	count[1] = HPMAX_ESSENZ;
 	on_state[0] = usehpmaxrecipe;
 };
 
@@ -1874,7 +1871,7 @@ instance ALCHEMY_EGG(C_ITEM)
 	scemename = "MAP";
 	description = "Рецепт зелья из яиц Королевы ползунов";
 	text[1] = NAME_BONUS_MANAMAX;
-	count[1] = 10;
+	count[1] = MANAMAX_ELIXIEREGG;
 	on_state[0] = useeggrecipe;
 };
 

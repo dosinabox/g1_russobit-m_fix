@@ -344,7 +344,7 @@ instance FORTUNOS_KEULE(C_ITEM)
 	damagetype = DAM_EDGE;
 	range = 100;
 	cond_atr[2] = ATR_STRENGTH;
-	cond_value[2] = 20;
+	cond_value[2] = 10;
 	owner = nov_1357_fortuno;
 	visual = "ItMw_1H_Sickle_01.3DS";
 	description = name;
@@ -362,7 +362,7 @@ instance LEES_AXT(C_ITEM)
 	name = "Топор Ли";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_AXE;
-	material = MAT_METAL;
+	material = MAT_WOOD;
 	value = 200;
 	damagetotal = 105;
 	damagetype = DAM_EDGE;
@@ -386,7 +386,7 @@ instance ORIKS_AXT(C_ITEM)
 	name = "Топор Орика";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_AXE;
-	material = MAT_METAL;
+	material = MAT_WOOD;
 	value = 200;
 	damagetotal = 95;
 	damagetype = DAM_EDGE;
@@ -410,7 +410,7 @@ instance TORLOFS_AXT(C_ITEM)
 	name = "Топор Торлофа";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_AXE;
-	material = MAT_METAL;
+	material = MAT_WOOD;
 	value = 200;
 	damagetotal = 99;
 	damagetype = DAM_EDGE;
@@ -458,7 +458,7 @@ instance GORNS_RACHE(C_ITEM)
 	name = "Месть Горна";
 	mainflag = ITEM_KAT_NF;
 	flags = ITEM_2HD_AXE;
-	material = MAT_METAL;
+	material = MAT_WOOD;
 	value = 200;
 	damagetotal = 100;
 	damagetype = DAM_EDGE;

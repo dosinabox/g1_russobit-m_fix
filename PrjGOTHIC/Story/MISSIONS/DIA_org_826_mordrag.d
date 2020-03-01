@@ -116,7 +116,7 @@ func void org_826_mordrag_courier_info()
 	Info_ClearChoices(org_826_mordrag_courier);
 	if(Npc_HasItems(hero,itwr_fire_letter_01) || Npc_HasItems(hero,itwr_fire_letter_02))
 	{
-		Info_AddChoice(org_826_mordrag_courier,"Мне нужно попасть в замок. У меня есть письмо...",org_826_mordrag_courier_letter);
+		Info_AddChoice(org_826_mordrag_courier,"Мне нужно попасть в замок. У меня есть письмо для Верховного Мага Круга Огня.",org_826_mordrag_courier_letter);
 	};
 	Info_AddChoice(org_826_mordrag_courier,"Да я просто так спросил.",org_826_mordrag_courier_notletter);
 	
@@ -541,12 +541,9 @@ func void org_826_mordrag_running_info()
 		{
 			AI_Output(other,self,"Org_826_Mordrag_RUNNING_15_04");	//Они провели Великую Церемонию.
 			AI_Output(self,other,"Org_826_Mordrag_RUNNING_11_09");	//Не может быть! Ты был там вместе с этими помешанными?
-		}
-		else
-		{
-			AI_Output(other,self,"Org_826_Mordrag_RUNNING_15_06");	//Да. Они увеличили свою духовную силу с помощью одного зелья, приготовленного из яиц ползунов, и попытались призвать Спящего.
-			AI_Output(self,other,"Org_826_Mordrag_RUNNING_11_07");	//Смешнее я еще ничего не слышал! Так они во все это верят, да?
 		};
+		AI_Output(other,self,"Org_826_Mordrag_RUNNING_15_06");	//Да. Они увеличили свою духовную силу с помощью одного зелья, приготовленного из яиц ползунов, и попытались призвать Спящего.
+		AI_Output(self,other,"Org_826_Mordrag_RUNNING_11_07");	//Смешнее я еще ничего не слышал! Так они во все это верят, да?
 		AI_Output(other,self,"Org_826_Mordrag_RUNNING_15_10");	//Хотелось бы посмотреть, что из этого выйдет.
 		AI_Output(self,other,"Org_826_Mordrag_RUNNING_11_11");	//Мне тоже. Расскажешь, когда эти хваленые Гуру вконец опозорятся.
 		MORDRAG_GOTOKALOM = LOG_SUCCESS;

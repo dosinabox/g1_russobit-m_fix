@@ -5,7 +5,7 @@ instance INFO_SFB_13_EXIT(C_INFO)
 	condition = info_sfb_13_exit_condition;
 	information = info_sfb_13_exit_info;
 	permanent = 1;
-	description = "«¿ ŒÕ◊»“‹ –¿«√Œ¬Œ–";
+	description = DIALOG_ENDE;
 };
 
 
@@ -53,7 +53,7 @@ instance INFO_SFB_14_EXIT(C_INFO)
 	condition = info_sfb_14_exit_condition;
 	information = info_sfb_14_exit_info;
 	permanent = 1;
-	description = "«¿ ŒÕ◊»“‹ –¿«√Œ¬Œ–";
+	description = DIALOG_ENDE;
 };
 
 

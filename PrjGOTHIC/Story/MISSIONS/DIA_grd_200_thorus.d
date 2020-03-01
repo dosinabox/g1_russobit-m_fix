@@ -24,6 +24,14 @@ func void b_thoruslearn()
 		Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_5,5 * LPCOST_ATTRIBUTE_DEXTERITY,OTHERCAMPLEARNPAY * 5),grd_200_thorus_teach_dex_5);
 		Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARNDEXTERITY_1,LPCOST_ATTRIBUTE_DEXTERITY,OTHERCAMPLEARNPAY),grd_200_thorus_teach_dex_1);
 	};
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_2H) < 1)
+	{
+		Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARN2H_1,LPCOST_TALENT_2H_1,0),grd_200_thorus_zweihand1);
+	}
+	else if(Npc_GetTalentSkill(hero,NPC_TALENT_2H) == 1)
+	{
+		Info_AddChoice(grd_200_thorus_teach,b_buildlearnstring(NAME_LEARN2H_2,LPCOST_TALENT_2H_2,0),grd_200_thorus_zweihand2);
+	};
 };
 
 instance INFO_THORUS_EXIT(C_INFO)
@@ -96,7 +104,7 @@ func int info_thorus_workforgomez_condition()
 func void info_thorus_workforgomez_info()
 {
 	AI_Output(other,self,"Info_WorkForGomez_15_00");	//Я хочу стать одним из людей Гомеза.
-	AI_Output(self,other,"Info_WorkForGomez_09_01");	//Да, что ты говоришь? И почему это ты думаешь, что можешь быть полезен Гомезу?
+	AI_Output(self,other,"Info_WorkForGomez_09_01");	//Да что ты говоришь! И почему это ты думаешь, что можешь быть полезен Гомезу?
 };
 
 
@@ -408,7 +416,7 @@ instance INFO_THORUS_BRIBEGUARD(C_INFO)
 
 func int info_thorus_bribeguard_condition()
 {
-	if(Npc_KnowsInfo(hero,info_thorus_entercastle) && (Npc_GetTrueGuild(other) != GIL_STT) && (Npc_GetTrueGuild(other) != GIL_GRD) && (THORUS_PASSGATE == FALSE))
+	if(Npc_KnowsInfo(hero,info_thorus_entercastle) && (Npc_GetTrueGuild(other) != GIL_STT) && (Npc_GetTrueGuild(other) != GIL_GRD) && (Npc_GetTrueGuild(other) != GIL_KDF) && (THORUS_PASSGATE == FALSE))
 	{
 		return 1;
 	};
@@ -480,7 +488,7 @@ instance INFO_THORUS_LETTERFORMAGES(C_INFO)
 	condition = info_thorus_letterformages_condition;
 	information = info_thorus_letterformages_info;
 	permanent = 0;
-	description = "Мне нужно попасть в замок. У меня есть письмо...";
+	description = "Мне нужно попасть в замок. У меня есть письмо для Верховного Мага Круга Огня";
 };
 
 
@@ -765,14 +773,14 @@ instance GRD_200_THORUS_AUFNAHME(C_INFO)
 	npc = grd_200_thorus;
 	condition = grd_200_thorus_aufnahme_condition;
 	information = grd_200_thorus_aufnahme_info;
-	permanent = 0;
+	permanent = 1;
 	description = "Я хочу стать стражником.";
 };
 
 
 func int grd_200_thorus_aufnahme_condition()
 {
-	if(Npc_KnowsInfo(hero,grd_200_thorus_gardist) && (hero.level >= 10) && (Npc_GetTrueGuild(hero) == GIL_STT))
+	if(Npc_KnowsInfo(hero,grd_200_thorus_gardist) && (Npc_GetTrueGuild(hero) == GIL_STT))
 	{
 		return TRUE;
 	};
@@ -780,22 +788,54 @@ func int grd_200_thorus_aufnahme_condition()
 
 func void grd_200_thorus_aufnahme_info()
 {
-	var C_NPC kdfwache;
+	var C_NPC magier_1;
+	var C_NPC magier_2;
+	var C_NPC magier_3;
+	var C_NPC magier_4;
+	var C_NPC magier_5;
+	magier_1 = Hlp_GetNpc(kdf_400_rodriguez);
+	magier_2 = Hlp_GetNpc(kdf_402_corristo);
+	magier_3 = Hlp_GetNpc(kdf_403_drago);
+	magier_4 = Hlp_GetNpc(kdf_405_torrez);
+	magier_5 = Hlp_GetNpc(kdf_401_damarok);
 	AI_Output(other,self,"GRD_200_Thorus_AUFNAHME_Info_15_01");	//Я хочу стать стражником.
-	AI_Output(self,other,"GRD_200_Thorus_AUFNAHME_Info_09_02");	//Приятно слышать это. Но сначала послушай, что должен знать любой новичок. Слушай внимательно, второй раз повторять не буду.
-	AI_Output(self,other,"GRD_200_Thorus_AUFNAHME_Info_09_03");	//Раньше ты был сам по себе, теперь пришло время забыть об этом. Мои люди горой стоят за своего товарища. Мы, стражники, охраняем жизнь Баронов, руду, шахту и лагерь.
-	AI_Output(self,other,"GRD_200_Thorus_AUFNAHME_Info_09_04");	//Рудокопы добывают руду, а наша задача следить, чтобы их не сожрали ползуны. И хотя с королем переговоры ведут Бароны, многое тоже зависит от нас.
-	AI_Output(self,other,"GRD_200_Thorus_AUFNAHME_Info_09_05");	//Днем и ночью мы находимся в шахте. Днем и ночью мы стоим на страже у ворот лагеря и следим за тем, чтобы его обитатели могли спать спокойно.
-	AI_Output(self,other,"GRD_200_Thorus_AUFNAHME_Info_09_06");	//Раньше мы были неорганизованной шайкой бандитов, но сейчас мы - сила, и с нами нужно считаться. Ради этого нам приходится много работать.
-	AI_Output(self,other,"GRD_200_Thorus_AUFNAHME_Info_09_07");	//От своих парней мне нужно одно - сплоченности. Только вместе мы сможем справиться с любыми проблемами.
-	AI_Output(self,other,"GRD_200_Thorus_AUFNAHME_Info_09_08");	//И остаться в живых.
-	AI_Output(self,other,"GRD_200_Thorus_AUFNAHME_Info_09_09");	//Потихоньку ты всему научишься. Будь готов, что кому-то может понадобиться твоя помощь и тебе надо будет сделать все, что для этого потребуется.
-	AI_Output(self,other,"GRD_200_Thorus_AUFNAHME_Info_09_10");	//Иди к Стоуну. Он даст тебе доспехи и меч.
-	AI_Output(self,other,"GRD_200_Thorus_AUFNAHME_Info_09_11");	//Ты найдешь его в оружейной лавке во Внутреннем Кольце.
-	kdfwache = Hlp_GetNpc(grd_245_gardist);
-	kdfwache.aivar[AIV_PASSGATE] = FALSE;
-	Npc_SetTrueGuild(hero,GIL_GRD);
-	hero.guild = GIL_GRD;
+	if(hero.level < 10)
+	{
+		AI_Output(self,other,"GRD_200_Thorus_GARDIST_Info_09_04");	//Но у тебя еще маловато для этого опыта. Подучись еще немного и приходи.
+		AI_StopProcessInfos(self);
+		b_printguildcondition(10);
+	}
+	else
+	{
+		AI_Output(self,other,"GRD_200_Thorus_AUFNAHME_Info_09_02");	//Приятно слышать это. Но сначала послушай, что должен знать любой новичок. Слушай внимательно, второй раз повторять не буду.
+		AI_Output(self,other,"GRD_200_Thorus_AUFNAHME_Info_09_03");	//Раньше ты был сам по себе, теперь пришло время забыть об этом. Мои люди горой стоят за своего товарища. Мы, стражники, охраняем жизнь Баронов, руду, шахту и лагерь.
+		AI_Output(self,other,"GRD_200_Thorus_AUFNAHME_Info_09_04");	//Рудокопы добывают руду, а наша задача следить, чтобы их не сожрали ползуны. И хотя с королем переговоры ведут Бароны, многое тоже зависит от нас.
+		AI_Output(self,other,"GRD_200_Thorus_AUFNAHME_Info_09_05");	//Днем и ночью мы находимся в шахте. Днем и ночью мы стоим на страже у ворот лагеря и следим за тем, чтобы его обитатели могли спать спокойно.
+		AI_Output(self,other,"GRD_200_Thorus_AUFNAHME_Info_09_06");	//Раньше мы были неорганизованной шайкой бандитов, но сейчас мы - сила, и с нами нужно считаться. Ради этого нам приходится много работать.
+		AI_Output(self,other,"GRD_200_Thorus_AUFNAHME_Info_09_07");	//От своих парней мне нужно одно - сплоченности. Только вместе мы сможем справиться с любыми проблемами.
+		AI_Output(self,other,"GRD_200_Thorus_AUFNAHME_Info_09_08");	//И остаться в живых.
+		AI_Output(self,other,"GRD_200_Thorus_AUFNAHME_Info_09_09");	//Потихоньку ты всему научишься. Будь готов, что кому-то может понадобиться твоя помощь и тебе надо будет сделать все, что для этого потребуется.
+		AI_Output(self,other,"GRD_200_Thorus_AUFNAHME_Info_09_10");	//Иди к Стоуну. Он даст тебе доспехи и меч.
+		AI_Output(self,other,"GRD_200_Thorus_AUFNAHME_Info_09_11");	//Ты найдешь его в оружейной лавке во Внутреннем Кольце.
+		
+		Npc_ExchangeRoutine(magier_1,"START");
+		AI_ContinueRoutine(magier_1);
+		
+		Npc_ExchangeRoutine(magier_2,"START");
+		AI_ContinueRoutine(magier_2);
+		
+		Npc_ExchangeRoutine(magier_3,"START");
+		AI_ContinueRoutine(magier_3);
+		
+		Npc_ExchangeRoutine(magier_4,"START");
+		AI_ContinueRoutine(magier_4);
+		
+		Npc_ExchangeRoutine(magier_5,"START");
+		AI_ContinueRoutine(magier_5);
+		
+		Npc_SetTrueGuild(hero,GIL_GRD);
+		hero.guild = GIL_GRD;
+	};
 };
 
 
@@ -877,8 +917,10 @@ func void grd_200_thorus_teach_pre_info()
 {
 	AI_Output(other,self,"GRD_200_Thorus_Teach_15_00");	//Ты можешь научить меня чему-нибудь?
 	AI_Output(self,other,"GRD_200_Thorus_Teach_09_01");	//Я могу помочь тебе улучшить свои умения и стать сильнее.
+	AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND1_Info_09_06");	//Двуручный меч - это идеальное оружие для боковых ударов, когда тебе надо держать врага на расстоянии.
+	AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND1_Info_09_07");	//В общем, можешь начать тренироваться.
 	Log_CreateTopic(GE_TEACHEROC,LOG_NOTE);
-	b_logentry(GE_TEACHEROC,"Торус может помочь мне увеличить силу и ловкость.");
+	b_logentry(GE_TEACHEROC,"Торус может научить меня вести бой двуручным мечом, если я смогу обращаться с одноручным оружием. Также он может помочь мне увеличить силу и ловкость.");
 };
 
 instance GRD_200_THORUS_TEACH(C_INFO)
@@ -1003,34 +1045,8 @@ func void grd_200_thorus_teach_dex_5()
 	b_thoruslearn();
 };
 
-
-instance GRD_200_THORUS_ZWEIHAND1(C_INFO)
+func void grd_200_thorus_zweihand1()
 {
-	npc = grd_200_thorus;
-	condition = grd_200_thorus_zweihand1_condition;
-	information = grd_200_thorus_zweihand1_info;
-	important = 0;
-	permanent = 1;
-	description = b_buildlearnstring(NAME_LEARN2H_1,LPCOST_TALENT_2H_1,0);
-};
-
-
-func int grd_200_thorus_zweihand1_condition()
-{
-	if((Npc_GetTalentSkill(hero,NPC_TALENT_2H) < 1) && (Npc_GetTrueGuild(hero) == GIL_GRD))
-	{
-		return TRUE;
-	};
-};
-
-func void grd_200_thorus_zweihand1_info()
-{
-	if(LOG_THORUSFIGHT == FALSE)
-	{
-		Log_CreateTopic(GE_TEACHEROC,LOG_NOTE);
-		b_logentry(GE_TEACHEROC,"Торус может научить меня вести бой двуручным мечом, если я смогу обращаться с одноручным оружием.");
-		LOG_THORUSFIGHT = TRUE;
-	};
 	AI_Output(other,self,"GRD_200_Thorus_ZWEIHAND1_Info_15_01");	//Научи меня владеть двуручным мечом.
 	if(Npc_GetTalentSkill(hero,NPC_TALENT_1H) < 2)
 	{
@@ -1043,33 +1059,11 @@ func void grd_200_thorus_zweihand1_info()
 		AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND1_Info_09_03");	//Меч нужно держать горизонтально. Тебе придется хорошо замахнуться, чтобы атаковать противника тяжелым оружием.
 		AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND1_Info_09_04");	//Подними руку и бей вертикально вниз. Обычно этого достаточно, чтобы избавиться от врага.
 		AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND1_Info_09_05");	//Используй инерцию движения, чтобы вернуться в исходную позицию.
-		AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND1_Info_09_06");	//Двуручный меч - это идеальное оружие для боковых ударов, когда тебе надо держать врага на расстоянии.
-		AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND1_Info_09_07");	//В общем, можешь начать тренироваться.
-		grd_200_thorus_zweihand1.permanent = 0;
 	};
+	b_thoruslearn();
 };
 
-
-instance GRD_200_THORUS_ZWEIHAND2(C_INFO)
-{
-	npc = grd_200_thorus;
-	condition = grd_200_thorus_zweihand2_condition;
-	information = grd_200_thorus_zweihand2_info;
-	important = 0;
-	permanent = 1;
-	description = b_buildlearnstring(NAME_LEARN2H_2,LPCOST_TALENT_2H_2,0);
-};
-
-
-func int grd_200_thorus_zweihand2_condition()
-{
-	if((Npc_GetTalentSkill(hero,NPC_TALENT_2H) == 1) && (Npc_GetTrueGuild(hero) == GIL_GRD))
-	{
-		return TRUE;
-	};
-};
-
-func void grd_200_thorus_zweihand2_info()
+func void grd_200_thorus_zweihand2()
 {
 	AI_Output(other,self,"GRD_200_Thorus_ZWEIHAND2_Info_15_01");	//Я хочу научиться лучше владеть двуручным мечом.
 	if(b_giveskill(other,NPC_TALENT_2H,2,LPCOST_TALENT_2H_2))
@@ -1082,7 +1076,7 @@ func void grd_200_thorus_zweihand2_info()
 		AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND2_Info_09_07");	//Если этого окажется недостаточно, по инерции возвращайся в прежнее положение.
 		AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND2_Info_09_08");	//Когда закончишь серию, защищайся и жди момента, чтобы атаковать снова.
 		AI_Output(self,other,"GRD_200_Thorus_ZWEIHAND2_Info_09_09");	//Секрет успеха кроется в чередовании ударов и своевременной защите.
-		grd_200_thorus_zweihand2.permanent = 0;
 	};
+	b_thoruslearn();
 };
 

@@ -168,7 +168,7 @@ const string TXT_TALENTS[12] =
 	"Магия",
 	"Подкрадывание",
 	"Алхимия",
-	"Мастер Огня",
+	"Трофеи",
 	"Акробатика"
 };
 
@@ -184,7 +184,7 @@ const string TXT_TALENTS_SKILLS[12] =
 	"не обучен|Круг 1|Круг 2|Круг 3|Круг 4|Круг 5|Круг 6",
 	"не обучен|обучен",
 	"не обучен|обучен",
-	"|",
+	"не обучен|обучен",
 	"не обучен|обучен"
 };
 
@@ -261,7 +261,7 @@ const string NAME_ONEHANDED = "Одноручное оружие";
 const string NAME_TWOHANDED = "Двуручное оружие";
 const string NAME_ONEHANDED_BONUS = "Одноручное оружие, бонус +3%";
 const string NAME_TWOHANDED_BONUS = "Двуручное оружие, бонус +3%";
-const string NAME_HEALINGPERMANA = "Исцеление (за ед. маг. силы):";
+const string NAME_HEALINGPERMANA = "Лечение (за ед. маг. силы):";
 const string NAME_BUYATTRIBUTESTR = "Сила +";
 const string NAME_BUYATTRIBUTEDEX = "Ловкость +";
 const string NAME_BUYATTRIBUTEMAN = "Магическая сила +";
@@ -365,7 +365,7 @@ const string NAME_LEARNSNEAK = "Подкрадывание";
 const string NAME_RAISESTRENGTH = "Сила +";
 const string NAME_RAISEDEXTERITY = "Ловкость +";
 const string NAME_RAISESTRDEX = "Сила и ловкость +";
-const string NAME_RAISEMANAMAX = "Макс. мана +";
+const string NAME_RAISEMANAMAX = "Макс. магическая сила +";
 const string NAME_RAISEHEALTHMAX = "Макс. жизненная сила +";
 const string MENU_TEXT_NEEDS_APPLY = "";
 const string MENU_TEXT_NEEDS_RESTART = "Некоторые настройки будут задействованы только после повторного запуска игры.";

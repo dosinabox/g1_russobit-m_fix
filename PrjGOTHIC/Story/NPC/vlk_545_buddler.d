@@ -4,7 +4,7 @@ instance VLK_545_BUDDLER(NPC_DEFAULT)
 	name[0] = NAME_BUDDLER;
 	npctype = NPCTYPE_MINE_AMBIENT;
 	guild = GIL_VLK;
-	level = 3;
+	level = 4;
 	voice = 3;
 	id = 545;
 	attribute[ATR_STRENGTH] = 15;
@@ -30,7 +30,7 @@ instance VLK_545_BUDDLER(NPC_DEFAULT)
 
 func void rtn_start_545()
 {
-	ta_pickore(0,0,23,0,"OM_023");
-	ta_pickore(23,0,24,0,"OM_023");
+	ta_pickore(23,0,6,0,"OM_023");
+	ta_pickore(6,0,23,0,"OM_023");
 };
 

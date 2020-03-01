@@ -21,6 +21,14 @@ func void b_gornatothlearn()
 		Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNMANA_5,5 * LPCOST_ATTRIBUTE_MANA,0),tpl_1402_gornatoth_teach_man_5);
 		Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARNMANA_1,LPCOST_ATTRIBUTE_MANA,0),tpl_1402_gornatoth_teach_man_1);
 	};
+	if(Npc_GetTalentSkill(hero,NPC_TALENT_1H) < 1)
+	{
+		Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARN1H_1,LPCOST_TALENT_1H_1,0),tpl_1402_gornatoth_teach_1h_1);
+	}
+	else if(Npc_GetTalentSkill(hero,NPC_TALENT_1H) == 1)
+	{
+		Info_AddChoice(tpl_1402_gornatoth_teach,b_buildlearnstring(NAME_LEARN1H_2,LPCOST_TALENT_1H_2,0),tpl_1402_gornatoth_teach_1h_2);
+	};
 };
 	
 instance DIA_TPL_1402_GORNATOTH_EXIT(C_INFO)
@@ -157,7 +165,7 @@ func void tpl_1402_gornatoth_getstuff_info()
 	b_logentry(GE_TRADERPSI,"У Гор На Тофа есть хорошие доспехи Стражей, но получить их может только тот, кто внес значительное пожертвование на нужды Братства. Я могу найти его на тренировочной площадке лагеря Братства.");
 	CreateInvItem(self,tpl_armor_l);
 	b_giveinvitems(self,hero,tpl_armor_l,1);
-	AI_EquipArmor(hero,tpl_armor_l);
+//	AI_EquipArmor(hero,tpl_armor_l);
 };
 
 
@@ -171,13 +179,13 @@ instance TPL_1402_GORNATOTH_ARMOR(C_INFO)
 	information = tpl_1402_gornatoth_armor_info;
 	important = 0;
 	permanent = 1;
-	description = "Мне нужен более прочный доспех.";
+	description = "Мне нужны более прочные доспехи.";
 };
 
 
 func int tpl_1402_gornatoth_armor_condition()
 {
-	if(Npc_KnowsInfo(hero,tpl_1402_gornatoth_getstuff) && ((GORNATOTH_ARMOR_M_WAS_BOUGHT != 1) || (GORNATOTH_ARMOR_H_WAS_BOUGHT != 1)))
+	if(((hero.guild == GIL_NOV) || Npc_KnowsInfo(hero,tpl_1402_gornatoth_getstuff)) && ((GORNATOTH_ARMOR_M_WAS_BOUGHT != 1) || (GORNATOTH_ARMOR_H_WAS_BOUGHT != 1)))
 	{
 		return TRUE;
 	};
@@ -186,16 +194,23 @@ func int tpl_1402_gornatoth_armor_condition()
 func void tpl_1402_gornatoth_armor_info()
 {
 	AI_Output(other,self,"Info_GorNaToth_ARMOR_15_01");	//Мне нужны более прочные доспехи.
-	AI_Output(self,other,"Info_GorNaToth_ARMOR_11_02");	//Я могу дать тебе доспех получше, но за это ты внесешь пожертвование на нужды нашего Братства.
-	Info_ClearChoices(tpl_1402_gornatoth_armor);
-	Info_AddChoice(tpl_1402_gornatoth_armor,DIALOG_BACK,tpl_1402_gornatoth_armor_back);
-	if(GORNATOTH_ARMOR_H_WAS_BOUGHT != 1)
+	if(hero.guild == GIL_NOV)
 	{
-		Info_AddChoice(tpl_1402_gornatoth_armor,b_buildbuyarmorstring("Тяжелый доспех стража, защита: 70/10/35/0",VALUE_TPL_ARMOR_H),tpl_1402_gornatoth_armor_h);
-	};
-	if(GORNATOTH_ARMOR_M_WAS_BOUGHT != 1)
+		AI_Output(self,hero,"Info_GorNaToth_ARMOR_M_11_02");	//Сейчас ты не сможешь носить его. Сначала тебе придется доказать свою верность Братству и стать Стражем. Только после этого у тебя будет право на такой доспех.
+	}
+	else
 	{
-		Info_AddChoice(tpl_1402_gornatoth_armor,b_buildbuyarmorstring("Средний доспех стража, защита: 55/10/25/0",VALUE_TPL_ARMOR_M),tpl_1402_gornatoth_armor_m);
+		AI_Output(self,other,"Info_GorNaToth_ARMOR_11_02");	//Я могу дать тебе доспех получше, но за это ты внесешь пожертвование на нужды нашего Братства.
+		Info_ClearChoices(tpl_1402_gornatoth_armor);
+		Info_AddChoice(tpl_1402_gornatoth_armor,DIALOG_BACK,tpl_1402_gornatoth_armor_back);
+		if(GORNATOTH_ARMOR_H_WAS_BOUGHT != 1)
+		{
+			Info_AddChoice(tpl_1402_gornatoth_armor,b_buildbuyarmorstring("Тяжелый доспех стража, защита: 70/10/35/0",VALUE_TPL_ARMOR_H),tpl_1402_gornatoth_armor_h);
+		};
+		if(GORNATOTH_ARMOR_M_WAS_BOUGHT != 1)
+		{
+			Info_AddChoice(tpl_1402_gornatoth_armor,b_buildbuyarmorstring("Средний доспех стража, защита: 55/10/25/0",VALUE_TPL_ARMOR_M),tpl_1402_gornatoth_armor_m);
+		};
 	};
 };
 
@@ -204,7 +219,7 @@ func void tpl_1402_gornatoth_armor_m()
 	AI_Output(hero,self,"Info_GorNaToth_ARMOR_M_15_01");	//Мне нужны средние доспехи Стража.
 	if(KAPITEL < 3)
 	{
-		AI_Output(self,hero,"Info_GorNaToth_ARMOR_M_11_02");	//Сейчас ты не сможешь носить его. Сначала тебе придется доказать свою верность Братству и стать Стражем. Только после этого у тебя будет право на такой доспех.
+		AI_Output(self,hero,"Info_GorNaToth_ARMOR_H_11_02");	//Ты для этого недостаточно опытен. Докажи, что ты верен нашему Братству, и только после этого ты будешь достоин носить столь совершенный доспех.
 	}
 	else if(Npc_HasItems(hero,itminugget) < VALUE_TPL_ARMOR_M)
 	{
@@ -214,11 +229,11 @@ func void tpl_1402_gornatoth_armor_m()
 	{
 		b_printtrademsg1("Отдано руды: 1650");
 		AI_Output(self,hero,"Info_GorNaToth_ARMOR_M_11_04");	//Ты можешь внести пожертвование, поэтому я дам тебе такой доспех. Он станет твоей надежной защитой.
-		b_printtrademsg2("Получен доспех Стража.");
+		b_printtrademsg2("Получен средний доспех Стража.");
 		b_giveinvitems(hero,self,itminugget,VALUE_TPL_ARMOR_M);
 		CreateInvItem(self,tpl_armor_m);
 		b_giveinvitems(self,hero,tpl_armor_m,1);
-		AI_EquipArmor(hero,tpl_armor_m);
+//		AI_EquipArmor(hero,tpl_armor_m);
 		GORNATOTH_ARMOR_M_WAS_BOUGHT = 1;
 	};
 	Info_ClearChoices(tpl_1402_gornatoth_armor);
@@ -242,7 +257,7 @@ func void tpl_1402_gornatoth_armor_h()
 		b_printtrademsg2("Получен тяжелый доспех Стража.");
 		b_giveinvitems(hero,self,itminugget,VALUE_TPL_ARMOR_H);
 		CreateInvItem(hero,tpl_armor_h);
-		AI_EquipArmor(hero,tpl_armor_h);
+//		AI_EquipArmor(hero,tpl_armor_h);
 		GORNATOTH_ARMOR_H_WAS_BOUGHT = 1;
 	};
 	Info_ClearChoices(tpl_1402_gornatoth_armor);
@@ -256,18 +271,18 @@ func void tpl_1402_gornatoth_armor_back()
 };
 
 
-instance TPL_1402_GORNATOTH_TEACH(C_INFO)
+instance TPL_1402_GORNATOTH_TEACH_PRE(C_INFO)
 {
 	npc = tpl_1402_gornatoth;
 	nr = 10;
-	condition = tpl_1402_gornatoth_teach_condition;
-	information = tpl_1402_gornatoth_teach_info;
-	permanent = 1;
+	condition = tpl_1402_gornatoth_teach_pre_condition;
+	information = tpl_1402_gornatoth_teach_pre_info;
+	permanent = 0;
 	description = "Ты можешь научить меня чему-нибудь?";
 };
 
 
-func int tpl_1402_gornatoth_teach_condition()
+func int tpl_1402_gornatoth_teach_pre_condition()
 {
 	if(c_npcbelongstopsicamp(hero))
 	{
@@ -275,16 +290,37 @@ func int tpl_1402_gornatoth_teach_condition()
 	};
 };
 
-func void tpl_1402_gornatoth_teach_info()
+func void tpl_1402_gornatoth_teach_pre_info()
 {
 	AI_Output(other,self,"TPL_1402_GorNaToth_Teach_15_00");	//Ты можешь научить меня чему-нибудь?
 	AI_Output(self,other,"TPL_1402_GorNaToth_Teach_11_01");	//Настоящему воину необходима не только сила духа, но также сила мышц и ловкость движений.
-	if(LOG_GORNATOTHTRAIN == FALSE)
+	Log_CreateTopic(GE_TEACHERPSI,LOG_NOTE);
+	b_logentry(GE_TEACHERPSI,"Страж Гор На Тоф может помочь мне повысить силу, ловкость и магическую силу, а также улучшить мое владение одноручным оружием.");
+};
+
+
+instance TPL_1402_GORNATOTH_TEACH(C_INFO)
+{
+	npc = tpl_1402_gornatoth;
+	nr = 10;
+	condition = tpl_1402_gornatoth_teach_condition;
+	information = tpl_1402_gornatoth_teach_info;
+	permanent = 1;
+	description = DIALOG_LEARN;
+};
+
+
+func int tpl_1402_gornatoth_teach_condition()
+{
+	if(Npc_KnowsInfo(hero,tpl_1402_gornatoth_teach_pre))
 	{
-		Log_CreateTopic(GE_TEACHERPSI,LOG_NOTE);
-		b_logentry(GE_TEACHERPSI,"Страж Гор На Тоф может помочь мне повысить силу, ловкость и магическую силу, а также улучшить мое владение одноручным оружием.");
-		LOG_GORNATOTHTRAIN = TRUE;
+		return TRUE;
 	};
+};
+
+func void tpl_1402_gornatoth_teach_info()
+{
+	AI_Output(other,self,"ORG_801_Lares_Teach_15_00");	//Я хочу улучшить свои навыки.
 	b_gornatothlearn();
 };
 
@@ -431,33 +467,8 @@ func void tpl_1402_gornatoth_teach_man_5()
 	b_gornatothlearn();
 };
 
-instance TPL_1402_GORNATOTH_TRAIN(C_INFO)
+func void tpl_1402_gornatoth_teach_1h_1()
 {
-	npc = tpl_1402_gornatoth;
-	condition = tpl_1402_gornatoth_train_condition;
-	information = tpl_1402_gornatoth_train_info;
-	important = 0;
-	permanent = 1;
-	description = b_buildlearnstring(NAME_LEARN1H_1,LPCOST_TALENT_1H_1,0);
-};
-
-
-func int tpl_1402_gornatoth_train_condition()
-{
-	if((Npc_GetTalentSkill(hero,NPC_TALENT_1H) < 1) && c_npcbelongstopsicamp(hero) && LOG_GORNATOTHTRAIN == TRUE)
-	{
-		return TRUE;
-	};
-};
-
-func void tpl_1402_gornatoth_train_info()
-{
-	if(LOG_GORNATOTHFIGHT == FALSE)
-	{
-		Log_CreateTopic(GE_TEACHERPSI,LOG_NOTE);
-		b_logentry(GE_TEACHERPSI,"Страж Гор На Тоф может научить меня обращаться с одноручным мечом.");
-		LOG_GORNATOTHFIGHT = TRUE;
-	};
 	AI_Output(other,self,"TPL_1402_GorNaToth_TRAIN_Info_15_00");	//Я хочу улучшить технику ведения боя с одноручным мечом.
 	if(b_giveskill(hero,NPC_TALENT_1H,1,LPCOST_TALENT_1H_1))
 	{
@@ -468,33 +479,11 @@ func void tpl_1402_gornatoth_train_info()
 		AI_Output(self,other,"TPL_1402_GorNaToth_TRAIN_11_05");	//Если ты будешь следовать моим советам, ты сможешь вести бой красиво. Но самое главное, твои движения станут быстрее.
 		AI_Output(self,other,"TPL_1402_GorNaToth_TRAIN_11_06");	//Да, есть еще кое-что: некоторые удары наносят большее повреждение противнику. Ты еще новичок, поэтому у тебя не так много шансов на критический удар.
 		AI_Output(self,other,"TPL_1402_GorNaToth_TRAIN_11_07");	//Но частые тренировки помогут тебе совершенствоваться и наносить все больше таких ударов.
-		tpl_1402_gornatoth_train.permanent = 0;
-		AI_StopProcessInfos(self);
-		b_practicecombat("PSI_PATH_6_7");
 	};
+	b_gornatothlearn();
 };
 
-
-instance TPL_1402_GORNATOTH_TRAINAGAIN(C_INFO)
-{
-	npc = tpl_1402_gornatoth;
-	condition = tpl_1402_gornatoth_trainagain_condition;
-	information = tpl_1402_gornatoth_trainagain_info;
-	important = 0;
-	permanent = 1;
-	description = b_buildlearnstring(NAME_LEARN1H_2,LPCOST_TALENT_1H_2,0);
-};
-
-
-func int tpl_1402_gornatoth_trainagain_condition()
-{
-	if((Npc_GetTalentSkill(hero,NPC_TALENT_1H) == 1) && c_npcbelongstopsicamp(hero))
-	{
-		return TRUE;
-	};
-};
-
-func void tpl_1402_gornatoth_trainagain_info()
+func void tpl_1402_gornatoth_teach_1h_2()
 {
 	AI_Output(other,self,"TPL_1402_GorNaToth_TRAINAGAIN_Info_15_01");	//Научи меня еще лучше владеть одноручным мечом.
 	if(b_giveskill(hero,NPC_TALENT_1H,2,LPCOST_TALENT_1H_2))
@@ -503,9 +492,7 @@ func void tpl_1402_gornatoth_trainagain_info()
 		AI_Output(self,other,"TPL_1402_GorNaToth_TRAINAGAIN_Info_11_03");	//Помнишь, что я говорил о хорошем размахе? Следующий шаг на пути к мастерству - умение использовать движения собственного тела. Если ты успел нанести два удара, сделай разворот. Это отвлечет противника и даст тебе возможность выбрать более удачную позицию.
 		AI_Output(self,other,"TPL_1402_GorNaToth_TRAINAGAIN_Info_11_04");	//Затем размахнись и нанеси удар справа налево.
 		AI_Output(self,other,"TPL_1402_GorNaToth_TRAINAGAIN_Info_11_05");	//Вернись в исходную стойку. Как ты знаешь, мастерство приходит с опытом. А теперь иди и не забывай о тренировках.
-		tpl_1402_gornatoth_trainagain.permanent = 0;
-		AI_StopProcessInfos(self);
-		b_practicecombat("PSI_PATH_6_7");
 	};
+	b_gornatothlearn();
 };
 

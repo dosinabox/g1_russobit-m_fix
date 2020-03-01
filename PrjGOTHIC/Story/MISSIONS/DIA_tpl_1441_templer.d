@@ -30,7 +30,7 @@ func void info_tpl_1441_firstwarn_info()
 	{
 		Info_ClearChoices(info_tpl_1441_firstwarn);
 		Info_AddChoice(info_tpl_1441_firstwarn,"Сам Юберион дал мне свое высочайшее разрешение.",info_tpl_1441_firstwarn_condition_yberion);
-		Info_AddChoice(info_tpl_1441_firstwarn,"Лестер прислал меня. Я хочу предложить Юбериону свою помощь.",info_tpl_1441_firstwarn_condition_lester);
+		Info_AddChoice(info_tpl_1441_firstwarn,"Послушник Лестер прислал меня. Я хочу предложить Юбериону свою помощь.",info_tpl_1441_firstwarn_condition_lester);
 	}
 	else
 	{
@@ -48,7 +48,7 @@ func void info_tpl_1441_firstwarn_condition_lester()
 {
 	var C_NPC templer;
 	AI_Output(hero,self,"Info_TPL_1441_FirstWarn_Condition_LESTER_15_01");	//Послушник Лестер прислал меня. Я хочу предложить Юбериону свою помощь.
-	AI_Output(self,hero,"Info_TPL_1441_FirstWarn_Condition_LESTER_13_02");	//Лестер. Я знаю его, ему можно доверять. Проходи.
+	AI_Output(self,hero,"Info_TPL_1441_FirstWarn_Condition_LESTER_13_02");	//Лестер? Я знаю его, ему можно доверять. Проходи.
 	Info_ClearChoices(info_tpl_1441_firstwarn);
 	templer = Hlp_GetNpc(tpl_1442_templer);
 	hero.aivar[AIV_GUARDPASSAGE_STATUS] = AIV_GPS_BEGIN;

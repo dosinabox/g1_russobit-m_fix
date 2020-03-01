@@ -38,7 +38,7 @@ instance STORYHELPER_EXIT(C_INFO)
 	information = storyhelper_exit_info;
 	important = 0;
 	permanent = 1;
-	description = "ÇÀÊÎÍ×ÈÒÜ ĞÀÇÃÎÂÎĞ";
+	description = DIALOG_ENDE;
 };
 
 

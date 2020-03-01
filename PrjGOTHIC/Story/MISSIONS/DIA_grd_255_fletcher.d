@@ -322,15 +322,15 @@ func void info_fletcher_die_info()
 		if(c_npcbelongstonewcamp(hero))
 		{
 			AI_Output(self,hero,"Info_Fletcher_DIE_06_11");	//Посмотри-ка. Паренек из Нового лагеря!
+			AI_Output(hero,self,"Info_Fletcher_DIE_15_13");	//Ну и что? Какое тебе до этого дело?
+			AI_Output(self,hero,"Info_Fletcher_DIE_06_14");	//Скоро ваша шахта также будет принадлежать нам.
+			AI_Output(hero,self,"Info_Fletcher_DIE_15_15");	//Да, да, мечтать не вредно.
+			AI_Output(self,hero,"Info_Fletcher_DIE_06_16");	//Извини, но я не могу позволить тебе об этом всем разбалтывать повсюду.
 		}
 		else
 		{
 			AI_Output(self,hero,"Info_Fletcher_DIE_06_12");	//Посмотри-ка. Паренек из Болотного лагеря!
 		};
-		AI_Output(hero,self,"Info_Fletcher_DIE_15_13");	//Ну и что? Какое тебе до этого дело?
-		AI_Output(self,hero,"Info_Fletcher_DIE_06_14");	//Скоро ваша шахта также будет принадлежать нам.
-		AI_Output(hero,self,"Info_Fletcher_DIE_15_15");	//Да, да, мечтать не вредно.
-		AI_Output(self,hero,"Info_Fletcher_DIE_06_16");	//Извини, но я не могу позволить тебе об этом всем разбалтывать повсюду.
 		AI_Output(hero,self,"Info_Fletcher_DIE_15_17");	//Подожди, я не хотел неприятностей.
 		AI_Output(self,hero,"Info_Fletcher_DIE_06_18");	//Надо было думать раньше, когда шел сюда!
 		AI_Output(hero,self,"Info_Fletcher_DIE_15_19");	//Эй, что за...

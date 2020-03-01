@@ -28,8 +28,13 @@ instance VLK_586_GRIMES(NPC_DEFAULT)
 
 func void rtn_start_586()
 {
+	ta_standaround(8,0,18,0,"OM_PICKORE_02");
+	ta_standaround(18,0,8,0,"OM_PICKORE_02");
+};
+
+func void rtn_work_586()
+{
 	ta_pickore(8,0,18,0,"OM_PICKORE_02");
 	ta_roastscavenger(18,0,23,0,"OM_CAVE1_48");
 	ta_sitaround(23,0,8,0,"OM_CAVE1_48");
 };
-

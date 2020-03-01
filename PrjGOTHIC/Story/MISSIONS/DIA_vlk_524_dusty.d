@@ -206,6 +206,11 @@ func void dia_dusty_letsgo_info()
 {
 	AI_Output(other,self,"DIA_Dusty_LetsGo_15_00");	//Я готов. Пойдем!
 	AI_Output(self,other,"DIA_Dusty_LetsGo_03_01");	//Хорошо, мы пойдем через южные ворота. Через северные нам не пройти, там стражники не берут взяток.
+	if(c_bodystatecontains(self,BS_SIT))
+	{
+		AI_Standup(self);
+		AI_TurnToNPC(self,hero);
+	};
 	AI_Output(self,other,"DIA_Dusty_LetsGo_03_02");	//И лучше всего, если руду предложишь им ты - у меня нет опыта в подобных делах.
 	AI_Output(other,self,"DIA_Dusty_LetsGo_15_03");	//Ладно. Пойдем.
 	GETNEWGUY_DUSTY_MOVING = TRUE;
