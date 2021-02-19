@@ -106,7 +106,7 @@ func void info_grd_7_daslager_info()
 	AI_Output(self,other,"Info_grd_7_DasLager_07_01");	//Нет. Большинство людей лагеря простые рудокопы.
 	AI_Output(self,other,"Info_grd_7_DasLager_07_02");	//Только стражники и Призраки являются людьми Гомеза.
 	Info_ClearChoices(info_grd_7_daslager);
-	Info_AddChoice(info_grd_7_daslager,"НАЗАД",info_grd_7_daslager_zurueck);
+	Info_AddChoice(info_grd_7_daslager,DIALOG_BACK,info_grd_7_daslager_zurueck);
 	Info_AddChoice(info_grd_7_daslager,"Чем занимаются стражники?",info_grd_7_daslager_gardisten);
 	Info_AddChoice(info_grd_7_daslager,"Что делают Призраки?",info_grd_7_daslager_schatten);
 	Info_AddChoice(info_grd_7_daslager,"Чем занимаются рудокопы?",info_grd_7_daslager_buddler);

@@ -32,7 +32,7 @@ func void rtn_start_530()
 	ta_sleep(23,0,7,0,"OCR_HUT_25");
 	ta_sitaround(7,0,8,0,"OCR_OUTSIDE_HUT_25");
 	ta_smalltalk(8,0,17,0,"OCR_OUTSIDE_HUT_27");
-	ta_sitaround(17,0,19,0,"OCR_OUTSIDE_ARENA_BENCH_2");
+	ta_sitaround(17,0,19,0,"OCR_OUTSIDE_ARENA_BENCH2");
 	ta_arenaspectator(19,0,23,0,"OCR_ARENA_07");
 };
 
@@ -41,6 +41,6 @@ func void rtn_noarena_530()
 	ta_sleep(23,0,7,0,"OCR_HUT_25");
 	ta_sitaround(7,0,8,0,"OCR_OUTSIDE_HUT_25");
 	ta_smalltalk(8,0,17,0,"OCR_OUTSIDE_HUT_27");
-	ta_sitaround(17,0,23,0,"OCR_OUTSIDE_ARENA_BENCH_2");
+	ta_sitaround(17,0,23,0,"OCR_OUTSIDE_ARENA_BENCH2");
 };
 

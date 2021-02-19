@@ -398,5 +398,6 @@ func int c_ischapter(var int chapter)
 	{
 		return TRUE;
 	};
+	return 0;
 };
 

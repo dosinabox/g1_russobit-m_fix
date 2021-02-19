@@ -212,7 +212,7 @@ instance PC_ALCHEMY_CANCEL(C_INFO)
 	information = pc_alchemy_cancel_info;
 	important = 0;
 	permanent = 1;
-	description = "ОТМЕНА";
+	description = STR_INFO_TRADE_EXIT;
 };
 
 func int pc_alchemy_cancel_condition()
@@ -657,7 +657,7 @@ func void pc_potionalchemy_egg_info()
 	else
 	{
 		PrintScreen("Думаю, это мне еще пригодится...",-1,45,"font_old_10_white.tga",3);
-		AI_OutputSVM_Overlay(hero,NULL,"Info_HighPriest4_15_03");
+		AI_OutputSVM_Overlay(hero,NULL,"INFO_HIGHPRIEST4_15_03");
 		AI_Wait(self,3);
 	};
 	update_special_cat_list();
@@ -769,7 +769,7 @@ instance PC_STOMP_CANCEL(C_INFO)
 	information = pc_stomp_cancel_info;
 	important = 0;
 	permanent = 1;
-	description = "ОТМЕНА";
+	description = STR_INFO_TRADE_EXIT;
 };
 
 func int pc_stomp_cancel_condition()

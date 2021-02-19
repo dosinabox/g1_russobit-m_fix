@@ -11,7 +11,7 @@ func void b_assessbody()
 	};
 };
 
-func int b_sayplunder()
+func void b_sayplunder()
 {
 	if(b_plunder())
 	{
@@ -24,7 +24,7 @@ func int b_sayplunder()
 	other.aivar[AIV_PLUNDERED] = TRUE;
 };
 
-func int b_checkitems_orik()
+func void b_checkitems_orik()
 {
 	if(Npc_HasItems(other,orik_key) || Npc_HasItems(other,oriks_axt))
 	{
@@ -50,7 +50,7 @@ func int b_checkitems_orik()
 	};
 };
 
-func int b_checkitems_lord()
+func void b_checkitems_lord()
 {
 	if(Npc_HasItems(other,itkey_rb_01) || Npc_HasItems(other,heerscherstab))
 	{
@@ -75,7 +75,7 @@ func int b_checkitems_lord()
 	};
 };
 
-func int b_checkitems_cavalorn()
+func void b_checkitems_cavalorn()
 {
 	if(Npc_HasItems(other,itkecavalorn01))
 	{
@@ -90,7 +90,7 @@ func int b_checkitems_cavalorn()
 	};
 };
 
-func int b_checkitems_whistler()
+func void b_checkitems_whistler()
 {
 	if(Npc_HasItems(other,whistlers_schwert))
 	{
@@ -112,7 +112,7 @@ func int b_checkitems_whistler()
 	};
 };
 
-func int b_checkitems_aaron()
+func void b_checkitems_aaron()
 {
 	if(Npc_HasItems(other,itke_om_02))
 	{
@@ -131,7 +131,7 @@ func int b_checkitems_aaron()
 	};
 };
 
-func int b_checkitems_ulbert()
+func void b_checkitems_ulbert()
 {
 	if(Npc_HasItems(other,itke_om_03))
 	{
@@ -147,7 +147,7 @@ func int b_checkitems_ulbert()
 	};
 };
 
-func int b_checkitems_bartholo()
+func void b_checkitems_bartholo()
 {
 	if(Npc_HasItems(other,itke_storage_01))
 	{
@@ -166,7 +166,7 @@ func int b_checkitems_bartholo()
 	};
 };
 
-func int b_checkitems_grd279()
+func void b_checkitems_grd279()
 {
 	if(Npc_HasItems(other,itke_weaponry))
 	{
@@ -182,7 +182,7 @@ func int b_checkitems_grd279()
 	};
 };
 
-func int b_checkitems_scar()
+func void b_checkitems_scar()
 {
 	if(Npc_HasItems(other,scars_schwert))
 	{
@@ -199,7 +199,7 @@ func int b_checkitems_scar()
 	};
 };
 
-func int b_checkitems_arto()
+func void b_checkitems_arto()
 {
 	if(Npc_HasItems(other,artos_schwert))
 	{
@@ -216,7 +216,7 @@ func int b_checkitems_arto()
 	};
 };
 
-func int b_checkitems_stone()
+func void b_checkitems_stone()
 {
 	if(Npc_HasItems(other,itkey_ob_smith_01))
 	{
@@ -232,7 +232,7 @@ func int b_checkitems_stone()
 	};
 };
 
-func int b_checkitems_kalom()
+func void b_checkitems_kalom()
 {
 	if(Npc_HasItems(other,kalomsrecipe))
 	{
@@ -248,7 +248,7 @@ func int b_checkitems_kalom()
 	};
 };
 
-func int b_checkitems_torlof()
+func void b_checkitems_torlof()
 {
 	if(Npc_HasItems(other,torlofs_axt))
 	{
@@ -265,7 +265,7 @@ func int b_checkitems_torlof()
 	};
 };
 
-func int b_checkitems_cord()
+func void b_checkitems_cord()
 {
 	if(Npc_HasItems(other,cords_spalter))
 	{

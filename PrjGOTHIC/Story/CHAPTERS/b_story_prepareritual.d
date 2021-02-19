@@ -98,5 +98,6 @@ func int c_timeforgreatprayer()
 	{
 		return TRUE;
 	};
+	return 0;
 };
 

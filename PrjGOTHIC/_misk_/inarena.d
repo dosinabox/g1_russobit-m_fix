@@ -4,11 +4,8 @@ func int inarena(var C_NPC who)
 	if(Npc_GetDistToWP(who,"OCR_ARENABATTLE") < 500)
 	{
 		return 1;
-	}
-	else
-	{
-		return 0;
 	};
+	return 0;
 };
 
 func void zs_afight()

@@ -104,7 +104,7 @@ func void useitwr_book_circle_02()
 	Doc_PrintLine(ndocid,1,"---------------");
 	Doc_PrintLines(ndocid,1,"Аданос увидел, что люди не бессмертны, что они умирают по воле Белиара. И он решил, что не будет подчиняться Белиару, а даст людям возможность исцелять свои тела.");
 	Doc_PrintLines(ndocid,1,"Это заклинание освобождает силу, исцеляющую мага.");
-	Doc_PrintLine(ndocid,1,"Инвестируемое заклинание");
+	Doc_PrintLine(ndocid,1,NAME_SPELL_INVEST);
 	Doc_PrintLine(ndocid,1,text_1);
 	Doc_PrintLine(ndocid,1,"");
 	Doc_PrintLine(ndocid,1,"");
@@ -162,7 +162,7 @@ func void useitwr_book_circle_03()
 	Doc_PrintLine(ndocid,1,"Огненный шар");
 	Doc_PrintLine(ndocid,1,"---------------");
 	Doc_PrintLines(ndocid,1,"Второй дар Инноса детям огня. Огненный шар, сжигающий свою жертву.");
-	Doc_PrintLine(ndocid,1,"Зарядное заклинание");
+	Doc_PrintLine(ndocid,1,NAME_SPELL_LOAD);
 	Doc_PrintLine(ndocid,1,text);
 	Doc_PrintLine(ndocid,1,"");
 	Doc_PrintLine(ndocid,1,"Ледяная глыба");
@@ -219,15 +219,14 @@ func void useitwr_book_circle_04()
 	Doc_PrintLine(ndocid,0,"---------------");
 	Doc_SetFont(ndocid,-1,"font_10_book.TGA");
 	Doc_PrintLine(ndocid,0,"");
-	Doc_PrintLine(ndocid,0,"Магия");
-	Doc_PrintLine(ndocid,0,"телепортации");
+	Doc_PrintLine(ndocid,0,"Магия телепортации");
 	Doc_PrintLine(ndocid,0,"---------------");
 	Doc_PrintLines(ndocid,0,"Главная особенность: несмотря на то, что заклинание заключено в руну, оно может быть прочитано каждым, кто обладает магической силой. При этом энергия заклинания сразу освобождается. Для него не существует ограничений.");
 	Doc_SetMargins(ndocid,-1,30,20,275,20,1);
 	Doc_PrintLine(ndocid,1,"Огненный шторм");
 	Doc_PrintLine(ndocid,1,"---------------");
 	Doc_PrintLines(ndocid,1,"Это заклинание действует как огненный шар на одного противника, а потом переносится на других, стоящих возле него.");
-	Doc_PrintLine(ndocid,1,"Зарядное заклинание");
+	Doc_PrintLine(ndocid,1,NAME_SPELL_LOAD);
 	Doc_PrintLine(ndocid,1,text);
 	Doc_PrintLine(ndocid,1,"");
 	Doc_PrintLine(ndocid,1,"Молния");

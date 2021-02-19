@@ -2001,6 +2001,7 @@ func void startup_world()
 	//PlayVideo("INTRO_RUSSOBIT.BIK");
 	b_cycle_function();
 	RUSSOBITMFIXV13 = TRUE;
+	FIX_VERSION_SAVE = FIX_VERSION_START;
 };
 
 func void startup_orcgraveyard()

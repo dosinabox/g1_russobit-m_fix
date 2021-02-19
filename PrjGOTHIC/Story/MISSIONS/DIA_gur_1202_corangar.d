@@ -141,7 +141,7 @@ instance GUR_1202_CORANGAR_TEACH(C_INFO)
 	condition = gur_1202_corangar_teach_condition;
 	information = gur_1202_corangar_teach_info;
 	permanent = 1;
-	description = DIALOG_LEARN;
+	description = "Как я могу увеличить силу и ловкость?";
 };
 
 
@@ -155,8 +155,7 @@ func int gur_1202_corangar_teach_condition()
 
 func void gur_1202_corangar_teach_info()
 {
-	//AI_Output(other,self,"GUR_1202_CorAngar_Teach_15_00");	//Как я могу увеличить силу и ловкость?
-	AI_Output(other,self,"ORG_801_Lares_Teach_15_00");	//Я хочу улучшить свои навыки.
+	AI_Output(other,self,"GUR_1202_CorAngar_Teach_15_00");	//Как я могу увеличить силу и ловкость?
 	b_corangarlearn();
 };
 
@@ -721,7 +720,7 @@ func void info_corangar_teleport_info()
 	AI_Output(self,hero,"Info_CorAngar_TELEPORT_08_01");	//Подожди!
 	AI_Output(hero,self,"Info_CorAngar_TELEPORT_15_02");	//В чем дело?
 	AI_Output(self,hero,"Info_CorAngar_TELEPORT_08_03");	//Возьми эту руну в знак нашей благодарности за твою помощь.
-	b_printtrademsg1("Получена руна телепортации.");
+	b_printtrademsg1("Получена руна телепортации в Болотный лагерь.");
 	AI_Output(self,hero,"Info_CorAngar_TELEPORT_08_04");	//Она даст тебе возможность быстро перенестись на площадь перед нашим Храмом.
 	AI_Output(hero,self,"Info_CorAngar_TELEPORT_15_05");	//Спасибо тебе!
 	if(YBERION_DIED == TRUE)

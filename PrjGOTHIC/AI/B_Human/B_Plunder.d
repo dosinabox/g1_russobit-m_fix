@@ -68,11 +68,8 @@ func int b_checkitem(var int category,var int slot)
 	if(Npc_HasItems(other,itminugget) > 0)
 	{
 		return TRUE;
-	}
-	else
-	{
-		return FALSE;
 	};
+	return FALSE;
 };
 
 func int b_plunder()

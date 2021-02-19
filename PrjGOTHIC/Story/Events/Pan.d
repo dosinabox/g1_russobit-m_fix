@@ -18,7 +18,7 @@ instance PC_NOPAN(C_INFO)
 	information = pc_nopan_info;
 	important = 0;
 	permanent = 1;
-	description = "Œ“Ã≈Õ¿";
+	description = STR_INFO_TRADE_EXIT;
 };
 
 func int pc_nopan_condition()

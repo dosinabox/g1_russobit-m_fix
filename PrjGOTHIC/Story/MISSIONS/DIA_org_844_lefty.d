@@ -124,6 +124,7 @@ func void dia_lefty_first_later()
 
 
 var int carriedwaterforlefty;
+var int failedwaterforlefty;
 
 instance DIA_LEFTY_WORKDAY(C_INFO)
 {
@@ -139,9 +140,20 @@ instance DIA_LEFTY_WORKDAY(C_INFO)
 func int dia_lefty_workday_condition()
 {
 	//if((((LEFTY_MISSION == LOG_RUNNING)) && Wld_IsTime(8,0,19,0) || (LEFTY_MISSION == LOG_SUCCESS)) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE) && ((LEFTY_WORKDAY <= (Wld_GetDay() - 1)) || (LEFTY_MISSION == LOG_SUCCESS)))
-	if(Wld_IsTime(8,0,19,0) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE) && (LEFTY_WORKDAY <= (Wld_GetDay() - 1)))
+	//if(Wld_IsTime(8,0,19,0) && (self.aivar[AIV_WASDEFEATEDBYSC] == FALSE) && (LEFTY_WORKDAY <= (Wld_GetDay() - 1)))
+	if((self.aivar[AIV_WASDEFEATEDBYSC] == FALSE) && (Wld_IsTime(8,0,19,0)))
 	{
-		return 1;
+		if((LEFTY_MISSION == LOG_FAILED) || (LEFTY_MISSION == LOG_RUNNING))
+		{
+			if(LEFTY_WORKDAY <= (Wld_GetDay() - 1))
+			{
+				return 1;
+			};
+		};
+		if(LEFTY_MISSION == LOG_SUCCESS)
+		{
+			return 1;
+		};
 	};
 };
 
@@ -164,7 +176,11 @@ func void dia_lefty_workday_info()
 		AI_Output(self,other,"DIA_Lefty_WorkDay_StillRunning_07_01");	//Мне не нравится, когда кто-то не держит своего слова!
 		LEFTY_WORKDAY = b_setdaytolerance();
 		LEFTY_MISSION = LOG_FAILED;
-		b_logentry(CH1_CARRYWATER,"Лефти был в бешенстве, узнав, что я еще не разнес воду! Сложно иметь дело с этим неуравновешенным типом.");
+		if(!FAILEDWATERFORLEFTY)
+		{
+			b_logentry(CH1_CARRYWATER,"Лефти был в бешенстве, узнав, что я еще не разнес воду! Сложно иметь дело с этим неуравновешенным типом.");
+			FAILEDWATERFORLEFTY = TRUE;
+		};
 		AI_StopProcessInfos(self);
 		Npc_SetTarget(self,other);
 		if(Npc_GetTrueGuild(hero) == GIL_ORG || Npc_GetTrueGuild(hero) == GIL_SLD || Npc_GetTrueGuild(hero) == GIL_KDW)

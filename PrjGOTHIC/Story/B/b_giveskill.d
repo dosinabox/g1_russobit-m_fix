@@ -175,12 +175,11 @@ func int b_giveskill(var C_NPC typ,var int tal,var int new_wert,var int lp_cost)
 	else if(tal_wert >= new_wert)
 	{
 		b_say(self,other,"$NOLEARNYOUREBETTER");
-		return 0;
 	}
 	else if((tal_wert + 1) < new_wert)
 	{
 		b_say(self,other,"$NOLEARNYOUALREADYKNOW");
-		return 0;
 	};
+	return 0;
 };
 

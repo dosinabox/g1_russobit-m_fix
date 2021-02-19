@@ -254,13 +254,15 @@ instance D36TESTBOOK(C_ITEM)
 	visual = "ITWR_BOOK_ALCHEMY.3ds";
 	material = MAT_LEATHER;
 	scemename = "MAP";
+	text[0] = "Gothic Russobit-M Fix";
+	text[1] = ConcatStrings(IntToString(FIX_VERSION_START)," версия от 19/02/2021");
+	text[2] = ConcatStrings(IntToString(FIX_VERSION_SAVE)," версия в сохранении");
 	on_state[0] = use_d36testbook;
 };
 
 func void use_d36testbook()
 {
-	PrintScreen("тестим...",-1,30,"font_old_20_white.tga",4);
-	Npc_SetTalentSkill(hero,NPC_TALENT_FIREMASTER,1);
+	//PrintScreen("тестим...",-1,30,"font_old_20_white.tga",4);
 };
 
 instance ALCHEMYKIT(C_ITEM)

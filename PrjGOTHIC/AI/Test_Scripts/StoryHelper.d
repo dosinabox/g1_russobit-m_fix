@@ -72,7 +72,7 @@ func int storyhelper_info2_condition()
 func void storyhelper_info2_info()
 {
 	Info_ClearChoices(storyhelper_info2);
-	Info_AddChoice(storyhelper_info2,"НАЗАД",storyhelper_back2);
+	Info_AddChoice(storyhelper_info2,DIALOG_BACK,storyhelper_back2);
 	Info_AddChoice(storyhelper_info2,"II: Подготовка к вызову",storyhelper_prepareritual);
 	Info_AddChoice(storyhelper_info2,"II: Альманах",storyhelper_corkalom_bringbook_running);
 	Info_AddChoice(storyhelper_info2,"II: Яйца ползунов",storyhelper_corkalom_bringmcqballs_running);
@@ -232,7 +232,7 @@ func int storyhelper_info4_condition()
 func void storyhelper_info4_info()
 {
 	Info_ClearChoices(storyhelper_info4);
-	Info_AddChoice(storyhelper_info4,"НАЗАД",storyhelper_back4);
+	Info_AddChoice(storyhelper_info4,DIALOG_BACK,storyhelper_back4);
 	Info_AddChoice(storyhelper_info4,"IV: Поиск частей Улу-Мулу",storyhelper_searchforulumulu);
 	Info_AddChoice(storyhelper_info4,"IV: Подготовка к нападению на Свободную шахту",storyhelper_attackfreemine);
 	Info_AddChoice(storyhelper_info4,"IV: Ксардас - найти орка-шамана",storyhelper_xardasfindorcshaman);
@@ -408,7 +408,7 @@ func int storyhelper_info5_condition()
 func void storyhelper_info5_info()
 {
 	Info_ClearChoices(storyhelper_info5);
-	Info_AddChoice(storyhelper_info5,"НАЗАД",storyhelper_back5);
+	Info_AddChoice(storyhelper_info5,DIALOG_BACK,storyhelper_back5);
 	//Info_AddChoice(storyhelper_info5,"V: УРИЗЕЛЬ заряжен",storyhelper_urizielloaded);
 	Info_AddChoice(storyhelper_info5,"V: Подготовка к зарядке УРИЗЕЛЯ",storyhelper_loaduriziel);
 	Info_AddChoice(storyhelper_info5,"V: Исследование затонувшей башни",storyhelper_exploresunkentower);
@@ -632,7 +632,7 @@ func int storyhelper_info6_condition()
 func void storyhelper_info6_info()
 {
 	Info_ClearChoices(storyhelper_info6);
-	Info_AddChoice(storyhelper_info6,"НАЗАД",storyhelper_back6);
+	Info_AddChoice(storyhelper_info6,DIALOG_BACK,storyhelper_back6);
 	Info_AddChoice(storyhelper_info6,"VI: УРИЗЕЛЬ заряжен",storyhelper_urizielloaded);
 };
 

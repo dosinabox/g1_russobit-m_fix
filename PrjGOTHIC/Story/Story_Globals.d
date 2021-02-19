@@ -207,6 +207,8 @@ const int LPCOST_TALENT_PICKLOCK_1 = 5;
 const int LPCOST_TALENT_PICKLOCK_2 = 10;
 const int LPCOST_TALENT_PICKPOCKET_1 = 5;
 const int LPCOST_TALENT_PICKPOCKET_2 = 10;
+const int FIX_VERSION_START = 14;
+var int FIX_VERSION_SAVE;
 //var int log_gornatothfight;
 //var int log_gornatothtrain;
 var int log_wolftrain;

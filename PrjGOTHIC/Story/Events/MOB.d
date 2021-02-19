@@ -13,8 +13,8 @@ func int mc_oldmine_asghan()
 	else
 	{
 		g_printscreen(_STR_MESSAGE_WHEEL_STUCKS);
-		return FALSE;
 	};
+	return FALSE;
 };
 
 func int mc_oldmine_entrance()
@@ -31,8 +31,8 @@ func int mc_oldmine_entrance()
 	else
 	{
 		printdebugnpc(PD_ITEM_MOBSI,"...готово к работе.");
-		return TRUE;
 	};
+	return TRUE;
 };
 
 func int mc_monasteryruin_gate()
@@ -49,8 +49,8 @@ func int mc_monasteryruin_gate()
 	else
 	{
 		printdebugnpc(PD_ITEM_MOBSI,"...уже открыто.");
-		return TRUE;
 	};
+	return TRUE;
 };
 
 func int mc_ogy_gate()
@@ -65,8 +65,8 @@ func int mc_ogy_gate()
 	{
 		printdebugnpc(PD_ITEM_MOBSI,"...open");
 		g_printscreen(_STR_MESSAGE_WHEEL_STUCKS);
-		return FALSE;
 	};
+	return FALSE;
 };
 
 
@@ -91,8 +91,8 @@ func int mc_fm_gate()
 		{
 			g_printscreen(_STR_MESSAGE_WHEEL_STUCKS);
 		};
-		return FALSE;
 	};
+	return FALSE;
 };
 
 func int evt_trollschlucht_gate_trigger()
@@ -159,8 +159,8 @@ func int mc_orccity_gate()
 		{
 			g_printscreen(_STR_MESSAGE_WHEEL_STUCKS);
 		};
-		return FALSE;
 	};
+	return FALSE;
 };
 
 func int mc_orccity_sunctum_outergate()
@@ -183,8 +183,8 @@ func int mc_orccity_sunctum_outergate()
 		{
 			g_printscreen(_STR_MESSAGE_OCLEVER_STUCKS);
 		};
-		return FALSE;
 	};
+	return FALSE;
 };
 
 func int evt_wheel_01_conditionfunc()
@@ -522,8 +522,8 @@ func int evt_wheel_d07_conditionfunc()
 	else
 	{
 		g_printscreen(_STR_MESSAGE_OCLEVER_STUCKS);
-		return FALSE;
 	};
+	return FALSE;
 };
 
 func void evt_wheel_d07_s1()
@@ -572,6 +572,7 @@ func int evt_wheel_09_conditionfunc()
 	{
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 	};
+	return FALSE;
 };
 
 func void evt_wheel_09_s0()
@@ -793,6 +794,7 @@ func int ll1_cf()
 	{
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY_NO_LOCKPICK,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int ll2_cf()
@@ -813,6 +815,7 @@ func int ll2_cf()
 	{
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY_NO_LOCKPICK,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int ll2_itke_gomez_01_cf()
@@ -840,6 +843,7 @@ func int ll2_itke_gomez_01_cf()
 	{
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY_NO_LOCKPICK,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itke_gomez_01_cf()
@@ -862,6 +866,7 @@ func int itke_gomez_01_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itke_gomez_02_cf()
@@ -884,6 +889,7 @@ func int itke_gomez_02_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itke_gomez_03_cf()
@@ -906,6 +912,7 @@ func int itke_gomez_03_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itke_quentin_cf()
@@ -928,6 +935,7 @@ func int itke_quentin_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itke_weaponry_01_cf()
@@ -950,6 +958,7 @@ func int itke_weaponry_01_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itke_weaponry_02_cf()
@@ -972,6 +981,7 @@ func int itke_weaponry_02_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itke_weaponry_03_cf()
@@ -994,6 +1004,7 @@ func int itke_weaponry_03_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itke_weaponry_04_cf()
@@ -1016,6 +1027,7 @@ func int itke_weaponry_04_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itke_berg_01_cf()
@@ -1038,6 +1050,7 @@ func int itke_berg_01_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itke_focus5_cf()
@@ -1060,6 +1073,7 @@ func int itke_focus5_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itke_sunkentower_01_cf()
@@ -1082,6 +1096,7 @@ func int itke_sunkentower_01_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itke_sunkentower_02_cf()
@@ -1104,6 +1119,7 @@ func int itke_sunkentower_02_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itke_focus4_cf()
@@ -1125,6 +1141,7 @@ func int itke_focus4_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itkecavalorn01_cf()
@@ -1146,6 +1163,7 @@ func int itkecavalorn01_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itke_freemine_cf()
@@ -1154,7 +1172,7 @@ func int itke_freemine_cf()
 	{
 		return TRUE;
 	}
-	if(Npc_HasItems(hero,itke_freemine))
+	else if(Npc_HasItems(hero,itke_freemine))
 	{
 		AI_Wait(self,0.7);
 		Snd_Play3d(self,"DOOR_LOCK");
@@ -1167,6 +1185,7 @@ func int itke_freemine_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itke_yberion_cf()
@@ -1189,6 +1208,7 @@ func int itke_yberion_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itke_psi_kalom_01_cf()
@@ -1211,6 +1231,7 @@ func int itke_psi_kalom_01_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int dungeonkey_01_cf()
@@ -1232,6 +1253,7 @@ func int dungeonkey_01_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int dungeonkey_02_cf()
@@ -1253,6 +1275,7 @@ func int dungeonkey_02_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int dungeonkey_03_cf()
@@ -1274,6 +1297,7 @@ func int dungeonkey_03_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itke_gilbert_cf()
@@ -1295,6 +1319,7 @@ func int itke_gilbert_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itkey_ob_smith_01_cf()
@@ -1316,6 +1341,7 @@ func int itkey_ob_smith_01_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itke_storage_01_cf()
@@ -1337,6 +1363,7 @@ func int itke_storage_01_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itke_storage_02_cf()
@@ -1358,6 +1385,7 @@ func int itke_storage_02_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itke_storage_03_cf()
@@ -1379,6 +1407,7 @@ func int itke_storage_03_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int ll2_itkey_rb_01_cf()
@@ -1387,7 +1416,7 @@ func int ll2_itkey_rb_01_cf()
 	{
 		return TRUE;
 	}
-	if(Npc_HasItems(hero,itkey_rb_01))
+	else if(Npc_HasItems(hero,itkey_rb_01))
 	{
 		AI_Wait(self,0.7);
 		AI_PlayAni(self,"T_CHESTBIG_S0_PICKRIGHT");
@@ -1412,6 +1441,7 @@ func int ll2_itkey_rb_01_cf()
 	{
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY_NO_LOCKPICK,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int ll2_orik_key_cf()
@@ -1445,6 +1475,7 @@ func int ll2_orik_key_cf()
 	{
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY_NO_LOCKPICK,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int ll2_itke_tower_01_cf()
@@ -1477,6 +1508,7 @@ func int ll2_itke_tower_01_cf()
 	{
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY_NO_LOCKPICK,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int ll2_itke_tower_02_cf()
@@ -1509,6 +1541,7 @@ func int ll2_itke_tower_02_cf()
 	{
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY_NO_LOCKPICK,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itke_om_02_cf()
@@ -1531,6 +1564,7 @@ func int itke_om_02_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itke_om_03_01_cf()
@@ -1553,6 +1587,7 @@ func int itke_om_03_01_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 
 func int itke_om_03_02_cf()
@@ -1575,5 +1610,6 @@ func int itke_om_03_02_cf()
 		AI_OutputSVM_Overlay(self,self,"$NEEDKEY");
 		PrintScreen(_STR_MESSAGE_INTERACT_NO_KEY,-1,_YPOS_MESSAGE_JOINCAMP,"font_old_10_white.tga",2);
 	};
+	return FALSE;
 };
 

@@ -10,10 +10,10 @@
 ###################################
 
 !define MOD_NAME "Gothic Russobit-M Fix"
-!define MOD_VERSION "декабрь 2018"
-!define MOD_DETAILED_VERSION "1.16.0.0"
+!define MOD_VERSION "февраль 2021"
+!define MOD_DETAILED_VERSION "1.14.0.0"
 !define MOD_AUTHOR "D36"
-!define INSTALLER_NAME "GothicRussobitMFix_12.18_install"
+!define INSTALLER_NAME "GothicRussobitMFix_02.21_install"
 !define UNINSTALLER_NAME "Gothic_RussobitM_Fix_Uninstall"
 
 Name "${MOD_NAME}"
