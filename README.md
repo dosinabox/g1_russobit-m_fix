@@ -1,4 +1,4 @@
-- Скачать архив с исходниками (Clone or Download - Download ZIP);
+- Скачать архив с исходниками (Code - Download ZIP);
 - Распаковать архив в папку с проектами (*Gothic Sourcer\Gothic Projects*);
 - Переименовать папку проекта в **Solg1_russobit-m_fix**;
 - Запустить Gothic Sourcer и открыть решение *Gothic Projects\Solg1_russobit-m_fix\g1_russobit-m_fix.gsc*.
